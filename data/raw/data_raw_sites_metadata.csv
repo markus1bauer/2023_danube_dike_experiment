@@ -3,12 +3,6 @@ no;serial number of plots;NA;NA;numeric;NA;NA
 plot;ID of the plot;NA;NA;factor;NA;L = land, 1 = block, 01 = plot number within this block
 block;ID of the block;NA;NA;factor;1, 2, 3, 4, 5, 6;1 is in the east and 6 in the west
 idTreatment;ID of the treatment combination;NA;NA;factor;NA;NA
-surveyYear_1;year of the first vegetation survey;NA;NA;numeric;NA;NA
-surveyYear_2;year of the second vegetation survey;NA;NA;numeric;NA;NA
-surveyYear_3;year of the third vegetation survey;NA;NA;numeric;NA;NA
-botanist_1;botanist of surveyYear_1;NA;NA;character;NA;NA
-botanist_2;botanist of surveyYear_2;NA;NA;character;NA;NA
-botanist_3;botanist of surveyYear_3;NA;NA;character;NA;NA
 side;on which side is the plot on the dike;NA;NA;factor;water, land;NA
 exposition;exposition of the plots;NA;NA;factor;north, south;NA
 substrateType;type of substrate (combination of sandRatio and substrate Depth);NA;NA;factor;1, 2, 3, 4, 5, 6;NA
@@ -17,3 +11,12 @@ substrateDepth;the depht of the built in substrate;NA;cm;factor;15, 30;holes wer
 seedmixType;there existed two types of hay meadow mixtures and two of dry grassland mixtures;NA;NA;factor;1, 2, 3, 4;NA
 targetType;target of the seedmixture;NA;NA;factor;hay_meadow, dry_grassland;NA
 seedDensity;how dense were the seed mixtures seeded?;NA;g m^-2;factor;4, 8;NA
+surveyDate_2018;date of the vegetation survey in surveyYear_2018;NA;YYYY-mm-dd;date;NA;NA
+surveyDate_2019;date of the vegetation survey in surveyYear_2019;NA;YYYY-mm-dd;date;NA;NA
+surveyDate_2020;date of the vegetation survey in surveyYear_2020;NA;YYYY-mm-dd;date;NA;NA
+botanist_2018;botanist of surveyYear_2018;NA;NA;character;NA;NA
+botanist_2019;botanist of surveyYear_2019;NA;NA;character;NA;NA
+botanist_2020;botanist of surveyYear_2020;NA;NA;character;NA;NA
+vegetationCov_2018;total vegetation coverage in surveyYear_2018;NA;%;numeric;NA;NA
+vegetationCov_2019;total vegetation coverage in surveyYear_2019;NA;%;numeric;NA;NA
+vegetationCov_2020;total vegetation coverage in surveyYear_2020;NA;%;numeric;NA;NA
