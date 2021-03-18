@@ -553,15 +553,10 @@ traits <- data %>%
   mutate(name = fct_recode(name, Vicia_sativa_ssp_nigra= "Vicia_sativa_s._nigra")) %>%  group_by(name) %>%
 ### summarise different rows of one species after renaming ###  
   summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
-  left_join(traits, data, by = "name")
+  right_join(traits, by = "name")
 ### check completeness of LEDA ###
-#test <- traits %>%
-  #select(name, t, n, f, sla, seedmass, height)
-#n_miss(test$sla);pct_complete(test$sla)
-#n_miss(test$seedmass);pct_complete(test$seedmass)
-#n_miss(test$height);pct_complete(test$height)
-#(test2 <- test %>%
-  #select(-t, -n, -f) %>%
+#(test2 <- traits %>%
+  #select(name, sla, seedmass, height) %>%
   #filter(!complete.cases(.)))
 
 ### * read TRY data 1 ####
@@ -589,7 +584,7 @@ data <- data.table::fread("data_raw_TRY_20210306_13996.txt",
   #group_by(name) %>%
   #summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
   #filter(str_detect(name, "Equisetum"))
-traits2 <- data %>%
+traits <- data %>%
   mutate(name = fct_recode(name, Carex_praecox_ssp_praecox = "Carex_praecox")) %>%
   mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia")) %>%
   mutate(name = fct_recode(name, Ranunculus_serpens_ssp_nemorosus = "Ranunculus_serpens_subsp._nemorosus")) %>%
@@ -602,19 +597,9 @@ traits2 <- data %>%
   mutate(seedmass = coalesce(seedmass.x, seedmass.y), .keep = "unused") %>%
   mutate(height = coalesce(height.x, height.y), .keep = "unused")
 ### check completeness of LEDA + TRY1 ###
-test <- traits %>%
-  select(name, t, n, f, sla, seedmass, height)
-#(test$sla.y);pct_complete(test$sla) # 6, 97.6%
-#n_miss(test$seedmass);pct_complete(test$seedmass) #9, 96.4%
-#n_miss(test$height);pct_complete(test$height) # 4, 98.4%
-#vis_miss(test, cluster = F, sort_miss = T)
-#gg_miss_var(test)
-#gg_miss_case(test, order_cases = F)
-(test2 <- test %>%
-    select(-t, -n, -f) %>%
-    #drop_na()
-    filter(!complete.cases(sla, height, seedmass)))
-rm(test, data)
+#(test2 <- traits %>%
+#select(name, sla, seedmass, height) %>%
+#filter(!complete.cases(sla, seedmass, height)))
 
 ### * read TRY data 2 ####
 data <- data.table::fread("data_raw_TRY_20210318_14157.txt", 
@@ -636,11 +621,11 @@ data <- data.table::fread("data_raw_TRY_20210318_14157.txt",
   mutate(trait = str_replace(trait, "3116", "sla")) %>%
   mutate(trait = str_replace(trait, "3117", "sla"))
 ##### Find Synonyms ###
-test2$name[which(!(test2$name %in% data$name))]
-data %>%
-group_by(name) %>%
-summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
-filter(str_detect(name, "Silene"))
+#test2$name[which(!(test2$name %in% data$name))]
+#data %>%
+#group_by(name) %>%
+#summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+#filter(str_detect(name, "Silene"))
 traits <- data %>%
   mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia")) %>%
   mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major_subsp._major")) %>%
@@ -656,24 +641,67 @@ traits <- data %>%
   right_join(traits, by = "name") %>%
   mutate(sla = coalesce(sla.x, sla.y), .keep = "unused") %>%
   mutate(seedmass = coalesce(seedmass.x, seedmass.y), .keep = "unused") %>%
-  mutate(height = coalesce(height.x, height.y), .keep = "unused")
+  mutate(height = coalesce(height.x, height.y), .keep = "unused") 
+### check completeness of LEDA + TRY1 + TRY2 ###
+#(test2 <- traits %>%
+#select(name, sla, seedmass, height) %>%
+#filter(!complete.cases(sla, seedmass, height)))
 
-### * check completeness of LEDA + TRY2 ####
+### * read GrooT data ####
+data <- read.csv("data_raw_GrooT.csv", header = T, na.strings = c("", "NA")) %>%
+  filter(traitName == "Specific_root_length" |
+           traitName == "Root_length_density_volume" |
+           traitName == "Root_mass_fraction" |
+           traitName == "Lateral_spread") %>%
+  mutate(name = as_factor(str_c(genusTNRS, speciesTNRS, sep = "_"))) %>%
+  rename(trait = traitName, value = medianSpecies) %>%
+  select(name, trait, value) %>%
+  pivot_wider(names_from = "trait", values_from = "value") %>%
+  rename(rmf = Root_mass_fraction, rld = Root_length_density_volume, srl = Specific_root_length, lateral = Lateral_spread)
+##### Find Synonyms ###
+#traits$name[which(!(traits$name %in% data$name))]
+#data %>%
+  #group_by(name) %>%
+  #summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+  #filter(str_detect(name, "Centaurea_"))
+traits <- data %>%
+  mutate(name = fct_recode(name, Cota_tinctoria = "Anthemis_tinctoria")) %>%
+  mutate(name = fct_recode(name, Carex_praecox_ssp_praecox = "Carex_praecox")) %>%
+  mutate(name = fct_recode(name, Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum")) %>%
+  mutate(name = fct_recode(name, Persicaria_bistorta = "Bistorta_officinalis")) %>%
+  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major")) %>%
+  mutate(name = fct_recode(name, Jacobaea_vulgaris = "Senecio_jacobaea")) %>%
+  mutate(name = fct_recode(name, "Silene_flos-cuculi" = "Lychnis_flos-cuculi")) %>%
+  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia")) %>%
+  mutate(name = fct_recode(name, Vicia_sativa_ssp_nigra = "Vicia_sativa")) %>%
+  group_by(name) %>%
+  summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+  right_join(traits, by = "name")
+### check completeness of Roots ####
+(test2 <- traits %>%
+   select(name, rmf, rld, srl, lateral) %>%
+   filter(!complete.cases(rmf, rld, srl, lateral)))
+
+### * check completeness of traits ####
 test <- traits %>%
-  select(name, t, n, f, sla.y, seedmass.y, height.y)
-n_miss(test$sla.y);pct_complete(test$sla) # 6, 97.6%
-n_miss(test$seedmass);pct_complete(test$seedmass) #9, 96.4%
-n_miss(test$height);pct_complete(test$height) # 4, 98.4%
+  select(t, n, f, sla, seedmass, height, rmf, rld, srl, lateral)
 vis_miss(test, cluster = F, sort_miss = T)
 gg_miss_var(test)
 gg_miss_case(test, order_cases = F)
-(test2 <- test %>%
-  select(-t, -n, -f) %>%
-  filter(!complete.cases(.)))
-write.csv2(test2, "missing_species.csv")
+(test2 <- traits %>%
+  select(name, sla, seedmass, height, rmf, rld, srl, lateral) %>%
+  filter(!complete.cases(sla, seedmass, height, rmf, rld, srl, lateral)))
 rm(test, test2, data)
 
 ### * prepare data frames ####
+species <- species %>%
+  mutate(name = as.character(name)) %>%
+  arrange(name) %>%
+  mutate(name = as_factor(name))
+traits <- traits %>%
+  mutate(name = as.character(name)) %>%
+  arrange(name) %>%
+  mutate(name = as_factor(name))
 traitsLHS <- traits %>%
   select(name, sla, seedmass, height) %>%
   drop_na()
@@ -686,11 +714,23 @@ traitsSM <- traits %>%
 traitsH <- traits %>%
   select(name, height) %>%
   drop_na()
+traitsSRL <- traits %>%
+  select(name, srl) %>%
+  drop_na()
+traitsRLD <- traits %>%
+  select(name, rld) %>%
+  drop_na()
+traitsRMF <- traits %>%
+  select(name, rmf) %>%
+  drop_na()
+traitsAll <- traits %>%
+  select(name, sla, seedmass, height, srl) %>%
+  drop_na()
 
 
 ### 8 CWM and FDis of functional plant traits #####################################################################################
 
-### a All -------------------------------------------------------------------------------------------
+### a LHS -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsLHS, by = "name")
 Ttraits <- semi_join(traitsLHS, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -702,6 +742,7 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
                calc.FRic = F, calc.FDiv = F, corr = "cailliez")
 sites$fdisAbuLHS <- TdiversityAbu$FDis
+231 / 250
 
 ### b SLA -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSLA, by = "name")
@@ -717,7 +758,7 @@ TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
 sites$fdisAbuSla <- TdiversityAbu$FDis
 sites$cwmAbuSla <- exp(as.numeric(as.character(TdiversityAbu$CWM$sla)))
 
-### b Seed mass -------------------------------------------------------------------------------------------
+### c Seed mass -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSM, by = "name")
 Ttraits <- semi_join(traitsSM, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -730,8 +771,9 @@ TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
 sites$fdisAbuSeedmass <- TdiversityAbu$FDis
 sites$cwmAbuSeedmass <- exp(as.numeric(as.character(TdiversityAbu$CWM$seedmass)))
+233/250
 
-### c Canopy height -------------------------------------------------------------------------------------------
+### d Canopy height -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsH, by = "name")
 Ttraits <- semi_join(traitsH, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -744,9 +786,67 @@ TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
 sites$fdisAbuHeight <- TdiversityAbu$FDis
 sites$cwmAbuHeight <- exp(as.numeric(as.character(TdiversityAbu$CWM$height)))
-rm(TdiversityAbu, log_Ttraits, Ttraits, Tspecies, traitsLHS, traitsSLA, traitsSM, traitsH)
+235 / 250
 
-traits <- select(traits, -targetArrhenatherion, -table30, -table33, -table34, -nitrogenIndicator, -nitrogenIndicator2, leanIndicator)
+### e Root length density -------------------------------------------------------------------------------------------
+Tspecies <- semi_join(species, traitsRLD, by = "name")
+Ttraits <- semi_join(traitsRLD, Tspecies, by = "name")
+Tspecies <- Tspecies %>%
+  pivot_longer(-name, "site", "value") %>%
+  pivot_wider(site, name) %>%
+  column_to_rownames("site")
+Ttraits <- column_to_rownames(Ttraits, "name")
+log_Ttraits <- log(Ttraits)
+TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
+                      calc.FRic = F, calc.FDiv = F, corr = "sqrt");
+sites$fdisAbuRld <- TdiversityAbu$FDis
+sites$cwmAbuRld <- exp(as.numeric(as.character(TdiversityAbu$CWM$height)))
+58 / 250
+
+### f Specific root length -------------------------------------------------------------------------------------------
+Tspecies <- semi_join(species, traitsSRL, by = "name")
+Ttraits <- semi_join(traitsSRL, Tspecies, by = "name")
+Tspecies <- Tspecies %>%
+  pivot_longer(-name, "site", "value") %>%
+  pivot_wider(site, name) %>%
+  column_to_rownames("site")
+Ttraits <- column_to_rownames(Ttraits, "name")
+log_Ttraits <- log(Ttraits)
+TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
+                      calc.FRic = F, calc.FDiv = F, corr = "sqrt");
+sites$fdisAbuSrl <- TdiversityAbu$FDis
+sites$cwmAbuSrl <- exp(as.numeric(as.character(TdiversityAbu$CWM$height)))
+144 / 250
+
+### g Root mass fraction -------------------------------------------------------------------------------------------
+Tspecies <- semi_join(species, traitsRMF, by = "name")
+Ttraits <- semi_join(traitsRMF, Tspecies, by = "name")
+Tspecies <- Tspecies %>%
+  pivot_longer(-name, "site", "value") %>%
+  pivot_wider(site, name) %>%
+  column_to_rownames("site")
+Ttraits <- column_to_rownames(Ttraits, "name")
+log_Ttraits <- log(Ttraits)
+TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
+                      calc.FRic = F, calc.FDiv = F, corr = "sqrt");
+sites$fdisAbuRmf <- TdiversityAbu$FDis
+sites$cwmAbuRmf <- exp(as.numeric(as.character(TdiversityAbu$CWM$height)))
+162 / 250
+
+### h All -------------------------------------------------------------------------------------------
+Tspecies <- semi_join(species, traitsAll, by = "name")
+Ttraits <- semi_join(traitsAll, Tspecies, by = "name")
+Tspecies <- Tspecies %>%
+  pivot_longer(-name, "site", "value") %>%
+  pivot_wider(site, name) %>%
+  column_to_rownames("site")
+Ttraits <- column_to_rownames(Ttraits, "name")
+log_Ttraits <- log(Ttraits)
+TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
+                      calc.FRic = F, calc.FDiv = F, corr = "cailliez")
+sites$fdisAbuAll <- TdiversityAbu$FDis
+rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
+
 
 
 

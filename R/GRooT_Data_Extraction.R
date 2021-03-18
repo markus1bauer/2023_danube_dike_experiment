@@ -3,7 +3,7 @@
 
 # load data: GRooTFullVersion #
 
-GRooTFullVersion<- read.csv("C:/Users/GRooTFullVersion.csv", header=T, na.strings=c("", "NA")) ####Final
+GRooTFullVersion<- read.csv("data_raw_GrooT.csv", header=T, na.strings=c("", "NA")) ####Final
 str(GRooTFullVersion)
 names(GRooTFullVersion)
 
