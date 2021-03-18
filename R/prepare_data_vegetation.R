@@ -1,4 +1,4 @@
-# Prepare vegetation data ####
+# Prepare vegetation data for Danube experiment ####
 # Markus Bauer
 
 
@@ -117,6 +117,7 @@ species <- full_join(speciesL, speciesW) %>%
   mutate(name = fct_recode(name, Persicaria_amphibia = "Polygonum_amphibium")) %>%
   mutate(name = fct_recode(name, Persicaria_bistorta = "Bistorta_officinalis")) %>%
   mutate(name = fct_recode(name, Persicaria_minor = "Polygonum_minus")) %>%
+  mutate(name = fct_recode(name, Populus_alba = "Popolus_alba")) %>%
   mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia")) %>%
   mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_alba")) %>%
   mutate(name = fct_recode(name, "Silene_flos-cuculi" = "Lychnis_flos-cuculi")) %>%
@@ -300,10 +301,8 @@ sites <- species %>%
   select(-type) %>%
   ungroup() %>%
   mutate(seededCov = round(total, 3), .keep = "unused") %>%
-  right_join(sites, by = "id")
-
-### d Ruderal and seeded species coverage ratio -------------------------------------------------------------------------------------------
-sites <- sites %>%
+  right_join(sites, by = "id") %>%
+### Create ruderalCovratio and seededCovratio ###
   mutate(ruderalCovratio = ruderalCov / accumulatedCov) %>%
   mutate(seededCovratio = seededCov / accumulatedCov)
 
@@ -387,6 +386,7 @@ sites <- sites %>%
   right_join(specRich_target, by = "id") %>%
   right_join(specRich_ffh6510, by = "id") %>%
   right_join(specRich_ffh6210, by = "id") %>%
+### Create targetRichratio ###
   mutate(targetRichratio = targetRichness / speciesRichness) %>%
   mutate(targetRichratio = round(targetRichratio, 3))
 rm(list=setdiff(ls(), c("sites", "species", "traits")))
@@ -478,7 +478,7 @@ rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
 
 ### 7 Functional plant traits #####################################################################################
 
-#### * read LEDA data #### 
+#### * read and join LEDA data #### 
 dataSLA <- data.table::fread("data_raw_LEDA_20210223_sla.txt", 
                              sep = ";",
                              dec = ".",
@@ -514,18 +514,18 @@ dataH <- data.table::fread("data_raw_LEDA_20210223_canopy_height.txt",
   rename(name = "SBS name") %>%
   rename(height = "single value [m]") %>%
   mutate(name = as_factor(str_replace_all(name, " ", "_")))
-
-
-data <- full_join(dataSLA, dataSM, by = "name")
-data <- full_join(data, dataH, by = "name")
+### Join SLA, canopy height and seedmass of LEDA ###
+data <- dataSLA %>%
+  full_join(dataSM, by = "name") %>%
+  full_join(dataH, by = "name")
 rm(dataSLA, dataSM, dataH)
-##### Synonyms ###
+##### Find synonyms ###
 #traits$name[which(!(traits$name %in% data$name))]
 #data %>%
   #group_by(name) %>%
   #summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
   #filter(str_detect(name, "incana"))
-data <- data %>%
+traits <- data %>%
   mutate(name = fct_recode(name, Centaurea_stoebe = "Centaurea_stoebe_s.lat.")) %>%
   mutate(name = fct_recode(name, Carex_praecox_ssp_praecox = "Carex_praecox")) %>%
   mutate(name = fct_recode(name, Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum")) %>%
@@ -551,20 +551,20 @@ data <- data %>%
   mutate(name = fct_recode(name, Taraxacum_campylodes = "Taraxacum_Sec._Ruderalia")) %>%
   mutate(name = fct_recode(name, Tripleurospermum_maritimum = "Matricaria_maritima")) %>%
   mutate(name = fct_recode(name, Vicia_sativa_ssp_nigra= "Vicia_sativa_s._nigra")) %>%  group_by(name) %>%
-  summarise(across(where(is.double), ~median(.x, na.rm = T)))
-traits <- left_join(traits, data, by = "name")
-
-### * check completeness of LEDA ####
-test <- traits %>%
-  select(name, t, n, f, sla, seedmass, height)
-n_miss(test$sla);pct_complete(test$sla)
-n_miss(test$seedmass);pct_complete(test$seedmass)
-n_miss(test$height);pct_complete(test$height)
+### summarise different rows of one species after renaming ###  
+  summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+  left_join(traits, data, by = "name")
+### check completeness of LEDA ###
+#test <- traits %>%
+  #select(name, t, n, f, sla, seedmass, height)
+#n_miss(test$sla);pct_complete(test$sla)
+#n_miss(test$seedmass);pct_complete(test$seedmass)
+#n_miss(test$height);pct_complete(test$height)
 #(test2 <- test %>%
   #select(-t, -n, -f) %>%
   #filter(!complete.cases(.)))
 
-### * read TRY data ####
+### * read TRY data 1 ####
 data <- data.table::fread("data_raw_TRY_20210306_13996.txt", 
               header = T, 
               sep = "\t", 
@@ -583,29 +583,85 @@ data <- data.table::fread("data_raw_TRY_20210306_13996.txt",
   mutate(trait = str_replace(trait, "3115", "sla")) %>%
   mutate(trait = str_replace(trait, "3116", "sla")) %>%
   mutate(trait = str_replace(trait, "3117", "sla"))
-##### Synonyms ###
+##### Find synonyms ###
 #test2$name[which(!(test2$name %in% data$name))]
 #data %>%
   #group_by(name) %>%
   #summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
   #filter(str_detect(name, "Equisetum"))
-data <- data %>%
+traits2 <- data %>%
   mutate(name = fct_recode(name, Carex_praecox_ssp_praecox = "Carex_praecox")) %>%
   mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia")) %>%
   mutate(name = fct_recode(name, Ranunculus_serpens_ssp_nemorosus = "Ranunculus_serpens_subsp._nemorosus")) %>%
   mutate(trait = as_factor(trait)) %>%
   group_by(name, trait) %>%
   summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
-  spread(trait, value)
-traits <- left_join(traits, data, by = "name") %>%
+  pivot_wider(names_from = "trait", values_from = "value") %>%
+  right_join(traits, by = "name") %>%
+  mutate(sla = coalesce(sla.x, sla.y), .keep = "unused") %>%
+  mutate(seedmass = coalesce(seedmass.x, seedmass.y), .keep = "unused") %>%
+  mutate(height = coalesce(height.x, height.y), .keep = "unused")
+### check completeness of LEDA + TRY1 ###
+test <- traits %>%
+  select(name, t, n, f, sla, seedmass, height)
+#(test$sla.y);pct_complete(test$sla) # 6, 97.6%
+#n_miss(test$seedmass);pct_complete(test$seedmass) #9, 96.4%
+#n_miss(test$height);pct_complete(test$height) # 4, 98.4%
+#vis_miss(test, cluster = F, sort_miss = T)
+#gg_miss_var(test)
+#gg_miss_case(test, order_cases = F)
+(test2 <- test %>%
+    select(-t, -n, -f) %>%
+    #drop_na()
+    filter(!complete.cases(sla, height, seedmass)))
+rm(test, data)
+
+### * read TRY data 2 ####
+data <- data.table::fread("data_raw_TRY_20210318_14157.txt", 
+                          header = T, 
+                          sep = "\t", 
+                          dec = ".", 
+                          quote = "") %>%
+  as_tibble() %>%
+  rename(name = "AccSpeciesName") %>%
+  rename(value = "StdValue") %>%
+  rename(trait = "TraitID") %>%
+  select(name, value, trait) %>%
+  mutate(name = as_factor(str_replace_all(name, " ", "_"))) %>%
+  drop_na %>%
+  mutate(trait = str_replace(trait, "26", "seedmass")) %>%
+  mutate(trait = str_replace(trait, "3106", "height")) %>%
+  mutate(trait = str_replace(trait, "3107", "height")) %>%
+  mutate(trait = str_replace(trait, "3115", "sla")) %>%
+  mutate(trait = str_replace(trait, "3116", "sla")) %>%
+  mutate(trait = str_replace(trait, "3117", "sla"))
+##### Find Synonyms ###
+test2$name[which(!(test2$name %in% data$name))]
+data %>%
+group_by(name) %>%
+summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+filter(str_detect(name, "Silene"))
+traits <- data %>%
+  mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia")) %>%
+  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major_subsp._major")) %>%
+  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major")) %>%
+  mutate(name = fct_recode(name, Cornus_controversa = "Cornus_sanguinea")) %>%
+  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia_subsp._alba")) %>%
+  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia")) %>%
+  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia_ssp._alba")) %>%
+  mutate(trait = as_factor(trait)) %>%
+  group_by(name, trait) %>%
+  summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+  pivot_wider(names_from = "trait", values_from = "value") %>%
+  right_join(traits, by = "name") %>%
   mutate(sla = coalesce(sla.x, sla.y), .keep = "unused") %>%
   mutate(seedmass = coalesce(seedmass.x, seedmass.y), .keep = "unused") %>%
   mutate(height = coalesce(height.x, height.y), .keep = "unused")
 
-### * check completeness of LEDA + TRY ####
+### * check completeness of LEDA + TRY2 ####
 test <- traits %>%
-  select(name, t, n, f, sla, seedmass, height)
-n_miss(test$sla);pct_complete(test$sla) # 6, 97.6%
+  select(name, t, n, f, sla.y, seedmass.y, height.y)
+n_miss(test$sla.y);pct_complete(test$sla) # 6, 97.6%
 n_miss(test$seedmass);pct_complete(test$seedmass) #9, 96.4%
 n_miss(test$height);pct_complete(test$height) # 4, 98.4%
 vis_miss(test, cluster = F, sort_miss = T)
@@ -614,6 +670,7 @@ gg_miss_case(test, order_cases = F)
 (test2 <- test %>%
   select(-t, -n, -f) %>%
   filter(!complete.cases(.)))
+write.csv2(test2, "missing_species.csv")
 rm(test, test2, data)
 
 ### * prepare data frames ####
