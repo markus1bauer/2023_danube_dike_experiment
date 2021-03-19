@@ -22,6 +22,19 @@ setwd("Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danub
 
 ### 1 Species #####################################################################################
 
+speciesS <- read_csv2("data_raw_species_seeded.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                          cols(
+                            .default = col_double(),
+                            side = col_factor(),
+                            id = col_factor()
+                          )) #%>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  rename_with( ~ paste0("L_", .x), -name) %>%
+  rename_with(~ paste0(.x, "_2018"), -name) %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
+  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
+  select(-descriptor)
+
 ### a Load species tables of all years -------------------------------------------------------------------------------------------
 speciesL18 <- read_csv2("data_raw_species_2018_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
                        cols(
@@ -31,7 +44,7 @@ speciesL18 <- read_csv2("data_raw_species_2018_land.csv", col_names = T, na = c(
   mutate(name = str_replace(name, " ", "_")) %>%
   rename_with( ~ paste0("L_", .x), -name) %>%
   rename_with(~ paste0(.x, "_2018"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "warn") %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
   mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
   select(-descriptor)
 speciesW18 <- read_csv2("data_raw_species_2018_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
@@ -42,7 +55,7 @@ speciesW18 <- read_csv2("data_raw_species_2018_water.csv", col_names = T, na = c
   mutate(name = str_replace(name, " ", "_")) %>%
   rename_with( ~ paste0("W_", .x), -name) %>%
   rename_with(~ paste0(.x, "_2018"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "warn") %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
   mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
   select(-descriptor) %>%
   mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major"))
@@ -54,7 +67,7 @@ speciesL19 <- read_csv2("data_raw_species_2019_land.csv", col_names = T, na = c(
   mutate(name = str_replace(name, " ", "_")) %>%
   rename_with( ~ paste0("L_", .x), -name) %>%
   rename_with(~ paste0(.x, "_2019"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "warn") %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
   mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
   select(-descriptor) %>%
   mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major"))
@@ -66,7 +79,7 @@ speciesW19 <- read_csv2("data_raw_species_2019_water.csv", col_names = T, na = c
   mutate(name = str_replace(name, " ", "_")) %>%
   rename_with( ~ paste0("W_", .x), -name) %>%
   rename_with(~ paste0(.x, "_2019"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "warn") %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
   mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
   select(-descriptor) %>%
   mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major"))
@@ -78,7 +91,7 @@ speciesL20 <- read_csv2("data_raw_species_2020_land.csv", col_names = T, na = c(
   mutate(name = str_replace(name, " ", "_")) %>%
   rename_with( ~ paste0("L_", .x), -name) %>%
   rename_with(~ paste0(.x, "_2020"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "warn") %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
   mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
   select(-descriptor)
 speciesW20 <- read_csv2("data_raw_species_2020_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
@@ -91,7 +104,7 @@ speciesW20 <- read_csv2("data_raw_species_2020_water.csv", col_names = T, na = c
   rename_with(~ paste0(.x, "_2020"), -name) %>%
   mutate(name = str_replace(name, "Plantago_major ssp. major", "Plantago_major_ssp_major")) %>%
   mutate(name = str_replace(name, "Plantago_major ssp. intermedia", "Plantago_major_ssp_intermedia")) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "warn") %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
   mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
   select(-descriptor)
 
@@ -179,7 +192,7 @@ traits <- read_csv2("data_raw_traits.csv", col_names = T, na = c("", "NA", "na")
                         r = col_double(),
                         n = col_double()
                       )) %>%
-  separate(name, c("genus", "species", "ssp", "subspecies"), "_", remove = F, extra = "drop", fill = "warn") %>%
+  separate(name, c("genus", "species", "ssp", "subspecies"), "_", remove = F, extra = "drop", fill = "right") %>%
   mutate(genus = str_sub(genus, 1, 4)) %>%
   mutate(species = str_sub(species, 1, 4)) %>%
   mutate(subspecies = str_sub(subspecies, 1, 4)) %>%
@@ -686,7 +699,7 @@ traits <- data %>%
 test <- traits %>%
   select(t, n, f, sla, seedmass, height, rmf, rld, srl, lateral)
 vis_miss(test, cluster = F, sort_miss = T)
-gg_miss_var(test)
+#gg_miss_var(test)
 gg_miss_case(test, order_cases = F)
 (test2 <- traits %>%
   select(name, sla, seedmass, height, rmf, rld, srl, lateral) %>%
@@ -698,32 +711,44 @@ species <- species %>%
   mutate(name = as.character(name)) %>%
   arrange(name) %>%
   mutate(name = as_factor(name))
+#traits %>%
+  #filter(group != "tree" & group != "shrub") %>%
+  #left_join(species, by = "name") %>%
+  #count() #241 species remain
 traits <- traits %>%
   mutate(name = as.character(name)) %>%
   arrange(name) %>%
   mutate(name = as_factor(name))
 traitsLHS <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(name, sla, seedmass, height) %>%
   drop_na()
 traitsSLA <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(name, sla) %>%
   drop_na()  
 traitsSM <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(name, seedmass) %>%
   drop_na()
 traitsH <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(name, height) %>%
   drop_na()
 traitsSRL <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(name, srl) %>%
   drop_na()
 traitsRLD <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(name, rld) %>%
   drop_na()
 traitsRMF <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(name, rmf) %>%
   drop_na()
 traitsAll <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(name, sla, seedmass, height, srl) %>%
   drop_na()
 
@@ -742,7 +767,7 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
                calc.FRic = F, calc.FDiv = F, corr = "cailliez")
 sites$fdisAbuLHS <- TdiversityAbu$FDis
-231 / 250
+224 / (241 - 12) #97.8%
 
 ### b SLA -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSLA, by = "name")
@@ -756,7 +781,9 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
                    calc.FRic = F, calc.FDiv = F, corr = "sqrt");
 sites$fdisAbuSla <- TdiversityAbu$FDis
-sites$cwmAbuSla <- exp(as.numeric(as.character(TdiversityAbu$CWM$sla)))
+sites$cwmAbuSla <- TdiversityAbu$CWM$sla %>%
+  as.character() %>% as.numeric() %>% exp()
+226 / (241 - 12) #98.7%
 
 ### c Seed mass -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSM, by = "name")
@@ -770,8 +797,9 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
 sites$fdisAbuSeedmass <- TdiversityAbu$FDis
-sites$cwmAbuSeedmass <- exp(as.numeric(as.character(TdiversityAbu$CWM$seedmass)))
-233/250
+sites$cwmAbuSeedmass <- TdiversityAbu$CWM$seedmass %>%
+  as.character() %>% as.numeric() %>% exp()
+226 / (241 - 12) #98.7%
 
 ### d Canopy height -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsH, by = "name")
@@ -785,25 +813,11 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
 sites$fdisAbuHeight <- TdiversityAbu$FDis
-sites$cwmAbuHeight <- exp(as.numeric(as.character(TdiversityAbu$CWM$height)))
-235 / 250
+sites$cwmAbuHeight <- TdiversityAbu$CWM$height %>%
+  as.character() %>% as.numeric() %>% exp()
+228 / (241 - 12) #99.6%
 
-### e Root length density -------------------------------------------------------------------------------------------
-Tspecies <- semi_join(species, traitsRLD, by = "name")
-Ttraits <- semi_join(traitsRLD, Tspecies, by = "name")
-Tspecies <- Tspecies %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
-  column_to_rownames("site")
-Ttraits <- column_to_rownames(Ttraits, "name")
-log_Ttraits <- log(Ttraits)
-TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
-                      calc.FRic = F, calc.FDiv = F, corr = "sqrt");
-sites$fdisAbuRld <- TdiversityAbu$FDis
-sites$cwmAbuRld <- exp(as.numeric(as.character(TdiversityAbu$CWM$height)))
-58 / 250
-
-### f Specific root length -------------------------------------------------------------------------------------------
+### e Specific root length -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSRL, by = "name")
 Ttraits <- semi_join(traitsSRL, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -815,10 +829,11 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
 sites$fdisAbuSrl <- TdiversityAbu$FDis
-sites$cwmAbuSrl <- exp(as.numeric(as.character(TdiversityAbu$CWM$height)))
-144 / 250
+sites$cwmAbuSrl <- TdiversityAbu$CWM$srl %>%
+  as.character() %>% as.numeric() %>% exp()
+137 / (241 - 12) #59.8% available
 
-### g Root mass fraction -------------------------------------------------------------------------------------------
+### f Root mass fraction -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsRMF, by = "name")
 Ttraits <- semi_join(traitsRMF, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -830,10 +845,11 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
 sites$fdisAbuRmf <- TdiversityAbu$FDis
-sites$cwmAbuRmf <- exp(as.numeric(as.character(TdiversityAbu$CWM$height)))
-162 / 250
+sites$cwmAbuRmf <- TdiversityAbu$CWM$rmf %>%
+  as.character() %>% as.numeric() %>% exp()
+157 / (241 - 12) #68.6% available
 
-### h All -------------------------------------------------------------------------------------------
+### g All -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsAll, by = "name")
 Ttraits <- semi_join(traitsAll, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -845,8 +861,8 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
                       calc.FRic = F, calc.FDiv = F, corr = "cailliez")
 sites$fdisAbuAll <- TdiversityAbu$FDis
+137 / (241 - 12) #59.8% available
 rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
-
 
 
 

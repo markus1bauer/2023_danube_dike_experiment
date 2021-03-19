@@ -193,7 +193,7 @@ Salix_spec;NA;NA;NA;NA;Salispec;Salicaceae;no;shrub;NA;NA;no;NA;NA;NA;NA;no;no;n
 Salvia_pratensis;NA;0,265000000000000;NA;NA;Salvprat;Lamiaceae;yes;herb;V;NA;no;6;3;8;4;yes;no;no;no;NA;NA;yes;26,3800000000000;2,296400000;0,3750
 Sanguisorba_minor;144,0897042000000;0,277500000000000;2,330688600000;NA;Sangmino;Rosaceae;yes;herb;NA;NA;no;6;3;8;2;yes;no;no;yes;NA;NA;yes;19,2500000000000;4,508000000;0,2000
 Sanguisorba_officinalis;98,9750454000000;0,389443532000000;0,892871317375;2,6;Sangoffi;Rosaceae;yes;herb;V;NA;no;5;7;NA;NA;yes;no;no;no;NA;NA;yes;21,4000000000000;2,264000000;0,4750
-Saxifraga_major;NA;NA;NA;NA;Saximajo;Apiaceae;no;herb;NA;NA;no;NA;NA;NA;NA;no;no;no;no;NA;NA;no;NA;NA;NA
+Saxifraga_granulata;NA;0,867672357000000;NA;0,5;Saxigran;Saxifragaceae;no;herb;V;NA;no;6;4;5;3;no;no;no;no;NA;NA;no;30,8000000000000;0,028500000;0,1000
 Scabiosa_columbaria;120,2294669000000;0,664804469000000;NA;NA;Scabcolu;Caprifoliaceae;yes;herb;NA;NA;no;5;3;8;3;yes;no;no;yes;NA;NA;yes;18,3600000000000;2,058000000;0,2750
 Securigera_varia;211,1000000000000;0,539170507000000;NA;17,1;Secuvari;Fabaceae;no;legume;NA;NA;no;6;4;9;3;yes;no;no;no;NA;NA;yes;28,4900000000000;5,404000000;0,4250
 Sedum_acre;NA;0,411071849000000;NA;9,9;Seduacre;Crassulaceae;yes;herb;NA;NA;no;6;2;NA;1;yes;no;no;no;NA;NA;yes;11,9000000000000;0,040000000;0,0600
