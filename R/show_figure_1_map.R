@@ -21,7 +21,7 @@ library(grid)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/processed/spatial")
+setwd(here("data/processed/spatial"))
 
 ### Load data ###
 germany <- st_read("germany.shp")
@@ -104,7 +104,8 @@ sitesGraph + inset_element(gerGraph,
 ### d Save -----------------------------------------------------------------------
 ggsave("figure_1_map_(300dpi_8x11cm).tiff", 
        dpi = 300, width = 8, height = 11, units = "cm",
-       path = "Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/outputs/figures")
+       path = here("outputs/figures")
+)
 
 
 # 2 Map with tmap ##############################################################################
@@ -136,5 +137,5 @@ tmap_save(tmap,
                                y = unit(3.3, "cm"),
                                width = unit(3, "cm"),
                                height = unit(4, "cm")), 
-          filename = "Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/outputs/figures/figure_1_map_tmap_(300dpi_8x11cm).tiff",
+          filename = paste0(here("outputs/figures"), "/", "figure_1_map_tmap_(300dpi_8x11cm).tiff"),
           dpi = 300)

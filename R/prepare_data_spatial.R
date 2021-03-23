@@ -9,6 +9,7 @@
 
 
 ### Packages ###
+library(here)
 library(tidyverse)
 library(raster)
 library(ggmap)
@@ -18,7 +19,7 @@ library(mapedit)
 
 ### Start ###
 rm(list = ls())
-setwd("Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/raw/spatial")
+setwd(here("data/raw/spatial"))
 register_google(key = "AIzaSyB5nQU_dgB_kPsQkk-_cq7pA0g1-2qka4E")
 
 
@@ -48,7 +49,7 @@ bg_stamen_terrain <- get_map(
   location= c(left = 12.87, bottom = 48.835, right = 12.895, top = 48.845),
   zoom = 14, 
   scale = 1,
-  maptype = "terrain",
+  maptype = "terrain-background",
   source = "stamen"
 )
 ggmap(bg_stamen_terrain)
@@ -87,7 +88,8 @@ blocks <- st_read("blocks.kml") %>%
   summarise(geometry = st_combine(geometry)) %>%
   st_convex_hull %>%
   rename(block = Name) %>%
-  mutate(block = as_factor(block))
+  mutate(block = as_factor(block)) %>%
+  mutate(block = fct_recode(block, "6" = "1", "5" = "2", "4" = "3", "3" = "4", "2" = "5", "1" = "6"))
 
 blocks2 <- blocks %>%
   st_centroid()
@@ -113,17 +115,17 @@ rm(data)
 # C Save ##############################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-setwd("Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/processed/spatial")
+setwd(here("data/processed/spatial"))
 write_csv2(blocks2, file = "blocks2.csv")
 writeRaster(bg_google_satellite2, file = "bg_google_satellite2.grd", overwrite = TRUE, 
             datatype = "raster")
 st_write(germany, layer = "germany.shp", driver = "ESRI Shapefile", delete_layer = T,
-         dsn = "Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/processed/spatial")
+         dsn = here("data/processed/spatial"))
 #st_write(danube, layer = "danube.shp", driver = "ESRI Shapefile", delete_layer = T,
-         #dsn = "Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/processed/spatial")
+         #dsn = here("data/processed/spatial"))
 st_write(dikes, layer = "dikes.shp", driver = "ESRI Shapefile", delete_layer = T,
-         dsn = "Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/processed/spatial")
+         dsn = here("data/processed/spatial"))
 st_write(blocks, layer = "blocks.shp", driver = "ESRI Shapefile", delete_layer = T,
-         dsn = "Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/processed/spatial")
-save(bg_google_satellite, file = "Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/processed/spatial/bg_google_satellite.rda")
-save(bg_stamen_terrain, file = "Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/processed/spatial/bg_stamen_terrain.rda")
+         dsn = here("data/processed/spatial"))
+save(bg_google_satellite, file = paste0(here("data/processed/spatial"), "/", "bg_google_satellite.rda"))
+save(bg_stamen_terrain, file = paste0(here("data/processed/spatial"), "/", "bg_stamen_terrain.rda"))

@@ -3,6 +3,7 @@
 
 
 ### Packages ###
+library(here)
 library(tidyverse)
 library(vegan)
 library(FD) #dbFD()
@@ -11,7 +12,7 @@ library(naniar) #are_na()
 ### Start ###
 #installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T, start_new_R = F, quit_R = T, print_R_versions = T, GUI = F)
 rm(list = ls())
-setwd("Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/raw")
+setwd(here("data/raw"))
 
 
 
@@ -22,20 +23,42 @@ setwd("Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danub
 
 ### 1 Species #####################################################################################
 
-speciesS <- read_csv2("data_raw_species_seeded.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+
+### a Load species tables of all years -------------------------------------------------------------------------------------------
+speciesLseeded <- read_csv2("data_raw_species_seeded_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
                           cols(
                             .default = col_double(),
                             side = col_factor(),
                             id = col_factor()
-                          )) #%>%
+                          )) %>%
+  mutate(id = str_c(side, id, sep = "_")) %>%
+  mutate(id = paste0(id, "_seeded")) %>%
+  pivot_longer(-c(id, side), names_to = "name", values_to = "n") %>%
   mutate(name = str_replace(name, " ", "_")) %>%
-  rename_with( ~ paste0("L_", .x), -name) %>%
-  rename_with(~ paste0(.x, "_2018"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
-  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
-  select(-descriptor)
-
-### a Load species tables of all years -------------------------------------------------------------------------------------------
+  group_by(id) %>%
+  mutate(sum = sum(n, na.rm = T)) %>%
+  mutate(abu = n / sum * 100) %>%
+  pivot_wider(names_from = "id", values_from = "abu") %>%
+  group_by(name) %>%
+  summarise(across(where(is.numeric), ~sum(.x, na.rm = T))) %>%
+  select(-n, -sum)
+speciesWseeded <- read_csv2("data_raw_species_seeded_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                              cols(
+                                .default = col_double(),
+                                side = col_factor(),
+                                id = col_factor()
+                              )) %>%
+  mutate(id = str_c(side, id, sep = "_")) %>%
+  mutate(id = paste0(id, "_seeded")) %>%
+  pivot_longer(-c(side, id), names_to = "name", values_to = "n") %>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  group_by(id) %>%
+  mutate(sum = sum(n, na.rm = T)) %>%
+  mutate(abu = n / sum * 100) %>%
+  pivot_wider(names_from = "id", values_from = "abu") %>%
+  group_by(name) %>%
+  summarise(across(where(is.numeric), ~sum(.x, na.rm = T))) %>%
+  select(-n, -sum)
 speciesL18 <- read_csv2("data_raw_species_2018_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
                        cols(
                          .default = col_double(),
@@ -109,15 +132,16 @@ speciesW20 <- read_csv2("data_raw_species_2020_water.csv", col_names = T, na = c
   select(-descriptor)
 
 ### b Join species tables -------------------------------------------------------------------------------------------
-speciesL <- speciesL18 %>%
+speciesL <- speciesLseeded %>%
+  full_join(speciesL18, by = "name") %>%
   full_join(speciesL19, by = "name") %>%
-  full_join(speciesL20, by = "name") 
-speciesW <- speciesW18 %>%
+  full_join(speciesL20, by = "name")
+speciesW <- speciesWseeded %>%
+  full_join(speciesW18, by = "name") %>%
   full_join(speciesW19, by = "name") %>%
   full_join(speciesW20, by = "name") 
 species <- full_join(speciesL, speciesW) %>%
-  drop_na(name) %>%
-### Rename species ###
+  ### Rename species ###
   mutate(name = fct_recode(name, Carex_praecox_ssp_praecox = "Carex_praecox")) %>%
   mutate(name = fct_recode(name, Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum")) %>%
   mutate(name = fct_recode(name, Cerastium_fontanum_ssp_vulgare = "Cerastium_holosteoides")) %>%
@@ -148,13 +172,7 @@ species <- full_join(speciesL, speciesW) %>%
   mutate(max = ifelse(is.infinite(max), NA, max)) %>%
   pivot_wider(names_from = "id", values_from = "max") %>%
   mutate(name = as_factor(name)) %>%
-### Check that each species occurs at least one time ###
-  group_by(name) %>%
-  mutate(total = sum(c_across(starts_with("L") | starts_with("W")), na.rm = T)) %>%
-  mutate(presence = if_else(total > 0, 1, 0)) %>%
-  filter(presence == 1) %>%
-  ungroup() %>%
-  select(-total, -presence) %>%
+### Rename plots ###
   rename_with(~ str_replace(.x, "_1_201", "_01_201")) %>%
   rename_with(~ str_replace(.x, "_1_2020", "_01_2020")) %>%
   rename_with(~ str_replace(.x, "_2_201", "_02_201")) %>%
@@ -173,9 +191,23 @@ species <- full_join(speciesL, speciesW) %>%
   rename_with(~ str_replace(.x, "_8_2020", "_08_2020")) %>%
   rename_with(~ str_replace(.x, "_9_201", "_09_201")) %>%
   rename_with(~ str_replace(.x, "_9_2020", "_09_2020")) %>%
+### Check that each species occurs at least one time ###
+  group_by(name) %>%
+  mutate(total = sum(c_across(starts_with("L") | starts_with("W")), na.rm = T)) %>%
+  mutate(presence = if_else(total > 0, 1, 0)) %>%
+  filter(presence == 1) %>%
+  ungroup() %>%
+  select(-total, -presence) %>%
   mutate(name = as.character(name)) %>%
   arrange(name) %>%
-  mutate(name = as_factor(name))
+  mutate(name = as_factor(name)) %>%
+### Check that each plot has at least one species ###
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  group_by(id) %>%
+  mutate(sum = sum(value, na.rm = T)) %>%
+  filter(sum > 0) %>%
+  select(-sum) %>%
+  pivot_wider(names_from = id, values_from = value)
 rm(list = setdiff(ls(), c("species")))
 
 
@@ -212,9 +244,11 @@ traits <- read_csv2("data_raw_traits.csv", col_names = T, na = c("", "NA", "na")
 sites <- read_csv2("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), col_types = 
                      cols(
                        .default = col_factor(),
+                       vegetationCov_seeded = col_double(),
                        vegetationCov_2018 = col_double(),
                        vegetationCov_2019 = col_double(),
                        vegetationCov_2020 = col_double(),
+                       surveyDate_seeded = col_date(),
                        surveyDate_2018 = col_date(),
                        surveyDate_2019 = col_date(),
                        surveyDate_2020 = col_date()
@@ -224,17 +258,13 @@ sites <- read_csv2("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), 
   mutate(plot = str_replace(plot, "-", "_")) %>%
   mutate(surveyYear = str_replace(surveyYear, "vegetationCov_", "")) %>%
   mutate(id = as_factor(str_c(plot, surveyYear, sep = "_")), .keep = "all") %>%
-  mutate(plot = as_factor(plot))
+  mutate(plot = as_factor(plot)) %>%
 ### Remove plots with no species ###
-ids <- as_factor(colnames(species[-1]))
-#sites$id[which(!(sites$id %in% ids))]
-#ids[which(!(ids %in% sites$id))]
-sites <- sites %>%
-  filter(id %in% ids)
+  filter(id %in% as_factor(colnames(species[-1])))
 ### Remove plots which are not part of the sites tibble ##
 species <- species %>%
   select(name, all_of(sites$id))
-rm(ids)
+#rm(ids)
 ### Check missing values ###
 #miss_var_summary(species, order = T)
 #miss_var_summary(sites, order = T)
@@ -446,11 +476,15 @@ rm(tbi, tbi2)
 ### a N value -------------------------------------------------------------------------------------------
 Ntraits <- traits %>%
   select(name, n) %>%
-  filter(n > 0) 
+  filter(n > 0)
 Nspecies <- semi_join(species, Ntraits, by = "name") %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
-  column_to_rownames("site")
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  group_by(id) %>%
+  mutate(sum = sum(value, na.rm = T)) %>%
+  filter(sum > 0) %>%
+  select(-sum) %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("id")
 Ntraits <- column_to_rownames(Ntraits, "name")
 ### Calculate CWM ###
 Nweighted <- dbFD(Ntraits, Nspecies, w.abun = T,
@@ -461,9 +495,13 @@ Ftraits <- traits %>%
   select(name, f) %>%
   filter(f > 0) 
 Fspecies <- semi_join(species, Ftraits, by = "name") %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
-  column_to_rownames("site")
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  group_by(id) %>%
+  mutate(sum = sum(value, na.rm = T)) %>%
+  filter(sum > 0) %>%
+  select(-sum) %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("id")
 Ftraits <- column_to_rownames(Ftraits, "name")
 ### Calculate CWM ###
 Fweighted <- dbFD(Ftraits, Fspecies, w.abun = T,
@@ -474,9 +512,13 @@ Ttraits <- traits %>%
   select(name, t) %>%
   filter(t > 0) 
 Tspecies <- semi_join(species, Ttraits, by = "name") %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
-  column_to_rownames("site")
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  group_by(id) %>%
+  mutate(sum = sum(value, na.rm = T)) %>%
+  filter(sum > 0) %>%
+  select(-sum) %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("id")
 Ttraits <- column_to_rownames(Ttraits, "name")
 ### Calculate CWM ###
 Tweighted <- dbFD(Ttraits, Tspecies, w.abun = T,
@@ -711,10 +753,17 @@ species <- species %>%
   mutate(name = as.character(name)) %>%
   arrange(name) %>%
   mutate(name = as_factor(name))
-#traits %>%
-  #filter(group != "tree" & group != "shrub") %>%
-  #left_join(species, by = "name") %>%
-  #count() #241 species remain
+herbCount <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
+  left_join(species, by = "name") %>%
+  count() %>%
+  pull()
+undefinedSpeciesCount <- traits %>%
+  filter(group != "tree" & group != "shrub") %>%
+  filter(str_detect(name, "_spec|Öhrchen")) %>%
+  left_join(species, by = "name") %>%
+  count() %>%
+  pull()
 traits <- traits %>%
   mutate(name = as.character(name)) %>%
   arrange(name) %>%
@@ -767,7 +816,7 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
                calc.FRic = F, calc.FDiv = F, corr = "cailliez")
 sites$fdisAbuLHS <- TdiversityAbu$FDis
-224 / (241 - 12) #97.8%
+length(traitsLHS$name) / (herbCount - undefinedSpeciesCount)
 
 ### b SLA -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSLA, by = "name")
@@ -783,7 +832,7 @@ TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
 sites$fdisAbuSla <- TdiversityAbu$FDis
 sites$cwmAbuSla <- TdiversityAbu$CWM$sla %>%
   as.character() %>% as.numeric() %>% exp()
-226 / (241 - 12) #98.7%
+length(traitsSLA$name) / (herbCount - undefinedSpeciesCount)
 
 ### c Seed mass -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSM, by = "name")
@@ -799,7 +848,7 @@ TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
 sites$fdisAbuSeedmass <- TdiversityAbu$FDis
 sites$cwmAbuSeedmass <- TdiversityAbu$CWM$seedmass %>%
   as.character() %>% as.numeric() %>% exp()
-226 / (241 - 12) #98.7%
+length(traitsSM$name) / (herbCount - undefinedSpeciesCount)
 
 ### d Canopy height -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsH, by = "name")
@@ -815,7 +864,7 @@ TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
 sites$fdisAbuHeight <- TdiversityAbu$FDis
 sites$cwmAbuHeight <- TdiversityAbu$CWM$height %>%
   as.character() %>% as.numeric() %>% exp()
-228 / (241 - 12) #99.6%
+length(traitsH$name) / (herbCount - undefinedSpeciesCount)
 
 ### e Specific root length -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSRL, by = "name")
@@ -831,7 +880,7 @@ TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
 sites$fdisAbuSrl <- TdiversityAbu$FDis
 sites$cwmAbuSrl <- TdiversityAbu$CWM$srl %>%
   as.character() %>% as.numeric() %>% exp()
-137 / (241 - 12) #59.8% available
+length(traitsSRL$name) / (herbCount - undefinedSpeciesCount)
 
 ### f Root mass fraction -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsRMF, by = "name")
@@ -847,7 +896,7 @@ TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
 sites$fdisAbuRmf <- TdiversityAbu$FDis
 sites$cwmAbuRmf <- TdiversityAbu$CWM$rmf %>%
   as.character() %>% as.numeric() %>% exp()
-157 / (241 - 12) #68.6% available
+length(traitsRMF$name) / (herbCount - undefinedSpeciesCount)
 
 ### g All -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsAll, by = "name")
@@ -861,7 +910,7 @@ log_Ttraits <- log(Ttraits)
 TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
                       calc.FRic = F, calc.FDiv = F, corr = "cailliez")
 sites$fdisAbuAll <- TdiversityAbu$FDis
-137 / (241 - 12) #59.8% available
+length(traitsAll$name) / (herbCount - undefinedSpeciesCount)
 rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
 
 
@@ -870,8 +919,7 @@ rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
 # C Save processed data ##############################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-setwd("Z:/Documents/0_Uni/2022_Donaudeiche/3_Aufnahmen_und_Ergebnisse/2022_Danube_dike_experiment/data/processed")
+setwd(here("data/processed"))
 write_csv2(sites, "data_processed_sites.csv")
 write_csv2(species, "data_processed_species.csv")
 write_csv2(traits, "data_processed_traits.csv")

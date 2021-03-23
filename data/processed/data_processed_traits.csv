@@ -13,6 +13,7 @@ Alopecurus_pratensis;213,7474158500000;0,776138547750000;25,936399152500;5,2;Alo
 Amaranthus_retroflexus;181,4498879375000;0,255000000000000;NA;NA;Amarretr;Amaranthaceae;no;herb;NA;NA;no;7;5;7;7;no;no;no;no;yes;NA;no;16,7400000000000;0,413000000;0,4750
 Anagallis_arvensis;NA;NA;NA;NA;Anagarve;Primulaceae;no;herb;NA;NA;no;6;5;NA;6;no;no;no;no;NA;NA;no;28,7000000000000;0,431200000;0,1375
 Angelica_sylvestris;NA;NA;NA;NA;Angesylv;Apiaceae;no;herb;NA;NA;no;NA;8;NA;NA;yes;no;no;no;NA;NA;yes;26,7000000000000;2,960000000;0,9000
+Anthericum_ramosum;NA;NA;NA;0,5;Anthramo;Asparagaceae;yes;herb;V;NA;no;5;3;7;3;yes;no;no;no;NA;NA;yes;23,5100000000000;5,111000000;0,2875
 Anthoxanthum_odoratum;352,3954195300000;0,540568099000000;8,518805520750;2,6;Anthodor;Poaceae;yes;sub-grass;NA;NA;no;NA;NA;5;NA;no;yes;yes;no;NA;NA;yes;30,0300000000000;0,627500000;0,1650
 Anthyllis_vulneraria;184,3037210000000;0,297241488000000;NA;NA;Anthvuln;Fabaceae;yes;legume;NA;NA;no;6;3;7;2;yes;no;no;yes;yes;NA;yes;15,9000000000000;3,279400000;0,2000
 Apera_spica-venti;NA;0,346243367333333;NA;NA;Aperspic;Poaceae;no;grass;NA;NA;no;6;6;5;NA;no;no;no;no;NA;NA;no;17,3000000000000;0,119000000;0,5500
@@ -47,6 +48,7 @@ Carex_hirta;NA;NA;NA;9,8;Carehirt;Cyperaceae;no;sedge;NA;NA;no;6;6;NA;5;no;yes;n
 Carex_muricata;60,4840664600000;0,752407153000000;NA;26,5;Caremuri;Cyperaceae;no;sedge;NA;NA;no;6;4;NA;6;no;yes;no;no;NA;NA;yes;18,1000000000000;1,827200000;0,2750
 Carex_praecox_ssp_praecox;NA;NA;NA;13,4;Carepraeprae;Cyperaceae;no;sedge;V;3;no;6;3;NA;4;no;yes;no;no;NA;NA;yes;16,0500000000000;0,990000000;0,2000
 Carex_spec;NA;NA;NA;NA;Carespec;Cyperaceae;no;grass;NA;NA;no;NA;NA;NA;NA;no;no;no;no;NA;NA;no;NA;NA;NA
+Carlina_vulgaris;332,8231064000000;0,863013699000000;NA;NA;Carlvulg;Compositae;yes;herb;NA;NA;no;5;4;7;3;no;no;no;no;NA;NA;no;33,1700000000000;NA;0,3750
 Centaurea_jacea;116,3507790500000;0,449296964000000;2,100065919500;4,1;Centjace;Compositae;yes;herb;NA;NA;no;NA;NA;NA;NA;yes;no;yes;no;NA;NA;yes;16,3000000000000;2,000000000;0,8500
 Centaurea_scabiosa;NA;NA;NA;NA;Centscab;Compositae;yes;herb;NA;NA;no;NA;3;8;4;yes;no;no;yes;NA;NA;yes;19,6800000000000;6,547600000;0,8250
 Centaurea_spec;NA;NA;NA;NA;Centspec;Compositae;no;herb;NA;NA;no;NA;NA;NA;NA;no;no;no;no;NA;NA;no;NA;NA;NA
@@ -109,6 +111,7 @@ Geranium_pyrenaicum;170,3541445000000;0,713403880000000;NA;NA;Gerapyre;Geraniace
 Getreide_Öhrchen;NA;NA;NA;NA;GetrÖhrc;Poaceae;no;grass;NA;NA;no;NA;NA;NA;NA;no;no;no;no;NA;NA;no;NA;NA;NA
 Geum_urbanum;241,5622602000000;0,259332190000000;NA;4,3;Geumurba;Rosaceae;no;herb;NA;NA;no;5;5;NA;7;yes;no;no;no;NA;NA;yes;40,9000000000000;2,449000000;0,4000
 Glechoma_hederacea;429,4738147500000;0,155460027000000;1,808242814500;37,0;Glechede;Lamiaceae;no;herb;NA;NA;no;6;6;NA;7;yes;no;no;no;NA;NA;yes;34,4500000000000;0,685000000;0,2000
+Helianthemum_nummularium;NA;0,107503227000000;NA;NA;Helinumm;Cistaceae;yes;herb;3;3;no;6;3;7;1;yes;no;no;yes;NA;NA;yes;14,7000000000000;1,122000000;0,1155
 Helianthus_annuus;231,9200000000000;0,186581191375000;NA;NA;Heliannu;Compositae;no;herb;NA;NA;yes;NA;NA;NA;NA;no;no;no;no;yes;NA;no;17,5300000000000;49,000000000;2,7432
 Helianthus_tuberosus;38,2970966250000;0,293342984875000;NA;11,4;Helitube;Compositae;no;herb;NA;NA;yes;7;6;7;8;no;no;no;no;NA;NA;no;10,7758620690000;3,800000000;1,7500
 Helictotrichon_pubescens;62,8695405300000;0,673158466500000;NA;NA;Helipube;Poaceae;yes;top-grass;NA;NA;no;NA;NA;NA;4;no;yes;yes;no;NA;NA;yes;22,3700000000000;1,924000000;0,6000
@@ -117,6 +120,7 @@ Holcus_lanatus;326,3078389875000;0,421744849000000;16,385518772500;5,0;Holclana;
 Hordeum_vulgare;56,5120000000000;0,327500000000000;NA;NA;Hordvulg;Poaceae;no;grass;NA;NA;yes;NA;NA;NA;NA;no;no;no;no;NA;NA;no;0,0400000000000;40,905000000;0,9650
 Hypericum_perforatum;465,2968152400000;0,325245387000000;NA;9,3;Hypeperf;Hypericaceae;yes;herb;NA;NA;no;6;4;6;3;yes;no;no;no;NA;NA;yes;23,2407755300000;0,110700000;0,4250
 Hypochaeris_radicata;135,8477377012500;0,482391962125000;NA;2,1;Hyporadi;Compositae;yes;herb;NA;NA;no;5;5;4;3;yes;no;no;no;NA;NA;yes;21,4000000000000;0,655000000;0,0650
+Inula_salicina;66,5142619150000;NA;NA;13,0;Inulsali;Compositae;yes;herb;V;NA;no;6;6;9;2;no;no;no;no;NA;NA;no;26,6300000000000;0,242000000;0,5000
 Iris_spec;NA;NA;NA;NA;Irisspec;Iridaceae;no;herb;NA;NA;no;NA;NA;NA;NA;no;no;no;no;NA;NA;no;NA;NA;NA
 Jacobaea_vulgaris;NA;0,606663120000000;NA;11,5;Jacovulg;Compositae;no;herb;NA;NA;no;5;4;7;5;no;no;no;no;NA;NA;no;30,9000000000000;0,269000000;0,2000
 Knautia_arvensis;160,7569596000000;0,534845379000000;2,682874699625;NA;Knauarve;Caprifoliaceae;yes;herb;NA;NA;no;6;4;NA;4;yes;no;yes;no;NA;NA;yes;18,7200000000000;3,928000000;0,4250
@@ -154,6 +158,7 @@ Pastinaca_sativa;88,2282332800000;0,699789637500000;1,022137502500;NA;Pastsati;A
 Persicaria_amphibia;NA;NA;NA;34,6;Persamph;Polygonaceae;no;herb;NA;NA;no;6;11;6;4;yes;no;no;no;yes;NA;yes;16,5000000000000;4,184500000;0,4750
 Persicaria_bistorta;NA;NA;NA;5,2;Persbist;Polygonaceae;no;herb;NA;NA;no;4;7;5;5;no;no;no;no;NA;NA;no;17,0730591656897;4,810000000;0,3750
 Persicaria_minor;NA;NA;NA;NA;Persmino;Polygonaceae;no;herb;NA;NA;no;6;8;5;8;no;no;no;no;NA;NA;no;40,4000000000000;0,870000000;0,3000
+Peucedanum_oreoselinum;NA;NA;NA;NA;Peucoreo;Apiaceae;yes;herb;V;NA;no;6;3;6;2;yes;no;no;no;NA;NA;yes;16,2700000000000;3,466000000;0,5000
 Phleum_phleoides;NA;0,350227420000000;NA;0,5;Phlephle;Poaceae;no;top-grass;V;NA;no;6;3;8;2;no;yes;no;yes;NA;NA;yes;17,5200000000000;0,166400000;0,3000
 Phleum_pratense;406,9973316666670;0,299264576000000;12,698164106250;0,5;Phleprat;Poaceae;yes;top-grass;NA;NA;no;NA;5;NA;6;no;no;no;no;NA;NA;no;24,4000000000000;0,465500000;0,3710
 Pimpinella_major;246,3602065000000;0,493916180500000;1,222430025000;NA;Pimpmajo;Apiaceae;yes;herb;NA;NA;no;5;5;7;7;yes;no;no;no;NA;NA;yes;28,6000000000000;2,118000000;0,6250
@@ -225,6 +230,7 @@ Trifolium_campestre;244,5397998500000;0,245283019000000;0,595777618000;NA;Trifca
 Trifolium_dubium;251,7874157000000;0,209328782000000;0,864501219250;NA;Trifdubi;Fabaceae;no;legume;NA;NA;no;6;5;6;5;yes;no;yes;no;NA;NA;yes;25,1000000000000;0,460000000;0,2250
 Trifolium_hybridum;225,8619089000000;0,129164391000000;2,142906166750;NA;Trifhybr;Fabaceae;no;legume;NA;NA;yes;6;6;7;5;yes;no;no;no;NA;NA;yes;25,4000000000000;0,931500000;0,3500
 Trifolium_medium;70,3059873600000;0,779050737000000;NA;NA;Trifmedi;Fabaceae;no;legume;NA;NA;no;6;4;6;3;yes;no;no;no;NA;NA;yes;20,6100000000000;2,126600000;0,4000
+Trifolium_montanum;211,3795614500000;NA;NA;NA;Trifmont;Fabaceae;yes;legume;V;NA;no;NA;3;8;2;yes;no;no;yes;NA;NA;yes;18,4950000000000;0,850000000;0,2750
 Trifolium_pratense;173,4893261000000;0,205141388000000;1,488908636500;NA;Trifprat;Fabaceae;yes;legume;NA;NA;no;NA;NA;NA;NA;yes;no;yes;no;NA;NA;yes;23,1000000000000;1,420000000;0,2750
 Trifolium_repens;175,1737647000000;0,172538135400000;1,378605094250;26,5;Trifrepe;Fabaceae;no;legume;NA;NA;no;NA;5;6;6;no;no;no;no;NA;NA;no;30,6995000000000;0,561500000;0,3500
 Tripleurospermum_maritimum;NA;0,137500000000000;NA;NA;Tripmari;Compositae;no;herb;NA;NA;no;6;6;7;8;no;no;no;no;NA;yes;no;19,7387986750000;0,300000000;0,2400
