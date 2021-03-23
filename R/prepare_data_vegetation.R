@@ -732,7 +732,7 @@ traits <- data %>%
   group_by(name) %>%
   summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
   right_join(traits, by = "name")
-### check completeness of Roots ####
+### check completeness of Roots ###
 (test2 <- traits %>%
    select(name, rmf, rld, srl, lateral) %>%
    filter(!complete.cases(rmf, rld, srl, lateral)))
@@ -753,6 +753,10 @@ species <- species %>%
   mutate(name = as.character(name)) %>%
   arrange(name) %>%
   mutate(name = as_factor(name))
+traits <- traits %>%
+  mutate(name = as.character(name)) %>%
+  arrange(name) %>%
+  mutate(name = as_factor(name))
 herbCount <- traits %>%
   filter(group != "tree" & group != "shrub") %>%
   left_join(species, by = "name") %>%
@@ -764,10 +768,6 @@ undefinedSpeciesCount <- traits %>%
   left_join(species, by = "name") %>%
   count() %>%
   pull()
-traits <- traits %>%
-  mutate(name = as.character(name)) %>%
-  arrange(name) %>%
-  mutate(name = as_factor(name))
 traitsLHS <- traits %>%
   filter(group != "tree" & group != "shrub") %>%
   select(name, sla, seedmass, height) %>%
