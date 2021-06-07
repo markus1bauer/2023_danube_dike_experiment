@@ -106,7 +106,7 @@ speciesW19 <- read_csv2("data_raw_species_2019_water.csv", col_names = T, na = c
   mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
   select(-descriptor) %>%
   mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major"))
-speciesL20 <- read_csv2("data_raw_species_2020_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+speciesL20 <- read_csv("data_raw_species_2020_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
                           cols(
                             .default = col_double(),
                             name = col_factor()
@@ -209,6 +209,13 @@ species <- full_join(speciesL, speciesW) %>%
   select(-sum) %>%
   pivot_wider(names_from = id, values_from = value)
 rm(list = setdiff(ls(), c("species")))
+
+specieslist <- species %>%
+  mutate_if(is.numeric, ~1 * (. != 0)) %>%
+  mutate(sum = rowSums(across(where(is.numeric)), na.rm = T), .keep = "unused") %>%
+  group_by(name) %>%
+  summarise(sum = sum(sum))
+write_csv(specieslist, "specieslist.csv")
 
 
 ### 2 Traits #####################################################################################
