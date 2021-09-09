@@ -23,175 +23,12 @@ setwd(here("data/raw"))
 
 ### 1 Species #####################################################################################
 
-
-### a Load species tables of all years -------------------------------------------------------------------------------------------
-speciesLseeded <- read_csv2("data_raw_species_seeded_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-                          cols(
-                            .default = col_double(),
-                            side = col_factor(),
-                            id = col_factor()
-                          )) %>%
-  mutate(id = str_c(side, id, sep = "_")) %>%
-  mutate(id = paste0(id, "_seeded")) %>%
-  pivot_longer(-c(id, side), names_to = "name", values_to = "n") %>%
-  mutate(name = str_replace(name, " ", "_")) %>%
-  group_by(id) %>%
-  mutate(sum = sum(n, na.rm = T)) %>%
-  mutate(abu = n / sum * 100) %>%
-  pivot_wider(names_from = "id", values_from = "abu") %>%
-  group_by(name) %>%
-  summarise(across(where(is.numeric), ~sum(.x, na.rm = T))) %>%
-  select(-n, -sum)
-speciesWseeded <- read_csv2("data_raw_species_seeded_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-                              cols(
-                                .default = col_double(),
-                                side = col_factor(),
-                                id = col_factor()
-                              )) %>%
-  mutate(id = str_c(side, id, sep = "_")) %>%
-  mutate(id = paste0(id, "_seeded")) %>%
-  pivot_longer(-c(side, id), names_to = "name", values_to = "n") %>%
-  mutate(name = str_replace(name, " ", "_")) %>%
-  group_by(id) %>%
-  mutate(sum = sum(n, na.rm = T)) %>%
-  mutate(abu = n / sum * 100) %>%
-  pivot_wider(names_from = "id", values_from = "abu") %>%
-  group_by(name) %>%
-  summarise(across(where(is.numeric), ~sum(.x, na.rm = T))) %>%
-  select(-n, -sum)
-speciesL18 <- read_csv2("data_raw_species_2018_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-                       cols(
-                         .default = col_double(),
-                         name = col_factor()
-                       )) %>%
-  mutate(name = str_replace(name, " ", "_")) %>%
-  rename_with( ~ paste0("L_", .x), -name) %>%
-  rename_with(~ paste0(.x, "_2018"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
-  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
-  select(-descriptor)
-speciesW18 <- read_csv2("data_raw_species_2018_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-                          cols(
-                            .default = col_double(),
-                            name = col_factor()
-                          )) %>%
-  mutate(name = str_replace(name, " ", "_")) %>%
-  rename_with( ~ paste0("W_", .x), -name) %>%
-  rename_with(~ paste0(.x, "_2018"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
-  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
-  select(-descriptor) %>%
-  mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major"))
-speciesL19 <- read_csv2("data_raw_species_2019_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-                          cols(
-                            .default = col_double(),
-                            name = col_factor()
-                          )) %>%
-  mutate(name = str_replace(name, " ", "_")) %>%
-  rename_with( ~ paste0("L_", .x), -name) %>%
-  rename_with(~ paste0(.x, "_2019"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
-  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
-  select(-descriptor) %>%
-  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major"))
-speciesW19 <- read_csv2("data_raw_species_2019_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-                          cols(
-                            .default = col_double(),
-                            name = col_factor()
-                          )) %>%
-  mutate(name = str_replace(name, " ", "_")) %>%
-  rename_with( ~ paste0("W_", .x), -name) %>%
-  rename_with(~ paste0(.x, "_2019"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
-  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
-  select(-descriptor) %>%
-  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major"))
-speciesL20 <- read_csv("data_raw_species_2020_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-                          cols(
-                            .default = col_double(),
-                            name = col_factor()
-                          )) %>%
-  mutate(name = str_replace(name, " ", "_")) %>%
-  rename_with( ~ paste0("L_", .x), -name) %>%
-  rename_with(~ paste0(.x, "_2020"), -name) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
-  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
-  select(-descriptor)
-speciesW20 <- read_csv2("data_raw_species_2020_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-                          cols(
-                            .default = col_double(),
-                            name = col_factor()
-                          )) %>%
-  mutate(name = str_replace(name, " ", "_")) %>%
-  rename_with( ~ paste0("W_", .x), -name) %>%
-  rename_with(~ paste0(.x, "_2020"), -name) %>%
-  mutate(name = str_replace(name, "Plantago_major ssp. major", "Plantago_major_ssp_major")) %>%
-  mutate(name = str_replace(name, "Plantago_major ssp. intermedia", "Plantago_major_ssp_intermedia")) %>%
-  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
-  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
-  select(-descriptor)
-
-### b Join species tables -------------------------------------------------------------------------------------------
-speciesL <- speciesLseeded %>%
-  full_join(speciesL18, by = "name") %>%
-  full_join(speciesL19, by = "name") %>%
-  full_join(speciesL20, by = "name")
-speciesW <- speciesWseeded %>%
-  full_join(speciesW18, by = "name") %>%
-  full_join(speciesW19, by = "name") %>%
-  full_join(speciesW20, by = "name") 
-species <- full_join(speciesL, speciesW) %>%
-  ### Rename species ###
-  mutate(name = fct_recode(name, Carex_praecox_ssp_praecox = "Carex_praecox")) %>%
-  mutate(name = fct_recode(name, Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum")) %>%
-  mutate(name = fct_recode(name, Cerastium_fontanum_ssp_vulgare = "Cerastium_holosteoides")) %>%
-  mutate(name = fct_recode(name, Cornus_controversa = "Cornus_sanguinea")) %>%
-  mutate(name = fct_recode(name, Cota_tinctoria = "Anthemis_tinctoris")) %>%
-  mutate(name = fct_recode(name, Erigeron_canadensis = "Conyza_canadensis")) %>%
-  mutate(name = fct_recode(name, Fallopia_convolvulus = "Polygonum_convolvulus")) %>%
-  mutate(name = fct_recode(name, Galium_mollugo = "Galium_album")) %>%
-  mutate(name = fct_recode(name, Jacobaea_vulgaris = "Senecio_jacobaea")) %>%
-  mutate(name = fct_recode(name, Persicaria_amphibia = "Polygonum_amphibium")) %>%
-  mutate(name = fct_recode(name, Persicaria_bistorta = "Bistorta_officinalis")) %>%
-  mutate(name = fct_recode(name, Persicaria_minor = "Polygonum_minus")) %>%
-  mutate(name = fct_recode(name, Populus_alba = "Popolus_alba")) %>%
-  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia")) %>%
-  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_alba")) %>%
-  mutate(name = fct_recode(name, "Silene_flos-cuculi" = "Lychnis_flos-cuculi")) %>%
-  mutate(name = fct_recode(name, Taraxacum_campylodes = "Taraxacum_officinale")) %>%
-  mutate(name = fct_recode(name, Vicia_sativa_ssp_nigra = "Vicia_angustifolia")) %>%
-### combine created duplicates ###
-  group_by(name) %>%
-  summarise(across(where(is.double), ~sum(.x, na.rm = T))) %>%
-### Implement counted inidviduals as 0.5 % in normal columns ###
-  mutate(across(where(is.numeric) & contains("i"), ~ 0.5 * (. > 0))) %>%
-  pivot_longer(cols = -name, names_to = "id", values_to = "n") %>%
-  mutate(id  =  str_replace(id, "i", "")) %>%
-  group_by(name, id) %>%
-  summarise(max = max(n, na.rm = T)) %>%
-  mutate(max = ifelse(is.infinite(max), NA, max)) %>%
-  pivot_wider(names_from = "id", values_from = "max") %>%
-  mutate(name = as_factor(name)) %>%
-### Rename plots ###
-  rename_with(~ str_replace(.x, "_1_201", "_01_201")) %>%
-  rename_with(~ str_replace(.x, "_1_2020", "_01_2020")) %>%
-  rename_with(~ str_replace(.x, "_2_201", "_02_201")) %>%
-  rename_with(~ str_replace(.x, "_2_2020", "_02_2020")) %>%
-  rename_with(~ str_replace(.x, "_3_201", "_03_201")) %>%
-  rename_with(~ str_replace(.x, "_3_2020", "_03_2020")) %>%
-  rename_with(~ str_replace(.x, "_4_201", "_04_201")) %>%
-  rename_with(~ str_replace(.x, "_4_2020", "_04_2020")) %>%
-  rename_with(~ str_replace(.x, "_5_201", "_05_201")) %>%
-  rename_with(~ str_replace(.x, "_5_2020", "_05_2020")) %>%
-  rename_with(~ str_replace(.x, "_6_201", "_06_201")) %>%
-  rename_with(~ str_replace(.x, "_6_2020", "_06_2020")) %>%
-  rename_with(~ str_replace(.x, "_7_201", "_07_201")) %>%
-  rename_with(~ str_replace(.x, "_7_2020", "_07_2020")) %>%
-  rename_with(~ str_replace(.x, "_8_201", "_08_201")) %>%
-  rename_with(~ str_replace(.x, "_8_2020", "_08_2020")) %>%
-  rename_with(~ str_replace(.x, "_9_201", "_09_201")) %>%
-  rename_with(~ str_replace(.x, "_9_2020", "_09_2020")) %>%
-### Check that each species occurs at least one time ###
+species <- read_csv("data_raw_species.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+            cols(
+              .default = "d",
+              name = "f"
+            )) %>%
+  ### Check that each species occurs at least one time ###
   group_by(name) %>%
   mutate(total = sum(c_across(starts_with("L") | starts_with("W")), na.rm = T)) %>%
   mutate(presence = if_else(total > 0, 1, 0)) %>%
@@ -201,26 +38,36 @@ species <- full_join(speciesL, speciesW) %>%
   mutate(name = as.character(name)) %>%
   arrange(name) %>%
   mutate(name = as_factor(name)) %>%
-### Check that each plot has at least one species ###
+  ### Check that each plot has at least one species ###
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   group_by(id) %>%
   mutate(sum = sum(value, na.rm = T)) %>%
   filter(sum > 0) %>%
   select(-sum) %>%
+  ### Adapt species cover to Londo scale ###
+  mutate(value = if_else(!str_detect(id, "_seeded$") & value == 6, 10, value),
+         value = if_else(!str_detect(id, "_seeded$") & value == 7, 10, value),
+         value = if_else(!str_detect(id, "_seeded$") & value == 8, 10, value),
+         value = if_else(!str_detect(id, "_seeded$") & value == 12, 10, value)) %>%
   pivot_wider(names_from = id, values_from = value)
-rm(list = setdiff(ls(), c("species")))
 
 specieslist <- species %>%
   mutate_if(is.numeric, ~1 * (. != 0)) %>%
   mutate(sum = rowSums(across(where(is.numeric)), na.rm = T), .keep = "unused") %>%
   group_by(name) %>%
   summarise(sum = sum(sum))
-write_csv(specieslist, "specieslist.csv")
+#write_csv(specieslist, "specieslist.csv")
+
+
+summarise(across(2:last_col(), sum, na.rm = T)) %>%
+  pivot_longer(cols = everything(), names_to = "id", values_to = "n")
+
+
 
 
 ### 2 Traits #####################################################################################
 
-traits <- read_csv2("data_raw_traits.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+traits <- read_csv("data_raw_traits.csv", col_names = T, na = c("", "NA", "na"), col_types = 
                       cols(
                         .default = col_factor(),
                         name = col_factor(),
@@ -230,7 +77,7 @@ traits <- read_csv2("data_raw_traits.csv", col_names = T, na = c("", "NA", "na")
                         f = col_double(),
                         r = col_double(),
                         n = col_double()
-                      )) %>%
+                      )) #%>%
   separate(name, c("genus", "species", "ssp", "subspecies"), "_", remove = F, extra = "drop", fill = "right") %>%
   mutate(genus = str_sub(genus, 1, 4)) %>%
   mutate(species = str_sub(species, 1, 4)) %>%
@@ -238,34 +85,49 @@ traits <- read_csv2("data_raw_traits.csv", col_names = T, na = c("", "NA", "na")
   unite(abb, genus, species, subspecies, sep = "") %>%
   mutate(abb = str_replace(abb, "NA", "")) %>%
   mutate(abb = as_factor(abb)) %>%
-  select(-ssp, - descriptor, -synonym, -nomenclature, -legal, -l, -k, -fchange) %>%
+  select(-ssp, -synonym, -nomenclature, -legal, -l, -k, -fchange) %>%
 #traits[duplicated(traits$abb),]
 #Check congruency of traits and species table
 #traits$name[which(!(traits$name %in% species$name))]
 #species$name[which(!(species$name %in% traits$name))]
   semi_join(species, by = "name")
 
-
+  
 ### 3 Sites #####################################################################################
 
-sites <- read_csv2("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+sites <- read_csv("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), col_types = 
                      cols(
                        .default = col_factor(),
-                       vegetationCov_seeded = col_double(),
-                       vegetationCov_2018 = col_double(),
-                       vegetationCov_2019 = col_double(),
-                       vegetationCov_2020 = col_double(),
-                       surveyDate_seeded = col_date(),
-                       surveyDate_2018 = col_date(),
-                       surveyDate_2019 = col_date(),
-                       surveyDate_2020 = col_date()
+                       vegetationCov_seeded = "d",
+                       vegetationCov_2018 = "d",
+                       vegetationCov_2019 = "d",
+                       vegetationCov_2020 = "d",
+                       vegetationCov_2021 = "d",
+                       surveyDate_seeded = col_date(format = "%Y-%m-%d"),
+                       surveyDate_2018 = col_date(format = "%Y-%m-%d"),
+                       surveyDate_2019 = col_date(format = "%Y-%m-%d"),
+                       surveyDate_2020 = col_date(format = "%Y-%m-%d"),
+                       surveyDate_2021 = col_date(format = "%Y-%m-%d")
                        )) %>%
-  select(-starts_with("surveyDate"), -starts_with("botanist")) %>%
-  pivot_longer(starts_with("vegetationCov"), names_to = "surveyYear", values_to ="vegetationCov") %>%
-  mutate(plot = str_replace(plot, "-", "_")) %>%
-  mutate(surveyYear = str_replace(surveyYear, "vegetationCov_", "")) %>%
-  mutate(id = as_factor(str_c(plot, surveyYear, sep = "_")), .keep = "all") %>%
-  mutate(plot = as_factor(plot)) %>%
+    select(-starts_with("surveyDate"), -starts_with("botanist")) %>%
+    pivot_longer(starts_with("vegetationCov"), names_to = "surveyYear", values_to ="vegetationCov") %>%
+    mutate(plot = str_replace(plot, "-", "_"),
+           surveyYear = str_replace(surveyYear, "vegetationCov_", ""),
+           id = as_factor(str_c(plot, surveyYear, sep = "_")),
+           plot = as_factor(plot)) %>%
+    select(id, vegetationCov)
+
+  
+sites %>%
+  full_join(species21onwards, by = "id") %>%
+  mutate(diff = (n - vegetationCov)) %>%
+  filter(diff > 40 | diff < -5)
+
+
+
+
+
+  
 ### Remove plots with no species ###
   filter(id %in% as_factor(colnames(species[-1])))
 ### Remove plots which are not part of the sites tibble ##
@@ -927,8 +789,8 @@ rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 setwd(here("data/processed"))
-write_csv2(sites, "data_processed_sites.csv")
-write_csv2(species, "data_processed_species.csv")
-write_csv2(traits, "data_processed_traits.csv")
-write_csv2(tbiAbu, "data_processed_tbiAbu.csv")
-write_csv2(tbiPa, "data_processed_tbiPa.csv")
+write_csv(sites, "data_processed_sites.csv")
+write_csv(species, "data_processed_species.csv")
+write_csv(traits, "data_processed_traits.csv")
+write_csv(tbiAbu, "data_processed_tbiAbu.csv")
+write_csv(tbiPa, "data_processed_tbiPa.csv")

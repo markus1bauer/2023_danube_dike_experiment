@@ -1,0 +1,199 @@
+# Prepare vegetation data for Danube experiment ####
+# Markus Bauer
+
+
+### Packages ###
+library(here)
+library(tidyverse)
+
+### Start ###
+#installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T, start_new_R = F, quit_R = T, print_R_versions = T, GUI = F)
+rm(list = ls())
+setwd(here("data/raw"))
+
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Load data ##############################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+### 1 Species #####################################################################################
+
+
+### a Load species tables of all years -------------------------------------------------------------------------------------------
+speciesLseeded <- read_csv2("data_raw_species_seeded_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                              cols(
+                                .default = col_double(),
+                                side = col_factor(),
+                                id = col_factor()
+                              )) %>%
+  mutate(id = str_c(side, id, sep = "_")) %>%
+  mutate(id = paste0(id, "_seeded")) %>%
+  pivot_longer(-c(id, side), names_to = "name", values_to = "n") %>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  group_by(id) %>%
+  mutate(sum = sum(n, na.rm = T)) %>%
+  mutate(abu = n / sum * 100) %>%
+  pivot_wider(names_from = "id", values_from = "abu") %>%
+  group_by(name) %>%
+  summarise(across(where(is.numeric), ~sum(.x, na.rm = T))) %>%
+  select(-n, -sum)
+speciesWseeded <- read_csv2("data_raw_species_seeded_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                              cols(
+                                .default = col_double(),
+                                side = col_factor(),
+                                id = col_factor()
+                              )) %>%
+  mutate(id = str_c(side, id, sep = "_")) %>%
+  mutate(id = paste0(id, "_seeded")) %>%
+  pivot_longer(-c(side, id), names_to = "name", values_to = "n") %>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  group_by(id) %>%
+  mutate(sum = sum(n, na.rm = T)) %>%
+  mutate(abu = n / sum * 100) %>%
+  pivot_wider(names_from = "id", values_from = "abu") %>%
+  group_by(name) %>%
+  summarise(across(where(is.numeric), ~sum(.x, na.rm = T))) %>%
+  select(-n, -sum)
+speciesL18 <- read_csv2("data_raw_species_2018_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                          cols(
+                            .default = col_double(),
+                            name = col_factor()
+                          )) %>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  rename_with(~ paste0("L_", .x), -name) %>%
+  rename_with(~ paste0(.x, "_2018"), -name) %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
+  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
+  select(-descriptor)
+speciesW18 <- read_csv2("data_raw_species_2018_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                          cols(
+                            .default = col_double(),
+                            name = col_factor()
+                          )) %>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  rename_with(~ paste0("W_", .x), -name) %>%
+  rename_with(~ paste0(.x, "_2018"), -name) %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
+  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
+  select(-descriptor) %>%
+  mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major"))
+speciesL19 <- read_csv2("data_raw_species_2019_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                          cols(
+                            .default = col_double(),
+                            name = col_factor()
+                          )) %>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  rename_with(~ paste0("L_", .x), -name) %>%
+  rename_with(~ paste0(.x, "_2019"), -name) %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
+  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
+  select(-descriptor) %>%
+  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major"))
+speciesW19 <- read_csv2("data_raw_species_2019_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                          cols(
+                            .default = col_double(),
+                            name = col_factor()
+                          )) %>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  rename_with(~ paste0("W_", .x), -name) %>%
+  rename_with(~ paste0(.x, "_2019"), -name) %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
+  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
+  select(-descriptor) %>%
+  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major"))
+speciesL20 <- read_csv("data_raw_species_2020_land.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                         cols(
+                           .default = col_double(),
+                           name = col_factor()
+                         )) %>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  rename_with(~ paste0("L_", .x), -name) %>%
+  rename_with(~ paste0(.x, "_2020"), -name) %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
+  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
+  select(-descriptor)
+speciesW20 <- read_csv2("data_raw_species_2020_water.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                          cols(
+                            .default = col_double(),
+                            name = col_factor()
+                          )) %>%
+  mutate(name = str_replace(name, " ", "_")) %>%
+  rename_with( ~ paste0("W_", .x), -name) %>%
+  rename_with(~ paste0(.x, "_2020"), -name) %>%
+  mutate(name = str_replace(name, "Plantago_major ssp. major", "Plantago_major_ssp_major"),
+         name = str_replace(name, "Plantago_major ssp. intermedia", "Plantago_major_ssp_intermedia")) %>%
+  separate(name, c("name", "descriptor"), " ", extra = "drop", fill = "right") %>%
+  mutate(name = as_factor(str_replace(name, "\\.", ""))) %>%
+  select(-descriptor)
+species21onwards <- read_csv("data_raw_species_2021_onwards.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+                               cols(
+                                 .default = col_double(),
+                                 name = col_factor()
+                               )) 
+
+### b Join species tables -------------------------------------------------------------------------------------------
+speciesL <- speciesLseeded %>%
+  full_join(speciesL18, by = "name") %>%
+  full_join(speciesL19, by = "name") %>%
+  full_join(speciesL20, by = "name")
+speciesW <- speciesWseeded %>%
+  full_join(speciesW18, by = "name") %>%
+  full_join(speciesW19, by = "name") %>%
+  full_join(speciesW20, by = "name") 
+species <- speciesL %>%
+  full_join(speciesW) %>%
+  full_join(species21onwards) %>%
+  ### Rename species ###
+  mutate(name = fct_recode(name, 
+                           Carex_praecox_ssp_praecox = "Carex_praecox",
+                           Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum",
+                           Cerastium_fontanum_ssp_vulgare = "Cerastium_holosteoides",
+                           Cornus_controversa = "Cornus_sanguinea",
+                           Cota_tinctoria = "Anthemis_tinctoris",
+                           Erigeron_canadensis = "Conyza_canadensis",
+                           Fallopia_convolvulus = "Polygonum_convolvulus",
+                           Galium_mollugo = "Galium_album",
+                           Jacobaea_vulgaris = "Senecio_jacobaea",
+                           Persicaria_amphibia = "Polygonum_amphibium",
+                           Persicaria_bistorta = "Bistorta_officinalis",
+                           Persicaria_minor = "Polygonum_minus",
+                           Populus_alba = "Popolus_alba",
+                           Silene_latifolia_ssp_alba = "Silene_latifolia",
+                           Silene_latifolia_ssp_alba = "Silene_alba",
+                           "Silene_flos-cuculi" = "Lychnis_flos-cuculi",
+                           Taraxacum_campylodes = "Taraxacum_officinale",
+                           Vicia_sativa_ssp_nigra = "Vicia_angustifolia")) %>%
+  ### combine created duplicates ###
+  group_by(name) %>%
+  summarise(across(where(is.double), ~sum(.x, na.rm = T))) %>%
+  ### Implement counted inidviduals as 0.5 % in normal columns ###
+  mutate(across(where(is.numeric) & contains("i"), ~ 0.5 * (. > 0))) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "n") %>%
+  mutate(id  =  str_replace(id, "i", "")) %>%
+  group_by(name, id) %>%
+  summarise(max = max(n, na.rm = T)) %>%
+  mutate(max = ifelse(is.infinite(max), NA, max)) %>%
+  pivot_wider(names_from = "id", values_from = "max") %>%
+  mutate(name = as_factor(name)) %>%
+  ### Rename plots ###
+  rename_with(~ str_replace(.x, "_1_201", "_01_201")) %>%
+  rename_with(~ str_replace(.x, "_1_2020", "_01_2020")) %>%
+  rename_with(~ str_replace(.x, "_2_201", "_02_201")) %>%
+  rename_with(~ str_replace(.x, "_2_2020", "_02_2020")) %>%
+  rename_with(~ str_replace(.x, "_3_201", "_03_201")) %>%
+  rename_with(~ str_replace(.x, "_3_2020", "_03_2020")) %>%
+  rename_with(~ str_replace(.x, "_4_201", "_04_201")) %>%
+  rename_with(~ str_replace(.x, "_4_2020", "_04_2020")) %>%
+  rename_with(~ str_replace(.x, "_5_201", "_05_201")) %>%
+  rename_with(~ str_replace(.x, "_5_2020", "_05_2020")) %>%
+  rename_with(~ str_replace(.x, "_6_201", "_06_201")) %>%
+  rename_with(~ str_replace(.x, "_6_2020", "_06_2020")) %>%
+  rename_with(~ str_replace(.x, "_7_201", "_07_201")) %>%
+  rename_with(~ str_replace(.x, "_7_2020", "_07_2020")) %>%
+  rename_with(~ str_replace(.x, "_8_201", "_08_201")) %>%
+  rename_with(~ str_replace(.x, "_8_2020", "_08_2020")) %>%
+  rename_with(~ str_replace(.x, "_9_201", "_09_201")) %>%
+  rename_with(~ str_replace(.x, "_9_2020", "_09_2020")) %>%
+  write_csv(here("data/raw/data_raw_species.csv"))

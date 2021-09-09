@@ -1,327 +1,327 @@
-﻿name;descriptor;synonym;family;nomenclature;seeded;group;legal;rlg;rlb;neophyte;l;t;k;f;fchange;r;n;targetHerb;targetGrass;ffh6510;ffh6210;ruderalExperiment;ruderalIndicator
-Acer_campestre;L.;NA;Sapindaceae;WFO;no;tree;NA;NA;NA;no;5;6;4;5;no;7;6;no;no;no;no;;
-Acer_pseudoplatanus;L.;NA;Sapindaceae;WFO;no;tree;NA;NA;NA;no;4;NA;4;6;no;NA;7;no;no;no;no;;
-Achillea_millefolium;L.;NA;Compositae;WFO;yes;herb;na;na;na;no;8;NA;NA;4;no;NA;5;yes;no;yes;no;;
-Acinos_arvensis;(Schur) Dandy;NA;Lamiaceae;WFO;no;herb;na;V;na;no;9;6;3;2;no;5;1;yes;no;no;no;;
-Aegopodium_podagraria;L.;NA;Apiaceae;WFO;no;herb;na;na;na;no;5;5;3;6;no;7;8;no;no;no;no;;
-Agrimonia_eupatoria;L.;NA;Rosaceae;WFO;yes;herb;na;na;na;no;7;6;4;4;no;8;4;yes;no;no;no;;
-Agrostis_capillaris;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;7;NA;3;NA;no;4;4;no;yes;no;no;;
-Agrostis_gigantea;Roth;NA;Poaceae;WFO;no;top-grass;na;na;na;no;7;5;3;8;no;7;6;no;yes;no;no;;
-Agrostis_stolonifera;L.;NA;Poaceae;WFO;no;sub-grass;na;na;na;no;8;NA;5;NA;flood;NA;5;no;yes;no;no;;
-Ajuga_reptans;L.;NA;Lamiaceae;WFO;yes;herb;na;na;na;no;6;NA;2;6;no;6;6;yes;no;yes;no;;
-Allium_oleraceum;L.;NA;Amaryllidaceae;WFO;no;herb;na;na;na;no;7;6;4;3;no;7;4;yes;no;no;no;;
-Allium_sativum;L.;NA;Amaryllidaceae;WFO;no;herb;na;na;na;yes;NA;NA;NA;NA;no;NA;NA;no;no;no;no;;
-Allium_scorodoprasum;L.;NA;Amaryllidaceae;WFO;no;herb;na;na;3;no;6;6;5;7;no;7;7;yes;no;no;no;;
-Allium_vineale;L.;NA;Amaryllidaceae;WFO;no;herb;na;na;na;no;5;7;3;4;no;NA;7;yes;no;no;no;;
-Alopecurus_myosuroides;Huds.;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;6;6;3;5;no;7;6;no;no;no;no;;
-Alopecurus_pratensis;L.;NA;Poaceae;WFO;yes;top-grass;na;na;na;no;6;NA;5;6;no;6;7;no;yes;yes;no;;
-Amaranthus_retroflexus;L.;NA;Amaranthaceae;WFO;no;herb;NA;NA;NA;no;8;7;6;5;no;7;7;no;no;no;no;yes;
-Anagallis_arvensis;L.;NA;Primulaceae;WFO;no;herb;NA;NA;NA;no;6;6;3;5;no;NA;6;no;no;no;no;;
-Angelica_sylvestris;L.;NA;Apiaceae;WFO;no;herb;na;na;na;no;7;NA;4;8;no;NA;NA;yes;no;no;no;;
-Anthericum_ramosum;L.;NA;Asparagaceae;WFO;yes;herb;BG;V;na;no;7;5;4;3;no;7;3;yes;no;no;no;;
-Anthoxanthum_odoratum;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;NA;NA;NA;NA;no;5;NA;no;yes;yes;no;;
-Anthriscus_sylvestris;(L.) Hoffm.;NA;Apiaceae;WFO;no;herb;na;na;na;no;7;NA;5;5;no;NA;8;no;no;no;no;;
-Anthyllis_vulneraria;L.;NA;Fabaceae;WFO;yes;legume;na;na;na;no;8;6;3;3;no;7;2;yes;no;no;yes;yes;
-Apera_spica-venti;(L.) P. Beauv.;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;6;6;4;6;no;5;NA;no;no;no;no;;
-Arabis_hirsuta;(L.) Scop.;NA;Brassicaceae;WFO;yes;herb;na;V;na;no;7;5;3;4;chwet;8;NA;yes;no;no;yes;;
-Arenaria_serpyllifolia;L.;NA;Caryophyllaceae;WFO;no;herb;na;na;na;no;8;NA;NA;4;no;7;NA;yes;no;no;no;;
-Arrhenatherum_elatius;(L.) P.Beauv. Ex J.Presl & C.Presl;NA;Poaceae;WFO;yes;top-grass;na;na;na;no;8;5;3;5;no;7;7;no;yes;yes;no;;
-Artemisia_vulgaris;L.;NA;Compositae;WFO;no;herb;na;na;na;no;7;6;NA;6;no;NA;8;no;no;no;no;;yes
-Asperula_cynanchica;L.;NA;Rubiaceae;WFO;yes;herb;NA;V;NA;no;7;NA;5;3;no;8;3;no;no;no;no;;
-Astragalus_glycyphyllos;L.;NA;Fabaceae;WFO;no;legume;na;na;na;no;6;6;4;4;no;7;3;yes;no;no;no;;
-Avena_fatua;L.;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;6;6;6;5;no;7;NA;no;no;no;no;yes;
-Barbarea_vulgaris;R.Br.;NA;Brassicaceae;WFO;no;herb;na;na;na;no;8;6;3;6;no;NA;6;no;no;no;no;;yes
-Bellis_perennis;L.;NA;Compositae;WFO;no;herb;na;na;na;no;8;NA;2;5;no;NA;6;no;no;no;no;;
-Brachypodium_pinnatum;(L.) P.Beauv.;NA;Poaceae;WFO;yes;top-grass;na;na;na;no;6;6;5;4;no;7;4;no;yes;no;yes;;
-Brassica_napus;L.;NA;Brassicaceae;WFO;no;herb;NA;NA;NA;yes;NA;NA;NA;NA;no;NA;NA;no;no;no;no;;
-Brassica_rapa;L.;NA;Brassicaceae;WFO;no;herb;na;na;na;no;NA;NA;NA;NA;no;NA;NA;no;no;no;no;;yes
-Briza_media;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;8;NA;3;NA;no;NA;2;no;yes;yes;yes;;
-Bromus_erectus;Huds.;NA;Poaceae;WFO;yes;top-grass;na;na;na;no;8;5;2;3;no;8;3;no;yes;no;yes;;
-Bromus_hordeaceus;L.;NA;Poaceae;WFO;no;top-grass;na;na;na;no;7;6;4;NA;chwet;NA;3;no;yes;yes;no;;
-Bromus_inermis;Leyss.;NA;Poaceae;WFO;no;top-grass;na;na;na;no;8;NA;7;4;chwet;8;5;no;yes;no;no;;
-Bromus_sterilis;L.;NA;Poaceae;WFO;no;sub-grass;na;na;na;no;7;6;4;4;no;NA;5;no;no;no;no;;yes
-Bunias_orientalis;L.;NA;Brassicaceae;WFO;no;herb;NA;NA;NA;yes;7;6;5;5;no;8;5;no;no;no;no;;
-Buphthalmum_salicifolium;L.;NA;Compositae;WFO;yes;herb;NA;NA;NA;no;8;NA;4;4;no;8;3;no;no;no;no;;
-Calamagrostis_epigejos;(L.) Roth;NA;Poaceae;WFO;no;top-grass;na;na;na;no;7;5;7;NA;chwet;NA;6;no;no;no;no;;
-Calystegia_sepium;(L.) R. Br.;NA;Convolvulaceae;WFO;no;herb;na;na;na;no;8;6;5;6;no;7;9;no;no;no;no;yes;
-Campanula_glomerata;L.;NA;Campanulaceae;WFO;yes;herb;na;3;na;no;7;NA;7;4;no;7;NA;yes;no;no;yes;;
-Campanula_patula;L.;NA;Campanulaceae;WFO;yes;herb;na;V;na;no;8;6;4;5;no;7;5;yes;no;yes;no;;
-Campanula_rapunculoides;L.;NA;Campanulaceae;WFO;yes;herb;na;na;na;no;6;6;4;4;no;7;4;yes;no;no;no;;
-Campanula_rotundifolia;L.;NA;Campanulaceae;WFO;yes;herb;na;na;na;no;7;5;NA;NA;no;NA;2;yes;no;no;no;;
-Campanula_trachelium;L.;NA;Campanulaceae;WFO;no;herb;na;na;na;no;4;NA;3;6;no;8;8;no;no;no;no;;
-Capsella_bursa-pastoris;(L.) Medik.;NA;Brassicaceae;WFO;no;herb;na;na;na;no;7;NA;NA;5;no;NA;6;no;no;no;no;;yes
-Cardamine_hirsuta;L.;NA;Brassicaceae;WFO;no;herb;NA;NA;NA;no;6;6;3;5;no;5;7;no;no;no;no;;
-Carduus_acanthoides;L.;NA;Compositae;WFO;no;herb;na;na;na;no;9;5;6;4;no;8;7;no;no;no;no;;yes
-Carex_acutiformis;Ehrh.;NA;Cyperaceae;WFO;no;sedge;na;na;na;no;7;NA;3;9;chwet;7;5;no;yes;no;no;;
-Carex_caryophyllea;Latourr.;NA;Cyperaceae;WFO;no;sedge;na;V;na;no;8;NA;3;4;no;NA;2;no;yes;no;yes;;
-Carex_digitata;L.;NA;Cyperaceae;WFO;no;sedge;na;na;na;no;3;NA;4;5;no;NA;4;no;yes;no;no;;
-Carex_flacca;Schreb.;NA;Cyperaceae;WFO;yes;sedge;na;na;na;no;7;NA;3;6;chwet;8;NA;no;yes;no;no;;
-Carex_hirta;L.;NA;Cyperaceae;WFO;no;sedge;na;na;na;no;7;6;3;6;chwet;NA;5;no;yes;no;no;;
-Carex_montana;L.;NA;Cyperaceae;WFO;no;sedge;na;na;na;no;5;NA;4;4;no;6;3;no;yes;no;yes;;
-Carex_muricata;L.;NA;Cyperaceae;WFO;no;sedge;na;na;na;no;7;6;3;4;no;NA;6;no;yes;no;no;;
-Carex_panicea;L.;NA;Cyperaceae;WFO;no;sedge;na;V;na;no;8;NA;3;8;chwet;NA;4;no;yes;no;no;;
-Carex_praecox_ssp_curvata;Schreb.;Carex_curvata;Cyperaceae;WFO;no;sedge;na;D;3;no;NA;NA;NA;NA;no;NA;NA;no;yes;no;no;;
-Carex_praecox_ssp_praecox;Schreb.;NA;Cyperaceae;WFO;no;sedge;na;V;3;no;9;6;6;3;chwet;NA;4;no;yes;no;no;;
-Carex_spec;NA;NA;Cyperaceae;WFO;no;grass;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Carex_sylvatica;Huds.;NA;Cyperaceae;WFO;no;sedge;na;na;na;no;2;5;3;5;no;6;5;no;no;no;no;;
-Carlina_vulgaris;L.;NA;Compositae;WFO;yes;herb;NA;NA;NA;no;7;5;3;4;no;7;3;no;no;no;no;;
-Carum_carvi;L.;NA;Apiaceae;WFO;no;herb;na;na;na;no;8;4;5;5;no;NA;6;yes;no;yes;no;;
-Centaurea_jacea;L.;NA;Compositae;WFO;yes;herb;na;na;na;no;7;NA;5;NA;no;NA;NA;yes;no;yes;no;;
-Centaurea_scabiosa;L.;NA;Compositae;WFO;yes;herb;na;na;na;no;7;NA;3;3;no;8;4;yes;no;no;yes;;
-Centaurea_spec;NA;NA;Compositae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Centaurea_stoebe;Tausch;NA;Compositae;WFO;yes;herb;na;na;3;no;NA;NA;NA;NA;no;NA;NA;yes;no;no;no;;
-Centaurium_erythraea;Rafn;NA;Gentianaceae;WFO;no;herb;BG;na;na;no;8;6;5;5;no;6;6;yes;no;no;no;;
-Cerastium_arvense;L.;NA;Caryophyllaceae;WFO;no;herb;na;na;na;no;8;NA;5;4;no;6;4;yes;no;no;no;;
-Cerastium_fontanum_ssp_vulgare;Greuter & Burdet;Cerastium_holosteoides;Caryophyllaceae;WFO;yes;herb;na;na;na;no;6;NA;NA;5;no;NA;5;yes;no;yes;no;;
-Cerastium_glomeratum;Thuill.;NA;Caryophyllaceae;WFO;no;herb;na;na;na;no;7;5;3;5;no;5;5;yes;no;no;no;;
-Chaerophyllum_bulbosum;L.;NA;Apiaceae;WFO;no;herb;na;na;na;no;7;6;5;7;no;8;8;no;no;no;no;;
-Chenopodium_album;L.;NA;Amaranthaceae;WFO;no;herb;na;na;na;no;NA;NA;NA;4;no;NA;7;no;no;no;no;yes;yes
-Chenopodium_polyspermum;L.;NA;Amaranthaceae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;4;no;NA;7;no;no;no;no;yes;
-Cichorium_intybus;L.;NA;Compositae;WFO;yes;herb;na;na;na;no;9;6;5;4;no;8;5;yes;no;no;no;;
-Cirsium_arvense;(L.) Scop.;NA;Compositae;WFO;no;herb;na;na;na;no;8;5;NA;NA;no;NA;7;no;no;no;no;yes;yes
-Cirsium_oleraceum;(L.) Scop.;NA;Compositae;WFO;yes;herb;na;na;na;no;6;NA;3;7;no;8;5;yes;no;no;no;;
-Cirsium_vulgare;(Savi) Ten.;NA;Compositae;WFO;no;herb;na;na;na;no;8;5;3;5;no;7;8;no;no;no;no;;yes
-Clinopodium_vulgare;L.;NA;Lamiaceae;WFO;yes;herb;na;na;na;no;7;NA;3;4;no;7;3;yes;no;no;no;;
-Colchicum_autumnale;L.;NA;Colchicaceae;WFO;no;herb;na;na;na;no;6;5;2;6;chwet;7;NA;yes;no;no;no;;
-Consolida_regalis;Gray;NA;Ranunculaceae;WFO;no;herb;NA;3;3;no;6;7;6;5;no;8;5;no;no;no;no;;
-Convolvulus_arvensis;L.;NA;Convolvulaceae;WFO;no;herb;na;na;na;no;7;6;NA;4;no;7;NA;no;no;no;no;yes;
-Cornus_controversa;Hemsl.;Cornus_sanguinea;Cornaceae;WFO;no;shrub;NA;NA;NA;no;7;5;4;5;no;7;NA;no;no;no;no;;
-Cota_tinctoria;L.;Anthemis_tinctoria;Compositae;WFO;no;herb;na;na;na;no;8;6;5;3;no;6;4;yes;no;no;no;;
-Crepis_biennis;Lapeyr.;NA;Compositae;WFO;yes;herb;na;na;na;no;7;5;3;5;no;6;5;yes;no;yes;no;;
-Crepis_capillaris;(L.) Wallr.;NA;Compositae;WFO;no;herb;na;na;na;no;7;6;2;5;no;6;4;no;no;no;no;;
-Cyanus_segetum;Hill;Centaurea_cyanus;Compositae;WFO;no;herb;na;V;na;no;7;6;5;NA;no;NA;NA;no;no;no;no;;yes
-Cynodon_dactylon;(L.) Pers.;NA;Poaceae;WFO;no;sub-grass;na;na;na;yes;8;7;3;4;no;NA;5;no;no;no;no;;
-Cynosurus_cristatus;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;8;5;3;5;no;NA;4;no;yes;yes;no;;
-Dactylis_glomerata;L.;NA;Poaceae;WFO;yes;top-grass;na;na;na;no;7;NA;3;5;no;NA;6;no;yes;no;no;;
-Daucus_carota;L.;NA;Apiaceae;WFO;yes;herb;na;na;na;no;8;6;5;4;no;NA;4;yes;no;yes;no;;
-Deschampsia_cespitosa;(L.) P.Beauv.;NA;Poaceae;WFO;no;top-grass;na;na;na;no;6;NA;NA;7;chwet;NA;3;no;yes;no;no;;
-Dianthus_carthusianorum;L.;NA;Caryophyllaceae;WFO;yes;herb;BG;V;na;no;8;5;4;3;no;7;2;yes;no;no;yes;;
-Dianthus_deltoides;L.;NA;Caryophyllaceae;WFO;no;herb;BG;V;na;no;8;5;4;3;no;3;2;yes;no;no;no;;
-Dipsacus_fullonum;L.;NA;Caprifoliaceae;WFO;no;herb;na;na;na;no;9;6;3;6;chwet;8;7;no;no;no;no;;yes
-Echinochloa_crus-galli;(L.) P.Beauv;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;6;7;5;5;no;NA;8;no;no;no;no;yes;
-Echium_vulgare;L.;NA;Boraginaceae;WFO;yes;herb;na;na;na;no;9;6;3;4;no;8;4;yes;no;no;no;;
-Elymus_repens;(L.) Gould;NA;Poaceae;WFO;no;top-grass;na;na;na;no;7;6;7;NA;chwet;NA;7;no;no;no;no;;
-Epilobium_parviflorum;Schreb.;NA;Onagraceae;WFO;no;herb;NA;NA;NA;no;7;5;3;9;flood;8;6;no;no;no;no;;
-Epilobium_spec;NA;NA;Onagraceae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Equisetum_arvense;L.;NA;Equisetaceae;WFO;no;herb;na;na;na;no;6;NA;NA;6;chwet;NA;3;no;no;no;no;yes;yes
-Eragrostis_minor;Host;NA;Poaceae;WFO;no;grass;NA;NA;NA;yes;8;7;5;3;no;NA;4;no;no;no;no;;
-Erigeron_annuus;(L.) Pers.;NA;Compositae;WFO;no;herb;na;na;na;yes;7;6;NA;6;no;NA;8;yes;no;no;no;;
-Erigeron_canadensis;L.;Conyza_canadensis;Compositae;WFO;no;herb;NA;NA;NA;yes;8;6;NA;4;no;NA;5;no;no;no;no;;
-Erophila_verna;(L.) DC.;Draba_verna;Brassicaceae;WFO;no;herb;BG;na;na;no;8;6;3;NA;no;NA;2;no;no;no;no;;yes
-Erysimum_cheiranthoides;L.;NA;Brassicaceae;WFO;no;herb;NA;NA;NA;no;7;5;NA;5;no;7;7;no;no;no;no;yes;
-Euonymus_europaeus;L.;NA;Celastraceae;WFO;no;shrub;NA;NA;NA;no;6;5;3;5;no;8;5;no;no;no;no;;
-Euphorbia_amygdaloides;Lam.;NA;Euphorbiaceae;WFO;no;herb;NA;NA;NA;no;4;5;3;5;no;8;5;no;no;no;no;;
-Euphorbia_cyparissias;L.;NA;Euphorbiaceae;WFO;no;herb;na;na;na;no;8;NA;4;3;no;NA;3;yes;no;no;no;;
-Euphorbia_esula;L.;NA;Euphorbiaceae;WFO;no;herb;na;na;3;no;8;6;5;4;no;8;NA;yes;no;no;no;;
-Euphorbia_helioscopia;L.;NA;Euphorbiaceae;WFO;no;herb;NA;NA;NA;no;6;NA;3;5;no;7;7;no;no;no;no;yes;
-Euphorbia_verrucosa;L.;NA;Euphorbiaceae;WFO;no;herb;na;V;na;no;8;6;2;3;no;9;3;yes;no;no;yes;;
-Falcaria_vulgaris;Bernh.;NA;Apiaceae;WFO;no;herb;na;na;na;no;7;7;6;3;no;9;NA;yes;no;no;no;;
-Fallopia_convolvulus;(L.) Á.Löve;NA;Polygonaceae;WFO;no;herb;NA;NA;NA;no;7;6;NA;5;no;NA;6;no;no;no;no;yes;
-Festuca_arundinacea;Schreb.;NA;Poaceae;WFO;no;top-grass;na;na;na;no;8;5;NA;7;chwet;7;4;no;yes;no;no;;
-Festuca_ovina;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;9;7;4;2;no;NA;1;no;yes;no;yes;;
-Festuca_pratensis;Huds.;NA;Poaceae;WFO;yes;top-grass;na;na;na;no;8;NA;3;6;no;NA;6;no;yes;yes;no;;
-Festuca_rubra;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;NA;NA;NA;NA;no;NA;NA;no;yes;yes;no;;
-Filipendula_ulmaria;(L.) Maxim.;NA;Rosaceae;WFO;no;herb;na;na;na;no;7;5;NA;8;no;NA;4;no;no;no;no;;
-Filipendula_vulgaris;Moench;NA;Rosaceae;WFO;yes;herb;na;3;3;no;7;6;5;3;chwet;8;2;yes;no;no;yes;;
-Fragaria_vesca;L.;NA;Rosaceae;WFO;no;herb;na;na;na;no;7;NA;5;5;no;NA;6;yes;no;no;no;;
-Fragaria_viridis;Weston;NA;Rosaceae;WFO;no;herb;NA;NA;NA;no;7;5;5;3;no;8;3;no;no;no;no;;
-Fumaria_officinalis;Burm.f.;NA;Papaveraceae;WFO;no;herb;NA;NA;NA;no;6;6;3;5;no;6;7;no;no;no;no;yes;
-Galeopsis_tetrahit;L.;NA;Lamiaceae;WFO;no;herb;NA;NA;NA;no;7;NA;3;5;no;NA;6;no;no;no;no;yes;
-Galium_aparine;L.;NA;Rubiaceae;WFO;no;herb;NA;NA;NA;no;7;6;3;NA;no;6;8;no;no;no;no;;
-Galium_mollugo;L.;NA;Rubiaceae;WFO;yes;herb;na;D;na;no;7;6;3;4;no;7;NA;yes;no;yes;no;;
-Galium_palustre;L.;NA;Rubiaceae;WFO;no;herb;NA;NA;NA;no;6;5;3;9;flood;NA;4;no;no;no;no;;
-Galium_verum;L.;NA;Rubiaceae;WFO;yes;herb;na;na;na;no;7;6;NA;4;chwet;7;3;yes;no;no;no;;
-Geranium_dissectum;L.;NA;Geraniaceae;WFO;no;herb;na;na;na;no;6;6;3;5;no;8;5;yes;no;no;no;;
-Geranium_molle;L.;NA;Geraniaceae;WFO;no;herb;na;na;na;no;7;6;3;4;no;5;4;yes;no;no;no;;
-Geranium_pratense;L.;NA;Geraniaceae;WFO;yes;herb;na;na;na;no;8;6;5;5;no;8;7;yes;no;no;no;;
-Geranium_pusillum;L.;NA;Geraniaceae;WFO;no;herb;na;na;na;no;7;6;5;4;no;NA;7;yes;no;no;no;;
-Geranium_pyrenaicum;Burm.f.;NA;Geraniaceae;WFO;no;herb;na;na;na;yes;8;6;4;5;no;7;8;yes;no;no;no;;
-Getreide_Öhrchen;NA;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Geum_urbanum;L.;NA;Rosaceae;WFO;no;herb;na;na;na;no;4;5;5;5;no;NA;7;yes;no;no;no;;
-Glechoma_hederacea;L.;NA;Lamiaceae;WFO;no;herb;na;na;na;no;6;6;3;6;no;NA;7;yes;no;no;no;;
-Helianthemum_nummularium;(L.) Mill.;NA;Cistaceae;WFO;yes;herb;na;3;3;no;7;6;4;3;no;7;1;yes;no;no;yes;;
-Helianthus_annuus;L.;NA;Compositae;WFO;no;herb;NA;NA;NA;yes;NA;NA;NA;NA;no;NA;NA;no;no;no;no;yes;
-Helianthus_tuberosus;L.;NA;Compositae;WFO;no;herb;NA;NA;NA;yes;8;7;NA;6;no;7;8;no;no;no;no;;
-Helictotrichon_pubescens;(Huds.) Schult. & Schult.f.;NA;Poaceae;WFO;yes;top-grass;na;na;na;no;5;NA;3;NA;no;NA;4;no;yes;yes;no;;
-Heracleum_sphondylium;L.;NA;Apiaceae;WFO;no;herb;na;na;na;no;7;5;2;5;no;NA;8;no;no;no;no;;
-Hippocrepis_comosa;L.;NA;Fabaceae;WFO;yes;legume;na;V;na;no;7;5;2;3;no;7;2;yes;no;no;yes;;
-Holcus_lanatus;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;7;6;3;6;no;NA;4;no;yes;yes;no;;
-Hordeum_vulgare;L.;NA;Poaceae;WFO;no;grass;NA;NA;NA;yes;NA;NA;NA;NA;no;NA;NA;no;no;no;no;;
-Hypericum_perforatum;L.;NA;Hypericaceae;WFO;yes;herb;na;na;na;no;7;6;5;4;no;6;3;yes;no;no;no;;
-Hypochaeris_radicata;L.;NA;Compositae;WFO;yes;herb;na;na;na;no;8;5;3;5;no;4;3;yes;no;no;no;;
-Inula_salicina;L.;NA;Compositae;WFO;yes;herb;NA;V;na;no;8;6;5;6;chwet;9;2;no;no;no;no;;
-Iris_spec;NA;NA;Iridaceae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Jacobaea_vulgaris;Gaertn.;Senecio_jacobaea;Compositae;WFO;no;herb;na;na;na;no;8;5;3;4;chwet;7;5;no;no;no;no;;
-Knautia_arvensis;(L.) Coult.;NA;Caprifoliaceae;WFO;yes;herb;na;na;na;no;7;6;3;4;no;NA;4;yes;no;yes;no;;
-Koeleria_pyramidata;(Lam.) P.Beauv.;NA;Poaceae;WFO;yes;sub-grass;na;V;na;no;7;6;4;4;no;7;2;no;yes;no;yes;;
-Lactuca_serriola;L.;NA;Compositae;WFO;no;herb;na;na;na;no;9;7;7;4;no;NA;4;no;no;no;no;;yes
-Lamium_maculatum;(L.) L.;NA;Lamiaceae;WFO;no;herb;NA;NA;NA;no;5;NA;4;6;no;7;8;no;no;no;no;;
-Lamium_purpureum;L.;NA;Lamiaceae;WFO;no;herb;NA;NA;NA;no;7;5;3;5;no;7;7;no;no;no;no;;
-Lapsana_communis;L.;NA;Compositae;WFO;no;herb;NA;NA;NA;no;5;6;3;5;no;NA;7;no;no;no;no;;
-Lathyrus_pratensis;L.;NA;Fabaceae;WFO;yes;legume;na;na;na;no;7;5;NA;6;no;7;6;yes;no;yes;no;;
-Lathyrus_sylvestris;L.;NA;Fabaceae;WFO;no;legume;na;na;na;no;7;6;4;4;no;8;2;no;no;no;no;;
-Lathyrus_tuberosus;L.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;7;6;6;4;chwet;8;4;no;no;no;no;;
-Leontodon_hispidus;L.;NA;Compositae;WFO;yes;herb;na;na;na;no;8;NA;3;5;no;7;6;yes;no;no;no;;
-Lepidium_campestre;(L.) R.Br.;NA;Brassicaceae;WFO;no;herb;NA;NA;NA;no;7;6;3;4;no;8;6;no;no;no;no;;
-Lepidium_ruderale;L.;NA;Brassicaceae;WFO;no;herb;na;na;na;no;9;6;7;4;no;NA;6;no;no;no;no;;yes
-Leucanthemum_vulgare;(Vaill.) Lam.;NA;Compositae;WFO;yes;herb;na;na;na;no;7;NA;3;4;no;NA;3;yes;no;yes;no;;
-Linaria_vulgaris;Mill.;NA;Plantaginaceae;WFO;no;herb;na;na;na;no;8;6;5;4;no;7;5;no;no;no;no;;yes
-Linum_catharticum;L.;NA;Linaceae;WFO;no;herb;BG;na;na;no;7;NA;3;NA;no;7;2;yes;no;no;yes;;
-Linum_spec;NA;NA;Linaceae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Lolium_perenne;L.;NA;Poaceae;WFO;no;sub-grass;na;na;na;no;8;6;3;5;no;7;7;no;no;no;no;;
-Lotus_corniculatus;L.;NA;Fabaceae;WFO;yes;legume;na;na;na;no;7;NA;3;4;no;7;3;yes;no;no;no;;
-Lysimachia_nummularia;L.;NA;Primulaceae;WFO;no;herb;na;na;na;no;4;6;4;6;chwet;NA;NA;yes;no;no;no;;
-Lysimachia_vulgaris;L.;NA;Primulaceae;WFO;no;herb;na;na;na;no;6;NA;NA;8;chwet;NA;NA;yes;no;no;no;;
-Lythrum_salicaria;L.;NA;Lythraceae;WFO;no;herb;NA;NA;NA;no;7;5;5;8;chwet;6;NA;no;no;no;no;;
-Malva_moschata;L.;NA;Malvaceae;WFO;no;herb;na;na;3;no;8;6;3;4;no;7;4;yes;no;no;no;;
-Malva_spec;NA;NA;Malvaceae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Matricaria_chamomilla;L.;NA;Compositae;WFO;no;herb;na;na;na;no;7;6;5;5;no;5;5;no;no;no;no;;yes
-Medicago_falcata;L.;NA;Fabaceae;WFO;yes;legume;na;na;na;no;8;6;7;3;no;9;3;yes;no;no;yes;;
-Medicago_lupulina;L.;NA;Fabaceae;WFO;yes;legume;na;na;na;no;7;5;NA;4;no;8;NA;yes;no;yes;no;;
-Medicago_minima;(L.) L.;NA;Fabaceae;WFO;no;legume;na;V;na;no;9;7;3;3;no;8;2;yes;no;no;no;;
-Medicago_sativa;L.;NA;Fabaceae;WFO;no;legume;na;na;na;yes;8;6;6;4;no;7;NA;yes;no;no;no;;
-Melilotus_albus;Medik.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;9;6;6;3;no;7;4;no;no;no;no;;
-Melilotus_officinalis;(L.) Pall.;NA;Fabaceae;WFO;no;legume;na;na;na;no;8;6;6;3;no;8;3;no;no;no;no;;yes
-Mentha_longifolia;(L.) L.;NA;Lamiaceae;WFO;no;herb;na;na;na;no;7;5;4;8;flood;9;7;yes;no;no;no;;
-Myosotis_arvensis;(L.) Hill;NA;Boraginaceae;WFO;no;herb;na;na;na;no;6;6;5;5;no;NA;6;yes;no;no;no;;
-Nardus_stricta;L.;NA;Poaceae;WFO;no;sub-grass;na;V;na;no;8;NA;3;NA;chwet;2;2;no;yes;no;no;;
-Oenothera_biennis;L.;NA;Onagraceae;WFO;no;herb;na;na;na;yes;9;7;3;4;no;NA;4;yes;no;no;no;;yes
-Onobrychis_viciifolia;Scop.;NA;Fabaceae;WFO;yes;legume;na;na;na;yes;8;7;6;3;no;8;3;yes;no;no;no;;
-Ononis_spinosa_ssp_spinosa;L.;NA;Fabaceae;WFO;no;legume;na;na;na;no;8;6;5;4;chwet;7;3;yes;no;no;no;;
-Ononis_spinosa_ssp_procurrens;(Wallr.) Briq.;Ononis_repens;Fabaceae;WFO;no;legume;na;na;na;no;8;5;2;4;chwet;7;2;yes;no;no;no;;
-Origanum_vulgare;L.;NA;Lamiaceae;WFO;yes;herb;na;na;na;no;7;NA;3;3;no;8;3;yes;no;no;no;;
-Orobanche_spec;na;NA;Orobanchaceae;na;no;Parasit;na;na;na;no;NA;NA;NA;NA;no;NA;NA;yes;no;no;yes;;
-Papaver_rhoeas;L.;NA;Papaveraceae;WFO;no;herb;na;na;na;no;6;6;3;5;no;7;6;no;no;no;no;;yes
-Parthenocissus_inserta;(A.Kern.) Fritsch;NA;Vitaceae;WFO;no;z Gehölz;na;na;na;yes;NA;NA;NA;NA;no;NA;NA;no;no;no;no;;
-Pastinaca_sativa;L.;NA;Apiaceae;WFO;yes;herb;NA;NA;NA;no;8;6;5;4;no;8;5;no;no;no;no;;
-Persicaria_amphibia;(L.) Delarbre;Polygonum_amphibium;Polygonaceae;WFO;no;herb;na;na;na;no;7;6;NA;11;no;6;4;yes;no;no;no;yes;
-Persicaria_bistorta;(L.) Samp.;Bistorta_officinalis;Polygonaceae;WFO;no;herb;NA;NA;NA;no;7;4;7;7;no;5;5;no;no;no;no;;
-Persicaria_minor;(Huds.) Opiz;NA;Polygonaceae;WFO;no;herb;NA;NA;NA;no;7;6;3;8;flood;5;8;no;no;no;no;;
-Peucedanum_officinale;L.;NA;Apiaceae;WFO;yes;herb;na;3;2;no;7;7;5;4;chwet;8;2;yes;no;no;no;;
-Peucedanum_oreoselinum;(L.) Moench;NA;Apiaceae;WFO;yes;herb;na;V;na;no;6;6;4;3;no;6;2;yes;no;no;no;;
-Phalaris_arundinacea;L.;NA;Poaceae;WFO;no;top-grass;na;na;na;no;7;5;NA;9;flood;7;7;no;no;no;no;;
-Phleum_phleoides;(L.) H.Karst.;NA;Poaceae;WFO;no;top-grass;na;V;na;no;8;6;7;3;no;8;2;no;yes;no;yes;;
-Phleum_pratense;L.;NA;Poaceae;WFO;yes;top-grass;na;na;na;no;7;NA;5;5;no;NA;6;no;no;no;no;;
-Phyteuma_spicatum;L.;NA;Poaceae;WFO;no;top-grass;na;na;na;no;NA;NA;4;5;no;6;5;no;no;no;no;;
-Pilosella_caespitosa;(Dumort.) P.D.Sell & C.West;Hieracium_caespitosum;Compositae;WFO;no;herb;na;V;3;no;8;5;6;7;chwet;7;3;yes;no;no;no;;
-Pilosella_officinarum;Vaill.;Hieracium_pilosella;Compositae;WFO;no;herb;na;na;na;no;7;NA;3;4;no;NA;2;yes;no;no;no;;
-Pilosella_piloselloides;(Vill.) Soják;Hieracium_piloselloides;Compositae;WFO;no;herb;na;na;na;no;9;6;4;4;chwet;8;2;yes;no;no;no;;
-Pimpinella_major;(L.) Huds.;NA;Apiaceae;WFO;yes;herb;na;na;na;no;7;5;2;5;no;7;7;yes;no;no;no;;
-Pimpinella_saxifraga;L.;NA;Apiaceae;WFO;yes;herb;na;na;na;no;7;NA;5;3;no;NA;2;yes;no;yes;no;;
-Plantago_lanceolata;L.;NA;Plantaginaceae;WFO;yes;herb;na;na;na;no;6;NA;3;NA;no;NA;NA;yes;no;yes;no;;
-Plantago_major_ssp_intermedia;(Gilib.) Lange;Plantago_intermedia;Plantaginaceae;WFO;no;herb;na;na;na;no;7;6;NA;7;flood;5;4;yes;no;no;yes;;
-Plantago_major_ssp_major;L.;NA;Plantaginaceae;WFO;no;herb;NA;NA;NA;no;8;NA;NA;5;no;NA;6;no;no;no;no;;
-Plantago_media;L.;NA;Plantaginaceae;WFO;yes;herb;na;na;na;no;7;NA;7;4;no;7;3;yes;no;no;no;;
-Poa_angustifolia;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;7;6;NA;NA;no;NA;3;yes;no;no;no;;
-Poa_annua;L.;NA;Poaceae;WFO;no;sub-grass;na;na;na;no;7;NA;5;6;no;NA;8;no;no;no;no;;
-Poa_compressa;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;9;NA;4;3;no;9;3;no;yes;no;no;;
-Poa_pratensis;L.;NA;Poaceae;WFO;yes;sub-grass;na;na;na;no;6;NA;NA;5;no;NA;6;no;yes;yes;no;;
-Poa_trivialis;L.;NA;Poaceae;WFO;no;sub-grass;na;na;na;no;6;NA;3;7;no;NA;7;no;no;no;no;;
-Polygala_amarella;Crantz;NA;Polygalaceae;WFO;no;herb;na;V;na;no;9;NA;4;9;no;9;1;yes;no;no;no;;
-Polygala_vulgaris;L.;NA;Polygalaceae;WFO;no;herb;na;V;na;no;7;NA;3;5;no;3;2;yes;no;no;no;;
-Polygonatum_multiflorum;(L.) All.;NA;Asparagaceae;WFO;no;herb;na;na;na;no;2;NA;5;5;no;6;5;no;no;no;no;;
-Polygonum_aviculare;L.;NA;Polygonaceae;WFO;no;herb;na;na;na;no;7;6;NA;4;no;NA;6;no;no;no;no;yes;yes
-Populus_alba;L.;NA;Salicaceae;WFO;no;tree;NA;NA;NA;no;5;7;7;7;chwet;8;6;no;no;no;no;;
-Potentilla_anserina;L.;NA;Rosaceae;WFO;no;herb;na;na;na;no;7;6;NA;6;chwet;NA;7;yes;no;no;no;;
-Potentilla_argentea;L.;NA;Rosaceae;WFO;no;herb;na;na;na;no;9;6;3;2;no;3;1;yes;no;no;no;;
-Potentilla_erecta;(L.) Hampe;NA;Rosaceae;WFO;no;herb;NA;NA;NA;no;6;NA;3;NA;no;NA;2;no;no;no;no;;
-Potentilla_grandiflora;L.;Potentilla_verna;Rosaceae;WFO;no;herb;na;V;na;no;8;6;4;3;no;7;2;yes;no;no;no;;
-Potentilla_recta;L.;NA;Rosaceae;WFO;yes;herb;na;na;na;no;9;7;5;3;no;5;2;yes;no;no;no;;
-Potentilla_reptans;L.;NA;Rosaceae;WFO;no;herb;na;na;na;no;6;6;3;6;no;7;5;yes;no;no;no;;
-Prunella_grandiflora;(L.) Jacq.;NA;Lamiaceae;WFO;yes;herb;NA;V;NA;no;7;NA;5;3;no;8;3;no;no;no;no;;
-Prunella_vulgaris;L.;NA;Lamiaceae;WFO;yes;herb;na;na;na;no;7;NA;3;5;no;7;NA;yes;no;yes;no;;
-Prunus_avium;Franch.;NA;Rosaceae;WFO;no;tree;NA;NA;NA;no;4;5;4;5;no;7;5;no;no;no;no;;
-Quercus_robur;L.;NA;Fagaceae;WFO;no;tree;NA;NA;NA;no;7;5;5;NA;no;NA;NA;no;no;no;no;;
-Ranunculus_acris;L.;NA;Ranunculaceae;WFO;yes;herb;na;na;na;no;7;NA;3;6;no;NA;NA;yes;no;yes;no;;
-Ranunculus_bulbosus;L.;NA;Ranunculaceae;WFO;yes;herb;na;na;na;no;8;6;3;3;no;7;3;yes;no;no;yes;;
-Ranunculus_polyanthemos;L.;NA;Ranunculaceae;WFO;no;herb;NA;V;1;no;6;6;5;4;chwet;NA;2;no;no;no;no;;
-Ranunculus_repens;L.;NA;Ranunculaceae;WFO;no;herb;na;na;na;no;6;NA;NA;7;chwet;NA;NA;no;no;no;no;yes;
-Ranunculus_serpens_ssp_nemorosus;(DC.) G.López;Ranunculus_nemorosus;Ranunculaceae;WFO;no;herb;na;V;na;no;6;NA;4;5;no;6;NA;yes;no;no;no;;
-Reseda_lutea;L.;NA;Resedaceae;WFO;no;herb;na;na;na;no;7;6;3;3;no;8;5;yes;no;no;no;;
-Rhinanthus_alectorolophus;(Scop.) Pollich;NA;Orobanchaceae;WFO;yes;hemiparasite;na;na;na;no;8;NA;2;4;no;7;3;yes;no;no;no;;
-Rhinanthus_glacialis;Personnat;NA;Orobanchaceae;WFO;no;hemiparasite;na;V;na;no;8;3;4;5;no;4;2;yes;no;no;yes;;
-Rhinanthus_minor;L.;NA;Orobanchaceae;WFO;yes;hemiparasite;na;na;na;no;7;5;3;NA;no;NA;3;no;no;no;no;;
-Rhinanthus_serotinus;(Schönh.) Oborny;NA;Orobanchaceae;WFO;no;hemiparasite;na;3;na;no;7;5;3;6;chwet;7;2;yes;no;no;yes;;
-Rorippa_sylvestris;(L.) Besser;NA;Brassicaceae;WFO;no;herb;NA;NA;NA;no;6;6;3;8;flood;8;6;no;no;no;no;yes;
-Rosa_canina;L.;NA;Rosaceae;WFO;no;halfshrub;na;na;na;no;8;5;3;4;no;NA;NA;no;no;no;no;;
-Rubus_caesius;L.;NA;Rosaceae;WFO;no;halfshrub;na;na;na;no;6;5;4;NA;no;8;7;no;no;no;no;;
-Rubus_fruticosus_agg;na;NA;Rosaceae;na;no;halfshrub;na;na;na;no;NA;NA;NA;NA;no;NA;NA;no;no;no;no;;
-Rumex_acetosa;L.;NA;Polygonaceae;WFO;yes;herb;na;na;na;no;8;NA;NA;NA;no;NA;6;yes;no;yes;no;;
-Rumex_crispus;L.;NA;Polygonaceae;WFO;no;herb;na;na;na;no;7;5;3;7;chwet;NA;5;no;no;no;no;;
-Rumex_obtusifolius;L.;NA;Polygonaceae;WFO;no;herb;NA;NA;NA;no;7;5;3;6;no;NA;9;no;no;no;no;yes;
-Salix_purpurea;L.;NA;Salicaceae;WFO;no;tree;NA;NA;NA;no;8;5;4;NA;flood;8;NA;no;no;no;no;yes;
-Salix_spec;NA;NA;Salicaceae;WFO;no;shrub;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Salvia_nemorosa;L.;NA;Lamiaceae;WFO;no;herb;NA;NA;2;no;7;7;NA;4;no;9;4;yes;no;no;no;;
-Salvia_pratensis;L.;NA;Lamiaceae;WFO;yes;herb;NA;V;NA;no;8;6;4;3;no;8;4;yes;no;no;no;;
-Sanguisorba_minor;Scop.;NA;Rosaceae;WFO;yes;herb;NA;NA;NA;no;7;6;5;3;no;8;2;yes;no;no;yes;;
-Sanguisorba_officinalis;L.;NA;Rosaceae;WFO;yes;herb;NA;V;NA;no;7;5;7;7;no;NA;NA;yes;no;no;no;;
-Saponaria_officinalis;L.;NA;Caryophyllaceae;WFO;no;herb;NA;NA;NA;no;7;6;3;5;no;7;5;yes;no;no;no;;
-Saxifraga_granulata;L.;NA;Saxifragaceae;WFO;no;herb;yes;V;NA;no;NA;6;2;4;no;5;3;no;no;no;no;;
-Scabiosa_columbaria;L.;NA;Caprifoliaceae;WFO;yes;herb;NA;NA;NA;no;8;5;2;3;no;8;3;yes;no;no;yes;;
-Scrophularia_umbrosa;Dumort.;NA;Scrophulariaceae;WFO;no;herb;NA;NA;NA;no;7;6;5;9;flood;8;7;no;no;no;no;;
-Securigera_varia;(L.) Lassen;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;7;6;5;4;no;9;3;yes;no;no;no;;
-Sedum_acre;L.;NA;Crassulaceae;WFO;yes;herb;NA;NA;NA;no;8;6;3;2;no;NA;1;yes;no;no;no;;
-Sedum_sexangulare;L.;NA;Crassulaceae;WFO;no;herb;NA;NA;NA;no;7;5;4;2;no;6;1;yes;no;no;no;;
-Setaria_pumila;(Poir.) Roem. & Schult.;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;7;7;4;4;no;5;6;no;no;no;no;yes;
-Setaria_spec;NA;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Setaria_verticillata;(L.) P.Beauv;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;7;7;4;4;no;NA;7;no;no;no;no;yes;
-Setaria_viridis;(L.) P.Beauv.;NA;Poaceae;WFO;no;sub-grass;NA;NA;NA;no;7;6;NA;4;no;NA;7;no;no;no;no;yes;yes
-Silaum_silaus;(L.) Schinz & Thell.;NA;Apiaceae;WFO;yes;herb;NA;V;NA;no;7;6;5;NA;chwet;7;2;yes;no;no;no;;
-Silene_dioica;(L.) Clairv.;NA;Caryophyllaceae;WFO;no;herb;NA;NA;NA;no;NA;NA;4;6;no;7;8;no;no;no;no;;
-Silene_flos-cuculi;(L.) Greuter & Burdet;Lychnis_flos-cuculi;Caryophyllaceae;WFO;yes;herb;NA;NA;NA;no;7;5;3;7;chwet;NA;NA;yes;no;no;no;;
-Silene_gallica;L.;NA;Caryophyllaceae;WFO;no;herb;NA;1;NA;no;7;7;3;4;no;7;6;no;no;no;no;;
-Silene_latifolia_ssp_alba;Poir.;NA;Caryophyllaceae;WFO;yes;herb;NA;NA;NA;no;8;6;NA;4;no;NA;7;yes;no;no;no;;
-Silene_vulgaris;(Moench) Garcke;NA;Caryophyllaceae;WFO;yes;herb;NA;NA;NA;no;8;NA;NA;4;chwet;7;2;yes;no;no;no;;
-Sisymbrium_officinale;(L.) Scop.;NA;Brassicaceae;WFO;no;herb;NA;NA;NA;no;8;6;5;4;no;NA;7;no;no;no;no;;yes
-Solidago_canadensis;L.;NA;Compositae;WFO;no;herb;NA;NA;NA;yes;8;6;5;NA;no;NA;6;no;no;no;no;;
-Solidago_gigantea;Aiton;NA;Compositae;WFO;no;herb;NA;NA;NA;yes;8;6;5;6;no;NA;7;no;no;no;no;;
-Sonchus_arvensis;L.;NA;Compositae;WFO;no;herb;NA;NA;NA;no;7;5;NA;5;chwet;7;NA;no;no;no;no;yes;yes
-Sonchus_asper;(L.) Hill;NA;Compositae;WFO;no;herb;NA;NA;NA;no;7;5;NA;6;no;7;7;yes;no;no;no;yes;
-Stachys_officinalis;(L.) Trevis.;Betonica_officinalis;Lamiaceae;WFO;no;herb;NA;V;NA;no;7;6;5;NA;chwet;NA;3;yes;no;no;no;;
-Stachys_palustris;L.;NA;Lamiaceae;WFO;no;herb;NA;NA;NA;no;7;5;NA;7;chwet;7;6;yes;no;no;no;;
-Stachys_sylvatica;L.;NA;Lamiaceae;WFO;no;herb;NA;NA;NA;no;4;NA;3;7;no;7;7;no;no;no;no;;
-Stellaria_graminea;L.;NA;Caryophyllaceae;WFO;no;herb;NA;NA;NA;no;6;NA;NA;4;no;4;3;yes;no;yes;no;;
-Stellaria_media;(L.) Vill.;NA;Caryophyllaceae;WFO;no;herb;NA;NA;NA;no;6;NA;NA;NA;no;7;8;no;no;no;no;yes;
-Symphytum_officinale;L.;NA;Boraginaceae;WFO;no;herb;NA;NA;NA;no;7;6;3;8;no;NA;8;no;no;no;no;yes;
-Tanacetum_vulgare;L.;NA;Compositae;WFO;no;herb;NA;NA;NA;no;8;6;4;5;no;8;5;yes;no;no;no;;
-Taraxacum_campylodes;G.E.Haglund;Taraxacum_officinale;Compositae;na;no;herb;NA;NA;NA;no;7;NA;5;NA;no;NA;7;no;no;no;no;;
-Thalictrum_minus;L.;NA;Ranunculaceae;WFO;no;herb;NA;V;G;no;6;NA;7;3;no;8;3;yes;no;no;no;;
-Thlaspi_arvense;L.;NA;Brassicaceae;WFO;no;herb;NA;NA;NA;no;6;5;NA;5;no;7;6;no;no;no;no;yes;
-Thymus_praecox;Opiz;NA;Lamiaceae;WFO;yes;herb;NA;NA;NA;no;8;6;5;3;no;8;1;no;no;no;no;;
-Thymus_pulegioides;L.;NA;Lamiaceae;WFO;no;herb;NA;NA;NA;no;8;NA;4;4;no;NA;1;yes;no;no;no;;
-Tragopogon_pratensis;L.;NA;Compositae;WFO;yes;herb;NA;NA;NA;no;7;6;3;4;no;7;6;yes;no;yes;no;;
-Trifolium_arvense;L.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;8;6;3;3;no;2;1;no;no;no;no;;
-Trifolium_campestre;Schreb.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;8;6;3;4;no;6;3;yes;no;yes;no;;
-Trifolium_dubium;Sibth.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;6;6;3;5;no;6;5;yes;no;yes;no;;
-Trifolium_hybridum;L.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;yes;7;6;5;6;no;7;5;yes;no;no;no;;
-Trifolium_medium;L.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;7;6;4;4;no;6;3;yes;no;no;no;;
-Trifolium_montanum;L.;NA;Fabaceae;WFO;yes;legume;NA;V;NA;no;8;NA;4;3;chwet;8;2;yes;no;no;yes;;
-Trifolium_pratense;L.;NA;Fabaceae;WFO;yes;legume;NA;NA;NA;no;7;NA;3;NA;no;NA;NA;yes;no;yes;no;;
-Trifolium_repens;L.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;8;NA;NA;5;no;6;6;no;no;no;no;;
-Tripleurospermum_maritimum;(L.) W.D.J.Koch;NA;Compositae;WFO;no;herb;NA;NA;NA;no;9;6;3;6;flood;7;8;no;no;no;no;;yes
-Trisetum_flavescens;(L.) P.Beauv.;NA;Poaceae;WFO;yes;top-grass;NA;NA;NA;no;7;NA;5;NA;no;NA;5;no;no;yes;no;;
-Triticum_spec;NA;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Tussilago_farfara;L.;NA;Compositae;WFO;no;herb;NA;NA;NA;no;8;NA;3;6;chwet;8;NA;yes;no;no;no;;
-Urtica_dioica;L.;NA;Urticaceae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;6;no;7;8;no;no;no;no;;
-Valeriana_officinalis;L.;NA;Caprifoliaceae;WFO;no;herb;NA;NA;NA;no;7;6;5;8;chwet;7;5;yes;no;no;no;;
-Valerianella_spec;NA;NA;Caprifoliaceae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Verbascum_blattaria;L.;NA;Scrophulariaceae;WFO;no;herb;NA;3;3;no;8;7;7;3;no;7;6;yes;no;no;no;;
-Verbascum_densiflorum;Bertol.;NA;Scrophulariaceae;WFO;no;herb;NA;NA;NA;no;8;6;5;4;no;8;5;no;no;no;no;;
-Verbascum_lychnitis;L.;NA;Scrophulariaceae;WFO;yes;herb;NA;NA;NA;no;7;6;5;3;no;7;3;yes;no;no;no;;
-Verbascum_nigrum;L.;NA;Scrophulariaceae;WFO;no;herb;NA;NA;NA;no;7;5;5;5;no;7;7;yes;no;no;no;;
-Verbascum_spec;NA;NA;Scrophulariaceae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Verbascum_thapsus;L.;NA;Scrophulariaceae;WFO;no;herb;NA;NA;NA;no;8;NA;3;4;no;7;7;yes;no;no;no;;
-Verbena_officinalis;L.;NA;Verbenaceae;WFO;no;herb;NA;NA;NA;no;9;6;3;5;no;7;7;yes;no;no;no;;
-Veronica_arvensis;L.;NA;Plantaginaceae;WFO;no;herb;NA;NA;NA;no;7;6;3;4;no;6;NA;yes;no;no;no;;
-Veronica_chamaedrys;L.;NA;Plantaginaceae;WFO;yes;herb;NA;NA;NA;no;6;NA;NA;5;no;NA;NA;yes;no;yes;no;;
-Veronica_persica;Poir.;NA;Plantaginaceae;WFO;no;herb;NA;NA;NA;yes;6;NA;3;5;no;7;7;no;no;no;no;;
-Veronica_spec;NA;NA;Plantaginaceae;WFO;no;herb;NA;NA;NA;no;NA;NA;NA;NA;NA;NA;NA;no;no;no;no;;
-Vicia_cracca;L.;NA;Fabaceae;WFO;yes;legume;NA;NA;NA;no;7;5;NA;5;no;NA;NA;yes;no;yes;no;;
-Vicia_dasycarpa;Ten.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;yes;NA;NA;NA;NA;no;NA;NA;yes;no;no;no;;
-Vicia_hirsuta;(L.) Gray;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;7;6;5;4;no;NA;4;yes;no;no;no;;
-Vicia_onobrychioides;L.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;NA;NA;NA;NA;no;NA;NA;no;no;no;no;;
-Vicia_sativa_ssp_nigra;(L.) Ehrh.;Vicia_angustifolia;Fabaceae;WFO;no;legume;NA;NA;NA;no;5;6;3;NA;no;NA;NA;yes;no;yes;no;;
-Vicia_sepium;L.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;NA;NA;5;5;no;6;5;yes;no;no;no;;
-Vicia_tetrasperma;(L.) Schreb.;NA;Fabaceae;WFO;no;legume;NA;NA;NA;no;6;6;5;5;no;5;5;yes;no;no;no;;
-Viola_arvensis;Murray;NA;Violaceae;WFO;no;herb;NA;NA;NA;no;6;5;NA;NA;no;NA;NA;no;no;no;no;;
-Vulpia_myuros;(L.) C.C.Gmel.;NA;Poaceae;WFO;no;grass;NA;NA;NA;no;8;7;3;2;no;5;1;no;no;no;no;;
+﻿name,nomenclature,synonym,family,seeded,group,legal,rlg,rlb,neophyte,l,t,k,f,fchange,r,n,targetHerb,targetGrass,ffh6510,ffh6210,nitrogenIndicator,grazingIndicator,ruderalIndicator
+Acer_campestre,http://www.worldfloraonline.org/taxon/wfo-0000514040,NA,Sapindaceae,no,tree,NA,NA,NA,no,5,6,4,5,no,7,6,no,no,no,no,NA,NA,NA
+Acer_pseudoplatanus,http://www.worldfloraonline.org/taxon/wfo-0000514908,NA,Sapindaceae,no,tree,NA,NA,NA,no,4,NA,4,6,no,NA,7,no,no,no,no,NA,NA,NA
+Achillea_millefolium,http://www.worldfloraonline.org/taxon/wfo-0000042097,NA,Compositae,yes,herb,na,na,na,no,8,NA,NA,4,no,NA,5,yes,no,yes,no,NA,NA,NA
+Acinos_arvensis,http://www.worldfloraonline.org/taxon/wfo-0000320080,NA,Lamiaceae,no,herb,na,V,na,no,9,6,3,2,no,5,1,yes,no,no,no,NA,NA,NA
+Aegopodium_podagraria,http://www.worldfloraonline.org/taxon/wfo-0000521573,NA,Apiaceae,no,herb,na,na,na,no,5,5,3,6,no,7,8,no,no,no,no,NA,NA,NA
+Agrimonia_eupatoria,http://www.worldfloraonline.org/taxon/wfo-0001006654,NA,Rosaceae,yes,herb,na,na,na,no,7,6,4,4,no,8,4,yes,no,no,no,NA,NA,NA
+Agrostis_capillaris,http://www.worldfloraonline.org/taxon/wfo-0000841743,NA,Poaceae,yes,sub-grass,na,na,na,no,7,NA,3,NA,no,4,4,no,yes,no,no,NA,NA,NA
+Agrostis_gigantea,http://www.worldfloraonline.org/taxon/wfo-0000843693,NA,Poaceae,no,top-grass,na,na,na,no,7,5,3,8,no,7,6,no,yes,no,no,NA,NA,NA
+Agrostis_stolonifera,http://www.worldfloraonline.org/taxon/wfo-0000844489,NA,Poaceae,no,sub-grass,na,na,na,no,8,NA,5,NA,flood,NA,5,no,yes,no,no,NA,NA,NA
+Ajuga_reptans,http://www.worldfloraonline.org/taxon/wfo-0000935107,NA,Lamiaceae,yes,herb,na,na,na,no,6,NA,2,6,no,6,6,yes,no,yes,no,NA,NA,NA
+Allium_oleraceum,http://www.worldfloraonline.org/taxon/wfo-0000756866,NA,Amaryllidaceae,no,herb,na,na,na,no,7,6,4,3,no,7,4,yes,no,no,no,NA,NA,NA
+Allium_sativum,http://www.worldfloraonline.org/taxon/wfo-0000757248,NA,Amaryllidaceae,no,herb,na,na,na,yes,NA,NA,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Allium_scorodoprasum,http://www.worldfloraonline.org/taxon/wfo-0000757306,NA,Amaryllidaceae,no,herb,na,na,3,no,6,6,5,7,no,7,7,yes,no,no,no,NA,NA,NA
+Allium_vineale,http://www.worldfloraonline.org/taxon/wfo-0000757711,NA,Amaryllidaceae,no,herb,na,na,na,no,5,7,3,4,no,NA,7,yes,no,no,no,NA,NA,NA
+Alopecurus_myosuroides,http://www.worldfloraonline.org/taxon/wfo-0000845620,NA,Poaceae,no,grass,NA,NA,NA,no,6,6,3,5,no,7,6,no,no,no,no,NA,NA,NA
+Alopecurus_pratensis,http://www.worldfloraonline.org/taxon/wfo-0000845656,NA,Poaceae,yes,top-grass,na,na,na,no,6,NA,5,6,no,6,7,no,yes,yes,no,NA,NA,NA
+Amaranthus_retroflexus,http://www.worldfloraonline.org/taxon/wfo-0000530447,NA,Amaranthaceae,no,herb,NA,NA,NA,no,8,7,6,5,no,7,7,no,no,no,no,NA,NA,NA
+Anagallis_arvensis,http://www.worldfloraonline.org/taxon/wfo-0000533162,NA,Primulaceae,no,herb,NA,NA,NA,no,6,6,3,5,no,NA,6,no,no,no,no,NA,NA,NA
+Angelica_sylvestris,http://www.worldfloraonline.org/taxon/wfo-0000536413,NA,Apiaceae,no,herb,na,na,na,no,7,NA,4,8,no,NA,NA,yes,no,no,no,NA,NA,NA
+Anthericum_ramosum,http://www.worldfloraonline.org/taxon/wfo-0000760635,NA,Asparagaceae,yes,herb,BG,V,na,no,7,5,4,3,no,7,3,yes,no,no,no,NA,NA,NA
+Anthoxanthum_odoratum,http://www.worldfloraonline.org/taxon/wfo-0000848178,NA,Poaceae,yes,sub-grass,na,na,na,no,NA,NA,NA,NA,no,5,NA,no,yes,yes,no,NA,NA,NA
+Anthriscus_sylvestris,http://www.worldfloraonline.org/taxon/wfo-0000538692,NA,Apiaceae,no,herb,na,na,na,no,7,NA,5,5,no,NA,8,no,no,no,no,NA,NA,NA
+Anthyllis_vulneraria,http://www.worldfloraonline.org/taxon/wfo-0000212115,NA,Fabaceae,yes,legume,na,na,na,no,8,6,3,3,no,7,2,yes,no,no,yes,NA,NA,NA
+Apera_spica-venti,http://www.worldfloraonline.org/taxon/wfo-0000848273,NA,Poaceae,no,grass,NA,NA,NA,no,6,6,4,6,no,5,NA,no,no,no,no,NA,NA,NA
+Arabis_hirsuta,http://www.worldfloraonline.org/taxon/wfo-0000542279,NA,Brassicaceae,yes,herb,na,V,na,no,7,5,3,4,chwet,8,NA,yes,no,no,yes,NA,NA,NA
+Arenaria_serpyllifolia,http://www.worldfloraonline.org/taxon/wfo-0000546651,NA,Caryophyllaceae,no,herb,na,na,na,no,8,NA,NA,4,no,7,NA,yes,no,no,no,NA,NA,NA
+Arrhenatherum_elatius,http://www.worldfloraonline.org/taxon/wfo-0000849608,NA,Poaceae,yes,top-grass,na,na,na,no,8,5,3,5,no,7,7,no,yes,yes,no,NA,NA,NA
+Artemisia_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000115588,NA,Compositae,no,herb,na,na,na,no,7,6,NA,6,no,NA,8,no,no,no,no,NA,NA,NA
+Asperula_cynanchica,http://www.worldfloraonline.org/taxon/wfo-0000285663,NA,Rubiaceae,yes,herb,NA,V,NA,no,7,NA,5,3,no,8,3,no,no,no,no,NA,NA,NA
+Astragalus_glycyphyllos,http://www.worldfloraonline.org/taxon/wfo-0000213564,NA,Fabaceae,no,legume,na,na,na,no,6,6,4,4,no,7,3,yes,no,no,no,NA,NA,NA
+Avena_fatua,http://www.worldfloraonline.org/taxon/wfo-0000851838,NA,Poaceae,no,grass,NA,NA,NA,no,6,6,6,5,no,7,NA,no,no,no,no,NA,NA,NA
+Barbarea_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000560064,NA,Brassicaceae,no,herb,na,na,na,no,8,6,3,6,no,NA,6,no,no,no,no,NA,NA,NA
+Bellis_perennis,http://www.worldfloraonline.org/taxon/wfo-0000072578,NA,Compositae,no,herb,na,na,na,no,8,NA,2,5,no,NA,6,no,no,no,no,NA,NA,NA
+Brachypodium_pinnatum,http://www.worldfloraonline.org/taxon/wfo-0000854513,NA,Poaceae,yes,top-grass,na,na,na,no,6,6,5,4,no,7,4,no,yes,no,yes,NA,NA,NA
+Brassica_napus,http://www.worldfloraonline.org/taxon/wfo-0000571271,NA,Brassicaceae,no,herb,NA,NA,NA,yes,NA,NA,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Brassica_rapa,http://www.worldfloraonline.org/taxon/wfo-0000571544,NA,Brassicaceae,no,herb,na,na,na,no,NA,NA,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Briza_media,http://www.worldfloraonline.org/taxon/wfo-0000854755,NA,Poaceae,yes,sub-grass,na,na,na,no,8,NA,3,NA,no,NA,2,no,yes,yes,yes,NA,NA,NA
+Bromus_erectus,http://www.worldfloraonline.org/taxon/wfo-0000855493,NA,Poaceae,yes,top-grass,na,na,na,no,8,5,2,3,no,8,3,no,yes,no,yes,NA,NA,NA
+Bromus_hordeaceus,http://www.worldfloraonline.org/taxon/wfo-0000855692,NA,Poaceae,no,top-grass,na,na,na,no,7,6,4,NA,chwet,NA,3,no,yes,yes,no,NA,NA,NA
+Bromus_inermis,http://www.worldfloraonline.org/taxon/wfo-0000855743,NA,Poaceae,no,top-grass,na,na,na,no,8,NA,7,4,chwet,8,5,no,yes,no,no,NA,NA,NA
+Bromus_sterilis,http://www.worldfloraonline.org/taxon/wfo-0000856589,NA,Poaceae,no,sub-grass,na,na,na,no,7,6,4,4,no,NA,5,no,no,no,no,NA,NA,NA
+Bunias_orientalis,http://www.worldfloraonline.org/taxon/wfo-0000574739,NA,Brassicaceae,no,herb,NA,NA,NA,yes,7,6,5,5,no,8,5,no,no,no,no,NA,NA,NA
+Buphthalmum_salicifolium,http://www.worldfloraonline.org/taxon/wfo-0000082220,NA,Compositae,yes,herb,NA,NA,NA,no,8,NA,4,4,no,8,3,no,no,no,no,NA,NA,NA
+Calamagrostis_epigejos,http://www.worldfloraonline.org/taxon/wfo-0000857259,NA,Poaceae,no,top-grass,na,na,na,no,7,5,7,NA,chwet,NA,6,no,no,no,no,NA,NA,NA
+Calystegia_sepium,http://www.worldfloraonline.org/taxon/wfo-0001296723,NA,Convolvulaceae,no,herb,na,na,na,no,8,6,5,6,no,7,9,no,no,no,no,NA,NA,NA
+Campanula_glomerata,http://www.worldfloraonline.org/taxon/wfo-0000827269,NA,Campanulaceae,yes,herb,na,3,na,no,7,NA,7,4,no,7,NA,yes,no,no,yes,NA,NA,NA
+Campanula_patula,http://www.worldfloraonline.org/taxon/wfo-0000828061,NA,Campanulaceae,yes,herb,na,V,na,no,8,6,4,5,no,7,5,yes,no,yes,no,NA,NA,NA
+Campanula_rapunculoides,http://www.worldfloraonline.org/taxon/wfo-0000828416,NA,Campanulaceae,yes,herb,na,na,na,no,6,6,4,4,no,7,4,yes,no,no,no,NA,NA,NA
+Campanula_rotundifolia,http://www.worldfloraonline.org/taxon/wfo-0000828550,NA,Campanulaceae,yes,herb,na,na,na,no,7,5,NA,NA,no,NA,2,yes,no,no,no,NA,NA,NA
+Campanula_trachelium,http://www.worldfloraonline.org/taxon/wfo-0000829176,NA,Campanulaceae,no,herb,na,na,na,no,4,NA,3,6,no,8,8,no,no,no,no,NA,NA,NA
+Capsella_bursa-pastoris,http://www.worldfloraonline.org/taxon/wfo-0000585589,NA,Brassicaceae,no,herb,na,na,na,no,7,NA,NA,5,no,NA,6,no,no,no,no,NA,NA,NA
+Cardamine_hirsuta,http://www.worldfloraonline.org/taxon/wfo-0000586924,NA,Brassicaceae,no,herb,NA,NA,NA,no,6,6,3,5,no,5,7,no,no,no,no,NA,NA,NA
+Carduus_acanthoides,http://www.worldfloraonline.org/taxon/wfo-0000114356,NA,Compositae,no,herb,na,na,na,no,9,5,6,4,no,8,7,no,no,no,no,NA,NA,NA
+Carex_acutiformis,http://www.worldfloraonline.org/taxon/wfo-0000344201,NA,Cyperaceae,no,sedge,na,na,na,no,7,NA,3,9,chwet,7,5,no,yes,no,no,NA,NA,NA
+Carex_caryophyllea,http://www.worldfloraonline.org/taxon/wfo-0000345352,NA,Cyperaceae,no,sedge,na,V,na,no,8,NA,3,4,no,NA,2,no,yes,no,yes,NA,NA,NA
+Carex_digitata,http://www.worldfloraonline.org/taxon/wfo-0000346034,NA,Cyperaceae,no,sedge,na,na,na,no,3,NA,4,5,no,NA,4,no,yes,no,no,NA,NA,NA
+Carex_flacca,http://www.worldfloraonline.org/taxon/wfo-0000346645,NA,Cyperaceae,yes,sedge,na,na,na,no,7,NA,3,6,chwet,8,NA,no,yes,no,no,NA,NA,NA
+Carex_hirta,http://www.worldfloraonline.org/taxon/wfo-0000347452,NA,Cyperaceae,no,sedge,na,na,na,no,7,6,3,6,chwet,NA,5,no,yes,no,no,NA,NA,NA
+Carex_montana,http://www.worldfloraonline.org/taxon/wfo-0000348977,NA,Cyperaceae,no,sedge,na,na,na,no,5,NA,4,4,no,6,3,no,yes,no,yes,NA,NA,NA
+Carex_muricata,http://www.worldfloraonline.org/taxon/wfo-0000349075,NA,Cyperaceae,no,sedge,na,na,na,no,7,6,3,4,no,NA,6,no,yes,no,no,NA,NA,NA
+Carex_panicea,http://www.worldfloraonline.org/taxon/wfo-0000349728,NA,Cyperaceae,no,sedge,na,V,na,no,8,NA,3,8,chwet,NA,4,no,yes,no,no,NA,NA,NA
+Carex_praecox_ssp_curvata,http://www.worldfloraonline.org/taxon/wfo-0000350214,Carex_curvata,Cyperaceae,no,sedge,na,D,3,no,NA,NA,NA,NA,no,NA,NA,no,yes,no,no,NA,NA,NA
+Carex_praecox_ssp_praecox,http://www.worldfloraonline.org/taxon/wfo-0000350207,NA,Cyperaceae,no,sedge,na,V,3,no,9,6,6,3,chwet,NA,4,no,yes,no,no,NA,NA,NA
+Carex_spec,http://www.worldfloraonline.org/taxon/wfo-0000588460,NA,Cyperaceae,no,grass,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Carex_sylvatica,http://www.worldfloraonline.org/taxon/wfo-0000351795,NA,Cyperaceae,no,sedge,na,na,na,no,2,5,3,5,no,6,5,no,no,no,no,NA,NA,NA
+Carlina_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000130786,NA,Compositae,yes,herb,NA,NA,NA,no,7,5,3,4,no,7,3,no,no,no,no,NA,NA,NA
+Carum_carvi,http://www.worldfloraonline.org/taxon/wfo-0000588460,NA,Apiaceae,no,herb,na,na,na,no,8,4,5,5,no,NA,6,yes,no,yes,no,NA,NA,NA
+Centaurea_jacea,http://www.worldfloraonline.org/taxon/wfo-0000095537,NA,Compositae,yes,herb,na,na,na,no,7,NA,5,NA,no,NA,NA,yes,no,yes,no,NA,NA,NA
+Centaurea_scabiosa,http://www.worldfloraonline.org/taxon/wfo-0000013986,NA,Compositae,yes,herb,na,na,na,no,7,NA,3,3,no,8,4,yes,no,no,yes,NA,NA,NA
+Centaurea_spec,http://www.worldfloraonline.org/taxon/wfo-4000007161,NA,Compositae,no,herb,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Centaurea_stoebe,http://www.worldfloraonline.org/taxon/wfo-0000021390,NA,Compositae,yes,herb,na,na,3,no,NA,NA,NA,NA,no,NA,NA,yes,no,no,no,NA,NA,NA
+Centaurium_erythraea,http://www.worldfloraonline.org/taxon/wfo-0000593916,NA,Gentianaceae,no,herb,BG,na,na,no,8,6,5,5,no,6,6,yes,no,no,no,NA,NA,NA
+Cerastium_arvense,http://www.worldfloraonline.org/taxon/wfo-0000595158,NA,Caryophyllaceae,no,herb,na,na,na,no,8,NA,5,4,no,6,4,yes,no,no,no,NA,NA,NA
+Cerastium_fontanum_ssp_vulgare,http://www.worldfloraonline.org/taxon/wfo-0000595577,Cerastium_holosteoides,Caryophyllaceae,yes,herb,na,na,na,no,6,NA,NA,5,no,NA,5,yes,no,yes,no,NA,NA,NA
+Cerastium_glomeratum,http://www.worldfloraonline.org/taxon/wfo-0000595603,NA,Caryophyllaceae,no,herb,na,na,na,no,7,5,3,5,no,5,5,yes,no,no,no,NA,NA,NA
+Chaerophyllum_bulbosum,http://www.worldfloraonline.org/taxon/wfo-0000598957,NA,Apiaceae,no,herb,na,na,na,no,7,6,5,7,no,8,8,no,no,no,no,NA,NA,NA
+Chenopodium_album,http://www.worldfloraonline.org/taxon/wfo-0000600897,NA,Amaranthaceae,no,herb,na,na,na,no,NA,NA,NA,4,no,NA,7,no,no,no,no,NA,NA,NA
+Chenopodium_polyspermum,http://www.worldfloraonline.org/taxon/wfo-0000601652,NA,Amaranthaceae,no,herb,NA,NA,NA,no,NA,NA,NA,4,no,NA,7,no,no,no,no,NA,NA,NA
+Cichorium_intybus,http://www.worldfloraonline.org/taxon/wfo-0000080671,NA,Compositae,yes,herb,na,na,na,no,9,6,5,4,no,8,5,yes,no,no,no,NA,NA,NA
+Cirsium_arvense,http://www.worldfloraonline.org/taxon/wfo-0000006870,NA,Compositae,no,herb,na,na,na,no,8,5,NA,NA,no,NA,7,no,no,no,no,NA,NA,NA
+Cirsium_oleraceum,http://www.worldfloraonline.org/taxon/wfo-0000063143,NA,Compositae,yes,herb,na,na,na,no,6,NA,3,7,no,8,5,yes,no,no,no,NA,NA,NA
+Cirsium_vulgare,http://www.worldfloraonline.org/taxon/wfo-0000081703,NA,Compositae,no,herb,na,na,na,no,8,5,3,5,no,7,8,no,no,no,no,NA,NA,NA
+Clinopodium_vulgare,http://www.worldfloraonline.org/taxon/wfo-0000893535,NA,Lamiaceae,yes,herb,na,na,na,no,7,NA,3,4,no,7,3,yes,no,no,no,NA,NA,NA
+Colchicum_autumnale,http://www.worldfloraonline.org/taxon/wfo-0000763824,NA,Colchicaceae,no,herb,na,na,na,no,6,5,2,6,chwet,7,NA,yes,no,no,no,NA,NA,NA
+Consolida_regalis,http://www.worldfloraonline.org/taxon/wfo-0000619574,NA,Ranunculaceae,no,herb,NA,3,3,no,6,7,6,5,no,8,5,no,no,no,no,NA,NA,NA
+Convolvulus_arvensis,http://www.worldfloraonline.org/taxon/wfo-0001296633,NA,Convolvulaceae,no,herb,na,na,na,no,7,6,NA,4,no,7,NA,no,no,no,no,NA,NA,NA
+Cornus_controversa,http://www.worldfloraonline.org/taxon/wfo-0000924640,Cornus_sanguinea,Cornaceae,no,shrub,NA,NA,NA,no,7,5,4,5,no,7,NA,no,no,no,no,NA,NA,NA
+Cota_tinctoria,http://www.worldfloraonline.org/taxon/wfo-0000076814,Anthemis_tinctoria,Compositae,no,herb,na,na,na,no,8,6,5,3,no,6,4,yes,no,no,no,NA,NA,NA
+Crepis_biennis,http://www.worldfloraonline.org/taxon/wfo-0000061510,NA,Compositae,yes,herb,na,na,na,no,7,5,3,5,no,6,5,yes,no,yes,no,NA,NA,NA
+Crepis_capillaris,http://www.worldfloraonline.org/taxon/wfo-0000030643,NA,Compositae,no,herb,na,na,na,no,7,6,2,5,no,6,4,no,no,no,no,NA,NA,NA
+Cyanus_segetum,http://www.worldfloraonline.org/taxon/wfo-0000071996,Centaurea_cyanus,Compositae,no,herb,na,V,na,no,7,6,5,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Cynodon_dactylon,http://www.worldfloraonline.org/taxon/wfo-0000861178,NA,Poaceae,no,sub-grass,na,na,na,yes,8,7,3,4,no,NA,5,no,no,no,no,NA,NA,NA
+Cynosurus_cristatus,http://www.worldfloraonline.org/taxon/wfo-0000861316,NA,Poaceae,yes,sub-grass,na,na,na,no,8,5,3,5,no,NA,4,no,yes,yes,no,NA,NA,NA
+Dactylis_glomerata,http://www.worldfloraonline.org/taxon/wfo-0000861498,NA,Poaceae,yes,top-grass,na,na,na,no,7,NA,3,5,no,NA,6,no,yes,no,no,NA,NA,NA
+Daucus_carota,http://www.worldfloraonline.org/taxon/wfo-0000638442,NA,Apiaceae,yes,herb,na,na,na,no,8,6,5,4,no,NA,4,yes,no,yes,no,NA,NA,NA
+Deschampsia_cespitosa,http://www.worldfloraonline.org/taxon/wfo-0000862467,NA,Poaceae,no,top-grass,na,na,na,no,6,NA,NA,7,chwet,NA,3,no,yes,no,no,NA,NA,NA
+Dianthus_carthusianorum,http://www.worldfloraonline.org/taxon/wfo-0000643249,NA,Caryophyllaceae,yes,herb,BG,V,na,no,8,5,4,3,no,7,2,yes,no,no,yes,NA,NA,NA
+Dianthus_deltoides,http://www.worldfloraonline.org/taxon/wfo-0000643427,NA,Caryophyllaceae,no,herb,BG,V,na,no,8,5,4,3,no,3,2,yes,no,no,no,NA,NA,NA
+Dipsacus_fullonum,http://www.worldfloraonline.org/taxon/wfo-0000651022,NA,Caprifoliaceae,no,herb,na,na,na,no,9,6,3,6,chwet,8,7,no,no,no,no,NA,NA,NA
+Echinochloa_crus-galli,http://www.worldfloraonline.org/taxon/wfo-0000865236,NA,Poaceae,no,grass,NA,NA,NA,no,6,7,5,5,no,NA,8,no,no,no,no,NA,NA,NA
+Echium_vulgare,http://www.worldfloraonline.org/taxon/wfo-0000663145,NA,Boraginaceae,yes,herb,na,na,na,no,9,6,3,4,no,8,4,yes,no,no,no,NA,NA,NA
+Elymus_repens,http://www.worldfloraonline.org/taxon/wfo-0000866643,NA,Poaceae,no,top-grass,na,na,na,no,7,6,7,NA,chwet,NA,7,no,no,no,no,NA,NA,NA
+Epilobium_parviflorum,http://www.worldfloraonline.org/taxon/wfo-0000669577,NA,Onagraceae,no,herb,NA,NA,NA,no,7,5,3,9,flood,8,6,no,no,no,no,NA,NA,NA
+Epilobium_spec,http://www.worldfloraonline.org/taxon/wfo-4000013609,NA,Onagraceae,no,herb,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Equisetum_arvense,http://www.worldfloraonline.org/taxon/wfo-0001108914,NA,Equisetaceae,no,herb,na,na,na,no,6,NA,NA,6,chwet,NA,3,no,no,no,no,NA,NA,NA
+Eragrostis_minor,http://www.worldfloraonline.org/taxon/wfo-0000868064,NA,Poaceae,no,grass,NA,NA,NA,yes,8,7,5,3,no,NA,4,no,no,no,no,NA,NA,NA
+Erigeron_annuus,http://www.worldfloraonline.org/taxon/wfo-0000069875,NA,Compositae,no,herb,na,na,na,yes,7,6,NA,6,no,NA,8,yes,no,no,no,NA,NA,NA
+Erigeron_canadensis,http://www.worldfloraonline.org/taxon/wfo-0000015917,Conyza_canadensis,Compositae,no,herb,NA,NA,NA,yes,8,6,NA,4,no,NA,5,no,no,no,no,NA,NA,NA
+Erophila_verna,http://www.worldfloraonline.org/taxon/wfo-0000677261,Draba_verna,Brassicaceae,no,herb,BG,na,na,no,8,6,3,NA,no,NA,2,no,no,no,no,NA,NA,NA
+Erysimum_cheiranthoides,http://www.worldfloraonline.org/taxon/wfo-0000678580#localNames,NA,Brassicaceae,no,herb,NA,NA,NA,no,7,5,NA,5,no,7,7,no,no,no,no,NA,NA,NA
+Euonymus_europaeus,http://www.worldfloraonline.org/taxon/wfo-0000681728,NA,Celastraceae,no,shrub,NA,NA,NA,no,6,5,3,5,no,8,5,no,no,no,no,NA,NA,NA
+Euphorbia_amygdaloides,http://www.worldfloraonline.org/taxon/wfo-0000960650,NA,Euphorbiaceae,no,herb,NA,NA,NA,no,4,5,3,5,no,8,5,no,no,no,no,NA,NA,NA
+Euphorbia_cyparissias,http://www.worldfloraonline.org/taxon/wfo-0000961626,NA,Euphorbiaceae,no,herb,na,na,na,no,8,NA,4,3,no,NA,3,yes,no,no,no,NA,NA,NA
+Euphorbia_esula,http://www.worldfloraonline.org/taxon/wfo-0000961974,NA,Euphorbiaceae,no,herb,na,na,3,no,8,6,5,4,no,8,NA,yes,no,no,no,NA,NA,NA
+Euphorbia_helioscopia,http://www.worldfloraonline.org/taxon/wfo-0000962471,NA,Euphorbiaceae,no,herb,NA,NA,NA,no,6,NA,3,5,no,7,7,no,no,no,no,NA,NA,NA
+Euphorbia_verrucosa,http://www.worldfloraonline.org/taxon/wfo-0000965311,NA,Euphorbiaceae,no,herb,na,V,na,no,8,6,2,3,no,9,3,yes,no,no,yes,NA,NA,NA
+Falcaria_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000685760,NA,Apiaceae,no,herb,na,na,na,no,7,7,6,3,no,9,NA,yes,no,no,no,NA,NA,NA
+Fallopia_convolvulus,http://www.worldfloraonline.org/taxon/wfo-0000685786,NA,Polygonaceae,no,herb,NA,NA,NA,no,7,6,NA,5,no,NA,6,no,no,no,no,NA,NA,NA
+Festuca_arundinacea,http://www.worldfloraonline.org/taxon/wfo-0000869819,NA,Poaceae,no,top-grass,na,na,na,no,8,5,NA,7,chwet,7,4,no,yes,no,no,NA,NA,NA
+Festuca_ovina,http://www.worldfloraonline.org/taxon/wfo-0000871222,NA,Poaceae,yes,sub-grass,na,na,na,no,9,7,4,2,no,NA,1,no,yes,no,yes,NA,NA,NA
+Festuca_pratensis,http://www.worldfloraonline.org/taxon/wfo-0000871673,NA,Poaceae,yes,top-grass,na,na,na,no,8,NA,3,6,no,NA,6,no,yes,yes,no,NA,NA,NA
+Festuca_rubra,http://www.worldfloraonline.org/taxon/wfo-0000871854,NA,Poaceae,yes,sub-grass,na,na,na,no,NA,NA,NA,NA,no,NA,NA,no,yes,yes,no,NA,NA,NA
+Filipendula_ulmaria,http://www.worldfloraonline.org/taxon/wfo-0000983427,NA,Rosaceae,no,herb,na,na,na,no,7,5,NA,8,no,NA,4,no,no,no,no,NA,NA,NA
+Filipendula_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000999867,NA,Rosaceae,yes,herb,na,3,3,no,7,6,5,3,chwet,8,2,yes,no,no,yes,NA,NA,NA
+Fragaria_vesca,http://www.worldfloraonline.org/taxon/wfo-0000993770,NA,Rosaceae,no,herb,na,na,na,no,7,NA,5,5,no,NA,6,yes,no,no,no,NA,NA,NA
+Fragaria_viridis,http://www.worldfloraonline.org/taxon/wfo-0001007688,NA,Rosaceae,no,herb,NA,NA,NA,no,7,5,5,3,no,8,3,no,no,no,no,NA,NA,NA
+Fumaria_officinalis,http://www.worldfloraonline.org/taxon/wfo-0000693355,NA,Papaveraceae,no,herb,NA,NA,NA,no,6,6,3,5,no,6,7,no,no,no,no,NA,NA,NA
+Galeopsis_tetrahit,http://www.worldfloraonline.org/taxon/wfo-0000968061,NA,Lamiaceae,no,herb,NA,NA,NA,no,7,NA,3,5,no,NA,6,no,no,no,no,NA,NA,NA
+Galium_aparine,http://www.worldfloraonline.org/taxon/wfo-0000968296,NA,Rubiaceae,no,herb,NA,NA,NA,no,7,6,3,NA,no,6,8,no,no,no,no,NA,NA,NA
+Galium_mollugo,http://www.worldfloraonline.org/taxon/wfo-0000969499,NA,Rubiaceae,yes,herb,na,D,na,no,7,6,3,4,no,7,NA,yes,no,yes,no,NA,NA,NA
+Galium_palustre,http://www.worldfloraonline.org/taxon/wfo-0000969740,NA,Rubiaceae,no,herb,NA,NA,NA,no,6,5,3,9,flood,NA,4,no,no,no,no,NA,NA,NA
+Galium_verum,http://www.worldfloraonline.org/taxon/wfo-0000970562,NA,Rubiaceae,yes,herb,na,na,na,no,7,6,NA,4,chwet,7,3,yes,no,no,no,NA,NA,NA
+Geranium_dissectum,http://www.worldfloraonline.org/taxon/wfo-0000700368,NA,Geraniaceae,no,herb,na,na,na,no,6,6,3,5,no,8,5,yes,no,no,no,NA,NA,NA
+Geranium_molle,http://www.worldfloraonline.org/taxon/wfo-0000700868,NA,Geraniaceae,no,herb,na,na,na,no,7,6,3,4,no,5,4,yes,no,no,no,NA,NA,NA
+Geranium_pratense,http://www.worldfloraonline.org/taxon/wfo-0000701108,NA,Geraniaceae,yes,herb,na,na,na,no,8,6,5,5,no,8,7,yes,no,no,no,NA,NA,NA
+Geranium_pusillum,http://www.worldfloraonline.org/taxon/wfo-0000701157,NA,Geraniaceae,no,herb,na,na,na,no,7,6,5,4,no,NA,7,yes,no,no,no,NA,NA,NA
+Geranium_pyrenaicum,http://www.worldfloraonline.org/taxon/wfo-0000701169,NA,Geraniaceae,no,herb,na,na,na,yes,8,6,4,5,no,7,8,yes,no,no,no,NA,NA,NA
+Poaceae,http://www.worldfloraonline.org/taxon/wfo-7000000483,NA,Poaceae,no,grass,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Geum_urbanum,http://www.worldfloraonline.org/taxon/wfo-0001013476,NA,Rosaceae,no,herb,na,na,na,no,4,5,5,5,no,NA,7,yes,no,no,no,NA,NA,NA
+Glechoma_hederacea,http://www.worldfloraonline.org/taxon/wfo-0000972872,NA,Lamiaceae,no,herb,na,na,na,no,6,6,3,6,no,NA,7,yes,no,no,no,NA,NA,NA
+Helianthemum_nummularium,http://www.worldfloraonline.org/taxon/wfo-0000717621,NA,Cistaceae,yes,herb,na,3,3,no,7,6,4,3,no,7,1,yes,no,no,yes,NA,NA,NA
+Helianthus_annuus,http://www.worldfloraonline.org/taxon/wfo-0000088131,NA,Compositae,no,herb,NA,NA,NA,yes,NA,NA,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Helianthus_tuberosus,http://www.worldfloraonline.org/taxon/wfo-0000091975,NA,Compositae,no,herb,NA,NA,NA,yes,8,7,NA,6,no,7,8,no,no,no,no,NA,NA,NA
+Helictotrichon_pubescens,http://www.worldfloraonline.org/taxon/wfo-0000873950,NA,Poaceae,yes,top-grass,na,na,na,no,5,NA,3,NA,no,NA,4,no,yes,yes,no,NA,NA,NA
+Heracleum_sphondylium,http://www.worldfloraonline.org/taxon/wfo-0000720220,NA,Apiaceae,no,herb,na,na,na,no,7,5,2,5,no,NA,8,no,no,no,no,NA,NA,NA
+Hippocrepis_comosa,http://www.worldfloraonline.org/taxon/wfo-0000213796,NA,Fabaceae,yes,legume,na,V,na,no,7,5,2,3,no,7,2,yes,no,no,yes,NA,NA,NA
+Holcus_lanatus,http://www.worldfloraonline.org/taxon/wfo-0000874509,NA,Poaceae,yes,sub-grass,na,na,na,no,7,6,3,6,no,NA,4,no,yes,yes,no,NA,NA,NA
+Hordeum_vulgare,http://www.worldfloraonline.org/taxon/wfo-0000875054,NA,Poaceae,no,grass,NA,NA,NA,yes,NA,NA,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Hypericum_perforatum,http://www.worldfloraonline.org/taxon/wfo-0000728093,NA,Hypericaceae,yes,herb,na,na,na,no,7,6,5,4,no,6,3,yes,no,no,no,NA,NA,NA
+Hypochaeris_radicata,http://www.worldfloraonline.org/taxon/wfo-0000074809,NA,Compositae,yes,herb,na,na,na,no,8,5,3,5,no,4,3,yes,no,no,no,NA,NA,NA
+Inula_salicina,http://www.worldfloraonline.org/taxon/wfo-0000086135,NA,Compositae,yes,herb,NA,V,na,no,8,6,5,6,chwet,9,2,no,no,no,no,NA,NA,NA
+Iris_spec,http://www.worldfloraonline.org/taxon/wfo-4000019189,NA,Iridaceae,no,herb,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Jacobaea_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000031875,Senecio_jacobaea,Compositae,no,herb,na,na,na,no,8,5,3,4,chwet,7,5,no,no,no,no,NA,NA,NA
+Knautia_arvensis,http://www.worldfloraonline.org/taxon/wfo-0000356720,NA,Caprifoliaceae,yes,herb,na,na,na,no,7,6,3,4,no,NA,4,yes,no,yes,no,NA,NA,NA
+Koeleria_pyramidata,http://www.worldfloraonline.org/taxon/wfo-0000877284,NA,Poaceae,yes,sub-grass,na,V,na,no,7,6,4,4,no,7,2,no,yes,no,yes,NA,NA,NA
+Lactuca_serriola,http://www.worldfloraonline.org/taxon/wfo-0000015140,NA,Compositae,no,herb,na,na,na,no,9,7,7,4,no,NA,4,no,no,no,no,NA,NA,NA
+Lamium_maculatum,http://www.worldfloraonline.org/taxon/wfo-0000222579,NA,Lamiaceae,no,herb,NA,NA,NA,no,5,NA,4,6,no,7,8,no,no,no,no,NA,NA,NA
+Lamium_purpureum,http://www.worldfloraonline.org/taxon/wfo-0000222642,NA,Lamiaceae,no,herb,NA,NA,NA,no,7,5,3,5,no,7,7,no,no,no,no,NA,NA,NA
+Lapsana_communis,http://www.worldfloraonline.org/taxon/wfo-0000086921,NA,Compositae,no,herb,NA,NA,NA,no,5,6,3,5,no,NA,7,no,no,no,no,NA,NA,NA
+Lathyrus_pratensis,http://www.worldfloraonline.org/taxon/wfo-0000212701,NA,Fabaceae,yes,legume,na,na,na,no,7,5,NA,6,no,7,6,yes,no,yes,no,NA,NA,NA
+Lathyrus_sylvestris,http://www.worldfloraonline.org/taxon/wfo-0000213824,NA,Fabaceae,no,legume,na,na,na,no,7,6,4,4,no,8,2,no,no,no,no,NA,NA,NA
+Lathyrus_tuberosus,http://www.worldfloraonline.org/taxon/wfo-0000213826,NA,Fabaceae,no,legume,NA,NA,NA,no,7,6,6,4,chwet,8,4,no,no,no,no,NA,NA,NA
+Leontodon_hispidus,http://www.worldfloraonline.org/taxon/wfo-0000018147,NA,Compositae,yes,herb,na,na,na,no,8,NA,3,5,no,7,6,yes,no,no,no,NA,NA,NA
+Lepidium_campestre,http://www.worldfloraonline.org/taxon/wfo-0000358297,NA,Brassicaceae,no,herb,NA,NA,NA,no,7,6,3,4,no,8,6,no,no,no,no,NA,NA,NA
+Lepidium_ruderale,http://www.worldfloraonline.org/taxon/wfo-0000358755,NA,Brassicaceae,no,herb,na,na,na,no,9,6,7,4,no,NA,6,no,no,no,no,NA,NA,NA
+Leucanthemum_vulgare,http://www.worldfloraonline.org/taxon/wfo-0000036932,NA,Compositae,yes,herb,na,na,na,no,7,NA,3,4,no,NA,3,yes,no,yes,no,NA,NA,NA
+Linaria_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000446438,NA,Plantaginaceae,no,herb,na,na,na,no,8,6,5,4,no,7,5,no,no,no,no,NA,NA,NA
+Linum_catharticum,http://www.worldfloraonline.org/taxon/wfo-0000363831,NA,Linaceae,no,herb,BG,na,na,no,7,NA,3,NA,no,7,2,yes,no,no,yes,NA,NA,NA
+Linum_spec,http://www.worldfloraonline.org/taxon/wfo-4000021903,NA,Linaceae,no,herb,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Lolium_perenne,http://www.worldfloraonline.org/taxon/wfo-0000878441,NA,Poaceae,no,sub-grass,na,na,na,no,8,6,3,5,no,7,7,no,no,no,no,NA,NA,NA
+Lotus_corniculatus,http://www.worldfloraonline.org/taxon/wfo-0000212180,NA,Fabaceae,yes,legume,na,na,na,no,7,NA,3,4,no,7,3,yes,no,no,no,NA,NA,NA
+Lysimachia_nummularia,http://www.worldfloraonline.org/taxon/wfo-0000442792,NA,Primulaceae,no,herb,na,na,na,no,4,6,4,6,chwet,NA,NA,yes,no,no,no,NA,NA,NA
+Lysimachia_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000442301,NA,Primulaceae,no,herb,na,na,na,no,6,NA,NA,8,chwet,NA,NA,yes,no,no,no,NA,NA,NA
+Lythrum_salicaria,http://www.worldfloraonline.org/taxon/wfo-0000366878,NA,Lythraceae,no,herb,NA,NA,NA,no,7,5,5,8,chwet,6,NA,no,no,no,no,NA,NA,NA
+Malva_moschata,http://www.worldfloraonline.org/taxon/wfo-0000449199,NA,Malvaceae,no,herb,na,na,3,no,8,6,3,4,no,7,4,yes,no,no,no,NA,NA,NA
+Malva_spec,http://www.worldfloraonline.org/taxon/wfo-4000022983,NA,Malvaceae,no,herb,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Matricaria_chamomilla,http://www.worldfloraonline.org/taxon/wfo-0000003146,NA,Compositae,no,herb,na,na,na,no,7,6,5,5,no,5,5,no,no,no,no,NA,NA,NA
+Medicago_falcata,http://www.worldfloraonline.org/taxon/wfo-0000213426,NA,Fabaceae,yes,legume,na,na,na,no,8,6,7,3,no,9,3,yes,no,no,yes,NA,NA,NA
+Medicago_lupulina,http://www.worldfloraonline.org/taxon/wfo-0000213454,NA,Fabaceae,yes,legume,na,na,na,no,7,5,NA,4,no,8,NA,yes,no,yes,no,NA,NA,NA
+Medicago_minima,http://www.worldfloraonline.org/taxon/wfo-0000185370,NA,Fabaceae,no,legume,na,V,na,no,9,7,3,3,no,8,2,yes,no,no,no,NA,NA,NA
+Medicago_sativa,http://www.worldfloraonline.org/taxon/wfo-0000213468,NA,Fabaceae,no,legume,na,na,na,yes,8,6,6,4,no,7,NA,yes,no,no,no,NA,NA,NA
+Melilotus_albus,http://www.worldfloraonline.org/taxon/wfo-0000212815,NA,Fabaceae,no,legume,NA,NA,NA,no,9,6,6,3,no,7,4,no,no,no,no,NA,NA,NA
+Melilotus_officinalis,http://www.worldfloraonline.org/taxon/wfo-0000213864,NA,Fabaceae,no,legume,na,na,na,no,8,6,6,3,no,8,3,no,no,no,no,NA,NA,NA
+Mentha_longifolia,http://www.worldfloraonline.org/taxon/wfo-0000240918,NA,Lamiaceae,no,herb,na,na,na,no,7,5,4,8,flood,9,7,yes,no,no,no,NA,NA,NA
+Myosotis_arvensis,http://www.worldfloraonline.org/taxon/wfo-0000367842,NA,Boraginaceae,no,herb,na,na,na,no,6,6,5,5,no,NA,6,yes,no,no,no,NA,NA,NA
+Nardus_stricta,http://www.worldfloraonline.org/taxon/wfo-0000881131,NA,Poaceae,no,sub-grass,na,V,na,no,8,NA,3,NA,chwet,2,2,no,yes,no,no,NA,NA,NA
+Oenothera_biennis,http://www.worldfloraonline.org/taxon/wfo-0000389564,NA,Onagraceae,no,herb,na,na,na,yes,9,7,3,4,no,NA,4,yes,no,no,no,NA,NA,NA
+Onobrychis_viciifolia,http://www.worldfloraonline.org/taxon/wfo-0000205013,NA,Fabaceae,yes,legume,na,na,na,yes,8,7,6,3,no,8,3,yes,no,no,no,NA,NA,NA
+Ononis_spinosa,http://www.worldfloraonline.org/taxon/wfo-0000183372,Ononis_spinosa_ssp_spinosa,Fabaceae,no,legume,na,na,na,no,8,6,5,4,chwet,7,3,yes,no,no,no,NA,NA,NA
+Ononis_spinosa_ssp_procurrens,http://www.worldfloraonline.org/taxon/wfo-0000186975,Ononis_repens,Fabaceae,no,legume,na,na,na,no,8,5,2,4,chwet,7,2,yes,no,no,no,NA,NA,NA
+Origanum_vulgare,http://www.worldfloraonline.org/taxon/wfo-0000260765,NA,Lamiaceae,yes,herb,na,na,na,no,7,NA,3,3,no,8,3,yes,no,no,no,NA,NA,NA
+Orobanche_spec,http://www.worldfloraonline.org/taxon/wfo-4000027206,NA,Orobanchaceae,no,Parasit,na,na,na,no,NA,NA,NA,NA,no,NA,NA,yes,no,no,yes,NA,NA,NA
+Papaver_rhoeas,http://www.worldfloraonline.org/taxon/wfo-0000481006,NA,Papaveraceae,no,herb,na,na,na,no,6,6,3,5,no,7,6,no,no,no,no,NA,NA,NA
+Parthenocissus_inserta,http://www.worldfloraonline.org/taxon/wfo-0000476975,NA,Vitaceae,no,z Gehölz,na,na,na,yes,NA,NA,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Pastinaca_sativa,http://www.worldfloraonline.org/taxon/wfo-0000391752,NA,Apiaceae,yes,herb,NA,NA,NA,no,8,6,5,4,no,8,5,no,no,no,no,NA,NA,NA
+Persicaria_amphibia,http://www.worldfloraonline.org/taxon/wfo-0000488056,Polygonum_amphibium,Polygonaceae,no,herb,na,na,na,no,7,6,NA,11,no,6,4,yes,no,no,no,NA,NA,NA
+Persicaria_bistorta,http://www.worldfloraonline.org/taxon/wfo-0000488076,Bistorta_officinalis,Polygonaceae,no,herb,NA,NA,NA,no,7,4,7,7,no,5,5,no,no,no,no,NA,NA,NA
+Persicaria_minor,http://www.worldfloraonline.org/taxon/wfo-0000488490,NA,Polygonaceae,no,herb,NA,NA,NA,no,7,6,3,8,flood,5,8,no,no,no,no,NA,NA,NA
+Peucedanum_officinale,http://www.worldfloraonline.org/taxon/wfo-0000391810,NA,Apiaceae,yes,herb,na,3,2,no,7,7,5,4,chwet,8,2,yes,no,no,no,NA,NA,NA
+Peucedanum_oreoselinum,http://www.worldfloraonline.org/taxon/wfo-0000391827,NA,Apiaceae,yes,herb,na,V,na,no,6,6,4,3,no,6,2,yes,no,no,no,NA,NA,NA
+Phalaris_arundinacea,http://www.worldfloraonline.org/taxon/wfo-0000889610,NA,Poaceae,no,top-grass,na,na,na,no,7,5,NA,9,flood,7,7,no,no,no,no,NA,NA,NA
+Phleum_phleoides,http://www.worldfloraonline.org/taxon/wfo-0000890086,NA,Poaceae,no,top-grass,na,V,na,no,8,6,7,3,no,8,2,no,yes,no,yes,NA,NA,NA
+Phleum_pratense,http://www.worldfloraonline.org/taxon/wfo-0000890092,NA,Poaceae,yes,top-grass,na,na,na,no,7,NA,5,5,no,NA,6,no,no,no,no,NA,NA,NA
+Phyteuma_spicatum,http://www.worldfloraonline.org/taxon/wfo-0000816739,NA,Poaceae,no,top-grass,na,na,na,no,NA,NA,4,5,no,6,5,no,no,no,no,NA,NA,NA
+Pilosella_caespitosa,http://www.worldfloraonline.org/taxon/wfo-0000118413,Hieracium_caespitosum,Compositae,no,herb,na,V,3,no,8,5,6,7,chwet,7,3,yes,no,no,no,NA,NA,NA
+Pilosella_officinarum,http://www.worldfloraonline.org/taxon/wfo-0000068649,Hieracium_pilosella,Compositae,no,herb,na,na,na,no,7,NA,3,4,no,NA,2,yes,no,no,no,NA,NA,NA
+Pilosella_piloselloides,http://www.worldfloraonline.org/taxon/wfo-0000032468,Hieracium_piloselloides,Compositae,no,herb,na,na,na,no,9,6,4,4,chwet,8,2,yes,no,no,no,NA,NA,NA
+Pimpinella_major,http://www.worldfloraonline.org/taxon/wfo-0000391450,NA,Apiaceae,yes,herb,na,na,na,no,7,5,2,5,no,7,7,yes,no,no,no,NA,NA,NA
+Pimpinella_saxifraga,http://www.worldfloraonline.org/taxon/wfo-0000391166,NA,Apiaceae,yes,herb,na,na,na,no,7,NA,5,3,no,NA,2,yes,no,yes,no,NA,NA,NA
+Plantago_lanceolata,http://www.worldfloraonline.org/taxon/wfo-0000486603,NA,Plantaginaceae,yes,herb,na,na,na,no,6,NA,3,NA,no,NA,NA,yes,no,yes,no,NA,NA,NA
+Plantago_major_ssp_intermedia,http://www.worldfloraonline.org/taxon/wfo-0000745393,Plantago_intermedia,Plantaginaceae,no,herb,na,na,na,no,7,6,NA,7,flood,5,4,yes,no,no,yes,NA,NA,NA
+Plantago_major,http://www.worldfloraonline.org/taxon/wfo-0000486544,NA,Plantaginaceae,no,herb,NA,NA,NA,no,8,NA,NA,5,no,NA,6,no,no,no,no,NA,NA,NA
+Plantago_media,http://www.worldfloraonline.org/taxon/wfo-0000486573,NA,Plantaginaceae,yes,herb,na,na,na,no,7,NA,7,4,no,7,3,yes,no,no,no,NA,NA,NA
+Poa_angustifolia,http://www.worldfloraonline.org/taxon/wfo-0000891510,NA,Poaceae,yes,sub-grass,na,na,na,no,7,6,NA,NA,no,NA,3,yes,no,no,no,NA,NA,NA
+Poa_annua,http://www.worldfloraonline.org/taxon/wfo-0000891536,NA,Poaceae,no,sub-grass,na,na,na,no,7,NA,5,6,no,NA,8,no,no,no,no,NA,NA,NA
+Poa_compressa,http://www.worldfloraonline.org/taxon/wfo-0000892001,NA,Poaceae,yes,sub-grass,na,na,na,no,9,NA,4,3,no,9,3,no,yes,no,no,NA,NA,NA
+Poa_pratensis,http://www.worldfloraonline.org/taxon/wfo-0000893396,NA,Poaceae,yes,sub-grass,na,na,na,no,6,NA,NA,5,no,NA,6,no,yes,yes,no,NA,NA,NA
+Poa_trivialis,http://www.worldfloraonline.org/taxon/wfo-0000894135,NA,Poaceae,no,sub-grass,na,na,na,no,6,NA,3,7,no,NA,7,no,no,no,no,NA,NA,NA
+Polygala_amarella,http://www.worldfloraonline.org/taxon/wfo-0000484045,NA,Polygalaceae,no,herb,na,V,na,no,9,NA,4,9,no,9,1,yes,no,no,no,NA,NA,NA
+Polygala_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000488110,NA,Polygalaceae,no,herb,na,V,na,no,7,NA,3,5,no,3,2,yes,no,no,no,NA,NA,NA
+Polygonatum_multiflorum,http://www.worldfloraonline.org/taxon/wfo-0000716086,NA,Asparagaceae,no,herb,na,na,na,no,2,NA,5,5,no,6,5,no,no,no,no,NA,NA,NA
+Polygonum_aviculare,http://www.worldfloraonline.org/taxon/wfo-0000489656,NA,Polygonaceae,no,herb,na,na,na,no,7,6,NA,4,no,NA,6,no,no,no,no,NA,NA,NA
+Populus_alba,http://www.worldfloraonline.org/taxon/wfo-0000928384,NA,Salicaceae,no,tree,NA,NA,NA,no,5,7,7,7,chwet,8,6,no,no,no,no,NA,NA,NA
+Potentilla_anserina,http://www.worldfloraonline.org/taxon/wfo-0001016615,NA,Rosaceae,no,herb,na,na,na,no,7,6,NA,6,chwet,NA,7,yes,no,no,no,NA,NA,NA
+Potentilla_argentea,http://www.worldfloraonline.org/taxon/wfo-0001016312,NA,Rosaceae,no,herb,na,na,na,no,9,6,3,2,no,3,1,yes,no,no,no,NA,NA,NA
+Potentilla_erecta,http://www.worldfloraonline.org/taxon/wfo-0000984938,NA,Rosaceae,no,herb,NA,NA,NA,no,6,NA,3,NA,no,NA,2,no,no,no,no,NA,NA,NA
+Potentilla_grandiflora,http://www.worldfloraonline.org/taxon/wfo-0000983686,Potentilla_verna,Rosaceae,no,herb,na,V,na,no,8,6,4,3,no,7,2,yes,no,no,no,NA,NA,NA
+Potentilla_recta,http://www.worldfloraonline.org/taxon/wfo-0000983388,NA,Rosaceae,yes,herb,na,na,na,no,9,7,5,3,no,5,2,yes,no,no,no,NA,NA,NA
+Potentilla_reptans,http://www.worldfloraonline.org/taxon/wfo-0001011690,NA,Rosaceae,no,herb,na,na,na,no,6,6,3,6,no,7,5,yes,no,no,no,NA,NA,NA
+Prunella_grandiflora,http://www.worldfloraonline.org/taxon/wfo-0000983686,NA,Lamiaceae,yes,herb,NA,V,NA,no,7,NA,5,3,no,8,3,no,no,no,no,NA,NA,NA
+Prunella_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000283746,NA,Lamiaceae,yes,herb,na,na,na,no,7,NA,3,5,no,7,NA,yes,no,yes,no,NA,NA,NA
+Prunus_avium,http://www.worldfloraonline.org/taxon/wfo-0001005630,NA,Rosaceae,no,tree,NA,NA,NA,no,4,5,4,5,no,7,5,no,no,no,no,NA,NA,NA
+Quercus_robur,http://www.worldfloraonline.org/taxon/wfo-0000292858,NA,Fagaceae,no,tree,NA,NA,NA,no,7,5,5,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Ranunculus_acris,http://www.worldfloraonline.org/taxon/wfo-0000461396,NA,Ranunculaceae,yes,herb,na,na,na,no,7,NA,3,6,no,NA,NA,yes,no,yes,no,NA,NA,NA
+Ranunculus_bulbosus,http://www.worldfloraonline.org/taxon/wfo-0000461562,NA,Ranunculaceae,yes,herb,na,na,na,no,8,6,3,3,no,7,3,yes,no,no,yes,NA,NA,NA
+Ranunculus_polyanthemos,http://www.worldfloraonline.org/taxon/wfo-0000463507,NA,Ranunculaceae,no,herb,NA,V,1,no,6,6,5,4,chwet,NA,2,no,no,no,no,NA,NA,NA
+Ranunculus_repens,http://www.worldfloraonline.org/taxon/wfo-0000463198,NA,Ranunculaceae,no,herb,na,na,na,no,6,NA,NA,7,chwet,NA,NA,no,no,no,no,NA,NA,NA
+Ranunculus_serpens_ssp_nemorosus,http://www.worldfloraonline.org/taxon/wfo-0000462219,Ranunculus_nemorosus,Ranunculaceae,no,herb,na,V,na,no,6,NA,4,5,no,6,NA,yes,no,no,no,NA,NA,NA
+Reseda_lutea,http://www.worldfloraonline.org/taxon/wfo-0000462651,NA,Resedaceae,no,herb,na,na,na,no,7,6,3,3,no,8,5,yes,no,no,no,NA,NA,NA
+Rhinanthus_alectorolophus,http://www.worldfloraonline.org/taxon/wfo-0000463700,NA,Orobanchaceae,yes,hemiparasite,na,na,na,no,8,NA,2,4,no,7,3,yes,no,no,no,NA,NA,NA
+Rhinanthus_glacialis,http://www.worldfloraonline.org/taxon/wfo-0001138801,NA,Orobanchaceae,no,hemiparasite,na,V,na,no,8,3,4,5,no,4,2,yes,no,no,yes,NA,NA,NA
+Rhinanthus_minor,http://www.worldfloraonline.org/taxon/wfo-0000747233,NA,Orobanchaceae,yes,hemiparasite,na,na,na,no,7,5,3,NA,no,NA,3,no,no,no,no,NA,NA,NA
+Rhinanthus_serotinus,http://www.worldfloraonline.org/taxon/wfo-0000464097,NA,Orobanchaceae,no,hemiparasite,na,3,na,no,7,5,3,6,chwet,7,2,yes,no,no,yes,NA,NA,NA
+Rorippa_sylvestris,http://www.worldfloraonline.org/taxon/wfo-0000399565,NA,Brassicaceae,no,herb,NA,NA,NA,no,6,6,3,8,flood,8,6,no,no,no,no,NA,NA,NA
+Rosa_canina,http://www.worldfloraonline.org/taxon/wfo-0001005999,NA,Rosaceae,no,halfshrub,na,na,na,no,8,5,3,4,no,NA,NA,no,no,no,no,NA,NA,NA
+Rubus_caesius,http://www.worldfloraonline.org/taxon/wfo-0001017340,NA,Rosaceae,no,halfshrub,na,na,na,no,6,5,4,NA,no,8,7,no,no,no,no,NA,NA,NA
+Rubus_sect_Rubus,daten.bayernflora.de/de/info_pflanzen.php?taxnr=27542,NA,Rosaceae,no,halfshrub,na,na,na,no,NA,NA,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Rumex_acetosa,http://www.worldfloraonline.org/taxon/wfo-0000403595,NA,Polygonaceae,yes,herb,na,na,na,no,8,NA,NA,NA,no,NA,6,yes,no,yes,no,NA,NA,NA
+Rumex_crispus,http://www.worldfloraonline.org/taxon/wfo-0000403671,NA,Polygonaceae,no,herb,na,na,na,no,7,5,3,7,chwet,NA,5,no,no,no,no,NA,NA,NA
+Rumex_obtusifolius,http://www.worldfloraonline.org/taxon/wfo-0000403904,NA,Polygonaceae,no,herb,NA,NA,NA,no,7,5,3,6,no,NA,9,no,no,no,no,NA,NA,NA
+Salix_purpurea,http://www.worldfloraonline.org/taxon/wfo-0000930408,NA,Salicaceae,no,tree,NA,NA,NA,no,8,5,4,NA,flood,8,NA,no,no,no,no,NA,NA,NA
+Salix_spec,http://www.worldfloraonline.org/taxon/wfo-4000033844,NA,Salicaceae,no,shrub,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Salvia_nemorosa,http://www.worldfloraonline.org/taxon/wfo-0000301687,NA,Lamiaceae,no,herb,NA,NA,2,no,7,7,NA,4,no,9,4,yes,no,no,no,NA,NA,NA
+Salvia_pratensis,http://www.worldfloraonline.org/taxon/wfo-0000301989,NA,Lamiaceae,yes,herb,NA,V,NA,no,8,6,4,3,no,8,4,yes,no,no,no,NA,NA,NA
+Sanguisorba_minor,http://www.worldfloraonline.org/taxon/wfo-0001015888,NA,Rosaceae,yes,herb,NA,NA,NA,no,7,6,5,3,no,8,2,yes,no,no,yes,NA,NA,NA
+Sanguisorba_officinalis,http://www.worldfloraonline.org/taxon/wfo-0000983287,NA,Rosaceae,yes,herb,NA,V,NA,no,7,5,7,7,no,NA,NA,yes,no,no,no,NA,NA,NA
+Saponaria_officinalis,http://www.worldfloraonline.org/taxon/wfo-0000438211,NA,Caryophyllaceae,no,herb,NA,NA,NA,no,7,6,3,5,no,7,5,yes,no,no,no,NA,NA,NA
+Saxifraga_granulata,http://www.worldfloraonline.org/taxon/wfo-0000494893,NA,Saxifragaceae,no,herb,yes,V,NA,no,NA,6,2,4,no,5,3,no,no,no,no,NA,NA,NA
+Scabiosa_columbaria,http://www.worldfloraonline.org/taxon/wfo-0000500277,NA,Caprifoliaceae,yes,herb,NA,NA,NA,no,8,5,2,3,no,8,3,yes,no,no,yes,NA,NA,NA
+Scrophularia_umbrosa,http://www.worldfloraonline.org/taxon/wfo-0000496178,NA,Scrophulariaceae,no,herb,NA,NA,NA,no,7,6,5,9,flood,8,7,no,no,no,no,NA,NA,NA
+Securigera_varia,http://www.worldfloraonline.org/taxon/wfo-0000186576,NA,Fabaceae,no,legume,NA,NA,NA,no,7,6,5,4,no,9,3,yes,no,no,no,NA,NA,NA
+Sedum_acre,http://www.worldfloraonline.org/taxon/wfo-0000437124,NA,Crassulaceae,yes,herb,NA,NA,NA,no,8,6,3,2,no,NA,1,yes,no,no,no,NA,NA,NA
+Sedum_sexangulare,http://www.worldfloraonline.org/taxon/wfo-0000437960,NA,Crassulaceae,no,herb,NA,NA,NA,no,7,5,4,2,no,6,1,yes,no,no,no,NA,NA,NA
+Setaria_pumila,http://www.worldfloraonline.org/taxon/wfo-0000899491,NA,Poaceae,no,grass,NA,NA,NA,no,7,7,4,4,no,5,6,no,no,no,no,NA,NA,NA
+Setaria_spec,http://www.worldfloraonline.org/taxon/wfo-4000035199,NA,Poaceae,no,grass,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Setaria_verticillata,http://www.worldfloraonline.org/taxon/wfo-0000899661,NA,Poaceae,no,grass,NA,NA,NA,no,7,7,4,4,no,NA,7,no,no,no,no,NA,NA,NA
+Setaria_viridis,http://www.worldfloraonline.org/taxon/wfo-0000899679,NA,Poaceae,no,sub-grass,NA,NA,NA,no,7,6,NA,4,no,NA,7,no,no,no,no,NA,NA,NA
+Silaum_silaus,http://www.worldfloraonline.org/taxon/wfo-0000434202,NA,Apiaceae,yes,herb,NA,V,NA,no,7,6,5,NA,chwet,7,2,yes,no,no,no,NA,NA,NA
+Silene_dioica,http://www.worldfloraonline.org/taxon/wfo-0000440478,NA,Caryophyllaceae,no,herb,NA,NA,NA,no,NA,NA,4,6,no,7,8,no,no,no,no,NA,NA,NA
+Silene_flos-cuculi,http://www.worldfloraonline.org/taxon/wfo-0000438691,Lychnis_flos-cuculi,Caryophyllaceae,yes,herb,NA,NA,NA,no,7,5,3,7,chwet,NA,NA,yes,no,no,no,NA,NA,NA
+Silene_gallica,http://www.worldfloraonline.org/taxon/wfo-0000440573,NA,Caryophyllaceae,no,herb,NA,1,NA,no,7,7,3,4,no,7,6,no,no,no,no,NA,NA,NA
+Silene_latifolia_ssp_alba,http://www.worldfloraonline.org/taxon/wfo-0000440845,NA,Caryophyllaceae,yes,herb,NA,NA,NA,no,8,6,NA,4,no,NA,7,yes,no,no,no,NA,NA,NA
+Silene_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000440200,NA,Caryophyllaceae,yes,herb,NA,NA,NA,no,8,NA,NA,4,chwet,7,2,yes,no,no,no,NA,NA,NA
+Sisymbrium_officinale,http://www.worldfloraonline.org/taxon/wfo-0000432010,NA,Brassicaceae,no,herb,NA,NA,NA,no,8,6,5,4,no,NA,7,no,no,no,no,NA,NA,NA
+Solidago_canadensis,http://www.worldfloraonline.org/taxon/wfo-0000060775,NA,Compositae,no,herb,NA,NA,NA,yes,8,6,5,NA,no,NA,6,no,no,no,no,NA,NA,NA
+Solidago_gigantea,http://www.worldfloraonline.org/taxon/wfo-0000130517,NA,Compositae,no,herb,NA,NA,NA,yes,8,6,5,6,no,NA,7,no,no,no,no,NA,NA,NA
+Sonchus_arvensis,http://www.worldfloraonline.org/taxon/wfo-0000092611,NA,Compositae,no,herb,NA,NA,NA,no,7,5,NA,5,chwet,7,NA,no,no,no,no,NA,NA,NA
+Sonchus_asper,http://www.worldfloraonline.org/taxon/wfo-0000031264,NA,Compositae,no,herb,NA,NA,NA,no,7,5,NA,6,no,7,7,yes,no,no,no,NA,NA,NA
+Stachys_officinalis,http://www.worldfloraonline.org/taxon/wfo-0000314333,Betonica_officinalis,Lamiaceae,no,herb,NA,V,NA,no,7,6,5,NA,chwet,NA,3,yes,no,no,no,NA,NA,NA
+Stachys_palustris,http://www.worldfloraonline.org/taxon/wfo-0000314357,NA,Lamiaceae,no,herb,NA,NA,NA,no,7,5,NA,7,chwet,7,6,yes,no,no,no,NA,NA,NA
+Stachys_sylvatica,http://www.worldfloraonline.org/taxon/wfo-0000314658,NA,Lamiaceae,no,herb,NA,NA,NA,no,4,NA,3,7,no,7,7,no,no,no,no,NA,NA,NA
+Stellaria_graminea,http://www.worldfloraonline.org/taxon/wfo-0000436380,NA,Caryophyllaceae,no,herb,NA,NA,NA,no,6,NA,NA,4,no,4,3,yes,no,yes,no,NA,NA,NA
+Stellaria_media,http://www.worldfloraonline.org/taxon/wfo-0000436325,NA,Caryophyllaceae,no,herb,NA,NA,NA,no,6,NA,NA,NA,no,7,8,no,no,no,no,NA,NA,NA
+Symphytum_officinale,http://www.worldfloraonline.org/taxon/wfo-0000432219,NA,Boraginaceae,no,herb,NA,NA,NA,no,7,6,3,8,no,NA,8,no,no,no,no,NA,NA,NA
+Tanacetum_vulgare,http://www.worldfloraonline.org/taxon/wfo-0000114512,NA,Compositae,no,herb,NA,NA,NA,no,8,6,4,5,no,8,5,yes,no,no,no,NA,NA,NA
+Taraxacum_campylodes,http://www.worldfloraonline.org/taxon/wfo-0000093449,Taraxacum_officinale,Compositae,no,herb,NA,NA,NA,no,7,NA,5,NA,no,NA,7,no,no,no,no,NA,NA,NA
+Thalictrum_minus,http://www.worldfloraonline.org/taxon/wfo-0000453930,NA,Ranunculaceae,no,herb,NA,V,G,no,6,NA,7,3,no,8,3,yes,no,no,no,NA,NA,NA
+Thlaspi_arvense,http://www.worldfloraonline.org/taxon/wfo-0000410873,NA,Brassicaceae,no,herb,NA,NA,NA,no,6,5,NA,5,no,7,6,no,no,no,no,NA,NA,NA
+Thymus_praecox,http://www.worldfloraonline.org/taxon/wfo-0000324555,NA,Lamiaceae,yes,herb,NA,NA,NA,no,8,6,5,3,no,8,1,no,no,no,no,NA,NA,NA
+Thymus_pulegioides,http://www.worldfloraonline.org/taxon/wfo-0000324607,NA,Lamiaceae,no,herb,NA,NA,NA,no,8,NA,4,4,no,NA,1,yes,no,no,no,NA,NA,NA
+Tragopogon_pratensis,http://www.worldfloraonline.org/taxon/wfo-0000080363,NA,Compositae,yes,herb,NA,NA,NA,no,7,6,3,4,no,7,6,yes,no,yes,no,NA,NA,NA
+Trifolium_arvense,http://www.worldfloraonline.org/taxon/wfo-0000212967,NA,Fabaceae,no,legume,NA,NA,NA,no,8,6,3,3,no,2,1,no,no,no,no,NA,NA,NA
+Trifolium_campestre,http://www.worldfloraonline.org/taxon/wfo-0000212979,NA,Fabaceae,no,legume,NA,NA,NA,no,8,6,3,4,no,6,3,yes,no,yes,no,NA,NA,NA
+Trifolium_dubium,http://www.worldfloraonline.org/taxon/wfo-0000212995,NA,Fabaceae,no,legume,NA,NA,NA,no,6,6,3,5,no,6,5,yes,no,yes,no,NA,NA,NA
+Trifolium_hybridum,http://www.worldfloraonline.org/taxon/wfo-0000213009,NA,Fabaceae,no,legume,NA,NA,NA,yes,7,6,5,6,no,7,5,yes,no,no,no,NA,NA,NA
+Trifolium_medium,http://www.worldfloraonline.org/taxon/wfo-0000213979,NA,Fabaceae,no,legume,NA,NA,NA,no,7,6,4,4,no,6,3,yes,no,no,no,NA,NA,NA
+Trifolium_montanum,http://www.worldfloraonline.org/taxon/wfo-0000213031,NA,Fabaceae,yes,legume,NA,V,NA,no,8,NA,4,3,chwet,8,2,yes,no,no,yes,NA,NA,NA
+Trifolium_pratense,http://www.worldfloraonline.org/taxon/wfo-0000213053,NA,Fabaceae,yes,legume,NA,NA,NA,no,7,NA,3,NA,no,NA,NA,yes,no,yes,no,NA,NA,NA
+Trifolium_repens,http://www.worldfloraonline.org/taxon/wfo-0000213062,NA,Fabaceae,no,legume,NA,NA,NA,no,8,NA,NA,5,no,6,6,no,no,no,no,NA,NA,NA
+Tripleurospermum_maritimum,http://www.worldfloraonline.org/taxon/wfo-0000063085,NA,Compositae,no,herb,NA,NA,NA,no,9,6,3,6,flood,7,8,no,no,no,no,NA,NA,NA
+Trisetum_flavescens,http://www.worldfloraonline.org/taxon/wfo-0000905119,NA,Poaceae,yes,top-grass,NA,NA,NA,no,7,NA,5,NA,no,NA,5,no,no,yes,no,NA,NA,NA
+Triticum_spec,http://www.worldfloraonline.org/taxon/wfo-4000039397,NA,Poaceae,no,grass,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Tussilago_farfara,http://www.worldfloraonline.org/taxon/wfo-0000117140,NA,Compositae,no,herb,NA,NA,NA,no,8,NA,3,6,chwet,8,NA,yes,no,no,no,NA,NA,NA
+Urtica_dioica,http://www.worldfloraonline.org/taxon/wfo-0000416616,NA,Urticaceae,no,herb,NA,NA,NA,no,NA,NA,NA,6,no,7,8,no,no,no,no,NA,NA,NA
+Valeriana_officinalis,http://www.worldfloraonline.org/taxon/wfo-0000426953,NA,Caprifoliaceae,no,herb,NA,NA,NA,no,7,6,5,8,chwet,7,5,yes,no,no,no,NA,NA,NA
+Valerianella_spec,http://www.worldfloraonline.org/taxon/wfo-4000039960,NA,Caprifoliaceae,no,herb,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Verbascum_blattaria,http://www.worldfloraonline.org/taxon/wfo-0000420104,NA,Scrophulariaceae,no,herb,NA,3,3,no,8,7,7,3,no,7,6,yes,no,no,no,NA,NA,NA
+Verbascum_densiflorum,http://www.worldfloraonline.org/taxon/wfo-0000420566,NA,Scrophulariaceae,no,herb,NA,NA,NA,no,8,6,5,4,no,8,5,no,no,no,no,NA,NA,NA
+Verbascum_lychnitis,http://www.worldfloraonline.org/taxon/wfo-0000420406,NA,Scrophulariaceae,yes,herb,NA,NA,NA,no,7,6,5,3,no,7,3,yes,no,no,no,NA,NA,NA
+Verbascum_nigrum,http://www.worldfloraonline.org/taxon/wfo-0000420517,NA,Scrophulariaceae,no,herb,NA,NA,NA,no,7,5,5,5,no,7,7,yes,no,no,no,NA,NA,NA
+Verbascum_spec,http://www.worldfloraonline.org/taxon/wfo-4000040135,NA,Scrophulariaceae,no,herb,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Verbascum_thapsus,http://www.worldfloraonline.org/taxon/wfo-0000419130,NA,Scrophulariaceae,no,herb,NA,NA,NA,no,8,NA,3,4,no,7,7,yes,no,no,no,NA,NA,NA
+Verbena_officinalis,http://www.worldfloraonline.org/taxon/wfo-0000332143,NA,Verbenaceae,no,herb,NA,NA,NA,no,9,6,3,5,no,7,7,yes,no,no,no,NA,NA,NA
+Veronica_arvensis,http://www.worldfloraonline.org/taxon/wfo-0000419753,NA,Plantaginaceae,no,herb,NA,NA,NA,no,7,6,3,4,no,6,NA,yes,no,no,no,NA,NA,NA
+Veronica_chamaedrys,http://www.worldfloraonline.org/taxon/wfo-0000419437,NA,Plantaginaceae,yes,herb,NA,NA,NA,no,6,NA,NA,5,no,NA,NA,yes,no,yes,no,NA,NA,NA
+Veronica_persica,http://www.worldfloraonline.org/taxon/wfo-0000425859,NA,Plantaginaceae,no,herb,NA,NA,NA,yes,6,NA,3,5,no,7,7,no,no,no,no,NA,NA,NA
+Veronica_spec,http://www.worldfloraonline.org/taxon/wfo-4000040171,NA,Plantaginaceae,no,herb,NA,NA,NA,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Vicia_cracca,http://www.worldfloraonline.org/taxon/wfo-0000214046,NA,Fabaceae,yes,legume,NA,NA,NA,no,7,5,NA,5,no,NA,NA,yes,no,yes,no,NA,NA,NA
+Vicia_villosa_ssp_varia,http://www.worldfloraonline.org/taxon/wfo-0000212809,Vicia_villosa_ssp_dasycarpa,Fabaceae,no,legume,NA,NA,NA,yes,NA,NA,NA,NA,no,NA,NA,yes,no,no,no,NA,NA,NA
+Vicia_hirsuta,http://www.worldfloraonline.org/taxon/wfo-0000212743,NA,Fabaceae,no,legume,NA,NA,NA,no,7,6,5,4,no,NA,4,yes,no,no,no,NA,NA,NA
+Vicia_onobrychioides,http://www.worldfloraonline.org/taxon/wfo-0000212769,NA,Fabaceae,no,legume,NA,NA,NA,no,NA,NA,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Vicia_sativa_ssp_nigra,http://www.worldfloraonline.org/taxon/wfo-0000212782,Vicia_angustifolia,Fabaceae,no,legume,NA,NA,NA,no,5,6,3,NA,no,NA,NA,yes,no,yes,no,NA,NA,NA
+Vicia_sepium,http://www.worldfloraonline.org/taxon/wfo-0000212792,NA,Fabaceae,no,legume,NA,NA,NA,no,NA,NA,5,5,no,6,5,yes,no,no,no,NA,NA,NA
+Vicia_tetrasperma,http://www.worldfloraonline.org/taxon/wfo-0000212802,NA,Fabaceae,no,legume,NA,NA,NA,no,6,6,5,5,no,5,5,yes,no,no,no,NA,NA,NA
+Viola_arvensis,http://www.worldfloraonline.org/taxon/wfo-0000426676,NA,Violaceae,no,herb,NA,NA,NA,no,6,5,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
+Vulpia_myuros,http://www.worldfloraonline.org/taxon/wfo-0000907427,NA,Poaceae,no,grass,NA,NA,NA,no,8,7,3,2,no,5,1,no,no,no,no,NA,NA,NA
