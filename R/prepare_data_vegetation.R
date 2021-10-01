@@ -89,7 +89,7 @@ specieslist <- species %>%
   mutate(sum = rowSums(across(where(is.numeric)), na.rm = T), .keep = "unused") %>%
   group_by(name) %>%
   summarise(sum = sum(sum))
-#write_csv(specieslist, here("data/raw/specieslist_202109xx.csv"))
+#write_csv(specieslist, here("data/raw/specieslist_2022xxxx.csv"))
 
 
 ### 3 Traits #####################################################################################
@@ -137,7 +137,7 @@ species %>%
   janitor::tabyl()
 species %>% # Check special typos
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
-  filter(value == 8)
+  filter(value == 90)
 
 ### Compare vegetationCov and accumulatedCov ###
 species %>%
@@ -149,7 +149,7 @@ species %>%
     select(id, surveyYear, value, vegetationCov, diff) %>%
     filter(!str_detect(id, "_seeded$")) %>%
     filter(diff > 20 | diff < -5) %>%
-    arrange(value) %>%
+    arrange(surveyYear, id, diff) %>%
     print(n = 100)
 
 ### Check plots over time ###
