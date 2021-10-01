@@ -15,131 +15,157 @@ rm(list = ls())
 setwd(here("data/raw"))
 
 
-
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Load data ##############################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### 1 Species #####################################################################################
+### 1 Sites #####################################################################################
 
-species <- read_csv("data_raw_species.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-            cols(
-              .default = "d",
-              name = "f"
-            )) %>%
+sites <- read_csv("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), col_types =
+                    cols(
+                      .default = "f",
+                      surveyDate_seeded = col_date(format = "%Y-%m-%d"),
+                      surveyDate_2018 = col_date(format = "%Y-%m-%d"),
+                      surveyDate_2019 = col_date(format = "%Y-%m-%d"),
+                      surveyDate_2020 = col_date(format = "%Y-%m-%d"),
+                      surveyDate_2021 = col_date(format = "%Y-%m-%d"),
+                      botanist_2018 = "c",
+                      botanist_2019 = "c",
+                      botanist_2020 = "c",
+                      botanist_2021 = "c",
+                      vegetationCov_2018 = "c",
+                      vegetationCov_2019 = "c",
+                      vegetationCov_2020 = "c",
+                      vegetationCov_2021 = "c",
+                      bioMass_2019 = "c"
+                      )) %>%
+  select(-starts_with("surveyDate")) %>%
+  pivot_longer(starts_with("vegetationCov_") | starts_with("botanist_") | starts_with("bioMass_"), 
+               names_to = c("x", "surveyYear"),
+               names_sep = "_",
+               values_to = "n") %>%
+  pivot_wider(names_from = x, values_from = n) %>%
+  mutate(plot = str_replace(plot, "-", "_"),
+         plot = str_replace(plot, "L_", "L"),
+         plot = str_replace(plot, "W_", "W"),
+         id = str_c(plot, surveyYear, sep = "_"),
+         plot = factor(plot),
+         id = factor(id),
+         vegetationCov = as.numeric(vegetationCov),
+         surveyYear = as.numeric(surveyYear),
+         bioMass = as.numeric(bioMass)) %>%
+  filter(!(block == "C" & (surveyYear == "seeded" | 
+                             surveyYear == "2018" | 
+                             surveyYear == "2019" | 
+                             surveyYear == "2020")))
+
+
+### 2 Species #####################################################################################
+
+species <- data.table::fread("data_raw_species.csv", 
+                             sep = ",",
+                             dec = ".",
+                             skip = 0,
+                             header = T,
+                             na.strings = c("", "NA", "na"),
+                             colClasses = list(
+                               character = "name"
+                             )) %>%
   ### Check that each species occurs at least one time ###
   group_by(name) %>%
-  mutate(total = sum(c_across(starts_with("L") | starts_with("W")), na.rm = T)) %>%
-  mutate(presence = if_else(total > 0, 1, 0)) %>%
-  filter(presence == 1) %>%
-  ungroup() %>%
-  select(-total, -presence) %>%
-  mutate(name = as.character(name)) %>%
   arrange(name) %>%
-  mutate(name = as_factor(name)) %>%
-  ### Check that each plot has at least one species ###
-  pivot_longer(-name, names_to = "id", values_to = "value") %>%
-  group_by(id) %>%
-  mutate(sum = sum(value, na.rm = T)) %>%
-  filter(sum > 0) %>%
-  select(-sum) %>%
-  ### Adapt species cover to Londo scale ###
-  mutate(value = if_else(!str_detect(id, "_seeded$") & value == 6, 10, value),
-         value = if_else(!str_detect(id, "_seeded$") & value == 7, 10, value),
-         value = if_else(!str_detect(id, "_seeded$") & value == 8, 10, value),
-         value = if_else(!str_detect(id, "_seeded$") & value == 12, 10, value)) %>%
-  pivot_wider(names_from = id, values_from = value)
+  mutate(total = sum(c_across(starts_with("L") | starts_with("W") | starts_with("C")), na.rm = T),
+         presence = if_else(total > 0, 1, 0),
+         name = factor(name)) %>%
+  filter(presence == 1) %>% # filter species
+  ungroup() %>%
+  select(name, sort(tidyselect::peek_vars()), -total, -presence) %>%
+  na_if(0)
 
+### Create list with species names and their frequency ###
 specieslist <- species %>%
-  mutate_if(is.numeric, ~1 * (. != 0)) %>%
+  mutate(across(where(is.numeric), ~1 * (. != 0))) %>%
   mutate(sum = rowSums(across(where(is.numeric)), na.rm = T), .keep = "unused") %>%
   group_by(name) %>%
   summarise(sum = sum(sum))
-#write_csv(specieslist, "specieslist.csv")
+#write_csv(specieslist, here("data/raw/specieslist_202109xx.csv"))
 
 
-summarise(across(2:last_col(), sum, na.rm = T)) %>%
-  pivot_longer(cols = everything(), names_to = "id", values_to = "n")
-
-
-
-
-### 2 Traits #####################################################################################
+### 3 Traits #####################################################################################
 
 traits <- read_csv("data_raw_traits.csv", col_names = T, na = c("", "NA", "na"), col_types = 
-                      cols(
-                        .default = col_factor(),
-                        name = col_factor(),
-                        l = col_double(),
-                        t = col_double(),
-                        k = col_double(),
-                        f = col_double(),
-                        r = col_double(),
-                        n = col_double()
-                      )) #%>%
-  separate(name, c("genus", "species", "ssp", "subspecies"), "_", remove = F, extra = "drop", fill = "right") %>%
-  mutate(genus = str_sub(genus, 1, 4)) %>%
-  mutate(species = str_sub(species, 1, 4)) %>%
-  mutate(subspecies = str_sub(subspecies, 1, 4)) %>%
-  unite(abb, genus, species, subspecies, sep = "") %>%
-  mutate(abb = str_replace(abb, "NA", "")) %>%
-  mutate(abb = as_factor(abb)) %>%
-  select(-ssp, -synonym, -nomenclature, -legal, -l, -k, -fchange) %>%
-#traits[duplicated(traits$abb),]
-#Check congruency of traits and species table
-#traits$name[which(!(traits$name %in% species$name))]
-#species$name[which(!(species$name %in% traits$name))]
-  semi_join(species, by = "name")
-
-  
-### 3 Sites #####################################################################################
-
-sites <- read_csv("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), col_types = 
                      cols(
-                       .default = col_factor(),
-                       vegetationCov_seeded = "d",
-                       vegetationCov_2018 = "d",
-                       vegetationCov_2019 = "d",
-                       vegetationCov_2020 = "d",
-                       vegetationCov_2021 = "d",
-                       surveyDate_seeded = col_date(format = "%Y-%m-%d"),
-                       surveyDate_2018 = col_date(format = "%Y-%m-%d"),
-                       surveyDate_2019 = col_date(format = "%Y-%m-%d"),
-                       surveyDate_2020 = col_date(format = "%Y-%m-%d"),
-                       surveyDate_2021 = col_date(format = "%Y-%m-%d")
-                       )) %>%
-    select(-starts_with("surveyDate"), -starts_with("botanist")) %>%
-    pivot_longer(starts_with("vegetationCov"), names_to = "surveyYear", values_to ="vegetationCov") %>%
-    mutate(plot = str_replace(plot, "-", "_"),
-           surveyYear = str_replace(surveyYear, "vegetationCov_", ""),
-           id = as_factor(str_c(plot, surveyYear, sep = "_")),
-           plot = as_factor(plot)) %>%
-    select(id, vegetationCov)
+                       .default = "f",
+                       name = "c",
+                       l = "d",
+                       t = "d",
+                       k = "d",
+                       f = "d",
+                       r = "d",
+                       n = "d",
+                     )) %>%
+  separate(name, c("genus", "species", "ssp", "subspecies"), "_", 
+           remove = F, extra = "drop", fill = "right") %>%
+  mutate(genus = str_sub(genus, 1, 4),
+         species = str_sub(species, 1, 4),
+         subspecies = str_sub(subspecies, 1, 4),
+         name = factor(name)) %>%
+  unite(abb, genus, species, subspecies, sep = "", na.rm = T) %>%
+  mutate(abb = str_replace(abb, "NA", ""),
+         abb = as_factor(abb)) %>%
+  select(-ssp, -synonym, -nomenclature, -legal, -l, -k, -fchange) %>%
+  arrange(name)
 
-  
+### Check congruency of traits and species table ###
+  traits[duplicated(traits$abb),]
+  #traits$name[which(!(traits$name %in% species$name))]
+  species$name[which(!(species$name %in% traits$name))]
+traits <- semi_join(traits, species, by = "name")
+
+
+### 4 Check data frames #####################################################################################
+
+### Check typos ###
 sites %>%
-  full_join(species21onwards, by = "id") %>%
-  mutate(diff = (n - vegetationCov)) %>%
-  filter(diff > 40 | diff < -5)
+  filter(!str_detect(id, "_seeded$")) %>%
+  janitor::tabyl(vegetationCov)
+#sites %>% filter(vegetationCov == 17)
+species %>%
+  select(-name, -ends_with("_seeded")) %>%
+  unlist() %>%
+  janitor::tabyl()
+species %>% # Check special typos
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  filter(value == 8)
 
+### Compare vegetationCov and accumulatedCov ###
+species %>%
+    summarise(across(where(is.double),~sum(.x, na.rm = T))) %>%
+    pivot_longer(cols = everything(), names_to = "id", values_to = "value") %>%
+    mutate(id = factor(id)) %>%
+    full_join(sites, by = "id") %>% 
+    mutate(diff = (value - vegetationCov)) %>%
+    select(id, surveyYear, value, vegetationCov, diff) %>%
+    filter(!str_detect(id, "_seeded$")) %>%
+    filter(diff > 20 | diff < -5) %>%
+    arrange(value) %>%
+    print(n = 100)
 
+### Check plots over time ###
+species %>%
+  select(name, starts_with("W5_24")) %>%
+  filter(if_any(starts_with("W"), ~ . > 0)) %>%
+  print(n = 100)
 
+### Check missing data ###
+miss_var_summary(sites, order = T)
+vis_miss(sites, cluster = F)
+miss_var_summary(traits, order = T)
+vis_miss(traits, cluster = F, sort_miss = T)
 
-
-  
-### Remove plots with no species ###
-  filter(id %in% as_factor(colnames(species[-1])))
-### Remove plots which are not part of the sites tibble ##
-species <- species %>%
-  select(name, all_of(sites$id))
-#rm(ids)
-### Check missing values ###
-#miss_var_summary(species, order = T)
-#miss_var_summary(sites, order = T)
-#vis_miss(species, cluster = F)
-#vis_miss(sites, cluster = F)
-#sites[is.na(sites$vegetationCov_2018),]
+#sites[is.na(sites$id),]
+rm(list=setdiff(ls(), c("sites", "species", "traits")))
 
 
 
@@ -151,8 +177,8 @@ species <- species %>%
 ### 1 Create simple variables #####################################################################################
 
 sites <- sites %>%
-  mutate(conf.low = c(1:length(id))) %>%
-  mutate(conf.high = c(1:length(id)))
+  mutate(conf.low = c(1:length(id)),
+         conf.high = c(1:length(id)))
 
 traits <- traits %>%
   mutate(target = if_else(
@@ -162,146 +188,149 @@ traits <- traits %>%
 
 ### 2 Coverages #####################################################################################
 
-### a Graminoid covratio; graminoid, herb, and total coverage)-------------------------------------------------------------------------------------------
-sites <- species %>%
-  mutate(type = traits$family) %>%
+cover <- left_join(species, traits, by = "name") %>%
+  select(name, family, target, ruderalIndicator, seeded, starts_with("L"), starts_with("W")) %>%
   pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id, type) %>%
+  group_by(id)
+
+### * graminoid, herb, and total coverage) ####
+cover_total_and_graminoid <- cover %>%
+  group_by(id, family) %>%
   summarise(total = sum(n, na.rm = T)) %>%
-  mutate(type = if_else(type == "Poaceae" | type == "Cyperaceae" | type == "Juncaceae", "graminoidCov", "herbCov")) %>%
+  mutate(type = if_else(family == "Poaceae" | family == "Cyperaceae" | family == "Juncaceae", "graminoidCov", "herbCov")) %>%
   group_by(id, type) %>%
   summarise(total = sum(total, na.rm = T)) %>%
   spread(type, total) %>%
-  mutate(graminoidCovratio = graminoidCov / (graminoidCov + herbCov)) %>%
-  mutate(accumulatedCov = graminoidCov + herbCov) %>%
-  ungroup() %>%
-  mutate(graminoidCovratio = round(graminoidCovratio, 3), .keep = "unused") %>%
-  mutate(accumulatedCov = round(accumulatedCov, 3), .keep = "unused") %>%
-  right_join(sites, by = "id")
+  mutate(accumulatedCov = graminoidCov + herbCov,
+         accumulatedCov = round(accumulatedCov, 1)) %>%
+  ungroup()
 
-### b Target species' coverage -------------------------------------------------------------------------------------------
-sites <- species %>%
-  mutate(type = traits$target) %>%
-  pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id, type) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
-  filter(type == "yes") %>%
-  select(-type) %>%
-  ungroup() %>%
-  mutate(targetCov = round(total, 3), .keep = "unused") %>%
-  right_join(sites, by = "id")
+### * Target species' coverage ####
+cover_target <- cover %>%
+  filter(target == "yes") %>%
+  summarise(targetCov = sum(n, na.rm = T)) %>%
+  mutate(targetCov = round(targetCov, 1)) %>%
+  ungroup()
 
-### c Ruderal species' coverage -------------------------------------------------------------------------------------------
-sites <- species %>%
-  mutate(type = traits$ruderalExperiment) %>%
-  pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id, type) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
-  filter(type == "yes") %>%
-  select(-type) %>%
-  ungroup() %>%
-  mutate(ruderalCov = round(total, 3), .keep = "unused") %>%
-  right_join(sites, by = "id")
+### * Ruderal species' coverage ####
+cover_ruderalIndicator <- cover %>%
+  filter(ruderalIndicator == "yes") %>%
+  summarise(ruderalCov = sum(n, na.rm = T)) %>%
+  mutate(ruderalCov = round(ruderalCov, 1)) %>%
+  ungroup()
 
-### d Seeded species' coverage -------------------------------------------------------------------------------------------
-sites <- species %>%
-  mutate(type = traits$seeded) %>%
-  pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id, type) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
-  filter(type == "yes") %>%
-  select(-type) %>%
+### * Seeded species' coverage ####
+cover_seeded <- species %>%
+  select(-starts_with("C"), -contains("x0809")) %>%
+  pivot_longer(-name, names_to = "id", values_to = "value", values_drop_na = T) %>%
+  separate(id, c("plot", "surveyYear"), sep = "_(?!.*_)", 
+           remove = F, extra = "merge", fill = "warn", convert = F) %>%
+  pivot_wider(names_from = "surveyYear", values_from = "value") %>%
+  group_by(plot, name) %>%
+  summarise(across(where(is.double), ~sum(.x, na.rm = T))) %>%
   ungroup() %>%
-  mutate(seededCov = round(total, 3), .keep = "unused") %>%
-  right_join(sites, by = "id") %>%
-### Create ruderalCovratio and seededCovratio ###
-  mutate(ruderalCovratio = ruderalCov / accumulatedCov) %>%
-  mutate(seededCovratio = seededCov / accumulatedCov)
+  pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value", 
+               names_transform = list(surveyYear = as.factor)) %>%
+  mutate(success = if_else(seeded > 0 & value > 0, 1, 0)) %>%
+  group_by(plot, surveyYear) %>%
+  summarise(seededRichness = sum(success)) %>%
+  ungroup() %>%
+  unite(id, plot, surveyYear, sep = "_")
 
+### * implement in sites data set ####
+sites <- sites %>%
+  full_join(cover_total_and_graminoid, by = "id") %>%
+  full_join(cover_target, by = "id") %>%
+  #right_join(cover_ruderalIndicator, by = "id") %>%
+  full_join(cover_seeded, by = "id") %>%
+  ### Calcute the ratio of target species richness of total species richness
+  mutate(targetCovratio = targetCov / accumulatedCov,
+         graminoidCovratio = graminoidCov / accumulatedCov,
+         seededCovratio = seededCov / accumulatedCov,
+         targetCovratio = round(targetCovratio, 3),
+         graminoidCovratio = round(graminoidCovratio, 3),
+         seededCovratio = round(seededCovratio, 3))
+
+rm(list = setdiff(ls(), c("sites", "species", "traits")))
 
 ### 3 Species richness #####################################################################################
 
-specRich <- species %>%
+speciesRichness <- species %>%
   left_join(traits, by = "name") %>%
-  select(rlg, rlb, target, targetHerb, ffh6510, ffh6210, starts_with("L"), starts_with("W"))
-
-### a total species richness -------------------------------------------------------------------------------------------
-specRich_all <- specRich %>%
+  select(name, rlg, rlb, target, targetHerb, ffh6510, ffh6210, starts_with("L"), starts_with("W")) %>%
   pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id) %>%
   mutate(n = if_else(n > 0, 1, 0)) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
-  group_by(id) %>%
-  summarise(speciesRichness = sum(total, na.rm = T)) %>%
+  group_by(id)
+
+### * total species richness ####
+speciesRichness_all <- speciesRichness %>%
+  summarise(speciesRichness = sum(n, na.rm = T)) %>%
   ungroup()
 
-### b red list Germany (species richness) -------------------------------------------------------------------------------------------
-specRich_rlg <- specRich %>%
-  pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id, rlg) %>%
-  mutate(n = if_else(n > 0, 1, 0)) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
+### * red list Germany (species richness) ####
+speciesRichness_rlg <- speciesRichness %>%
   filter(rlg == "1" | rlg == "2" | rlg == "3" | rlg == "V") %>%
-  group_by(id) %>%
-  summarise(rlgRichness = sum(total, na.rm = T)) %>%
+  summarise(rlgRichness = sum(n, na.rm = T)) %>%
   ungroup()
 
-### c red list Bavaria (species richness) -------------------------------------------------------------------------------------------
-specRich_rlb <- specRich %>%
-  pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id, rlb) %>%
-  mutate(n = if_else(n > 0, 1, 0)) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
+### * red list Bavaria (species richness) ####
+speciesRichness_rlb <- speciesRichness %>%
   filter(rlb == "1" | rlb == "2" | rlb == "3" | rlb == "V") %>%
-  group_by(id) %>%
-  summarise(rlbRichness = sum(total, na.rm = T)) %>%
+  summarise(rlbRichness = sum(n, na.rm = T)) %>%
   ungroup()
 
-### d target species (species richness) -------------------------------------------------------------------------------------------
-specRich_target <- specRich %>%
-  pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id, target) %>%
-  mutate(n = if_else(n > 0, 1, 0)) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
+### * target species (species richness) ####
+speciesRichness_target <- speciesRichness %>%
   filter(target == "yes") %>%
-  group_by(id) %>%
-  summarise(targetRichness = sum(total, na.rm = T)) %>%
+  summarise(targetRichness = sum(n, na.rm = T)) %>%
   ungroup()
 
-### g ffh6510 species (species richness) -------------------------------------------------------------------------------------------
-specRich_ffh6510 <- specRich %>%
-  pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id, ffh6510) %>%
-  mutate(n = if_else(n > 0, 1, 0)) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
+### * seeded species (species richness) ####
+speciesRichness_seeded <- species %>%
+  select(-starts_with("C"), -contains("x0809")) %>%
+  pivot_longer(-name, names_to = "id", values_to = "value", values_drop_na = T) %>%
+  separate(id, c("plot", "surveyYear"), sep = "_(?!.*_)", 
+           remove = F, extra = "merge", fill = "warn", convert = F) %>%
+  pivot_wider(names_from = "surveyYear", values_from = "value") %>%
+  group_by(plot, name) %>%
+  summarise(across(where(is.double), ~sum(.x, na.rm = T))) %>%
+  ungroup() %>%
+  pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value", 
+               names_transform = list(surveyYear = as.factor)) %>%
+  mutate(successCov = if_else(seeded > 0 & value > 0, value, 0)) %>%
+  group_by(plot, surveyYear) %>%
+  summarise(seededCov = sum(successCov)) %>%
+  ungroup() %>%
+  unite(id, plot, surveyYear, sep = "_")
+
+### * ffh6510 species (species richness) ####
+speciesRichness_ffh6510 <- speciesRichness %>%
   filter(ffh6510 == "yes") %>%
-  group_by(id) %>%
-  summarise(ffh6510Richness = sum(total, na.rm = T)) %>%
+  summarise(ffh6510Richness = sum(n, na.rm = T)) %>%
   ungroup()
 
-### h ffh6210 species (species richness) -------------------------------------------------------------------------------------------
-specRich_ffh6210 <- specRich %>%
-  pivot_longer(names_to = "id", values_to = "n", cols = starts_with("L") | starts_with("W")) %>%
-  group_by(id, ffh6210) %>%
-  mutate(n = if_else(n > 0, 1, 0)) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
+### * ffh6210 species (species richness) ####
+speciesRichness_ffh6210 <- speciesRichness %>%
   filter(ffh6210 == "yes") %>%
-  group_by(id) %>%
-  summarise(ffh6210Richness = sum(total, na.rm = T)) %>%
+  summarise(ffh6210Richness = sum(n, na.rm = T)) %>%
   ungroup()
 
-### m implement in sites data set -------------------------------------------------------------------------------------------
+### * implement in sites data set ####
 sites <- sites %>%
-  right_join(specRich_all, by = "id") %>%
-  right_join(specRich_rlg, by = "id") %>%
-  right_join(specRich_rlb, by = "id") %>%
-  right_join(specRich_target, by = "id") %>%
-  right_join(specRich_ffh6510, by = "id") %>%
-  right_join(specRich_ffh6210, by = "id") %>%
-### Create targetRichratio ###
-  mutate(targetRichratio = targetRichness / speciesRichness) %>%
-  mutate(targetRichratio = round(targetRichratio, 3))
-rm(list=setdiff(ls(), c("sites", "species", "traits")))
+  right_join(speciesRichness_all, by = "id") %>%
+  right_join(speciesRichness_rlg, by = "id") %>%
+  right_join(speciesRichness_rlb, by = "id") %>%
+  right_join(speciesRichness_target, by = "id") %>%
+  right_join(speciesRichness_seeded, by = "id") %>%
+  right_join(speciesRichness_ffh6510, by = "id") %>%
+  right_join(speciesRichness_ffh6210, by = "id") %>%
+  ### Create targetRichratio ###
+  mutate(targetRichratio = targetRichness / speciesRichness,
+         seededRichratio = seededRichness / speciesRichness,
+         targetRichratio = round(targetRichratio, 3),
+         seededRichratio = round(seededRichratio, 3))
+
+rm(list = setdiff(ls(), c("sites", "species", "traits")))
 
 
 ### 5 TBI #####################################################################################
@@ -788,9 +817,9 @@ rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
 # C Save processed data ##############################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-setwd(here("data/processed"))
-write_csv(sites, "data_processed_sites.csv")
-write_csv(species, "data_processed_species.csv")
-write_csv(traits, "data_processed_traits.csv")
-write_csv(tbiAbu, "data_processed_tbiAbu.csv")
-write_csv(tbiPa, "data_processed_tbiPa.csv")
+
+write_csv(sites, here("data/processed/data_processed_sites.csv"))
+write_csv(species, here("data/processed/data_processed_species.csv"))
+write_csv(traits, here("data/processed/data_processed_traits.csv"))
+write_csv(tbiAbu, here("data/processed/data_processed_tbiAbu.csv"))
+write_csv(tbiPa, here("data/processed/data_processed_tbiPa.csv"))
