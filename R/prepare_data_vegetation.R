@@ -256,6 +256,8 @@ rm(list = setdiff(ls(), c("sites", "species", "traits")))
 
 ### 3 Species richness #####################################################################################
 
+#### a Species richness ----------------------------------------------------------------------------------------------------
+
 speciesRichness <- species %>%
   left_join(traits, by = "name") %>%
   select(name, rlg, rlb, target, targetHerb, ffh6510, ffh6210, starts_with("L"), starts_with("W")) %>%
@@ -331,12 +333,28 @@ sites <- sites %>%
          targetRichratio = round(targetRichratio, 3),
          seededRichratio = round(seededRichratio, 3))
 
-rm(list = setdiff(ls(), c("sites", "species", "traits")))
+#### b Species eveness and shannon ----------------------------------------------------------------------
+data <- species  %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("id") %>%
+  diversity(index = "shannon") %>%
+  as_tibble(rownames = NA) %>%
+  rownames_to_column(var = "id") %>%
+  mutate(id = factor(id)) %>%
+  rename(shannon = value)
+sites <- sites %>%
+  left_join(data, by = "id") %>%
+  mutate(eveness = shannon / log(speciesRichness))
+
+rm(list = ls(pattern = "[^species|traits|sites]"))
+
 
 
 ### 5 Beta diversity #####################################################################################
 
-### a TBI -------------------------------------------------------------------------------------------
+#### a TBI -------------------------------------------------------------------------------------------
 
 data <- species %>%
   select(where(~!all(is.na(.x)))) %>%
@@ -365,7 +383,7 @@ rm(data, i, nam)
 
 ### 6 CWM of Ellenberg #####################################################################################
 
-### a N value -------------------------------------------------------------------------------------------
+#### a N value -------------------------------------------------------------------------------------------
 Ntraits <- traits %>%
   select(name, n) %>%
   filter(n > 0)
@@ -382,7 +400,7 @@ Ntraits <- column_to_rownames(Ntraits, "name")
 Nweighted <- dbFD(Ntraits, Nspecies, w.abun = T,
                         calc.FRic = F, calc.FDiv = F, corr = "sqrt")
 
-### b F value -------------------------------------------------------------------------------------------
+#### b F value -------------------------------------------------------------------------------------------
 Ftraits <- traits %>%
   select(name, f) %>%
   filter(f > 0) 
@@ -399,7 +417,7 @@ Ftraits <- column_to_rownames(Ftraits, "name")
 Fweighted <- dbFD(Ftraits, Fspecies, w.abun = T,
                   calc.FRic = F, calc.FDiv = F, corr = "sqrt")
 
-### c T value -------------------------------------------------------------------------------------------
+#### c T value -------------------------------------------------------------------------------------------
 Ttraits <- traits %>%
   select(name, t) %>%
   filter(t > 0) 
@@ -696,7 +714,7 @@ traitsAll <- traits %>%
 
 ### 8 CWM and FDis of functional plant traits #####################################################################################
 
-### a LHS -------------------------------------------------------------------------------------------
+#### a LHS -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsLHS, by = "name")
 Ttraits <- semi_join(traitsLHS, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -710,7 +728,7 @@ TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
 sites$fdisAbuLHS <- TdiversityAbu$FDis
 length(traitsLHS$name) / (herbCount - undefinedSpeciesCount)
 
-### b SLA -------------------------------------------------------------------------------------------
+#### b SLA -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSLA, by = "name")
 Ttraits <- semi_join(traitsSLA, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -726,7 +744,7 @@ sites$cwmAbuSla <- TdiversityAbu$CWM$sla %>%
   as.character() %>% as.numeric() %>% exp()
 length(traitsSLA$name) / (herbCount - undefinedSpeciesCount)
 
-### c Seed mass -------------------------------------------------------------------------------------------
+#### c Seed mass -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSM, by = "name")
 Ttraits <- semi_join(traitsSM, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -742,7 +760,7 @@ sites$cwmAbuSeedmass <- TdiversityAbu$CWM$seedmass %>%
   as.character() %>% as.numeric() %>% exp()
 length(traitsSM$name) / (herbCount - undefinedSpeciesCount)
 
-### d Canopy height -------------------------------------------------------------------------------------------
+#### d Canopy height -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsH, by = "name")
 Ttraits <- semi_join(traitsH, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -758,7 +776,7 @@ sites$cwmAbuHeight <- TdiversityAbu$CWM$height %>%
   as.character() %>% as.numeric() %>% exp()
 length(traitsH$name) / (herbCount - undefinedSpeciesCount)
 
-### e Specific root length -------------------------------------------------------------------------------------------
+#### e Specific root length -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsSRL, by = "name")
 Ttraits <- semi_join(traitsSRL, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -774,7 +792,7 @@ sites$cwmAbuSrl <- TdiversityAbu$CWM$srl %>%
   as.character() %>% as.numeric() %>% exp()
 length(traitsSRL$name) / (herbCount - undefinedSpeciesCount)
 
-### f Root mass fraction -------------------------------------------------------------------------------------------
+#### f Root mass fraction -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsRMF, by = "name")
 Ttraits <- semi_join(traitsRMF, Tspecies, by = "name")
 Tspecies <- Tspecies %>%
@@ -790,7 +808,7 @@ sites$cwmAbuRmf <- TdiversityAbu$CWM$rmf %>%
   as.character() %>% as.numeric() %>% exp()
 length(traitsRMF$name) / (herbCount - undefinedSpeciesCount)
 
-### g All -------------------------------------------------------------------------------------------
+#### g All -------------------------------------------------------------------------------------------
 Tspecies <- semi_join(species, traitsAll, by = "name")
 Ttraits <- semi_join(traitsAll, Tspecies, by = "name")
 Tspecies <- Tspecies %>%

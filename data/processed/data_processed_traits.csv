@@ -34,7 +34,6 @@ Briza_media,Brizmedi,Poaceae,yes,sub-grass,no,no,no,NA,NA,NA,2,no,yes,yes,yes,"N
 Bromus_erectus,Bromerec,Poaceae,yes,top-grass,no,no,no,5,3,8,3,no,yes,no,yes,"NA","NA","NA",yes
 Bromus_hordeaceus,Bromhord,Poaceae,no,top-grass,no,no,no,6,NA,NA,3,no,yes,yes,no,"NA","NA","NA",yes
 Bromus_inermis,Brominer,Poaceae,no,top-grass,no,no,no,NA,4,8,5,no,yes,no,no,"NA","NA","NA",yes
-Bromus_secalinus,Bromseca,Poaceae,no,grass,no,2,no,NA,NA,NA,NA,no,no,no,no,"NA","NA","NA",no
 Bromus_sterilis,Bromster,Poaceae,no,sub-grass,no,no,no,6,4,NA,5,no,no,no,no,"NA","NA","NA",no
 Bunias_orientalis,Buniorie,Brassicaceae,no,herb,no,no,yes,6,5,8,5,no,no,no,no,"NA","NA","NA",no
 Buphthalmum_salicifolium,Buphsali,Asteraceae,yes,herb,no,no,no,NA,4,8,3,no,no,no,no,"NA","NA","NA",no
@@ -147,7 +146,6 @@ Lathyrus_sylvestris,Lathsylv,Fabaceae,no,legume,no,no,no,6,4,8,2,no,no,no,no,"NA
 Lathyrus_tuberosus,Lathtube,Fabaceae,no,legume,no,no,no,6,4,8,4,no,no,no,no,"NA","NA","NA",no
 Leontodon_hispidus,Leonhisp,Asteraceae,yes,herb,no,no,no,NA,5,7,6,yes,no,no,no,"NA","NA","NA",yes
 Lepidium_campestre,Lepicamp,Brassicaceae,no,herb,no,no,no,6,4,8,6,no,no,no,no,"NA","NA","NA",no
-Lepidium_ruderale,Lepirude,Brassicaceae,no,herb,no,no,no,6,4,NA,6,no,no,no,no,"NA","NA","NA",no
 Leucanthemum_vulgare,Leucvulg,Asteraceae,yes,herb,no,no,no,NA,4,NA,3,yes,no,yes,no,"NA","NA","NA",yes
 Linum_spec,Linuspec,Linaceae,no,herb,no,no,no,NA,NA,NA,NA,no,no,no,no,"NA","NA","NA",no
 Lolium_perenne,Lolipere,Poaceae,no,sub-grass,no,no,no,6,5,7,7,no,no,no,no,"NA","NA","NA",no
