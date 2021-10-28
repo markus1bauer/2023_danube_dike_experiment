@@ -63,7 +63,7 @@ sites <- read_csv("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), c
 
 ### 2 Species #####################################################################################
 
-species <- data.table::fread("data_raw_species.csv", 
+species <- data.table::fread("data_raw_species_20211011.csv", 
                              sep = ",",
                              dec = ".",
                              skip = 0,
@@ -89,7 +89,7 @@ specieslist <- species %>%
   mutate(sum = rowSums(across(where(is.numeric)), na.rm = T), .keep = "unused") %>%
   group_by(name) %>%
   summarise(sum = sum(sum))
-#write_csv(specieslist, here("data/raw/specieslist_2022xxxx.csv"))
+#write_csv(specieslist, here("outputs/tables/specieslist_20211011.csv"))
 
 
 ### 3 Traits #####################################################################################
@@ -154,8 +154,8 @@ species %>%
 
 ### Check plots over time ###
 species %>%
-  select(name, starts_with("W5_24")) %>%
-  filter(if_any(starts_with("W"), ~ . > 0)) %>%
+  select(name, starts_with("L1_19"), -ends_with("_seeded")) %>%
+  filter(if_any(starts_with("L"), ~ . > 0)) %>%
   print(n = 100)
 
 ### Check missing data ###
@@ -196,10 +196,10 @@ cover <- left_join(species, traits, by = "name") %>%
 ### * graminoid, herb, and total coverage) ####
 cover_total_and_graminoid <- cover %>%
   group_by(id, family) %>%
-  summarise(total = sum(n, na.rm = T)) %>%
+  summarise(total = sum(n, na.rm = T), .groups = "keep") %>%
   mutate(type = if_else(family == "Poaceae" | family == "Cyperaceae" | family == "Juncaceae", "graminoidCov", "herbCov")) %>%
   group_by(id, type) %>%
-  summarise(total = sum(total, na.rm = T)) %>%
+  summarise(total = sum(total, na.rm = T), .groups = "keep") %>%
   spread(type, total) %>%
   mutate(accumulatedCov = graminoidCov + herbCov,
          accumulatedCov = round(accumulatedCov, 1)) %>%
@@ -227,22 +227,22 @@ cover_seeded <- species %>%
            remove = F, extra = "merge", fill = "warn", convert = F) %>%
   pivot_wider(names_from = "surveyYear", values_from = "value") %>%
   group_by(plot, name) %>%
-  summarise(across(where(is.double), ~sum(.x, na.rm = T))) %>%
+  summarise(across(where(is.double), ~sum(.x, na.rm = T)), .groups = "keep") %>%
   ungroup() %>%
   pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value", 
                names_transform = list(surveyYear = as.factor)) %>%
-  mutate(success = if_else(seeded > 0 & value > 0, 1, 0)) %>%
+  mutate(success = if_else(seeded > 0 & value > 0, value, 0)) %>%
   group_by(plot, surveyYear) %>%
-  summarise(seededRichness = sum(success)) %>%
+  summarise(seededCov = sum(success), .groups = "keep") %>%
   ungroup() %>%
   unite(id, plot, surveyYear, sep = "_")
 
 ### * implement in sites data set ####
 sites <- sites %>%
-  full_join(cover_total_and_graminoid, by = "id") %>%
-  full_join(cover_target, by = "id") %>%
+  left_join(cover_total_and_graminoid, by = "id") %>%
+  left_join(cover_target, by = "id") %>%
   #right_join(cover_ruderalIndicator, by = "id") %>%
-  full_join(cover_seeded, by = "id") %>%
+  left_join(cover_seeded, by = "id") %>%
   ### Calcute the ratio of target species richness of total species richness
   mutate(targetCovratio = targetCov / accumulatedCov,
          graminoidCovratio = graminoidCov / accumulatedCov,
@@ -252,6 +252,7 @@ sites <- sites %>%
          seededCovratio = round(seededCovratio, 3))
 
 rm(list = setdiff(ls(), c("sites", "species", "traits")))
+
 
 ### 3 Species richness #####################################################################################
 
@@ -293,13 +294,13 @@ speciesRichness_seeded <- species %>%
            remove = F, extra = "merge", fill = "warn", convert = F) %>%
   pivot_wider(names_from = "surveyYear", values_from = "value") %>%
   group_by(plot, name) %>%
-  summarise(across(where(is.double), ~sum(.x, na.rm = T))) %>%
+  summarise(across(where(is.double), ~sum(.x, na.rm = T)), .groups = "keep") %>%
   ungroup() %>%
   pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value", 
                names_transform = list(surveyYear = as.factor)) %>%
-  mutate(successCov = if_else(seeded > 0 & value > 0, value, 0)) %>%
+  mutate(successCov = if_else(seeded > 0 & value > 0, 1, 0)) %>%
   group_by(plot, surveyYear) %>%
-  summarise(seededCov = sum(successCov)) %>%
+  summarise(seededRichness = sum(successCov), .groups = "keep") %>%
   ungroup() %>%
   unite(id, plot, surveyYear, sep = "_")
 
@@ -317,13 +318,13 @@ speciesRichness_ffh6210 <- speciesRichness %>%
 
 ### * implement in sites data set ####
 sites <- sites %>%
-  right_join(speciesRichness_all, by = "id") %>%
-  right_join(speciesRichness_rlg, by = "id") %>%
-  right_join(speciesRichness_rlb, by = "id") %>%
-  right_join(speciesRichness_target, by = "id") %>%
-  right_join(speciesRichness_seeded, by = "id") %>%
-  right_join(speciesRichness_ffh6510, by = "id") %>%
-  right_join(speciesRichness_ffh6210, by = "id") %>%
+  left_join(speciesRichness_all, by = "id") %>%
+  left_join(speciesRichness_rlg, by = "id") %>%
+  left_join(speciesRichness_rlb, by = "id") %>%
+  left_join(speciesRichness_target, by = "id") %>%
+  left_join(speciesRichness_seeded, by = "id") %>%
+  left_join(speciesRichness_ffh6510, by = "id") %>%
+  left_join(speciesRichness_ffh6210, by = "id") %>%
   ### Create targetRichratio ###
   mutate(targetRichratio = targetRichness / speciesRichness,
          seededRichratio = seededRichness / speciesRichness,
@@ -333,40 +334,33 @@ sites <- sites %>%
 rm(list = setdiff(ls(), c("sites", "species", "traits")))
 
 
-### 5 TBI #####################################################################################
+### 5 Beta diversity #####################################################################################
 
-tbi <- species %>%
-  pivot_longer(-name, "id", "n") %>%
+### a TBI -------------------------------------------------------------------------------------------
+
+data <- species %>%
+  select(where(~!all(is.na(.x)))) %>%
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
   pivot_wider(id, name) %>%
-  left_join(sites, by = "id") %>%
-  select(id, exposition, surveyYear, Acer_campestre:Vulpia_myuros) %>%
-  filter(surveyYear == 2018 | surveyYear == 2020) %>%
-#tbiStart <- sites %>% select(id, plot, surveyYear) %>% filter(surveyYear == 2018)
-#tbiEnd <- sites %>% select(id, plot, surveyYear) %>% filter(surveyYear == 2020)
-#anti_join(tbiStart, tbiEnd, by = "plot")
-#anti_join(tbiEnd, tbiStart, by = "plot")
-#rm(tbiStart, tbiEnd)
-  column_to_rownames(var = "id") %>%
-  select(-surveyYear)
+  mutate(year = str_match(id, "20\\d{2}|seeded"),
+         plot = str_match(id, "[:upper:]\\d\\_\\d{2}|C\\d{2}|[:upper:]\\d_x\\d{4}"),
+         year = factor(year),
+         plot = factor(plot)) %>%
+  arrange(id) %>%
+  select(plot, year, sort(tidyselect::peek_vars()), -id)
 
-### a Abundance data --------------------------------------------------------------------------------------------
-tbi2 <- select(tbi, -exposition)
-tbiAbu <- tbi2[,colSums(tbi2) > 0]
+### Separate each year in several tibbles ###
 
-### b Presence-absence data--------------------------------------------------------------------------------------------
-tbiPa <- tbiAbu
-tbiPa[tbiPa > 0] = 1
+for(i in unique(data$year)) {
+  nam <- paste("species", i, sep = "")
+  
+  assign(nam, data %>%
+           filter(year == i) %>%
+           column_to_rownames("plot") %>%
+           select(-year))
+}
 
-### c Abundance Exposition--------------------------------------------------------------------------------------------
-#tbi2 <- tbi %>%
-  #filter(exposition == "north") %>%
- # select(-exposition)
-#tbiAbuN <- tbi2[,colSums(tbi2) > 0]
-
-tbiAbu <- rownames_to_column(tbiAbu, var = "id")
-tbiPa <- rownames_to_column(tbiPa, var = "id")
-#tbiAbuN <- rownames_to_column(tbiAbuN, var = "id")
-rm(tbi, tbi2)
+rm(data, i, nam)
 
 
 ### 6 CWM of Ellenberg #####################################################################################
@@ -819,7 +813,11 @@ rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
 
 
 write_csv(sites, here("data/processed/data_processed_sites.csv"))
-write_csv(species, here("data/processed/data_processed_species.csv"))
 write_csv(traits, here("data/processed/data_processed_traits.csv"))
-write_csv(tbiAbu, here("data/processed/data_processed_tbiAbu.csv"))
-write_csv(tbiPa, here("data/processed/data_processed_tbiPa.csv"))
+write_csv(species, here("data/processed/data_processed_species.csv"))
+write_csv(speciesseeded, here("data/processed/data_processed_speciesseeded.csv"))
+write_csv(species2018, here("data/processed/data_processed_species18.csv"))
+write_csv(species2019, here("data/processed/data_processed_species19.csv"))
+write_csv(species2020, here("data/processed/data_processed_species20.csv"))
+write_csv(species2021, here("data/processed/data_processed_species21.csv"))
+
