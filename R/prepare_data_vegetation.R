@@ -20,7 +20,7 @@ setwd(here("data/raw"))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### 1 Sites #####################################################################################
+## 1 Sites #####################################################################################
 
 sites <- read_csv("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), col_types =
                     cols(
@@ -61,9 +61,9 @@ sites <- read_csv("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), c
                              surveyYear == "2020")))
 
 
-### 2 Species #####################################################################################
+## 2 Species #####################################################################################
 
-species <- data.table::fread("data_raw_species_20211011.csv", 
+species <- data.table::fread("data_raw_species_20211103.csv", 
                              sep = ",",
                              dec = ".",
                              skip = 0,
@@ -75,13 +75,13 @@ species <- data.table::fread("data_raw_species_20211011.csv",
   ### Check that each species occurs at least one time ###
   group_by(name) %>%
   arrange(name) %>%
+  select(name, all_of(sites$id)) %>%
   mutate(total = sum(c_across(starts_with("L") | starts_with("W") | starts_with("C")), na.rm = T),
-         presence = if_else(total > 0, 1, 0),
-         name = factor(name)) %>%
-  filter(presence == 1) %>% # filter species
+         presence = if_else(total > 0, 1, 0)) %>%
+  filter(presence == 1) %>% # filter only species which occur at least one time
   ungroup() %>%
   select(name, sort(tidyselect::peek_vars()), -total, -presence) %>%
-  na_if(0)
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0)))
 
 ### Create list with species names and their frequency ###
 specieslist <- species %>%
@@ -92,7 +92,7 @@ specieslist <- species %>%
 #write_csv(specieslist, here("outputs/tables/specieslist_20211011.csv"))
 
 
-### 3 Traits #####################################################################################
+## 3 Traits #####################################################################################
 
 traits <- read_csv("data_raw_traits.csv", col_names = T, na = c("", "NA", "na"), col_types = 
                      cols(
@@ -110,7 +110,7 @@ traits <- read_csv("data_raw_traits.csv", col_names = T, na = c("", "NA", "na"),
   mutate(genus = str_sub(genus, 1, 4),
          species = str_sub(species, 1, 4),
          subspecies = str_sub(subspecies, 1, 4),
-         name = factor(name)) %>%
+         name = as.character(name)) %>%
   unite(abb, genus, species, subspecies, sep = "", na.rm = T) %>%
   mutate(abb = str_replace(abb, "NA", ""),
          abb = as_factor(abb)) %>%
@@ -124,7 +124,7 @@ traits <- read_csv("data_raw_traits.csv", col_names = T, na = c("", "NA", "na"),
 traits <- semi_join(traits, species, by = "name")
 
 
-### 4 Check data frames #####################################################################################
+## 4 Check data frames #####################################################################################
 
 ### Check typos ###
 sites %>%
@@ -141,7 +141,7 @@ species %>% # Check special typos
 
 ### Compare vegetationCov and accumulatedCov ###
 species %>%
-    summarise(across(where(is.double),~sum(.x, na.rm = T))) %>%
+    summarise(across(where(is.double), ~sum(.x, na.rm = T))) %>%
     pivot_longer(cols = everything(), names_to = "id", values_to = "value") %>%
     mutate(id = factor(id)) %>%
     full_join(sites, by = "id") %>% 
@@ -165,7 +165,7 @@ miss_var_summary(traits, order = T)
 vis_miss(traits, cluster = F, sort_miss = T)
 
 #sites[is.na(sites$id),]
-rm(list=setdiff(ls(), c("sites", "species", "traits")))
+rm(list = setdiff(ls(), c("sites", "species", "traits")))
 
 
 
@@ -174,7 +174,7 @@ rm(list=setdiff(ls(), c("sites", "species", "traits")))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### 1 Create simple variables #####################################################################################
+## 1 Create simple variables #####################################################################################
 
 sites <- sites %>%
   mutate(conf.low = c(1:length(id)),
@@ -186,7 +186,7 @@ traits <- traits %>%
   ))
 
 
-### 2 Coverages #####################################################################################
+## 2 Coverages #####################################################################################
 
 cover <- left_join(species, traits, by = "name") %>%
   select(name, family, target, ruderalIndicator, seeded, starts_with("L"), starts_with("W")) %>%
@@ -254,9 +254,9 @@ sites <- sites %>%
 rm(list = setdiff(ls(), c("sites", "species", "traits")))
 
 
-### 3 Species richness #####################################################################################
+## 3 Alpha diversity #####################################################################################
 
-#### a Species richness ----------------------------------------------------------------------------------------------------
+### a Species richness ----------------------------------------------------------------------------------------------------
 
 speciesRichness <- species %>%
   left_join(traits, by = "name") %>%
@@ -333,7 +333,7 @@ sites <- sites %>%
          targetRichratio = round(targetRichratio, 3),
          seededRichratio = round(seededRichratio, 3))
 
-#### b Species eveness and shannon ----------------------------------------------------------------------
+### b Species eveness and shannon ----------------------------------------------------------------------
 data <- species  %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
@@ -351,43 +351,13 @@ sites <- sites %>%
 rm(list = ls(pattern = "[^species|traits|sites]"))
 
 
+## 5 CWM of Ellenberg #####################################################################################
 
-### 5 Beta diversity #####################################################################################
-
-#### a TBI -------------------------------------------------------------------------------------------
-
-data <- species %>%
-  select(where(~!all(is.na(.x)))) %>%
-  pivot_longer(-name, names_to = "id", values_to = "value") %>%
-  pivot_wider(id, name) %>%
-  mutate(year = str_match(id, "20\\d{2}|seeded"),
-         plot = str_match(id, "[:upper:]\\d\\_\\d{2}|C\\d{2}|[:upper:]\\d_x\\d{4}"),
-         year = factor(year),
-         plot = factor(plot)) %>%
-  arrange(id) %>%
-  select(plot, year, sort(tidyselect::peek_vars()), -id)
-
-### Separate each year in several tibbles ###
-
-for(i in unique(data$year)) {
-  nam <- paste("species", i, sep = "")
-  
-  assign(nam, data %>%
-           filter(year == i) %>%
-           column_to_rownames("plot") %>%
-           select(-year))
-}
-
-rm(data, i, nam)
-
-
-### 6 CWM of Ellenberg #####################################################################################
-
-#### a N value -------------------------------------------------------------------------------------------
-Ntraits <- traits %>%
+### a N value -------------------------------------------------------------------------------------------
+data_traits <- traits %>%
   select(name, n) %>%
   filter(n > 0)
-Nspecies <- semi_join(species, Ntraits, by = "name") %>%
+data_species <- semi_join(species, data_traits, by = "name") %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   group_by(id) %>%
   mutate(sum = sum(value, na.rm = T)) %>%
@@ -395,16 +365,16 @@ Nspecies <- semi_join(species, Ntraits, by = "name") %>%
   select(-sum) %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("id")
-Ntraits <- column_to_rownames(Ntraits, "name")
+data_traits <- column_to_rownames(data_traits, "name")
 ### Calculate CWM ###
-Nweighted <- dbFD(Ntraits, Nspecies, w.abun = T,
+Nweighted <- dbFD(data_traits, data_species, w.abun = T,
                         calc.FRic = F, calc.FDiv = F, corr = "sqrt")
 
-#### b F value -------------------------------------------------------------------------------------------
-Ftraits <- traits %>%
+### b F value -------------------------------------------------------------------------------------------
+data_traits <- traits %>%
   select(name, f) %>%
   filter(f > 0) 
-Fspecies <- semi_join(species, Ftraits, by = "name") %>%
+data_species <- semi_join(species, data_traits, by = "name") %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   group_by(id) %>%
   mutate(sum = sum(value, na.rm = T)) %>%
@@ -412,16 +382,16 @@ Fspecies <- semi_join(species, Ftraits, by = "name") %>%
   select(-sum) %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("id")
-Ftraits <- column_to_rownames(Ftraits, "name")
+data_traits <- column_to_rownames(data_traits, "name")
 ### Calculate CWM ###
-Fweighted <- dbFD(Ftraits, Fspecies, w.abun = T,
+Fweighted <- dbFD(data_traits, data_species, w.abun = T,
                   calc.FRic = F, calc.FDiv = F, corr = "sqrt")
 
-#### c T value -------------------------------------------------------------------------------------------
-Ttraits <- traits %>%
+### c T value -------------------------------------------------------------------------------------------
+data_traits <- traits %>%
   select(name, t) %>%
   filter(t > 0) 
-Tspecies <- semi_join(species, Ttraits, by = "name") %>%
+data_species <- semi_join(species, data_traits, by = "name") %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   group_by(id) %>%
   mutate(sum = sum(value, na.rm = T)) %>%
@@ -429,34 +399,35 @@ Tspecies <- semi_join(species, Ttraits, by = "name") %>%
   select(-sum) %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("id")
-Ttraits <- column_to_rownames(Ttraits, "name")
+data_traits <- column_to_rownames(data_traits, "name")
 ### Calculate CWM ###
-Tweighted <- dbFD(Ttraits, Tspecies, w.abun = T,
+Tweighted <- dbFD(data_traits, data_species, w.abun = T,
                   calc.FRic = F, calc.FDiv = F, corr = "sqrt")
 
 ### d implement in sites data set -------------------------------------------------------------------------------------------
 sites$cwmAbuN <- round(as.numeric(as.character(Nweighted$CWM$n)), 3)
 sites$cwmAbuF <- round(as.numeric(as.character(Fweighted$CWM$f)), 3)
 sites$cwmAbuT <- round(as.numeric(as.character(Tweighted$CWM$t)), 3)
-rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
+
+rm(list = setdiff(ls(), c("sites", "species", "traits")))
 
 
-### 7 Functional plant traits #####################################################################################
+## 6 Functional plant traits #####################################################################################
 
-#### * read and join LEDA data #### 
-dataSLA <- data.table::fread("data_raw_LEDA_20210223_sla.txt", 
+### a LEDA data #####
+data_sla <- data.table::fread("data_raw_traitbase_leda_20210223_sla.txt", 
                              sep = ";",
                              dec = ".",
-                             skip = 3,
+                             skip = 4,
                              header = T,
-                             select = c("SBS name", "single value [mm^2/mg]"),
+                             select = c("SBS name", "single value [mm^2/mg]")
                              ) %>%
   as_tibble() %>%
-  rename(name = "SBS name") %>%
-  rename(sla = "single value [mm^2/mg]") %>%
-  mutate(name = as_factor(str_replace_all(name, " ", "_")))
+  rename(name = "SBS name", 
+         sla = "single value [mm^2/mg]") %>%
+  mutate(name = str_replace_all(name, " ", "_"))
 
-dataSM <- data.table::fread("data_raw_LEDA_20210223_seedmass.txt", 
+data_seedmass <- data.table::fread("data_raw_traitbase_leda_20210223_seedmass.txt", 
                             sep = ";",
                             dec = ".",
                             skip = 3,
@@ -464,11 +435,12 @@ dataSM <- data.table::fread("data_raw_LEDA_20210223_seedmass.txt",
                             select = c("SBS name", "single value [mg]"),
                             ) %>%
   as_tibble() %>%
-  rename(name = "SBS name") %>%
-  rename(seedmass = "single value [mg]") %>%
-  mutate(name = as_factor(str_replace_all(name, " ", "_")))
+  rename(name = "SBS name",
+         seedmass = "single value [mg]") %>%
+  mutate(name = str_replace_all(name, " ", "_"),
+         seedmass = round(seedmass, 3))
 
-dataH <- data.table::fread("data_raw_LEDA_20210223_canopy_height.txt", 
+data_height <- data.table::fread("data_raw_traitbase_leda_20210223_canopy_height.txt", 
                            sep = ";",
                            dec = ".",
                            skip = 3,
@@ -476,352 +448,404 @@ dataH <- data.table::fread("data_raw_LEDA_20210223_canopy_height.txt",
                            select = c("SBS name", "single value [m]")
                              ) %>%
   as_tibble() %>%
-  rename(name = "SBS name") %>%
-  rename(height = "single value [m]") %>%
-  mutate(name = as_factor(str_replace_all(name, " ", "_")))
-### Join SLA, canopy height and seedmass of LEDA ###
-data <- dataSLA %>%
-  full_join(dataSM, by = "name") %>%
-  full_join(dataH, by = "name")
-rm(dataSLA, dataSM, dataH)
-##### Find synonyms ###
-#traits$name[which(!(traits$name %in% data$name))]
+  rename(name = "SBS name",
+         height = "single value [m]") %>%
+  mutate(name = str_replace_all(name, " ", "_"))
+#### Join SLA, canopy height and seedmass of LEDA ###
+data <- data_sla %>%
+  full_join(data_seedmass, by = "name") %>%
+  full_join(data_height, by = "name")
+
+#### * Find synonyms ####
+data <- data %>%
+  mutate(name = as_factor(name),
+         name = fct_recode(name, 
+                           Centaurea_stoebe = "Centaurea_stoebe_s.lat.",
+                           Carex_filiformis = "Carex_tomentosa",
+                           Carex_leporina = "Carex_ovalis",
+                           Carex_praecox_ssp_praecox = "Carex_praecox",
+                           Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum",
+                           Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum_s._vulgare",
+                           Cornus_controversa = "Cornus_sanguinea",
+                           Erigeron_canadensis = "Conyza_canadensis",
+                           Cota_tinctoria = "Anthemis_tinctoria",
+                           Cyanus_segetum = "Centaurea_cyanus",
+                           Euphorbia_verrucosa = "Euphorbia_brittingeri",
+                           Helictotrichon_pubescens = "Avenula_pubescens",
+                           Hypochaeris_radicata = "Hypochoeris_radicata",
+                           Jacobaea_vulgaris = "Senecio_vulgaris",
+                           Medicago_falcata = "Medicago_sativa_s._falcata",
+                           Melilotus_albus = "Melilotus_alba",
+                           Ononis_spinosa_ssp_procurrens = "Ononis_repens",
+                           Persicaria_amphibia = "Polygonum_amphibium",
+                           Persicaria_bistorta = "Polygonum_bistorta",
+                           Persicaria_lapathifolia = "Polygonum_lapathifolium",
+                           Persicaria_minor = "Polygonum_minus",
+                           Persicaria_mitis = "Polygonum_mite",
+                           Pilosella_caespitosa = "Hieracium_caespitosum",
+                           Pilosella_officinarum = "Hieracium_pilosella",
+                           Pilosella_piloselloides = "Hieracium_piloselloides",
+                           Plantago_major = "Plantago_major",
+                           Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia",
+                           Rubus_fruticosus_agg = "Rubus_fruticosus",
+                           Rubus_fruticosus_agg = "Rubus_fruticosus_ag._L.",
+                           Securigera_varia = "Coronilla_varia",
+                           Sedum_maximum = "Sedum_telephium_s._maximum",
+                           "Silene_flos-cuculi" = "Lychnis_flos-cuculi",
+                           Silene_latifolia_ssp_alba = "Silene_latifolia",
+                           Taraxacum_campylodes = "Taraxacum_officinale",
+                           Taraxacum_campylodes = "Taraxacum_Sec._Ruderalia",
+                           Tripleurospermum_maritimum = "Matricaria_maritima",
+                           Vicia_sativa_ssp_nigra= "Vicia_sativa_s._nigra")) %>% 
+  group_by(name) %>%
+### summarise different rows of one species after renaming ###  
+  summarise(across(where(is.double), ~median(.x, na.rm = T)))
+traits$name[which(!(traits$name %in% data$name))]
 #data %>%
   #group_by(name) %>%
   #summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
-  #filter(str_detect(name, "incana"))
-traits <- data %>%
-  mutate(name = fct_recode(name, Centaurea_stoebe = "Centaurea_stoebe_s.lat.")) %>%
-  mutate(name = fct_recode(name, Carex_praecox_ssp_praecox = "Carex_praecox")) %>%
-  mutate(name = fct_recode(name, Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum")) %>%
-  mutate(name = fct_recode(name, Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum_s._vulgare")) %>%
-  mutate(name = fct_recode(name, Cota_tinctoria = "Anthemis_tinctoria")) %>%
-  mutate(name = fct_recode(name, Cyanus_segetum = "Centaurea_cyanus")) %>%
-  mutate(name = fct_recode(name, Euphorbia_verrucosa = "Euphorbia_brittingeri")) %>%
-  mutate(name = fct_recode(name, Helictotrichon_pubescens = "Avenula_pubescens")) %>%
-  mutate(name = fct_recode(name, Hypochaeris_radicata = "Hypochoeris_radicata")) %>%
-  mutate(name = fct_recode(name, Jacobaea_vulgaris = "Senecio_vulgaris")) %>%
-  mutate(name = fct_recode(name, Medicago_falcata = "Medicago_sativa_s._falcata")) %>%
-  mutate(name = fct_recode(name, Ononis_spinosa_ssp_procurrens = "Ononis_repens")) %>%
-  mutate(name = fct_recode(name, Persicaria_amphibia = "Polygonum_amphibium")) %>%
-  mutate(name = fct_recode(name, Pilosella_caespitosa = "Hieracium_caespitosum")) %>%
-  mutate(name = fct_recode(name, Pilosella_officinarum = "Hieracium_pilosella")) %>%
-  mutate(name = fct_recode(name, Pilosella_piloselloides = "Hieracium_piloselloides")) %>%
-  mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia")) %>%
-  mutate(name = fct_recode(name, Rubus_fruticosus_agg = "Rubus_fruticosus")) %>%
-  mutate(name = fct_recode(name, Rubus_fruticosus_agg = "Rubus_fruticosus_ag._L.")) %>%
-  mutate(name = fct_recode(name, Securigera_varia = "Coronilla_varia")) %>%
-  mutate(name = fct_recode(name, "Silene_flos-cuculi" = "Lychnis_flos-cuculi")) %>%
-  mutate(name = fct_recode(name, Taraxacum_campylodes = "Taraxacum_officinale")) %>%
-  mutate(name = fct_recode(name, Taraxacum_campylodes = "Taraxacum_Sec._Ruderalia")) %>%
-  mutate(name = fct_recode(name, Tripleurospermum_maritimum = "Matricaria_maritima")) %>%
-  mutate(name = fct_recode(name, Vicia_sativa_ssp_nigra= "Vicia_sativa_s._nigra")) %>%  group_by(name) %>%
-### summarise different rows of one species after renaming ###  
-  summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
-  right_join(traits, by = "name")
-### check completeness of LEDA ###
-#(test2 <- traits %>%
-  #select(name, sla, seedmass, height) %>%
-  #filter(!complete.cases(.)))
+  #filter(str_detect(name, "ovalis"))
+traits <- traits %>%
+  left_join(data, by = "name")
 
-### * read TRY data 1 ####
-data <- data.table::fread("data_raw_TRY_20210306_13996.txt", 
+#### * check completeness of LEDA ####
+test <- traits %>%
+  select(name, sla, seedmass, height) %>%
+  filter(!complete.cases(.))
+
+rm(list = setdiff(ls(), c("sites", "species", "traits", "test")))
+
+
+### b TRY data 1 ####
+data <- data.table::fread("data_raw_traitbase_try_20210306_13996.txt", 
               header = T, 
               sep = "\t", 
               dec = ".", 
               quote = "") %>%
   as_tibble() %>%
-  rename(name = "AccSpeciesName") %>%
-  rename(value = "StdValue") %>%
-  rename(trait = "TraitID") %>%
+  rename(name = "AccSpeciesName",
+         value = "StdValue",
+         trait = "TraitID") %>%
   select(name, value, trait) %>%
-  mutate(name = as_factor(str_replace_all(name, " ", "_"))) %>%
+  mutate(name = str_replace_all(name, " ", "_")) %>%
   drop_na %>%
-  mutate(trait = str_replace(trait, "26", "seedmass")) %>%
-  mutate(trait = str_replace(trait, "3106", "height")) %>%
-  mutate(trait = str_replace(trait, "3107", "height")) %>%
-  mutate(trait = str_replace(trait, "3115", "sla")) %>%
-  mutate(trait = str_replace(trait, "3116", "sla")) %>%
-  mutate(trait = str_replace(trait, "3117", "sla"))
-##### Find synonyms ###
-#test2$name[which(!(test2$name %in% data$name))]
+  mutate(trait = str_replace(trait, "26", "seedmass"),
+         trait = str_replace(trait, "3106", "height"),
+         trait = str_replace(trait, "3107", "height"),
+         trait = str_replace(trait, "3115", "sla"),
+         trait = str_replace(trait, "3116", "sla"),
+         trait = str_replace(trait, "3117", "sla"))
+
+##### * Find synonyms ####
+data <- data %>%
+  mutate(name = as_factor(name),
+         name = fct_recode(name, 
+                           Carex_praecox_ssp_praecox = "Carex_praecox",
+                           Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia",
+                           Ranunculus_serpens_ssp_nemorosus = "Ranunculus_serpens_subsp._nemorosus"),
+         trait = as_factor(trait)) %>%
+  group_by(name, trait) %>%
+  summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+  pivot_wider(names_from = "trait", values_from = "value")
+test$name[which(!(test$name %in% data$name))]
 #data %>%
   #group_by(name) %>%
   #summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
   #filter(str_detect(name, "Equisetum"))
-traits <- data %>%
-  mutate(name = fct_recode(name, Carex_praecox_ssp_praecox = "Carex_praecox")) %>%
-  mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia")) %>%
-  mutate(name = fct_recode(name, Ranunculus_serpens_ssp_nemorosus = "Ranunculus_serpens_subsp._nemorosus")) %>%
-  mutate(trait = as_factor(trait)) %>%
-  group_by(name, trait) %>%
-  summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
-  pivot_wider(names_from = "trait", values_from = "value") %>%
-  right_join(traits, by = "name") %>%
-  mutate(sla = coalesce(sla.x, sla.y), .keep = "unused") %>%
-  mutate(seedmass = coalesce(seedmass.x, seedmass.y), .keep = "unused") %>%
-  mutate(height = coalesce(height.x, height.y), .keep = "unused")
-### check completeness of LEDA + TRY1 ###
-#(test2 <- traits %>%
-#select(name, sla, seedmass, height) %>%
-#filter(!complete.cases(sla, seedmass, height)))
+traits <- traits %>%
+  left_join(data, by = "name") %>%
+  mutate(sla = coalesce(sla.x, sla.y),
+         seedmass = coalesce(seedmass.x, seedmass.y),
+         height = coalesce(height.x, height.y), 
+         .keep = "unused")
 
-### * read TRY data 2 ####
-data <- data.table::fread("data_raw_TRY_20210318_14157.txt", 
+### * check completeness of LEDA + TRY1 ####
+(test <- traits %>%
+   select(name, sla, seedmass, height) %>%
+   filter(!complete.cases(sla, seedmass, height)))
+
+### c TRY data 2 ####
+data <- data.table::fread("data_raw_traitbase_try_20210318_14157.txt", 
                           header = T, 
                           sep = "\t", 
                           dec = ".", 
                           quote = "") %>%
   as_tibble() %>%
-  rename(name = "AccSpeciesName") %>%
-  rename(value = "StdValue") %>%
-  rename(trait = "TraitID") %>%
+  rename(name = "AccSpeciesName",
+         value = "StdValue",
+         trait = "TraitID") %>%
   select(name, value, trait) %>%
-  mutate(name = as_factor(str_replace_all(name, " ", "_"))) %>%
+  mutate(name = str_replace_all(name, " ", "_")) %>%
   drop_na %>%
-  mutate(trait = str_replace(trait, "26", "seedmass")) %>%
-  mutate(trait = str_replace(trait, "3106", "height")) %>%
-  mutate(trait = str_replace(trait, "3107", "height")) %>%
-  mutate(trait = str_replace(trait, "3115", "sla")) %>%
-  mutate(trait = str_replace(trait, "3116", "sla")) %>%
-  mutate(trait = str_replace(trait, "3117", "sla"))
-##### Find Synonyms ###
-#test2$name[which(!(test2$name %in% data$name))]
-#data %>%
-#group_by(name) %>%
-#summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
-#filter(str_detect(name, "Silene"))
-traits <- data %>%
-  mutate(name = fct_recode(name, Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia")) %>%
-  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major_subsp._major")) %>%
-  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major")) %>%
-  mutate(name = fct_recode(name, Cornus_controversa = "Cornus_sanguinea")) %>%
-  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia_subsp._alba")) %>%
-  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia")) %>%
-  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia_ssp._alba")) %>%
-  mutate(trait = as_factor(trait)) %>%
+  mutate(trait = str_replace(trait, "26", "seedmass"),
+         trait = str_replace(trait, "3106", "height"),
+         trait = str_replace(trait, "3107", "height"),
+         trait = str_replace(trait, "3115", "sla"),
+         trait = str_replace(trait, "3116", "sla"),
+         trait = str_replace(trait, "3117", "sla"))
+
+##### * Find Synonyms ####
+data <- data %>%
+  mutate(name = as_factor(name),
+         name = fct_recode(name, 
+                           Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia",
+                           Plantago_major = "Plantago_major_subsp._major",
+                           Cornus_controversa = "Cornus_sanguinea",
+                           Silene_latifolia_ssp_alba = "Silene_latifolia_subsp._alba",
+                           Silene_latifolia_ssp_alba = "Silene_latifolia",
+                           Silene_latifolia_ssp_alba = "Silene_latifolia_ssp._alba"),
+         trait = as_factor(trait)) %>%
   group_by(name, trait) %>%
   summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
-  pivot_wider(names_from = "trait", values_from = "value") %>%
-  right_join(traits, by = "name") %>%
-  mutate(sla = coalesce(sla.x, sla.y), .keep = "unused") %>%
-  mutate(seedmass = coalesce(seedmass.x, seedmass.y), .keep = "unused") %>%
-  mutate(height = coalesce(height.x, height.y), .keep = "unused") 
-### check completeness of LEDA + TRY1 + TRY2 ###
-#(test2 <- traits %>%
-#select(name, sla, seedmass, height) %>%
-#filter(!complete.cases(sla, seedmass, height)))
+  pivot_wider(names_from = "trait", values_from = "value")
+test$name[which(!(test$name %in% data$name))]
+#data %>%
+  #group_by(name) %>%
+  #summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+  #filter(str_detect(name, "Silene"))
+traits <- traits %>%
+  left_join(data, by = "name") %>%
+  mutate(sla = coalesce(sla.x, sla.y), 
+         seedmass = coalesce(seedmass.x, seedmass.y),
+         height = coalesce(height.x, height.y),
+         .keep = "unused") 
 
-### * read GrooT data ####
-data <- read.csv("data_raw_GrooT.csv", header = T, na.strings = c("", "NA")) %>%
+### * check completeness of LEDA + TRY1 + TRY2 ####
+(test <- traits %>%
+   select(name, sla, seedmass, height) %>%
+   filter(!complete.cases(sla, seedmass, height)))
+
+### d GrooT data ####
+data <- read.csv("data_raw_traitbase_groot.csv", header = T, na.strings = c("", "NA", "na")) %>%
   filter(traitName == "Specific_root_length" |
            traitName == "Root_length_density_volume" |
            traitName == "Root_mass_fraction" |
            traitName == "Lateral_spread") %>%
-  mutate(name = as_factor(str_c(genusTNRS, speciesTNRS, sep = "_"))) %>%
-  rename(trait = traitName, value = medianSpecies) %>%
+  mutate(name = str_c(genusTNRS, speciesTNRS, sep = "_")) %>%
+  rename(trait = traitName, 
+         value = medianSpecies) %>%
   select(name, trait, value) %>%
   pivot_wider(names_from = "trait", values_from = "value") %>%
-  rename(rmf = Root_mass_fraction, rld = Root_length_density_volume, srl = Specific_root_length, lateral = Lateral_spread)
-##### Find Synonyms ###
-#traits$name[which(!(traits$name %in% data$name))]
+  rename(rmf = Root_mass_fraction, 
+         rld = Root_length_density_volume, 
+         srl = Specific_root_length, 
+         lateral = Lateral_spread)
+
+##### * Find Synonyms ####
+data <- data %>%
+  mutate(name = as_factor(name),
+         name = fct_recode(name, 
+                           Cota_tinctoria = "Anthemis_tinctoria",
+                           Carex_praecox_ssp_praecox = "Carex_praecox",
+                           Carex_filiformis = "Carex_tomentosa",
+                           Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum",
+                           Persicaria_bistorta = "Bistorta_officinalis",
+                           Jacobaea_vulgaris = "Senecio_jacobaea",
+                           "Silene_flos-cuculi" = "Lychnis_flos-cuculi",
+                           Silene_latifolia_ssp_alba = "Silene_latifolia",
+                           Vicia_sativa_ssp_nigra = "Vicia_sativa")) %>%
+  group_by(name) %>%
+  summarise(across(where(is.double), ~median(.x, na.rm = T)))
+traits$name[which(!(traits$name %in% data$name))]
 #data %>%
   #group_by(name) %>%
   #summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
   #filter(str_detect(name, "Centaurea_"))
-traits <- data %>%
-  mutate(name = fct_recode(name, Cota_tinctoria = "Anthemis_tinctoria")) %>%
-  mutate(name = fct_recode(name, Carex_praecox_ssp_praecox = "Carex_praecox")) %>%
-  mutate(name = fct_recode(name, Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum")) %>%
-  mutate(name = fct_recode(name, Persicaria_bistorta = "Bistorta_officinalis")) %>%
-  mutate(name = fct_recode(name, Plantago_major_ssp_major = "Plantago_major")) %>%
-  mutate(name = fct_recode(name, Jacobaea_vulgaris = "Senecio_jacobaea")) %>%
-  mutate(name = fct_recode(name, "Silene_flos-cuculi" = "Lychnis_flos-cuculi")) %>%
-  mutate(name = fct_recode(name, Silene_latifolia_ssp_alba = "Silene_latifolia")) %>%
-  mutate(name = fct_recode(name, Vicia_sativa_ssp_nigra = "Vicia_sativa")) %>%
-  group_by(name) %>%
-  summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
-  right_join(traits, by = "name")
-### check completeness of Roots ###
-(test2 <- traits %>%
+traits <- traits %>%
+  left_join(data, by = "name")
+
+### * check completeness of Roots ####
+(test <- traits %>%
    select(name, rmf, rld, srl, lateral) %>%
    filter(!complete.cases(rmf, rld, srl, lateral)))
 
-### * check completeness of traits ####
+### e check completeness of traits ####
 test <- traits %>%
-  select(t, n, f, sla, seedmass, height, rmf, rld, srl, lateral)
-vis_miss(test, cluster = F, sort_miss = T)
-#gg_miss_var(test)
-gg_miss_case(test, order_cases = F)
-(test2 <- traits %>%
-  select(name, sla, seedmass, height, rmf, rld, srl, lateral) %>%
-  filter(!complete.cases(sla, seedmass, height, rmf, rld, srl, lateral)))
-rm(test, test2, data)
+  select(name, group, t, n, f, sla, seedmass, height, rmf, rld, srl, lateral) %>%
+  filter(!(str_detect(name, "_spec") | str_detect(name, "ceae"))) %>%
+  filter(group != "tree" & group != "shrub") %>%
+  select(-name, -group)
+vis_miss(test, cluster = T, sort_miss = T)
+miss_var_summary(test)
+gg_miss_case(test, order_cases = T)
+(test <- traits %>%
+    select(name, sla, seedmass, height, rmf, rld, srl, lateral) %>%
+    filter(!complete.cases(sla, seedmass, height, rmf, rld, srl, lateral)))
 
-### * prepare data frames ####
+rm(list = ls(pattern = "[^species|traits|sites]"))
+
+### f prepare data frames ####
 species <- species %>%
   mutate(name = as.character(name)) %>%
-  arrange(name) %>%
-  mutate(name = as_factor(name))
+  arrange(name)
 traits <- traits %>%
   mutate(name = as.character(name)) %>%
   arrange(name) %>%
-  mutate(name = as_factor(name))
-herbCount <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
-  left_join(species, by = "name") %>%
-  count() %>%
-  pull()
-undefinedSpeciesCount <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
-  filter(str_detect(name, "_spec|Öhrchen")) %>%
-  left_join(species, by = "name") %>%
-  count() %>%
-  pull()
-traitsLHS <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
+  mutate(across(c(sla, seedmass, height, srl, rmf, rld), 
+                ~ round(.x, digits = 3)))
+(herbCount <- traits %>% #gamma diversity herbs: 269
+    filter(group != "tree" & group != "shrub") %>%
+    count() %>%
+    pull())
+(undefinedCount <- traits %>% #gamma diversity of undefined species: 15
+    filter((str_detect(name, "_spec") | str_detect(name, "ceae"))) %>%
+    count() %>%
+    pull())
+data <- traits %>%
+  filter(!(str_detect(name, "_spec") | str_detect(name, "ceae"))) %>%
+  filter(group != "tree" & group != "shrub")
+traits_lhs <- data %>%
   select(name, sla, seedmass, height) %>%
   drop_na()
-traitsSLA <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
+traits_sla <- data %>%
   select(name, sla) %>%
   drop_na()  
-traitsSM <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
+traits_seedmass <- data %>%
   select(name, seedmass) %>%
   drop_na()
-traitsH <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
+traits_height <- data %>%
   select(name, height) %>%
   drop_na()
-traitsSRL <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
+traits_srl <- data %>%
   select(name, srl) %>%
   drop_na()
-traitsRLD <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
+traits_rld <- data %>%
   select(name, rld) %>%
   drop_na()
-traitsRMF <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
+traits_rmf <- data %>%
   select(name, rmf) %>%
   drop_na()
-traitsAll <- traits %>%
-  filter(group != "tree" & group != "shrub") %>%
-  select(name, sla, seedmass, height, srl) %>%
+traits_all <- data %>%
+  select(name, sla, seedmass, height, rmf) %>%
   drop_na()
 
 
-### 8 CWM and FDis of functional plant traits #####################################################################################
+## 7 CWM and FDis of functional plant traits #####################################################################################
 
-#### a LHS -------------------------------------------------------------------------------------------
-Tspecies <- semi_join(species, traitsLHS, by = "name")
-Ttraits <- semi_join(traitsLHS, Tspecies, by = "name")
-Tspecies <- Tspecies %>%
+### a LHS -------------------------------------------------------------------------------------------
+data_species <- semi_join(species, traits_lhs, by = "name")
+data_traits <- semi_join(traits_lhs, data_species, by = "name")
+data_species <- data_species %>%
   pivot_longer(-name, "site", "value") %>%
   pivot_wider(site, name) %>%
   column_to_rownames("site")
-Ttraits <- column_to_rownames(Ttraits, "name")
-log_Ttraits <- log(Ttraits)
-TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T,
                calc.FRic = F, calc.FDiv = F, corr = "cailliez")
-sites$fdisAbuLHS <- TdiversityAbu$FDis
-length(traitsLHS$name) / (herbCount - undefinedSpeciesCount)
+sites$fdisAbuLHS <- data_diversityAbu$FDis
+length(traits_lhs$name) / (herbCount - undefinedCount)
 
-#### b SLA -------------------------------------------------------------------------------------------
-Tspecies <- semi_join(species, traitsSLA, by = "name")
-Ttraits <- semi_join(traitsSLA, Tspecies, by = "name")
-Tspecies <- Tspecies %>%
+### b SLA -------------------------------------------------------------------------------------------
+data_species <- semi_join(species, traits_sla, by = "name")
+data_traits <- semi_join(traits_sla, data_species, by = "name")
+data_species <- data_species %>%
   pivot_longer(-name, "site", "value") %>%
   pivot_wider(site, name) %>%
   column_to_rownames("site")
-Ttraits <- column_to_rownames(Ttraits, "name")
-log_Ttraits <- log(Ttraits)
-TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
                    calc.FRic = F, calc.FDiv = F, corr = "sqrt");
-sites$fdisAbuSla <- TdiversityAbu$FDis
-sites$cwmAbuSla <- TdiversityAbu$CWM$sla %>%
-  as.character() %>% as.numeric() %>% exp()
-length(traitsSLA$name) / (herbCount - undefinedSpeciesCount)
+sites$fdisAbuSla <- data_diversityAbu$FDis
+sites$cwmAbuSla <- data_diversityAbu$CWM$sla %>%
+  as.character() %>% 
+  as.numeric() %>% 
+  exp()
+length(traits_sla$name) / (herbCount - undefinedCount)
 
-#### c Seed mass -------------------------------------------------------------------------------------------
-Tspecies <- semi_join(species, traitsSM, by = "name")
-Ttraits <- semi_join(traitsSM, Tspecies, by = "name")
-Tspecies <- Tspecies %>%
+### c Seed mass -------------------------------------------------------------------------------------------
+data_species <- semi_join(species, traits_seedmass, by = "name")
+data_traits <- semi_join(traits_seedmass, data_species, by = "name")
+data_species <- data_species %>%
   pivot_longer(-name, "site", "value") %>%
   pivot_wider(site, name) %>%
   column_to_rownames("site")
-Ttraits <- column_to_rownames(Ttraits, "name")
-log_Ttraits <- log(Ttraits)
-TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
-sites$fdisAbuSeedmass <- TdiversityAbu$FDis
-sites$cwmAbuSeedmass <- TdiversityAbu$CWM$seedmass %>%
-  as.character() %>% as.numeric() %>% exp()
-length(traitsSM$name) / (herbCount - undefinedSpeciesCount)
+sites$fdisAbuSeedmass <- data_diversityAbu$FDis
+sites$cwmAbuSeedmass <- data_diversityAbu$CWM$seedmass %>%
+  as.character() %>% 
+  as.numeric() %>% 
+  exp()
+length(traits_seedmass$name) / (herbCount - undefinedCount)
 
-#### d Canopy height -------------------------------------------------------------------------------------------
-Tspecies <- semi_join(species, traitsH, by = "name")
-Ttraits <- semi_join(traitsH, Tspecies, by = "name")
-Tspecies <- Tspecies %>%
+### d Canopy height -------------------------------------------------------------------------------------------
+data_species <- semi_join(species, traits_height, by = "name")
+data_traits <- semi_join(traits_height, data_species, by = "name")
+data_species <- data_species %>%
   pivot_longer(-name, "site", "value") %>%
   pivot_wider(site, name) %>%
   column_to_rownames("site")
-Ttraits <- column_to_rownames(Ttraits, "name")
-log_Ttraits <- log(Ttraits)
-TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
-sites$fdisAbuHeight <- TdiversityAbu$FDis
-sites$cwmAbuHeight <- TdiversityAbu$CWM$height %>%
-  as.character() %>% as.numeric() %>% exp()
-length(traitsH$name) / (herbCount - undefinedSpeciesCount)
+sites$fdisAbuHeight <- data_diversityAbu$FDis
+sites$cwmAbuHeight <- data_diversityAbu$CWM$height %>%
+  as.character() %>% 
+  as.numeric() %>% 
+  exp()
+length(traits_height$name) / (herbCount - undefinedCount)
 
-#### e Specific root length -------------------------------------------------------------------------------------------
-Tspecies <- semi_join(species, traitsSRL, by = "name")
-Ttraits <- semi_join(traitsSRL, Tspecies, by = "name")
-Tspecies <- Tspecies %>%
+### e Specific root length -------------------------------------------------------------------------------------------
+data_species <- semi_join(species, traits_srl, by = "name")
+data_traits <- semi_join(traits_srl, data_species, by = "name")
+data_species <- data_species %>%
   pivot_longer(-name, "site", "value") %>%
   pivot_wider(site, name) %>%
   column_to_rownames("site")
-Ttraits <- column_to_rownames(Ttraits, "name")
-log_Ttraits <- log(Ttraits)
-TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
-sites$fdisAbuSrl <- TdiversityAbu$FDis
-sites$cwmAbuSrl <- TdiversityAbu$CWM$srl %>%
-  as.character() %>% as.numeric() %>% exp()
-length(traitsSRL$name) / (herbCount - undefinedSpeciesCount)
+sites$fdisAbuSrl <- data_diversityAbu$FDis
+sites$cwmAbuSrl <- data_diversityAbu$CWM$srl %>%
+  as.character() %>% 
+  as.numeric() %>% 
+  exp()
+length(traits_srl$name) / (herbCount - undefinedCount)
 
-#### f Root mass fraction -------------------------------------------------------------------------------------------
-Tspecies <- semi_join(species, traitsRMF, by = "name")
-Ttraits <- semi_join(traitsRMF, Tspecies, by = "name")
-Tspecies <- Tspecies %>%
+### f Root mass fraction -------------------------------------------------------------------------------------------
+data_species <- semi_join(species, traits_rmf, by = "name")
+data_traits <- semi_join(traits_rmf, data_species, by = "name")
+data_species <- data_species %>%
   pivot_longer(-name, "site", "value") %>%
   pivot_wider(site, name) %>%
   column_to_rownames("site")
-Ttraits <- column_to_rownames(Ttraits, "name")
-log_Ttraits <- log(Ttraits)
-TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T, 
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
                       calc.FRic = F, calc.FDiv = F, corr = "sqrt");
-sites$fdisAbuRmf <- TdiversityAbu$FDis
-sites$cwmAbuRmf <- TdiversityAbu$CWM$rmf %>%
-  as.character() %>% as.numeric() %>% exp()
-length(traitsRMF$name) / (herbCount - undefinedSpeciesCount)
+sites$fdisAbuRmf <- data_diversityAbu$FDis
+sites$cwmAbuRmf <- data_diversityAbu$CWM$rmf %>%
+  as.character() %>% 
+  as.numeric() %>% 
+  exp()
+length(traits_rmf$name) / (herbCount - undefinedCount)
 
-#### g All -------------------------------------------------------------------------------------------
-Tspecies <- semi_join(species, traitsAll, by = "name")
-Ttraits <- semi_join(traitsAll, Tspecies, by = "name")
-Tspecies <- Tspecies %>%
+### g All -------------------------------------------------------------------------------------------
+data_species <- semi_join(species, traits_all, by = "name")
+data_traits <- semi_join(traits_all, data_species, by = "name")
+data_species <- data_species %>%
   pivot_longer(-name, "site", "value") %>%
   pivot_wider(site, name) %>%
   column_to_rownames("site")
-Ttraits <- column_to_rownames(Ttraits, "name")
-log_Ttraits <- log(Ttraits)
-TdiversityAbu <- dbFD(log_Ttraits, Tspecies, w.abun = T,
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T,
                       calc.FRic = F, calc.FDiv = F, corr = "cailliez")
-sites$fdisAbuAll <- TdiversityAbu$FDis
-length(traitsAll$name) / (herbCount - undefinedSpeciesCount)
-rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
+sites$fdisAbuAll <- data_diversityAbu$FDis
+length(traits_all$name) / (herbCount - undefinedCount)
+
+### h Finalisation -------------------------------------------------------------------------------------------
+sites <- sites %>%
+  mutate(across(c(fdisAbuLHS, fdisAbuSla, cwmAbuSla, fdisAbuSeedmass, cwmAbuSeedmass, fdisAbuHeight, cwmAbuHeight, fdisAbuSrl, cwmAbuSrl, fdisAbuRmf, cwmAbuRmf, fdisAbuAll), 
+                ~ round(.x, digits = 3)))
+
+rm(list = setdiff(ls(), c("sites", "species", "traits")))
 
 
 
@@ -833,9 +857,4 @@ rm(list=setdiff(ls(), c("sites", "species", "traits", "tbiPa", "tbiAbu")))
 write_csv(sites, here("data/processed/data_processed_sites.csv"))
 write_csv(traits, here("data/processed/data_processed_traits.csv"))
 write_csv(species, here("data/processed/data_processed_species.csv"))
-write_csv(speciesseeded, here("data/processed/data_processed_speciesseeded.csv"))
-write_csv(species2018, here("data/processed/data_processed_species18.csv"))
-write_csv(species2019, here("data/processed/data_processed_species19.csv"))
-write_csv(species2020, here("data/processed/data_processed_species20.csv"))
-write_csv(species2021, here("data/processed/data_processed_species21.csv"))
 
