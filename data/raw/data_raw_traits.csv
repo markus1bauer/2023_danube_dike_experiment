@@ -42,7 +42,7 @@ Briza_media,http://www.worldfloraonline.org/taxon/wfo-0000854755,NA,Poaceae,yes,
 Bromus_erectus,http://www.worldfloraonline.org/taxon/wfo-0000855493,NA,Poaceae,yes,top-grass,no,no,no,no,8,5,2,3,no,8,3,no,yes,no,yes,NA,NA,NA
 Bromus_hordeaceus,http://www.worldfloraonline.org/taxon/wfo-0000855692,NA,Poaceae,no,top-grass,no,no,no,no,7,6,4,NA,chwet,NA,3,no,yes,yes,no,NA,NA,NA
 Bromus_inermis,http://www.worldfloraonline.org/taxon/wfo-0000855743,NA,Poaceae,no,top-grass,no,no,no,no,8,NA,7,4,chwet,8,5,no,yes,no,no,NA,NA,NA
-Bromus_secalinus,http://www.worldfloraonline.org/taxon/wfo-0000856443,NA,Poaceae,no,grass,no,no,2,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
+Bromus_secalinus,http://www.worldfloraonline.org/taxon/wfo-0000856443,NA,Poaceae,no,grass,no,no,2,no,6,6,3,NA,no,5,NA,no,no,no,no,NA,NA,NA
 Bromus_sterilis,http://www.worldfloraonline.org/taxon/wfo-0000856589,NA,Poaceae,no,sub-grass,no,no,no,no,7,6,4,4,no,NA,5,no,no,no,no,NA,NA,NA
 Bunias_orientalis,http://www.worldfloraonline.org/taxon/wfo-0000574739,NA,Brassicaceae,no,herb,no,no,no,yes,7,6,5,5,no,8,5,no,no,no,no,NA,NA,NA
 Buphthalmum_salicifolium,http://www.worldfloraonline.org/taxon/wfo-0000082220,NA,Asteraceae,yes,herb,no,no,no,no,8,NA,4,4,no,8,3,no,no,no,no,NA,NA,NA
@@ -66,7 +66,7 @@ Carex_leporina,http://www.worldfloraonline.org/taxon/wfo-0000348260,NA,Cyperacea
 Carex_montana,http://www.worldfloraonline.org/taxon/wfo-0000348977,NA,Cyperaceae,no,sedge,no,no,no,no,5,NA,4,4,no,6,3,no,yes,no,yes,NA,NA,NA
 Carex_muricata,http://www.worldfloraonline.org/taxon/wfo-0000349075,NA,Cyperaceae,no,sedge,no,no,no,no,7,6,3,4,no,NA,6,no,yes,no,no,NA,NA,NA
 Carex_panicea,http://www.worldfloraonline.org/taxon/wfo-0000349728,NA,Cyperaceae,no,sedge,no,V,no,no,8,NA,3,8,chwet,NA,4,no,yes,no,no,NA,NA,NA
-Carex_praecox_ssp_curvata,http://www.worldfloraonline.org/taxon/wfo-0000350214,Carex_curvata,Cyperaceae,no,sedge,no,D,3,no,NA,NA,NA,NA,no,NA,NA,no,yes,no,no,NA,NA,NA
+Carex_praecox_ssp_curvata,http://www.worldfloraonline.org/taxon/wfo-0000350214,Carex_curvata,Cyperaceae,no,sedge,no,D,3,no,9,6,6,3,chwet,NA,4,no,yes,no,no,NA,NA,NA
 Carex_praecox_ssp_praecox,http://www.worldfloraonline.org/taxon/wfo-0000350207,NA,Cyperaceae,no,sedge,no,V,3,no,9,6,6,3,chwet,NA,4,no,yes,no,no,NA,NA,NA
 Carex_spec,http://www.worldfloraonline.org/taxon/wfo-0000588460,NA,Cyperaceae,no,sedge,no,no,no,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
 Carex_sylvatica,http://www.worldfloraonline.org/taxon/wfo-0000351795,NA,Cyperaceae,no,sedge,no,no,no,no,2,5,3,5,no,6,5,no,no,no,no,NA,NA,NA
@@ -75,7 +75,7 @@ Carum_carvi,http://www.worldfloraonline.org/taxon/wfo-0000588460,NA,Apiaceae,no,
 Centaurea_jacea,http://www.worldfloraonline.org/taxon/wfo-0000095537,NA,Asteraceae,yes,herb,no,no,no,no,7,NA,5,NA,no,NA,NA,yes,no,yes,no,NA,NA,NA
 Centaurea_scabiosa,http://www.worldfloraonline.org/taxon/wfo-0000013986,NA,Asteraceae,yes,herb,no,no,no,no,7,NA,3,3,no,8,4,yes,no,no,yes,NA,NA,NA
 Centaurea_spec,http://www.worldfloraonline.org/taxon/wfo-4000007161,NA,Asteraceae,no,herb,no,no,no,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
-Centaurea_stoebe,http://www.worldfloraonline.org/taxon/wfo-0000021390,NA,Asteraceae,yes,herb,no,no,3,no,NA,NA,NA,NA,no,NA,NA,yes,no,no,no,NA,NA,NA
+Centaurea_stoebe,http://www.worldfloraonline.org/taxon/wfo-0000021390,NA,Asteraceae,yes,herb,no,no,3,no,8,7,6,2,no,8,3,yes,no,no,no,NA,NA,NA
 Centaurium_erythraea,http://www.worldfloraonline.org/taxon/wfo-0000593916,NA,Gentianaceae,no,herb,BG,no,no,no,8,6,5,5,no,6,6,yes,no,no,no,NA,NA,NA
 Cerastium_arvense,http://www.worldfloraonline.org/taxon/wfo-0000595158,NA,Caryophyllaceae,no,herb,no,no,no,no,8,NA,5,4,no,6,4,yes,no,no,no,NA,NA,NA
 Cerastium_fontanum_ssp_vulgare,http://www.worldfloraonline.org/taxon/wfo-0000595577,Cerastium_holosteoides,Caryophyllaceae,yes,herb,no,no,no,no,6,NA,NA,5,no,NA,5,yes,no,yes,no,NA,NA,NA
@@ -129,7 +129,7 @@ Fallopia_convolvulus,http://www.worldfloraonline.org/taxon/wfo-0000685786,NA,Pol
 Festuca_arundinacea,http://www.worldfloraonline.org/taxon/wfo-0000869819,NA,Poaceae,no,top-grass,no,no,no,no,8,5,NA,7,chwet,7,4,no,yes,no,no,NA,NA,NA
 Festuca_ovina,http://www.worldfloraonline.org/taxon/wfo-0000871222,NA,Poaceae,yes,sub-grass,no,no,no,no,9,7,4,2,no,NA,1,no,yes,no,yes,NA,NA,NA
 Festuca_pratensis,http://www.worldfloraonline.org/taxon/wfo-0000871673,NA,Poaceae,yes,top-grass,no,no,no,no,8,NA,3,6,no,NA,6,no,yes,yes,no,NA,NA,NA
-Festuca_rubra,http://www.worldfloraonline.org/taxon/wfo-0000871854,NA,Poaceae,yes,sub-grass,no,no,no,no,NA,NA,NA,NA,no,NA,NA,no,yes,yes,no,NA,NA,NA
+Festuca_rubra,http://www.worldfloraonline.org/taxon/wfo-0000871854,NA,Poaceae,yes,sub-grass,no,no,no,no,NA,NA,5,6,no,6,NA,no,yes,yes,no,NA,NA,NA
 Festuca_spec,http://www.worldfloraonline.org/taxon/wfo-4000014703,NA,Poaceae,no,grass,no,no,no,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
 Filipendula_ulmaria,http://www.worldfloraonline.org/taxon/wfo-0000983427,NA,Rosaceae,no,herb,no,no,no,no,7,5,NA,8,no,NA,4,no,no,no,no,NA,NA,NA
 Filipendula_vulgaris,http://www.worldfloraonline.org/taxon/wfo-0000999867,NA,Rosaceae,yes,herb,no,3,3,no,7,6,5,3,chwet,8,2,yes,no,no,yes,NA,NA,NA
@@ -338,7 +338,6 @@ Veronica_serpyllifolia,http://www.worldfloraonline.org/taxon/wfo-0000425204,NA,P
 Veronica_spec,http://www.worldfloraonline.org/taxon/wfo-4000040171,NA,Plantaginaceae,no,herb,no,no,no,no,NA,NA,NA,NA,NA,NA,NA,no,no,no,no,NA,NA,NA
 Vicia_cracca,http://www.worldfloraonline.org/taxon/wfo-0000214046,NA,Fabaceae,yes,legume,no,no,no,no,7,5,NA,5,no,NA,NA,yes,no,yes,no,NA,NA,NA
 Vicia_hirsuta,http://www.worldfloraonline.org/taxon/wfo-0000212743,NA,Fabaceae,no,legume,no,no,no,no,7,6,5,4,no,NA,4,yes,no,no,no,NA,NA,NA
-Vicia_onobrychioides,http://www.worldfloraonline.org/taxon/wfo-0000212769,NA,Fabaceae,no,legume,no,no,no,no,NA,NA,NA,NA,no,NA,NA,no,no,no,no,NA,NA,NA
 Vicia_sativa_ssp_nigra,http://www.worldfloraonline.org/taxon/wfo-0000212782,Vicia_angustifolia,Fabaceae,no,legume,no,no,no,no,5,6,3,NA,no,NA,NA,yes,no,yes,no,NA,NA,NA
 Vicia_sepium,http://www.worldfloraonline.org/taxon/wfo-0000212792,NA,Fabaceae,no,legume,no,no,no,no,NA,NA,5,5,no,6,5,yes,no,no,no,NA,NA,NA
 Vicia_tetrasperma,http://www.worldfloraonline.org/taxon/wfo-0000212802,NA,Fabaceae,no,legume,no,no,no,no,6,6,5,5,no,5,5,yes,no,no,no,NA,NA,NA
