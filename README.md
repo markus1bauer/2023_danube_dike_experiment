@@ -46,4 +46,4 @@ Contact markus1.bauer@tum.de for any further information.
 
 **Citation:**
 
-> Bauer, M., Huber, J., Beck, K. & Kollmann, J. (XXXX). XXX. XX, XXX-XXX. https://doi.org/10.xxx
+> Bauer M, Huber J & Kollmann J (20XX). XXX. XX, XXX-XXX. https://doi.org/10.xxx
