@@ -1,18 +1,24 @@
-# Prepare vegetation data for Danube experiment ####
+# Grassland experiment on dikes
+# Prepare species, sites, and traits data ####
 # Markus Bauer
+# 2022-03-30
 
 
 ### Packages ###
 library(here)
 library(tidyverse)
 library(vegan)
-library(FD) #dbFD()
-library(naniar) #are_na()
+library(FD) #dbFD
+library(naniar) #are_na
 
 ### Start ###
 #installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T, start_new_R = F, quit_R = T, print_R_versions = T, GUI = F)
+#remotes::install_github(file.path("inbo", "checklist"))
+checklist::setup_source()
+#checklist::check_source()
+#devtools::check()
 rm(list = ls())
-setwd(here("data/raw"))
+setwd(here("data", "raw"))
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -22,7 +28,8 @@ setwd(here("data/raw"))
 
 ## 1 Sites #####################################################################################
 
-sites <- read_csv("data_raw_sites.csv", col_names = T, na = c("", "NA", "na"), col_types =
+sites <- read_csv("data_raw_sites.csv", col_names = TRUE, na = c("", "NA", "na"),
+                  col_types =
                     cols(
                       .default = "f",
                       surveyDate_seeded = col_date(format = "%Y-%m-%d"),
@@ -76,7 +83,7 @@ species <- data.table::fread("data_raw_species_20211103.csv",
   group_by(name) %>%
   arrange(name) %>%
   select(name, all_of(sites$id)) %>%
-  mutate(total = sum(c_across(starts_with("L") | starts_with("W") | starts_with("C")), na.rm = T),
+  mutate(total = sum(c_across(starts_with("L") | starts_with("W") | starts_with("C")), na.rm = TRUE),
          presence = if_else(total > 0, 1, 0)) %>%
   filter(presence == 1) %>% # filter only species which occur at least one time
   ungroup() %>%
@@ -94,7 +101,8 @@ specieslist <- species %>%
 
 ## 3 Traits #####################################################################################
 
-traits <- read_csv("data_raw_traits.csv", col_names = T, na = c("", "NA", "na"), col_types = 
+traits <- read_csv("data_raw_traits.csv", col_names = TRUE, na = c("", "NA", "na"),
+                   col_types =
                      cols(
                        .default = "f",
                        name = "c",
@@ -360,15 +368,15 @@ data_traits <- traits %>%
 data_species <- semi_join(species, data_traits, by = "name") %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   group_by(id) %>%
-  mutate(sum = sum(value, na.rm = T)) %>%
+  mutate(sum = sum(value, na.rm = TRUE)) %>%
   filter(sum > 0) %>%
   select(-sum) %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("id")
 data_traits <- column_to_rownames(data_traits, "name")
 ### Calculate CWM ###
-Nweighted <- dbFD(data_traits, data_species, w.abun = T,
-                        calc.FRic = F, calc.FDiv = F, corr = "sqrt")
+Nweighted <- dbFD(data_traits, data_species, w.abun = TRUE,
+                        calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
 
 ### b F value -------------------------------------------------------------------------------------------
 data_traits <- traits %>%
@@ -377,15 +385,15 @@ data_traits <- traits %>%
 data_species <- semi_join(species, data_traits, by = "name") %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   group_by(id) %>%
-  mutate(sum = sum(value, na.rm = T)) %>%
+  mutate(sum = sum(value, na.rm = TRUE)) %>%
   filter(sum > 0) %>%
   select(-sum) %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("id")
 data_traits <- column_to_rownames(data_traits, "name")
 ### Calculate CWM ###
-Fweighted <- dbFD(data_traits, data_species, w.abun = T,
-                  calc.FRic = F, calc.FDiv = F, corr = "sqrt")
+Fweighted <- dbFD(data_traits, data_species, w.abun = TRUE,
+                  calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
 
 ### c T value -------------------------------------------------------------------------------------------
 data_traits <- traits %>%
@@ -394,15 +402,15 @@ data_traits <- traits %>%
 data_species <- semi_join(species, data_traits, by = "name") %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   group_by(id) %>%
-  mutate(sum = sum(value, na.rm = T)) %>%
+  mutate(sum = sum(value, na.rm = TRUE)) %>%
   filter(sum > 0) %>%
   select(-sum) %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("id")
 data_traits <- column_to_rownames(data_traits, "name")
 ### Calculate CWM ###
-Tweighted <- dbFD(data_traits, data_species, w.abun = T,
-                  calc.FRic = F, calc.FDiv = F, corr = "sqrt")
+Tweighted <- dbFD(data_traits, data_species, w.abun = TRUE,
+                  calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
 
 ### d implement in sites data set -------------------------------------------------------------------------------------------
 sites$cwmAbuN <- round(as.numeric(as.character(Nweighted$CWM$n)), 3)
@@ -419,7 +427,7 @@ data_sla <- data.table::fread("data_raw_traitbase_leda_20210223_sla.txt",
                              sep = ";",
                              dec = ".",
                              skip = 4,
-                             header = T,
+                             header = TRUE,
                              select = c("SBS name", "single value [mm^2/mg]")
                              ) %>%
   as_tibble() %>%
@@ -431,7 +439,7 @@ data_seedmass <- data.table::fread("data_raw_traitbase_leda_20210223_seedmass.tx
                             sep = ";",
                             dec = ".",
                             skip = 3,
-                            header = T,
+                            header = TRUE,
                             select = c("SBS name", "single value [mg]"),
                             ) %>%
   as_tibble() %>%
@@ -444,7 +452,7 @@ data_height <- data.table::fread("data_raw_traitbase_leda_20210223_canopy_height
                            sep = ";",
                            dec = ".",
                            skip = 3,
-                           header = T,
+                           header = TRUE,
                            select = c("SBS name", "single value [m]")
                              ) %>%
   as_tibble() %>%
@@ -499,7 +507,7 @@ data <- data %>%
                            Vicia_sativa_ssp_nigra= "Vicia_sativa_s._nigra")) %>% 
   group_by(name) %>%
 ### summarise different rows of one species after renaming ###  
-  summarise(across(where(is.double), ~median(.x, na.rm = T)))
+  summarise(across(where(is.double), ~median(.x, na.rm = TRUE)))
 traits$name[which(!(traits$name %in% data$name))]
 #data %>%
   #group_by(name) %>%
@@ -518,7 +526,7 @@ rm(list = setdiff(ls(), c("sites", "species", "traits", "test")))
 
 ### b TRY data 1 ####
 data <- data.table::fread("data_raw_traitbase_try_20210306_13996.txt", 
-              header = T, 
+              header = TRUE, 
               sep = "\t", 
               dec = ".", 
               quote = "") %>%
@@ -545,7 +553,7 @@ data <- data %>%
                            Ranunculus_serpens_ssp_nemorosus = "Ranunculus_serpens_subsp._nemorosus"),
          trait = as_factor(trait)) %>%
   group_by(name, trait) %>%
-  summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+  summarise(across(where(is.double), ~median(.x, na.rm = TRUE))) %>%
   pivot_wider(names_from = "trait", values_from = "value")
 test$name[which(!(test$name %in% data$name))]
 #data %>%
@@ -566,7 +574,7 @@ traits <- traits %>%
 
 ### c TRY data 2 ####
 data <- data.table::fread("data_raw_traitbase_try_20210318_14157.txt", 
-                          header = T, 
+                          header = TRUE, 
                           sep = "\t", 
                           dec = ".", 
                           quote = "") %>%
@@ -596,7 +604,7 @@ data <- data %>%
                            Silene_latifolia_ssp_alba = "Silene_latifolia_ssp._alba"),
          trait = as_factor(trait)) %>%
   group_by(name, trait) %>%
-  summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+  summarise(across(where(is.double), ~median(.x, na.rm = TRUE))) %>%
   pivot_wider(names_from = "trait", values_from = "value")
 test$name[which(!(test$name %in% data$name))]
 #data %>%
@@ -616,7 +624,7 @@ traits <- traits %>%
    filter(!complete.cases(sla, seedmass, height)))
 
 ### d GrooT data ####
-data <- read.csv("data_raw_traitbase_groot.csv", header = T, na.strings = c("", "NA", "na")) %>%
+data <- read.csv("data_raw_traitbase_groot.csv", header = TRUE, na.strings = c("", "NA", "na")) %>%
   filter(traitName == "Specific_root_length" |
            traitName == "Root_length_density_volume" |
            traitName == "Root_mass_fraction" |
@@ -665,9 +673,9 @@ test <- traits %>%
   filter(!(str_detect(name, "_spec") | str_detect(name, "ceae"))) %>%
   filter(group != "tree" & group != "shrub") %>%
   select(-name, -group)
-vis_miss(test, cluster = T, sort_miss = T)
+vis_miss(test, cluster = TRUE, sort_miss = TRUE)
 miss_var_summary(test)
-gg_miss_case(test, order_cases = T)
+gg_miss_case(test, order_cases = TRUE)
 (test <- traits %>%
     select(name, sla, seedmass, height, rmf, rld, srl, lateral) %>%
     filter(!complete.cases(sla, seedmass, height, rmf, rld, srl, lateral)))
@@ -731,8 +739,8 @@ data_species <- data_species %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
-data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T,
-               calc.FRic = F, calc.FDiv = F, corr = "cailliez")
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE,
+               calc.FRic = FALSE, calc.FDiv = FALSE, corr = "cailliez")
 sites$fdisAbuLHS <- data_diversityAbu$FDis
 length(traits_lhs$name) / (herbCount - undefinedCount)
 
@@ -745,8 +753,8 @@ data_species <- data_species %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
-data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
-                   calc.FRic = F, calc.FDiv = F, corr = "sqrt");
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE, 
+                   calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt");
 sites$fdisAbuSla <- data_diversityAbu$FDis
 sites$cwmAbuSla <- data_diversityAbu$CWM$sla %>%
   as.character() %>% 
@@ -763,8 +771,8 @@ data_species <- data_species %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
-data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
-                      calc.FRic = F, calc.FDiv = F, corr = "sqrt");
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE, 
+                      calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt");
 sites$fdisAbuSeedmass <- data_diversityAbu$FDis
 sites$cwmAbuSeedmass <- data_diversityAbu$CWM$seedmass %>%
   as.character() %>% 
@@ -781,8 +789,8 @@ data_species <- data_species %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
-data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
-                      calc.FRic = F, calc.FDiv = F, corr = "sqrt");
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE, 
+                      calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt");
 sites$fdisAbuHeight <- data_diversityAbu$FDis
 sites$cwmAbuHeight <- data_diversityAbu$CWM$height %>%
   as.character() %>% 
@@ -799,8 +807,8 @@ data_species <- data_species %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
-data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
-                      calc.FRic = F, calc.FDiv = F, corr = "sqrt");
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE, 
+                      calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt");
 sites$fdisAbuSrl <- data_diversityAbu$FDis
 sites$cwmAbuSrl <- data_diversityAbu$CWM$srl %>%
   as.character() %>% 
@@ -817,8 +825,8 @@ data_species <- data_species %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
-data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T, 
-                      calc.FRic = F, calc.FDiv = F, corr = "sqrt");
+data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE, 
+                      calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt");
 sites$fdisAbuRmf <- data_diversityAbu$FDis
 sites$cwmAbuRmf <- data_diversityAbu$CWM$rmf %>%
   as.character() %>% 
@@ -836,7 +844,7 @@ data_species <- data_species %>%
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
 data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = T,
-                      calc.FRic = F, calc.FDiv = F, corr = "cailliez")
+                      calc.FRic = FALSE, calc.FDiv = FALSE, corr = "cailliez")
 sites$fdisAbuAll <- data_diversityAbu$FDis
 length(traits_all$name) / (herbCount - undefinedCount)
 
@@ -854,7 +862,7 @@ rm(list = setdiff(ls(), c("sites", "species", "traits")))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-write_csv(sites, here("data/processed/data_processed_sites.csv"))
-write_csv(traits, here("data/processed/data_processed_traits.csv"))
-write_csv(species, here("data/processed/data_processed_species.csv"))
+write_csv(sites, here("data", "processed", "data_processed_sites.csv"))
+write_csv(traits, here("data", "processed", "data_processed_traits.csv"))
+write_csv(species, here("data", "processed", "data_processed_species.csv"))
 
