@@ -3,9 +3,9 @@
 
 
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Preparation ################################################################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ###############################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ### Packages ###
 library(here)
@@ -17,10 +17,11 @@ library(emmeans)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed"))
+setwd(here("data", "processed"))
 
 ### Load data ###
-sites <- read_csv2("data_processed_sites.csv", col_names = T, na = c("na", "NA"), col_types = 
+sites <- read_csv("data_processed_sites.csv",
+                  col_names = TRUE, na = c("na", "NA"), col_types =
                      cols(
                        .default = "?",
                        id = "f",
@@ -30,14 +31,19 @@ sites <- read_csv2("data_processed_sites.csv", col_names = T, na = c("na", "NA")
                        exposition = "f",
                        side = "f",
                        ffh = "f",
-                       changeType = col_factor(c("FFH6510", "any-FFH", "better", "change", "worse", "non-FFH"))
+                       changeType = col_factor(
+                         c("FFH6510", "any-FFH", "better", "change", "worse",
+                           "non-FFH")
+                         )
                      )) %>%
-  select(biotopeType, cwmAbuHeight, id, surveyYear, constructionYear, plotAge, locationAbb, block, plot, side, exposition, PC1, PC2, PC3, changeType, ffh) %>%
+  select(biotopeType, cwmAbuHeight, id, surveyYear, constructionYear, plotAge,
+         locationAbb, block, plot, side, exposition, PC1, PC2, PC3, changeType,
+         ffh) %>%
   mutate(n = cwmAbuHeight) %>%
-  mutate(plotAge = scale(plotAge, scale = T, center = F)) %>%
-  mutate(surveyYear = scale(surveyYear, scale = T, center = F)) %>%
+  mutate(plotAge = scale(plotAge, scale = TRUE, center = F)) %>%
+  mutate(surveyYear = scale(surveyYear, scale = TRUE, center = F)) %>%
   mutate(surveyYearF = as_factor(surveyYear)) %>%
-  mutate(constructionYear = scale(constructionYear, scale = T, center = F)) %>%
+  mutate(constructionYear = scale(constructionYear, scale = TRUE, center = F)) %>%
   mutate(constructionYearF = as_factor(constructionYear)) %>%
   filter(exposition != "east",
          exposition != "west") %>%
@@ -48,24 +54,30 @@ sites <- read_csv2("data_processed_sites.csv", col_names = T, na = c("na", "NA")
   select(-count) %>%
   mutate(exposition = factor(exposition)) %>%
   mutate(locationAbb = factor(locationAbb)) %>%
-  mutate(locationAbb = factor(locationAbb, levels = unique(locationAbb[order(constructionYear)]))) %>%
+  mutate(locationAbb = factor(locationAbb,
+                              levels = unique(
+                                locationAbb[order(constructionYear)])
+                              )) %>%
   mutate(plot = factor(plot)) %>%
   mutate(block = factor(block))
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Statistics ################################################################################################################
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Statistics ###############################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### 1 Data exploration #####################################################################################
+### 1 Data exploration #######################################################
 
-#### a Graphs ---------------------------------------------------------------------------------------------
+#### a Graphs ----------------------------------------------------------------
 #simple effects:
-ggplot(sites, aes(y = n, x = locationAbb)) + geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = constructionYear)) + geom_point() + geom_smooth(method = "lm") 
-ggplot(sites, aes(y = n, x = constructionYearF)) + geom_boxplot() + geom_quasirandom()
+ggplot(sites, aes(y = n, x = locationAbb)) +
+  geom_boxplot() + geom_quasirandom()
+ggplot(sites, aes(y = n, x = constructionYear)) +
+  geom_point() + geom_smooth(method = "lm") 
+ggplot(sites, aes(y = n, x = constructionYearF)) +
+  geom_boxplot() + geom_quasirandom()
 ggplot(sites, aes(y = n, x = plotAge)) + geom_point() + geom_smooth(method = "lm") 
 ggplot(sites, aes(y = n, x = surveyYearF)) + geom_boxplot() + geom_quasirandom()
 ggplot(sites, aes(y = n, x = exposition)) + geom_boxplot() + geom_quasirandom()
@@ -89,7 +101,8 @@ ggplot(sites, aes(x = PC2, y = n, color = surveyYearF)) +
   geom_smooth(method = "lm") + 
   facet_wrap(~surveyYearF)
 ggplot(sites, aes(x = plotAge, y = n, color = changeType)) + 
-  geom_smooth(aes(group = plot), colour = "grey40", method = "lm", se = F, show.legend = F) + 
+  geom_smooth(aes(group = plot), colour = "grey40", method = "lm",
+              se = FALSE, show.legend = FALSE) + 
   geom_point() + 
   geom_smooth(method = "lm") + 
   facet_wrap(~changeType)
@@ -108,33 +121,33 @@ ggplot(sites, aes(sqrt(n))) + geom_density()
 
 #### a models ----------------------------------------------------------------------------------------
 #random structure
-m1a <- lmer(n ~ 1 + (surveyYear|locationAbb/plot), sites, REML = F)
+m1a <- lmer(n ~ 1 + (surveyYear|locationAbb/plot), sites, REML = FALSE)
 VarCorr(m1a) # convergence problems
-m1b <- lmer(n ~ 1 + (surveyYear|plot), sites, REML = F)
+m1b <- lmer(n ~ 1 + (surveyYear|plot), sites, REML = FALSE)
 VarCorr(m1b) # convergence problems
-m1c <- lmer(n ~ 1 + (1|locationAbb/plot), sites, REML = F)
+m1c <- lmer(n ~ 1 + (1|locationAbb/plot), sites, REML = FALSE)
 VarCorr(m1c)
-m1d <- lmer(n ~ 1 + (1|plot), sites, REML = F)
+m1d <- lmer(n ~ 1 + (1|plot), sites, REML = FALSE)
 VarCorr(m1d)
 #fixed effects
 m2 <- lmer((n) ~ (exposition + side + PC1 + PC2 + PC3) + 
-             (1|plot), sites, REML = F)
-simulateResiduals(m2, plot = T)
+             (1|plot), sites, REML = FALSE)
+simulateResiduals(m2, plot = TRUE)
 #fixed and site and year effects
 m3 <- lmer((n) ~ (exposition + side + PC1 + PC2 + PC3 + surveyYearF + locationAbb) +
-             (1|plot), sites, REML = F);
-simulateResiduals(m3, plot = T)
+             (1|plot), sites, REML = FALSE)
+simulateResiduals(m3, plot = TRUE)
 isSingular(m3)
 #plotAge instead of location
 m4 <- lmer((n) ~ (exposition + side + PC1 + PC2 + PC3 + surveyYearF + plotAge) + 
-             (1|plot), sites, REML = F);
-simulateResiduals(m4, plot = T)
+             (1|plot), sites, REML = FALSE)
+simulateResiduals(m4, plot = TRUE)
 isSingular(m4)
 
 m5 <- lmer((n) ~ (exposition + side + PC1 + PC2 + PC3 + surveyYearF + locationAbb) +
              locationAbb:exposition + locationAbb:surveyYearF +
-             (1|plot), sites, REML = F);
-simulateResiduals(m5, plot = T)
+             (1|plot), sites, REML = FALSE)
+simulateResiduals(m5, plot = TRUE)
 isSingular(m5)
 
 
@@ -143,7 +156,7 @@ anova(m2, m3, m4)
 rm(m1a, m1b, m1c, m1d, m4)
 
 #### c model check -----------------------------------------------------------------------------------------
-simulationOutput <- simulateResiduals(m3, plot = F)
+simulationOutput <- simulateResiduals(m3, plot = FALSE)
 plotResiduals(simulationOutput$scaledResiduals, sites$surveyYearF)
 plotResiduals(simulationOutput$scaledResiduals, sites$locationAbb)
 plotResiduals(simulationOutput$scaledResiduals, sites$block)
@@ -164,12 +177,12 @@ MuMIn::r.squaredGLMM(m2) # to see which R2m is due to 'location' and 'surveyYear
 0.015 / 0.241
 rm(m2)
 VarCorr(m3)
-sjPlot::plot_model(m3, type = "re", show.values = T)
+sjPlot::plot_model(m3, type = "re", show.values = TRUE)
 car::Anova(m5, type = 2)
 
 ### Effect sizes -----------------------------------------------------------------------------------------
 (emm <- emmeans(m3, revpairwise ~ exposition, type = "response"))
-plot(emm, comparison = T)
+plot(emm, comparison = TRUE)
 (emm <- emmeans(m3, revpairwise ~ side, type = "response"))
 
 ### Save ###

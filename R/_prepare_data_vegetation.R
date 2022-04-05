@@ -13,12 +13,13 @@ library(naniar) #are_na
 remotes::install_github(file.path("inbo", "checklist"))
 
 ### Start ###
-#installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T, start_new_R = F, quit_R = T, print_R_versions = T, GUI = F)
+installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T, start_new_R = F, quit_R = T, print_R_versions = T, GUI = F)
 #checklist::setup_source()
 #checklist::check_source()
-#devtools::check()
+#renv::restore()
 rm(list = ls())
 setwd(here("data", "raw"))
+
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -90,7 +91,8 @@ species <- data.table::fread("data_raw_species_20211103.csv",
     starts_with("L") | starts_with("W") | starts_with("C")),
     na.rm = TRUE),
     presence = if_else(total > 0, 1, 0)) %>%
-  filter(presence == 1) %>% # filter only species which occur at least one time
+  filter(presence == 1) %>%
+  # filter only species which occur at least one time
   ungroup() %>%
   select(name, sort(tidyselect::peek_vars()), -total, -presence) %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0)))
@@ -249,7 +251,8 @@ cover_seeded <- species %>%
            remove = FALSE, extra = "merge", fill = "warn", convert = FALSE) %>%
   pivot_wider(names_from = "surveyYear", values_from = "value") %>%
   group_by(plot, name) %>%
-  summarise(across(where(is.double), ~sum(.x, na.rm = TRUE)), .groups = "keep") %>%
+  summarise(across(where(is.double), ~sum(.x, na.rm = TRUE)),
+            .groups = "keep") %>%
   ungroup() %>%
   pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value",
                names_transform = list(surveyYear = as.factor)) %>%
@@ -321,7 +324,8 @@ speciesRichness_seeded <- species %>%
            remove = FALSE, extra = "merge", fill = "warn", convert = FALSE) %>%
   pivot_wider(names_from = "surveyYear", values_from = "value") %>%
   group_by(plot, name) %>%
-  summarise(across(where(is.double), ~sum(.x, na.rm = TRUE)), .groups = "keep") %>%
+  summarise(across(where(is.double), ~sum(.x, na.rm = TRUE)),
+            .groups = "keep") %>%
   ungroup() %>%
   pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value",
                names_transform = list(surveyYear = as.factor)) %>%
@@ -682,7 +686,8 @@ data <- data %>%
                            Cota_tinctoria = "Anthemis_tinctoria",
                            Carex_praecox_ssp_praecox = "Carex_praecox",
                            Carex_filiformis = "Carex_tomentosa",
-                           Cerastium_fontanum_ssp_vulgare = "Cerastium_fontanum",
+                           Cerastium_fontanum_ssp_vulgare =
+                             "Cerastium_fontanum",
                            Persicaria_bistorta = "Bistorta_officinalis",
                            Jacobaea_vulgaris = "Senecio_jacobaea",
                            "Silene_flos-cuculi" = "Lychnis_flos-cuculi",
@@ -728,11 +733,13 @@ traits <- traits %>%
   arrange(name) %>%
   mutate(across(c(sla, seedmass, height, srl, rmf, rld),
                 ~ round(.x, digits = 3)))
-(herbCount <- traits %>% #gamma diversity herbs: 269
+(herbCount <- traits %>%
+    # gamma diversity herbs: 269
     filter(group != "tree" & group != "shrub") %>%
     count() %>%
     pull())
-(undefinedCount <- traits %>% #gamma diversity of undefined species: 15
+(undefinedCount <- traits %>%
+    # gamma diversity of undefined species: 15
     filter((str_detect(name, "_spec") | str_detect(name, "ceae"))) %>%
     count() %>%
     pull())
