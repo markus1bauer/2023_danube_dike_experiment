@@ -12,6 +12,7 @@ library(here)
 library(tidyverse)
 library(ggbeeswarm)
 library(brms)
+library(BayesianTools)
 library(DHARMa)
 library(emmeans)
 
@@ -104,28 +105,33 @@ ggplot(sites, aes(log(n))) + geom_density()
 #random structure
 m1a <- brm(n ~ 1 + (surveyYear | block/plot), data = sites)
 VarCorr(m1a) # convergence problems
-m1b <- lmer(n ~ 1 + (surveyYear | block), data = sites)
+m1b <- brm(n ~ 1 + (surveyYear | block), data = sites)
 VarCorr(m1b) # convergence problems
-m1c <- lmer(n ~ 1 + (1 | block/plot), data = sites)
+m1c <- brm(n ~ 1 + (1 | block/plot), data = sites)
 VarCorr(m1c)
-m1d <- lmer(n ~ 1 + (1 | block/plot), sites,)
+m1d <- brm(n ~ 1 + (1 | block/plot), data = sites,)
 VarCorr(m1d)
 #fixed effects
-m2 <- lmer((n) ~ (exposition + substrateDepth + sandRatio + targetType +
+m2 <- brm((n) ~ (exposition + substrateDepth + sandRatio + targetType +
                     seedDensity) +
              exposition:sandRatio + exposition:targetType +
-             (1 | block/plot) + (1 | surveyYear_fac), sites, REML = FALSE)
-simulateResiduals(m2, plot = TRUE)
+             (1 | block/plot) + (1 | surveyYear_fac),
+          data = sites, 
+          family = gaussian,
+          cores = parallel::detectCores(), 
+          chains = 4,
+          iter = 10000,
+          control = list(adapt_delta = 0.99, max_treedepth = 12), 
+          seed = 123, 
+          prior = set_prior("normal(0,2)", class="b"))
 #fixed and site and year effects
-m3 <- lmer(sqrt(n) ~ (exposition + substrateDepth + sandRatio + targetType +
+m3 <- brm(sqrt(n) ~ (exposition + substrateDepth + sandRatio + targetType +
                     seedDensity) + surveyYear_fac +
              exposition:sandRatio + exposition:targetType +
-             (1 | block/plot), sites, REML = FALSE)
-simulateResiduals(m3, plot = TRUE)
-m4 <- lmer(sqrt(n) ~ (exposition + substrateDepth + sandRatio + targetType +
+             (1 | block/plot), data = sites)
+m4 <- brm(sqrt(n) ~ (exposition + substrateDepth + sandRatio + targetType +
                         seedDensity + surveyYear_fac)^3 +
-             (1 | block/plot), sites, REML = FALSE)
-simulateResiduals(m4, plot = TRUE)
+             (1 | block/plot), data = sites)
 
 
 #### b comparison ------------------------------------------------------------
@@ -133,26 +139,34 @@ anova(m2, m3, m4)
 rm(m1a, m1b, m1c, m1d, m4)
 
 #### c model check -----------------------------------------------------------
-simulationOutput <- simulateResiduals(m3, plot = FALSE)
-plotResiduals(simulationOutput$scaledResiduals, sites$surveyYearF)
-plotResiduals(simulationOutput$scaledResiduals, sites$locationAbb)
-plotResiduals(simulationOutput$scaledResiduals, sites$block)
-plotResiduals(simulationOutput$scaledResiduals, sites$plot)
-plotResiduals(simulationOutput$scaledResiduals, sites$side)
-plotResiduals(simulationOutput$scaledResiduals, sites$exposition)
-plotResiduals(simulationOutput$scaledResiduals, sites$PC1)
-plotResiduals(simulationOutput$scaledResiduals, sites$PC2)
-plotResiduals(simulationOutput$scaledResiduals, sites$PC3)
+Samples <- coda.samples(jagsModel, variable.names = para.names, n.iter = 5000)
 
+x = getSample(Samples)
+# note - yesterday, we calcualted the predictions from the parameters
+# here we observe them direct - this is the normal way to calcualte the 
+# posterior predictive distribution
+posteriorPredDistr = x[,5:(4+599)]
+posteriorPredSim = x[,(5+599):(4+2*599)]
+
+
+sim <- createDHARMa(simulatedResponse = t(posteriorPredSim), 
+                   observedResponse = Owls$SiblingNegotiation, 
+                   fittedPredictedResponse = apply(posteriorPredDistr, 2, median), 
+                   integerResponse = TRUE)
+plot(sim)
+testDispersion(res)
+testZeroInflation(res)
+plotResiduals(Dat$Veg,res$scaledResiduals)
+
+testSpatialAutocorrelation(res)
 
 ## 3 Chosen model output #####################################################
 
 ### Model output -------------------------------------------------------------
-MuMIn::r.squaredGLMM(m4)
-0.411 /  0.425
-VarCorr(m3)
-sjPlot::plot_model(m3, type = "re", show.values = TRUE)
-car::Anova(m2, type = 3)
+summary(m)
+plot(m)
+correlationPlot(m)
+marginalPlot(m)
 
 ### Effect sizes --------------------------------------------------------------
 (emm <- emmeans(m3, revpairwise ~ exposition, type = "response"))
