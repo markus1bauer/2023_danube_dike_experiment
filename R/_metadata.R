@@ -7,9 +7,9 @@ library(here)
 library(tidyverse)
 library(EML)
 library(emld)
-remotes::install_github("ropenscilabs/emldown", build = FALSE)
+#remotes::install_github("ropenscilabs/emldown", build = FALSE)
 library(emldown)
-remotes::install_github("EDIorg/EMLassemblyline")
+#remotes::install_github("EDIorg/EMLassemblyline")
 library(EMLassemblyline)
 
 ### Start ###

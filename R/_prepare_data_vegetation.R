@@ -10,13 +10,12 @@ library(tidyverse)
 library(vegan)
 library(FD) #dbFD
 library(naniar) #are_na
-remotes::install_github(file.path("inbo", "checklist"))
+#remotes::install_github(file.path("inbo", "checklist"))
 
 ### Start ###
-installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T, start_new_R = F, quit_R = T, print_R_versions = T, GUI = F)
+#installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T, start_new_R = F, quit_R = T, print_R_versions = T, GUI = F)
 #checklist::setup_source()
 #checklist::check_source()
-#renv::restore()
 rm(list = ls())
 setwd(here("data", "raw"))
 

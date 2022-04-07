@@ -32,6 +32,23 @@
         "qgam"
       ]
     },
+    "EML": {
+      "Package": "EML",
+      "Version": "2.0.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "81c56ce58dcd7e43b95b9b3f4420ce44",
+      "Requirements": [
+        "digest",
+        "dplyr",
+        "emld",
+        "jqr",
+        "jsonlite",
+        "rmarkdown",
+        "uuid",
+        "xml2"
+      ]
+    },
     "FD": {
       "Package": "FD",
       "Version": "1.0-12",
@@ -43,6 +60,27 @@
         "ape",
         "geometry",
         "vegan"
+      ]
+    },
+    "GGally": {
+      "Package": "GGally",
+      "Version": "2.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "022f78c8698724b326f1838b1a98cafa",
+      "Requirements": [
+        "RColorBrewer",
+        "dplyr",
+        "forcats",
+        "ggplot2",
+        "gtable",
+        "lifecycle",
+        "plyr",
+        "progress",
+        "reshape",
+        "rlang",
+        "scales",
+        "tidyr"
       ]
     },
     "KernSmooth": {
@@ -102,11 +140,33 @@
     },
     "RColorBrewer": {
       "Package": "RColorBrewer",
-      "Version": "1.1-2",
+      "Version": "1.1-3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e031418365a7f7a766181ab5a41a5716",
+      "Hash": "45f0398006e83a5b10b72a90663d8d8c",
       "Requirements": []
+    },
+    "RNeXML": {
+      "Package": "RNeXML",
+      "Version": "2.4.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "566784df90f63652d2db76ed8832e15a",
+      "Requirements": [
+        "XML",
+        "ape",
+        "dplyr",
+        "httr",
+        "lazyeval",
+        "plyr",
+        "reshape2",
+        "rlang",
+        "stringi",
+        "stringr",
+        "tidyr",
+        "uuid",
+        "xml2"
+      ]
     },
     "Rcpp": {
       "Package": "Rcpp",
@@ -167,6 +227,18 @@
         "scales"
       ]
     },
+    "V8": {
+      "Package": "V8",
+      "Version": "4.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c6bdc74e7e3a095102a6326d5a8f0224",
+      "Requirements": [
+        "Rcpp",
+        "curl",
+        "jsonlite"
+      ]
+    },
     "XML": {
       "Package": "XML",
       "Version": "3.99-0.9",
@@ -193,6 +265,72 @@
         "MASS",
         "pixmap",
         "sp"
+      ]
+    },
+    "adegenet": {
+      "Package": "adegenet",
+      "Version": "2.1.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "81f5a24c3abef768441a192d41686cbd",
+      "Requirements": [
+        "MASS",
+        "ade4",
+        "ape",
+        "boot",
+        "dplyr",
+        "ggplot2",
+        "igraph",
+        "reshape2",
+        "seqinr",
+        "shiny",
+        "vegan"
+      ]
+    },
+    "adegraphics": {
+      "Package": "adegraphics",
+      "Version": "1.0-16",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5f15b8efa9d44f9cfb2998c63f2ec341",
+      "Requirements": [
+        "KernSmooth",
+        "RColorBrewer",
+        "ade4",
+        "lattice",
+        "latticeExtra",
+        "sp"
+      ]
+    },
+    "adephylo": {
+      "Package": "adephylo",
+      "Version": "1.1-11",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b1eed9d85b748f4fa6e55403c08b6f20",
+      "Requirements": [
+        "ade4",
+        "adegenet",
+        "ape",
+        "phylobase"
+      ]
+    },
+    "adespatial": {
+      "Package": "adespatial",
+      "Version": "0.3-14",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a2e71f1100b8448c6a6b681b3a886ed4",
+      "Requirements": [
+        "MASS",
+        "ade4",
+        "adegraphics",
+        "adephylo",
+        "lattice",
+        "shiny",
+        "sp",
+        "spdep",
+        "vegan"
       ]
     },
     "ape": {
@@ -611,12 +749,23 @@
         "withr"
       ]
     },
-    "desc": {
-      "Package": "desc",
-      "Version": "1.4.1",
+    "deldir": {
+      "Package": "deldir",
+      "Version": "1.0-6",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "eebd27ee58fcc58714eedb7aa07d8ad1",
+      "Hash": "65a3d4e2a1619bb85ae0fb64628da972",
+      "Requirements": []
+    },
+    "desc": {
+      "Package": "desc",
+      "Version": "1.4.1.9000",
+      "Source": "Repository",
+      "Repository": "https://ropensci.r-universe.dev",
+      "RemoteUrl": "https://github.com/r-lib/desc",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "a91da3f91a701243b5adb928327a3ec5c3297c0f",
+      "Hash": "7b73ee61d4e636d03e66b50469329024",
       "Requirements": [
         "R6",
         "cli",
@@ -772,6 +921,37 @@
       "Hash": "bb0eec2fe32e88d9e2836c2f73ea2077",
       "Requirements": [
         "rlang"
+      ]
+    },
+    "emld": {
+      "Package": "emld",
+      "Version": "0.5.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6098f89bda95bbbc579fe594f353a361",
+      "Requirements": [
+        "jsonld",
+        "jsonlite",
+        "xml2",
+        "yaml"
+      ]
+    },
+    "emldown": {
+      "Package": "emldown",
+      "Version": "0.0.5",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "emldown",
+      "RemoteUsername": "ropenscilabs",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "8d98c8fc708dc1f2ecc8eec3d23a66e4f487e658",
+      "Hash": "a1e6a5e0308cdbf25662cfee6e7b3731",
+      "Requirements": [
+        "EML",
+        "leaflet",
+        "xml2",
+        "xslt"
       ]
     },
     "emmeans": {
@@ -960,10 +1140,13 @@
     },
     "gert": {
       "Package": "gert",
-      "Version": "1.6.0",
+      "Version": "1.6.0.9000",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "98c014c4c933f23ea5a0321a4d0b588b",
+      "Repository": "https://ropensci.r-universe.dev",
+      "RemoteUrl": "https://github.com/r-lib/gert",
+      "RemoteRef": "main",
+      "RemoteSha": "553605ec5329dca61139109270f8d97d055c767f",
+      "Hash": "ac54d294539aed0bfc61844c10071879",
       "Requirements": [
         "askpass",
         "credentials",
@@ -1281,6 +1464,18 @@
         "uuid"
       ]
     },
+    "igraph": {
+      "Package": "igraph",
+      "Version": "1.2.11",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "1d10cd31c2979f9c819ffe4d16b9dc2b",
+      "Requirements": [
+        "Matrix",
+        "magrittr",
+        "pkgconfig"
+      ]
+    },
     "ini": {
       "Package": "ini",
       "Version": "0.3.1",
@@ -1351,6 +1546,17 @@
       "Hash": "441ee36360a57b363f4fa3df0c364630",
       "Requirements": []
     },
+    "jqr": {
+      "Package": "jqr",
+      "Version": "1.2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a0637f1eb368d00f3c561552f52b39f3",
+      "Requirements": [
+        "lazyeval",
+        "magrittr"
+      ]
+    },
     "jquerylib": {
       "Package": "jquerylib",
       "Version": "0.1.4",
@@ -1370,6 +1576,18 @@
       "Requirements": [
         "Rcpp",
         "rapidjsonr"
+      ]
+    },
+    "jsonld": {
+      "Package": "jsonld",
+      "Version": "2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "173b7fe6d4c05b04aef7d350bc72ffeb",
+      "Requirements": [
+        "V8",
+        "curl",
+        "jsonlite"
       ]
     },
     "jsonlite": {
@@ -1420,6 +1638,19 @@
       "Repository": "CRAN",
       "Hash": "b64cdbb2b340437c4ee047a1f4c4377b",
       "Requirements": []
+    },
+    "latticeExtra": {
+      "Package": "latticeExtra",
+      "Version": "0.6-29",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "590829599d6182cf7461787af34666ee",
+      "Requirements": [
+        "RColorBrewer",
+        "jpeg",
+        "lattice",
+        "png"
+      ]
     },
     "lazyeval": {
       "Package": "lazyeval",
@@ -1638,10 +1869,10 @@
     },
     "magrittr": {
       "Package": "magrittr",
-      "Version": "2.0.2",
+      "Version": "2.0.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "cdc87ecd81934679d1557633d8e1fe51",
+      "Hash": "7ce2733a9826b3aeb1775d56fd305472",
       "Requirements": []
     },
     "mapedit": {
@@ -1946,6 +2177,20 @@
       "Repository": "CRAN",
       "Hash": "abf0ca85c1c752e0d04f46334e635046",
       "Requirements": []
+    },
+    "phylobase": {
+      "Package": "phylobase",
+      "Version": "0.8.10",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a0ff712f5072fcc6349c02f7f22e8254",
+      "Requirements": [
+        "RNeXML",
+        "Rcpp",
+        "ade4",
+        "ape",
+        "rncl"
+      ]
     },
     "picante": {
       "Package": "picante",
@@ -2316,6 +2561,18 @@
         "plyr"
       ]
     },
+    "reshape2": {
+      "Package": "reshape2",
+      "Version": "1.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bb5996d0bd962d214a11140d77589917",
+      "Requirements": [
+        "Rcpp",
+        "plyr",
+        "stringr"
+      ]
+    },
     "rgdal": {
       "Package": "rgdal",
       "Version": "1.5-29",
@@ -2361,6 +2618,17 @@
         "yaml"
       ]
     },
+    "rncl": {
+      "Package": "rncl",
+      "Version": "0.8.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "72f358fb79438401352db574376b0637",
+      "Requirements": [
+        "Rcpp",
+        "progress"
+      ]
+    },
     "rosm": {
       "Package": "rosm",
       "Version": "0.2.5",
@@ -2403,10 +2671,10 @@
     },
     "rprojroot": {
       "Package": "rprojroot",
-      "Version": "2.0.2",
+      "Version": "2.0.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "249d8cd1e74a8f6a26194a91b47f21d1",
+      "Hash": "1de7ab598047a87bba48434ba35d497d",
       "Requirements": []
     },
     "rstudioapi": {
@@ -2498,6 +2766,16 @@
         "viridisLite"
       ]
     },
+    "segmented": {
+      "Package": "segmented",
+      "Version": "1.4-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "47ccaf91cbaf8e6272b9ff74a6d1d514",
+      "Requirements": [
+        "MASS"
+      ]
+    },
     "selectr": {
       "Package": "selectr",
       "Version": "0.4-2",
@@ -2507,6 +2785,17 @@
       "Requirements": [
         "R6",
         "stringr"
+      ]
+    },
+    "seqinr": {
+      "Package": "seqinr",
+      "Version": "4.2-8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "487529ff4c174fb9a83d6ffce74f9d62",
+      "Requirements": [
+        "ade4",
+        "segmented"
       ]
     },
     "servr": {
@@ -2701,6 +2990,34 @@
       "Hash": "ce8613f4e8c84ef4da9eba65b874ebe9",
       "Requirements": [
         "lattice"
+      ]
+    },
+    "spData": {
+      "Package": "spData",
+      "Version": "2.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5d68152962bb57448336effdcf598d0a",
+      "Requirements": [
+        "raster",
+        "sp"
+      ]
+    },
+    "spdep": {
+      "Package": "spdep",
+      "Version": "1.2-3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "91e8b265450575e6e3b8d9ca9220d17f",
+      "Requirements": [
+        "boot",
+        "deldir",
+        "e1071",
+        "s2",
+        "sf",
+        "sp",
+        "spData",
+        "units"
       ]
     },
     "stars": {
@@ -3193,6 +3510,17 @@
       "Hash": "6c85f015dee9cc7710ddd20f86881f58",
       "Requirements": [
         "processx"
+      ]
+    },
+    "xslt": {
+      "Package": "xslt",
+      "Version": "1.4.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2f44fc659e30d602098fb238e3b656ed",
+      "Requirements": [
+        "Rcpp",
+        "xml2"
       ]
     },
     "xtable": {

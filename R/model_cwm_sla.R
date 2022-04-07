@@ -20,53 +20,24 @@ rm(list = ls())
 setwd(here("data", "processed"))
 
 ### Load data ###
-sites <- read_csv2("data_processed_sites.csv",
+sites <- read_csv("data_processed_sites.csv",
                    col_names = TRUE, na = c("na", "NA"), col_types =
                      cols(
                        .default = "?",
-                       id = "f",
-                       locationAbb = "f",
                        block = "f",
-                       plot = "f",
                        exposition = "f",
-                       side = "f",
-                       ffh = "f",
-                       changeType = col_factor(
-                         c("FFH6510", "any-FFH", "better",
-                           "change", "worse", "non-FFH")
+                       sandRatio = "f",
+                       substrateDepth = "f",
+                       seedDensity = "f",
+                       targetType = "f"
                          )
-                     )) %>%
-  select(biotopeType, baykompv, cwmAbuSla, id, surveyYear, constructionYear,
-         plotAge, locationAbb, block, plot, side, exposition, PC1, PC2, PC3,
-         changeType, ffh) %>%
-  mutate(n = cwmAbuSla) %>%
-  mutate(location = factor(locationAbb,
-                           levels = unique(
-                             locationAbb[order(constructionYear)])
-                           )) %>%
-  mutate(plotAge = scale(plotAge,
-                         scale = TRUE, center = FALSE),
-         surveyYear = scale(surveyYear,
-                            scale = TRUE, center = FALSE),
-         surveyYearF = as_factor(surveyYear),
-         constructionYear = scale(constructionYear,
-                                  scale = TRUE, center = FALSE),
-         constructionYearF = as_factor(constructionYear)) %>%
-  filter(exposition != "east",
-         exposition != "west") %>%
-  group_by(plot) %>%
-  mutate(count = n()) %>%
-  ungroup() %>%
-  slice_max(count, n = 1) %>%
-  select(-count) %>%
-  mutate(locationAbb = factor(locationAbb),
-         locationAbb = factor(locationAbb,
-                              levels = unique(
-                                locationAbb[order(constructionYear)])
-                              ),
-         exposition = factor(exposition),
-         block = factor(block),
-         plot = factor(plot))
+                     ) %>%
+  filter(!str_detect(id, "C")) %>%
+  mutate(n = cwmAbuSla,
+         surveyYear_fac = factor(surveyYear)) %>%
+  select(id, plot, block, surveyYear, surveyYear_fac, exposition,
+         sandRatio, substrateDepth, seedDensity, targetType, n)
+    
 
 
 
@@ -79,93 +50,82 @@ sites <- read_csv2("data_processed_sites.csv",
 
 #### a Graphs -----------------------------------------------------------------
 #simple effects:
-ggplot(sites, aes(y = n, x = locationAbb)) +
+ggplot(sites, aes(y = n, x = exposition)) +
   geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = constructionYear)) +
-  geom_point() + geom_smooth(method = "lm") 
-ggplot(sites, aes(y = n, x = constructionYearF)) +
-  geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = plotAge)) +
-  geom_point() + geom_smooth(method = "lm") 
-ggplot(sites, aes(y = n, x = surveyYearF)) +
-  geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = exposition)) + geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = side)) + geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = PC1)) + geom_point() + geom_smooth(method = "lm")
-ggplot(sites, aes(y = n, x = PC2)) + geom_point() + geom_smooth(method = "lm")
-ggplot(sites, aes(y = n, x = PC3)) + geom_point() + geom_smooth(method = "lm")
-ggplot(sites, aes(y = n, x = changeType)) + geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = ffh)) + geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = baykompv)) + geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = biotopeType)) +
-  geom_boxplot() + geom_quasirandom()
+ggplot(sites, aes(y = n, x = targetType)) +
+  geom_boxplot() + geom_quasirandom() 
+ggplot(sites, aes(y = n, x = seedDensity)) +
+  geom_boxplot() + geom_quasirandom() 
+ggplot(sites, aes(y = n, x = substrateDepth)) +
+  geom_boxplot() + geom_quasirandom() 
+ggplot(sites, aes(y = n, x = sandRatio)) +
+  geom_boxplot() + geom_quasirandom() 
+ggplot(sites, aes(y = n, x = block)) +
+  geom_boxplot() + geom_quasirandom() 
 #2way
-ggplot(sites, aes(x = locationAbb, y = n, color = exposition)) + 
-  geom_boxplot() +
-  geom_quasirandom()
-ggplot(sites, aes(x = locationAbb, y = n, color = exposition)) + 
-  geom_boxplot() +
-  facet_wrap(~ exposition)
-ggplot(sites, aes(x = locationAbb, y = n, color = surveyYearF)) + 
-  geom_boxplot()
-ggplot(sites, aes(x = PC2, y = n, color = surveyYearF)) + 
-  geom_point() + 
-  geom_smooth(method = "lm") + 
-  facet_wrap(~ surveyYearF)
-ggplot(sites, aes(x = plotAge, y = n, color = changeType)) + 
-  geom_smooth(aes(group = plot), colour = "grey40",
-              method = "lm", se = FALSE, show.legend = FALSE) + 
-  geom_point() + 
-  geom_smooth(method = "lm") + 
-  facet_wrap(~ changeType)
-
+ggplot(sites, aes(x = exposition, y = n)) + 
+  geom_boxplot() + geom_quasirandom() + facet_wrap(~ targetType)
+ggplot(sites, aes(x = sandRatio, y = n)) + 
+  geom_boxplot() + geom_quasirandom() + facet_wrap(~ targetType)
+ggplot(sites, aes(x = substrateDepth, y = n)) + 
+  geom_boxplot() + geom_quasirandom() + facet_wrap(~ targetType)
+ggplot(sites, aes(x = sandRatio, y = n)) + 
+  geom_boxplot() + geom_quasirandom() + facet_wrap(~ exposition)
+#3way
+ggplot(sites, aes(x = exposition, y = n, color = sandRatio)) + 
+  geom_boxplot() + facet_wrap(~ targetType)
+ggplot(sites %>% filter(surveyYear == 2021),
+       aes(x = exposition, y = n, color = sandRatio)) + 
+  geom_boxplot() + facet_wrap(~ targetType)
+ggplot(sites, aes(x = exposition, y = n, color = substrateDepth)) + 
+  geom_boxplot() + facet_wrap(~ targetType)
+ggplot(sites, aes(x = substrateDepth, y = n, color = sandRatio)) + 
+  geom_boxplot() + facet_wrap(~ targetType)
+ggplot(sites, aes(x = factor(surveyYear), y = n, color = targetType)) + 
+  geom_boxplot() + facet_wrap(~ exposition)
+#4way
+ggplot(sites, aes(x = exposition, y = n, color = sandRatio, fill = substrateDepth)) + 
+  geom_boxplot() + facet_wrap(~ targetType)
 
 ##### b Outliers, zero-inflation, transformations? ----------------------------
 dotchart((sites$n), groups = factor(sites$exposition),
          main = "Cleveland dotplot")
-sites %>% count(locationAbb)
+sites %>% count(block)
 boxplot(sites$n)
 plot(table((sites$n)), type = "h",
      xlab = "Observed values", ylab = "Frequency")
 ggplot(sites, aes(n)) + geom_density()
-ggplot(sites, aes(sqrt(n))) + geom_density()
+ggplot(sites, aes(log(n))) + geom_density()
 
 
 ## 2 Model building ###########################################################
 
 #### a models -----------------------------------------------------------------
 #random structure
-m1a <- lmer(n ~ 1 + (surveyYear | locationAbb/plot), sites, REML = FALSE)
+m1a <- lmer(n ~ 1 + (surveyYear | block/plot), sites, REML = FALSE)
 VarCorr(m1a) # convergence problems
-m1b <- lmer(n ~ 1 + (surveyYear | plot), sites, REML = FALSE)
+m1b <- lmer(n ~ 1 + (surveyYear | block), sites, REML = FALSE)
 VarCorr(m1b) # convergence problems
-m1c <- lmer(n ~ 1 + (1 | locationAbb/plot), sites, REML = FALSE)
+m1c <- lmer(n ~ 1 + (1 | block/plot), sites, REML = FALSE)
 VarCorr(m1c)
-m1d <- lmer(n ~ 1 + (1 | plot), sites, REML = FALSE)
+m1d <- lmer(n ~ 1 + (1 | block/plot), sites, REML = FALSE)
 VarCorr(m1d)
 #fixed effects
-m2 <- lmer((n) ~ (exposition + side + PC1 + PC2 + PC3) + 
-             (1 | plot), sites, REML = FALSE)
+m2 <- lmer((n) ~ (exposition + substrateDepth + sandRatio + targetType +
+                    seedDensity) +
+             exposition:sandRatio + exposition:targetType +
+             (1 | block/plot) + (1 | surveyYear_fac), sites, REML = FALSE)
 simulateResiduals(m2, plot = TRUE)
 #fixed and site and year effects
-m3 <- lmer((n) ~ (exposition + side + PC1 + PC2 + PC3 + surveyYearF +
-                    locationAbb) +
-             (1 | plot), sites, REML = FALSE)
+m3 <- lmer(sqrt(n) ~ (exposition + substrateDepth + sandRatio + targetType +
+                    seedDensity) + surveyYear_fac +
+             exposition:sandRatio + exposition:targetType +
+             (1 | block/plot), sites, REML = FALSE)
 simulateResiduals(m3, plot = TRUE)
-isSingular(m3)
-#plotAge instead of location
-m4 <- lmer((n) ~ (exposition + side + PC1 + PC2 + PC3 + surveyYearF +
-                    plotAge) + 
-             (1 | plot), sites, REML = FALSE)
+m4 <- lmer(sqrt(n) ~ (exposition + substrateDepth + sandRatio + targetType +
+                        seedDensity + surveyYear_fac)^3 +
+             (1 | block/plot), sites, REML = FALSE)
 simulateResiduals(m4, plot = TRUE)
-isSingular(m4)
-
-m5 <- lmer((n) ~ (exposition + side + PC1 + PC2 + PC3 + surveyYearF +
-                    locationAbb) +
-             locationAbb:exposition + locationAbb:surveyYearF +
-             (1 | plot), sites, REML = FALSE)
-simulateResiduals(m5, plot = TRUE)
-isSingular(m5)
 
 
 #### b comparison ------------------------------------------------------------
@@ -188,15 +148,11 @@ plotResiduals(simulationOutput$scaledResiduals, sites$PC3)
 ## 3 Chosen model output #####################################################
 
 ### Model output -------------------------------------------------------------
-MuMIn::r.squaredGLMM(m5)
+MuMIn::r.squaredGLMM(m4)
 0.411 /  0.425
-MuMIn::r.squaredGLMM(m2)
-# to see which R2m is due to 'location' and 'surveyYearF'
-0.015 / 0.241
-rm(m2)
 VarCorr(m3)
 sjPlot::plot_model(m3, type = "re", show.values = TRUE)
-car::Anova(m5, type = 2)
+car::Anova(m2, type = 3)
 
 ### Effect sizes --------------------------------------------------------------
 (emm <- emmeans(m3, revpairwise ~ exposition, type = "response"))
