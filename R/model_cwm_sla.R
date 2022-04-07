@@ -11,7 +11,7 @@
 library(here)
 library(tidyverse)
 library(ggbeeswarm)
-library(lmerTest)
+library(brms)
 library(DHARMa)
 library(emmeans)
 
@@ -52,7 +52,7 @@ sites <- read_csv("data_processed_sites.csv",
 #simple effects:
 ggplot(sites, aes(y = n, x = exposition)) +
   geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = targetType)) +
+ggplot(sites %>% filter(surveyYear == 2021), aes(y = n, x = targetType)) +
   geom_boxplot() + geom_quasirandom() 
 ggplot(sites, aes(y = n, x = seedDensity)) +
   geom_boxplot() + geom_quasirandom() 
@@ -63,9 +63,9 @@ ggplot(sites, aes(y = n, x = sandRatio)) +
 ggplot(sites, aes(y = n, x = block)) +
   geom_boxplot() + geom_quasirandom() 
 #2way
-ggplot(sites, aes(x = exposition, y = n)) + 
+ggplot(sites %>% filter(surveyYear == 2021), aes(x = exposition, y = n)) + 
   geom_boxplot() + geom_quasirandom() + facet_wrap(~ targetType)
-ggplot(sites, aes(x = sandRatio, y = n)) + 
+ggplot(sites %>% filter(surveyYear == 2021), aes(x = sandRatio, y = n)) + 
   geom_boxplot() + geom_quasirandom() + facet_wrap(~ targetType)
 ggplot(sites, aes(x = substrateDepth, y = n)) + 
   geom_boxplot() + geom_quasirandom() + facet_wrap(~ targetType)
@@ -102,13 +102,13 @@ ggplot(sites, aes(log(n))) + geom_density()
 
 #### a models -----------------------------------------------------------------
 #random structure
-m1a <- lmer(n ~ 1 + (surveyYear | block/plot), sites, REML = FALSE)
+m1a <- brm(n ~ 1 + (surveyYear | block/plot), data = sites)
 VarCorr(m1a) # convergence problems
-m1b <- lmer(n ~ 1 + (surveyYear | block), sites, REML = FALSE)
+m1b <- lmer(n ~ 1 + (surveyYear | block), data = sites)
 VarCorr(m1b) # convergence problems
-m1c <- lmer(n ~ 1 + (1 | block/plot), sites, REML = FALSE)
+m1c <- lmer(n ~ 1 + (1 | block/plot), data = sites)
 VarCorr(m1c)
-m1d <- lmer(n ~ 1 + (1 | block/plot), sites, REML = FALSE)
+m1d <- lmer(n ~ 1 + (1 | block/plot), sites,)
 VarCorr(m1d)
 #fixed effects
 m2 <- lmer((n) ~ (exposition + substrateDepth + sandRatio + targetType +
