@@ -13,7 +13,6 @@ library(here)
 library(tidyverse)
 library(ggbeeswarm)
 library(brms)
-library(BayesianTools)
 library(DHARMa)
 library(MCMCvis)
 library(emmeans)
@@ -88,7 +87,8 @@ ggplot(sites, aes(x = exposition, y = n, color = sandRatio)) +
   facet_wrap(~ targetType)
 ggplot(sites %>% filter(surveyYear == 2021),
        aes(x = exposition, y = n, color = sandRatio)) + 
-  geom_boxplot() + facet_wrap(~ targetType)
+  geom_boxplot() +
+  facet_wrap(~ targetType)
 ggplot(sites %>% filter(surveyYear == 2021),
        aes(x = exposition, y = n, color = substrateDepth)) + 
   geom_boxplot() +
@@ -97,6 +97,10 @@ ggplot(sites %>% filter(surveyYear == 2021),
        aes(x = substrateDepth, y = n, color = sandRatio)) + 
   geom_boxplot() +
   facet_wrap(~ targetType)
+ggplot(sites %>% filter(surveyYear == 2021),
+       aes(x = substrateDepth, y = n, color = sandRatio)) + 
+  geom_boxplot() +
+  facet_wrap(~ exposition)
 ggplot(sites, aes(x = factor(surveyYear), y = n, color = targetType)) + 
   geom_boxplot() +
   facet_wrap(~ exposition)
@@ -122,8 +126,19 @@ ggplot(sites, aes(log(n))) + geom_density()
 #### a models -----------------------------------------------------------------
 iter = 10000
 chains = 4
-set.seed(123)
 
+m1 <- brm(n ~ 1 + 
+           (1 | block/plot) + (1 | botanist_year),
+         data = sites, 
+         warmup = 500,
+         chains = chains,
+         iter = iter,
+         prior = set_prior("cauchy(0,1)", class = "sigma"),
+         control = list(adapt_delta = 0.99),
+         save_pars = save_pars(all = TRUE),
+         cores = parallel::detectCores(),
+         seed = 123)
+summary(m1)
 m2 <- brm(n ~ (exposition + substrateDepth + sandRatio + targetType +
                  seedDensity) + 
             (1 | block/plot) + (1 | botanist_year),
@@ -132,27 +147,86 @@ m2 <- brm(n ~ (exposition + substrateDepth + sandRatio + targetType +
           chains = chains,
           iter = iter,
           prior = set_prior("cauchy(0,1)", class = "sigma"),
-          cores = parallel::detectCores())
-plot(m2) # check convergence visually
-summary(m2) # check convergence by PSRF
-coda::effectiveSize(m2)
-# A general guideline suggests that values less than 1.05 are good, between 1.05 and 1.10 are ok, and above 1.10 have not converged well.
-m3 <- brm(n ~ (exposition + substrateDepth + sandRatio +
-                 seedDensity) * targetType +
-            (1 | block/plot) + (1 | surveyYear_fac),
+          save_pars = save_pars(all = TRUE),
+          cores = parallel::detectCores(),
+          seed = 123)
+summary(m2) # check convergence by ESS and PSRF
+m3 <- brm(n ~ (exposition + substrateDepth + sandRatio + targetType +
+                 seedDensity) + 
+            (1 + targetType | block/plot) + (1 + targetType | botanist_year),
           data = sites, 
           warmup = 500,
           chains = chains,
           iter = iter,
           prior = set_prior("cauchy(0,1)", class = "sigma"),
-          cores = parallel::detectCores())
-BayesianTools::tracePlot(m3) # check convergence visually
-BayesianTools::summary(m3) # check convergence by PSRF
+          control = list(adapt_delta = 0.99),
+          save_pars = save_pars(all = TRUE),
+          cores = parallel::detectCores(),
+          seed = 123)
+summary(m3) # check convergence by ESS and PSRF
+m4 <- brm(n ~ (exposition + substrateDepth + sandRatio + seedDensity) *
+                 targetType + 
+            (1 + targetType | block/plot) + (1 + targetType | botanist_year),
+          data = sites, 
+          warmup = 500,
+          chains = chains,
+          iter = iter,
+          prior = set_prior("cauchy(0,1)", class = "sigma"),
+          save_pars = save_pars(all = TRUE),
+          cores = parallel::detectCores(),
+          seed = 123)
+summary(m4) # check convergence by ESS and PSRF
+m5 <- brm(n ~ exposition * substrateDepth * sandRatio + seedDensity +
+            targetType + 
+            (1 + targetType | block/plot) + (1 + targetType | botanist_year),
+          data = sites, 
+          warmup = 500,
+          chains = chains,
+          iter = iter,
+          prior = set_prior("cauchy(0,1)", class = "sigma"),
+          control = list(adapt_delta = 0.99),
+          save_pars = save_pars(all = TRUE),
+          cores = parallel::detectCores(),
+          seed = 123)
+summary(m5) # check convergence by ESS and PSRF
+m6 <- brm(n ~ exposition * substrateDepth * sandRatio + seedDensity +
+            targetType + botanist_year +
+            (1 + targetType | block/plot),
+          data = sites, 
+          warmup = 500,
+          chains = chains,
+          iter = iter,
+          prior = c(
+            set_prior("cauchy(0,1)", class = "sigma"),
+            set_prior("normal(0.1,2)", class = "b", coef = "targetType")
+            ),
+          control = list(adapt_delta = 1.1),
+          save_pars = save_pars(all = TRUE),
+          cores = parallel::detectCores(),
+          seed = 123)
+summary(m6) # check convergence by ESS and PSRF
+prior_summary(m6)
+plot(hypothesis(m6, "targetTypedry_grassland > 0"))
+# A general guideline suggests that values less than 1.05 are good, between 1.05 and 1.10 are ok, and above 1.10 have not converged well.
 coda::effectiveSize(m3)
-
+plot(m)
+gelman.diag(Samples)
+correlationPlot(Samples)
+MCMCtrace(m6, 
+          #params = c('beta[1]', 'beta[2]', 'beta[3]'), 
+          ISB = FALSE, 
+          exact = TRUE,
+          Rhat = TRUE,
+          n.eff = TRUE,
+          pdf = TRUE)
+MCMCplot(m6)#, 
+         #params = "beta", 
+         #ci = c(50, 80), 
+         #HPD = FALSE, 
+         #ref_ovl = TRUE)
 
 #### b comparison ------------------------------------------------------------
-bayes_factor(m2, m3, log = FALSE)
+brms::bayes_factor(m4, m5, log = FALSE)
 rm(m3)
 
 #### c model check -----------------------------------------------------------
@@ -163,12 +237,12 @@ pp_check(m2, type = "loo_intervals")
 pp_check(m2, type = "loo_pit")
 
 model_check <- createDHARMa(
-  simulatedResponse = t(posterior_predict(m2)),
+  simulatedResponse = t(posterior_predict(m6)),
   observedResponse = sites$n,
-  fittedPredictedResponse = apply(t(posterior_epred(m2)), 1, mean),
+  fittedPredictedResponse = apply(t(posterior_epred(m6)), 1, mean),
   integerResponse = TRUE
-)
-plot(model_check)
+  ) %>%
+  plot()
 
 
 ## 3 Chosen model output #####################################################
