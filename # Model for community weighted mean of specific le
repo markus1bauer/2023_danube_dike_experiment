@@ -120,6 +120,7 @@ m2 <- brm(n ~ (exposition + substrateDepth + sandRatio + targetType +
           cores = parallel::detectCores(), )
 BayesianTools::tracePlot(m2) # check convergence visually
 BayesianTools::summary(m2) # check convergence by PSRF
+coda::effectiveSize(m3)
 # A general guideline suggests that values less than 1.05 are good, between 1.05 and 1.10 are ok, and above 1.10 have not converged well.
 m3 <- brm(n ~ (exposition + substrateDepth + sandRatio +
                     seedDensity) * targetType +
@@ -130,8 +131,9 @@ m3 <- brm(n ~ (exposition + substrateDepth + sandRatio +
           iter = iter,
           prior = set_prior("cauchy(0,1)", class = "sigma")
           cores = parallel::detectCores(), )
-BayesianTools::tracePlot(m2) # check convergence visually
-BayesianTools::summary(m2) # check convergence by PSRF
+BayesianTools::tracePlot(m3) # check convergence visually
+BayesianTools::summary(m3) # check convergence by PSRF
+coda::effectiveSize(m3)
 
 
 #### b comparison ------------------------------------------------------------
