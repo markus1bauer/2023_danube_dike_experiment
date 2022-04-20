@@ -518,8 +518,8 @@ for (i in unique(data_species$year)) {
 res18 <- TBI(species_seeded, species2018,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res18$BCD.summary # B = 0.223, C = 0.155, D = 0.378 (58.9% vs. 41.0%)
-res18$t.test_B.C # p.perm = 0.0058
+res18$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
+res18$t.test_B.C # p.perm = 0.
 tbi18 <- res18$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "18")
@@ -530,20 +530,20 @@ plot(res18, type = "BC")
 res19 <- TBI(species_seeded, species2019,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res19$BCD.summary # B = 0.223, C = 0.155, D = 0.378 (58.9% vs. 41.0%)
-res19$t.test_B.C # p.perm = 0.0058
+res19$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
+res19$t.test_B.C # p.perm = 0.
 tbi19 <- res19$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "19")
 #### Test plot
 plot(res19, type = "BC")
 
-#### * seedmixes vs. 2021 ####
+#### * seedmixes vs. 2020 ####
 res20 <- TBI(species_seeded, species2020,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res20$BCD.summary # B = 0.223, C = 0.155, D = 0.378 (58.9% vs. 41.0%)
-res20$t.test_B.C # p.perm = 0.0058
+res20$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
+res20$t.test_B.C # p.perm = 0.
 tbi20 <- res20$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "20")
@@ -554,8 +554,8 @@ plot(res20, type = "BC")
 res21 <- TBI(species_seeded, species2021,
                method = "sorensen",
                nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res21$BCD.summary # B = 0.223, C = 0.155, D = 0.378 (58.9% vs. 41.0%)
-res21$t.test_B.C # p.perm = 0.0058
+res21$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
+res21$t.test_B.C # p.perm = 0.
 tbi21 <- res21$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "21")
@@ -563,115 +563,90 @@ tbi21 <- res21$BCD.mat %>%
 plot(res21, type = "BC")
 
 #### * Combine datasets ####
-data_presence <- bind_rows(tbi1718, tbi1819, tbi1921, tbi1719, tbi1721) %>%
+data_presence <- bind_rows(tbi18, tbi19, tbi20, tbi21) %>%
   mutate(presabu = "presence")
 
 ### b Calculate TBI Abundance ------------------------------------------
 
-#### * 2017 vs. 2018 ####
-res1718 <- TBI(species2017, species2018,
-               method = "%diff",
-               nperm = 9999, test.t.perm = TRUE, clock = TRUE
-)
-res1718$BCD.summary # B = 0.213, C = 0.260, D = 0.473 (45.0% vs. 54.9%)
-res1718$t.test_B.C # p.perm = 0.1756
-tbi1718 <- as_tibble(res1718$BCD.mat) %>%
-  mutate(comparison = "1718")
+#### * seedmixes vs. 2018 ####
+res18 <- TBI(species_seeded, species2018,
+             method = "sorensen",
+             nperm = 9999, test.t.perm = TRUE, clock = TRUE)
+res18$BCD.summary # B = 0.566, C = 0.308, D = 0.874 (0.647 vs. 0.352)
+res18$t.test_B.C # p.perm = 0.
+tbi18 <- res18$BCD.mat %>%
+  as_tibble() %>%
+  mutate(comparison = "18")
 #### Test plot
-plot(res1718, type = "BC")
+plot(res18, type = "BC")
 
-#### * 2018 vs. 2019 ####
-res1819 <- TBI(species2018, species2019,
-               method = "%diff",
-               nperm = 9999, test.t.perm = TRUE, clock = TRUE
-)
-res1819$BCD.summary # B = 0.167, C = 0.302, D = 0.470 (35.7% vs. 64.2%)
-res1819$t.test_B.C # p.perm = 1e-04
-tbi1819 <- as_tibble(res1819$BCD.mat) %>%
-  mutate(comparison = "1819")
+#### * seedmixes vs. 2019 ####
+res19 <- TBI(species_seeded, species2019,
+             method = "sorensen",
+             nperm = 9999, test.t.perm = TRUE, clock = TRUE)
+res19$BCD.summary # B = 0.372, C = 0.361, D = 0.733 (0.507 vs. 0.492)
+res19$t.test_B.C # p.perm = 0.422
+tbi19 <- res19$BCD.mat %>%
+  as_tibble() %>%
+  mutate(comparison = "19")
 #### Test plot
-plot(res1819, type = "BC")
+plot(res19, type = "BC")
 
-#### * 2019 vs. 2021 ####
-res1921 <- TBI(species2019, species2021,
-               method = "%diff",
-               nperm = 9999, test.t.perm = TRUE, clock = TRUE
-)
-res1921$BCD.summary # B = 0.331, C = 0.168, D = 0.499 (66.3% vs. 33.6%)
-res1921$t.test_B.C # p.perm = 1e-04
-tbi1921 <- as_tibble(res1921$BCD.mat) %>%
-  mutate(comparison = "1921")
+#### * seedmixes vs. 2020 ####
+res20 <- TBI(species_seeded, species2020,
+             method = "sorensen",
+             nperm = 9999, test.t.perm = TRUE, clock = TRUE)
+res20$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
+res20$t.test_B.C # p.perm = 0.
+tbi20 <- res20$BCD.mat %>%
+  as_tibble() %>%
+  mutate(comparison = "20")
 #### Test plot
-plot(res1921, type = "BC")
+plot(res20, type = "BC")
 
-#### * 2017 vs. 2019 ####
-res1719 <- TBI(species2017, species2019,
-               method = "%diff",
-               nperm = 9999, test.t.perm = TRUE, clock = TRUE
-)
-res1719$BCD.summary # B = 0.210, C = 0.390, D = 0.601 (35.0% vs. 64.9%)
-res1719$t.test_B.C # p.perm = 1e-04
-tbi1719 <- as_tibble(res1719$BCD.mat) %>%
-  mutate(comparison = "1719")
+#### * seedmixes vs. 2021 ####
+res21 <- TBI(species_seeded, species2021,
+             method = "sorensen",
+             nperm = 9999, test.t.perm = TRUE, clock = TRUE)
+res21$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
+res21$t.test_B.C # p.perm = 0.
+tbi21 <- res21$BCD.mat %>%
+  as_tibble() %>%
+  mutate(comparison = "21")
 #### Test plot
-plot(res1719, type = "BC")
-
-#### * 2017 vs. 2021 ####
-res1721 <- TBI(species2017, species2021,
-               method = "%diff",
-               nperm = 9999, test.t.perm = TRUE, clock = TRUE
-)
-res1721$BCD.summary # B = 0.301, C = 0.319, D = 0.620 (48.5% vs. 51.4%)
-res1721$t.test_B.C # p.perm = 0.598
-tbi1721 <- as_tibble(res1721$BCD.mat) %>%
-  mutate(comparison = "1721")
-#### Test plot
-plot(res1721, type = "BC")
+plot(res21, type = "BC")
 
 #### * Combine datasets ####
-data_abundance <- bind_rows(tbi1718, tbi1819, tbi1921, tbi1719, tbi1721) %>%
+data_presence <- bind_rows(tbi18, tbi19, tbi20, tbi21) %>%
   mutate(presabu = "abundance")
 plot <- data_sites %>%
-  filter(str_detect(id, "2017")) %>%
+  filter(str_detect(id, "2018")) %>%
   pull(plot)
+
 ### combine abundance and presence data ###
 data <- add_row(data_presence, data_abundance) %>%
-  mutate(plot = rep(plot, length(data_abundance$comparison) * 2 / 38))
+  mutate(plot = rep(plot, length(data_abundance$comparison) * 2 / 38)) # überprüfen
 sites_temporal <- sites %>%
   filter(surveyYearF == "2017") %>%
   left_join(data, by = "plot") %>%
   rename(
     B = "B/(2A+B+C)", C = "C/(2A+B+C)", D = "D=(B+C)/(2A+B+C)",
     change = Change
-  ) %>%
+    ) %>%
   mutate(
     change = C - B,
     plot = as_factor(plot)
-  ) %>%
+    ) %>%
   select(
     plot, block,
-    location, locationAbb, locationYear, longitude, latitude,
-    riverkm, distanceRiver,
-    constructionYear,
-    exposition, side,
-    PC1soil, PC2soil, PC3soil, PC1constructionYear, PC2constructionYear,
-    PC3constructionYear,
-    conf.low, conf.high,
+    exposition, seedDensity, targetType, substrateDepth, sandRatio,
     B, C, D, comparison, presabu
-  ) %>%
-  mutate(across(
-    c(
-      PC1soil, PC2soil, PC3soil,
-      distanceRiver,
-      B, C, D
-    ),
-    ~ round(.x, digits = 4)
-  ))
+    ) %>%
+  mutate(across(c(B, C, D), ~ round(.x, digits = 4)))
 
 rm(list = setdiff(ls(), c(
-  "sites", "species", "traits", "sites_temporal",
-  "pcaConstuctionYear", "pcaSoil", "pcaSurveyYear"
-)))
+  "sites", "species", "traits", "sites_temporal", "seedmixes"
+  )))
 
 ## 7 Functional plant traits ###################################################
 
