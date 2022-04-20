@@ -102,9 +102,9 @@ sitesGraph + inset_element(gerGraph,
                            on_top = T)
 
 ### d Save -----------------------------------------------------------------------
-ggsave("figure_1_map_(300dpi_8x11cm).tiff", 
+ggsave("figure_1_map_300dpi_8x11cm.tiff", 
        dpi = 300, width = 8, height = 11, units = "cm",
-       path = here("outputs/figures")
+       path = here("outputs", "figures")
 )
 
 

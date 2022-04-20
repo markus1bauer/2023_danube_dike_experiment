@@ -7,13 +7,14 @@
 ### Packages ###
 library(here)
 library(tidyverse)
-library(vegan)
-library(FD) #dbFD
 library(naniar) #are_na
+library(vegan)
+library(adespatial)
+library(FD) #dbFD
 #remotes::install_github(file.path("inbo", "checklist"))
 
 ### Start ###
-#installr::updateR(browse_news = F, install_R = T, copy_packages = T, copy_Rprofile.site = T, keep_old_packages = T, update_packages = T, start_new_R = F, quit_R = T, print_R_versions = T, GUI = F)
+#installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE, start_new_R = TRUE, quit_R = TRUE, print_R_versions = TRUE, GUI = FALSE)
 #checklist::setup_source()
 #checklist::check_source()
 rm(list = ls())
@@ -73,7 +74,7 @@ sites <- read_csv("data_raw_sites.csv", col_names = TRUE,
 
 ## 2 Species ###################################################################
 
-species <- data.table::fread("data_raw_species_20211103.csv",
+species <- data.table::fread("data_raw_species_20211112.csv",
                              sep = ",",
                              dec = ".",
                              skip = 0,
@@ -90,8 +91,8 @@ species <- data.table::fread("data_raw_species_20211103.csv",
     starts_with("L") | starts_with("W") | starts_with("C")),
     na.rm = TRUE),
     presence = if_else(total > 0, 1, 0)) %>%
+  # filter only species which occur at least one time:
   filter(presence == 1) %>%
-  # filter only species which occur at least one time
   ungroup() %>%
   select(name, sort(tidyselect::peek_vars()), -total, -presence) %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0)))
@@ -103,10 +104,31 @@ specieslist <- species %>%
          .keep = "unused") %>%
   group_by(name) %>%
   summarise(sum = sum(sum))
-#write_csv(specieslist, here("outputs/tables/specieslist_20211011.csv"))
+#write_csv(specieslist, here("outputs/tables/specieslist_20220420.csv"))
 
 
-## 3 Traits ####################################################################
+## 3 Seedmixes #################################################################
+
+seedmixes <- data.table::fread("data_raw_species_20211112.csv",
+                             sep = ",",
+                             dec = ".",
+                             skip = 0,
+                             header = TRUE,
+                             na.strings = c("", "NA", "na"),
+                             colClasses = list(
+                               character = "name"
+                             )) %>%
+  arrange(name) %>%
+  select(name, ends_with("seeded")) %>%
+  filter(name %in% species$name) %>%
+  select(name, sort(tidyselect::peek_vars())) %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(-name, names_to = "id", values_to = "seeded") %>%
+  separate(id, c("plot"), sep = "_(?!.*_)",
+           remove = TRUE, extra = "drop", fill = "warn", convert = FALSE)
+ 
+
+## 4 Traits ####################################################################
 
 traits <- read_csv("data_raw_traits.csv", col_names = TRUE,
                    na = c("", "NA", "na"),
@@ -137,10 +159,11 @@ traits <- read_csv("data_raw_traits.csv", col_names = TRUE,
   traits[duplicated(traits$abb), ]
   #traits$name[which(!(traits$name %in% species$name))]
   species$name[which(!(species$name %in% traits$name))]
-traits <- semi_join(traits, species, by = "name")
+traits <- traits %>%
+  semi_join(species, by = "name")
 
 
-## 4 Check data frames #########################################################
+## 5 Check data frames #########################################################
 
 ### Check typos ###
 sites %>%
@@ -181,7 +204,7 @@ miss_var_summary(traits, order = TRUE)
 vis_miss(traits, cluster = FALSE, sort_miss = TRUE)
 
 #sites[is.na(sites$id),]
-rm(list = setdiff(ls(), c("sites", "species", "traits")))
+rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 
 
@@ -191,10 +214,6 @@ rm(list = setdiff(ls(), c("sites", "species", "traits")))
 
 
 ## 1 Create simple variables ###################################################
-
-sites <- sites %>%
-  mutate(conf.low = c(1:seq_len(id)),
-         conf.high = c(1:seq_len(id)))
 
 traits <- traits %>%
   mutate(target = if_else(
@@ -244,20 +263,28 @@ cover_ruderalIndicator <- cover %>%
 ### * Seeded species' coverage ####
 cover_seeded <- species %>%
   select(-starts_with("C"), -contains("x0809")) %>%
+  # Make two columns out of column id:
   pivot_longer(-name, names_to = "id", values_to = "value",
                values_drop_na = TRUE) %>%
   separate(id, c("plot", "surveyYear"), sep = "_(?!.*_)",
            remove = FALSE, extra = "merge", fill = "warn", convert = FALSE) %>%
+  # Summarise for plot:
   pivot_wider(names_from = "surveyYear", values_from = "value") %>%
   group_by(plot, name) %>%
   summarise(across(where(is.double), ~sum(.x, na.rm = TRUE)),
             .groups = "keep") %>%
   ungroup() %>%
+  # Combine with seedmixes:
   pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value",
                names_transform = list(surveyYear = as.factor)) %>%
+  unite(id_seeded, name, plot, sep = "", remove = FALSE) %>%
+  left_join(seedmixes %>%
+              unite(id_seeded, name, plot, sep = "", remove = TRUE),
+            by = "id_seeded") %>%
+  select(-id_seeded) %>%
   mutate(success = if_else(seeded > 0 & value > 0, value, 0)) %>%
   group_by(plot, surveyYear) %>%
-  summarise(seededCov = sum(success), .groups = "keep") %>%
+  summarise(seededCov = sum(success, na.rm = TRUE), .groups = "keep") %>%
   ungroup() %>%
   unite(id, plot, surveyYear, sep = "_")
 
@@ -275,7 +302,7 @@ sites <- sites %>%
          graminoidCovratio = round(graminoidCovratio, 3),
          seededCovratio = round(seededCovratio, 3))
 
-rm(list = setdiff(ls(), c("sites", "species", "traits")))
+rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 
 ## 3 Alpha diversity ###########################################################
@@ -317,20 +344,29 @@ speciesRichness_target <- speciesRichness %>%
 ### * seeded species (species richness) ####
 speciesRichness_seeded <- species %>%
   select(-starts_with("C"), -contains("x0809")) %>%
+  # Make two columns out of column id:
   pivot_longer(-name, names_to = "id", values_to = "value",
                values_drop_na = TRUE) %>%
   separate(id, c("plot", "surveyYear"), sep = "_(?!.*_)",
            remove = FALSE, extra = "merge", fill = "warn", convert = FALSE) %>%
+  # Summarise for plot:
   pivot_wider(names_from = "surveyYear", values_from = "value") %>%
   group_by(plot, name) %>%
   summarise(across(where(is.double), ~sum(.x, na.rm = TRUE)),
             .groups = "keep") %>%
   ungroup() %>%
+  # Combine with seedmixes:
   pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value",
                names_transform = list(surveyYear = as.factor)) %>%
+  unite(id_seeded, name, plot, sep = "", remove = FALSE) %>%
+  left_join(seedmixes %>%
+              unite(id_seeded, name, plot, sep = "", remove = TRUE),
+            by = "id_seeded") %>%
+  select(-id_seeded) %>%
   mutate(successCov = if_else(seeded > 0 & value > 0, 1, 0)) %>%
   group_by(plot, surveyYear) %>%
-  summarise(seededRichness = sum(successCov), .groups = "keep") %>%
+  summarise(seededRichness = sum(successCov, na.rm = TRUE),
+            .groups = "keep") %>%
   ungroup() %>%
   unite(id, plot, surveyYear, sep = "_")
 
@@ -376,7 +412,7 @@ sites <- sites %>%
   left_join(data, by = "id") %>%
   mutate(eveness = shannon / log(speciesRichness))
 
-rm(list = ls(pattern = "[^species|traits|sites]"))
+rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 
 ## 5 CWM of Ellenberg ##########################################################
@@ -437,10 +473,207 @@ sites$cwmAbuN <- round(as.numeric(as.character(Nweighted$CWM$n)), 3)
 sites$cwmAbuF <- round(as.numeric(as.character(Fweighted$CWM$f)), 3)
 sites$cwmAbuT <- round(as.numeric(as.character(Tweighted$CWM$t)), 3)
 
-rm(list = setdiff(ls(), c("sites", "species", "traits")))
+rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 
-## 6 Functional plant traits ###################################################
+## 6 Temporal beta diversity ###################################################
+
+### * Prepare data ####
+data_sites <- sites %>%
+  # Choose only plots which were surveyed in each year:
+  filter(accumulatedCov > 0) %>%
+  add_count(plot) %>%
+  filter(n == max(n)) %>%
+  select(id, plot)
+data_species <- species %>%
+  select(where(~ !all(is.na(.x)))) %>%
+  mutate(across(where(is.numeric), ~ replace(., is.na(.), 0))) %>%
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  separate(id, c("plot", "year"), sep = "_(?!.*_)",
+           remove = FALSE, extra = "merge", fill = "warn", convert = FALSE) %>%
+  arrange(id) %>%
+  semi_join(data_sites, by = "id") %>%
+  select(plot, year, tidyselect::peek_vars(), -id)
+species_seeded <- seedmixes %>%
+  pivot_wider(names_from = "name", values_from = "seeded") %>%
+  arrange(plot) %>%
+  column_to_rownames("plot") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0)))
+
+### Separate each year in several tibbles ###
+
+for (i in unique(data_species$year)) {
+  nam <- paste("species", i, sep = "")
+  
+  assign(nam, data_species %>%
+           filter(year == i) %>%
+           select(-year) %>%
+           column_to_rownames(var = "plot"))
+}
+
+### a Calculate TBI Presence --------------------------------------------------
+
+#### * seedmixes vs. 2018 ####
+res18 <- TBI(species_seeded, species2018,
+             method = "sorensen",
+             nperm = 9999, test.t.perm = TRUE, clock = TRUE)
+res18$BCD.summary # B = 0.223, C = 0.155, D = 0.378 (58.9% vs. 41.0%)
+res18$t.test_B.C # p.perm = 0.0058
+tbi18 <- res18$BCD.mat %>%
+  as_tibble() %>%
+  mutate(comparison = "18")
+#### Test plot
+plot(res18, type = "BC")
+
+#### * seedmixes vs. 2019 ####
+res19 <- TBI(species_seeded, species2019,
+             method = "sorensen",
+             nperm = 9999, test.t.perm = TRUE, clock = TRUE)
+res19$BCD.summary # B = 0.223, C = 0.155, D = 0.378 (58.9% vs. 41.0%)
+res19$t.test_B.C # p.perm = 0.0058
+tbi19 <- res19$BCD.mat %>%
+  as_tibble() %>%
+  mutate(comparison = "19")
+#### Test plot
+plot(res19, type = "BC")
+
+#### * seedmixes vs. 2021 ####
+res20 <- TBI(species_seeded, species2020,
+             method = "sorensen",
+             nperm = 9999, test.t.perm = TRUE, clock = TRUE)
+res20$BCD.summary # B = 0.223, C = 0.155, D = 0.378 (58.9% vs. 41.0%)
+res20$t.test_B.C # p.perm = 0.0058
+tbi20 <- res20$BCD.mat %>%
+  as_tibble() %>%
+  mutate(comparison = "20")
+#### Test plot
+plot(res20, type = "BC")
+
+#### * seedmixes vs. 2021 ####
+res21 <- TBI(species_seeded, species2021,
+               method = "sorensen",
+               nperm = 9999, test.t.perm = TRUE, clock = TRUE)
+res21$BCD.summary # B = 0.223, C = 0.155, D = 0.378 (58.9% vs. 41.0%)
+res21$t.test_B.C # p.perm = 0.0058
+tbi21 <- res21$BCD.mat %>%
+  as_tibble() %>%
+  mutate(comparison = "21")
+#### Test plot
+plot(res21, type = "BC")
+
+#### * Combine datasets ####
+data_presence <- bind_rows(tbi1718, tbi1819, tbi1921, tbi1719, tbi1721) %>%
+  mutate(presabu = "presence")
+
+### b Calculate TBI Abundance ------------------------------------------
+
+#### * 2017 vs. 2018 ####
+res1718 <- TBI(species2017, species2018,
+               method = "%diff",
+               nperm = 9999, test.t.perm = TRUE, clock = TRUE
+)
+res1718$BCD.summary # B = 0.213, C = 0.260, D = 0.473 (45.0% vs. 54.9%)
+res1718$t.test_B.C # p.perm = 0.1756
+tbi1718 <- as_tibble(res1718$BCD.mat) %>%
+  mutate(comparison = "1718")
+#### Test plot
+plot(res1718, type = "BC")
+
+#### * 2018 vs. 2019 ####
+res1819 <- TBI(species2018, species2019,
+               method = "%diff",
+               nperm = 9999, test.t.perm = TRUE, clock = TRUE
+)
+res1819$BCD.summary # B = 0.167, C = 0.302, D = 0.470 (35.7% vs. 64.2%)
+res1819$t.test_B.C # p.perm = 1e-04
+tbi1819 <- as_tibble(res1819$BCD.mat) %>%
+  mutate(comparison = "1819")
+#### Test plot
+plot(res1819, type = "BC")
+
+#### * 2019 vs. 2021 ####
+res1921 <- TBI(species2019, species2021,
+               method = "%diff",
+               nperm = 9999, test.t.perm = TRUE, clock = TRUE
+)
+res1921$BCD.summary # B = 0.331, C = 0.168, D = 0.499 (66.3% vs. 33.6%)
+res1921$t.test_B.C # p.perm = 1e-04
+tbi1921 <- as_tibble(res1921$BCD.mat) %>%
+  mutate(comparison = "1921")
+#### Test plot
+plot(res1921, type = "BC")
+
+#### * 2017 vs. 2019 ####
+res1719 <- TBI(species2017, species2019,
+               method = "%diff",
+               nperm = 9999, test.t.perm = TRUE, clock = TRUE
+)
+res1719$BCD.summary # B = 0.210, C = 0.390, D = 0.601 (35.0% vs. 64.9%)
+res1719$t.test_B.C # p.perm = 1e-04
+tbi1719 <- as_tibble(res1719$BCD.mat) %>%
+  mutate(comparison = "1719")
+#### Test plot
+plot(res1719, type = "BC")
+
+#### * 2017 vs. 2021 ####
+res1721 <- TBI(species2017, species2021,
+               method = "%diff",
+               nperm = 9999, test.t.perm = TRUE, clock = TRUE
+)
+res1721$BCD.summary # B = 0.301, C = 0.319, D = 0.620 (48.5% vs. 51.4%)
+res1721$t.test_B.C # p.perm = 0.598
+tbi1721 <- as_tibble(res1721$BCD.mat) %>%
+  mutate(comparison = "1721")
+#### Test plot
+plot(res1721, type = "BC")
+
+#### * Combine datasets ####
+data_abundance <- bind_rows(tbi1718, tbi1819, tbi1921, tbi1719, tbi1721) %>%
+  mutate(presabu = "abundance")
+plot <- data_sites %>%
+  filter(str_detect(id, "2017")) %>%
+  pull(plot)
+### combine abundance and presence data ###
+data <- add_row(data_presence, data_abundance) %>%
+  mutate(plot = rep(plot, length(data_abundance$comparison) * 2 / 38))
+sites_temporal <- sites %>%
+  filter(surveyYearF == "2017") %>%
+  left_join(data, by = "plot") %>%
+  rename(
+    B = "B/(2A+B+C)", C = "C/(2A+B+C)", D = "D=(B+C)/(2A+B+C)",
+    change = Change
+  ) %>%
+  mutate(
+    change = C - B,
+    plot = as_factor(plot)
+  ) %>%
+  select(
+    plot, block,
+    location, locationAbb, locationYear, longitude, latitude,
+    riverkm, distanceRiver,
+    constructionYear,
+    exposition, side,
+    PC1soil, PC2soil, PC3soil, PC1constructionYear, PC2constructionYear,
+    PC3constructionYear,
+    conf.low, conf.high,
+    B, C, D, comparison, presabu
+  ) %>%
+  mutate(across(
+    c(
+      PC1soil, PC2soil, PC3soil,
+      distanceRiver,
+      B, C, D
+    ),
+    ~ round(.x, digits = 4)
+  ))
+
+rm(list = setdiff(ls(), c(
+  "sites", "species", "traits", "sites_temporal",
+  "pcaConstuctionYear", "pcaSoil", "pcaSurveyYear"
+)))
+
+## 7 Functional plant traits ###################################################
 
 ### a LEDA data #####
 data_sla <- data.table::fread(
