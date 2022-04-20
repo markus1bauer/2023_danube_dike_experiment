@@ -518,11 +518,11 @@ for (i in unique(data_species$year)) {
 res18 <- TBI(species_seeded, species2018,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res18$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
-res18$t.test_B.C # p.perm = 0.
+res18$BCD.summary # B = .566, C = .308, D = .874 (.647 vs. .352)
+res18$t.test_B.C # p.perm = 1e-04
 tbi18 <- res18$BCD.mat %>%
   as_tibble() %>%
-  mutate(comparison = "18")
+  mutate(comparison = "2018")
 #### Test plot
 plot(res18, type = "BC")
 
@@ -530,11 +530,11 @@ plot(res18, type = "BC")
 res19 <- TBI(species_seeded, species2019,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res19$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
-res19$t.test_B.C # p.perm = 0.
+res19$BCD.summary # B = .372, C = .361, D = .733 (.507 vs. .492)
+res19$t.test_B.C # p.perm = .422
 tbi19 <- res19$BCD.mat %>%
   as_tibble() %>%
-  mutate(comparison = "19")
+  mutate(comparison = "2019")
 #### Test plot
 plot(res19, type = "BC")
 
@@ -542,11 +542,11 @@ plot(res19, type = "BC")
 res20 <- TBI(species_seeded, species2020,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res20$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
-res20$t.test_B.C # p.perm = 0.
+res20$BCD.summary # B = .318, C = .396, D = .715 (.445 vs. .554)
+res20$t.test_B.C # p.perm = 1e-04
 tbi20 <- res20$BCD.mat %>%
   as_tibble() %>%
-  mutate(comparison = "20")
+  mutate(comparison = "2020")
 #### Test plot
 plot(res20, type = "BC")
 
@@ -554,11 +554,11 @@ plot(res20, type = "BC")
 res21 <- TBI(species_seeded, species2021,
                method = "sorensen",
                nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res21$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
-res21$t.test_B.C # p.perm = 0.
+res21$BCD.summary # B = .343, C = .394, D = .738 (.465 vs. .534)
+res21$t.test_B.C # p.perm = 1e-04
 tbi21 <- res21$BCD.mat %>%
   as_tibble() %>%
-  mutate(comparison = "21")
+  mutate(comparison = "2021")
 #### Test plot
 plot(res21, type = "BC")
 
@@ -566,87 +566,86 @@ plot(res21, type = "BC")
 data_presence <- bind_rows(tbi18, tbi19, tbi20, tbi21) %>%
   mutate(presabu = "presence")
 
+rm(list = setdiff(ls(), c(
+  "sites", "species", "traits", "seedmixes", "species_seeded",
+  "species2018", "species2019", "species2020", "species2021"
+  )))
+
 ### b Calculate TBI Abundance ------------------------------------------
 
 #### * seedmixes vs. 2018 ####
 res18 <- TBI(species_seeded, species2018,
-             method = "sorensen",
+             method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res18$BCD.summary # B = 0.566, C = 0.308, D = 0.874 (0.647 vs. 0.352)
-res18$t.test_B.C # p.perm = 0.
+res18$BCD.summary # B = .654, C = .318, D = .973 (.672 vs. .327)
+res18$t.test_B.C # p.perm = 1e-04
 tbi18 <- res18$BCD.mat %>%
   as_tibble() %>%
-  mutate(comparison = "18")
+  mutate(comparison = "2018")
 #### Test plot
 plot(res18, type = "BC")
 
 #### * seedmixes vs. 2019 ####
 res19 <- TBI(species_seeded, species2019,
-             method = "sorensen",
+             method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res19$BCD.summary # B = 0.372, C = 0.361, D = 0.733 (0.507 vs. 0.492)
-res19$t.test_B.C # p.perm = 0.422
+res19$BCD.summary # B = .519, C = .386, D = .905 (.573 vs. .426)
+res19$t.test_B.C # p.perm = .1e-04
 tbi19 <- res19$BCD.mat %>%
   as_tibble() %>%
-  mutate(comparison = "19")
+  mutate(comparison = "2019")
 #### Test plot
 plot(res19, type = "BC")
 
 #### * seedmixes vs. 2020 ####
 res20 <- TBI(species_seeded, species2020,
-             method = "sorensen",
+             method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res20$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
-res20$t.test_B.C # p.perm = 0.
+res20$BCD.summary # B = .484, C = .385, D = .870 (.557 vs. .442)
+res20$t.test_B.C # p.perm = 1e-04
 tbi20 <- res20$BCD.mat %>%
   as_tibble() %>%
-  mutate(comparison = "20")
+  mutate(comparison = "2020")
 #### Test plot
 plot(res20, type = "BC")
 
 #### * seedmixes vs. 2021 ####
 res21 <- TBI(species_seeded, species2021,
-             method = "sorensen",
+             method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res21$BCD.summary # B = 0., C = 0., D = 0. (% vs. %)
-res21$t.test_B.C # p.perm = 0.
+res21$BCD.summary # B = .470, C = .392, D = .862 (.544 vs. .455)
+res21$t.test_B.C # p.perm = 1e-04
 tbi21 <- res21$BCD.mat %>%
   as_tibble() %>%
-  mutate(comparison = "21")
+  mutate(comparison = "2021")
 #### Test plot
 plot(res21, type = "BC")
 
 #### * Combine datasets ####
-data_presence <- bind_rows(tbi18, tbi19, tbi20, tbi21) %>%
+data_abundance <- bind_rows(tbi18, tbi19, tbi20, tbi21) %>%
   mutate(presabu = "abundance")
 plot <- data_sites %>%
+  mutate(plot = factor(plot)) %>%
   filter(str_detect(id, "2018")) %>%
   pull(plot)
-
-### combine abundance and presence data ###
+### combine abundance and presence data:
 data <- add_row(data_presence, data_abundance) %>%
-  mutate(plot = rep(plot, length(data_abundance$comparison) * 2 / 38)) # überprüfen
-sites_temporal <- sites %>%
-  filter(surveyYearF == "2017") %>%
-  left_join(data, by = "plot") %>%
+  mutate(plot = rep(plot, length(data_abundance$comparison) * 2 / 288),
+         id = str_c(plot, comparison, sep = "_")) %>%
   rename(
     B = "B/(2A+B+C)", C = "C/(2A+B+C)", D = "D=(B+C)/(2A+B+C)",
     change = Change
     ) %>%
-  mutate(
-    change = C - B,
-    plot = as_factor(plot)
-    ) %>%
-  select(
-    plot, block,
-    exposition, seedDensity, targetType, substrateDepth, sandRatio,
-    B, C, D, comparison, presabu
-    ) %>%
-  mutate(across(c(B, C, D), ~ round(.x, digits = 4)))
+  mutate(change = C - B,
+         across(c(B, C, D, change), ~ round(.x, digits = 4))) %>%
+  select(id, B, C, D, presabau)
+sites2 <- sites %>%
+  left_join(data, by = "id")
 
 rm(list = setdiff(ls(), c(
   "sites", "species", "traits", "sites_temporal", "seedmixes"
   )))
+
 
 ## 7 Functional plant traits ###################################################
 
