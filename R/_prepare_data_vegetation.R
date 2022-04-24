@@ -495,11 +495,6 @@ data_species <- species %>%
   arrange(id) %>%
   semi_join(data_sites, by = "id") %>%
   select(plot, year, tidyselect::peek_vars(), -id)
-species_seeded <- seedmixes %>%
-  pivot_wider(names_from = "name", values_from = "seeded") %>%
-  arrange(plot) %>%
-  column_to_rownames("plot") %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0)))
 
 ### Separate each year in several tibbles ###
 
@@ -511,6 +506,12 @@ for (i in unique(data_species$year)) {
            select(-year) %>%
            column_to_rownames(var = "plot"))
 }
+
+species_seeded <- seedmixes %>%
+  pivot_wider(names_from = "name", values_from = "seeded") %>%
+  arrange(plot) %>%
+  column_to_rownames("plot") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0)))
 
 ### a Calculate TBI Presence --------------------------------------------------
 
@@ -568,7 +569,8 @@ data_presence <- bind_rows(tbi18, tbi19, tbi20, tbi21) %>%
 
 rm(list = setdiff(ls(), c(
   "sites", "species", "traits", "seedmixes", "species_seeded",
-  "species2018", "species2019", "species2020", "species2021"
+  "species2018", "species2019", "species2020", "species2021",
+  "data_presence", "data_sites", "data_species"
   )))
 
 ### b Calculate TBI Abundance ------------------------------------------
@@ -638,18 +640,19 @@ data <- add_row(data_presence, data_abundance) %>%
     ) %>%
   mutate(change = C - B,
          across(c(B, C, D, change), ~ round(.x, digits = 4))) %>%
-  select(id, B, C, D, presabau)
-sites2 <- sites %>%
+  select(id, B, C, D, presabu)
+sites <- sites %>%
   left_join(data, by = "id")
 
 rm(list = setdiff(ls(), c(
-  "sites", "species", "traits", "sites_temporal", "seedmixes"
+  "sites", "species", "traits", "seedmixes"
   )))
 
 
 ## 7 Functional plant traits ###################################################
 
-### a LEDA data #####
+### a LEDA data ---------------------------------------------------------------
+
 data_sla <- data.table::fread(
   "data_raw_traitbase_leda_20210223_sla.txt",
   sep = ";",
@@ -757,10 +760,12 @@ test <- traits %>%
   select(name, sla, seedmass, height) %>%
   filter(!complete.cases(.))
 
-rm(list = setdiff(ls(), c("sites", "species", "traits", "test")))
+rm(list = setdiff(ls(), c(
+  "sites", "species", "traits", "seedmixes", "test"
+)))
 
+### b TRY data 1 --------------------------------------------------------------
 
-### b TRY data 1 ####
 data <- data.table::fread("data_raw_traitbase_try_20210306_13996.txt",
               header = TRUE,
               sep = "\t",
@@ -811,7 +816,8 @@ traits <- traits %>%
    select(name, sla, seedmass, height) %>%
    filter(!complete.cases(sla, seedmass, height)))
 
-### c TRY data 2 ####
+### c TRY data 2 --------------------------------------------------------------
+
 data <- data.table::fread("data_raw_traitbase_try_20210318_14157.txt",
                           header = TRUE,
                           sep = "\t",
@@ -868,7 +874,8 @@ traits <- traits %>%
    select(name, sla, seedmass, height) %>%
    filter(!complete.cases(sla, seedmass, height)))
 
-### d GrooT data ####
+### d GrooT data --------------------------------------------------------------
+
 data <- read.csv("data_raw_traitbase_groot.csv", header = TRUE,
                  na.strings = c("", "NA", "na")) %>%
   filter(traitName == "Specific_root_length" |
@@ -914,7 +921,8 @@ traits <- traits %>%
    select(name, rmf, rld, srl, lateral) %>%
    filter(!complete.cases(rmf, rld, srl, lateral)))
 
-### e check completeness of traits ####
+### e check completeness of traits --------------------------------------------
+
 test <- traits %>%
   select(name, group, t, n, f, sla, seedmass, height,
          rmf, rld, srl, lateral) %>%
@@ -928,9 +936,12 @@ gg_miss_case(test, order_cases = TRUE)
     select(name, sla, seedmass, height, rmf, rld, srl, lateral) %>%
     filter(!complete.cases(sla, seedmass, height, rmf, rld, srl, lateral)))
 
-rm(list = ls(pattern = "[^species|traits|sites]"))
+rm(list = setdiff(ls(), c(
+  "sites", "species", "traits", "seedmixes"
+)))
 
-### f prepare data frames ####
+### f prepare data frames for calculation of FD -------------------------------
+
 species <- species %>%
   mutate(name = as.character(name)) %>%
   arrange(name)
@@ -939,13 +950,13 @@ traits <- traits %>%
   arrange(name) %>%
   mutate(across(c(sla, seedmass, height, srl, rmf, rld),
                 ~ round(.x, digits = 3)))
+### gamma diversity herbs: 269 ###
 (herbCount <- traits %>%
-    # gamma diversity herbs: 269
     filter(group != "tree" & group != "shrub") %>%
     count() %>%
     pull())
+### gamma diversity of undefined species: 15 ###
 (undefinedCount <- traits %>%
-    # gamma diversity of undefined species: 15
     filter((str_detect(name, "_spec") | str_detect(name, "ceae"))) %>%
     count() %>%
     pull())
@@ -978,135 +989,201 @@ traits_all <- data %>%
   drop_na()
 
 
-## 7 CWM and FDis of functional plant traits ###################################
+## 8 CWM and FDis of functional plant traits ###################################
 
 ### a LHS ----------------------------------------------------------------------
+
+### Preparation ###
 data_species <- semi_join(species, traits_lhs, by = "name")
 data_traits <- semi_join(traits_lhs, data_species, by = "name")
 data_species <- data_species %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
+### Calculation ###
 data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE,
                calc.FRic = FALSE, calc.FDiv = FALSE, corr = "cailliez")
-sites$fdisAbuLHS <- data_diversityAbu$FDis
+### Integration to dataset ###
+data <- data_diversityAbu$FDis %>%
+  as.data.frame() %>%
+  rownames_to_column("id") %>%
+  rename("fdisAbuLHS" = ".")
+sites <- sites %>%
+  left_join(data, by = "id")
 length(traits_lhs$name) / (herbCount - undefinedCount)
 
 ### b SLA ----------------------------------------------------------------------
+
+### Preparation ###
 data_species <- semi_join(species, traits_sla, by = "name")
 data_traits <- semi_join(traits_sla, data_species, by = "name")
 data_species <- data_species %>%
   pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
+### Calculation ###
 data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE,
                    calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
-sites$fdisAbuSla <- data_diversityAbu$FDis
-sites$cwmAbuSla <- data_diversityAbu$CWM$sla %>%
-  as.character() %>%
-  as.numeric() %>%
-  exp()
+### Integration to dataset ###
+data <- data_diversityAbu$FDis %>%
+  as.data.frame() %>%
+  add_column(data_diversityAbu$CWM$sla) %>%
+  rownames_to_column("id") %>%
+  rename("fdisAbuSla" = ".",
+         "cwmAbuSla" = "data_diversityAbu$CWM$sla") %>%
+  mutate(cwmAbuSla = exp(cwmAbuSla))
+sites <- sites %>%
+  left_join(data, by = "id")
+### Describe
 length(traits_sla$name) / (herbCount - undefinedCount)
 
 ### c Seed mass ----------------------------------------------------------------
+
+### Preparation ###
 data_species <- semi_join(species, traits_seedmass, by = "name")
 data_traits <- semi_join(traits_seedmass, data_species, by = "name")
 data_species <- data_species %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
+### Calculation ###
 data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE,
                       calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
-sites$fdisAbuSeedmass <- data_diversityAbu$FDis
-sites$cwmAbuSeedmass <- data_diversityAbu$CWM$seedmass %>%
-  as.character() %>%
-  as.numeric() %>%
-  exp()
+### Integration to dataset ###
+data <- data_diversityAbu$FDis %>%
+  as.data.frame() %>%
+  add_column(data_diversityAbu$CWM$seedmass) %>%
+  rownames_to_column("id") %>%
+  rename("fdisAbuSeedmass" = ".",
+         "cwmAbuSeedmass" = "data_diversityAbu$CWM$seedmass") %>%
+  mutate(cwmAbuSeedmass = exp(cwmAbuSeedmass))
+sites <- sites %>%
+  left_join(data, by = "id")
+### Describe ###
 length(traits_seedmass$name) / (herbCount - undefinedCount)
 
 ### d Canopy height ------------------------------------------------------------
+
+### Preparation ###
 data_species <- semi_join(species, traits_height, by = "name")
 data_traits <- semi_join(traits_height, data_species, by = "name")
 data_species <- data_species %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
+### Calculation ###
 data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE,
                       calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
-sites$fdisAbuHeight <- data_diversityAbu$FDis
-sites$cwmAbuHeight <- data_diversityAbu$CWM$height %>%
-  as.character() %>%
-  as.numeric() %>%
-  exp()
+### Integration to dataset ###
+data <- data_diversityAbu$FDis %>%
+  as.data.frame() %>%
+  add_column(data_diversityAbu$CWM$height) %>%
+  rownames_to_column("id") %>%
+  rename("fdisAbuHeight" = ".",
+         "cwmAbuHeight" = "data_diversityAbu$CWM$height") %>%
+  mutate(cwmAbuHeight = exp(cwmAbuHeight))
+sites <- sites %>%
+  left_join(data, by = "id")
+#Describe
 length(traits_height$name) / (herbCount - undefinedCount)
 
 ### e Specific root length -----------------------------------------------------
+
+### Preparation ###
 data_species <- semi_join(species, traits_srl, by = "name")
 data_traits <- semi_join(traits_srl, data_species, by = "name")
 data_species <- data_species %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
+### Calculation ###
 data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE,
                       calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
-sites$fdisAbuSrl <- data_diversityAbu$FDis
-sites$cwmAbuSrl <- data_diversityAbu$CWM$srl %>%
-  as.character() %>%
-  as.numeric() %>%
-  exp()
+### Integration to dataset ###
+data <- data_diversityAbu$FDis %>%
+  as.data.frame() %>%
+  add_column(data_diversityAbu$CWM$srl) %>%
+  rownames_to_column("id") %>%
+  rename("fdisAbuSrl" = ".",
+         "cwmAbuSrl" = "data_diversityAbu$CWM$srl") %>%
+  mutate(cwmAbuSrl = exp(cwmAbuSrl))
+sites <- sites %>%
+  left_join(data, by = "id")
+### Describe ###
 length(traits_srl$name) / (herbCount - undefinedCount)
 
 ### f Root mass fraction -------------------------------------------------------
+
+### Prepartion ###
 data_species <- semi_join(species, traits_rmf, by = "name")
 data_traits <- semi_join(traits_rmf, data_species, by = "name")
 data_species <- data_species %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
+### Calculation ###
 data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE,
                       calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
-sites$fdisAbuRmf <- data_diversityAbu$FDis
-sites$cwmAbuRmf <- data_diversityAbu$CWM$rmf %>%
-  as.character() %>%
-  as.numeric() %>%
-  exp()
+### Integration to dataset ###
+data <- data_diversityAbu$FDis %>%
+  as.data.frame() %>%
+  add_column(data_diversityAbu$CWM$rmf) %>%
+  rownames_to_column("id") %>%
+  rename("fdisAbuRmf" = ".",
+         "cwmAbuRmf" = "data_diversityAbu$CWM$rmf") %>%
+  mutate(cwmAbuRmf = exp(cwmAbuRmf))
+sites <- sites %>%
+  left_join(data, by = "id")
+### Describe ###
 length(traits_rmf$name) / (herbCount - undefinedCount)
 
 ### g All ----------------------------------------------------------------------
+
+### Preparation ###
 data_species <- semi_join(species, traits_all, by = "name")
 data_traits <- semi_join(traits_all, data_species, by = "name")
 data_species <- data_species %>%
-  pivot_longer(-name, "site", "value") %>%
-  pivot_wider(site, name) %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
 log_data_traits <- log(data_traits)
+### Calculation ###
 data_diversityAbu <- dbFD(log_data_traits, data_species, w.abun = TRUE,
                       calc.FRic = FALSE, calc.FDiv = FALSE, corr = "cailliez")
-sites$fdisAbuAll <- data_diversityAbu$FDis
+### Integration to dataset ###
+data <- data_diversityAbu$FDis %>%
+  as.data.frame() %>%
+  rownames_to_column("id") %>%
+  rename("fdisAbuAll" = ".")
+sites <- sites %>%
+  left_join(data, by = "id")
+### Describe ###
 length(traits_all$name) / (herbCount - undefinedCount)
 
 ### h Finalisation -------------------------------------------------------------
-sites <- sites %>%
+sites2 <- sites %>%
   mutate(across(c(fdisAbuLHS, fdisAbuSla, cwmAbuSla, fdisAbuSeedmass,
                   cwmAbuSeedmass, fdisAbuHeight, cwmAbuHeight,
                   fdisAbuSrl, cwmAbuSrl, fdisAbuRmf,
-                  cwmAbuRmf, fdisAbuAll) 
+                  cwmAbuRmf, fdisAbuAll),
                 ~ round(.x, digits = 3)))
 
-rm(list = setdiff(ls(), c("sites", "species", "traits")))
+rm(list = setdiff(ls(), c(
+  "sites", "species", "traits", "seedmixes"
+)))
 
 
 
