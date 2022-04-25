@@ -57,7 +57,7 @@ Carlina_vulgaris,Carlvulg,Asteraceae,yes,herb,no,no,no,5,4,7,3,no,no,no,no,"NA",
 Centaurea_jacea,Centjace,Asteraceae,yes,herb,no,no,no,NA,NA,NA,NA,yes,no,yes,no,"NA","NA","NA",yes,16.3,2,0.85,116.351,0.449,2.1,4.1
 Centaurea_scabiosa,Centscab,Asteraceae,yes,herb,no,no,no,NA,3,8,4,yes,no,no,yes,"NA","NA","NA",yes,19.68,6.548,0.825,NA,NA,NA,NA
 Centaurea_spec,Centspec,Asteraceae,no,herb,no,no,no,NA,NA,NA,NA,no,no,no,no,"NA","NA","NA",no,NA,NA,NA,NA,NA,NA,NA
-Centaurea_stoebe,Centstoe,Asteraceae,yes,herb,no,3,no,NA,NA,NA,NA,yes,no,no,no,"NA","NA","NA",yes,27.09,2.08,0.688,NA,0.267,NA,NA
+Centaurea_stoebe,Centstoe,Asteraceae,yes,herb,no,3,no,7,2,8,3,yes,no,no,no,"NA","NA","NA",yes,27.09,2.08,0.688,NA,0.267,NA,NA
 Cerastium_arvense,Ceraarve,Caryophyllaceae,no,herb,no,no,no,NA,4,6,4,yes,no,no,no,"NA","NA","NA",yes,25.01,0.198,0.125,91.582,NA,NA,8.8
 Cerastium_fontanum_ssp_vulgare,Cerafontvulg,Caryophyllaceae,yes,herb,no,no,no,NA,5,NA,5,yes,no,yes,no,"NA","NA","NA",yes,28.9,0.14,0.15,7.205,0.111,NA,13
 Cerastium_glomeratum,Ceraglom,Caryophyllaceae,no,herb,no,no,no,5,5,5,5,yes,no,no,no,"NA","NA","NA",yes,22.5,0.059,0.135,318,0.251,NA,NA
@@ -102,7 +102,7 @@ Fallopia_convolvulus,Fallconv,Polygonaceae,no,herb,no,no,no,6,5,NA,6,no,no,no,no
 Festuca_arundinacea,Festarun,Poaceae,no,top-grass,no,no,no,5,7,7,4,no,yes,no,no,"NA","NA","NA",yes,18.1,2.152,0.6,151.543,0.32,7.49,6.8
 Festuca_ovina,Festovin,Poaceae,yes,sub-grass,no,no,no,7,2,NA,1,no,yes,no,yes,"NA","NA","NA",yes,14.13,0.38,0.152,162.232,0.327,NA,0.5
 Festuca_pratensis,Festprat,Poaceae,yes,top-grass,no,no,no,NA,6,NA,6,no,yes,yes,no,"NA","NA","NA",yes,22.345,2.086,0.55,287.381,0.578,8.321,3.6
-Festuca_rubra,Festrubr,Poaceae,yes,sub-grass,no,no,no,NA,NA,NA,NA,no,yes,yes,no,"NA","NA","NA",yes,17.09,0.79,0.45,344.477,0.206,9.37,9.2
+Festuca_rubra,Festrubr,Poaceae,yes,sub-grass,no,no,no,NA,6,6,NA,no,yes,yes,no,"NA","NA","NA",yes,17.09,0.79,0.45,344.477,0.206,9.37,9.2
 Festuca_spec,Festspec,Poaceae,no,grass,no,no,no,NA,NA,NA,NA,no,no,no,no,"NA","NA","NA",no,NA,NA,NA,NA,NA,NA,NA
 Filipendula_ulmaria,Filiulma,Rosaceae,no,herb,no,no,no,5,8,NA,4,no,no,no,no,"NA","NA","NA",no,19.1,0.706,0.875,48.629,NA,NA,10.9
 Filipendula_vulgaris,Filivulg,Rosaceae,yes,herb,3,3,no,6,3,8,2,yes,no,no,yes,"NA","NA","NA",yes,17.888,0.771,0.35,72.016,0.878,NA,3.6
@@ -275,7 +275,6 @@ Veronica_serpyllifolia,Veroserp,Plantaginaceae,no,herb,no,no,no,NA,6,5,NA,yes,no
 Veronica_spec,Verospec,Plantaginaceae,no,herb,no,no,no,NA,NA,NA,NA,no,no,no,no,"NA","NA","NA",no,NA,NA,NA,NA,NA,NA,NA
 Vicia_cracca,Vicicrac,Fabaceae,yes,legume,no,no,no,5,5,NA,NA,yes,no,yes,no,"NA","NA","NA",yes,25.21,14.29,0.75,41.012,0.493,0.607,22
 Vicia_hirsuta,Vicihirs,Fabaceae,no,legume,no,no,no,6,4,NA,4,yes,no,no,no,"NA","NA","NA",yes,19.1,6.955,0.25,87.907,0.208,NA,NA
-Vicia_onobrychioides,Vicionob,Fabaceae,no,legume,no,no,no,NA,NA,NA,NA,no,no,no,no,"NA","NA","NA",no,NA,NA,0.4,NA,NA,NA,0.5
 Vicia_sativa_ssp_nigra,Vicisatinigr,Fabaceae,no,legume,no,no,no,6,NA,NA,NA,yes,no,yes,no,"NA","NA","NA",yes,20.16,13.009,0.375,60.471,0.211,NA,NA
 Vicia_sepium,Vicisepi,Fabaceae,no,legume,no,no,no,NA,5,6,5,yes,no,no,no,"NA","NA","NA",yes,37.495,21.993,0.45,NA,0.293,NA,13
 Vicia_tetrasperma,Vicitetr,Fabaceae,no,legume,no,no,no,6,5,5,5,yes,no,no,no,"NA","NA","NA",yes,26.189,3.35,0.375,NA,0.138,NA,NA
