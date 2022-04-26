@@ -12,11 +12,9 @@
 ### Packages ###
 library(here)
 library(tidyverse)
-library(vegan)
-library(adespatial)
 
 ### Start ###
-rm(list = ls())
+rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 setwd(here("data", "processed"))
 
 ### Load data ###
@@ -34,91 +32,69 @@ sites <- read_csv("data_processed_sites.csv",
                       targetType = "f",
                       seedDensity = "d"
                     )) %>%
-  filter(surveyYear == 2021 & !str_detect(id, "C")) %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
-    seedDensity, surveyYear, vegetationCov
+    seedDensity, surveyYear, cwmAbuSla
   ) %>%
   mutate(
+    n = cwmAbuSla,
     exposition_numeric = as.double(exposition),
     targetType_numeric = as.double(targetType),
     block_numeric = as.double(block)
   )
 
-species <- read_csv("data_processed_species.csv",
-                    col_names = TRUE,
-                    na = c("na", "NA", ""), col_types =
-                      cols(
-                        .default = "d",
-                        name = "f"
-                      )
-) %>%
-  mutate(across(where(is.numeric), ~ replace(., is.na(.), 0))) %>%
-  pivot_longer(-name, names_to = "id", values_to = "value") %>%
-  pivot_wider(names_from = name, values_from = "value") %>%
-  semi_join(sites, by = "id") %>%
-  arrange(id) %>%
-  column_to_rownames("id")
+data <- sites
 
-sites <- sites %>%
-  column_to_rownames("id")
+### * Model ####
 
-sites_soil <- sites %>%
-  select(sandRatio, substrateDepth)
-sites_seedmix <- sites %>%
-  select(targetType_numeric, seedDensity)
-sites_space <- sites %>%
-  select(exposition_numeric)
+
+### * Functions ####
+theme_mb <- function() {
+  theme(
+    panel.background = element_rect(fill = "white"),
+    text = element_text(size = 9, color = "black"),
+    strip.text = element_text(size = 10),
+    axis.text = element_text(angle = 0, hjust = 0.5, size = 9,
+                             color = "black"),
+    axis.title = element_text(angle = 0, hjust = 0.5, size = 9,
+                              color = "black"),
+    axis.line = element_line(),
+    legend.key = element_rect(fill = "white"),
+    legend.position = "none",
+    legend.margin = margin(0, 0, 0, 0, "cm"),
+    plot.margin = margin(0, 0, 0, 0, "cm")
+  )
+}
 
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Statistics ##########################################################
+# B Plot ################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-## 1 Beta diversity #####################################################
+(graph_a <- ggplot() +
+   geom_smooth(
+     aes(y = n, x = surveyYear),
+     data = data,
+     method = "glm"
+   ) +
+    #geom_hline(
+     # yintercept = c(
+      #  mean(sites$y),
+       # mean(sites$y) + 0.5 * sd(sites$y),
+        #mean(sites$y) - 0.5 * sd(sites$y)
+      #),
+      #linetype = c(1, 2, 2),
+      #color = "grey70"
+    #) +
+    #scale_y_continuous(limits = c(0, .92), breaks = seq(-100, 400, .1)) +
+    #scale_shape_manual(values = c("circle", "circle open")) +
+    #labs(x = "", y = expression(Temporal ~ "beta" ~ diversity ~ "[" * italic("D")[sor] * "]")) +
+    theme_mb())
 
-### * check collinearity ####
-data <- sites %>%
-  select(where(is.numeric), -ends_with("numeric"), -surveyYear)
-GGally::ggpairs(data, lower = list(continuous = "smooth_loess"))
-#--> no relationship has r > 0.7 (Dormann et al. 2013 Ecography)
+### Save ###
+ggsave(here("outputs", "figures", "sla_800dpi_8x8cm.tiff"),
+       dpi = 800, width = 8, height = 8, units = "cm")
 
-### * Calculate: Baselga presence-absence ####
-beta <- beta.div.comp(species, coef = "BS", quant = FALSE)
-beta$Note
-beta$part # total = 0.325, substitution = 0.279, subsets = 0.046
-beta_total <- beta$D %>% # sörensen dissimilarity
-  as.matrix() %>%
-  as.data.frame()
-beta_substitution <- beta$repl %>% # replacement / simpson dissimilarity
-  as.matrix()
-beta_subsets <- beta$rich %>% # nestedness
-  as.matrix()
-
-
-## 3 db-RDA: replacemnet ######################################################
-
-### a full model --------------------------------------------------------------
-
-m1 <- dbrda(
-  beta_substitution ~ sandRatio + substrateDepth + exposition +
-    seedDensity + targetType,
-  data = sites
-)
-anova(m1, permutations = how(nperm = 9999)) # P = 1e-04
-(r2adj <- RsquareAdj(m1)$adj.r.squared) # R2adj = .398
-
-
-## 3 db-RDA: nestedness #######################################################
-
-### a full model --------------------------------------------------------------
-
-m1 <- dbrda(
-  beta_subsets ~ sandRatio + substrateDepth +
-    seedDensity + targetType + exposition,
-  data = sites
-)
-anova(m1, permutations = how(nperm = 9999)) # P = 1e-04
 
