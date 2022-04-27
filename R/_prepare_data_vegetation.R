@@ -49,14 +49,13 @@ sites <- read_csv("data_raw_sites.csv", col_names = TRUE,
                       vegetationCov_2021 = "c",
                       bioMass_2019 = "c"
                       )) %>%
-  select(-starts_with("surveyDate")) %>%
   pivot_longer(starts_with("vegetationCov_") |
                  starts_with("botanist_") |
-                 starts_with("bioMass_"),
-               names_to = c("x", "surveyYear"),
-               names_sep = "_",
-               values_to = "n") %>%
-  pivot_wider(names_from = x, values_from = n) %>%
+                 starts_with("bioMass_") |
+                 starts_with("surveyDate"),
+               names_to = c("x", "surveyYear"), names_sep = "_",
+               values_to = "n", values_transform = list (n = as.character)) %>%
+  pivot_wider(names_from = "x", values_from = "n") %>%
   mutate(plot = str_replace(plot, "-", "_"),
          plot = str_replace(plot, "L_", "L"),
          plot = str_replace(plot, "W_", "W"),
@@ -275,13 +274,9 @@ cover_seeded <- species %>%
             .groups = "keep") %>%
   ungroup() %>%
   # Combine with seedmixes:
-  pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value",
+  pivot_longer(starts_with("20"),
+               names_to = "surveyYear", values_to = "value",
                names_transform = list(surveyYear = as.factor)) %>%
-  unite(id_seeded, name, plot, sep = "", remove = FALSE) %>%
-  left_join(seedmixes %>%
-              unite(id_seeded, name, plot, sep = "", remove = TRUE),
-            by = "id_seeded") %>%
-  select(-id_seeded) %>%
   mutate(success = if_else(seeded > 0 & value > 0, value, 0)) %>%
   group_by(plot, surveyYear) %>%
   summarise(seededCov = sum(success, na.rm = TRUE), .groups = "keep") %>%
@@ -358,11 +353,6 @@ speciesRichness_seeded <- species %>%
   # Combine with seedmixes:
   pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value",
                names_transform = list(surveyYear = as.factor)) %>%
-  unite(id_seeded, name, plot, sep = "", remove = FALSE) %>%
-  left_join(seedmixes %>%
-              unite(id_seeded, name, plot, sep = "", remove = TRUE),
-            by = "id_seeded") %>%
-  select(-id_seeded) %>%
   mutate(successCov = if_else(seeded > 0 & value > 0, 1, 0)) %>%
   group_by(plot, surveyYear) %>%
   summarise(seededRichness = sum(successCov, na.rm = TRUE),
@@ -398,6 +388,7 @@ sites <- sites %>%
          seededRichratio = round(seededRichratio, 3))
 
 ### b Species eveness and shannon ----------------------------------------------
+
 data <- species  %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
@@ -942,7 +933,10 @@ rm(list = setdiff(ls(), c(
 
 ### f prepare data frames for calculation of FD -------------------------------
 
-species <- species %>%
+species <- seedmixes %>%
+  mutate(id = str_glue("{plot}_seeded")) %>%
+  pivot_wider(-plot, names_from= "id", values_from = "seeded") %>%
+  left_join(species, by = "name") %>%
   mutate(name = as.character(name)) %>%
   arrange(name)
 traits <- traits %>%
@@ -1174,6 +1168,7 @@ sites <- sites %>%
 length(traits_all$name) / (herbCount - undefinedCount)
 
 ### h Finalisation -------------------------------------------------------------
+
 sites2 <- sites %>%
   mutate(across(c(fdisAbuLHS, fdisAbuSla, cwmAbuSla, fdisAbuSeedmass,
                   cwmAbuSeedmass, fdisAbuHeight, cwmAbuHeight,

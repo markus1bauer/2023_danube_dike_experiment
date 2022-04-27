@@ -1,17 +1,18 @@
 # Dike grassland experiment
 # Show_figure species composition ####
 # Markus Bauer
-# 2022-04-05
+# 2022-04-27
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# A Preparation #########################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ###############################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 ### Packages ###
 library(here)
 library(tidyverse)
+library(ggbeeswarm)
 
 ### Start ###
 rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
@@ -32,15 +33,14 @@ sites <- read_csv("data_processed_sites.csv",
                       targetType = "f",
                       seedDensity = "d"
                     )) %>%
+  filter(!str_detect(id, "C")) %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
     seedDensity, surveyYear, cwmAbuSla
   ) %>%
   mutate(
     n = cwmAbuSla,
-    exposition_numeric = as.double(exposition),
-    targetType_numeric = as.double(targetType),
-    block_numeric = as.double(block)
+    surveyYear_fac = factor(surveyYear)
   )
 
 data <- sites
@@ -68,17 +68,24 @@ theme_mb <- function() {
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Plot ################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Plot ######################################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 (graph_a <- ggplot() +
-   geom_smooth(
-     aes(y = n, x = surveyYear),
+   geom_beeswarm(
+     aes(y = n, x = surveyYear_fac, color = targetType),
      data = data,
-     method = "glm"
+     alpha = 0.5,
+     dodge.width = 0.8
    ) +
+   geom_boxplot(
+     aes(y = n, x = surveyYear_fac, fill = targetType),
+     data = data,
+     alpha = 0.5
+   ) +
+   #facet_grid(~targetType) +
     #geom_hline(
      # yintercept = c(
       #  mean(sites$y),
