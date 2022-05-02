@@ -1,7 +1,7 @@
 # Grassland experiment on dikes
 # Prepare species, sites, and traits data ####
 # Markus Bauer
-# 2022-03-30
+# 2022-04-29
 
 
 ### Packages ###
@@ -63,7 +63,6 @@ sites <- read_csv("data_raw_sites.csv", col_names = TRUE,
          plot = factor(plot),
          id = factor(id),
          vegetationCov = as.numeric(vegetationCov),
-         surveyYear = as.numeric(surveyYear),
          bioMass = as.numeric(bioMass)) %>%
   filter(!(block == "C" & (surveyYear == "seeded" |
                              surveyYear == "2018" |
@@ -212,24 +211,34 @@ rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-## 1 Create simple variables ###################################################
+## 1 Target species ############################################################
 
 traits <- traits %>%
-  mutate(target = if_else(
-    targetHerb == "yes" | targetGrass == "yes", "yes", "no"
-  ))
+  mutate(
+    target = if_else(
+      ((biotopeTarget == "yes" | ffh6510 == "yes" | ffh6210 == "yes") &
+         family != "Cyperaceae") |
+        seedAvailability == "no" | specialTarget == "yes",
+    "yes",
+    "no"
+    )
+  )
 
 
 ## 2 Coverages #################################################################
 
-cover <- left_join(species, traits, by = "name") %>%
-  select(name, family, target, ruderalIndicator, seeded,
-         starts_with("L"), starts_with("W")) %>%
-  pivot_longer(names_to = "id", values_to = "n",
-               cols = starts_with("L") | starts_with("W")) %>%
+cover <- species %>%
+  left_join(traits, by = "name") %>%
+  select(name, family, target, seeded,
+         starts_with("L"), starts_with("W"), starts_with("C")) %>%
+  pivot_longer(
+    names_to = "id",
+    values_to = "n",
+    cols = starts_with("L") |starts_with("W") | starts_with("C")
+    ) %>%
   group_by(id)
 
-### * graminoid, herb, and total coverage) ####
+### * Graminoid, herb, and total coverage) ####
 cover_total_and_graminoid <- cover %>%
   group_by(id, family) %>%
   summarise(total = sum(n, na.rm = TRUE), .groups = "keep") %>%
@@ -245,18 +254,11 @@ cover_total_and_graminoid <- cover %>%
          accumulatedCov = round(accumulatedCov, 1)) %>%
   ungroup()
 
-### * Target species' coverage ####
+### * Target specis' coverage ####
 cover_target <- cover %>%
   filter(target == "yes") %>%
   summarise(targetCov = sum(n, na.rm = TRUE)) %>%
   mutate(targetCov = round(targetCov, 1)) %>%
-  ungroup()
-
-### * Ruderal species' coverage ####
-cover_ruderalIndicator <- cover %>%
-  filter(ruderalIndicator == "yes") %>%
-  summarise(ruderalCov = sum(n, na.rm = TRUE)) %>%
-  mutate(ruderalCov = round(ruderalCov, 1)) %>%
   ungroup()
 
 ### * Seeded species' coverage ####
@@ -283,13 +285,12 @@ cover_seeded <- species %>%
   ungroup() %>%
   unite(id, plot, surveyYear, sep = "_")
 
-### * implement in sites data set ####
+### * Implement in sites data set ####
 sites <- sites %>%
   left_join(cover_total_and_graminoid, by = "id") %>%
   left_join(cover_target, by = "id") %>%
-  #right_join(cover_ruderalIndicator, by = "id") %>%
   left_join(cover_seeded, by = "id") %>%
-  ### Calcute the ratio of target species richness of total species richness
+  ### Calcute the ratio of target richness of total species richness
   mutate(targetCovratio = targetCov / accumulatedCov,
          graminoidCovratio = graminoidCov / accumulatedCov,
          seededCovratio = seededCov / accumulatedCov,
@@ -306,10 +307,12 @@ rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 speciesRichness <- species %>%
   left_join(traits, by = "name") %>%
-  select(name, rlg, rlb, target, targetHerb, ffh6510, ffh6210,
-         starts_with("L"), starts_with("W")) %>%
-  pivot_longer(names_to = "id", values_to = "n",
-               cols = starts_with("L") | starts_with("W")) %>%
+  select(name, rlg, rlb, target, ffh6510, ffh6210,
+         starts_with("L"), starts_with("W"), starts_with("C")) %>%
+  pivot_longer(
+    names_to = "id", values_to = "n",
+    cols = starts_with("L") | starts_with("W") | starts_with("C")
+    ) %>%
   mutate(n = if_else(n > 0, 1, 0)) %>%
   group_by(id)
 
@@ -381,16 +384,23 @@ sites <- sites %>%
   left_join(speciesRichness_seeded, by = "id") %>%
   left_join(speciesRichness_ffh6510, by = "id") %>%
   left_join(speciesRichness_ffh6210, by = "id") %>%
-  ### Create targetRichratio ###
-  mutate(targetRichratio = targetRichness / speciesRichness,
-         seededRichratio = seededRichness / speciesRichness,
-         targetRichratio = round(targetRichratio, 3),
-         seededRichratio = round(seededRichratio, 3))
+
+  ### * Calculate Favourable Conservation Status (FCS) ####
+  ###   Helm et al. 2014 Divers Distrib
+  mutate(
+    fcs_target = log(
+      (targetRichness + 1) / (speciesRichness - targetRichness + 1)
+      ),
+    fcs_seeded = log(
+      (seededRichness + 1 ) / (speciesRichness - seededRichness + 1)
+      ),
+    fcs_target = round(fcs_target, 3),
+    fcs_seeded = round(fcs_seeded, 3)
+    )
 
 ### b Species eveness and shannon ----------------------------------------------
 
 data <- species  %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("id") %>%
@@ -467,9 +477,54 @@ sites$cwmAbuT <- round(as.numeric(as.character(Tweighted$CWM$t)), 3)
 rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 
-## 6 Temporal beta diversity ###################################################
+## 6 Ordination ################################################################
 
-### * Prepare data ####
+data_sites <- sites
+data_species <- species %>%
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  arrange(id) %>%
+  semi_join(data_sites, by = "id") %>%
+  column_to_rownames("id") %>%
+  mutate(across(where(is.numeric), ~replace(., 0, NA)))
+
+### Calculate NMDS ###
+set.seed(123)
+(nmds <- metaMDS(data_species,
+                 dist = "bray", binary = FALSE, autotransform = TRUE,
+                 try = 99, previous.best = TRUE, na.rm = TRUE))
+# 2D-stress: 0.209
+#Wisconsing(sqrt())
+### Add to sites ###
+data <- nmds %>%
+  scores() %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "id") %>%
+  as_tibble() %>%
+  select(id, NMDS1, NMDS2) %>%
+  mutate(
+    NMDS1 = round(NMDS1, 4),
+    NMDS2 = round(NMDS2, 4)
+  )
+sites <- sites %>%
+  left_join(data, by = "id") %>%
+  mutate(
+    reference_hay = if_else(
+      (targetType == "hay_meadow" | targetType == "mixed") & block == "C",
+      NMDS1, NA_real_
+      )
+    ) %>%
+  mutate(centroid_hay = mean(reference_hay, na.rm = TRUE), # mean = -0.493
+         sd_hay = sd(reference_hay, na.rm = TRUE), # sd = 0.196
+         distance_hay = centroid_hay - NMDS1) %>%
+  select(-reference_hay, - centroid_hay, -sd_hay)
+
+rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
+
+
+## 7 Temporal beta diversity ###################################################
+
+### Prepare data ###
 data_sites <- sites %>%
   # Choose only plots which were surveyed in each year:
   filter(accumulatedCov > 0) %>%
@@ -488,9 +543,8 @@ data_species <- species %>%
   select(plot, year, tidyselect::peek_vars(), -id)
 
 ### Separate each year in several tibbles ###
-
 for (i in unique(data_species$year)) {
-  nam <- paste("species", i, sep = "")
+  nam <- paste("species", i, sep = "_")
   
   assign(nam, data_species %>%
            filter(year == i) %>%
@@ -498,16 +552,10 @@ for (i in unique(data_species$year)) {
            column_to_rownames(var = "plot"))
 }
 
-species_seeded <- seedmixes %>%
-  pivot_wider(names_from = "name", values_from = "seeded") %>%
-  arrange(plot) %>%
-  column_to_rownames("plot") %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0)))
-
 ### a Calculate TBI Presence --------------------------------------------------
 
 #### * seedmixes vs. 2018 ####
-res18 <- TBI(species_seeded, species2018,
+res18 <- TBI(species_seeded, species_2018,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
 res18$BCD.summary # B = .566, C = .308, D = .874 (.647 vs. .352)
@@ -519,7 +567,7 @@ tbi18 <- res18$BCD.mat %>%
 plot(res18, type = "BC")
 
 #### * seedmixes vs. 2019 ####
-res19 <- TBI(species_seeded, species2019,
+res19 <- TBI(species_seeded, species_2019,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
 res19$BCD.summary # B = .372, C = .361, D = .733 (.507 vs. .492)
@@ -531,7 +579,7 @@ tbi19 <- res19$BCD.mat %>%
 plot(res19, type = "BC")
 
 #### * seedmixes vs. 2020 ####
-res20 <- TBI(species_seeded, species2020,
+res20 <- TBI(species_seeded, species_2020,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
 res20$BCD.summary # B = .318, C = .396, D = .715 (.445 vs. .554)
@@ -543,7 +591,7 @@ tbi20 <- res20$BCD.mat %>%
 plot(res20, type = "BC")
 
 #### * seedmixes vs. 2021 ####
-res21 <- TBI(species_seeded, species2021,
+res21 <- TBI(species_seeded, species_2021,
                method = "sorensen",
                nperm = 9999, test.t.perm = TRUE, clock = TRUE)
 res21$BCD.summary # B = .343, C = .394, D = .738 (.465 vs. .534)
@@ -560,14 +608,14 @@ data_presence <- bind_rows(tbi18, tbi19, tbi20, tbi21) %>%
 
 rm(list = setdiff(ls(), c(
   "sites", "species", "traits", "seedmixes", "species_seeded",
-  "species2018", "species2019", "species2020", "species2021",
+  "species_2018", "species_2019", "species_2020", "species_2021",
   "data_presence", "data_sites", "data_species"
   )))
 
-### b Calculate TBI Abundance ------------------------------------------
+### b Calculate TBI Abundance -------------------------------------------------
 
 #### * seedmixes vs. 2018 ####
-res18 <- TBI(species_seeded, species2018,
+res18 <- TBI(species_seeded, species_2018,
              method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
 res18$BCD.summary # B = .654, C = .318, D = .973 (.672 vs. .327)
@@ -579,7 +627,7 @@ tbi18 <- res18$BCD.mat %>%
 plot(res18, type = "BC")
 
 #### * seedmixes vs. 2019 ####
-res19 <- TBI(species_seeded, species2019,
+res19 <- TBI(species_seeded, species_2019,
              method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
 res19$BCD.summary # B = .519, C = .386, D = .905 (.573 vs. .426)
@@ -591,7 +639,7 @@ tbi19 <- res19$BCD.mat %>%
 plot(res19, type = "BC")
 
 #### * seedmixes vs. 2020 ####
-res20 <- TBI(species_seeded, species2020,
+res20 <- TBI(species_seeded, species_2020,
              method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
 res20$BCD.summary # B = .484, C = .385, D = .870 (.557 vs. .442)
@@ -603,7 +651,7 @@ tbi20 <- res20$BCD.mat %>%
 plot(res20, type = "BC")
 
 #### * seedmixes vs. 2021 ####
-res21 <- TBI(species_seeded, species2021,
+res21 <- TBI(species_seeded, species_2021,
              method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
 res21$BCD.summary # B = .470, C = .392, D = .862 (.544 vs. .455)
@@ -621,16 +669,22 @@ plot <- data_sites %>%
   mutate(plot = factor(plot)) %>%
   filter(str_detect(id, "2018")) %>%
   pull(plot)
-### combine abundance and presence data:
-data <- add_row(data_presence, data_abundance) %>%
-  mutate(plot = rep(plot, length(data_abundance$comparison) * 2 / 288),
-         id = str_c(plot, comparison, sep = "_")) %>%
+
+#### * Combine all TBIs ####
+data <- data_presence %>%
+  add_row(data_abundance) %>%
+  mutate(
+    plot = rep(plot, length(data_abundance$comparison) * 2 / 288),
+    id = str_c(plot, comparison, sep = "_")
+    ) %>%
   rename(
     B = "B/(2A+B+C)", C = "C/(2A+B+C)", D = "D=(B+C)/(2A+B+C)",
     change = Change
     ) %>%
-  mutate(change = C - B,
-         across(c(B, C, D, change), ~ round(.x, digits = 4))) %>%
+  mutate(
+    change = C - B,
+    across(c(B, C, D, change), ~ round(.x, digits = 4))
+    ) %>%
   select(id, B, C, D, presabu)
 sites <- sites %>%
   left_join(data, by = "id")
@@ -640,7 +694,7 @@ rm(list = setdiff(ls(), c(
   )))
 
 
-## 7 Functional plant traits ###################################################
+## 8 Functional plant traits ###################################################
 
 ### a LEDA data ---------------------------------------------------------------
 
@@ -933,12 +987,6 @@ rm(list = setdiff(ls(), c(
 
 ### f prepare data frames for calculation of FD -------------------------------
 
-species <- seedmixes %>%
-  mutate(id = str_glue("{plot}_seeded")) %>%
-  pivot_wider(-plot, names_from= "id", values_from = "seeded") %>%
-  left_join(species, by = "name") %>%
-  mutate(name = as.character(name)) %>%
-  arrange(name)
 traits <- traits %>%
   mutate(name = as.character(name)) %>%
   arrange(name) %>%
@@ -983,7 +1031,7 @@ traits_all <- data %>%
   drop_na()
 
 
-## 8 CWM and FDis of functional plant traits ###################################
+## 9 CWM and FDis of functional plant traits ###################################
 
 ### a LHS ----------------------------------------------------------------------
 
@@ -1169,12 +1217,13 @@ length(traits_all$name) / (herbCount - undefinedCount)
 
 ### h Finalisation -------------------------------------------------------------
 
-sites2 <- sites %>%
+sites <- sites %>%
   mutate(across(c(fdisAbuLHS, fdisAbuSla, cwmAbuSla, fdisAbuSeedmass,
                   cwmAbuSeedmass, fdisAbuHeight, cwmAbuHeight,
                   fdisAbuSrl, cwmAbuSrl, fdisAbuRmf,
                   cwmAbuRmf, fdisAbuAll),
-                ~ round(.x, digits = 3)))
+                ~ round(.x, digits = 3))) %>%
+  select(id, tidyselect::peek_vars())
 
 rm(list = setdiff(ls(), c(
   "sites", "species", "traits", "seedmixes"

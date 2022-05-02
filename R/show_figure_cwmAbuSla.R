@@ -27,23 +27,26 @@ sites <- read_csv("data_processed_sites.csv",
                       id = "f",
                       plot = "f",
                       block = "f",
-                      exposition = "f",
-                      sandRatio = "d",
-                      substrateDepth = "d",
+                      exposition = col_factor(levels = c("north", "south")),
+                      sandRatio = "f",
+                      substrateDepth = "f",
                       targetType = "f",
-                      seedDensity = "d"
+                      seedDensity = "f"
                     )) %>%
-  filter(!str_detect(id, "C")) %>%
+  #filter(!str_detect(id, "C") &
+   #        presabu == "presence" |
+    #       surveyYear == "seeded") %>%
+  filter(!str_detect(id, "C") |
+           surveyYear == "seeded") %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
     seedDensity, surveyYear, cwmAbuSla
   ) %>%
   mutate(
     n = cwmAbuSla,
-    surveyYear_fac = factor(surveyYear)
+    surveyYear_fac = factor(surveyYear),
+    surveyYear_fac = fct_relevel(surveyYear_fac, "seeded", before = "2018")
   )
-
-data <- sites
 
 ### * Model ####
 
@@ -60,7 +63,7 @@ theme_mb <- function() {
                               color = "black"),
     axis.line = element_line(),
     legend.key = element_rect(fill = "white"),
-    legend.position = "none",
+    legend.position = "bottom",
     legend.margin = margin(0, 0, 0, 0, "cm"),
     plot.margin = margin(0, 0, 0, 0, "cm")
   )
@@ -72,36 +75,85 @@ theme_mb <- function() {
 # B Plot ######################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+data <- sites %>%
+  group_by(surveyYear_fac, targetType) %>%
+  summarise(median = median(n)) %>%
+  filter(surveyYear_fac == "seeded")
 
 (graph_a <- ggplot() +
-   geom_beeswarm(
+   geom_quasirandom(
      aes(y = n, x = surveyYear_fac, color = targetType),
-     data = data,
+     data = sites,
      alpha = 0.5,
-     dodge.width = 0.8
+     dodge.width = 0.8,
+     cex = .5
+   ) +
+   geom_hline(
+     yintercept = data$median,
+     linetype = "solid",
+     size = .3,
+     color = "grey70"
    ) +
    geom_boxplot(
      aes(y = n, x = surveyYear_fac, fill = targetType),
-     data = data,
+     data = sites,
      alpha = 0.5
    ) +
-   #facet_grid(~targetType) +
-    #geom_hline(
-     # yintercept = c(
-      #  mean(sites$y),
-       # mean(sites$y) + 0.5 * sd(sites$y),
-        #mean(sites$y) - 0.5 * sd(sites$y)
-      #),
-      #linetype = c(1, 2, 2),
-      #color = "grey70"
-    #) +
-    #scale_y_continuous(limits = c(0, .92), breaks = seq(-100, 400, .1)) +
-    #scale_shape_manual(values = c("circle", "circle open")) +
-    #labs(x = "", y = expression(Temporal ~ "beta" ~ diversity ~ "[" * italic("D")[sor] * "]")) +
+   facet_grid(. ~ exposition, labeller = as_labeller(
+     c(south = "South", north = "North")
+     )) +
+    scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
+    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
+                       values = c("#00BFC4", "#F8766D")) +
+    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
+                      values = c("#00BFC4", "#F8766D")) +
+    labs(
+      x = "", fill = "", color = "",
+      y = expression(
+        CWM ~ Specific ~ Leaf ~ Area ~ "[" * mm^2 ~ mg^-1 * "]"
+        )) +
     theme_mb())
 
+(graph_b <- ggplot() +
+    geom_quasirandom(
+      aes(y = n, x = surveyYear_fac, color = targetType),
+      data = sites,
+      alpha = 0.5,
+      dodge.width = 0.8,
+      cex = .5
+    ) +
+    geom_hline(
+      yintercept = data$median,
+      linetype = "solid",
+      size = .3,
+      color = "grey70"
+    ) +
+    geom_boxplot(
+      aes(y = n, x = surveyYear_fac, fill = targetType),
+      data = sites,
+      alpha = 0.5
+    ) +
+    facet_grid(
+      exposition ~ sandRatio,
+      labeller = as_labeller(
+        c(south = "South", north = "North",
+          "0" = "0%", "25" = "25%", "50" = "50%")
+      )
+    ) +
+    scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
+    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
+                       values = c("#00BFC4", "#F8766D")) +
+    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
+                      values = c("#00BFC4", "#F8766D")) +
+    labs(
+      x = "", fill = "", color = "",
+      y = expression(Seeded ~ species ~ richness ~ "[#]")
+    ) +
+    theme_mb())
+
+
 ### Save ###
-ggsave(here("outputs", "figures", "sla_800dpi_8x8cm.tiff"),
-       dpi = 800, width = 8, height = 8, units = "cm")
+ggsave(here("outputs", "figures", "figure_sla_800dpi_16x16cm.tiff"),
+       dpi = 800, width = 16, height = 16, units = "cm")
 
 
