@@ -33,11 +33,9 @@ sites <- read_csv("data_processed_sites.csv",
                       targetType = "f",
                       seedDensity = "f"
                     )) %>%
-  #filter(!str_detect(id, "C") &
-  #        presabu == "presence" |
-  #       surveyYear == "seeded") %>%
-  filter(!str_detect(id, "C") &
-           surveyYear != "seeded") %>%
+  filter(
+    !str_detect(id, "C") & presabu == "presence" & surveyYear != "seeded"
+  ) %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
     seedDensity, surveyYear, distance_hay
@@ -134,7 +132,7 @@ theme_mb <- function() {
       exposition ~ sandRatio,
       labeller = as_labeller(
         c(south = "South", north = "North",
-          "0" = "0%", "25" = "25%", "50" = "50%")
+          "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
       )
     ) +
     #scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
@@ -148,7 +146,6 @@ theme_mb <- function() {
     ) +
     theme_mb())
 
-
 ### Save ###
-ggsave(here("outputs", "figures", "figure_recover_time_800dpi_16x16cm.tiff"),
-       dpi = 800, width = 16, height = 16, units = "cm")
+ggsave(here("outputs", "figures", "figure_recover_time_800dpi_16.5x14cm.tiff"),
+       dpi = 800, width = 16.5, height = 14, units = "cm")

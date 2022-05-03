@@ -33,9 +33,9 @@ sites <- read_csv("data_processed_sites.csv",
                       targetType = "f",
                       seedDensity = "f"
                     )) %>%
-  filter(!str_detect(id, "C") &
-           presabu == "presence" &
-           surveyYear != "seeded") %>%
+  filter(
+    !str_detect(id, "C") & presabu == "presence" & surveyYear != "seeded"
+    ) %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
     seedDensity, surveyYear, B, C, D
@@ -110,7 +110,5 @@ theme_mb <- function() {
     theme_mb())
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_persistence_800dpi_16x16cm.tiff"),
-       dpi = 800, width = 16, height = 16, units = "cm")
-
-
+ggsave(here("outputs", "figures", "figure_persistence_800dpi_16.5x14cm.tiff"),
+       dpi = 800, width = 16.5, height = 14, units = "cm")

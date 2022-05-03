@@ -33,10 +33,9 @@ sites <- read_csv("data_processed_sites.csv",
                       targetType = "f",
                       seedDensity = "f"
                     )) %>%
-  #filter(!str_detect(id, "C") &
-  #         presabu == "presence" |
-  #         surveyYear == "seeded") %>%
-  filter(!str_detect(id, "C") & surveyYear != "seeded") %>%
+  filter(
+    !str_detect(id, "C") & presabu == "presence" & surveyYear != "seeded"
+  ) %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
     seedDensity, surveyYear, fcs_seeded
@@ -85,7 +84,7 @@ theme_mb <- function() {
     ) +
     geom_hline(
       yintercept = 0,
-      linetype = "solid",
+      linetype = "dashed",
       size = .3,
       color = "grey70"
     ) +
@@ -98,10 +97,10 @@ theme_mb <- function() {
       exposition ~ sandRatio,
       labeller = as_labeller(
         c(south = "South", north = "North",
-        "0" = "0%", "25" = "25%", "50" = "50%")
+        "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
       )
     ) +
-    scale_y_continuous(limits = c(-3.2, .5), breaks = seq(-100, 400, 1)) +
+    scale_y_continuous(limits = c(-3.26, .41), breaks = seq(-100, 400, 1)) +
     scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
                        values = c("#00BFC4", "#F8766D")) +
     scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
@@ -114,47 +113,8 @@ theme_mb <- function() {
       ) +
     theme_mb())
 
-(graph_b <- ggplot() +
-    geom_quasirandom(
-      aes(y = n, x = sandRatio, color = targetType),
-      data = sites,
-      alpha = 0.5,
-      dodge.width = 0.8,
-      cex = .5
-    ) +
-    geom_hline(
-      yintercept = 0,
-      linetype = "solid",
-      size = .3,
-      color = "grey70"
-    ) +
-    geom_boxplot(
-      aes(y = n, x = sandRatio, fill = targetType),
-      data = sites,
-      alpha = 0.5
-    ) +
-    facet_grid(
-      exposition ~ surveyYear_fac,
-      labeller = as_labeller(
-        c(south = "South", north = "North",
-          "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
-      )
-    ) +
-    scale_y_continuous(limits = c(-3.2, .5), breaks = seq(-100, 400, 1)) +
-    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-                       values = c("#00BFC4", "#F8766D")) +
-    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-                      values = c("#00BFC4", "#F8766D")) +
-    labs(
-      x = "", fill = "", color = "",
-      y = expression(
-        Favourable ~ Conservation ~ Status ~ "(FCS)"
-      )
-    ) +
-    theme_mb())
-
 ### Save ###
-ggsave(here("outputs", "figures", "figure_fcs_800dpi_16x16cm.tiff"),
-       dpi = 800, width = 16, height = 16, units = "cm")
+ggsave(here("outputs", "figures", "figure_fcs_800dpi_16.5x14cm.tiff"),
+       dpi = 800, width = 16.5, height = 14, units = "cm")
 
 

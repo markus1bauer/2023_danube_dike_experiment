@@ -33,10 +33,9 @@ sites <- read_csv("data_processed_sites.csv",
                       targetType = "f",
                       seedDensity = "f"
                     )) %>%
-  #filter(!str_detect(id, "C") &
-  #         presabu == "presence" |
-  #         surveyYear == "seeded") %>%
-  filter(!str_detect(id, "C") & surveyYear != "seeded") %>%
+  filter(
+    !str_detect(id, "C") & presabu == "presence" & surveyYear != "seeded"
+    ) %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
     seedDensity, surveyYear, accumulatedCov
@@ -46,7 +45,7 @@ sites <- read_csv("data_processed_sites.csv",
     surveyYear_fac = factor(surveyYear),
     targetType = factor(targetType)
   )
-
+table(sites$block, sites$surveyYear)
 ### * Model ####
 
 
@@ -98,10 +97,10 @@ theme_mb <- function() {
      exposition ~ sandRatio,
      labeller = as_labeller(
        c(south = "South", north = "North",
-         "0" = "0%", "25" = "25%", "50" = "50%")
+         "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
      )
    ) +
-   #scale_y_continuous(limits = c(-3.2, .5), breaks = seq(-100, 400, 1)) +
+   scale_y_continuous(limits = c(0, 125), breaks = seq(-100, 400, 25)) +
    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
                       values = c("#00BFC4", "#F8766D")) +
    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
@@ -113,7 +112,7 @@ theme_mb <- function() {
    theme_mb())
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_accumulatedCov_800dpi_16x16cm.tiff"),
-       dpi = 800, width = 16, height = 16, units = "cm")
+ggsave(here("outputs", "figures", "figure_accumulatedCov_800dpi_16.5x14cm.tiff"),
+       dpi = 800, width = 16.5, height = 14, units = "cm")
 
 

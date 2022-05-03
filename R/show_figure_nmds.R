@@ -41,7 +41,6 @@ sites <- read_csv("data_processed_sites.csv",
   mutate(
     targetType = if_else(targetType == "mixed", "hay_meadow", targetType),
     surveyYear_fac = as.character(surveyYear),
-    #surveyYear_fac = fct_relevel(surveyYear_fac, "seeded", before = "2018"),
     surveyYear_fac = if_else(block == "C", "reference", surveyYear_fac)
   )
 
@@ -73,52 +72,34 @@ theme_mb <- function() {
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-(graph_a <- ggplot() +
-    geom_point(
-      aes(y = NMDS2, x = NMDS1, color = surveyYear_fac, shape = targetType),
-      data = sites,
-      alpha = 1,
-      cex = 2
-    ) +
-    facet_grid(. ~ exposition, labeller = as_labeller(
-      c(south = "South", north = "North")
-    )) +
-    #scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
-    #scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-    #                   values = c("#00BFC4", "#F8766D")) +
-    labs(
-      x = "", fill = "", color = "",
-      y = expression(
-        y
-      )) +
-    theme_mb())
-
 (graph_b <- ggplot() +
-    geom_point(
-      aes(y = NMDS2, x = NMDS1, color = surveyYear_fac),
-      data = sites,
-      alpha = 1,
-      cex = 2
-    ) +
-    facet_grid(
-      exposition ~ targetType,
-      labeller = as_labeller(
-        c(south = "South", north = "North",
-          "dry_grassland" = "Dry grassland", "hay_meadow" = "Hay meadow")
-      )
-    ) +
-    #scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
-    #scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-    #                   values = c("#00BFC4", "#F8766D")) +
-    #scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-    #                  values = c("#00BFC4", "#F8766D")) +
-    labs(
-      x = "NMDS1", fill = "", color = "",
-      y = "NMDS2"
-    ) +
-    theme_mb())
+   geom_point(
+     aes(y = NMDS2, x = NMDS1, color = surveyYear_fac, shape = surveyYear_fac),
+     data = sites,
+     alpha = 1,
+     cex = 2
+   ) +
+   facet_grid(
+     exposition ~ targetType,
+     labeller = as_labeller(
+       c(south = "South", north = "North",
+         "dry_grassland" = "Dry grassland", "hay_meadow" = "Hay meadow")
+     )
+   ) +
+   coord_fixed() +
+   scale_color_manual(values = c(
+     "yellow1", "orange2", "firebrick3", "deeppink4", "royalblue", "black"
+   )) +
+   scale_shape_manual(values = c(
+     "circle", "circle", "circle", "circle", "square", "square open"
+   )) +
+   labs(
+     x = "NMDS1", fill = "", color = "", shape = "",
+     y = "NMDS2"
+   ) +
+   theme_mb())
 
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_nmds_800dpi_16x16cm.tiff"),
-       dpi = 800, width = 16, height = 16, units = "cm")
+ggsave(here("outputs", "figures", "figure_nmds_800dpi_16.5x16cm.tiff"),
+       dpi = 800, width = 16.5, height = 16, units = "cm")
