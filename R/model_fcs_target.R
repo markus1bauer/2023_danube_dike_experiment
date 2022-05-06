@@ -70,7 +70,7 @@ ggplot(sites %>% filter(surveyYear == 2020), aes(y = n, x = exposition)) +
   geom_boxplot() + geom_quasirandom()
 ggplot(sites %>% filter(surveyYear == 2021), aes(y = n, x = targetType)) +
   geom_boxplot() + geom_quasirandom() 
-ggplot(sites, aes(y = n, x = seedDensity)) +
+ggplot(sites %>% filter(surveyYear == 2021), aes(y = n, x = seedDensity)) +
   geom_boxplot() + geom_quasirandom() 
 ggplot(sites %>% filter(surveyYear == 2021), aes(y = n, x = substrateDepth)) +
   geom_boxplot() + geom_quasirandom() 
@@ -177,8 +177,14 @@ m11 <- brm(n ~ targetType + exposition + sandRatio + surveyYear_fac +
           cores = parallel::detectCores(),
           seed = 123)
 
-m21 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
-            seedDensity + substrateDepth)^3 +
+m21 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^3 +
+            seedDensity + substrateDepth +
+             seedDensity:targetType +
+             seedDensity:exposition +
+             substrateDepth:sandRatio +
+             substrateDepth:exposition +
+             seedDensity:targetType:exposition +
+             substrateDepth:sandRatio:exposition +
              targetType:exposition:sandRatio:surveyYear_fac +
             (1 | block/plot) + (1 | botanist_year),
           data = sites, 
@@ -196,21 +202,70 @@ m21 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
           cores = parallel::detectCores(),
           seed = 123)
 
-m21_flat <- brm(n ~ targetType + exposition * sandRatio * surveyYear_fac +
-                 seedDensity + substrateDepth +
-                 (1 + exposition | block/plot) + (1 | botanist_year),
-               data = sites, 
-               family = gaussian("identity"),
-               prior = c(
-                 set_prior("cauchy(0, 1)", class = "sigma")
-               ),
-               chains = chains,
-               iter = iter,
-               thin = thin,
-               warmup = floor(iter / 2),
-               save_pars = save_pars(all = TRUE),
-               cores = parallel::detectCores(),
-               seed = 123)
+m31 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
+             seedDensity + substrateDepth +
+             seedDensity:exposition +
+             substrateDepth:sandRatio +
+             targetType:exposition:surveyYear_fac +
+             sandRatio:exposition:surveyYear_fac +
+             (1 | block/plot) + (1 | botanist_year),
+           data = sites, 
+           family = gaussian("identity"),
+           prior = c(
+             set_prior("normal(0, 3)", class = "b"),
+             set_prior("normal(0, 3)", class = "b", coef = "expositionnorth"),
+             set_prior("cauchy(0, 1)", class = "sigma")
+           ),
+           chains = chains,
+           iter = iter,
+           thin = thin,
+           warmup = floor(iter / 2),
+           save_pars = save_pars(all = TRUE),
+           cores = parallel::detectCores(),
+           seed = 123)
+
+m21_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^3 +
+             seedDensity + substrateDepth +
+             seedDensity:targetType +
+             seedDensity:exposition +
+             substrateDepth:sandRatio +
+             substrateDepth:exposition +
+             seedDensity:targetType:exposition +
+             substrateDepth:sandRatio:exposition +
+             targetType:exposition:sandRatio:surveyYear_fac +
+             (1 | block/plot) + (1 | botanist_year),
+           data = sites, 
+           family = gaussian("identity"),
+           prior = c(
+             set_prior("cauchy(0, 1)", class = "sigma")
+           ),
+           chains = chains,
+           iter = iter,
+           thin = thin,
+           warmup = floor(iter / 2),
+           save_pars = save_pars(all = TRUE),
+           cores = parallel::detectCores(),
+           seed = 123)
+
+m31_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
+             seedDensity + substrateDepth +
+             seedDensity:exposition +
+             substrateDepth:sandRatio +
+             targetType:exposition:surveyYear_fac +
+             sandRatio:exposition:surveyYear_fac +
+             (1 | block/plot) + (1 | botanist_year),
+           data = sites, 
+           family = gaussian("identity"),
+           prior = c(
+             set_prior("cauchy(0, 1)", class = "sigma")
+           ),
+           chains = chains,
+           iter = iter,
+           thin = thin,
+           warmup = floor(iter / 2),
+           save_pars = save_pars(all = TRUE),
+           cores = parallel::detectCores(),
+           seed = 123)
 
 
 m4 <- lmerTest::lmer(n ~ (targetType + sandRatio + exposition +
@@ -232,82 +287,141 @@ m4 <- lmerTest::lmer(n ~ (targetType + sandRatio + exposition +
 
 ### b comparison ------------------------------------------------------------
 
-bayes_factor(m12, m22, log = TRUE)
-bayes_factor(m2, m2_flat, log = TRUE)
-m <- m22
+m_1 <- m31
+m_2 <- m21
 
 ### c model check -----------------------------------------------------------
 
 createDHARMa(
-  simulatedResponse = t(posterior_predict(m)),
+  simulatedResponse = t(posterior_predict(m_1)),
   observedResponse = sites$n,
-  fittedPredictedResponse = apply(t(posterior_epred(m)), 1, mean),
+  fittedPredictedResponse = apply(t(posterior_epred(m_1)), 1, mean),
   integerResponse = TRUE
   ) %>%
   plot()
+createDHARMa(
+  simulatedResponse = t(posterior_predict(m_2)),
+  observedResponse = sites$n,
+  fittedPredictedResponse = apply(t(posterior_epred(m_2)), 1, mean),
+  integerResponse = TRUE
+) %>%
+  plot()
 
-posterior <- m %>%
+posterior1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::subset_draws(
     variable = c(
-      "b_expositionnorth",
+      "b_substrateDepth30",
+      "b_seedDensity8",
+      "b_targetTypedry_grassland",
       "b_sandRatio25",
       "b_sandRatio50",
-      "b_targetTypedry_grassland",
-      "b_surveyYear_fac2019",
-      "b_surveyYear_fac2020",
-      "b_surveyYear_fac2021",
+      "b_expositionnorth",
       "sd_block__Intercept",
+      "sd_block:plot__Intercept",
+      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
-hmc_diagnostics <- nuts_params(m)
+posterior2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(
+    variable = c(
+      "b_substrateDepth30",
+      "b_seedDensity8",
+      "b_targetTypedry_grassland",
+      "b_sandRatio25",
+      "b_sandRatio50",
+      "b_expositionnorth",
+      "sd_block__Intercept",
+      "sd_block:plot__Intercept",
+      "sd_botanist_year__Intercept",
+      "sigma"
+    )
+  )
+hmc_diagnostics1 <- nuts_params(m_1)
+hmc_diagnostics2 <- nuts_params(m_2)
 y <- sites$n
-yrep <- posterior_predict(m, draws = 500)
-loo <- loo(m, save_psis = TRUE, moment_match = FALSE)
+yrep1 <- posterior_predict(m_1, draws = 500)
+yrep2 <- posterior_predict(m_2, draws = 500)
+loo1 <- loo(m_1, save_psis = TRUE, moment_match = FALSE)
+loo2 <- loo(m_2, save_psis = TRUE, moment_match = FALSE)
 
 ### Samling efficency/effectiveness (Rhat and EFF) ###
-draws <- m %>%
+draws1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::summarize_draws() %>%
   filter(str_starts(variable, "b_"))
-range(draws$rhat)
-range(draws$ess_bulk)
-range(draws$ess_tail)
+draws2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::summarize_draws() %>%
+  filter(str_starts(variable, "b_"))
+range(draws1$rhat)
+range(draws2$rhat)
+range(draws1$ess_bulk)
+range(draws2$ess_bulk)
+range(draws1$ess_tail)
+range(draws2$ess_tail)
 
 ### MCMC diagnostics ###
-mcmc_trace(posterior, np = hmc_diagnostics)
-mcmc_pairs(posterior, off_diag_args = list(size = 1.2))
-mcmc_scatter(m,
+mcmc_trace(posterior1, np = hmc_diagnostics)
+mcmc_trace(posterior2, np = hmc_diagnostics)
+mcmc_pairs(posterior1, off_diag_args = list(size = 1.2))
+mcmc_pairs(posterior2, off_diag_args = list(size = 1.2))
+mcmc_scatter(m1,
              pars = c("b_surveyYear_fac2020", "b_surveyYear_fac2019"),
              np = hmc_diagnostics,
              size = 1)
-mcmc_parcoord(posterior, np = hmc_diagnostics)
+mcmc_scatter(m2,
+             pars = c("b_surveyYear_fac2020", "b_surveyYear_fac2019"),
+             np = hmc_diagnostics,
+             size = 1)
+mcmc_parcoord(posterior1, np = hmc_diagnostics)
+mcmc_parcoord(posterior2, np = hmc_diagnostics)
 
 ### Posterior predictive check ###
 #### Kernel density
-ppc_dens_overlay(y, yrep[1:50, ])
-ppc_dens_overlay_grouped(y, yrep[1:50, ], group = sites$block)
-ppc_dens_overlay_grouped(y, yrep[1:50, ], group = sites$exposition)
-ppc_dens_overlay_grouped(y, yrep[1:50, ], group = sites$surveyYear_fac)
-ppc_dens_overlay_grouped(y, yrep[1:50, ], group = sites$targetType)
-ppc_dens_overlay_grouped(y, yrep[1:50, ], group = sites$seedDensity)
-ppc_dens_overlay_grouped(y, yrep[1:50, ], group = sites$sandRatio)
-ppc_dens_overlay_grouped(y, yrep[1:50, ], group = sites$substrateDepth)
+ppc_dens_overlay(y, yrep1[1:50, ])
+ppc_dens_overlay(y, yrep2[1:50, ])
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$block)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$block)
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$exposition)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$exposition)
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$surveyYear_fac)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$surveyYear_fac)
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$targetType)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$targetType)
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$seedDensity)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$seedDensity)
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$sandRatio)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$sandRatio)
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$substrateDepth)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$substrateDepth)
 #### Histograms of statistics skew
-ppc_stat(y, yrep, binwidth = 0.001)
-ppc_stat_grouped(y, yrep, group = sites$block, binwidth = 0.001)
-ppc_stat_grouped(y, yrep, group = sites$exposition, binwidth = 0.001)
-ppc_stat_grouped(y, yrep, group = sites$surveyYear_fac, binwidth = 0.001)
-ppc_stat_grouped(y, yrep, group = sites$targetType, binwidth = 0.001)
-ppc_stat_grouped(y, yrep, group = sites$seedDensity, binwidth = 0.001)
-ppc_stat_grouped(y, yrep, group = sites$sandRatio, binwidth = 0.001)
-ppc_stat_grouped(y, yrep, group = sites$substrateDepth, binwidth = 0.001)
+ppc_stat(y, yrep1, binwidth = 0.001)
+ppc_stat(y, yrep2, binwidth = 0.001)
+ppc_stat_grouped(y, yrep1, group = sites$block, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$block, binwidth = 0.001)
+ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
+ppc_stat_grouped(y, yrep1, group = sites$surveyYear_fac, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$surveyYear_fac, binwidth = 0.001)
+ppc_stat_grouped(y, yrep1, group = sites$targetType, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$targetType, binwidth = 0.001)
+ppc_stat_grouped(y, yrep1, group = sites$seedDensity, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$seedDensity, binwidth = 0.001)
+ppc_stat_grouped(y, yrep1, group = sites$sandRatio, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$sandRatio, binwidth = 0.001)
+ppc_stat_grouped(y, yrep1, group = sites$substrateDepth, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$substrateDepth, binwidth = 0.001)
 #### LOO-PIT plots
-ppc_loo_pit_overlay(y, yrep, lw = weights(loo$psis_object))
-
+ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
+ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+plot(loo1)
+plot(loo2)
 ### Autocorrelation ###
-mcmc_acf(posterior, lags = 10)
+mcmc_acf(posterior1, lags = 10)
+mcmc_acf(posterior2, lags = 10)
 
 
 ## 3 Chosen model output #####################################################
@@ -327,16 +441,24 @@ mcmc_intervals(
   point_est = "mean"
 )
 sjPlot::plot_model(m, type = "est")
-sjPlot::plot_model(m, type = "int")
-sjPlot::plot_model(m, type = "pred", terms = "exposition")
-sjPlot::plot_model(m, type = "pred", terms = "targetType")
-sjPlot::plot_model(m, type = "pred", terms = c("exposition", "sandRatio"))
+sjPlot::plot_model(m, type = "pred", terms = c(
+  "sandRatio", "substrateDepth", "surveyYear_fac", "exposition"
+))
+sjPlot::plot_model(m, type = "pred", terms = c(
+  "targetType", "sandRatio", "surveyYear_fac", "exposition"
+  ))
+sjPlot::plot_model(m, type = "pred", terms = c(
+  "sandRatio", "seedDensity", "surveyYear_fac", "exposition"
+))
 
 ### b Effect sizes ------------------------------------------------------------
 
-(emm <- emmeans(m, revpairwise ~ exposition, type = "response"))
-(emm <- emmeans(m, revpairwise ~ targetType, type = "response"))
-
+(emm <- emmeans(m, revpairwise ~ targetType + sandRatio |
+                  exposition | surveyYear_fac, type = "response"))
+(emm <- emmeans(m, revpairwise ~ substrateDepth + sandRatio |
+                  exposition | surveyYear_fac, type = "response"))
+(emm <- emmeans(m, revpairwise ~ seedDensity |
+                  exposition | surveyYear_fac, type = "response"))
 ### Save ###
 write.csv(draws, here("outputs", "statistics", "table_fcs_target.csv"))
 areas
