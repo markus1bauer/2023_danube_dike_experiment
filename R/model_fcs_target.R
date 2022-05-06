@@ -46,6 +46,12 @@ sites <- read_csv("data_processed_sites.csv",
     targetType = factor(targetType),
     botanist_year = str_c(botanist, surveyYear, sep = " "),
     botanist_year = factor(botanist_year),
+    sandRatio = factor(sandRatio),
+    substrateDepth = factor(substrateDepth),
+    seedDensity = factor(seedDensity),
+    block = factor(block),
+    plot = factor(plot),
+    id = factor(id),
     surveyYear = as.double(surveyYear)
   ) %>%
   select(
@@ -166,7 +172,6 @@ m_simple1 <- brm(n ~ targetType + exposition + sandRatio + surveyYear_fac +
                  family = gaussian("identity"),
                  prior = c(
                    set_prior("normal(0, 3)", class = "b"),
-                   set_prior("normal(0, 3)", class = "b", coef = "expositionnorth"),
                    set_prior("cauchy(0, 1)", class = "sigma")
                  ),
                  chains = chains,
@@ -186,7 +191,6 @@ m_full1 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
                family = gaussian("identity"),
                prior = c(
                  set_prior("normal(0, 3)", class = "b"),
-                 set_prior("normal(0, 3)", class = "b", coef = "expositionnorth"),
                  set_prior("cauchy(0, 1)", class = "sigma")
                ),
                chains = chains,
@@ -198,6 +202,7 @@ m_full1 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
                seed = 123)
 
 m31 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
+             substrateDepth + seedDensity +
              substrateDepth:sandRatio +
              seedDensity:exposition +
              targetType:exposition:surveyYear_fac +
@@ -208,7 +213,6 @@ m31 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
            family = gaussian("identity"),
            prior = c(
              set_prior("normal(0, 3)", class = "b"),
-             set_prior("normal(0, 3)", class = "b", coef = "expositionnorth"),
              set_prior("cauchy(0, 1)", class = "sigma")
            ),
            chains = chains,
@@ -238,24 +242,25 @@ m_full1_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
                seed = 123)
 
 m31_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
-             substrateDepth:sandRatio +
-             seedDensity:exposition +
-             targetType:exposition:surveyYear_fac +
-             sandRatio:exposition:surveyYear_fac +
-             seedDensity:exposition:surveyYear_fac +
-             (1 | block/plot) + (1 | botanist_year),
-           data = sites, 
-           family = gaussian("identity"),
-           prior = c(
-             set_prior("cauchy(0, 1)", class = "sigma")
-           ),
-           chains = chains,
-           iter = iter,
-           thin = thin,
-           warmup = floor(iter / 2),
-           save_pars = save_pars(all = TRUE),
-           cores = parallel::detectCores(),
-           seed = 123)
+                  substrateDepth + seedDensity +
+                  substrateDepth:sandRatio +
+                  seedDensity:exposition +
+                  targetType:exposition:surveyYear_fac +
+                  sandRatio:exposition:surveyYear_fac +
+                  seedDensity:exposition:surveyYear_fac +
+                  (1 | block/plot) + (1 | botanist_year),
+                data = sites, 
+                family = gaussian("identity"),
+                prior = c(
+                  set_prior("cauchy(0, 1)", class = "sigma")
+                ),
+                chains = chains,
+                iter = iter,
+                thin = thin,
+                warmup = floor(iter / 2),
+                save_pars = save_pars(all = TRUE),
+                cores = parallel::detectCores(),
+                seed = 123)
 
 m4 <- lmerTest::lmer(n ~ (targetType + sandRatio + exposition +
                        surveyYear_fac)^2 +
@@ -267,17 +272,23 @@ m4 <- lmerTest::lmer(n ~ (targetType + sandRatio + exposition +
                        sandRatio:surveyYear_fac:exposition +
                        sandRatio:exposition:targetType +
                        surveyYear_fac:exposition:targetType +
-                       (1 | block/plot),
+                       (1 | block/plot) + (1 | botanist_year),
                      data = sites,
                      REML = FALSE);lme4::isSingular(m4);simulateResiduals(m4, plot = TRUE);car::Anova(m4, type = 2)
-
-
 
 
 ### b comparison ------------------------------------------------------------
 
 m_1 <- m31
-m_2 <- m21
+m_2 <- m_simple1
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | block/plot) + (1 | botanist_year)) 
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | block/plot) + (1 | botanist_year)) 
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula = 1 ~ 1)
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+         re_formula = 1 ~ 1)
 
 ### c model check -----------------------------------------------------------
 
@@ -300,8 +311,8 @@ posterior1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::subset_draws(
     variable = c(
-      "b_substrateDepth30",
-      "b_seedDensity8",
+      #"b_substrateDepth30",
+      #"b_seedDensity8",
       "b_targetTypedry_grassland",
       "b_sandRatio25",
       "b_sandRatio50",
@@ -353,20 +364,20 @@ range(draws1$ess_tail)
 range(draws2$ess_tail)
 
 ### MCMC diagnostics ###
-mcmc_trace(posterior1, np = hmc_diagnostics)
-mcmc_trace(posterior2, np = hmc_diagnostics)
+mcmc_trace(posterior1, np = hmc_diagnostics1)
+mcmc_trace(posterior2, np = hmc_diagnostics2)
 mcmc_pairs(posterior1, off_diag_args = list(size = 1.2))
 mcmc_pairs(posterior2, off_diag_args = list(size = 1.2))
-mcmc_scatter(m1,
+mcmc_scatter(m_1,
              pars = c("b_surveyYear_fac2020", "b_surveyYear_fac2019"),
-             np = hmc_diagnostics,
+             np = hmc_diagnostics1,
              size = 1)
-mcmc_scatter(m2,
+mcmc_scatter(m_2,
              pars = c("b_surveyYear_fac2020", "b_surveyYear_fac2019"),
-             np = hmc_diagnostics,
+             np = hmc_diagnostics2,
              size = 1)
-mcmc_parcoord(posterior1, np = hmc_diagnostics)
-mcmc_parcoord(posterior2, np = hmc_diagnostics)
+mcmc_parcoord(posterior1, np = hmc_diagnostics1)
+mcmc_parcoord(posterior2, np = hmc_diagnostics2)
 
 ### Posterior predictive check ###
 #### Kernel density
@@ -417,66 +428,53 @@ mcmc_acf(posterior2, lags = 10)
 
 ### a Model output ------------------------------------------------------------
 
-prior_summary(m)
-bayes_R2(m, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 + exposition | block/plot) + (1 | botanist_year)) 
-bayes_R2(m, probs = c(0.05, 0.5, 0.95),
+prior_summary(m_1)
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | block/plot) + (1 | botanist_year)) 
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | block/plot) + (1 | botanist_year)) 
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
-draws
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+         re_formula = 1 ~ 1)
+draws1
 mcmc_intervals(
-  posterior,
+  posterior2,
   prob = 0.5,
   prob_outer = 0.95,
   point_est = "mean"
 )
-sjPlot::plot_model(m, type = "est")
-sjPlot::plot_model(m, type = "pred", terms = c(
+sjPlot::plot_model(m_1, type = "est")
+sjPlot::plot_model(m31_flat, type = "est")
+sjPlot::plot_model(m_1, type = "pred", terms = c(
   "sandRatio", "substrateDepth", "surveyYear_fac", "exposition"
 ))
-sjPlot::plot_model(m, type = "pred", terms = c(
+sjPlot::plot_model(m_1, type = "pred", terms = c(
   "targetType", "sandRatio", "surveyYear_fac", "exposition"
   ))
-sjPlot::plot_model(m, type = "pred", terms = c(
-  "sandRatio", "seedDensity", "surveyYear_fac", "exposition"
+sjPlot::plot_model(m_1, type = "pred", terms = c(
+  "seedDensity", "exposition", "surveyYear_fac"
 ))
 
 ### b Effect sizes ------------------------------------------------------------
 
-(emm <- emmeans(m, revpairwise ~ targetType + sandRatio |
+(emm <- emmeans(m_1, revpairwise ~ targetType + sandRatio |
                   exposition | surveyYear_fac, type = "response"))
-(emm <- emmeans(m, revpairwise ~ substrateDepth + sandRatio |
+(emm <- emmeans(m_1, revpairwise ~ substrateDepth + sandRatio |
                   exposition | surveyYear_fac, type = "response"))
-(emm <- emmeans(m, revpairwise ~ seedDensity |
+(emm <- emmeans(m_1, revpairwise ~ seedDensity |
                   exposition | surveyYear_fac, type = "response"))
+
 ### Save ###
 write.csv(draws, here("outputs", "statistics", "table_fcs_target.csv"))
-areas
-ggsave("figure_fcs_target_300dpi_14x14cm.tiff", 
-       dpi = 300, width = 14, height = 14, units = "cm",
-       path = here("outputs", "figures"))
+head(get_variables(m_1), 20)
 
-m2_flat %>%
-  posterior::as_draws() %>%
-  posterior::subset_draws(
-    variable = c(
-      "b_expositionnorth",
-      "b_sandRatio25",
-      "b_sandRatio50",
-      "b_targetTypedry_grassland",
-      "b_surveyYear_fac2019",
-      "b_surveyYear_fac2020",
-      "b_surveyYear_fac2021",
-      "b_substrateDepth30",
-      "b_seedDensity8",
-      "sd_block__Intercept",
-      "sigma"
-    )
-  ) %>%
-  bayesplot::mcmc_areas(posterior,
-                        prob = .5,
-                        prob_outer = .95,
-                        point_est = "mean")
-
-ggsave("figure_fcs_target_flat_300dpi_14x14cm.tiff", 
-       dpi = 300, width = 14, height = 14, units = "cm",
-       path = here("outputs", "figures"))
+data <- sites %>%
+  data_grid(exposition, block, plot, botanist_year) %>%
+  add_epred_draws(m_1, dpar = TRUE, category = "targetType") #%>%
+  ggplot(aes(x = exposition, y = .epred, color = targetType)) +
+  stat_pointinterval(position = position_dodge(width = .4)) +
+  scale_size_continuous(guide = "none") +
+  scale_color_manual(values = brewer.pal(6, "Blues")[-c(1,2)])
+  
+  
