@@ -159,55 +159,50 @@ iter = 1000#10000
 chains = 3#4
 thin = 2
 
-m11 <- brm(n ~ targetType + exposition + sandRatio + surveyYear_fac +
-            seedDensity + substrateDepth +
-            (1 | block/plot) + (1 | botanist_year),
-          data = sites, 
-          family = gaussian("identity"),
-          prior = c(
-            set_prior("normal(0, 3)", class = "b"),
-            set_prior("normal(0, 3)", class = "b", coef = "expositionnorth"),
-            set_prior("cauchy(0, 1)", class = "sigma")
-          ),
-          chains = chains,
-          iter = iter,
-          thin = thin,
-          warmup = floor(iter / 2),
-          save_pars = save_pars(all = TRUE),
-          cores = parallel::detectCores(),
-          seed = 123)
+m_simple1 <- brm(n ~ targetType + exposition + sandRatio + surveyYear_fac +
+                   seedDensity + substrateDepth +
+                   (1 | block/plot) + (1 | botanist_year),
+                 data = sites, 
+                 family = gaussian("identity"),
+                 prior = c(
+                   set_prior("normal(0, 3)", class = "b"),
+                   set_prior("normal(0, 3)", class = "b", coef = "expositionnorth"),
+                   set_prior("cauchy(0, 1)", class = "sigma")
+                 ),
+                 chains = chains,
+                 iter = iter,
+                 thin = thin,
+                 warmup = floor(iter / 2),
+                 save_pars = save_pars(all = TRUE),
+                 cores = parallel::detectCores(),
+                 seed = 123)
 
-m21 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^3 +
-            seedDensity + substrateDepth +
-             seedDensity:targetType +
-             seedDensity:exposition +
-             substrateDepth:sandRatio +
-             substrateDepth:exposition +
-             seedDensity:targetType:exposition +
-             substrateDepth:sandRatio:exposition +
-             targetType:exposition:sandRatio:surveyYear_fac +
-            (1 | block/plot) + (1 | botanist_year),
-          data = sites, 
-          family = gaussian("identity"),
-          prior = c(
-            set_prior("normal(0, 3)", class = "b"),
-            set_prior("normal(0, 3)", class = "b", coef = "expositionnorth"),
-            set_prior("cauchy(0, 1)", class = "sigma")
-          ),
-          chains = chains,
-          iter = iter,
-          thin = thin,
-          warmup = floor(iter / 2),
-          save_pars = save_pars(all = TRUE),
-          cores = parallel::detectCores(),
-          seed = 123)
+m_full1 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
+                      seedDensity + substrateDepth)^3 +
+                 targetType:sandRatio:exposition:surveyYear_fac +
+                 substrateDepth:sandRatio:exposition:surveyYear_fac +
+                 (1 | block/plot) + (1 | botanist_year),
+               data = sites, 
+               family = gaussian("identity"),
+               prior = c(
+                 set_prior("normal(0, 3)", class = "b"),
+                 set_prior("normal(0, 3)", class = "b", coef = "expositionnorth"),
+                 set_prior("cauchy(0, 1)", class = "sigma")
+               ),
+               chains = chains,
+               iter = iter,
+               thin = thin,
+               warmup = floor(iter / 2),
+               save_pars = save_pars(all = TRUE),
+               cores = parallel::detectCores(),
+               seed = 123)
 
 m31 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
-             seedDensity + substrateDepth +
-             seedDensity:exposition +
              substrateDepth:sandRatio +
+             seedDensity:exposition +
              targetType:exposition:surveyYear_fac +
              sandRatio:exposition:surveyYear_fac +
+             seedDensity:exposition:surveyYear_fac +
              (1 | block/plot) + (1 | botanist_year),
            data = sites, 
            family = gaussian("identity"),
@@ -224,35 +219,30 @@ m31 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
            cores = parallel::detectCores(),
            seed = 123)
 
-m21_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^3 +
-             seedDensity + substrateDepth +
-             seedDensity:targetType +
-             seedDensity:exposition +
-             substrateDepth:sandRatio +
-             substrateDepth:exposition +
-             seedDensity:targetType:exposition +
-             substrateDepth:sandRatio:exposition +
-             targetType:exposition:sandRatio:surveyYear_fac +
-             (1 | block/plot) + (1 | botanist_year),
-           data = sites, 
-           family = gaussian("identity"),
-           prior = c(
-             set_prior("cauchy(0, 1)", class = "sigma")
-           ),
-           chains = chains,
-           iter = iter,
-           thin = thin,
-           warmup = floor(iter / 2),
-           save_pars = save_pars(all = TRUE),
-           cores = parallel::detectCores(),
-           seed = 123)
+m_full1_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
+                      seedDensity + substrateDepth)^3 +
+                 targetType:sandRatio:exposition:surveyYear_fac +
+                 substrateDepth:sandRatio:exposition:surveyYear_fac +
+                 (1 | block/plot) + (1 | botanist_year),
+               data = sites, 
+               family = gaussian("identity"),
+               prior = c(
+                 set_prior("cauchy(0, 1)", class = "sigma")
+               ),
+               chains = chains,
+               iter = iter,
+               thin = thin,
+               warmup = floor(iter / 2),
+               save_pars = save_pars(all = TRUE),
+               cores = parallel::detectCores(),
+               seed = 123)
 
 m31_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
-             seedDensity + substrateDepth +
-             seedDensity:exposition +
              substrateDepth:sandRatio +
+             seedDensity:exposition +
              targetType:exposition:surveyYear_fac +
              sandRatio:exposition:surveyYear_fac +
+             seedDensity:exposition:surveyYear_fac +
              (1 | block/plot) + (1 | botanist_year),
            data = sites, 
            family = gaussian("identity"),
@@ -266,7 +256,6 @@ m31_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
            save_pars = save_pars(all = TRUE),
            cores = parallel::detectCores(),
            seed = 123)
-
 
 m4 <- lmerTest::lmer(n ~ (targetType + sandRatio + exposition +
                        surveyYear_fac)^2 +

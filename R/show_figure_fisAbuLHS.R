@@ -35,9 +35,9 @@ sites <- read_csv("data_processed_sites.csv",
                     )) %>%
   filter(
     !str_detect(id, "C") & presabu == "presence" | surveyYear == "seeded"
-    ) %>%
+  ) %>%
   mutate(
-    n = cwmAbuSla,
+    n = fdisAbuLHS,
     surveyYear_fac = factor(surveyYear),
     surveyYear_fac = fct_relevel(surveyYear_fac, "seeded", before = "2018")
   ) %>%
@@ -79,27 +79,27 @@ data <- sites %>%
   filter(surveyYear_fac == "seeded")
 
 (graph_a <- ggplot() +
-   geom_quasirandom(
-     aes(y = n, x = surveyYear_fac, color = targetType),
-     data = sites,
-     alpha = 0.5,
-     dodge.width = 0.8,
-     cex = .5
-   ) +
-   geom_hline(
-     yintercept = data$median,
-     linetype = "solid",
-     size = .3,
-     color = "grey70"
-   ) +
-   geom_boxplot(
-     aes(y = n, x = surveyYear_fac, fill = targetType),
-     data = sites,
-     alpha = 0.5
-   ) +
-   facet_grid(. ~ exposition, labeller = as_labeller(
-     c(south = "South", north = "North")
-     )) +
+    geom_quasirandom(
+      aes(y = n, x = surveyYear_fac, color = targetType),
+      data = sites,
+      alpha = 0.5,
+      dodge.width = 0.8,
+      cex = .5
+    ) +
+    geom_hline(
+      yintercept = data$median,
+      linetype = "solid",
+      size = .3,
+      color = "grey70"
+    ) +
+    geom_boxplot(
+      aes(y = n, x = surveyYear_fac, fill = targetType),
+      data = sites,
+      alpha = 0.5
+    ) +
+    facet_grid(. ~ exposition, labeller = as_labeller(
+      c(south = "South", north = "North")
+    )) +
     scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
     scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
                        values = c("#00BFC4", "#F8766D")) +
@@ -109,7 +109,7 @@ data <- sites %>%
       x = "", fill = "", color = "",
       y = expression(
         CWM ~ Specific ~ Leaf ~ Area ~ "[" * mm^2 ~ mg^-1 * "]"
-        )) +
+      )) +
     theme_mb())
 
 (graph_b <- ggplot() +
