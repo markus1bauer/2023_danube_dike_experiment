@@ -38,7 +38,7 @@ sites <- read_csv("data_processed_sites.csv",
     ) %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
-    seedDensity, surveyYear, cwmAbuSla
+    seedDensity, surveyYear, cwmAbuSls
   ) %>%
   mutate(
     n = cwmAbuSla,
@@ -75,7 +75,7 @@ theme_mb <- function() {
 
 data <- sites %>%
   group_by(surveyYear_fac, targetType) %>%
-  summarise(median = median(n)) %>%
+  summarise(median = median(n), sd = sd(n)) %>%
   filter(surveyYear_fac == "seeded")
 
 (graph_a <- ggplot() +

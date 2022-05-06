@@ -12,11 +12,8 @@
 
 ### Packages ###
 library(here)
-library(tibble)
-library(tidyr)
-library(dplyr)
-library(readr)
-library(stringr)
+library(tidyverse)
+library(nlme)
 library(ggbeeswarm)
 library(brms)
 library(DHARMa)
@@ -134,6 +131,17 @@ ggplot(sites, aes(log(n))) + geom_density()
 ## 2 Model building ###########################################################
 
 ### a models -----------------------------------------------------------------
+
+m1 <- lme(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
+            seedDensity + substrateDepth)^3,
+          random = ~ 1 | block/plot,
+          data = sites)
+qqnorm(residuals(m1))
+plot(m1, type=c("p","smooth"), col.line=1)
+plot(m1,
+     sqrt(abs(resid(.)))~fitted(.),
+     type=c("p","smooth"), col.line=1)
+car::Anova(m1)
 
 iter = 10000
 chains = 4
