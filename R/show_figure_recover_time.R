@@ -15,7 +15,7 @@ library(tidyverse)
 library(ggbeeswarm)
 
 ### Start ###
-rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
+#rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 setwd(here("data", "processed"))
 
 ### Load data ###
@@ -72,6 +72,8 @@ theme_mb <- function() {
 # B Plot ######################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+
+## 1 Boxplots #################################################################
 
 (graph_a <- ggplot() +
     geom_quasirandom(
@@ -147,5 +149,63 @@ theme_mb <- function() {
     theme_mb())
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_recover_time_800dpi_16.5x14cm.tiff"),
+ggsave(here("outputs", "figures",
+            "figure_box_recover_time_800dpi_16.5x14cm.tiff"),
+       dpi = 800, width = 16.5, height = 14, units = "cm")
+
+
+## 2 Marginal effects ##########################################################
+
+(graph_b <- ggeffects::ggemmeans(
+  m,
+  terms = c(
+    "surveyYear_fac", "targetType", "exposition", "sandRatio"
+  ),
+  ci.lvl = 0.95,
+  type = "fixed",
+  typical = "mean",
+  back.transform = TRUE,
+  ppd = TRUE
+) %>%
+  mutate(facet = fct_relevel(facet, "north", "south")) %>%
+  ggplot() +
+  geom_hline(
+    yintercept = 0,
+    linetype = "dashed",
+    size = .3,
+    color = "grey70"
+  ) +
+  geom_point(
+    aes(
+      x = x, y = predicted, color = group
+    ),
+    position = position_dodge(.5)
+  ) +
+  geom_pointrange(
+    aes(
+      x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
+    ),
+    position = position_dodge(.5)
+  ) +
+  facet_grid(
+    facet ~ panel,
+    labeller = as_labeller(
+      c(south = "South", north = "North",
+        "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
+    )
+  ) +
+  #scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
+  scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
+                     values = c("#00BFC4", "#F8766D")) +
+  scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
+                    values = c("#00BFC4", "#F8766D")) +
+  labs(
+    x = "", color = "",
+    y = expression(Successional ~ distance ~ "[" * italic("d")[jt,0] * "]")
+  ) +
+  theme_mb())
+
+### Save ###
+ggsave(here("outputs", "figures",
+            "figure_stat_recover_time_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")

@@ -279,8 +279,8 @@ m4 <- lmerTest::lmer(n ~ (targetType + sandRatio + exposition +
 
 ### b comparison ------------------------------------------------------------
 
-m_1 <- m31
-m_2 <- m_simple1
+m_1 <- m_simple
+m_2 <- m3
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | block/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -428,7 +428,7 @@ mcmc_acf(posterior2, lags = 10)
 
 ### a Model output ------------------------------------------------------------
 
-prior_summary(m_1)
+prior_summary(m_simple)
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | block/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -444,16 +444,16 @@ mcmc_intervals(
   prob_outer = 0.95,
   point_est = "mean"
 )
-sjPlot::plot_model(m_1, type = "est")
-sjPlot::plot_model(m31_flat, type = "est")
-sjPlot::plot_model(m_1, type = "pred", terms = c(
+sjPlot::plot_model(m3, type = "est")
+sjPlot::plot_model(m3_flat, type = "est")
+sjPlot::plot_model(m_1, type = "pred", ppd = TRUE, terms = c(
   "sandRatio", "substrateDepth", "surveyYear_fac", "exposition"
 ))
-sjPlot::plot_model(m_1, type = "pred", terms = c(
-  "targetType", "sandRatio", "surveyYear_fac", "exposition"
+sjPlot::plot_model(m_1, type = "pred", ppd = TRUE, terms = c(
+  "sandRatio", "targetType", "surveyYear_fac", "exposition"
   ))
-sjPlot::plot_model(m_1, type = "pred", terms = c(
-  "seedDensity", "exposition", "surveyYear_fac"
+sjPlot::plot_model(m_1, type = "pred", ppd = TRUE, terms = c(
+  "exposition", "seedDensity", "surveyYear_fac"
 ))
 
 ### b Effect sizes ------------------------------------------------------------
@@ -466,4 +466,4 @@ sjPlot::plot_model(m_1, type = "pred", terms = c(
                   exposition | surveyYear_fac, type = "response"))
 
 ### Save ###
-write.csv(draws, here("outputs", "statistics", "table_fcs_target.csv"))
+write.csv(draws, here("outputs", "statistics", "table_fcs_target_m3.csv"))

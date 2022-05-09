@@ -15,7 +15,7 @@ library(tidyverse)
 library(ggbeeswarm)
 
 ### Start ###
-rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
+#rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 setwd(here("data", "processed"))
 
 ### Load data ###
@@ -41,7 +41,8 @@ sites <- read_csv("data_processed_sites.csv",
   mutate(
     targetType = if_else(targetType == "mixed", "hay_meadow", targetType),
     surveyYear_fac = as.character(surveyYear),
-    surveyYear_fac = if_else(block == "C", "reference", surveyYear_fac)
+    surveyYear_fac = if_else(block == "C", "reference", surveyYear_fac),
+    surveyYear_fac = factor(surveyYear_fac)
   )
 
 ### * Model ####
@@ -65,19 +66,59 @@ theme_mb <- function() {
   )
 }
 
-
+veganCovEllipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
+  theta <- (0:npoints) * 2 * pi / npoints
+  Circle <- cbind(cos(theta), sin(theta))
+  t(center + scale * t(Circle %*% chol(cov)))
+}
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # B Plot ######################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-(graph_b <- ggplot() +
+ellipses <- tibble()
+
+data1 <-  sites %>%
+  mutate(group_type = str_c(surveyYear_fac, exposition, targetType,
+                            sep = "."),
+         group_type = factor(group_type))
+
+for(group in levels(data1$group_type)) {
+  
+  data2 <- data1 %>%
+    filter(group_type == group) %>%
+      with(
+        cov.wt(
+        cbind(NMDS1, NMDS2),
+        wt = rep(1 / length(NMDS1), length(NMDS1))
+        )
+      )
+  
+  ellipses <- 
+    veganCovEllipse(cov = data2$cov, center = data2$center) %>%
+    as_tibble() %>%
+    bind_cols(group = group) %>%
+    bind_rows(ellipses)
+  
+  data <- ellipses %>%
+    separate(group, sep = "\\.",
+             c("surveyYear_fac", "exposition", "targetType"))
+  
+}
+
+
+(graph_a <- ggplot() +
    geom_point(
      aes(y = NMDS2, x = NMDS1, color = surveyYear_fac, shape = surveyYear_fac),
      data = sites,
-     alpha = 1,
+     alpha = .5,
      cex = 2
+   ) +
+   geom_path(
+     aes(x = NMDS1, y = NMDS2, color = surveyYear_fac),
+     data = data,
+     size = 1
    ) +
    facet_grid(
      exposition ~ targetType,

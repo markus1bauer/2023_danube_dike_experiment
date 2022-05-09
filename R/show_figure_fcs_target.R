@@ -47,7 +47,7 @@ sites <- read_csv("data_processed_sites.csv",
   )
 
 ### * Model ####
-m <- m31
+m <- m3
 
 ### * Functions ####
 theme_mb <- function() {
@@ -74,9 +74,11 @@ theme_mb <- function() {
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+## 1 Boxplots #################################################################
+
 (graph_a <- ggplot() +
     geom_quasirandom(
-      aes(y = n, x = surveyYear_fac, color = targetType),
+      aes(y = n, x = sandRatio, color = targetType),
       data = sites,
       alpha = 0.5,
       dodge.width = 0.8,
@@ -89,15 +91,15 @@ theme_mb <- function() {
       color = "grey70"
     ) +
     geom_boxplot(
-      aes(y = n, x = surveyYear_fac, fill = targetType),
+      aes(y = n, x = sandRatio, fill = targetType),
       data = sites,
       alpha = 0.5
     ) +
     facet_grid(
-      exposition ~ sandRatio,
+      exposition ~ surveyYear_fac,
       labeller = as_labeller(
         c(south = "South", north = "North",
-        "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
+          "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
       )
     ) +
     scale_y_continuous(limits = c(-2.8, 1.9), breaks = seq(-100, 400, 1)) +
@@ -106,63 +108,70 @@ theme_mb <- function() {
     scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
                       values = c("#00BFC4", "#F8766D")) +
     labs(
-      x = "", fill = "", color = "",
+      x = "Sand ratio [%]", fill = "", color = "",
       y = expression(
         Favourable ~ Conservation ~ Status ~ "(FCS)"
         )
       ) +
     theme_mb())
 
+### Save ###
+ggsave(here("outputs", "figures",
+            "figure_box_fcs_target_800dpi_16.5x14cm.tiff"),
+       dpi = 800, width = 16.5, height = 14, units = "cm")
+
+## 2 Marginal effects ##########################################################
+
 (graph_b <- ggeffects::ggemmeans(
-      m,
-      terms = c(
-        "surveyYear_fac", "substrateDepth", "exposition", "sandRatio"
-      ),
-      ci.lvl = 0.95,
-      type = "fixed",
-      typical = "mean",
-      back.transform = TRUE,
-      ppd = TRUE
-    ) %>%
-    mutate(facet = fct_relevel(facet, "north", "south")) %>%
-    ggplot() +
-    geom_hline(
-      yintercept = 0,
-      linetype = "dashed",
-      size = .3,
-      color = "grey70"
-    ) +
-    geom_point(
-      aes(
-        x = x, y = predicted, color = group
-        ),
-      position = position_dodge(.5)
-    ) +
-    geom_pointrange(
-      aes(
-        x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
-      ),
-      position = position_dodge(.5)
-    ) +
-    facet_grid(
-      facet ~ panel,
-      labeller = as_labeller(
-        c(south = "South", north = "North",
-          "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
-      )
-    ) +
-    scale_y_continuous(limits = c(-1.9, 1.1), breaks = seq(-100, 400, 1)) +
-    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-                       values = c("#00BFC4", "#F8766D")) +
-    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-                      values = c("#00BFC4", "#F8766D")) +
-    labs(
-      x = "", color = "",
-      y = expression(
-        Favourable ~ Conservation ~ Status ~ "(FCS)"
-      )
-    ) +
-    theme_mb())
+  m,
+  terms = c(
+    "sandRatio", "targetType", "exposition", "surveyYear_fac"
+  ),
+  ci.lvl = 0.95,
+  type = "fixed",
+  typical = "mean",
+  back.transform = TRUE,
+  ppd = TRUE
+) %>%
+  mutate(facet = fct_relevel(facet, "north", "south")) %>%
+  ggplot() +
+  geom_hline(
+    yintercept = 0,
+    linetype = "dashed",
+    size = .3,
+    color = "grey70"
+  ) +
+  geom_point(
+    aes(
+      x = x, y = predicted, color = group
+    ),
+    position = position_dodge(.5)
+  ) +
+  geom_pointrange(
+    aes(
+      x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
+    ),
+    position = position_dodge(.5)
+  ) +
+  facet_grid(
+    facet ~ panel,
+    labeller = as_labeller(
+      c(south = "South", north = "North",
+        "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
+    )
+  ) +
+  scale_y_continuous(limits = c(-2.1, 1.2), breaks = seq(-100, 400, 1)) +
+  scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
+                     values = c("#00BFC4", "#F8766D")) +
+  scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
+                    values = c("#00BFC4", "#F8766D")) +
+  labs(
+    x = "Sand ratio [%]", color = "",
+    y = expression(
+      Favourable ~ Conservation ~ Status ~ "(FCS)"
+    )
+  ) +
+  theme_mb())
 
 ### Save ###
 ggsave(here("outputs", "figures",

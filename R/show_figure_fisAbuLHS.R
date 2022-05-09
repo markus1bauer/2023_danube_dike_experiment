@@ -43,7 +43,7 @@ sites <- read_csv("data_processed_sites.csv",
   ) %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
-    seedDensity, surveyYear, n
+    seedDensity, surveyYear, surveyYear_fac, n
   )
 
 ### * Model ####
@@ -80,7 +80,7 @@ data <- sites %>%
 
 (graph_a <- ggplot() +
     geom_quasirandom(
-      aes(y = n, x = surveyYear_fac, color = targetType),
+      aes(y = n, x = sandRatio, color = targetType),
       data = sites,
       alpha = 0.5,
       dodge.width = 0.8,
@@ -93,63 +93,29 @@ data <- sites %>%
       color = "grey70"
     ) +
     geom_boxplot(
-      aes(y = n, x = surveyYear_fac, fill = targetType),
-      data = sites,
-      alpha = 0.5
-    ) +
-    facet_grid(. ~ exposition, labeller = as_labeller(
-      c(south = "South", north = "North")
-    )) +
-    scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
-    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-                       values = c("#00BFC4", "#F8766D")) +
-    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-                      values = c("#00BFC4", "#F8766D")) +
-    labs(
-      x = "", fill = "", color = "",
-      y = expression(
-        CWM ~ Specific ~ Leaf ~ Area ~ "[" * mm^2 ~ mg^-1 * "]"
-      )) +
-    theme_mb())
-
-(graph_b <- ggplot() +
-    geom_quasirandom(
-      aes(y = n, x = surveyYear_fac, color = targetType),
-      data = sites,
-      alpha = 0.5,
-      dodge.width = 0.8,
-      cex = .5
-    ) +
-    geom_hline(
-      yintercept = data$median,
-      linetype = "solid",
-      size = .3,
-      color = "grey70"
-    ) +
-    geom_boxplot(
-      aes(y = n, x = surveyYear_fac, fill = targetType),
+      aes(y = n, x = sandRatio, fill = targetType),
       data = sites,
       alpha = 0.5
     ) +
     facet_grid(
-      exposition ~ sandRatio,
+      exposition ~ surveyYear_fac,
       labeller = as_labeller(
-        c(south = "South", north = "North",
-          "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
+        c(south = "South", north = "North", "seeded" = "seeded",
+          "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
       )
     ) +
-    scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
+    #scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
     scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
                        values = c("#00BFC4", "#F8766D")) +
     scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
                       values = c("#00BFC4", "#F8766D")) +
     labs(
       x = "", fill = "", color = "",
-      y = expression(CWM ~ Specific ~ Leaf ~ Area ~ "[" * mm^2 ~ mg^-1 * "]")
+      y = expression(FDis ~ "(" * Leaf-Height-Seed * ")")
     ) +
     theme_mb())
 
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_sla_800dpi_16.5x14cm.tiff"),
+ggsave(here("outputs", "figures", "figure_box_fdis_lhs_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")
