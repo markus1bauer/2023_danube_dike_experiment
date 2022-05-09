@@ -4,6 +4,7 @@
 # 2022-04-27
 
 
+
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ###############################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -102,43 +103,52 @@ for(group in levels(data1$group_type)) {
     bind_rows(ellipses)
   
   data <- ellipses %>%
-    separate(group, sep = "\\.",
-             c("surveyYear_fac", "exposition", "targetType"))
+    separate(
+      group,
+      sep = "\\.",
+      c("surveyYear_fac", "exposition", "targetType")
+      )
   
 }
 
 
 (graph_a <- ggplot() +
-   geom_point(
-     aes(y = NMDS2, x = NMDS1, color = surveyYear_fac, shape = surveyYear_fac),
-     data = sites,
-     alpha = .5,
-     cex = 2
-   ) +
-   geom_path(
-     aes(x = NMDS1, y = NMDS2, color = surveyYear_fac),
-     data = data,
-     size = 1
-   ) +
-   facet_grid(
-     exposition ~ targetType,
-     labeller = as_labeller(
-       c(south = "South", north = "North",
-         "dry_grassland" = "Dry grassland", "hay_meadow" = "Hay meadow")
-     )
-   ) +
-   coord_fixed() +
-   scale_color_manual(values = c(
-     "yellow1", "orange2", "firebrick3", "deeppink4", "royalblue", "black"
-   )) +
-   scale_shape_manual(values = c(
-     "circle", "circle", "circle", "circle", "square", "square open"
-   )) +
-   labs(
-     x = "NMDS1", fill = "", color = "", shape = "",
-     y = "NMDS2"
-   ) +
-   theme_mb())
+    geom_point(
+      aes(y = NMDS2, x = NMDS1, color = surveyYear_fac,
+          shape = surveyYear_fac, alpha = surveyYear_fac),
+      data = sites,
+      cex = 2
+    ) +
+    geom_path(
+      aes(x = NMDS1, y = NMDS2, color = surveyYear_fac),
+      data = data,
+      size = 1
+    ) +
+    facet_grid(
+      exposition ~ targetType,
+      labeller = as_labeller(
+        c(south = "South", north = "North",
+          "dry_grassland" = "Dry grassland", "hay_meadow" = "Hay meadow")
+      )
+    ) +
+    coord_fixed() +
+    scale_color_manual(
+      values = c(
+        "orange1", "firebrick2", "deeppink3", "mediumpurple4",
+        "royalblue", "black"
+      )
+    ) +
+    scale_shape_manual(
+      values = c(
+        "circle open", "circle open", "circle open", "circle open",
+        "square", "square open"
+      )
+    ) +
+    scale_alpha_manual(values = c(.3, .3, .3, .3, .7, .6)) +
+    labs(
+      x = "NMDS1", y = "NMDS2", fill = "", color = "", shape = "", alpha = ""
+    ) +
+    theme_mb())
 
 
 ### Save ###
