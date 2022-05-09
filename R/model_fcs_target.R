@@ -467,14 +467,3 @@ sjPlot::plot_model(m_1, type = "pred", terms = c(
 
 ### Save ###
 write.csv(draws, here("outputs", "statistics", "table_fcs_target.csv"))
-head(get_variables(m_1), 20)
-
-data <- sites %>%
-  data_grid(exposition, block, plot, botanist_year) %>%
-  add_epred_draws(m_1, dpar = TRUE, category = "targetType") #%>%
-  ggplot(aes(x = exposition, y = .epred, color = targetType)) +
-  stat_pointinterval(position = position_dodge(width = .4)) +
-  scale_size_continuous(guide = "none") +
-  scale_color_manual(values = brewer.pal(6, "Blues")[-c(1,2)])
-  
-  

@@ -15,7 +15,7 @@ library(tidyverse)
 library(ggbeeswarm)
 
 ### Start ###
-rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
+#rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 setwd(here("data", "processed"))
 
 ### Load data ###
@@ -111,6 +111,55 @@ theme_mb <- function() {
         Favourable ~ Conservation ~ Status ~ "(FCS)"
         )
       ) +
+    theme_mb())
+
+graph_b <- ggeffects::ggemmeans(
+      m31, terms = c(
+        "surveyYear_fac", "substrateDepth", "exposition", "sandRatio"
+      ),
+      ci.lvl = 0.95,
+      type = "fixed",
+      typical = "mean",
+      back.transform = TRUE,
+      ppd = TRUE
+    )# %>%
+    ggplot() +
+    geom_hline(
+      yintercept = 0,
+      linetype = "dashed",
+      size = .3,
+      color = "grey70"
+    ) +
+    geom_point(
+      aes(
+        x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
+        ),
+      alpha = 0.5
+    ) +
+    #geom_pointrange(
+      #aes(
+        #x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
+      #),
+      #alpha = 0.5
+    #) +
+    facet_grid(
+      exposition ~ sandRatio#,
+      #labeller = as_labeller(
+       # c(south = "South", north = "North",
+        #  "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
+      #)
+    ) +
+    scale_y_continuous(limits = c(-2.8, 1.9), breaks = seq(-100, 400, 1)) +
+    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
+                       values = c("#00BFC4", "#F8766D")) +
+    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
+                      values = c("#00BFC4", "#F8766D")) +
+    labs(
+      x = "", color = "",
+      y = expression(
+        Favourable ~ Conservation ~ Status ~ "(FCS)"
+      )
+    ) +
     theme_mb())
 
 ### Save ###
