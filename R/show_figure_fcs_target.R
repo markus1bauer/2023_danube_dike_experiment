@@ -47,7 +47,7 @@ sites <- read_csv("data_processed_sites.csv",
   )
 
 ### * Model ####
-
+m <- m31
 
 ### * Functions ####
 theme_mb <- function() {
@@ -113,8 +113,9 @@ theme_mb <- function() {
       ) +
     theme_mb())
 
-graph_b <- ggeffects::ggemmeans(
-      m31, terms = c(
+(graph_b <- ggeffects::ggemmeans(
+      m,
+      terms = c(
         "surveyYear_fac", "substrateDepth", "exposition", "sandRatio"
       ),
       ci.lvl = 0.95,
@@ -122,7 +123,8 @@ graph_b <- ggeffects::ggemmeans(
       typical = "mean",
       back.transform = TRUE,
       ppd = TRUE
-    )# %>%
+    ) %>%
+    mutate(facet = fct_relevel(facet, "north", "south")) %>%
     ggplot() +
     geom_hline(
       yintercept = 0,
@@ -132,24 +134,24 @@ graph_b <- ggeffects::ggemmeans(
     ) +
     geom_point(
       aes(
-        x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
+        x = x, y = predicted, color = group
         ),
-      alpha = 0.5
+      position = position_dodge(.5)
     ) +
-    #geom_pointrange(
-      #aes(
-        #x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
-      #),
-      #alpha = 0.5
-    #) +
+    geom_pointrange(
+      aes(
+        x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
+      ),
+      position = position_dodge(.5)
+    ) +
     facet_grid(
-      exposition ~ sandRatio#,
-      #labeller = as_labeller(
-       # c(south = "South", north = "North",
-        #  "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
-      #)
+      facet ~ panel,
+      labeller = as_labeller(
+        c(south = "South", north = "North",
+          "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
+      )
     ) +
-    scale_y_continuous(limits = c(-2.8, 1.9), breaks = seq(-100, 400, 1)) +
+    scale_y_continuous(limits = c(-1.9, 1.1), breaks = seq(-100, 400, 1)) +
     scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
                        values = c("#00BFC4", "#F8766D")) +
     scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
@@ -163,7 +165,6 @@ graph_b <- ggeffects::ggemmeans(
     theme_mb())
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_fcs_target_800dpi_16.5x14cm.tiff"),
+ggsave(here("outputs", "figures",
+            "figure_stat_fcs_target_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")
-
-

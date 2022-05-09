@@ -22,7 +22,7 @@ library(tidybayes)
 library(emmeans)
 
 ### Start ###
-#rm(list = ls())
+rm(list = ls())
 setwd(here("data", "processed"))
 
 ### Load data ###
@@ -161,11 +161,11 @@ ggplot(sites, aes(sqrt(n))) + geom_density()
 
 ### a models -----------------------------------------------------------------
 
-iter = 1000#10000
-chains = 3#4
+iter = 10000
+chains = 4
 thin = 2
 
-m_simple1 <- brm(n ~ targetType + exposition + sandRatio + surveyYear_fac +
+m_simple <- brm(n ~ targetType + exposition + sandRatio + surveyYear_fac +
                    seedDensity + substrateDepth +
                    (1 | block/plot) + (1 | botanist_year),
                  data = sites, 
@@ -182,7 +182,7 @@ m_simple1 <- brm(n ~ targetType + exposition + sandRatio + surveyYear_fac +
                  cores = parallel::detectCores(),
                  seed = 123)
 
-m_full1 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
+m_full <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
                       seedDensity + substrateDepth)^3 +
                  targetType:sandRatio:exposition:surveyYear_fac +
                  substrateDepth:sandRatio:exposition:surveyYear_fac +
@@ -201,7 +201,7 @@ m_full1 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
                cores = parallel::detectCores(),
                seed = 123)
 
-m31 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
+m3 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
              substrateDepth + seedDensity +
              substrateDepth:sandRatio +
              seedDensity:exposition +
@@ -223,7 +223,7 @@ m31 <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
            cores = parallel::detectCores(),
            seed = 123)
 
-m_full1_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
+m_full_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
                       seedDensity + substrateDepth)^3 +
                  targetType:sandRatio:exposition:surveyYear_fac +
                  substrateDepth:sandRatio:exposition:surveyYear_fac +
@@ -241,7 +241,7 @@ m_full1_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac +
                cores = parallel::detectCores(),
                seed = 123)
 
-m31_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
+m3_flat <- brm(n ~ (targetType + exposition + sandRatio + surveyYear_fac)^2 +
                   substrateDepth + seedDensity +
                   substrateDepth:sandRatio +
                   seedDensity:exposition +
