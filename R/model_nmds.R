@@ -75,9 +75,10 @@ set.seed(123)
 (ordi <- metaMDS(species,
                  dist = "bray", binary = FALSE, autotransform = TRUE,
                  try = 99, previous.best = TRUE, na.rm = TRUE))
-stressplot(ordi) # stress: 0.207
+stressplot(ordi) # stress: 0.207; Non-metric fit R² =.957
 
 #### b environmental factors --------------------------------------------------
+dist <- dist(ordi, method = "euclidean")
 (ef <- envfit(ordi ~ surveyYear_fac + exposition + sandRatio + substrateDepth +
                 targetType + seedDensity,
               data = sites,
