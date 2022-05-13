@@ -63,7 +63,7 @@ theme_mb <- function() {
                               color = "black"),
     axis.line = element_line(),
     legend.key = element_rect(fill = "white"),
-    legend.position = "bottom",
+    legend.position = "right",
     legend.margin = margin(0, 0, 0, 0, "cm"),
     plot.margin = margin(0, 0, 0, 0, "cm")
   )
@@ -80,7 +80,7 @@ theme_mb <- function() {
 
 (graph_a <- ggplot() +
     geom_quasirandom(
-      aes(y = n, x = surveyYear_fac, color = targetType),
+      aes(y = n, x = surveyYear_fac, color = sandRatio),
       data = sites,
       method = "pseudorandom",
       alpha = 0.2,
@@ -88,7 +88,7 @@ theme_mb <- function() {
       cex = .5
     ) +
     geom_boxplot(
-      aes(y = n, x = surveyYear_fac, fill = targetType),
+      aes(y = n, x = surveyYear_fac, fill = sandRatio),
       data = sites,
       alpha = 0.5
     ) +
@@ -100,19 +100,17 @@ theme_mb <- function() {
         )
       ) +
     scale_y_continuous(limits = c(0, 1), breaks = seq(-100, 400, .25)) +
-    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-                       values = c("#00BFC4", "#F8766D")) +
-    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-                      values = c("#00BFC4", "#F8766D")) +
+    scale_color_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
+    scale_fill_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
     labs(
-      x = "", fill = "", color = "",
+      x = "", fill = "Sand ratio [%]", color = "Sand ratio [%]",
       y = expression(Persistence)
       ) +
     theme_mb())
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_box_persistence_800dpi_16.5x14cm.tiff"),
-       dpi = 800, width = 16.5, height = 14, units = "cm")
+ggsave(here("outputs", "figures", "figure_box_persistence_800dpi_25x9cm.tiff"),
+       dpi = 800, width = 25, height = 9, units = "cm")
 
 
 ## 2 Marginal effects ##########################################################

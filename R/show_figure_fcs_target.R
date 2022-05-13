@@ -61,7 +61,7 @@ theme_mb <- function() {
                               color = "black"),
     axis.line = element_line(),
     legend.key = element_rect(fill = "white"),
-    legend.position = "bottom",
+    legend.position = "right",
     legend.margin = margin(0, 0, 0, 0, "cm"),
     plot.margin = margin(0, 0, 0, 0, "cm")
   )
@@ -117,8 +117,9 @@ theme_mb <- function() {
 
 ### Save ###
 ggsave(here("outputs", "figures",
-            "figure_box_fcs_target_800dpi_16.5x14cm.tiff"),
-       dpi = 800, width = 16.5, height = 14, units = "cm")
+            "figure_box_fcs_target_800dpi_27x9cm.tiff"),
+       dpi = 800, width = 27, height = 9, units = "cm")
+
 
 ## 2 Marginal effects ##########################################################
 

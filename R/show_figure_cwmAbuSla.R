@@ -43,7 +43,7 @@ sites <- read_csv("data_processed_sites.csv",
   ) %>%
   select(
     id, plot, block, exposition, sandRatio, substrateDepth, targetType,
-    seedDensity, surveyYear, n
+    seedDensity, surveyYear, surveyYear_fac, n
   )
 
 ### * Model ####
@@ -61,7 +61,7 @@ theme_mb <- function() {
                               color = "black"),
     axis.line = element_line(),
     legend.key = element_rect(fill = "white"),
-    legend.position = "bottom",
+    legend.position = "right",
     legend.margin = margin(0, 0, 0, 0, "cm"),
     plot.margin = margin(0, 0, 0, 0, "cm")
   )
@@ -77,13 +77,13 @@ theme_mb <- function() {
 ## 1 Boxplots #################################################################
 
 data <- sites %>%
+  filter(surveyYear_fac == "seeded") %>%
   group_by(surveyYear_fac, targetType) %>%
-  summarise(median = median(n), sd = sd(n)) %>%
-  filter(surveyYear_fac == "seeded")
+  summarise(median = median(n), sd = sd(n))
 
 (graph_a <- ggplot() +
     geom_quasirandom(
-      aes(y = n, x = surveyYear_fac, color = targetType),
+      aes(y = n, x = sandRatio, color = targetType),
       data = sites,
       alpha = 0.5,
       dodge.width = 0.8,
@@ -96,15 +96,15 @@ data <- sites %>%
       color = "grey70"
     ) +
     geom_boxplot(
-      aes(y = n, x = surveyYear_fac, fill = targetType),
+      aes(y = n, x = sandRatio, fill = targetType),
       data = sites,
       alpha = 0.5
     ) +
     facet_grid(
-      exposition ~ sandRatio,
+      exposition ~ surveyYear_fac,
       labeller = as_labeller(
-        c(south = "South", north = "North",
-          "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
+        c(south = "South", north = "North", seeded = "Seed mix",
+          "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
       )
     ) +
     scale_y_continuous(limits = c(15.4, 30.1), breaks = seq(-100, 400, 2)) +
@@ -119,8 +119,8 @@ data <- sites %>%
     theme_mb())
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_box_sla_800dpi_16.5x14cm.tiff"),
-       dpi = 800, width = 16.5, height = 14, units = "cm")
+ggsave(here("outputs", "figures", "figure_box_sla_800dpi_27x9cm.tiff"),
+       dpi = 800, width = 27, height = 9, units = "cm")
 
 
 ## 2 Marginal effects ##########################################################

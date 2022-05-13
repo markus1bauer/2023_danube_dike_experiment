@@ -61,7 +61,7 @@ theme_mb <- function() {
                               color = "black"),
     axis.line = element_line(),
     legend.key = element_rect(fill = "white"),
-    legend.position = "bottom",
+    legend.position = "right",
     legend.margin = margin(0, 0, 0, 0, "cm"),
     plot.margin = margin(0, 0, 0, 0, "cm")
   )
@@ -76,28 +76,30 @@ theme_mb <- function() {
 
 (graph_a <- ggplot() +
    geom_quasirandom(
-     aes(y = n, x = surveyYear_fac, color = targetType),
+     aes(y = n, x = sandRatio, color = targetType),
      data = sites,
      alpha = 0.5,
      dodge.width = 0.8,
      cex = .5
    ) +
    geom_hline(
-     yintercept = 100,
-     linetype = "solid",
+     yintercept = c(75, 100),
+     linetype = c("dashed", "solid", "dashed", "solid", "dashed", "solid",
+                  "dashed", "solid", "dashed", "solid", "dashed", "solid",
+                  "dashed", "solid", "dashed", "solid"),
      size = .3,
      color = "grey70"
    ) +
    geom_boxplot(
-     aes(y = n, x = surveyYear_fac, fill = targetType),
+     aes(y = n, x = sandRatio, fill = targetType),
      data = sites,
      alpha = 0.5
    ) +
    facet_grid(
-     exposition ~ sandRatio,
+     exposition ~ surveyYear_fac,
      labeller = as_labeller(
        c(south = "South", north = "North",
-         "0" = "0% Sand", "25" = "25% Sand", "50" = "50% Sand")
+         "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
      )
    ) +
    scale_y_continuous(limits = c(0, 125), breaks = seq(-100, 400, 25)) +
@@ -106,13 +108,11 @@ theme_mb <- function() {
    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
                      values = c("#00BFC4", "#F8766D")) +
    labs(
-     x = "", fill = "", color = "",
+     x = "Sand ratio [%]", fill = "", color = "",
      y = expression(Accumulated ~ cover ~ "[%]")
    ) +
    theme_mb())
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_accumulatedCov_800dpi_16.5x14cm.tiff"),
-       dpi = 800, width = 16.5, height = 14, units = "cm")
-
-
+ggsave(here("outputs", "figures", "figure_box_accumulatedCov_800dpi_27x9cm.tiff"),
+       dpi = 800, width = 27, height = 9, units = "cm")
