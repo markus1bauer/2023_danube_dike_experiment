@@ -1,7 +1,7 @@
 # Dike grassland experiment
 # Show_figure species composition ####
 # Markus Bauer
-# 2022-04-27
+# 2022-05-17
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -49,7 +49,7 @@ sites <- read_csv("data_processed_sites.csv",
   )
 
 ### * Model ####
-m <- m3
+m <- m31
 
 ### * Functions ####
 theme_mb <- function() {
@@ -115,54 +115,52 @@ ggsave(here("outputs", "figures", "figure_box_persistence_800dpi_25x9cm.tiff"),
 
 ## 2 Marginal effects ##########################################################
 
-(graph_b <- ggeffects::ggemmeans(
-  m,
-  terms = c(
-    "surveyYear_fac", "targetType", "exposition", "index"
-  ),
-  ci.lvl = 0.95,
-  type = "fixed",
-  typical = "mean",
-  back.transform = TRUE,
-  ppd = TRUE
-) %>%
-  mutate(facet = fct_relevel(facet, "north", "south")) %>%
-  ggplot() +
-  geom_hline(
-    yintercept = 0,
-    linetype = "dashed",
-    size = .3,
-    color = "grey70"
-  ) +
-  geom_point(
-    aes(
-      x = x, y = predicted, color = group
-    ),
-    position = position_dodge(.5)
-  ) +
-  geom_pointrange(
-    aes(
-      x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
-    ),
-    position = position_dodge(.5)
-  ) +
-  facet_grid(
-    index ~ exposition,
-    labeller = as_labeller(
-      c(south = "South", north = "North",
-        B = "Losses", C = "Gains", D = "Total")
-    )
-  ) +
-  scale_y_continuous(limits = c(0, 1), breaks = seq(-100, 400, .25)) +
-  scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-                     values = c("#00BFC4", "#F8766D")) +
-  scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-                    values = c("#00BFC4", "#F8766D")) +
-  labs(
-    x = "", color = "",
-    y = expression(Persistence)
-  ) +
-  theme_mb())
+(graph_b <- m %>%
+   ggeffects::ggemmeans(
+     terms = c(
+       "surveyYear_fac", "sandRatio", "exposition", "index"
+     ),
+     ci.lvl = 0.95,
+     type = "fixed",
+     typical = "mean",
+     back.transform = TRUE,
+     ppd = TRUE
+   ) %>%
+   mutate(facet = fct_relevel(facet, "north", "south")) %>%
+   ggplot() +
+   geom_hline(
+     yintercept = 0,
+     linetype = "dashed",
+     size = .3,
+     color = "grey70"
+   ))# +
+   geom_point(
+     aes(x = x, y = predicted, color = group),
+     position = position_dodge(.5)
+   ) +
+   geom_pointrange(
+     aes(
+       x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
+     ),
+     position = position_dodge(.5)
+   ) +
+   facet_grid(
+     index ~ exposition,
+     labeller = as_labeller(
+       c(south = "South", north = "North",
+         B = "Losses", C = "Gains", D = "Total")
+     )
+   ) +
+   scale_y_continuous(limits = c(0, 1), breaks = seq(-100, 400, .25)) +
+   #scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
+   #                   values = c("#00BFC4", "#F8766D")) +
+   #scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
+   #                  values = c("#00BFC4", "#F8766D")) +
+   labs(
+     x = "", color = "",
+     y = expression(Persistence)
+   ) +
+   theme_mb())
 
 ### Save ###
 ggsave(here("outputs", "figures",

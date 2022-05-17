@@ -1,7 +1,7 @@
 # Dike grassland experiment
 # Persistence Presence-Absence ####
 # Markus Bauer
-# 2022-04-25
+# 2022-05-13
 
 
 
@@ -184,7 +184,7 @@ m_full <- brm(n ~ (index + exposition + surveyYear_fac +
               cores = parallel::detectCores(),
               seed = 123)
 
-m3 <- brm(n ~ (index + exposition + surveyYear_fac +
+m31 <- brm(n ~ (index + exposition + surveyYear_fac +
                  targetType + sandRatio)^3 + seedDensity + substrateDepth +
             targetType:exposition:surveyYear_fac:index +
             sandRatio:exposition:surveyYear_fac:index +
@@ -198,6 +198,7 @@ m3 <- brm(n ~ (index + exposition + surveyYear_fac +
           chains = chains,
           iter = iter,
           thin = thin,
+          control = list(adapt_delta = 0.99, max_treedepth = 12),
           warmup = floor(iter / 2),
           save_pars = save_pars(all = TRUE),
           cores = parallel::detectCores(),
