@@ -79,38 +79,48 @@ theme_mb <- function() {
 ## 1 Boxplots #################################################################
 
 (graph_a <- ggplot() +
-    geom_quasirandom(
-      aes(y = n, x = surveyYear_fac, color = sandRatio),
-      data = sites,
-      method = "pseudorandom",
-      alpha = 0.2,
-      dodge.width = 0.8,
-      cex = .5
-    ) +
-    geom_boxplot(
-      aes(y = n, x = surveyYear_fac, fill = sandRatio),
-      data = sites,
-      alpha = 0.5
-    ) +
-    facet_grid(
-      index ~ exposition,
-      labeller = as_labeller(
-        c(south = "South", north = "North",
-          B = "Losses", C = "Gains", D = "Total")
-        )
-      ) +
-    scale_y_continuous(limits = c(0, 1), breaks = seq(-100, 400, .25)) +
-    scale_color_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
-    scale_fill_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
-    labs(
-      x = "", fill = "Sand ratio [%]", color = "Sand ratio [%]",
-      y = expression(Persistence)
-      ) +
-    theme_mb())
+   geom_hline(
+     yintercept = .5,
+     linetype = "dashed",
+     size = .3,
+     color = "grey70"
+   ) +
+   geom_quasirandom(
+     aes(y = n, x = surveyYear_fac, color = sandRatio),
+     data = sites,
+     method = "pseudorandom",
+     alpha = 0.2,
+     dodge.width = 0.8,
+     cex = .5
+   ) +
+   geom_boxplot(
+     aes(y = n, x = surveyYear_fac, fill = sandRatio),
+     data = sites,
+     alpha = 0.5
+   ) +
+   facet_grid(
+     index ~ exposition,
+     labeller = as_labeller(
+       c(south = "South", north = "North",
+         B = "Losses", C = "Gains", D = "Total")
+     )
+   ) +
+   scale_y_continuous(limits = c(0, 1), breaks = seq(-100, 400, .25)) +
+   scale_color_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
+   scale_fill_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
+   labs(
+     x = "", fill = "Sand ratio [%]", color = "Sand ratio [%]",
+     y = expression(Persistence)
+   ) +
+   theme_mb())
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_box_persistence_800dpi_25x9cm.tiff"),
+ggsave(here("outputs", "figures",
+            "figure_box_persistence_800dpi_25x9cm.tiff"),
        dpi = 800, width = 25, height = 9, units = "cm")
+ggsave(here("outputs", "figures",
+            "figure_box_persistence_800dpi_16.5x14cm.tiff"),
+       dpi = 800, width = 16.5, height = 14, units = "cm")
 
 
 ## 2 Marginal effects ##########################################################
@@ -129,40 +139,47 @@ ggsave(here("outputs", "figures", "figure_box_persistence_800dpi_25x9cm.tiff"),
    mutate(facet = fct_relevel(facet, "north", "south")) %>%
    ggplot() +
    geom_hline(
-     yintercept = 0,
+     yintercept = .5,
      linetype = "dashed",
      size = .3,
      color = "grey70"
-   ))# +
+   ) +
    geom_point(
      aes(x = x, y = predicted, color = group),
-     position = position_dodge(.5)
+     position = position_dodge(.5),
+     size = 1,
+     shape = 19
    ) +
-   geom_pointrange(
+   geom_linerange(
      aes(
-       x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
+       x = x, color = group, ymin = conf.low, ymax = conf.high
      ),
-     position = position_dodge(.5)
+     position = position_dodge(.5),
+     size = .5
    ) +
    facet_grid(
-     index ~ exposition,
+     panel ~ facet,
      labeller = as_labeller(
        c(south = "South", north = "North",
          B = "Losses", C = "Gains", D = "Total")
      )
    ) +
    scale_y_continuous(limits = c(0, 1), breaks = seq(-100, 400, .25)) +
-   #scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-   #                   values = c("#00BFC4", "#F8766D")) +
-   #scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-   #                  values = c("#00BFC4", "#F8766D")) +
+   scale_color_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
+   scale_fill_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
    labs(
-     x = "", color = "",
+     x = "", fill = "Sand ratio [%]", color = "Sand ratio [%]",
      y = expression(Persistence)
    ) +
    theme_mb())
 
 ### Save ###
+ggsave(here("outputs", "figures",
+            "figure_stat_persistence_800dpi_16x9cm.tiff"),
+       dpi = 800, width = 16, height = 9, units = "cm")
+ggsave(here("outputs", "figures",
+            "figure_stat_persistence_800dpi_27x9cm.tiff"),
+       dpi = 800, width = 27, height = 9, units = "cm")
 ggsave(here("outputs", "figures",
             "figure_stat_persistence_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")

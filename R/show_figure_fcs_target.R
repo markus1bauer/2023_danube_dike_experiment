@@ -148,9 +148,9 @@ ggsave(here("outputs", "figures",
     ),
     position = position_dodge(.5)
   ) +
-  geom_pointrange(
+  geom_linerange(
     aes(
-      x = x, y = predicted, color = group, ymin = conf.low, ymax = conf.high
+      x = x, color = group, ymin = conf.low, ymax = conf.high
     ),
     position = position_dodge(.5)
   ) +
