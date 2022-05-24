@@ -21,7 +21,7 @@ library(grid)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data/processed/spatial"))
+setwd(here("data","processed", "spatial"))
 
 ### Load data ###
 germany <- st_read("germany.shp")

@@ -22,41 +22,36 @@ library(tidybayes)
 library(emmeans)
 
 ### Start ###
-rm(list = ls())
+#rm(list = ls())
 setwd(here("data", "processed"))
 
 ### Load data ###
 sites <- read_csv("data_processed_sites.csv",
-                  col_names = TRUE, na = c("na", "NA"), col_types =
+                  col_names = TRUE,
+                  na = c("na", "NA", ""), col_types =
                     cols(
                       .default = "?",
+                      id = "f",
+                      plot = "f",
                       block = "f",
-                      exposition = "f",
+                      exposition = col_factor(levels = c("north", "south")),
                       sandRatio = "f",
                       substrateDepth = "f",
-                      seedDensity = "f",
-                      targetType = "f"
+                      targetType = "f",
+                      seedDensity = "f"
                     )) %>%
   filter(
     !str_detect(id, "C") & presabu == "presence" & surveyYear != "seeded"
   ) %>%
   mutate(
-    n = fcs_target,
+    n = distance_hay,
     surveyYear_fac = factor(surveyYear),
-    targetType = factor(targetType),
     botanist_year = str_c(botanist, surveyYear, sep = " "),
-    botanist_year = factor(botanist_year),
-    sandRatio = factor(sandRatio),
-    substrateDepth = factor(substrateDepth),
-    seedDensity = factor(seedDensity),
-    block = factor(block),
-    plot = factor(plot),
-    id = factor(id),
-    surveyYear = as.double(surveyYear)
+    botanist_year = factor(botanist_year)
   ) %>%
   select(
-    id, plot, block, exposition, sandRatio, substrateDepth, targetType,
-    seedDensity, surveyYear_fac, surveyYear, botanist_year, n
+    id, plot, block, botanist_year, exposition, sandRatio, substrateDepth, targetType,
+    seedDensity, surveyYear_fac, n
   )
 
 
@@ -84,8 +79,6 @@ ggplot(sites %>% filter(surveyYear == 2021), aes(y = n, x = sandRatio)) +
   geom_boxplot() + geom_quasirandom()
 ggplot(sites %>% filter(surveyYear == 2021), aes(y = n, x = block)) +
   geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = botanist_year)) +
-  geom_boxplot() + geom_quasirandom() 
 ggplot(sites, aes(y = n, x = surveyYear_fac)) +
   geom_boxplot() + geom_quasirandom()
 #2way
@@ -99,6 +92,9 @@ ggplot(sites %>% filter(surveyYear == 2021), aes(x = substrateDepth, y = n)) +
   geom_boxplot() + geom_quasirandom() +
   facet_wrap(~ targetType)
 ggplot(sites %>% filter(surveyYear == 2021), aes(x = sandRatio, y = n)) + 
+  geom_boxplot() + geom_quasirandom() +
+  facet_wrap(~ exposition)
+ggplot(sites, aes(x = botanist_year, y = n)) + 
   geom_boxplot() + geom_quasirandom() +
   facet_wrap(~ exposition)
 ggplot(sites, aes(x = surveyYear_fac, y = n)) + 
@@ -161,8 +157,8 @@ ggplot(sites, aes(sqrt(n))) + geom_density()
 
 ### a models -----------------------------------------------------------------
 
-iter = 10000
-chains = 4
+iter = 500#10000
+chains = 3#4
 thin = 2
 
 m_simple <- brm(n ~ targetType + exposition + sandRatio + surveyYear_fac +
@@ -171,7 +167,7 @@ m_simple <- brm(n ~ targetType + exposition + sandRatio + surveyYear_fac +
                 data = sites, 
                 family = gaussian("identity"),
                 prior = c(
-                  set_prior("normal(0, 3)", class = "b"),
+                  set_prior("normal(0, 2)", class = "b"),
                   set_prior("cauchy(0, 1)", class = "sigma")
                 ),
                 chains = chains,
