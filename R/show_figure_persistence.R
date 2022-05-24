@@ -103,9 +103,10 @@ theme_mb <- function() {
      labeller = as_labeller(
        c(south = "South", north = "North",
          B = "Losses", C = "Gains", D = "Total")
-     )
+     ),
+     scales = "free"
    ) +
-   scale_y_continuous(limits = c(0, 1), breaks = seq(-100, 400, .25)) +
+   scale_y_continuous(breaks = seq(-100, 400, .25)) +
    scale_color_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
    scale_fill_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
    labs(
