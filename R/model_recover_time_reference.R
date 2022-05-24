@@ -50,8 +50,8 @@ sites <- read_csv("data_processed_sites.csv",
     botanist_year = factor(botanist_year)
   ) %>%
   select(
-    id, plot, block, botanist_year, exposition, sandRatio, substrateDepth, targetType,
-    seedDensity, surveyYear_fac, n
+    id, plot, block, botanist_year, exposition, sandRatio, substrateDepth,
+    targetType, seedDensity, surveyYear, surveyYear_fac, n
   )
 
 
