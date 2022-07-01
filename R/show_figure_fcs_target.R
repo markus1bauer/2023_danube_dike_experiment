@@ -29,7 +29,7 @@ sites <- read_csv("data_processed_sites.csv",
                       block = "f",
                       exposition = col_factor(levels = c("north", "south")),
                       sandRatio = "f",
-                      substrateDepth = "f",
+                      substrateDepth = col_factor(levels = c("30", "15")),
                       targetType = "f",
                       seedDensity = "f"
                     )) %>%
@@ -76,6 +76,8 @@ theme_mb <- function() {
 
 ## 1 Boxplots #################################################################
 
+### a sandRatio x target Type -------------------------------------------------
+
 (graph_a <- ggplot() +
     geom_quasirandom(
       aes(y = n, x = sandRatio, color = targetType),
@@ -119,7 +121,57 @@ theme_mb <- function() {
 ggsave(here("outputs", "figures",
             "figure_box_fcs_target_800dpi_27x9cm.tiff"),
        dpi = 800, width = 27, height = 9, units = "cm")
+ggsave(here("outputs", "figures",
+            "figure_box_fcs_target_800dpi_16.5x14cm.tiff"),
+       dpi = 800, width = 16.5, height = 14, units = "cm")
 
+### b sandRatio x substrateDepth -----------------------------------------------
+
+(graph_b <- ggplot() +
+   geom_quasirandom(
+     aes(y = n, x = substrateDepth, color = sandRatio),
+     data = sites,
+     alpha = 0.5,
+     dodge.width = 0.8,
+     cex = .5
+   ) +
+   geom_hline(
+     yintercept = 0,
+     linetype = "dashed",
+     size = .3,
+     color = "grey70"
+   ) +
+   geom_boxplot(
+     aes(y = n, x = substrateDepth, fill = sandRatio),
+     data = sites,
+     alpha = 0.5
+   ) +
+   facet_grid(
+     exposition ~ surveyYear_fac,
+     labeller = as_labeller(
+       c(south = "South", north = "North",
+         "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
+     )
+   ) +
+   scale_y_continuous(limits = c(-2.8, 1.9), breaks = seq(-100, 400, 1)) +
+   scale_color_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
+   scale_fill_manual(values = c("#990000", "#CC6600", "#FFFF00")) +
+   labs(
+     x = "Substrate depth [cm]", fill = "Sand ratio [%]",
+     color = "Sand ratio [%]",
+     y = expression(
+       Favourable ~ Conservation ~ Status ~ "(FCS)"
+     )
+   ) +
+   theme_mb())
+
+### Save ###
+ggsave(here("outputs", "figures",
+            "figure_box_fcs_target_substrate_800dpi_27x9cm.tiff"),
+       dpi = 800, width = 27, height = 9, units = "cm")
+ggsave(here("outputs", "figures",
+            "figure_box_fcs_target_substrate_800dpi_16.5x14cm.tiff"),
+       dpi = 800, width = 16.5, height = 14, units = "cm")
 
 ## 2 Marginal effects ##########################################################
 

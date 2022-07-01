@@ -1,12 +1,13 @@
 # Grassland experiment on dikes
 # Prepare species, sites, and traits data ####
 # Markus Bauer
-# 2022-04-29
+# 2022-05-24
 
 
 ### Packages ###
 library(here)
 library(tidyverse)
+library(lubridate)
 library(naniar) #are_na
 library(vegan)
 library(adespatial)
@@ -64,7 +65,7 @@ sites <- read_csv("data_raw_sites.csv", col_names = TRUE,
          id = factor(id),
          vegetationCov = as.numeric(vegetationCov),
          bioMass = as.numeric(bioMass)) %>%
-  filter(!(block == "C" & (surveyYear == "seeded" |
+  filter(!(site == "C" & (surveyYear == "seeded" |
                              surveyYear == "2018" |
                              surveyYear == "2019" |
                              surveyYear == "2020")))
@@ -211,7 +212,7 @@ rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-## 1 Target species ############################################################
+## 1 Create variables ##########################################################
 
 traits <- traits %>%
   mutate(
@@ -224,6 +225,15 @@ traits <- traits %>%
     )
   )
 
+sites <- sites %>%
+  mutate(surveyDate = as_date(surveyDate),
+         seedingDate = if_else(
+           exposition == "north", ymd("20180413"), ymd("20180427")
+           ),
+         age = interval(seedingDate, surveyDate) %/% days(1),
+         block = str_c(site, exposition, sep = "_"),
+         block = factor(block)
+         )
 
 ## 2 Coverages #################################################################
 
