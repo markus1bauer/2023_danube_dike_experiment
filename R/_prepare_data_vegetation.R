@@ -18,6 +18,7 @@ library(FD) #dbFD
 #installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE, start_new_R = TRUE, quit_R = TRUE, print_R_versions = TRUE, GUI = FALSE)
 #checklist::setup_source()
 #checklist::check_source()
+#renv::snapshot()
 rm(list = ls())
 setwd(here("data", "raw"))
 
