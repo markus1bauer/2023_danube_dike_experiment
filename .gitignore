@@ -4,4 +4,13 @@
 .Ruserdata
 .RDataTmp
 .RDataTmp2
-data/raw/data_raw_traitbase_*.txt
+data/raw/data_raw_traitbase_biolflor_flowering_timing.csv
+data/raw/data_raw_traitbase_biolflor_species_names.csv
+data/raw/data_raw_traitbase_clopla _clonal_traits.txt
+data/raw/data_raw_traitbase_clopla _clonal_traits_metadata.doc
+data/raw/data_raw_traitbase_groot.csv
+data/raw/data_raw_traitbase_leda_20210223_canopy_height.txt
+data/raw/data_raw_traitbase_leda_20210223_seedmass.txt
+data/raw/data_raw_traitbase_leda_20210223_sla.txt
+data/raw/data_raw_traitbase_try_20210306_13996.txt
+data/raw/data_raw_traitbase_try_20210318_14157.txt
