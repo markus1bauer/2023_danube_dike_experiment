@@ -1,13 +1,14 @@
-# Dike grassland experiment
-# Community weighted mean of specific leaf area ####
+# Dike grassland field experiment
+# Favourable conservation status ####
 # Markus Bauer
-# 2022-04-11
+# 2022-10-18
 
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ###############################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 
 ### Packages ###
@@ -66,9 +67,12 @@ sites <- read_csv("data_processed_sites.csv",
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+
 ## 1 Data exploration ########################################################
 
+
 ### a Graphs -----------------------------------------------------------------
+
 #simple effects:
 ggplot(sites %>% filter(surveyYear == 2021), aes(y = n, x = exposition)) +
   geom_boxplot() + geom_quasirandom()
@@ -146,7 +150,8 @@ ggplot(data = sites,
   facet_grid(exposition ~ sandRatio)
 
 
-##### b Outliers, zero-inflation, transformations? ----------------------------
+#### b Outliers, zero-inflation, transformations? ----------------------------
+
 dotchart((sites$n), groups = factor(sites$exposition),
          main = "Cleveland dotplot")
 sites %>% group_by(exposition) %>% count(block)
@@ -157,7 +162,9 @@ ggplot(sites, aes(x = n)) + geom_density()
 ggplot(sites, aes(sqrt(n))) + geom_density()
 
 
+
 ## 2 Model building ###########################################################
+
 
 ### a models -----------------------------------------------------------------
 
@@ -289,6 +296,7 @@ bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
+
 
 ### c model check -----------------------------------------------------------
 
@@ -424,7 +432,9 @@ mcmc_acf(posterior1, lags = 10)
 mcmc_acf(posterior2, lags = 10)
 
 
+
 ## 3 Chosen model output #####################################################
+
 
 ### a Model output ------------------------------------------------------------
 
@@ -455,6 +465,7 @@ sjPlot::plot_model(m_1, type = "pred", ppd = TRUE, terms = c(
 sjPlot::plot_model(m_1, type = "pred", ppd = TRUE, terms = c(
   "exposition", "seedDensity", "surveyYear_fac"
 ))
+
 
 ### b Effect sizes ------------------------------------------------------------
 

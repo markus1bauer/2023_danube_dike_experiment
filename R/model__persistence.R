@@ -1,13 +1,14 @@
-# Dike grassland experiment
-# Persistence Presence-Absence ####
+# Dike grassland field experiment
+# Persistence (Presence-absence data) ####
 # Markus Bauer
-# 2022-05-13
+# 2022-10-18
 
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ###############################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 
 ### Packages ###
@@ -70,9 +71,12 @@ sites <- read_csv("data_processed_sites.csv",
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+
 ## 1 Data exploration ########################################################
 
+
 ### a Graphs -----------------------------------------------------------------
+
 #simple effects:
 ggplot(sites %>% filter(surveyYear == 2021, index == "B"),
        aes(y = n, x = exposition)) +
@@ -124,7 +128,9 @@ ggplot(sites %>% filter(index == "B"),
   geom_boxplot() + geom_quasirandom(dodge.width = .8, alpha = .5) +
   facet_grid(exposition ~ factor(surveyYear))
 
+
 ##### b Outliers, zero-inflation, transformations? ----------------------------
+
 dotchart((sites$n), groups = factor(sites$index),
          main = "Cleveland dotplot")
 sites %>% count(block)
@@ -135,7 +141,9 @@ ggplot(sites, aes(x = n)) + geom_density()
 ggplot(sites, aes(x = sqrt(n))) + geom_density()
 
 
+
 ## 2 Model building ###########################################################
+
 
 ### a models -----------------------------------------------------------------
 
@@ -256,6 +264,7 @@ bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
+
 
 ### c model check -----------------------------------------------------------
 
@@ -391,7 +400,9 @@ mcmc_acf(posterior1, lags = 10)
 mcmc_acf(posterior2, lags = 10)
 
 
+
 ## 3 Chosen model output #####################################################
+
 
 ### a Model output ------------------------------------------------------------
 
