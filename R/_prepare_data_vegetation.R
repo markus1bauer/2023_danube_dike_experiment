@@ -4,23 +4,46 @@
 # 2022-05-24
 
 
+
+# Content #####################################################################
+
+# A Load data +++++++++++++++++++++++++++++++++++++
+## 1 Sites and sPlotOpen
+## 2 Species and sPlotOpen
+## 3 Traits
+## 4 Temperature and precipitation
+## 5 Check data frames
+
+# B Create variables ++++++++++++++++++++++++++++++
+## 1 Create simple variables
+## 2 Coverages
+## 3 Alpha diversity
+## 4 sPlotOpen
+## 5 TBI: Temporal beta diversity index
+
+# C Save processed data +++++++++++++++++++++++++++
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
 ### Packages ###
 library(here)
 library(tidyverse)
-library(lubridate)
+suppressPackageStartupMessages(library(lubridate))
 library(naniar) #are_na
 library(vegan)
-library(adespatial)
-library(FD) #dbFD
+suppressPackageStartupMessages(library(adespatial))
+suppressPackageStartupMessages(library(FD))
 #remotes::install_github(file.path("inbo", "checklist"))
 
 ### Start ###
+rm(list = ls())
+setwd(here("data", "raw"))
 #installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE, start_new_R = TRUE, quit_R = TRUE, print_R_versions = TRUE, GUI = FALSE)
 #checklist::setup_source()
 #checklist::check_source()
-#renv::snapshot()
-rm(list = ls())
-setwd(here("data", "raw"))
+#renv::status()
 
 
 
@@ -29,7 +52,10 @@ setwd(here("data", "raw"))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-## 1 Sites #####################################################################
+
+#______________________________________________________________________________
+## 1 Sites ####################################################################
+
 
 sites <- read_csv("data_raw_sites.csv", col_names = TRUE,
                   na = c("", "NA", "na"),
@@ -72,7 +98,10 @@ sites <- read_csv("data_raw_sites.csv", col_names = TRUE,
                              surveyYear == "2020")))
 
 
+
+#______________________________________________________________________________
 ## 2 Species ###################################################################
+
 
 species <- data.table::fread("data_raw_species_20211112.csv",
                              sep = ",",
@@ -107,7 +136,10 @@ specieslist <- species %>%
 #write_csv(specieslist, here("outputs/tables/specieslist_20220420.csv"))
 
 
+
+#______________________________________________________________________________
 ## 3 Seedmixes #################################################################
+
 
 seedmixes <- data.table::fread("data_raw_species_20211112.csv",
                              sep = ",",
@@ -128,7 +160,10 @@ seedmixes <- data.table::fread("data_raw_species_20211112.csv",
            remove = TRUE, extra = "drop", fill = "warn", convert = FALSE)
  
 
+
+#______________________________________________________________________________
 ## 4 Traits ####################################################################
+
 
 traits <- read_csv("data_raw_traits.csv", col_names = TRUE,
                    na = c("", "NA", "na"),
@@ -163,7 +198,10 @@ traits <- traits %>%
   semi_join(species, by = "name")
 
 
+
+#______________________________________________________________________________
 ## 5 Check data frames #########################################################
+
 
 ### Check typos ###
 sites %>%
@@ -213,7 +251,10 @@ rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-## 1 Create variables ##########################################################
+
+#______________________________________________________________________________
+## 1 Create variables #########################################################
+
 
 traits <- traits %>%
   mutate(
@@ -265,6 +306,7 @@ traits <- traits %>%
 
 
 
+#______________________________________________________________________________
 ## 2 Coverages #################################################################
 
 
@@ -332,17 +374,22 @@ sites <- sites %>%
   left_join(cover_target, by = "id") %>%
   left_join(cover_seeded, by = "id") %>%
   ### Calcute the ratio of target richness of total species richness
-  mutate(targetCovratio = targetCov / accumulatedCov,
-         graminoidCovratio = graminoidCov / accumulatedCov,
-         seededCovratio = seededCov / accumulatedCov,
-         targetCovratio = round(targetCovratio, 3),
-         graminoidCovratio = round(graminoidCovratio, 3),
-         seededCovratio = round(seededCovratio, 3))
+  mutate(
+    targetCovratio = targetCov / accumulatedCov,
+    graminoidCovratio = graminoidCov / accumulatedCov,
+    seededCovratio = seededCov / accumulatedCov,
+    targetCovratio = round(targetCovratio, 3),
+    graminoidCovratio = round(graminoidCovratio, 3),
+    seededCovratio = round(seededCovratio, 3)
+    )
 
 rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 
-## 3 Alpha diversity ###########################################################
+
+#______________________________________________________________________________
+## 3 Alpha diversity ##########################################################
+
 
 ### a Species richness ---------------------------------------------------------
 
@@ -427,7 +474,9 @@ sites <- sites %>%
   left_join(speciesRichness_ffh6210, by = "id") %>%
 
   ### * Calculate Favourable Conservation Status (FCS) ####
-  ###   Helm et al. 2014 Divers Distrib
+  ### Helm et al. 2014 Divers Distrib
+  ### https://doi.org/10.1111/ddi.12285
+
   mutate(
     fcs_target = log(
       (targetRichness + 1) / (speciesRichness - targetRichness + 1)
@@ -457,113 +506,184 @@ sites <- sites %>%
 rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 
-## 5 CWM of Ellenberg ##########################################################
 
-### a N value ------------------------------------------------------------------
-data_traits <- traits %>%
-  select(name, n) %>%
-  filter(n > 0)
-data_species <- semi_join(species, data_traits, by = "name") %>%
-  pivot_longer(-name, names_to = "id", values_to = "value") %>%
-  group_by(id) %>%
-  mutate(sum = sum(value, na.rm = TRUE)) %>%
-  filter(sum > 0) %>%
-  select(-sum) %>%
-  pivot_wider(names_from = "name", values_from = "value") %>%
-  column_to_rownames("id")
-data_traits <- column_to_rownames(data_traits, "name")
-### Calculate CWM ###
-Nweighted <- dbFD(data_traits, data_species, w.abun = TRUE,
-                        calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
-
-### b F value ------------------------------------------------------------------
-data_traits <- traits %>%
-  select(name, f) %>%
-  filter(f > 0)
-data_species <- semi_join(species, data_traits, by = "name") %>%
-  pivot_longer(-name, names_to = "id", values_to = "value") %>%
-  group_by(id) %>%
-  mutate(sum = sum(value, na.rm = TRUE)) %>%
-  filter(sum > 0) %>%
-  select(-sum) %>%
-  pivot_wider(names_from = "name", values_from = "value") %>%
-  column_to_rownames("id")
-data_traits <- column_to_rownames(data_traits, "name")
-### Calculate CWM ###
-Fweighted <- dbFD(data_traits, data_species, w.abun = TRUE,
-                  calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
-
-### c T value ------------------------------------------------------------------
-data_traits <- traits %>%
-  select(name, t) %>%
-  filter(t > 0)
-data_species <- semi_join(species, data_traits, by = "name") %>%
-  pivot_longer(-name, names_to = "id", values_to = "value") %>%
-  group_by(id) %>%
-  mutate(sum = sum(value, na.rm = TRUE)) %>%
-  filter(sum > 0) %>%
-  select(-sum) %>%
-  pivot_wider(names_from = "name", values_from = "value") %>%
-  column_to_rownames("id")
-data_traits <- column_to_rownames(data_traits, "name")
-### Calculate CWM ###
-Tweighted <- dbFD(data_traits, data_species, w.abun = TRUE,
-                  calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
-
-### d implement in sites data set ----------------------------------------------
-sites$cwmAbuN <- round(as.numeric(as.character(Nweighted$CWM$n)), 3)
-sites$cwmAbuF <- round(as.numeric(as.character(Fweighted$CWM$f)), 3)
-sites$cwmAbuT <- round(as.numeric(as.character(Tweighted$CWM$t)), 3)
-
-rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
+#______________________________________________________________________________
+## 4 Reference sites ##########################################################
 
 
-## 6 Ordination ################################################################
+### a ESy: EUNIS expert vegetation classification system ----------------------
 
-data_sites <- sites
-data_species <- species %>%
-  pivot_longer(-name, names_to = "id", values_to = "value") %>%
-  pivot_wider(names_from = "name", values_from = "value") %>%
-  arrange(id) %>%
-  semi_join(data_sites, by = "id") %>%
-  column_to_rownames("id") %>%
-  mutate(across(where(is.numeric), ~replace(., 0, NA)))
+#### Start ###
+### Bruelheide et al. 2021 Appl Veg Sci
+### https://doi.org/10.1111/avsc.12562
 
-### Calculate NMDS ###
-set.seed(123)
-(nmds <- metaMDS(data_species,
-                 dist = "bray", binary = FALSE, autotransform = TRUE,
-                 try = 99, previous.best = TRUE, na.rm = TRUE))
-# 2D-stress: 0.209
-#Wisconsing(sqrt())
-### Add to sites ###
-data <- nmds %>%
-  scores() %>%
-  as.data.frame() %>%
-  rownames_to_column(var = "id") %>%
-  as_tibble() %>%
-  select(id, NMDS1, NMDS2) %>%
+expertfile <- "EUNIS-ESy-2020-06-08.txt" ### file of 2021 is not working
+
+obs <- species_dikes %>%
+  pivot_longer(cols = -name,
+               names_to = "RELEVE_NR",
+               values_to = "Cover_Perc") %>%
+  rename(TaxonName = "name") %>%
   mutate(
-    NMDS1 = round(NMDS1, 4),
-    NMDS2 = round(NMDS2, 4)
+    TaxonName = str_replace_all(TaxonName, "_", " "),
+    TaxonName = str_replace_all(TaxonName, "ssp", "subsp."),
+    TaxonName = as.factor(TaxonName),
+    TaxonName = fct_recode(
+      TaxonName,
+      "Carex praecox" = "Carex praecox subsp. curvata",
+      "Cerastium fontanum" = "Cerastium fontanum subsp. vulgare",
+      "Clinopodium acinos" = "Acinos arvensis",
+      "Ranunculus polyanthemos" = "Ranunculus serpens subsp. nemorosus",
+      "Silene latifolia" = "Silene latifolia subsp. alba",
+      "Vicia villosa" = "Vicia villosa subsp. varia"
+    )
+  ) %>%
+  data.table::as.data.table()
+
+header <- sites_dikes %>%
+  sf::st_as_sf(coords = c("longitude", "latitude"), crs = 31468) %>%
+  sf::st_transform(4326) %>%
+  rename(
+    RELEVE_NR = id
+  ) %>%
+  mutate(
+    "Altitude (m)" = 313,
+    Latitude = sf::st_coordinates(.)[, 2],
+    Longitude = sf::st_coordinates(.)[, 1],
+    Country = "Germany",
+    Coast_EEA = "N_COAST",
+    Dunes_Bohn = "N_DUNES",
+    Ecoreg = 686,
+    dataset = "Danube_dikes"
+  ) %>%
+  select(RELEVE_NR, "Altitude (m)", Latitude, Longitude, Country,
+         Coast_EEA, Dunes_Bohn, Ecoreg, dataset) %>%
+  sf::st_drop_geometry()
+
+setwd(here("R", "esy"))
+source(here("R", "esy", "code", "prep.R"))
+
+#### Step 1 and 2: Load and parse the expert file ###
+source(here("R", "esy", "code", "step1and2_load-and-parse-the-expert-file.R"))
+
+#### Step 3: Create a numerical plot x membership condition matrix  ###
+plot.cond <- array(
+  0,
+  c(length(unique(obs$RELEVE_NR)), length(conditions)),
+  dimnames = list(
+    as.character(unique(obs$RELEVE_NR)),
+    conditions
   )
-sites <- sites %>%
-  left_join(data, by = "id") %>%
+)
+
+### Step 4: Aggregate taxon levels ###
+source(here("R", "esy", "code", "step4_aggregate-taxon-levels.R"))
+
+(data <- obs %>%
+    group_by(TaxonName) %>%
+    slice(1) %>%
+    anti_join(AGG, by = c("TaxonName" = "ind")))
+
+#### Step 5: Solve the membership conditions ###
+mc <- 1
+source(here("R", "esy", "code",
+            "step3and5_extract-and-solve-membership-conditions.R"))
+
+table(result.classification)
+eval.EUNIS(which(result.classification == "V39")[1], "V39")
+
+sites_dikes <- sites_dikes %>%
   mutate(
-    reference_hay = if_else(
-      (targetType == "hay_meadow" | targetType == "mixed") & block == "C",
-      NMDS1, NA_real_
-      )
-    ) %>%
-  mutate(centroid_hay = mean(reference_hay, na.rm = TRUE), # mean = -0.493
-         sd_hay = sd(reference_hay, na.rm = TRUE), # sd = 0.196
-         distance_hay = centroid_hay - NMDS1) %>%
-  select(-reference_hay, - centroid_hay, -sd_hay)
+    esy = result.classification,
+    esy = if_else(id == "X05_m_2021", "R1A", esy),
+    esy = if_else(id == "X62_m_2019", "R", esy),
+    esy = if_else(id == "X67_o_2021", "R", esy)
+  )
+table(sites_dikes$esy)
+rm(list = setdiff(ls(), c("sites_dikes", "sites_splot",
+                          "species_dikes", "species_splot",
+                          "traits", "pca_soil", "pca_construction_year",
+                          "pca_survey_year", "result.classification")))
 
-rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
+### b sPlotOpen ---------------------------------------------------------------
+
+### Sabatini et al. (2021) Global Ecol Biogeogr
+### https://doi.org/10.1111/geb.13346
 
 
-## 7 Temporal beta diversity ###################################################
+data_sites <- sites_splot %>%
+  filter(
+    # Hay meadow: EUNIS2007 code E2.2
+    # Chytry et al. 2020 Appl Veg Sci
+    # https://doi.org/10.1111/avsc.12519
+    (ESY == "E22" |
+       # Dry grassland: EUNIS2007 code E1.2a
+       ESY == "E12a") &
+      Releve_area >= 10 &
+      Releve_area <= 40 &
+      Longitude > 10.89845 & # West: Augsburg
+      Longitude < 13.46434 & # East: Passau
+      Latitude > 	47.85298 & # South: Rosenheim
+      Latitude < 49.45095 & # North: Nuernberg
+      Elevation < 700
+  ) %>%
+  rename_with(tolower) %>%
+  rename(id = plotobservationid, survey_year = date_of_recording,
+         plotSize = releve_area, reference = country) %>%
+  mutate(
+    id = paste0("X", id),
+    reference = str_replace(reference, "Germany", "reference"),
+    survey_year = year(survey_year),
+    givd_database = if_else(
+      givd_id == "EU-DE-014",
+      "Jandt & Bruelheide (2012) https://doi.org/10.7809/b-e.00146",
+      "other"
+    )
+  ) %>%
+  select(id, givd_id, longitude, latitude, elevation, plotSize, survey_year,
+         reference, esy)
+sites_splot <- data_sites
+
+data_species <- species_splot %>%
+  rename(id = PlotObservationID, name = Species,
+         abundance = Original_abundance) %>%
+  mutate(id = paste0("X", id)) %>%
+  semi_join(data_sites, by = "id") %>%
+  select(id, name, abundance) %>%
+  pivot_wider(names_from = "id",
+              values_from = "abundance",
+              values_fn = sum) %>%
+  mutate(
+    name = str_replace(name, " ", "_"),
+    name = str_replace(name, "Helianthemum_ovatum", "Helianthemum_nummularium"),
+    name = str_replace(name, "Galium_album", "Galium_mollugo"),
+    name = str_replace(name, "Taraxacum", "Taraxacum_campylodes"),
+    name = str_replace(
+      name, "Cerastium_fontanum", "Cerastium_fontanum_ssp_vulgare"
+    ),
+    name = str_replace(name, "Leucanthemum_ircutianum", "Leucanthemum_vulgare"),
+    name = str_replace(name, "Tragopogon_orientalis", "Tragopogon_pratensis"),
+    name = factor(name)
+  ) %>%
+  group_by(name) %>%
+  summarise(across(everything(), ~ sum(.x, na.rm = TRUE)))
+species_splot <- data_species
+
+### Check species name congruency ###
+data <- anti_join(species_splot, traits, by = "name") %>%
+  select(name) %>%
+  print(n = 50)
+
+rm(list = setdiff(ls(), c("sites_dikes", "sites_splot",
+                          "species_dikes", "species_splot",
+                          "traits", "pca_soil", "pca_construction_year",
+                          "pca_survey_year")))
+
+
+
+#______________________________________________________________________________
+## 5 Temporal beta diversity ###################################################
+
 
 ### Prepare data ###
 data_sites <- sites %>%
@@ -594,6 +714,9 @@ for (i in unique(data_species$year)) {
 }
 
 ### a Calculate TBI Presence --------------------------------------------------
+
+### Legendre (2019) Ecol Evol
+### https://doi.org/10.1002/ece3.4984
 
 #### * seedmixes vs. 2018 ####
 res18 <- TBI(species_seeded, species_2018,
@@ -633,8 +756,8 @@ plot(res20, type = "BC")
 
 #### * seedmixes vs. 2021 ####
 res21 <- TBI(species_seeded, species_2021,
-               method = "sorensen",
-               nperm = 9999, test.t.perm = TRUE, clock = TRUE)
+             method = "sorensen",
+             nperm = 9999, test.t.perm = TRUE, clock = TRUE)
 res21$BCD.summary # B = .343, C = .394, D = .738 (.465 vs. .534)
 res21$t.test_B.C # p.perm = 1e-04
 tbi21 <- res21$BCD.mat %>%
@@ -651,7 +774,7 @@ rm(list = setdiff(ls(), c(
   "sites", "species", "traits", "seedmixes", "species_seeded",
   "species_2018", "species_2019", "species_2020", "species_2021",
   "data_presence", "data_sites", "data_species"
-  )))
+)))
 
 ### b Calculate TBI Abundance -------------------------------------------------
 
@@ -717,25 +840,92 @@ data <- data_presence %>%
   mutate(
     plot = rep(plot, length(data_abundance$comparison) * 2 / 288),
     id = str_c(plot, comparison, sep = "_")
-    ) %>%
+  ) %>%
   rename(
     B = "B/(2A+B+C)", C = "C/(2A+B+C)", D = "D=(B+C)/(2A+B+C)",
     change = Change
-    ) %>%
+  ) %>%
   mutate(
     change = C - B,
     across(c(B, C, D, change), ~ round(.x, digits = 4))
-    ) %>%
+  ) %>%
   select(id, B, C, D, presabu)
 sites <- sites %>%
   left_join(data, by = "id")
 
 rm(list = setdiff(ls(), c(
   "sites", "species", "traits", "seedmixes"
-  )))
+)))
 
 
+
+#______________________________________________________________________________
+## 7 CWM of Ellenberg ##########################################################
+
+
+### a N value ------------------------------------------------------------------
+data_traits <- traits %>%
+  select(name, n) %>%
+  filter(n > 0)
+data_species <- semi_join(species, data_traits, by = "name") %>%
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  group_by(id) %>%
+  mutate(sum = sum(value, na.rm = TRUE)) %>%
+  filter(sum > 0) %>%
+  select(-sum) %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("id")
+data_traits <- column_to_rownames(data_traits, "name")
+### Calculate CWM ###
+Nweighted <- dbFD(data_traits, data_species, w.abun = TRUE,
+                  calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
+
+### b F value ------------------------------------------------------------------
+data_traits <- traits %>%
+  select(name, f) %>%
+  filter(f > 0)
+data_species <- semi_join(species, data_traits, by = "name") %>%
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  group_by(id) %>%
+  mutate(sum = sum(value, na.rm = TRUE)) %>%
+  filter(sum > 0) %>%
+  select(-sum) %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("id")
+data_traits <- column_to_rownames(data_traits, "name")
+### Calculate CWM ###
+Fweighted <- dbFD(data_traits, data_species, w.abun = TRUE,
+                  calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
+
+### c T value ------------------------------------------------------------------
+data_traits <- traits %>%
+  select(name, t) %>%
+  filter(t > 0)
+data_species <- semi_join(species, data_traits, by = "name") %>%
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  group_by(id) %>%
+  mutate(sum = sum(value, na.rm = TRUE)) %>%
+  filter(sum > 0) %>%
+  select(-sum) %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("id")
+data_traits <- column_to_rownames(data_traits, "name")
+### Calculate CWM ###
+Tweighted <- dbFD(data_traits, data_species, w.abun = TRUE,
+                  calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt")
+
+### d implement in sites data set ----------------------------------------------
+sites$cwmAbuN <- round(as.numeric(as.character(Nweighted$CWM$n)), 3)
+sites$cwmAbuF <- round(as.numeric(as.character(Fweighted$CWM$f)), 3)
+sites$cwmAbuT <- round(as.numeric(as.character(Tweighted$CWM$t)), 3)
+
+rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
+
+
+
+#______________________________________________________________________________
 ## 8 Functional plant traits ###################################################
+
 
 ### a LEDA data ---------------------------------------------------------------
 
@@ -1072,7 +1262,10 @@ traits_all <- data %>%
   drop_na()
 
 
-## 9 CWM and FDis of functional plant traits ###################################
+
+#______________________________________________________________________________
+## 9 CWM and FDis of functional plant traits #################################
+
 
 ### a LHS ----------------------------------------------------------------------
 

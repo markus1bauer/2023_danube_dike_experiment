@@ -1,7 +1,7 @@
 # Dike grassland experiment
 # Show_figure species composition ####
 # Markus Bauer
-# 2022-04-27
+# 2022-10-28
 
 
 
@@ -10,10 +10,10 @@
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+
 ### Packages ###
 library(here)
 library(tidyverse)
-library(ggbeeswarm)
 
 ### Start ###
 #rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
@@ -45,6 +45,7 @@ sites <- read_csv("data_processed_sites.csv",
     surveyYear_fac = if_else(block == "C", "reference", surveyYear_fac),
     surveyYear_fac = factor(surveyYear_fac)
   )
+
 
 ### * Model ####
 
