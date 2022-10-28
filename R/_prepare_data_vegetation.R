@@ -236,7 +236,37 @@ sites <- sites %>%
          block = factor(block)
          )
 
+### Establishment ###
+data <- species %>%
+  select(-starts_with("C")) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "n") %>%
+  left_join(sites, by = "id") %>%
+  mutate(n = if_else(n > 0 & surveyYear == "seeded", 1, n)) %>%
+  select(plot, name, surveyYear, n) %>%
+  pivot_wider(names_from = "surveyYear", values_from = "n") %>%
+  pivot_longer(-c(plot, name, seeded),
+               names_to = "surveyYear", values_to = "n") %>%
+  mutate(n = if_else(seeded == 1 & n > 0, 1, 0)) %>%
+  group_by(name, surveyYear) %>%
+  summarise(
+    total_established = sum(n, na.rm = TRUE),
+    total_seeded = sum(seeded, na.rm = TRUE),
+    .groups = "keep"
+    ) %>%
+  filter(total_seeded > 0) %>%
+  mutate(rate = total_established / total_seeded,
+         rate = round(rate, digits = 2)) %>%
+  pivot_wider(names_from = "surveyYear",
+              values_from = c("rate", "total_seeded", "total_established")) %>%
+  select(-total_seeded_2019, -total_seeded_2020, -total_seeded_2021)
+
+traits <- traits %>%
+  left_join(data, by = "name")
+
+
+
 ## 2 Coverages #################################################################
+
 
 cover <- species %>%
   left_join(traits, by = "name") %>%
