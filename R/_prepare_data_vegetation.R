@@ -57,45 +57,70 @@ setwd(here("data", "raw"))
 ## 1 Sites ####################################################################
 
 
-sites <- read_csv("data_raw_sites.csv", col_names = TRUE,
+sites_experiment <- read_csv("data_raw_sites.csv", col_names = TRUE,
                   na = c("", "NA", "na"),
                   col_types =
                     cols(
                       .default = "f",
-                      surveyDate_seeded = col_date(format = "%Y-%m-%d"),
-                      surveyDate_2018 = col_date(format = "%Y-%m-%d"),
-                      surveyDate_2019 = col_date(format = "%Y-%m-%d"),
-                      surveyDate_2020 = col_date(format = "%Y-%m-%d"),
-                      surveyDate_2021 = col_date(format = "%Y-%m-%d"),
-                      botanist_2018 = "c",
-                      botanist_2019 = "c",
-                      botanist_2020 = "c",
-                      botanist_2021 = "c",
-                      vegetationCov_2018 = "c",
-                      vegetationCov_2019 = "c",
-                      vegetationCov_2020 = "c",
-                      vegetationCov_2021 = "c",
-                      bioMass_2019 = "c"
+                      survey_date.seeded = col_date(format = "%Y-%m-%d"),
+                      survey_date.2018 = col_date(format = "%Y-%m-%d"),
+                      survey_date.2019 = col_date(format = "%Y-%m-%d"),
+                      survey_date.2020 = col_date(format = "%Y-%m-%d"),
+                      survey_date.2021 = col_date(format = "%Y-%m-%d"),
+                      botanist.2018 = "c",
+                      botanist.2019 = "c",
+                      botanist.2020 = "c",
+                      botanist.2021 = "c",
+                      vegetation_cover.2018 = "d",
+                      vegetation_cover.2019 = "d",
+                      vegetation_cover.2020 = "d",
+                      vegetation_cover.2021 = "d",
+                      biomass.2019 = "d"
                       )) %>%
-  pivot_longer(starts_with("vegetationCov_") |
-                 starts_with("botanist_") |
-                 starts_with("bioMass_") |
-                 starts_with("surveyDate"),
-               names_to = c("x", "surveyYear"), names_sep = "_",
-               values_to = "n", values_transform = list (n = as.character)) %>%
+  pivot_longer(
+    starts_with("vegetation_cover") |
+      starts_with("botanist") |
+      starts_with("biomass") |
+      starts_with("survey_date"),
+    names_to = c("x", "survey_year"),
+    names_sep = "\\.",
+    values_to = "n",
+    values_transform = list (n = as.character)
+  ) %>%
   pivot_wider(names_from = "x", values_from = "n") %>%
   mutate(plot = str_replace(plot, "-", "_"),
          plot = str_replace(plot, "L_", "L"),
          plot = str_replace(plot, "W_", "W"),
-         id = str_c(plot, surveyYear, sep = "_"),
+         id = str_c(plot, survey_year, sep = "_"),
          plot = factor(plot),
          id = factor(id),
-         vegetationCov = as.numeric(vegetationCov),
-         bioMass = as.numeric(bioMass)) %>%
-  filter(!(site == "C" & (surveyYear == "seeded" |
-                             surveyYear == "2018" |
-                             surveyYear == "2019" |
-                             surveyYear == "2020")))
+         vegetation_cover = as.numeric(vegetation_cover),
+         biomass = as.numeric(biomass)) %>%
+  filter(!(site == "C" & (survey_year == "seeded" |
+                             survey_year == "2018" |
+                             survey_year == "2019" |
+                             survey_year == "2020" |
+                            survey_year == "2021")))
+
+### Sabatini et al. (2021) Global Ecol Biogeogr:
+### https://doi.org/10.1111/geb.13346
+sites_splot <- read_delim(here("data", "raw", "sabatini_etal_2021",
+                               "sPlotOpen_header.txt"),
+                          col_names = TRUE, na = c("", "NA", "na"),
+                          col_types = cols(
+                            .default = "?",
+                            Cover_algae_layer = "d"
+                          ))
+
+### Bauer et al. (2022) Zenodo:
+### https://doi.org/10.5281/zenodo.6334100
+sites_bauer <- read_csv(here("data", "raw", "bauer_etal_2022",
+                               "data_sites_bauer_etal_2022.csv"),
+                          col_names = TRUE, na = c("", "NA", "na"),
+                          col_types = cols(
+                            .default = "?"
+                          ))
+
 
 
 
@@ -103,7 +128,7 @@ sites <- read_csv("data_raw_sites.csv", col_names = TRUE,
 ## 2 Species ###################################################################
 
 
-species <- data.table::fread("data_raw_species_20211112.csv",
+species_experiment <- data.table::fread("data_raw_species_20211112.csv",
                              sep = ",",
                              dec = ".",
                              skip = 0,
@@ -115,9 +140,9 @@ species <- data.table::fread("data_raw_species_20211112.csv",
   ### Check that each species occurs at least one time ###
   group_by(name) %>%
   arrange(name) %>%
-  select(name, all_of(sites$id)) %>%
+  select(name, all_of(sites_experiment$id)) %>%
   mutate(total = sum(c_across(
-    starts_with("L") | starts_with("W") | starts_with("C")),
+    starts_with("L") | starts_with("W")),
     na.rm = TRUE),
     presence = if_else(total > 0, 1, 0)) %>%
   # filter only species which occur at least one time:
@@ -126,14 +151,33 @@ species <- data.table::fread("data_raw_species_20211112.csv",
   select(name, sort(tidyselect::peek_vars()), -total, -presence) %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0)))
 
+### Sabatini et al. (2021) Global Ecol Biogeogr:
+### https://doi.org/10.1111/geb.13346
+species_splot <- read_delim(here("data", "raw", "sabatini_etal_2021",
+                                 "sPlotOpen_DT.txt"),
+                            col_names = TRUE, na = c("", "NA", "na"), col_types =
+                              cols(
+                                .default = "?"
+                              )) %>%
+  filter(Abundance_scale == "CoverPerc")
+
+### Bauer et al. (2022) Zenodo:
+### https://doi.org/10.5281/zenodo.6334100
+species_bauer <- read_csv(here("data", "raw", "bauer_etal_2022",
+                             "data_species_bauer_etal_2022.csv"),
+                        col_names = TRUE, na = c("", "NA", "na"),
+                        col_types = cols(
+                          .default = "?"
+                        ))
+
 ### Create list with species names and their frequency ###
-specieslist <- species %>%
+specieslist <- species_experiment %>%
   mutate(across(where(is.numeric), ~1 * (. != 0))) %>%
   mutate(sum = rowSums(across(where(is.numeric)), na.rm = TRUE),
          .keep = "unused") %>%
   group_by(name) %>%
   summarise(sum = sum(sum))
-#write_csv(specieslist, here("outputs/tables/specieslist_20220420.csv"))
+#write_csv(specieslist, here("outputs", "tables", "specieslist_20221102.csv"))
 
 
 
@@ -152,14 +196,14 @@ seedmixes <- data.table::fread("data_raw_species_20211112.csv",
                              )) %>%
   arrange(name) %>%
   select(name, ends_with("seeded")) %>%
-  filter(name %in% species$name) %>%
+  filter(name %in% species_experiment$name) %>%
   select(name, sort(tidyselect::peek_vars())) %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
   pivot_longer(-name, names_to = "id", values_to = "seeded") %>%
   separate(id, c("plot"), sep = "_(?!.*_)",
            remove = TRUE, extra = "drop", fill = "warn", convert = FALSE)
- 
 
+ 
 
 #______________________________________________________________________________
 ## 4 Traits ####################################################################
@@ -169,7 +213,7 @@ traits <- read_csv("data_raw_traits.csv", col_names = TRUE,
                    na = c("", "NA", "na"),
                    col_types =
                      cols(
-                       .default = "f",
+                       .default = "c",
                        name = "c",
                        l = "d",
                        t = "d",
@@ -191,11 +235,29 @@ traits <- read_csv("data_raw_traits.csv", col_names = TRUE,
   arrange(name)
 
 ### Check congruency of traits and species table ###
-  traits[duplicated(traits$abb), ]
-  #traits$name[which(!(traits$name %in% species$name))]
-  species$name[which(!(species$name %in% traits$name))]
+anti_join(traits, species_experiment, by = "name") %>% select(name)
+anti_join(species_experiment, traits, by = "name") %>% select(name)
+data <- traits %>%
+  mutate(name = str_replace_all(name, "_", " ")) %>%
+  select(abb, name)
+TNRS::TNRS(
+  taxonomic_names = data,
+  sources = c("wfo", "tropicos", "wcvp"),
+  classification = "wfo",
+  mode = "resolve"
+) %>%
+  select(ID, Name_submitted, Overall_score, Source, Accepted_name,
+         Accepted_name_rank, Accepted_name_author, Accepted_family,
+         Accepted_name_url, Taxonomic_status) %>%
+  filter(
+    Overall_score < 1 | Source != "wfo" | Taxonomic_status != "Accepted"
+  ) %>%
+  arrange(Source)
+
+
+### Combine with species_experiment table ###
 traits <- traits %>%
-  semi_join(species, by = "name")
+  semi_join(species_experiment, by = "name")
 
 
 
@@ -204,45 +266,47 @@ traits <- traits %>%
 
 
 ### Check typos ###
-sites %>%
+sites_experiment %>%
   filter(!str_detect(id, "_seeded$")) %>%
-  janitor::tabyl(vegetationCov)
-#sites %>% filter(vegetationCov == 17)
-species %>%
+  janitor::tabyl(vegetation_cover)
+#sites %>% filter(vegetation_cover == 17)
+species_experiment %>%
   select(-name, -ends_with("_seeded")) %>%
   unlist() %>%
   janitor::tabyl()
-species %>% # Check special typos
+species_experiment %>% # Check special typos
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   filter(value == 90)
 
-### Compare vegetationCov and accumulatedCov ###
-species %>%
+### Compare vegetation_cover and accumulated_cover ###
+species_experiment %>%
     summarise(across(where(is.double), ~sum(.x, na.rm = TRUE))) %>%
     pivot_longer(cols = everything(), names_to = "id", values_to = "value") %>%
     mutate(id = factor(id)) %>%
-    full_join(sites, by = "id") %>%
-    mutate(diff = (value - vegetationCov)) %>%
-    select(id, surveyYear, value, vegetationCov, diff) %>%
+    full_join(sites_experiment, by = "id") %>%
+    mutate(diff = (value - vegetation_cover)) %>%
+    select(id, survey_year, vegetation_cover, value, diff) %>%
     filter(!str_detect(id, "_seeded$")) %>%
     filter(diff > 20 | diff < -5) %>%
-    arrange(surveyYear, id, diff) %>%
+    arrange(survey_year, id, diff) %>%
     print(n = 100)
 
 ### Check plots over time ###
-species %>%
+species_experiment %>%
   select(name, starts_with("L1_19"), -ends_with("_seeded")) %>%
   filter(if_any(starts_with("L"), ~ . > 0)) %>%
   print(n = 100)
 
 ### Check missing data ###
-miss_var_summary(sites, order = TRUE)
-vis_miss(sites, cluster = FALSE)
+miss_var_summary(sites_experiment, order = TRUE)
+vis_miss(sites_experiment, cluster = FALSE)
 miss_var_summary(traits, order = TRUE)
 vis_miss(traits, cluster = FALSE, sort_miss = TRUE)
 
-#sites[is.na(sites$id),]
-rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
+rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
+                          "species_experiment", "species_splot", "sites_bauer",
+                          "traits", "seedmixes")))
+
 
 
 
@@ -259,35 +323,34 @@ rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 traits <- traits %>%
   mutate(
     target = if_else(
-      (biotope_target == "yes" | ffh6510 == "yes" | ffh6210 == "yes" |
-        specialTarget == "yes",
-    "yes",
-    "no"
+      ffh6510 == "1" | ffh6210 == "1" | biotope_target == "1" | 
+        table_31 == "1" | table_34 == "1" | table_35 == "1" | table_36 == "1" |
+        mapped_2011 == "1" | special_target == "1",
+    "1", "0"
     )
   )
 
-sites <- sites %>%
-  mutate(surveyDate = as_date(surveyDate),
-         seedingDate = if_else(
+sites <- sites_experiment %>%
+  mutate(surveyDate = as_date(survey_date),
+         seeding_date = if_else(
            exposition == "north", ymd("20180413"), ymd("20180427")
            ),
-         age = interval(seedingDate, surveyDate) %/% days(1),
+         age = interval(seeding_date, survey_date) %/% days(1),
          block = str_c(site, exposition, sep = "_"),
          block = factor(block)
          )
 
 ### Establishment ###
-data <- species %>%
-  select(-starts_with("C")) %>%
+data <- species_experiment %>%
   pivot_longer(cols = -name, names_to = "id", values_to = "n") %>%
-  left_join(sites, by = "id") %>%
-  mutate(n = if_else(n > 0 & surveyYear == "seeded", 1, n)) %>%
-  select(plot, name, surveyYear, n) %>%
-  pivot_wider(names_from = "surveyYear", values_from = "n") %>%
+  left_join(sites_experiment, by = "id") %>%
+  mutate(n = if_else(n > 0 & survey_year == "seeded", 1, n)) %>%
+  select(plot, name, survey_year, n) %>%
+  pivot_wider(names_from = "survey_year", values_from = "n") %>%
   pivot_longer(-c(plot, name, seeded),
-               names_to = "surveyYear", values_to = "n") %>%
+               names_to = "survey_year", values_to = "n") %>%
   mutate(n = if_else(seeded == 1 & n > 0, 1, 0)) %>%
-  group_by(name, surveyYear) %>%
+  group_by(name, survey_year) %>%
   summarise(
     total_established = sum(n, na.rm = TRUE),
     total_seeded = sum(seeded, na.rm = TRUE),
@@ -295,10 +358,17 @@ data <- species %>%
     ) %>%
   filter(total_seeded > 0) %>%
   mutate(rate = total_established / total_seeded,
-         rate = round(rate, digits = 2)) %>%
-  pivot_wider(names_from = "surveyYear",
+         rate = round(rate, digits = 2),
+         seeded = "1") %>%
+  pivot_wider(names_from = "survey_year",
               values_from = c("rate", "total_seeded", "total_established")) %>%
   select(-total_seeded_2019, -total_seeded_2020, -total_seeded_2021)
+
+### Check size of species pool for seeding ###
+traits %>%
+  select(seeded_hay_meadow, seeded_dry_grassland) %>%
+  mutate(across(where(is.character), ~as.numeric(.x))) %>%
+  summarise(across(where(is.numeric), ~sum(.x)))
 
 traits <- traits %>%
   left_join(data, by = "name")
@@ -309,7 +379,7 @@ traits <- traits %>%
 ## 2 Coverages #################################################################
 
 
-cover <- species %>%
+cover <- species_experiment %>%
   left_join(traits, by = "name") %>%
   select(name, family, target, seeded,
          starts_with("L"), starts_with("W"), starts_with("C")) %>%
@@ -320,7 +390,7 @@ cover <- species %>%
     ) %>%
   group_by(id)
 
-### * Graminoid, herb, and total coverage) ####
+#### Graminoid, herb, and total coverage) ###
 cover_total_and_graminoid <- cover %>%
   group_by(id, family) %>%
   summarise(total = sum(n, na.rm = TRUE), .groups = "keep") %>%
@@ -328,61 +398,63 @@ cover_total_and_graminoid <- cover %>%
     family == "Poaceae" |
       family == "Cyperaceae" |
       family == "Juncaceae",
-    "graminoidCov", "herbCov")) %>%
+    "graminoid_cover", "herb_cover")) %>%
   group_by(id, type) %>%
   summarise(total = sum(total, na.rm = TRUE), .groups = "keep") %>%
   spread(type, total) %>%
-  mutate(accumulatedCov = graminoidCov + herbCov,
-         accumulatedCov = round(accumulatedCov, 1)) %>%
+  mutate(accumulated_cover = graminoid_cover + herb_cover,
+         accumulated_cover = round(accumulated_cover, 1)) %>%
   ungroup()
 
-### * Target specis' coverage ####
+#### Target specis' coverage ###
 cover_target <- cover %>%
   filter(target == "yes") %>%
-  summarise(targetCov = sum(n, na.rm = TRUE)) %>%
-  mutate(targetCov = round(targetCov, 1)) %>%
+  summarise(target_cover = sum(n, na.rm = TRUE)) %>%
+  mutate(target_cover = round(target_cover, 1)) %>%
   ungroup()
 
-### * Seeded species' coverage ####
-cover_seeded <- species %>%
-  select(-starts_with("C"), -contains("x0809")) %>%
+#### Seeded species' coverage ###
+cover_seeded <- species_experiment %>%
+  select(-contains("x0809")) %>%
   # Make two columns out of column id:
   pivot_longer(-name, names_to = "id", values_to = "value",
                values_drop_na = TRUE) %>%
-  separate(id, c("plot", "surveyYear"), sep = "_(?!.*_)",
+  separate(id, c("plot", "survey_year"), sep = "_(?!.*_)",
            remove = FALSE, extra = "merge", fill = "warn", convert = FALSE) %>%
   # Summarise for plot:
-  pivot_wider(names_from = "surveyYear", values_from = "value") %>%
+  pivot_wider(names_from = "survey_year", values_from = "value") %>%
   group_by(plot, name) %>%
   summarise(across(where(is.double), ~sum(.x, na.rm = TRUE)),
             .groups = "keep") %>%
   ungroup() %>%
   # Combine with seedmixes:
   pivot_longer(starts_with("20"),
-               names_to = "surveyYear", values_to = "value",
-               names_transform = list(surveyYear = as.factor)) %>%
+               names_to = "survey_year", values_to = "value",
+               names_transform = list(survey_year = as.factor)) %>%
   mutate(success = if_else(seeded > 0 & value > 0, value, 0)) %>%
-  group_by(plot, surveyYear) %>%
+  group_by(plot, survey_year) %>%
   summarise(seededCov = sum(success, na.rm = TRUE), .groups = "keep") %>%
   ungroup() %>%
-  unite(id, plot, surveyYear, sep = "_")
+  unite(id, plot, survey_year, sep = "_")
 
-### * Implement in sites data set ####
-sites <- sites %>%
+#### Implement in sites data set ###
+sites_experiment <- sites_experiment %>%
   left_join(cover_total_and_graminoid, by = "id") %>%
   left_join(cover_target, by = "id") %>%
   left_join(cover_seeded, by = "id") %>%
   ### Calcute the ratio of target richness of total species richness
   mutate(
-    targetCovratio = targetCov / accumulatedCov,
-    graminoidCovratio = graminoidCov / accumulatedCov,
-    seededCovratio = seededCov / accumulatedCov,
-    targetCovratio = round(targetCovratio, 3),
-    graminoidCovratio = round(graminoidCovratio, 3),
-    seededCovratio = round(seededCovratio, 3)
+    target_cover_ratio = target_cover / accumulated_cover,
+    graminoid_cover_ratio = graminoid_cover / accumulated_cover,
+    seeded_cover_ratio = seeded_cover / accumulated_cover,
+    target_cover_ratio = round(target_cover_ratio, 3),
+    graminoid_cover_ratio = round(graminoid_cover_ratio, 3),
+    seeded_cover_ratio = round(seeded_cover_ratio, 3)
     )
 
-rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
+rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
+                          "species_experiment", "species_splot", "sites_bauer",
+                          "traits", "seedmixes")))
 
 
 

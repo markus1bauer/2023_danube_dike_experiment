@@ -23,5 +23,5 @@ table_34,LfU(2018a): Tafel 34,NA,NA,NA,NA,factor,1 = high prioriy / 2 / 3 / 4 = 
 table_35,LfU(2018a): Tafel 35,NA,NA,NA,NA,factor,1 = high prioriy / 2 / 3 / 4 = lower but still priority,LfU (Bayerisches Landesamt fuer Umwelt) (2018a) Bestimmungsschluessel fuer Flaechen nach paragraph 30 BNatSchG/Art. 23 BayNatSchG
 table_36,LfU(2018a): Tafel 36,NA,NA,NA,NA,factor,1 = high prioriy / 2 / 3 / 4 = lower but still priority,LfU (Bayerisches Landesamt fuer Umwelt) (2018a) Bestimmungsschluessel fuer Flaechen nach paragraph 30 BNatSchG/Art. 23 BayNatSchG
 mapped_2011,Mapped on dikes in the whole region along the Danube? (ArGe Danubia 2011),NA,NA,NA,NA,factor,1 = yes / 0 = no,"ArGe Danubia (2011) Kartierbericht Pflanzengesellschaften, Biotoptypen, Nutzungstypen, FFH-Lebensraumtypen, Gef‰ﬂpflanzen."
+special_target,"Decided by the authors to be part of the species pool (e.g., Rhinanthus)",NA,NA,NA,NA,factor,1 = yes / 0 = no,NA
 seed_availability,Available from the commercial seed producer for regional seeds Krimmer GbR in Freising-Pulling?,NA,NA,NA,NA,factor,1 = yes / 0 = no,NA
-seeded,Was this species seeded for the experiment or not?,NA,NA,NA,NA,factor,1 = yes / 0 = no,NA

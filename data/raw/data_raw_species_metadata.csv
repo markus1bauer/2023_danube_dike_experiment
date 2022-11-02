@@ -1,0 +1,4 @@
+﻿attributeName,attributeDefinition,formatString,definition,unit,numberType,type
+name,botanical species name,NA,botanical species name,NA,NA,character
+1_1,abundances of species in plot 1 of block 1,NA,NA,percent,real,numeric
+1_1i,plot 1 of block 1 counted individuals,NA,NA,dimensionless,integer,numeric
