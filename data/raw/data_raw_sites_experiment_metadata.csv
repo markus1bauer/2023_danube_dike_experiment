@@ -3,24 +3,24 @@ plot,ID of the plot,NA,"L = land	 1 = block	 01 = plot number within this block	
 site,ID of the site,NA,NA,NA,NA,factor,1 = site in the east/2/3/4/5/6 = site in the west,NA
 latitude,Coordinates Y of site (EPSG: 4326 / WGS84),NA,NA,meter,real,numeric,NA,NA
 longitude,Coordinates X of site (EPSG: 4326 / WGS84),NA,NA,meter,real,numeric,NA,NA
-plot_size,size of the plot (2m x 2m),NA,NA,meterSquared,integer,numeric,NA,NA
-exposition,exposition of the plots,NA,NA,NA,NA,factor,north/south,NA
-orientation,on which side is the plot on the dike,NA,NA,NA,NA,factor,water/land,NA
-sand_ratio,ratio of sand of the total substrate in weigth percentage,NA,NA,percent,real,factor,0/25/50,NA
-substrate_depth,"the depht of the built in substrate (holes were digged in the existing dike and filled with prepared substrate				)",NA,NA,centimeter,integer,factor,15/50,NA
-target_type,target of the seedmixture,NA,NA,NA,NA,factor,hay_meadow/dry_grassland,NA
-seed_density,how dense were the seed mixtures seeded?,NA,NA,gramPerMeterSquared,integer,factor,4 vs. 8,NA
-survey_date_seeded,date of seeding in 2018,YYYY-mm-dd,NA,NA,NA,date,NA,NA
-survey_date_2018,date of the vegetation survey in survey_year_2018,YYYY-mm-dd,NA,NA,NA,date,NA,NA
-survey_date_2019,date of the vegetation survey in survey_year_2019,YYYY-mm-dd,NA,NA,NA,date,NA,NA
-survey_date_2020,date of the vegetation survey in survey_year_2020,YYYY-mm-dd,NA,NA,NA,date,NA,NA
-survey_date_2021,date of the vegetation survey in survey_year_2021,YYYY-mm-dd,NA,NA,NA,date,NA,NA
-botanist_2018,botanist of survey_year_2018,NA,botanist of surveyYear_2018,NA,NA,character,NA,NA
-botanist_2019,botanist of survey_year_2019,NA,botanist of surveyYear_2019,NA,NA,character,NA,NA
-botanist_2020,botanist of survey_year_2020,NA,botanist of surveyYear_2020,NA,NA,character,NA,NA
-botanist_2021,botanist of survey_year_2021,NA,botanist of surveyYear_2020,NA,NA,character,NA,NA
-vegetation_cover_2018,total vegetation coverage in survey_year_2018,NA,NA,percent,integer,numeric,NA,NA
-vegetation_cover_2019,total vegetation coverage in survey_year_2019,NA,NA,percent,integer,numeric,NA,NA
-vegetation_cover_2020,total vegetation coverage in survey_year_2020,NA,NA,percent,integer,numeric,NA,NA
-vegetation_cover_2021,total vegetation coverage in survey_year_2021,NA,NA,percent,integer,numeric,NA,NA
-biomass_2019,total fresh biomass in survey_year_2019 (accumulated value of three subsamples),NA,NA,gram,real,numeric,NA,NA
+plot_size,Size of the plot (2m x 2m),NA,NA,meterSquared,integer,numeric,NA,NA
+exposition,Exposition of the plots,NA,NA,NA,NA,factor,north/south,NA
+orientation,On which side is the plot on the dike?,NA,NA,NA,NA,factor,water/land,NA
+sand_ratio,Ratio of sand of the total substrate in weigth percentage,NA,NA,percent,real,factor,0/25/50,NA
+substrate_depth,"The depht of the built in substrate (holes were digged in the existing dike and filled with prepared substrate				)",NA,NA,centimeter,integer,factor,15/50,NA
+target_type,Target vegetation of the seedmixture,NA,NA,NA,NA,factor,hay_meadow/dry_grassland,NA
+seed_density,How dense were the seed mixtures seeded?,NA,NA,gramPerMeterSquared,integer,factor,4 vs. 8,NA
+survey_date_seeded,Date of seeding in 2018,YYYY-mm-dd,NA,NA,NA,date,NA,NA
+survey_date.2018,Date of the vegetation survey in survey_year_2018,YYYY-mm-dd,NA,NA,NA,date,NA,NA
+survey_date.2019,Date of the vegetation survey in survey_year_2019,YYYY-mm-dd,NA,NA,NA,date,NA,NA
+survey_date.2020,Date of the vegetation survey in survey_year_2020,YYYY-mm-dd,NA,NA,NA,date,NA,NA
+survey_date.2021,Date of the vegetation survey in survey_year_2021,YYYY-mm-dd,NA,NA,NA,date,NA,NA
+botanist.2018,Botanist of survey_year_2018,NA,botanist of surveyYear_2018,NA,NA,character,NA,NA
+botanist.2019,Botanist of survey_year_2019,NA,botanist of surveyYear_2019,NA,NA,character,NA,NA
+botanist.2020,Botanist of survey_year_2020,NA,botanist of surveyYear_2020,NA,NA,character,NA,NA
+botanist.2021,Botanist of survey_year_2021,NA,botanist of surveyYear_2020,NA,NA,character,NA,NA
+vegetation_cover.2018,Total vegetation coverage in survey_year_2018,NA,NA,percent,integer,numeric,NA,NA
+vegetation_cover.2019,Total vegetation coverage in survey_year_2019,NA,NA,percent,integer,numeric,NA,NA
+vegetation_cover.2020,Total vegetation coverage in survey_year_2020,NA,NA,percent,integer,numeric,NA,NA
+vegetation_cover.2021,Total vegetation coverage in survey_year_2021,NA,NA,percent,integer,numeric,NA,NA
+biomass.2019,Total fresh biomass in survey_year_2019 (accumulated value of three subsamples),NA,NA,gram,real,numeric,NA,NA
