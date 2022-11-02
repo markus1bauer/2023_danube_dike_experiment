@@ -259,9 +259,8 @@ rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 traits <- traits %>%
   mutate(
     target = if_else(
-      ((biotopeTarget == "yes" | ffh6510 == "yes" | ffh6210 == "yes") &
-         family != "Cyperaceae") |
-        seedAvailability == "no" | specialTarget == "yes",
+      (biotope_target == "yes" | ffh6510 == "yes" | ffh6210 == "yes" |
+        specialTarget == "yes",
     "yes",
     "no"
     )
@@ -519,7 +518,7 @@ rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 expertfile <- "EUNIS-ESy-2020-06-08.txt" ### file of 2021 is not working
 
-obs <- species_dikes %>%
+obs <- species %>%
   pivot_longer(cols = -name,
                names_to = "RELEVE_NR",
                values_to = "Cover_Perc") %>%
@@ -530,17 +529,13 @@ obs <- species_dikes %>%
     TaxonName = as.factor(TaxonName),
     TaxonName = fct_recode(
       TaxonName,
-      "Carex praecox" = "Carex praecox subsp. curvata",
       "Cerastium fontanum" = "Cerastium fontanum subsp. vulgare",
-      "Clinopodium acinos" = "Acinos arvensis",
-      "Ranunculus polyanthemos" = "Ranunculus serpens subsp. nemorosus",
-      "Silene latifolia" = "Silene latifolia subsp. alba",
-      "Vicia villosa" = "Vicia villosa subsp. varia"
+      "Silene latifolia" = "Silene latifolia subsp. alba"
     )
   ) %>%
   data.table::as.data.table()
 
-header <- sites_dikes %>%
+header <- sites %>%
   sf::st_as_sf(coords = c("longitude", "latitude"), crs = 31468) %>%
   sf::st_transform(4326) %>%
   rename(
