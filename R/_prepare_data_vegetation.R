@@ -464,7 +464,7 @@ rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
 
 ### a Species richness ---------------------------------------------------------
 
-speciesRichness <- species %>%
+species_richness <- species_experiment %>%
   left_join(traits, by = "name") %>%
   select(name, rlg, rlb, target, ffh6510, ffh6210,
          starts_with("L"), starts_with("W"), starts_with("C")) %>%
@@ -475,74 +475,74 @@ speciesRichness <- species %>%
   mutate(n = if_else(n > 0, 1, 0)) %>%
   group_by(id)
 
-### * total species richness ####
-speciesRichness_all <- speciesRichness %>%
-  summarise(speciesRichness = sum(n, na.rm = TRUE)) %>%
+#### Total species richness ###
+species_richness_all <- species_richness %>%
+  summarise(species_richness = sum(n, na.rm = TRUE)) %>%
   ungroup()
 
-### * red list Germany (species richness) ####
-speciesRichness_rlg <- speciesRichness %>%
+#### Red list Germany (species richness) ###
+species_richness_rlg <- species_richness %>%
   filter(rlg == "1" | rlg == "2" | rlg == "3" | rlg == "V") %>%
-  summarise(rlgRichness = sum(n, na.rm = TRUE)) %>%
+  summarise(rlg_richness = sum(n, na.rm = TRUE)) %>%
   ungroup()
 
-### * red list Bavaria (species richness) ####
-speciesRichness_rlb <- speciesRichness %>%
+#### Red list Bavaria (species richness) ###
+species_richness_rlb <- species_richness %>%
   filter(rlb == "1" | rlb == "2" | rlb == "3" | rlb == "V") %>%
-  summarise(rlbRichness = sum(n, na.rm = TRUE)) %>%
+  summarise(rlb_richness = sum(n, na.rm = TRUE)) %>%
   ungroup()
 
-### * target species (species richness) ####
-speciesRichness_target <- speciesRichness %>%
-  filter(target == "yes") %>%
-  summarise(targetRichness = sum(n, na.rm = TRUE)) %>%
+#### Target species (species richness) ###
+species_richness_target <- species_richness %>%
+  filter(target == "1") %>%
+  summarise(target_richness = sum(n, na.rm = TRUE)) %>%
   ungroup()
 
-### * seeded species (species richness) ####
-speciesRichness_seeded <- species %>%
-  select(-starts_with("C"), -contains("x0809")) %>%
+#### Seeded species (species richness) ###
+species_richness_seeded <- species_experiment %>%
+  select(-contains("x0809")) %>%
   # Make two columns out of column id:
   pivot_longer(-name, names_to = "id", values_to = "value",
                values_drop_na = TRUE) %>%
-  separate(id, c("plot", "surveyYear"), sep = "_(?!.*_)",
+  separate(id, c("plot", "survey_year"), sep = "_(?!.*_)",
            remove = FALSE, extra = "merge", fill = "warn", convert = FALSE) %>%
   # Summarise for plot:
-  pivot_wider(names_from = "surveyYear", values_from = "value") %>%
+  pivot_wider(names_from = "survey_year", values_from = "value") %>%
   group_by(plot, name) %>%
   summarise(across(where(is.double), ~sum(.x, na.rm = TRUE)),
             .groups = "keep") %>%
   ungroup() %>%
   # Combine with seedmixes:
-  pivot_longer(starts_with("20"), names_to = "surveyYear", values_to = "value",
-               names_transform = list(surveyYear = as.factor)) %>%
-  mutate(successCov = if_else(seeded > 0 & value > 0, 1, 0)) %>%
-  group_by(plot, surveyYear) %>%
-  summarise(seededRichness = sum(successCov, na.rm = TRUE),
+  pivot_longer(starts_with("20"), names_to = "survey_year", values_to = "value",
+               names_transform = list(survey_year = as.factor)) %>%
+  mutate(success_cover = if_else(seeded > 0 & value > 0, 1, 0)) %>%
+  group_by(plot, survey_year) %>%
+  summarise(seeded_richness = sum(success_cover, na.rm = TRUE),
             .groups = "keep") %>%
   ungroup() %>%
-  unite(id, plot, surveyYear, sep = "_")
+  unite(id, plot, survey_year, sep = "_")
 
-### * ffh6510 species (species richness) ####
-speciesRichness_ffh6510 <- speciesRichness %>%
-  filter(ffh6510 == "yes") %>%
-  summarise(ffh6510Richness = sum(n, na.rm = TRUE)) %>%
+### FFH6510 species (species richness) ###
+species_richness_ffh6510 <- species_richness %>%
+  filter(ffh6510 == "1") %>%
+  summarise(ffh6510_richness = sum(n, na.rm = TRUE)) %>%
   ungroup()
 
-### * ffh6210 species (species richness) ####
-speciesRichness_ffh6210 <- speciesRichness %>%
-  filter(ffh6210 == "yes") %>%
-  summarise(ffh6210Richness = sum(n, na.rm = TRUE)) %>%
+#### FFH6210 species (species richness) ###
+species_richness_ffh6210 <- species_richness %>%
+  filter(ffh6210 == "1") %>%
+  summarise(ffh6210_richness = sum(n, na.rm = TRUE)) %>%
   ungroup()
 
-### * implement in sites data set ####
-sites <- sites %>%
-  left_join(speciesRichness_all, by = "id") %>%
-  left_join(speciesRichness_rlg, by = "id") %>%
-  left_join(speciesRichness_rlb, by = "id") %>%
-  left_join(speciesRichness_target, by = "id") %>%
-  left_join(speciesRichness_seeded, by = "id") %>%
-  left_join(speciesRichness_ffh6510, by = "id") %>%
-  left_join(speciesRichness_ffh6210, by = "id") %>%
+#### Implement in sites data set ###
+sites_experiment <- sites_experiment %>%
+  left_join(species_richness_all, by = "id") %>%
+  left_join(species_richness_rlg, by = "id") %>%
+  left_join(species_richness_rlb, by = "id") %>%
+  left_join(species_richness_target, by = "id") %>%
+  left_join(species_richness_seeded, by = "id") %>%
+  left_join(species_richness_ffh6510, by = "id") %>%
+  left_join(species_richness_ffh6210, by = "id") %>%
 
   ### * Calculate Favourable Conservation Status (FCS) ####
   ### Helm et al. 2014 Divers Distrib
@@ -550,10 +550,10 @@ sites <- sites %>%
 
   mutate(
     fcs_target = log(
-      (targetRichness + 1) / (speciesRichness - targetRichness + 1)
+      (target_richness + 1) / (species_richness - target_richness + 1)
       ),
     fcs_seeded = log(
-      (seededRichness + 1 ) / (speciesRichness - seededRichness + 1)
+      (seeded_richness + 1 ) / (species_richness - seeded_richness + 1)
       ),
     fcs_target = round(fcs_target, 3),
     fcs_seeded = round(fcs_seeded, 3)
@@ -561,7 +561,7 @@ sites <- sites %>%
 
 ### b Species eveness and shannon ----------------------------------------------
 
-data <- species  %>%
+data <- species_experiment  %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("id") %>%
@@ -570,11 +570,13 @@ data <- species  %>%
   rownames_to_column(var = "id") %>%
   mutate(id = factor(id)) %>%
   rename(shannon = value)
-sites <- sites %>%
+sites_experiment <- sites_experiment %>%
   left_join(data, by = "id") %>%
-  mutate(eveness = shannon / log(speciesRichness))
+  mutate(eveness = shannon / log(species_richness))
 
-rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
+rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
+                          "species_experiment", "species_splot", "sites_bauer",
+                          "traits", "seedmixes")))
 
 
 
@@ -590,7 +592,7 @@ rm(list = setdiff(ls(), c("sites", "species", "traits", "seedmixes")))
 
 expertfile <- "EUNIS-ESy-2020-06-08.txt" ### file of 2021 is not working
 
-obs <- species %>%
+obs <- species_experiment %>%
   pivot_longer(cols = -name,
                names_to = "RELEVE_NR",
                values_to = "Cover_Perc") %>%
@@ -607,12 +609,11 @@ obs <- species %>%
   ) %>%
   data.table::as.data.table()
 
-header <- sites %>%
-  sf::st_as_sf(coords = c("longitude", "latitude"), crs = 31468) %>%
-  sf::st_transform(4326) %>%
+header <- sites_experiment %>%
+  sf::st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
   rename(
     RELEVE_NR = id
-  ) %>%
+  ) #%>%
   mutate(
     "Altitude (m)" = 313,
     Latitude = sf::st_coordinates(.)[, 2],
