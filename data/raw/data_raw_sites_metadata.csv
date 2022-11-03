@@ -3,6 +3,7 @@ plot,ID of the plot,NA,"L = land	 1 = block	 01 = plot number within this block	
 site,ID of the site,NA,NA,NA,NA,factor,1 = site in the east/2/3/4/5/6 = site in the west,NA
 latitude,Coordinates Y of site (EPSG: 4326 / WGS84),NA,NA,meter,real,numeric,NA,NA
 longitude,Coordinates X of site (EPSG: 4326 / WGS84),NA,NA,meter,real,numeric,NA,NA
+elevation,Meters above sea level,NA,NA,meter,integer,numeric,NA,NA
 plot_size,Size of the plot (2m x 2m),NA,NA,meterSquared,integer,numeric,NA,NA
 exposition,Exposition of the plots,NA,NA,NA,NA,factor,north/south,NA
 orientation,On which side is the plot on the dike?,NA,NA,NA,NA,factor,water/land,NA

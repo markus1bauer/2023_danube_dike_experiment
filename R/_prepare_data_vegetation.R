@@ -259,6 +259,12 @@ TNRS::TNRS(
 traits <- traits %>%
   semi_join(species_experiment, by = "name")
 
+rm(list = setdiff(ls(), c(
+  "sites_experiment", "sites_splot", "sites_bauer",
+  "species_experiment", "species_splot",
+                          "species_bauer",
+                          "traits", "seedmixes")))
+
 
 
 #______________________________________________________________________________
@@ -306,7 +312,6 @@ vis_miss(traits, cluster = FALSE, sort_miss = TRUE)
 rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
                           "species_experiment", "species_splot", "sites_bauer",
                           "traits", "seedmixes")))
-
 
 
 
@@ -408,7 +413,7 @@ cover_total_and_graminoid <- cover %>%
 
 #### Target specis' coverage ###
 cover_target <- cover %>%
-  filter(target == "yes") %>%
+  filter(target == "1") %>%
   summarise(target_cover = sum(n, na.rm = TRUE)) %>%
   mutate(target_cover = round(target_cover, 1)) %>%
   ungroup()
@@ -433,7 +438,7 @@ cover_seeded <- species_experiment %>%
                names_transform = list(survey_year = as.factor)) %>%
   mutate(success = if_else(seeded > 0 & value > 0, value, 0)) %>%
   group_by(plot, survey_year) %>%
-  summarise(seededCov = sum(success, na.rm = TRUE), .groups = "keep") %>%
+  summarise(seeded_cover = sum(success, na.rm = TRUE), .groups = "keep") %>%
   ungroup() %>%
   unite(id, plot, survey_year, sep = "_")
 
@@ -613,7 +618,7 @@ header <- sites_experiment %>%
   sf::st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
   rename(
     RELEVE_NR = id
-  ) #%>%
+  ) %>%
   mutate(
     "Altitude (m)" = 313,
     Latitude = sf::st_coordinates(.)[, 2],
@@ -622,7 +627,7 @@ header <- sites_experiment %>%
     Coast_EEA = "N_COAST",
     Dunes_Bohn = "N_DUNES",
     Ecoreg = 686,
-    dataset = "Danube_dikes"
+    dataset = "Danube_experiment"
   ) %>%
   select(RELEVE_NR, "Altitude (m)", Latitude, Longitude, Country,
          Coast_EEA, Dunes_Bohn, Ecoreg, dataset) %>%
@@ -658,26 +663,49 @@ source(here("R", "esy", "code",
             "step3and5_extract-and-solve-membership-conditions.R"))
 
 table(result.classification)
-eval.EUNIS(which(result.classification == "V39")[1], "V39")
+eval.EUNIS(which(result.classification == "V12")[4], "V12")
 
-sites_dikes <- sites_dikes %>%
+sites_experiment <- sites_experiment %>%
   mutate(
     esy = result.classification,
-    esy = if_else(id == "X05_m_2021", "R1A", esy),
-    esy = if_else(id == "X62_m_2019", "R", esy),
-    esy = if_else(id == "X67_o_2021", "R", esy)
-  )
-table(sites_dikes$esy)
-rm(list = setdiff(ls(), c("sites_dikes", "sites_splot",
-                          "species_dikes", "species_splot",
-                          "traits", "pca_soil", "pca_construction_year",
-                          "pca_survey_year", "result.classification")))
+    esy = if_else(id == "W1_18_2021", "R", esy),
+    esy = if_else(id == "L6_01_2018", "V", esy),
+    esy = if_else(id == "L6_04_2018", "V", esy),
+    esy = if_else(id == "W1_18_2019", "R", esy),
+    esy = if_else(id == "L6_13_2021", "V", esy),
+    esy = if_else(id == "W3_06_2019", "R", esy),
+    esy = if_else(id == "W5_06_2019", "R", esy),
+    esy = if_else(id == "W5_24_2019", "R", esy),
+    esy = if_else(id == "W6_12_2019", "R", esy),
+    esy = if_else(id == "L2_14_seeded", "R", esy),
+    esy = if_else(id == "W2_11_2019", "R", esy),
+    esy = if_else(id == "W3_07_seeded", "R", esy),
+    esy = if_else(id == "W3_24_2019", "R", esy),
+    esy = if_else(id == "W4_17_2019", "R", esy),
+    esy = if_else(id == "L2_07_2018", "V", esy),
+    esy = if_else(id == "L2_12_2019", "V", esy),
+    esy = if_else(id == "L2_12_2020", "V", esy),
+    esy = if_else(id == "L3_12_2018", "V", esy),
+    esy = if_else(id == "L4_03_2018", "V", esy),
+    esy = if_else(id == "L5_06_2018", "V", esy),
+    esy = if_else(id == "L5_09_2019", "V", esy),
+    esy = if_else(id == "L6_18_2018", "R", esy),
+    esy = if_else(id == "W1_21_2018", "V", esy),
+    esy = if_else(id == "W3_03_2018", "V", esy),
+    esy = if_else(id == "W4_11_2018", "V", esy),
+    esy = if_else(id == "W4_24_2018", "V", esy)
+    )
+table(sites_experiment$esy)
+
+rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
+                          "species_experiment", "species_splot", "sites_bauer",
+                          "traits", "seedmixes", "result.classification")))
+
 
 ### b sPlotOpen ---------------------------------------------------------------
 
 ### Sabatini et al. (2021) Global Ecol Biogeogr
 ### https://doi.org/10.1111/geb.13346
-
 
 data_sites <- sites_splot %>%
   filter(
@@ -687,8 +715,8 @@ data_sites <- sites_splot %>%
     (ESY == "E22" |
        # Dry grassland: EUNIS2007 code E1.2a
        ESY == "E12a") &
-      Releve_area >= 10 &
-      Releve_area <= 40 &
+      Releve_area >= 1 &
+      Releve_area <= 25 &
       Longitude > 10.89845 & # West: Augsburg
       Longitude < 13.46434 & # East: Passau
       Latitude > 	47.85298 & # South: Rosenheim
@@ -697,7 +725,7 @@ data_sites <- sites_splot %>%
   ) %>%
   rename_with(tolower) %>%
   rename(id = plotobservationid, survey_year = date_of_recording,
-         plotSize = releve_area, reference = country) %>%
+         plot_size = releve_area, reference = country) %>%
   mutate(
     id = paste0("X", id),
     reference = str_replace(reference, "Germany", "reference"),
@@ -708,7 +736,7 @@ data_sites <- sites_splot %>%
       "other"
     )
   ) %>%
-  select(id, givd_id, longitude, latitude, elevation, plotSize, survey_year,
+  select(id, givd_id, longitude, latitude, elevation, plot_size, survey_year,
          reference, esy)
 sites_splot <- data_sites
 
@@ -735,12 +763,40 @@ data_species <- species_splot %>%
   ) %>%
   group_by(name) %>%
   summarise(across(everything(), ~ sum(.x, na.rm = TRUE)))
-species_splot <- data_species
 
 ### Check species name congruency ###
-data <- anti_join(species_splot, traits, by = "name") %>%
+data <- data_species %>%
+  anti_join(traits, by = "name") %>%
   select(name) %>%
   print(n = 50)
+
+species_splot <- data_species
+
+
+### c Our own regional dike surveys -------------------------------------------
+
+### Bauer et al. (2022) Zenodo:
+### https://doi.org/10.5281/zenodo.6334100
+
+data_sites <- sites_bauer %>%
+  mutate(
+    reference = "reference",
+    plot_size = 25
+    ) %>%
+  select(id, longitude, latitude, plot_size, survey_year, reference,
+         esy, exposition, orientation, plot_age, species_richness)
+sites_splot <- data_sites
+
+data_species <- species_bauer
+
+### Check species name congruency ###
+data <- data_species %>%
+  anti_join(traits, by = "name") %>%
+  select(name) %>%
+  print(n = 50)
+
+species_splot <- data_species
+
 
 rm(list = setdiff(ls(), c("sites_dikes", "sites_splot",
                           "species_dikes", "species_splot",
