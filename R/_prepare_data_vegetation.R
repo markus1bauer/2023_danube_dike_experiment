@@ -182,31 +182,7 @@ specieslist <- species_experiment %>%
 
 
 #______________________________________________________________________________
-## 3 Seedmixes #################################################################
-
-
-seedmixes <- data.table::fread("data_raw_species_20211112.csv",
-                             sep = ",",
-                             dec = ".",
-                             skip = 0,
-                             header = TRUE,
-                             na.strings = c("", "NA", "na"),
-                             colClasses = list(
-                               character = "name"
-                             )) %>%
-  arrange(name) %>%
-  select(name, ends_with("seeded")) %>%
-  filter(name %in% species_experiment$name) %>%
-  select(name, sort(tidyselect::peek_vars())) %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
-  pivot_longer(-name, names_to = "id", values_to = "seeded") %>%
-  separate(id, c("plot"), sep = "_(?!.*_)",
-           remove = TRUE, extra = "drop", fill = "warn", convert = FALSE)
-
- 
-
-#______________________________________________________________________________
-## 4 Traits ####################################################################
+## 3 Traits ####################################################################
 
 
 traits <- read_csv("data_raw_traits.csv", col_names = TRUE,
@@ -261,14 +237,14 @@ traits <- traits %>%
 
 rm(list = setdiff(ls(), c(
   "sites_experiment", "sites_splot", "sites_bauer",
-  "species_experiment", "species_splot",
-                          "species_bauer",
-                          "traits", "seedmixes")))
+  "species_experiment", "species_splot", "species_bauer",
+  "traits"
+  )))
 
 
 
 #______________________________________________________________________________
-## 5 Check data frames #########################################################
+## 4 Check data frames #########################################################
 
 
 ### Check typos ###
@@ -309,9 +285,11 @@ vis_miss(sites_experiment, cluster = FALSE)
 miss_var_summary(traits, order = TRUE)
 vis_miss(traits, cluster = FALSE, sort_miss = TRUE)
 
-rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
-                          "species_experiment", "species_splot", "sites_bauer",
-                          "traits", "seedmixes")))
+rm(list = setdiff(ls(), c(
+  "sites_experiment", "sites_splot", "sites_bauer",
+  "species_experiment", "species_splot", "species_bauer",
+  "traits"
+)))
 
 
 
@@ -324,6 +302,8 @@ rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
 #______________________________________________________________________________
 ## 1 Create variables #########################################################
 
+
+### a Simple variables --------------------------------------------------------
 
 traits <- traits %>%
   mutate(
@@ -345,7 +325,9 @@ sites <- sites_experiment %>%
          block = factor(block)
          )
 
-### Establishment ###
+
+### b Establishment of species -------------------------------------------------
+
 data <- species_experiment %>%
   pivot_longer(cols = -name, names_to = "id", values_to = "n") %>%
   left_join(sites_experiment, by = "id") %>%
@@ -377,6 +359,20 @@ traits %>%
 
 traits <- traits %>%
   left_join(data, by = "name")
+
+
+### c Table of seedmixes -------------------------------------------------------
+
+data <- species_experiment %>%
+  select(name, ends_with("seeded")) %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(-name, names_to = "id", values_to = "seeded") %>%
+  separate(id, c("plot"), sep = "_(?!.*_)",
+           remove = TRUE, extra = "drop", fill = "warn", convert = FALSE) %>%
+  filter(seeded > 0) %>%
+  select(plot, name, seeded) %>%
+  arrange(plot, name)
+write_csv(data, here("outputs", "tables", "table_a3_seedmixes.csv"))
 
 
 
@@ -457,9 +453,11 @@ sites_experiment <- sites_experiment %>%
     seeded_cover_ratio = round(seeded_cover_ratio, 3)
     )
 
-rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
-                          "species_experiment", "species_splot", "sites_bauer",
-                          "traits", "seedmixes")))
+rm(list = setdiff(ls(), c(
+  "sites_experiment", "sites_splot", "sites_bauer",
+  "species_experiment", "species_splot", "species_bauer",
+  "traits"
+)))
 
 
 
@@ -564,7 +562,7 @@ sites_experiment <- sites_experiment %>%
     fcs_seeded = round(fcs_seeded, 3)
     )
 
-### b Species eveness and shannon ----------------------------------------------
+### b Species evenness and shannon ----------------------------------------------
 
 data <- species_experiment  %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
@@ -577,11 +575,17 @@ data <- species_experiment  %>%
   rename(shannon = value)
 sites_experiment <- sites_experiment %>%
   left_join(data, by = "id") %>%
-  mutate(eveness = shannon / log(species_richness))
+  mutate(
+    evenness = shannon / log(species_richness),
+    shannon = round(shannon, digits = 3),
+    evenness = round(evenness, digits = 3)
+    )
 
-rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
-                          "species_experiment", "species_splot", "sites_bauer",
-                          "traits", "seedmixes")))
+rm(list = setdiff(ls(), c(
+  "sites_experiment", "sites_splot", "sites_bauer",
+  "species_experiment", "species_splot", "species_bauer",
+  "traits"
+)))
 
 
 
@@ -697,9 +701,11 @@ sites_experiment <- sites_experiment %>%
     )
 table(sites_experiment$esy)
 
-rm(list = setdiff(ls(), c("sites_experiment", "sites_splot", "sites_bauer",
-                          "species_experiment", "species_splot", "sites_bauer",
-                          "traits", "seedmixes", "result.classification")))
+rm(list = setdiff(ls(), c(
+  "sites_experiment", "sites_splot", "sites_bauer",
+  "species_experiment", "species_splot", "species_bauer",
+  "traits", "result.classification"
+)))
 
 
 ### b sPlotOpen ---------------------------------------------------------------
@@ -727,7 +733,7 @@ data_sites <- sites_splot %>%
   rename(id = plotobservationid, survey_year = date_of_recording,
          plot_size = releve_area, reference = country) %>%
   mutate(
-    id = paste0("X", id),
+    id = paste0("S", id),
     reference = str_replace(reference, "Germany", "reference"),
     survey_year = year(survey_year),
     givd_database = if_else(
@@ -743,7 +749,7 @@ sites_splot <- data_sites
 data_species <- species_splot %>%
   rename(id = PlotObservationID, name = Species,
          abundance = Original_abundance) %>%
-  mutate(id = paste0("X", id)) %>%
+  mutate(id = paste0("S", id)) %>%
   semi_join(data_sites, by = "id") %>%
   select(id, name, abundance) %>%
   pivot_wider(names_from = "id",
@@ -785,7 +791,7 @@ data_sites <- sites_bauer %>%
     ) %>%
   select(id, longitude, latitude, plot_size, survey_year, reference,
          esy, exposition, orientation, plot_age, species_richness)
-sites_splot <- data_sites
+sites_bauer <- data_sites
 
 data_species <- species_bauer
 
@@ -795,13 +801,14 @@ data <- data_species %>%
   select(name) %>%
   print(n = 50)
 
-species_splot <- data_species
+species_bauer <- data_species
 
 
-rm(list = setdiff(ls(), c("sites_dikes", "sites_splot",
-                          "species_dikes", "species_splot",
-                          "traits", "pca_soil", "pca_construction_year",
-                          "pca_survey_year")))
+rm(list = setdiff(ls(), c(
+  "sites_experiment", "sites_splot", "sites_bauer",
+  "species_experiment", "species_splot", "species_bauer",
+  "traits", "results.classification"
+)))
 
 
 
@@ -1594,6 +1601,38 @@ rm(list = setdiff(ls(), c(
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-write_csv(sites, here("data", "processed", "data_processed_sites.csv"))
-write_csv(traits, here("data", "processed", "data_processed_traits.csv"))
-write_csv(species, here("data", "processed", "data_processed_species.csv"))
+
+#### Data of experiment ###
+write_csv(
+  sites_experiment,
+  here("data", "processed", "data_processed_sites.csv")
+  )
+write_csv(
+  species_experiment,
+  here("data", "processed", "data_processed_species.csv")
+  )
+
+write_csv(
+  traits,
+  here("data", "processed", "data_processed_traits.csv")
+  )
+
+#### Data of sPlotOpen ###
+write_csv(
+  sites_splot,
+  here("data", "processed", "data_processed_sites_splot.csv")
+  )
+write_csv(
+  species_splot,
+  here("data", "processed", "data_processed_species_splot.csv")
+  )
+
+#### Data of Bauer et al. (2022) Zenodo ###
+write_csv(
+  sites_bauer,
+  here("data", "processed", "data_processed_sites_bauer.csv")
+  )
+write_csv(
+  species_bauer,
+  here("data", "processed", "data_processed_species_bauer.csv")
+  )

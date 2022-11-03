@@ -14,43 +14,13 @@
 ### Packages ###
 library(here)
 library(tidyverse)
+library(vegan)
 
 ### Start ###
-#rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
+rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 setwd(here("data", "processed"))
 
-### Load data ###
-sites <- read_csv("data_processed_sites.csv",
-                  col_names = TRUE,
-                  na = c("na", "NA", ""), col_types =
-                    cols(
-                      .default = "?",
-                      id = "f",
-                      plot = "f",
-                      block = "f",
-                      exposition = col_factor(levels = c("north", "south")),
-                      sandRatio = "f",
-                      substrateDepth = "f",
-                      targetType = "c",
-                      seedDensity = "f"
-                    )) %>%
-  select(
-    id, plot, block, exposition, sandRatio, substrateDepth, targetType,
-    seedDensity, surveyYear, NMDS1, NMDS2
-  ) %>%
-  filter(targetType != "non_ffh") %>%
-  mutate(
-    targetType = if_else(targetType == "mixed", "hay_meadow", targetType),
-    surveyYear_fac = as.character(surveyYear),
-    surveyYear_fac = if_else(block == "C", "reference", surveyYear_fac),
-    surveyYear_fac = factor(surveyYear_fac)
-  )
-
-
-### * Model ####
-
-
-### * Functions ####
+### Functions ###
 theme_mb <- function() {
   theme(
     panel.background = element_rect(fill = "white"),
@@ -73,6 +43,43 @@ veganCovEllipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
   Circle <- cbind(cos(theta), sin(theta))
   t(center + scale * t(Circle %*% chol(cov)))
 }
+
+#### * Load sites data ####
+
+sites_experiment <- read_csv("data_processed_sites.csv",
+                             col_names = TRUE, na = c("na", "NA", ""),
+                             col_types = cols(.default = "?"))
+sites_splot <- read_csv("data_processed_sites_splot.csv",
+                             col_names = TRUE, na = c("na", "NA", ""),
+                             col_types = cols(.default = "?"))
+sites_bauer <- read_csv("data_processed_sites_bauer.csv",
+                             col_names = TRUE, na = c("na", "NA", ""),
+                             col_types = cols(.default = "?"))
+sites <- sites_experiment %>%
+  bind_rows(sites_splot, sites_bauer)
+
+#### * Load species data ####
+
+species_experiment <- read_csv("data_processed_species.csv",
+                          col_names = TRUE, na = c("na", "NA", ""),
+                          col_types = cols(.default = "?"))
+species_splot <- read_csv("data_processed_species_splot.csv",
+                          col_names = TRUE, na = c("na", "NA", ""),
+                          col_types = cols(.default = "?"))
+species_bauer <- read_csv("data_processed_species_bauer.csv",
+                        col_names = TRUE, na = c("na", "NA", ""),
+                        col_types = cols(.default = "?"))
+  
+
+
+#### * Model ####
+
+set.seed(123)
+(ordi <- metaMDS(species,
+                 dist = "bray", binary = FALSE, autotransform = TRUE,
+                 try = 99, previous.best = TRUE, na.rm = TRUE))
+stressplot(ordi) # stress: 0.207; Non-metric fit R² =.957
+
 
 
 
