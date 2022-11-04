@@ -49,7 +49,14 @@ vegan_cov_ellipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
 sites_experiment <- read_csv("data_processed_sites.csv",
                              col_names = TRUE, na = c("na", "NA", ""),
                              col_types = cols(.default = "?")) %>%
-  mutate(reference = survey_year)
+  mutate(
+    reference = survey_year,
+    target_type = if_else(
+      target_type == "dry_grassland", "Dry grassland", if_else(
+        target_type == "hay_meadow", "Hay meadow", "other"
+        )
+      )
+    )
 sites_splot <- read_csv("data_processed_sites_splot.csv",
                              col_names = TRUE, na = c("na", "NA", ""),
                              col_types = cols(
@@ -58,17 +65,25 @@ sites_splot <- read_csv("data_processed_sites_splot.csv",
                                )) %>%
   mutate(
     reference = if_else(
-      esy == "R12", "Dry grassland", if_else(
-        esy == "R22", "Hay meadow", "other"
+      esy == "E12a", "Dry grassland", if_else(
+        esy == "E22", "Hay meadow", "other"
         )
+      ),
+    target_type = if_else(
+      esy == "E12a", "Dry grassland", if_else(
+        esy == "E22", "Hay meadow", "other"
       )
+    ),
+    exposition = "other"
     )
+
 sites_bauer <- read_csv("data_processed_sites_bauer.csv",
                              col_names = TRUE, na = c("na", "NA", ""),
                              col_types = cols(
                                .default = "?",
                                survey_year = "c"
                                )) %>%
+  filter(exposition == "south" | exposition == "north") %>%
   mutate(
     reference = if_else(
       esy == "R12", "Dry grassland", if_else(
@@ -78,8 +93,13 @@ sites_bauer <- read_csv("data_processed_sites_bauer.csv",
           )
         )
       )
+    ),
+    target_type = if_else(
+      esy == "R12", "Dry grassland", if_else(
+        esy == "R22", "Hay meadow", "other"
+        )
+      )
     )
-  )
 sites <- sites_experiment %>%
   bind_rows(sites_splot, sites_bauer) %>%
   select(
@@ -132,7 +152,7 @@ rm(list = setdiff(ls(), c(
 
 #### * Model ####
 
-set.seed(10)
+set.seed(12)
 (ordi <- metaMDS(species, binary = TRUE,
                  try = 50, previous.best = TRUE, na.rm = TRUE))
 #Wisonsin sqrt transformation, stress type 1
@@ -192,12 +212,6 @@ for (group in levels(data_nmds$group_type)) {
      data = data_nmds,
      cex = 2
    ) +
-   geom_path(
-     aes(x = NMDS1, y = NMDS2, linetype = group_type, color = group_type),
-     data = data_ellipses %>% filter(group_type != "no"),
-     size = 1,
-     show.legend = FALSE
-   ) +
    facet_grid(
      exposition ~ target_type,
      labeller = as_labeller(
@@ -208,6 +222,12 @@ for (group in levels(data_nmds$group_type)) {
    coord_fixed() +
    theme_mb())
 
+   geom_path(
+     aes(x = NMDS1, y = NMDS2, linetype = group_type, color = group_type),
+     data = data_ellipses %>% filter(group_type != "no"),
+     size = 1,
+     show.legend = FALSE
+   ) +
    scale_color_manual(
      values = c(
        "orange1", "firebrick2", "deeppink3", "mediumpurple4",
