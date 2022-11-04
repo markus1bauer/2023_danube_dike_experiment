@@ -38,7 +38,7 @@ theme_mb <- function() {
   )
 }
 
-veganCovEllipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
+vegan_cov_ellipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
   theta <- (0:npoints) * 2 * pi / npoints
   Circle <- cbind(cos(theta), sin(theta))
   t(center + scale * t(Circle %*% chol(cov)))
@@ -48,15 +48,45 @@ veganCovEllipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
 
 sites_experiment <- read_csv("data_processed_sites.csv",
                              col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(.default = "?"))
+                             col_types = cols(.default = "?")) %>%
+  mutate(reference = survey_year)
 sites_splot <- read_csv("data_processed_sites_splot.csv",
                              col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(.default = "?"))
+                             col_types = cols(
+                               .default = "?",
+                               survey_year = "c"
+                               )) %>%
+  mutuate(
+    reference = if_else(
+      esy == "R12", "Dry grassland", if_else(
+        esy == "R22", "Hay meadow", "other"
+        )
+      )
+    )
 sites_bauer <- read_csv("data_processed_sites_bauer.csv",
                              col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(.default = "?"))
+                             col_types = cols(
+                               .default = "?",
+                               survey_year = "c"
+                               )) %>%
+  mutuate(
+    reference = if_else(
+      esy == "R12", "Dry grassland", if_else(
+        esy == "R22", "Hay meadow", if_else(
+          esy == "R", "Grassland", if_else(
+            esy == "?", "no", "Fail"
+          )
+        )
+      )
+    )
+  )
 sites <- sites_experiment %>%
-  bind_rows(sites_splot, sites_bauer)
+  bind_rows(sites_splot, sites_bauer) %>%
+  select(
+    id, plot, esy, reference,
+    exposition, sand_ratio, soil_depth, target_type, seed_density,
+    survey_year, longitude, latitude, elevation, plot_size
+    )
 
 #### * Load species data ####
 
@@ -69,17 +99,38 @@ species_splot <- read_csv("data_processed_species_splot.csv",
 species_bauer <- read_csv("data_processed_species_bauer.csv",
                         col_names = TRUE, na = c("na", "NA", ""),
                         col_types = cols(.default = "?"))
-  
 
+### Exclude rare species (< 0.5% accumulated cover in all plots)
+data <- species_experiment %>%
+  full_join(species_splot, by = "name") %>%
+  full_join(species_bauer, by = "name") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
+  group_by(name) %>%
+  summarise(total_cover_species = sum(value)) %>%
+  filter(total_cover_species < 0.5)
+
+species <- species_experiment %>%
+  full_join(species_splot, by = "name") %>%
+  full_join(species_bauer, by = "name") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
+  filter(!(name %in% data$name)) %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  arrange(id) %>%
+  semi_join(sites, by = "id") %>%
+  column_to_rownames("id")
+  
+rm(list = setdiff(ls(), c(
+  "sites", "species", "theme_mb", "vegan_cov_ellipse"
+  )))
 
 #### * Model ####
 
 set.seed(123)
-(ordi <- metaMDS(species,
-                 dist = "bray", binary = FALSE, autotransform = TRUE,
-                 try = 99, previous.best = TRUE, na.rm = TRUE))
-stressplot(ordi) # stress: 0.207; Non-metric fit R² =.957
-
+(ordi <- metaMDS(species, binary = TRUE,
+                 try = 50, previous.best = TRUE, na.rm = TRUE))
+stressplot(ordi) # stress: 0.205; Non-metric fit R² =.958
 
 
 
@@ -88,77 +139,97 @@ stressplot(ordi) # stress: 0.207; Non-metric fit R² =.957
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+### * Preparation ####
+
+data_envfit <- data_envfit %>%
+  scores(display = "vectors") %>%
+  as_tibble(rownames = NA) %>%
+  rownames_to_column(var = "variable") %>%
+  mutate(
+    variable = as_factor(variable),
+    variable = fct_recode(
+      variable,
+      "Graminoid cover" = "graminoid_cover_ratio",
+      "Ruderal cover" = "ruderal_cover",
+      "Specialist richness" = "ellenberg_richness"
+    )
+  )
+
 ellipses <- tibble()
 
-data1 <-  sites %>%
-  mutate(group_type = str_c(surveyYear_fac, exposition, targetType,
-                            sep = "."),
-         group_type = factor(group_type))
+data_nmds <-  sites %>%
+  select(id, reference, exposition, target_type) %>% # modify group
+  mutate(group_type = as_factor(reference), # modify group
+         NMDS1 = ordi$points[, 1],
+         NMDS2 = ordi$points[, 2]) %>%
+  group_by(group_type) %>%
+  mutate(mean1 = mean(NMDS1),
+         mean2 = mean(NMDS2))
 
-for(group in levels(data1$group_type)) {
+for (group in levels(data_nmds$group_type)) {
   
-  data2 <- data1 %>%
+  ellipses_calc <- data_nmds %>%
     filter(group_type == group) %>%
-      with(
-        cov.wt(
+    with(
+      cov.wt(
         cbind(NMDS1, NMDS2),
         wt = rep(1 / length(NMDS1), length(NMDS1))
-        )
       )
+    )
   
-  ellipses <- 
-    veganCovEllipse(cov = data2$cov, center = data2$center) %>%
+  ellipses <-
+    vegan_cov_ellipse(
+      cov = ellipses_calc$cov, center = ellipses_calc$center
+    ) %>%
     as_tibble() %>%
-    bind_cols(group = group) %>%
+    bind_cols(group_type = group) %>%
     bind_rows(ellipses)
   
-  data <- ellipses %>%
-    separate(
-      group,
-      sep = "\\.",
-      c("surveyYear_fac", "exposition", "targetType")
-      )
+  data_ellipses <- ellipses
   
 }
 
+#### * Plot ####
 
 (graph_a <- ggplot() +
-    geom_point(
-      aes(y = NMDS2, x = NMDS1, color = surveyYear_fac,
-          shape = surveyYear_fac, alpha = surveyYear_fac),
-      data = sites,
-      cex = 2
-    ) +
-    geom_path(
-      aes(x = NMDS1, y = NMDS2, color = surveyYear_fac),
-      data = data,
-      size = 1
-    ) +
-    facet_grid(
-      exposition ~ targetType,
-      labeller = as_labeller(
-        c(south = "South", north = "North",
-          "dry_grassland" = "Dry grassland", "hay_meadow" = "Hay meadow")
-      )
-    ) +
-    coord_fixed() +
-    scale_color_manual(
-      values = c(
-        "orange1", "firebrick2", "deeppink3", "mediumpurple4",
-        "royalblue", "black"
-      )
-    ) +
-    scale_shape_manual(
-      values = c(
-        "circle open", "circle open", "circle open", "circle open",
-        "square", "square open"
-      )
-    ) +
-    scale_alpha_manual(values = c(.3, .3, .3, .3, .7, .6)) +
-    labs(
-      x = "NMDS1", y = "NMDS2", fill = "", color = "", shape = "", alpha = ""
-    ) +
-    theme_mb())
+   geom_point(
+     aes(y = NMDS2, x = NMDS1, color = group_type, shape = group_type),
+     data = data_nmds,
+     cex = 2
+   ) +
+   geom_path(
+     aes(x = NMDS1, y = NMDS2, linetype = group_type, color = group_type),
+     data = data_ellipses %>% filter(group_type != "no"),
+     size = 1,
+     show.legend = FALSE
+   ) +
+   facet_grid(
+     exposition ~ targetType,
+     labeller = as_labeller(
+       c(south = "South", north = "North",
+         "dry_grassland" = "Dry grassland", "hay_meadow" = "Hay meadow")
+     )
+   ) +
+   coord_fixed() +
+   theme_mb())
+
+   scale_color_manual(
+     values = c(
+       "orange1", "firebrick2", "deeppink3", "mediumpurple4",
+       "royalblue", "black"
+     )
+   ) +
+   scale_shape_manual(
+     values = c(
+       "circle open", "circle open", "circle open", "circle open",
+       "square", "square open"
+     )
+   ) +
+   scale_alpha_manual(values = c(.3, .3, .3, .3, .7, .6)) +
+   labs(
+     x = "NMDS1", y = "NMDS2", fill = "", color = "", shape = "", alpha = ""
+   ) +
+   theme_mb())
 
 
 ### Save ###

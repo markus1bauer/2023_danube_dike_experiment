@@ -740,7 +740,9 @@ data_sites <- sites_splot %>%
       givd_id == "EU-DE-014",
       "Jandt & Bruelheide (2012) https://doi.org/10.7809/b-e.00146",
       "other"
-    )
+      ),
+    longitude = longitude * 10^5,
+    latitude = latitude * 10^5
   ) %>%
   select(id, givd_id, longitude, latitude, elevation, plot_size, survey_year,
          reference, esy)
