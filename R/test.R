@@ -51,78 +51,46 @@ sites_experiment <- read_csv("data_processed_sites.csv",
                              col_types = cols(.default = "?")) %>%
   mutate(reference = survey_year)
 sites_splot <- read_csv("data_processed_sites_splot.csv",
-                             col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(
-                               .default = "?",
-                               survey_year = "c"
-                               )) %>%
+                        col_names = TRUE, na = c("na", "NA", ""),
+                        col_types = cols(
+                          .default = "?",
+                          survey_year = "c"
+                        )) %>%
   mutate(
     reference = if_else(
       esy == "E12a", "Reference", if_else(
         esy == "E22", "Reference", "other"
-        )
-      ),
+      )
+    ),
     target_type = if_else(
       esy == "E12a", "dry_grassland", if_else(
         esy == "E22", "hay_meadow", "other"
       )
     ),
     exposition = "other"
-    )
-sites_bauer <- read_csv("data_processed_sites_bauer.csv",
-                             col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(
-                               .default = "?",
-                               survey_year = "c"
-                               )) %>%
-  filter(exposition == "south" | exposition == "north") %>%
-  mutate(
-    reference = if_else(
-      esy == "R1A", "Reference", if_else(
-        esy == "R22", "Reference", if_else(
-          esy == "R", "Grassland", if_else(
-            esy == "?", "no", if_else(
-              esy == "+", "no", if_else(
-                esy == "R21", "Grassland", if_else(
-                  esy == "V38", "Fail", "other"
-                )
-              )
-            )
-          )
-        )
-      )
-    ),
-    target_type = if_else(
-      esy == "R1A", "dry_grassland", if_else(
-        esy == "R22", "hay_meadow", "other"
-        )
-      )
-    )
+  )
+
 sites <- sites_experiment %>%
-  bind_rows(sites_splot, sites_bauer) %>%
+  bind_rows(sites_splot) %>%
   select(
     id, esy, reference,
     exposition, sand_ratio, substrate_depth, target_type, seed_density,
     survey_year, longitude, latitude, elevation, plot_size
-    ) %>%
+  ) %>%
   arrange(id)
 
 #### * Load species data ####
 
 species_experiment <- read_csv("data_processed_species.csv",
-                          col_names = TRUE, na = c("na", "NA", ""),
-                          col_types = cols(.default = "?"))
+                               col_names = TRUE, na = c("na", "NA", ""),
+                               col_types = cols(.default = "?"))
 species_splot <- read_csv("data_processed_species_splot.csv",
                           col_names = TRUE, na = c("na", "NA", ""),
                           col_types = cols(.default = "?"))
-species_bauer <- read_csv("data_processed_species_bauer.csv",
-                        col_names = TRUE, na = c("na", "NA", ""),
-                        col_types = cols(.default = "?"))
 
 ### Exclude rare species (< 0.5% accumulated cover in all plots)
 data <- species_experiment %>%
   full_join(species_splot, by = "name") %>%
-  full_join(species_bauer, by = "name") %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
   pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
   group_by(name) %>%
@@ -131,7 +99,6 @@ data <- species_experiment %>%
 
 species <- species_experiment %>%
   full_join(species_splot, by = "name") %>%
-  full_join(species_bauer, by = "name") %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
   pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
   filter(!(name %in% data$name)) %>% # use 'data' to filter
@@ -147,11 +114,11 @@ species <- species %>%
 
 rm(list = setdiff(ls(), c(
   "sites", "species", "theme_mb", "vegan_cov_ellipse", "ordi"
-  )))
+)))
 
 #### * Model ####
 
-set.seed(12)
+set.seed(123)
 (ordi <- metaMDS(species, binary = TRUE,
                  try = 50, previous.best = TRUE, na.rm = TRUE))
 #Wisonsin sqrt transformation, stress type 1
@@ -170,42 +137,20 @@ ellipses <- tibble()
 
 data_nmds <- sites %>%
   mutate(NMDS1 = ordi$points[, 1], NMDS2 = ordi$points[, 2])
-  
-data <- data_nmds %>%
-  filter(exposition == "other") %>%
-  mutate(exposition = "north")
-data <- data %>%
-  mutate(exposition = "south") %>%
-  bind_rows(data)
-data_nmds <- data_nmds %>%
-  filter(!(exposition == "other")) %>%
-  bind_rows(data)
-data <- data_nmds %>%
-  filter(target_type == "other") %>%
-  mutate(target_type = "hay_meadow")
-data <- data %>%
-  mutate(target_type = "dry_grassland") %>%
-  bind_rows(data)
-data_nmds <- data_nmds %>%
-  filter(!(target_type == "other")) %>%
-  bind_rows(data)
 
 data_nmds <- data_nmds %>%
   select(id, NMDS1, NMDS2, reference, exposition, target_type) %>% # modify group
   mutate(
     group_type = str_c(
       reference, exposition, target_type, sep = "." # modify group
-      )
-    ) %>%
+    )
+  ) %>%
   group_by(group_type) %>%
   mutate(mean1 = mean(NMDS1),
          mean2 = mean(NMDS2)) %>%
   filter(reference != "Grassland" & reference != "no" & reference != "Fail") %>%
   mutate(group_type = factor(group_type))
 
-table(data_nmds$reference)
-table(data_nmds$exposition)
-table(data_nmds$group_type)
 
 for (group in levels(data_nmds$group_type)) {
   
@@ -234,9 +179,7 @@ for (group in levels(data_nmds$group_type)) {
     )
   
 }
-table(data_ellipses$reference)
-table(data_ellipses$target_type)
-table(data_ellipses$exposition)
+
 
 #### * Plot ####
 
@@ -279,7 +222,3 @@ table(data_ellipses$exposition)
    ) +
    theme_mb())
 
-
-### Save ###
-ggsave(here("outputs", "figures", "figure_nmds_800dpi_16.5x16cm.tiff"),
-       dpi = 800, width = 16.5, height = 16, units = "cm")
