@@ -32,7 +32,7 @@ theme_mb <- function() {
                               color = "black"),
     axis.line = element_line(),
     legend.key = element_rect(fill = "white"),
-    legend.position = "bottom",
+    legend.position = "right",
     legend.margin = margin(0, 0, 0, 0, "cm"),
     plot.margin = margin(0, 0, 0, 0, "cm")
   )
@@ -58,8 +58,8 @@ sites_splot <- read_csv("data_processed_sites_splot.csv",
                                )) %>%
   mutate(
     reference = if_else(
-      esy == "E12a", "Reference", if_else(
-        esy == "E22", "Reference", "other"
+      esy == "E12a", "+Reference", if_else(
+        esy == "E22", "+Reference", "other"
         )
       ),
     target_type = if_else(
@@ -78,13 +78,13 @@ sites_bauer <- read_csv("data_processed_sites_bauer.csv",
   filter(exposition == "south" | exposition == "north") %>%
   mutate(
     reference = if_else(
-      esy == "R1A", "Reference", if_else(
-        esy == "R22", "Reference", if_else(
+      esy == "R1A", "+Reference", if_else(
+        esy == "R22", "+Reference", if_else(
           esy == "R", "Grassland", if_else(
             esy == "?", "no", if_else(
               esy == "+", "no", if_else(
                 esy == "R21", "Grassland", if_else(
-                  esy == "V38", "Fail", "other"
+                  esy == "V38", "-Reference", "other"
                 )
               )
             )
@@ -188,7 +188,8 @@ data <- data %>%
   bind_rows(data)
 data_nmds <- data_nmds %>%
   filter(!(target_type == "other")) %>%
-  bind_rows(data)
+  bind_rows(data) %>%
+  filter(!(reference == "-Reference" & exposition == "north"))
 
 data_nmds <- data_nmds %>%
   select(id, NMDS1, NMDS2, reference, exposition, target_type) %>% # modify group
@@ -200,12 +201,9 @@ data_nmds <- data_nmds %>%
   group_by(group_type) %>%
   mutate(mean1 = mean(NMDS1),
          mean2 = mean(NMDS2)) %>%
-  filter(reference != "Grassland" & reference != "no" & reference != "Fail") %>%
+  filter(reference != "Grassland" & reference != "no") %>%
   mutate(group_type = factor(group_type))
 
-table(data_nmds$reference)
-table(data_nmds$exposition)
-table(data_nmds$group_type)
 
 for (group in levels(data_nmds$group_type)) {
   
@@ -234,9 +232,6 @@ for (group in levels(data_nmds$group_type)) {
     )
   
 }
-table(data_ellipses$reference)
-table(data_ellipses$target_type)
-table(data_ellipses$exposition)
 
 #### * Plot ####
 
@@ -260,20 +255,24 @@ table(data_ellipses$exposition)
      size = 1,
      show.legend = FALSE
    ) +
+   geom_vline(xintercept = 0, linetype = "dashed") +
+   geom_hline(yintercept = 0, linetype = "dashed") +
    coord_fixed() +
    scale_shape_manual(
      values = c(
+       "triangle", "square",
        "circle open", "circle open", "circle open", "circle open",
-       "square", "square open"
+       "square open"
      )
    ) +
    scale_color_manual(
      values = c(
+       "grey", "royalblue",
        "orange1", "firebrick2", "deeppink3", "mediumpurple4",
-       "royalblue", "black"
+       "black"
      )
    ) +
-   scale_alpha_manual(values = c(.3, .3, .3, .3, .7, .6)) +
+   scale_alpha_manual(values = c(.7, .7, .3, .3, .3, .3, .6)) +
    labs(
      x = "NMDS1", y = "NMDS2", fill = "", color = "", shape = "", alpha = ""
    ) +
@@ -281,5 +280,5 @@ table(data_ellipses$exposition)
 
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_nmds_800dpi_16.5x16cm.tiff"),
+ggsave(here("outputs", "figures", "figure_nmds_800dpi_16.5x16cm_presentation.tiff"),
        dpi = 800, width = 16.5, height = 16, units = "cm")
