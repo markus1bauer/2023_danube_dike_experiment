@@ -56,7 +56,7 @@ sites_splot <- read_csv("data_processed_sites_splot.csv",
                                .default = "?",
                                survey_year = "c"
                                )) %>%
-  mutuate(
+  mutate(
     reference = if_else(
       esy == "R12", "Dry grassland", if_else(
         esy == "R22", "Hay meadow", "other"
@@ -69,7 +69,7 @@ sites_bauer <- read_csv("data_processed_sites_bauer.csv",
                                .default = "?",
                                survey_year = "c"
                                )) %>%
-  mutuate(
+  mutate(
     reference = if_else(
       esy == "R12", "Dry grassland", if_else(
         esy == "R22", "Hay meadow", if_else(
@@ -83,8 +83,8 @@ sites_bauer <- read_csv("data_processed_sites_bauer.csv",
 sites <- sites_experiment %>%
   bind_rows(sites_splot, sites_bauer) %>%
   select(
-    id, plot, esy, reference,
-    exposition, sand_ratio, soil_depth, target_type, seed_density,
+    id, esy, reference,
+    exposition, sand_ratio, substrate_depth, target_type, seed_density,
     survey_year, longitude, latitude, elevation, plot_size
     )
 
@@ -115,23 +115,31 @@ species <- species_experiment %>%
   full_join(species_bauer, by = "name") %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
   pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
-  filter(!(name %in% data$name)) %>%
+  filter(!(name %in% data$name)) %>% # use 'data' to filter
   pivot_wider(names_from = "name", values_from = "value") %>%
   arrange(id) %>%
-  semi_join(sites, by = "id") %>%
+  semi_join(sites, by = "id")
+
+sites <- sites %>%
+  semi_join(species, by = "id")
+
+species <- species %>%
   column_to_rownames("id")
-  
+
 rm(list = setdiff(ls(), c(
   "sites", "species", "theme_mb", "vegan_cov_ellipse"
   )))
 
 #### * Model ####
 
-set.seed(123)
+set.seed(10)
 (ordi <- metaMDS(species, binary = TRUE,
                  try = 50, previous.best = TRUE, na.rm = TRUE))
+#Wisonsin sqrt transformation, stress type 1
 stressplot(ordi) # stress: 0.205; Non-metric fit R² =.958
-
+data_nmds <- read_csv("data_processed_nmds.csv",
+                               col_names = TRUE, na = c("na", "NA", ""),
+                               col_types = cols(.default = "?"))
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -140,20 +148,6 @@ stressplot(ordi) # stress: 0.205; Non-metric fit R² =.958
 
 
 ### * Preparation ####
-
-data_envfit <- data_envfit %>%
-  scores(display = "vectors") %>%
-  as_tibble(rownames = NA) %>%
-  rownames_to_column(var = "variable") %>%
-  mutate(
-    variable = as_factor(variable),
-    variable = fct_recode(
-      variable,
-      "Graminoid cover" = "graminoid_cover_ratio",
-      "Ruderal cover" = "ruderal_cover",
-      "Specialist richness" = "ellenberg_richness"
-    )
-  )
 
 ellipses <- tibble()
 
@@ -165,6 +159,7 @@ data_nmds <-  sites %>%
   group_by(group_type) %>%
   mutate(mean1 = mean(NMDS1),
          mean2 = mean(NMDS2))
+#write_csv(data_nmds, here("data", "processed", "data_processed_nmds.csv"))
 
 for (group in levels(data_nmds$group_type)) {
   
@@ -204,7 +199,7 @@ for (group in levels(data_nmds$group_type)) {
      show.legend = FALSE
    ) +
    facet_grid(
-     exposition ~ targetType,
+     exposition ~ target_type,
      labeller = as_labeller(
        c(south = "South", north = "North",
          "dry_grassland" = "Dry grassland", "hay_meadow" = "Hay meadow")
