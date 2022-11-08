@@ -106,6 +106,7 @@ sites <- sites_experiment %>%
     survey_year, longitude, latitude, elevation, plot_size
     ) %>%
   arrange(id)
+  
 
 #### * Load species data ####
 

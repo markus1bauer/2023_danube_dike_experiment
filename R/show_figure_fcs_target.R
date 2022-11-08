@@ -26,24 +26,21 @@ sites <- read_csv("data_processed_sites.csv",
                       .default = "?",
                       id = "f",
                       plot = "f",
-                      block = "f",
+                      site = "f",
                       exposition = col_factor(levels = c("north", "south")),
-                      sandRatio = "f",
-                      substrateDepth = col_factor(levels = c("30", "15")),
-                      targetType = "f",
-                      seedDensity = "f"
+                      sand_ratio = "f",
+                      substrate_depth = col_factor(levels = c("30", "15")),
+                      target_type = "f",
+                      seed_density = "f"
                     )) %>%
-  filter(
-    !str_detect(id, "C") & presabu == "presence" & surveyYear != "seeded"
-  ) %>%
+  filter(survey_year != "seeded") %>%
   mutate(
     n = fcs_target,
-    surveyYear_fac = factor(surveyYear),
-    targetType = factor(targetType)
+    survey_year_fct = factor(survey_year)
   ) %>%
   select(
-    id, plot, block, exposition, sandRatio, substrateDepth, targetType,
-    seedDensity, surveyYear_fac, n
+    id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
+    seed_density, survey_year_fct, n
   )
 
 ### * Model ####
@@ -77,10 +74,33 @@ theme_mb <- function() {
 ## 1 Boxplots #################################################################
 
 ### a sandRatio x target Type -------------------------------------------------
-
+get_variables(m)[1:20]
+m %>%
+  spread_draws(b_target_typedry_grassland, b_expositionnorth, b_sand_ratio25,
+               b_sand_ratio50, b_survey_year_fct2019, b_survey_year_fct2020,
+               b_survey_year_fct2021) %>%
+  summarise_draws() %>%
+  ggplot(aes(x = mean, xmin = q5, xmax = q95, y = variable)) +
+  geom_pointinterval()
+m %>%
+  gather_draws(b_Intercept, b_target_typedry_grassland, b_expositionnorth,
+               b_sand_ratio25, b_sand_ratio50, b_survey_year_fct2019,
+               b_survey_year_fct2020, b_survey_year_fct2021) %>%
+  filter(.variable == "b_Intercept" | .variable == "b_target_typedry_grassland") %>%
+  ggplot(aes(x = .value, y = .variable)) +
+  stat_halfeye() +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  theme_mb()
+m %>%
+  modelr::data_grid(target_type) 
+pred.rich <- posterior_epred(treat.eff.rich, newdata = newdata, 
+                             scale = "response", 
+                             re_formula = ~ (1|region.year), 
+                             summary = FALSE
+)
 (graph_a <- ggplot() +
     geom_quasirandom(
-      aes(y = n, x = sandRatio, color = targetType),
+      aes(y = n, x = sand_ratio, color = target_type),
       data = sites,
       alpha = 0.5,
       dodge.width = 0.8,
@@ -92,13 +112,13 @@ theme_mb <- function() {
       size = .3,
       color = "grey70"
     ) +
-    geom_boxplot(
-      aes(y = n, x = sandRatio, fill = targetType),
-      data = sites,
-      alpha = 0.5
-    ) +
+    #geom_boxplot(
+    #  aes(y = n, x = sand_ratio, fill = target_type),
+    #  data = sites,
+    #  alpha = 0.5
+    #) +
     facet_grid(
-      exposition ~ surveyYear_fac,
+      exposition ~ survey_year_fct,
       labeller = as_labeller(
         c(south = "South", north = "North",
           "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
