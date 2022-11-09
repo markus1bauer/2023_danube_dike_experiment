@@ -1,7 +1,7 @@
 # Dike grassland experiment
 # Show_figure species composition ####
 # Markus Bauer
-# 2022-04-27
+# 2022-11-09
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -12,14 +12,35 @@
 ### Packages ###
 library(here)
 library(tidyverse)
+suppressPackageStartupMessages(library(brms))
+suppressPackageStartupMessages(library(tidybayes))
 library(ggbeeswarm)
 
 ### Start ###
-#rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
+rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 setwd(here("data", "processed"))
-load(file = here("data", "processed", "model_fcs_3.Rdata"))
 
 ### Load data ###
+France <- read_csv("red_knot.csv")
+france3_mbrms <- brms::brm(pop ~ I(year - 1976) + Location.of.population,
+                           data = France, family = poisson(), chains = 3,
+                           iter = 3000, warmup = 1000)
+France_plot <- France %>%
+  add_predicted_draws(france3_mbrms)
+library(tidybayes)
+
+(model_fit <- France %>%
+    add_predicted_draws(france3_mbrms) %>%  # adding the posterior distribution
+    ggplot(aes(x = year, y = pop)) +  
+    stat_lineribbon(aes(y = .prediction), .width = c(.95, .80, .50),  # regression line and CI
+                    alpha = 0.5, colour = "black") +
+    geom_point(data = France, colour = "darkseagreen4", size = 3) +   # raw data
+    scale_fill_brewer(palette = "Greys") +
+    ylab("Calidris canutus abundance\n") +  # latin name for red knot
+    xlab("\nYear") +
+    theme_bw() +
+    theme(legend.title = element_blank(),
+          legend.position = c(0.15, 0.85)))
 sites <- read_csv("data_processed_sites.csv",
                   col_names = TRUE,
                   na = c("na", "NA", ""), col_types =
@@ -37,15 +58,17 @@ sites <- read_csv("data_processed_sites.csv",
   filter(survey_year != "seeded") %>%
   mutate(
     n = fcs_target,
-    survey_year_fct = factor(survey_year)
+    survey_year_fct = factor(survey_year),
+    botanist_year = str_c(botanist, survey_year_fct, sep = "_"),
+    botanist_year = str_replace_all(botanist_year, " ", "_")
   ) %>%
   select(
-    id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
+    id, plot, site, botanist_year, exposition, sand_ratio, substrate_depth, target_type,
     seed_density, survey_year_fct, n
   )
 
 ### * Model ####
-m3
+load(file = "model_fcs_3.Rdata")
 
 ### * Functions ####
 theme_mb <- function() {
@@ -75,75 +98,58 @@ theme_mb <- function() {
 ## 1 Boxplots #################################################################
 
 ### a sandRatio x target Type -------------------------------------------------
-get_variables(m)[1:20]
-m %>%
-  spread_draws(b_target_typedry_grassland, b_expositionnorth, b_sand_ratio25,
-               b_sand_ratio50, b_survey_year_fct2019, b_survey_year_fct2020,
-               b_survey_year_fct2021) %>%
-  summarise_draws() %>%
-  ggplot(aes(x = mean, xmin = q5, xmax = q95, y = variable)) +
-  geom_pointinterval()
-m %>%
-  gather_draws(b_Intercept, b_target_typedry_grassland, b_expositionnorth,
-               b_sand_ratio25, b_sand_ratio50, b_survey_year_fct2019,
-               b_survey_year_fct2020, b_survey_year_fct2021) %>%
-  filter(.variable == "b_Intercept" | .variable == "b_target_typedry_grassland") %>%
-  ggplot(aes(x = .value, y = .variable)) +
-  stat_halfeye() +
-  geom_vline(xintercept = 0, linetype = "dashed") +
+
+test <- sites %>%
+  add_predicted_draws(m3, allow_new_levels = TRUE)
+  
+ggplot(data = sites) +
+  #geom_boxplot(aes(y = n, x = sand_ratio, color = target_type)) +
+  geom_quasirandom(
+    aes(y = n, x = sand_ratio, color = target_type),
+    alpha = 0.2,
+    dodge.width = 0.9,
+    cex = .5
+    ) +
+  stat_pointinterval(
+    aes(y = .prediction, x = sand_ratio, color = target_type),
+    data = test,
+    .width = c(0.66, 0.95),
+    point_size = 2,
+    position = "dodge"
+  ) +
+  geom_hline(
+    yintercept = 0,
+    linetype = "dashed",
+    linewidth = .3,
+    color = "black"
+  ) +
+  facet_grid(
+    exposition ~ survey_year_fct,
+    labeller = as_labeller(
+      c(south = "South", north = "North",
+        "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
+    )
+  ) +
+  scale_y_continuous(limits = c(-2.8, 1.9), breaks = seq(-100, 400, 1)) +
+  scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
+                     values = c("#00BFC4", "#F8766D")) +
+  scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
+                    values = c("#00BFC4", "#F8766D")) +
+  labs(
+    x = "Sand ratio [%]", fill = "", color = "",
+    y = expression(
+      Favourable ~ Conservation ~ Status ~ "(FCS)"
+    )
+  ) +
   theme_mb()
-m %>%
-  modelr::data_grid(target_type) 
-pred.rich <- posterior_epred(treat.eff.rich, newdata = newdata, 
-                             scale = "response", 
-                             re_formula = ~ (1|region.year), 
-                             summary = FALSE
-)
-(graph_a <- ggplot() +
-    geom_quasirandom(
-      aes(y = n, x = sand_ratio, color = target_type),
-      data = sites,
-      alpha = 0.5,
-      dodge.width = 0.8,
-      cex = .5
-    ) +
-    geom_hline(
-      yintercept = 0,
-      linetype = "dashed",
-      size = .3,
-      color = "grey70"
-    ) +
-    #geom_boxplot(
-    #  aes(y = n, x = sand_ratio, fill = target_type),
-    #  data = sites,
-    #  alpha = 0.5
-    #) +
-    facet_grid(
-      exposition ~ survey_year_fct,
-      labeller = as_labeller(
-        c(south = "South", north = "North",
-          "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
-      )
-    ) +
-    scale_y_continuous(limits = c(-2.8, 1.9), breaks = seq(-100, 400, 1)) +
-    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-                       values = c("#00BFC4", "#F8766D")) +
-    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-                      values = c("#00BFC4", "#F8766D")) +
-    labs(
-      x = "Sand ratio [%]", fill = "", color = "",
-      y = expression(
-        Favourable ~ Conservation ~ Status ~ "(FCS)"
-        )
-      ) +
-    theme_mb())
+  
 
 ### Save ###
 ggsave(here("outputs", "figures",
-            "figure_box_fcs_target_800dpi_27x9cm.tiff"),
+            "figure_2_fcs_target_800dpi_27x9cm.tiff"),
        dpi = 800, width = 27, height = 9, units = "cm")
 ggsave(here("outputs", "figures",
-            "figure_box_fcs_target_800dpi_16.5x14cm.tiff"),
+            "figure_2_fcs_target_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")
 
 ### b sandRatio x substrateDepth -----------------------------------------------

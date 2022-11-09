@@ -164,7 +164,7 @@ ggplot(sites, aes(sqrt(n))) + geom_density()
 
 ### a models -----------------------------------------------------------------
 
-iter = 3000
+iter = 10000
 chains = 4
 thin = 2
 priors <- c(
@@ -224,13 +224,8 @@ m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
                cores = parallel::detectCores(),
                seed = 123)
 
-m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
+m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
              substrate_depth + seed_density +
-             substrate_depth:sand_ratio +
-             seed_density:exposition +
-             target_type:exposition:survey_year_fct +
-             sand_ratio:exposition:survey_year_fct +
-             seed_density:exposition:survey_year_fct +
              (1 | site/plot) + (1 | botanist_year),
            data = sites, 
            family = gaussian("identity"),
@@ -319,6 +314,7 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 
 ### c model check -----------------------------------------------------------
 
+#### * DHARMa ####
 createDHARMa(
   simulatedResponse = t(posterior_predict(m_1)),
   observedResponse = sites$n,
@@ -334,6 +330,7 @@ createDHARMa(
   ) %>%
   plot()
 
+#### * Preparation ####
 posterior1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::subset_draws(
@@ -374,7 +371,7 @@ yrep2 <- posterior_predict(m_2, draws = 500)
 loo1 <- loo(m_1, save_psis = TRUE, moment_match = FALSE)
 loo2 <- loo(m_2, save_psis = TRUE, moment_match = FALSE)
 
-### Samling efficency/effectiveness (Rhat and EFF) ###
+#### * Samling efficency/effectiveness (Rhat and EFF) ####
 draws1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::summarize_draws() %>%
@@ -390,7 +387,7 @@ range(draws2$ess_bulk)
 range(draws1$ess_tail)
 range(draws2$ess_tail)
 
-### MCMC diagnostics ###
+#### * MCMC diagnostics ####
 mcmc_trace(posterior1, np = hmc_diagnostics1)
 mcmc_trace(posterior2, np = hmc_diagnostics2)
 mcmc_pairs(posterior1, off_diag_args = list(size = 1.2))
@@ -406,7 +403,7 @@ mcmc_scatter(m_2,
 mcmc_parcoord(posterior1, np = hmc_diagnostics1)
 mcmc_parcoord(posterior2, np = hmc_diagnostics2)
 
-### Posterior predictive check ###
+#### * Posterior predictive check ####
 #### Kernel density
 ppc_dens_overlay(y, yrep1[1:50, ])
 ppc_dens_overlay(y, yrep2[1:50, ])
@@ -446,7 +443,8 @@ ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
 ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
 plot(loo1)
 plot(loo2)
-### Autocorrelation ###
+
+#### * Autocorrelation ####
 mcmc_acf(posterior1, lags = 10)
 mcmc_acf(posterior2, lags = 10)
 
@@ -498,4 +496,3 @@ sjPlot::plot_model(m_1, type = "pred", ppd = TRUE, terms = c(
 ### Save ###
 save(m3, file = here("data", "processed", "model_fcs_3.Rdata"))
 save(m3_flat, file = here("data", "processed", "model_fcs_3_flat.Rdata"))
-write.csv(draws, here("outputs", "statistics", "table_fcs_target_m3.csv"))
