@@ -496,4 +496,6 @@ sjPlot::plot_model(m_1, type = "pred", ppd = TRUE, terms = c(
                   exposition | survey_year_fct, type = "response"))
 
 ### Save ###
+save(m3, file = here("data", "processed", "model_fcs_3.Rdata"))
+save(m3_flat, file = here("data", "processed", "model_fcs_3_flat.Rdata"))
 write.csv(draws, here("outputs", "statistics", "table_fcs_target_m3.csv"))
