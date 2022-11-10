@@ -182,53 +182,10 @@ priors <- c(
 Model caluclations
 
 ```{r}
-m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
-             substrate_depth + seed_density +
-             (1 | site/plot) + (1 | botanist_year),
-           data = sites, 
-           family = gaussian("identity"),
-           prior = priors,
-           chains = chains,
-           iter = iter,
-           thin = thin,
-           warmup = floor(iter / 2),
-           save_pars = save_pars(all = TRUE),
-           cores = parallel::detectCores(),
-           seed = 123)
-
-m2 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
-            substrate_depth + seed_density +
-            sand_ratio:substrate_depth +
-            (1 | site/plot) + (1 | botanist_year),
-          data = sites, 
-          family = gaussian("identity"),
-          prior = priors,
-          chains = chains,
-          iter = iter,
-          thin = thin,
-          warmup = floor(iter / 2),
-          save_pars = save_pars(all = TRUE),
-          cores = parallel::detectCores(),
-          seed = 123)
-
-m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
-                 substrate_depth + seed_density +
-                 substrate_depth:sand_ratio +
-                 seed_density:exposition +
-                 target_type:exposition:survey_year_fct +
-                 sand_ratio:exposition:survey_year_fct +
-                 seed_density:exposition:survey_year_fct +
-                 (1 | site/plot) + (1 | botanist_year),
-               data = sites, 
-               family = gaussian("identity"),
-               prior = priors,
-               chains = chains,
-               iter = iter,
-               thin = thin,
-               warmup = floor(iter / 2),
-               save_pars = save_pars(all = TRUE),
-               cores = parallel::detectCores(),
-               seed = 123)
+load(file = here("data", "processed", "model_fcs_1.Rdata"))
+m1
+load(file = here("data", "processed", "model_fcs_2.Rdata"))
+m2
 ```
 
 ### Model comparison
