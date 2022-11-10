@@ -21,26 +21,6 @@ rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 setwd(here("data", "processed"))
 
 ### Load data ###
-France <- read_csv("red_knot.csv")
-france3_mbrms <- brms::brm(pop ~ I(year - 1976) + Location.of.population,
-                           data = France, family = poisson(), chains = 3,
-                           iter = 3000, warmup = 1000)
-France_plot <- France %>%
-  add_predicted_draws(france3_mbrms)
-library(tidybayes)
-
-(model_fit <- France %>%
-    add_predicted_draws(france3_mbrms) %>%  # adding the posterior distribution
-    ggplot(aes(x = year, y = pop)) +  
-    stat_lineribbon(aes(y = .prediction), .width = c(.95, .80, .50),  # regression line and CI
-                    alpha = 0.5, colour = "black") +
-    geom_point(data = France, colour = "darkseagreen4", size = 3) +   # raw data
-    scale_fill_brewer(palette = "Greys") +
-    ylab("Calidris canutus abundance\n") +  # latin name for red knot
-    xlab("\nYear") +
-    theme_bw() +
-    theme(legend.title = element_blank(),
-          legend.position = c(0.15, 0.85)))
 sites <- read_csv("data_processed_sites.csv",
                   col_names = TRUE,
                   na = c("na", "NA", ""), col_types =
