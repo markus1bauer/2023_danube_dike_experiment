@@ -1,5 +1,7 @@
 ---
-title: "Untitled"
+title: "Favourable Conservation Status (FCS): <br> Analysis of Bauer et al. (unpublished) Field experiment"
+author: "Markus Bauer <br>"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
 output: github_document
 ---
 
@@ -7,24 +9,130 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## GitHub Documents
+# Preparation
 
-This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+#### Packages
 
-## Including Code
+```{r message = FALSE, tidy = TRUE}
+library(here)
+library(tidyverse)
+library(ggbeeswarm)
+library(patchwork)
+library(brms)
+library(DHARMa)
+library(bayesplot)
+library(loo)
+library(tidybayes)
+library(emmeans)
 
-You can include R code in the document as follows:
-
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r echo = FALSE}
+rm(list = ls())
+rm(list = setdiff(ls(), c(
+  "m_simple", "m_full", "m1", "m3", "m3_flat", "m_simple_flat", "m3_iter"
+  )))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+#### Load data
+
+```{r}
+sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
+                  col_names = TRUE, na = c("na", "NA", ""), col_types =
+                    cols(
+                      .default = "?",
+                      plot = "f",
+                      site = "f",
+                      sand_ratio = "f",
+                      substrate_depth = "f",
+                      target_type = col_factor(levels = c(
+                        "dry_grassland", "hay_meadow"
+                        )),
+                      seed_density = "f",
+                      exposition = col_factor(levels = c(
+                        "north", "south"
+                      )),
+                      survey_year = "d"
+                    )) %>%
+  ### Exclude data of seed mixtures
+  filter(survey_year != "seeded") %>%
+  mutate(
+    survey_year_fct = factor(survey_year),
+    botanist_year = str_c(survey_year, botanist, sep = " "),
+    botanist_year = factor(botanist_year),
+    n = fcs_target,
+    id = factor(id)
+    ) %>%
+  select(
+    id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
+    seed_density, survey_year_fct, survey_year, botanist_year, n
+    )
+```
+
+# Statistics
+
+## Data exploration
+
+### Graphs of raw data
+
+```{r echo = FALSE}
+plot1 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = sand_ratio)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Sand ratio [vol%] (Data of 2021)")
+plot2 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = substrate_depth)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Substrate depth [cm] (Data of 2021)")
+plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = target_type)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Target type (Data of 2021)")
+plot4 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = seed_density)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Seed density [g/m²] (Data of 2021)")
+(plot1 + plot2) / (plot3 + plot4)
+plot1 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = exposition)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Exposition (Data of 2021)")
+plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Survey year")
+plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Blocks (Data of 2021)")
+plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Botanists and survey year") +
+  theme(axis.text.x = element_text(angle = 90))
+(plot1 + plot2) / (plot3 + plot4)
+ggplot(data = sites,
+       aes(x = sand_ratio, y = n, color = target_type)) + 
+  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
+  geom_boxplot(fill = "transparent") +
+  facet_grid(exposition ~ survey_year_fct) +
+  labs(title = "Target type vs. sand ratio [vol%]")
+ggplot(data = sites,
+       aes(x = sand_ratio, y = n, color = substrate_depth)) + 
+  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
+  geom_boxplot(fill = "transparent") +
+  facet_grid(exposition ~ survey_year_fct) +
+  labs(title = "Substrate depth [cm] vs. sand ratio [vol%]")
+ggplot(data = sites,
+       aes(x = seed_density, y = n, color = target_type)) + 
+  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
+  geom_boxplot(fill = "transparent") +
+  facet_grid(exposition ~ survey_year_fct) +
+  labs(title = "Target type vs. Seed density [g/m²]")
+```
+
+### Outliers, zero-inflation, transformations?
+
+```{r}
+dotchart((sites$n), groups = factor(sites$exposition),
+         main = "Cleveland dotplot")
+sites %>% group_by(exposition) %>% count(site)
+boxplot(sites$n)
+plot(table((sites$n)), type = "h",
+     xlab = "Observed values", ylab = "Frequency")
+ggplot(sites, aes(x = n)) + geom_density()
+ggplot(sites, aes(sqrt(n))) + geom_density()
+```
+

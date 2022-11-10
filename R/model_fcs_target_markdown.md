@@ -1,33 +1,70 @@
-Untitled
+Favourable Conservation Status (FCS): <br> Analysis of Bauer et
+al. (unpublished) Field experiment
 ================
+Markus Bauer <br>
+2022-11-10
 
-## GitHub Documents
+# Preparation
 
-This is an R Markdown format used for publishing markdown documents to
-GitHub. When you click the **Knit** button all R code chunks are run and
-a markdown file (.md) suitable for publishing to GitHub is generated.
-
-## Including Code
-
-You can include R code in the document as follows:
+#### Packages
 
 ``` r
-summary(cars)
+library(here)
+library(tidyverse)
+library(ggbeeswarm)
+library(patchwork)
+library(brms)
+library(DHARMa)
+library(bayesplot)
+library(loo)
+library(tidybayes)
+library(emmeans)
 ```
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+#### Load data
 
-## Including Plots
+``` r
+sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
+                  col_names = TRUE, na = c("na", "NA", ""), col_types =
+                    cols(
+                      .default = "?",
+                      plot = "f",
+                      site = "f",
+                      sand_ratio = "f",
+                      substrate_depth = "f",
+                      target_type = col_factor(levels = c(
+                        "dry_grassland", "hay_meadow"
+                        )),
+                      seed_density = "f",
+                      exposition = col_factor(levels = c(
+                        "north", "south"
+                      )),
+                      survey_year = "d"
+                    )) %>%
+  ### Exclude data of seed mixtures
+  filter(survey_year != "seeded") %>%
+  mutate(
+    survey_year_fct = factor(survey_year),
+    botanist_year = str_c(survey_year, botanist, sep = " "),
+    botanist_year = factor(botanist_year),
+    n = fcs_target,
+    id = factor(id)
+    ) %>%
+  select(
+    id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
+    seed_density, survey_year_fct, survey_year, botanist_year, n
+    )
+```
 
-You can also embed plots, for example:
+    ## Warning: One or more parsing issues, call `problems()` on your data frame for details,
+    ## e.g.:
+    ##   dat <- vroom(...)
+    ##   problems(dat)
 
-![](model_fcs_target_markdown_files/figure-gfm/pressure-1.png)<!-- -->
+# Statistics
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+## Data exploration
+
+### Graphs
+
+![](model_fcs_target_markdown_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->![](model_fcs_target_markdown_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->![](model_fcs_target_markdown_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->![](model_fcs_target_markdown_files/figure-gfm/unnamed-chunk-4-4.png)<!-- -->![](model_fcs_target_markdown_files/figure-gfm/unnamed-chunk-4-5.png)<!-- -->

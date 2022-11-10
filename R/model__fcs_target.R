@@ -15,6 +15,7 @@
 library(here)
 library(tidyverse)
 library(ggbeeswarm)
+library(patchwork)
 library(brms)
 library(DHARMa)
 library(bayesplot)
@@ -30,25 +31,30 @@ rm(list = setdiff(ls(), c(
   )))
 
 ### Load data ###
-sites <- read_csv("data_processed_sites.csv",
+sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
                   col_names = TRUE, na = c("na", "NA", ""), col_types =
                     cols(
                       .default = "?",
                       plot = "f",
                       site = "f",
-                      survey_year = "d",
-                      exposition = "f",
                       sand_ratio = "f",
                       substrate_depth = "f",
+                      target_type = col_factor(levels = c(
+                        "dry_grassland", "hay_meadow"
+                      )),
                       seed_density = "f",
-                      target_type = "f"
+                      exposition = col_factor(levels = c(
+                        "north", "south"
+                      )),
+                      survey_year = "d"
                     )) %>%
+  ### Exclude data of seed mixtures
   filter(survey_year != "seeded") %>%
   mutate(
-    n = fcs_target,
     survey_year_fct = factor(survey_year),
-    botanist_year = str_c(botanist, survey_year, sep = " "),
+    botanist_year = str_c(survey_year, botanist, sep = " "),
     botanist_year = factor(botanist_year),
+    n = fcs_target,
     id = factor(id)
   ) %>%
   select(
@@ -58,92 +64,67 @@ sites <- read_csv("data_processed_sites.csv",
 
 
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Statistics ################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Statistics #################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 
-## 1 Data exploration ########################################################
+## 1 Data exploration ##########################################################
 
 
-### a Graphs -----------------------------------------------------------------
+### a Graphs of raw data -------------------------------------------------------
 
-#simple effects:
-ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = exposition)) +
-  geom_boxplot() + geom_quasirandom()
-ggplot(sites %>% filter(survey_year == 2020), aes(y = n, x = exposition)) +
-  geom_boxplot() + geom_quasirandom()
-ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = target_type)) +
-  geom_boxplot() + geom_quasirandom() 
-ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = seed_density)) +
-  geom_boxplot() + geom_quasirandom() 
-ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = substrate_depth)) +
-  geom_boxplot() + geom_quasirandom() 
-ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = sand_ratio)) +
-  geom_boxplot() + geom_quasirandom()
-ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
-  geom_boxplot() + geom_quasirandom()
-ggplot(sites, aes(y = n, x = botanist_year)) +
-  geom_boxplot() + geom_quasirandom() 
-ggplot(sites, aes(y = n, x = survey_year_fct)) +
-  geom_boxplot() + geom_quasirandom()
-#2way
-ggplot(sites %>% filter(survey_year == 2021), aes(x = exposition, y = n)) + 
-  geom_boxplot() + geom_quasirandom() +
-  facet_wrap(~ target_type)
-ggplot(sites %>% filter(survey_year == 2021), aes(x = sand_ratio, y = n)) + 
-  geom_boxplot() + geom_quasirandom() +
-  facet_wrap(~ target_type)
-ggplot(sites %>% filter(survey_year == 2021), aes(x = substrate_depth, y = n)) + 
-  geom_boxplot() + geom_quasirandom() +
-  facet_wrap(~ target_type)
-ggplot(sites %>% filter(survey_year == 2021), aes(x = sand_ratio, y = n)) + 
-  geom_boxplot() + geom_quasirandom() +
-  facet_wrap(~ exposition)
-ggplot(sites, aes(x = survey_year_fct, y = n)) + 
-  geom_boxplot() + geom_quasirandom() +
-  facet_wrap(~ site)
-#3way
-ggplot(sites, aes(x = exposition, y = n, color = sand_ratio)) + 
-  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
-  geom_boxplot(fill = "transparent") +
-  facet_wrap(~ target_type)
-ggplot(sites %>% filter(survey_year == 2021),
-       aes(x = exposition, y = n, color = sand_ratio)) +
-  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
-  geom_boxplot(fill = "transparent") +
-  facet_wrap(~ target_type)
-ggplot(sites %>% filter(survey_year == 2021),
-       aes(x = exposition, y = n, color = substrate_depth)) + 
-  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
-  geom_boxplot(fill = "transparent") +
-  facet_wrap(~ target_type)
-ggplot(sites %>% filter(survey_year == 2021),
-       aes(x = substrate_depth, y = n, color = sand_ratio)) + 
-  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
-  geom_boxplot(fill = "transparent") +
-  facet_wrap(~ target_type)
-ggplot(sites %>% filter(survey_year == 2021),
-       aes(x = substrate_depth, y = n, color = sand_ratio)) + 
-  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
-  geom_boxplot(fill = "transparent") +
-  facet_wrap(~ exposition)
-ggplot(sites, aes(x = factor(survey_year), y = n, color = target_type)) + 
-  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
-  geom_boxplot(fill = "transparent") +
-  facet_wrap(~ exposition) # Plot for figure
-#4way
-ggplot(sites %>% filter(survey_year == 2021),
-       aes(x = exposition, y = n, color = sand_ratio)) + 
-  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
-  geom_boxplot(fill = "transparent") +
-  facet_grid(substrate_depth ~ target_type)
+plot1 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = sand_ratio)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Sand ratio [vol%] (Data of 2021)")
+plot2 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = substrate_depth)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Substrate depth [cm] (Data of 2021)")
+plot3 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = target_type)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Target type (Data of 2021)")
+plot4 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = seed_density)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Seed density [g/m²] (Data of 2021)")
+(plot1 + plot2) / (plot3 + plot4)
+plot1 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = exposition)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Exposition (Data of 2021)")
+plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Survey year")
+plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Blocks (Data of 2021)")
+plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Botanists and survey year") +
+  theme(axis.text.x = element_text(angle = 90))
+(plot1 + plot2) / (plot3 + plot4)
 ggplot(data = sites,
-       aes(x = survey_year_fct, y = n, color = target_type)) + 
+       aes(x = sand_ratio, y = n, color = target_type)) + 
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
   geom_boxplot(fill = "transparent") +
-  facet_grid(exposition ~ sand_ratio)
+  facet_grid(exposition ~ survey_year_fct) +
+  labs(title = "Target type vs. sand ratio [vol%]")
+ggplot(data = sites,
+       aes(x = sand_ratio, y = n, color = substrate_depth)) + 
+  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
+  geom_boxplot(fill = "transparent") +
+  facet_grid(exposition ~ survey_year_fct) +
+  labs(title = "Substrate depth [cm] vs. sand ratio [vol%]")
+ggplot(data = sites,
+       aes(x = seed_density, y = n, color = target_type)) + 
+  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
+  geom_boxplot(fill = "transparent") +
+  facet_grid(exposition ~ survey_year_fct) +
+  labs(title = "Target type vs. Seed density [g/m²]")
 
 
 #### b Outliers, zero-inflation, transformations? ----------------------------
@@ -162,8 +143,28 @@ ggplot(sites, aes(sqrt(n))) + geom_density()
 ## 2 Model building ###########################################################
 
 
-### a models -----------------------------------------------------------------
+### a Models -----------------------------------------------------------------
 
+### * Preparation ####
+
+### Posssible priors ###
+get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
+            seed_density + substrate_depth +
+            (1 | site/plot) + (1 | botanist_year),
+          data = sites)
+### Example of normal distribution
+ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1))
+### Example of cauchy distribution
+ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
+  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1))
+### Example of a student t distribution
+ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
+  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5))
+
+### * Calculation ####
+
+### Specifications ###
 iter = 10000
 chains = 4
 thin = 2
@@ -171,29 +172,13 @@ priors <- c(
   set_prior("normal(0, 1)", class = "b"),
   set_prior("normal(0.1, 1)", class = "b", coef = "sand_ratio25"),
   set_prior("normal(0.2, 1)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(0.1, 1)", class = "b", coef = "expositionnorth"),
+  set_prior("normal(0.1, 1)", class = "b", coef = "expositionsouth"),
   set_prior("normal(0.1, 1)", class = "b", coef = "survey_year_fct2019"),
   set_prior("normal(0.2, 1)", class = "b", coef = "survey_year_fct2020"),
   set_prior("normal(0.3, 1)", class = "b",coef = "survey_year_fct2021"),
   set_prior("cauchy(0, 1)", class = "sigma")
 )
-
-### Posssible priors ###
-get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
-            seed_density + substrate_depth +
-            (1 | site/plot) + (1 | botanist_year),
-          data = sites)
-### Example of normal distribution ###
-ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1))
-### Example of cauchy distribution ###
-ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1))
-### Example of a student t distribution ###
-ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5))
-
-
+### Models ###
 m_simple <- brm(n ~ target_type + exposition + sand_ratio + survey_year_fct +
                    seed_density + substrate_depth +
                    (1 | site/plot) + (1 | botanist_year),
@@ -238,6 +223,21 @@ m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
            cores = parallel::detectCores(),
            seed = 123)
 
+m2 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
+            substrate_depth + seed_density +
+            sand_ratio:substrate_depth +
+            (1 | site/plot) + (1 | botanist_year),
+          data = sites, 
+          family = gaussian("identity"),
+          prior = priors,
+          chains = chains,
+          iter = iter,
+          thin = thin,
+          warmup = floor(iter / 2),
+          save_pars = save_pars(all = TRUE),
+          cores = parallel::detectCores(),
+          seed = 123)
+
 m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
                  substrate_depth + seed_density +
                  substrate_depth:sand_ratio +
@@ -249,24 +249,6 @@ m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
                data = sites, 
                family = gaussian("identity"),
                prior = priors,
-               chains = chains,
-               iter = iter,
-               thin = thin,
-               warmup = floor(iter / 2),
-               save_pars = save_pars(all = TRUE),
-               cores = parallel::detectCores(),
-               seed = 123)
-
-m_full_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
-                      seed_density + substrate_depth)^3 +
-                 target_type:sand_ratio:exposition:survey_year_fct +
-                 substrate_depth:sand_ratio:exposition:survey_year_fct +
-                 (1 | site/plot) + (1 | botanist_year),
-               data = sites, 
-               family = gaussian("identity"),
-               prior = c(
-                 set_prior("cauchy(0, 1)", class = "sigma")
-               ),
                chains = chains,
                iter = iter,
                thin = thin,
@@ -296,11 +278,17 @@ m3_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
                 cores = parallel::detectCores(),
                 seed = 123)
 
+### Save ###
+save(m1, file = here("data", "processed", "model_fcs_1.Rdata"))
+save(m2, file = here("data", "processed", "model_fcs_2.Rdata"))
+save(m3, file = here("data", "processed", "model_fcs_3.Rdata"))
+save(m3_flat, file = here("data", "processed", "model_fcs_3_flat.Rdata"))
 
-### b comparison ------------------------------------------------------------
+
+### b Model comparison ------------------------------------------------------------
 
 m_1 <- m1
-m_2 <- m3
+m_2 <- m2
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -311,7 +299,7 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 
 
-### c model check -----------------------------------------------------------
+### c Model check -----------------------------------------------------------
 
 #### * DHARMa ####
 createDHARMa(
@@ -496,6 +484,3 @@ sjPlot::plot_model(
 (emm <- emmeans(m_1, revpairwise ~ seed_density |
                   exposition | survey_year_fct, type = "response"))
 
-### Save ###
-save(m3, file = here("data", "processed", "model_fcs_3.Rdata"))
-save(m3_flat, file = here("data", "processed", "model_fcs_3_flat.Rdata"))
