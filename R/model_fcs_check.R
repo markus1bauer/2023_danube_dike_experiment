@@ -3,7 +3,7 @@
 # Model check
 
 # Markus Bauer
-# 2022-11-10
+# 2022-11-11
 
 
 
@@ -228,33 +228,12 @@ p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001
 p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
 p1 / p2
 #### LOO-PIT plots
-<<<<<<< Updated upstream
-<<<<<<<< Updated upstream:R/model_fcs_check.R
-p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
-p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
-p1 / p2
-p1 <- plot(loo1)
-p2 <- plot(loo2)
-p1 / p2
-========
-<<<<<<< Updated upstream:R/model_fcs_target_check.R
-ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
-ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
-=======
-p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
-p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
-p1 / p2
->>>>>>> Stashed changes:R/model_fcs_check.R
-plot(loo1)
-plot(loo2)
->>>>>>>> Stashed changes:R/model_fcs_target_check.R
-=======
 p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
 p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
 p1 / p2
 plot(loo1)
 plot(loo2)
->>>>>>> Stashed changes
+
 
 #### * Autocorrelation ####
 mcmc_acf(posterior1, lags = 10)
@@ -267,19 +246,7 @@ mcmc_acf(posterior2, lags = 10)
 
 ### a Model output ------------------------------------------------------------
 
-<<<<<<< Updated upstream
-<<<<<<<< Updated upstream:R/model_fcs_check.R
-prior_summary(m_2)
-========
-<<<<<<< Updated upstream:R/model_fcs_target_check.R
-prior_summary(m_1)
-=======
 prior_summary(m_2, all = FALSE)
->>>>>>> Stashed changes:R/model_fcs_check.R
->>>>>>>> Stashed changes:R/model_fcs_target_check.R
-=======
-prior_summary(m_2, all = FALSE)
->>>>>>> Stashed changes
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -288,43 +255,18 @@ bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
-draws1
+draws2
 mcmc_intervals(
   posterior1,
   prob = 0.66,
   prob_outer = 0.95,
   point_est = "mean"
 )
-<<<<<<< Updated upstream
-<<<<<<<< Updated upstream:R/model_fcs_check.R
 mcmc_intervals(
   posterior2,
   prob = 0.5,
   prob_outer = 0.95,
   point_est = "mean"
-========
-<<<<<<< Updated upstream:R/model_fcs_target_check.R
-sjPlot::plot_model(m_1, m_2, type = "est")
-sjPlot::plot_model(m_2, type = "est")
-sjPlot::plot_model(
-  m_1, m_2, type = "est", ppd = TRUE,
-  terms = c(
-    "sand_ratio", "substrate_depth", "target_type",
-    "seed_density",  "exposition", "survey_year_fct"
-  )
-=======
-=======
->>>>>>> Stashed changes
-mcmc_intervals(
-  posterior2,
-  prob = 0.66,
-  prob_outer = 0.95,
-  point_est = "mean"
-<<<<<<< Updated upstream
->>>>>>> Stashed changes:R/model_fcs_check.R
->>>>>>>> Stashed changes:R/model_fcs_target_check.R
-=======
->>>>>>> Stashed changes
 )
 
 
