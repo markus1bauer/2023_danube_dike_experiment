@@ -169,13 +169,18 @@ m_1$formula
 m_2$formula
 ```
 
-Conditional and marginal R² values
+Conditional R² values
 
 ```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+         re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
+```
+
+Marginal R² values
+
+```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
