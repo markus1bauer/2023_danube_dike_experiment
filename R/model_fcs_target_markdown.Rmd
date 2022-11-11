@@ -1,5 +1,5 @@
 ---
-title: "Favourable Conservation Status (FCS): <br> Analysis of Bauer et al. (unpublished) Field experiment"
+title: "Favourable Conservation Status (FCS): <br> <font size="-6"> Analysis of Bauer et al. (unpublished) Field experiment </font>"
 author: "Markus Bauer <br>"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
 output: github_document
@@ -126,40 +126,16 @@ ggplot(data = sites,
 ### Outliers, zero-inflation, transformations?
 
 ```{r}
-dotchart((sites$n), groups = factor(sites$exposition),
-         main = "Cleveland dotplot")
 sites %>% group_by(exposition) %>% count(site)
 boxplot(sites$n)
-plot(table((sites$n)), type = "h",
-     xlab = "Observed values", ylab = "Frequency")
+ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
+ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03)
 ggplot(sites, aes(x = n)) + geom_density()
-ggplot(sites, aes(sqrt(n))) + geom_density()
 ```
 
 ## Model building
 
 ### Models
-
-#### Preparation
-
-```{r}
-### Posssible priors ###
-get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
-            seed_density + substrate_depth +
-            (1 | site/plot) + (1 | botanist_year),
-          data = sites)
-### Example of normal distribution
-ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1))
-### Example of cauchy distribution
-ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1))
-### Example of a student t distribution
-ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5))
-```
-
-#### Calculation
 
 Specifications for the models
 
@@ -183,16 +159,40 @@ Model caluclations
 
 ```{r}
 load(file = here("data", "processed", "model_fcs_1.Rdata"))
+<<<<<<< Updated upstream
+load(file = here("data", "processed", "model_fcs_2.Rdata"))
+load(file = here("data", "processed", "model_fcs_3.Rdata"))
+m_1 <- m1
+m_2 <- m3
+=======
 m1
 load(file = here("data", "processed", "model_fcs_2.Rdata"))
 m2
+>>>>>>> Stashed changes
 ```
 
 ### Model comparison
 
+<<<<<<< Updated upstream
 ```{r}
+<<<<<<< Updated upstream
+m_1$formula
+m_2$formula
+=======
 m_1 <- m1
 m_2 <- m3
+=======
+Model formulas
+```{r echo = FALSE}
+m_1$formula
+m_2$formula
+```
+
+R² values conditional and marginal
+
+```{r}
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -305,52 +305,79 @@ mcmc_trace(posterior2, np = hmc_diagnostics2)
 ##### Kernel density
 
 ```{r}
-ppc_dens_overlay(y, yrep1[1:50, ])
-ppc_dens_overlay(y, yrep2[1:50, ])
+p1 <- ppc_dens_overlay(y, yrep1[1:50, ])
+p2 <- ppc_dens_overlay(y, yrep2[1:50, ])
+p1 / p2
 ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site)
 ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site)
-ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$exposition)
-ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$exposition)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$exposition)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$exposition)
+p1 / p2
 ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$survey_year_fct)
 ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$survey_year_fct)
-ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$target_type)
-ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$target_type)
-ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$seed_density)
-ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$seed_density)
-ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$sand_ratio)
-ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$sand_ratio)
-ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$substrate_depth)
-ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$substrate_depth)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$target_type)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$target_type)
+p1 / p2
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$seed_density)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$seed_density)
+p1 / p2
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$sand_ratio)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$sand_ratio)
+p1 / p2
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$substrate_depth)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$substrate_depth)
+p1 / p2
 ```
 
 ##### Histograms of statistics skew
 
 ```{r}
-ppc_stat(y, yrep1, binwidth = 0.001)
-ppc_stat(y, yrep2, binwidth = 0.001)
+p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
+p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
+p1 / p2
 ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
 ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
-ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
-ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
+p1 / p2
 ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
 ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
-ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
-ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
-ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
-ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
-ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
-ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
-ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
-ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
+p1 / p2
 ```
 
 ##### LOO-PIT plots
 
 ```{r}
+<<<<<<< Updated upstream
+p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
+p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+p1 / p2
+p1 <- plot(loo1)
+p2 <- plot(loo2)
+p1 / p2
+=======
+<<<<<<< Updated upstream
 ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
 ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+=======
+p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
+p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+p1 / p2
+>>>>>>> Stashed changes
 plot(loo1)
 plot(loo2)
+>>>>>>> Stashed changes
 ```
 
 #### Autocorrelation check
@@ -365,7 +392,15 @@ mcmc_acf(posterior2, lags = 10)
 ### Model output
 
 ```{r}
+<<<<<<< Updated upstream
+prior_summary(m_2)
+=======
+<<<<<<< Updated upstream
 prior_summary(m_1)
+=======
+prior_summary(m_2, all = FALSE)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -374,13 +409,21 @@ bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
-draws1
 mcmc_intervals(
   posterior1,
+  prob = 0.66,
+  prob_outer = 0.95,
+  point_est = "mean"
+)
+<<<<<<< Updated upstream
+mcmc_intervals(
+  posterior2,
   prob = 0.5,
   prob_outer = 0.95,
   point_est = "mean"
 )
+=======
+<<<<<<< Updated upstream
 sjPlot::plot_model(m_1, m_2, type = "est")
 sjPlot::plot_model(m_2, type = "est")
 sjPlot::plot_model(
@@ -390,16 +433,21 @@ sjPlot::plot_model(
     "seed_density",  "exposition", "survey_year_fct"
     )
   )
+=======
+mcmc_intervals(
+  posterior2,
+  prob = 0.66,
+  prob_outer = 0.95,
+  point_est = "mean"
+)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 ```
 
 ### Effect sizes
 
 ```{r}
-(emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
-                  exposition | survey_year_fct, type = "response"))
-(emm <- emmeans(m_1, revpairwise ~ substrate_depth + sand_ratio |
-                  exposition | survey_year_fct, type = "response"))
-(emm <- emmeans(m_1, revpairwise ~ seed_density |
-                  exposition | survey_year_fct, type = "response"))
+emmeans(m_2, revpairwise ~ target_type + sand_ratio |
+          exposition | survey_year_fct, type = "response")
 ```
 

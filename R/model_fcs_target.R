@@ -268,8 +268,8 @@ m1_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
                seed = 123)
 
 ### Save ###
-save(m_simple, file = here("data", "processed", "model_fcs_simmple.Rdata"))
-save(m_full, file = here("data", "processed", "model_fcs_full_.Rdata"))
+save(m_simple, file = here("data", "processed", "model_fcs_simple.Rdata"))
+save(m_full, file = here("data", "processed", "model_fcs_full.Rdata"))
 save(m1, file = here("data", "processed", "model_fcs_1.Rdata"))
 save(m2, file = here("data", "processed", "model_fcs_2.Rdata"))
 save(m3, file = here("data", "processed", "model_fcs_3.Rdata"))
