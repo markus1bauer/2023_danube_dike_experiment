@@ -158,9 +158,9 @@ priors <- c(
 Model caluclations
 
 ```{r}
-load(file = here("data", "processed", "model_fcs_1.Rdata"))
-load(file = here("data", "processed", "model_fcs_2.Rdata"))
-load(file = here("data", "processed", "model_fcs_3.Rdata"))
+load(file = here("data", "processed", "model_persistence_1.Rdata"))
+load(file = here("data", "processed", "model_persistence_2.Rdata"))
+load(file = here("data", "processed", "model_persistence_3.Rdata"))
 ```
 
 ### Model comparison
