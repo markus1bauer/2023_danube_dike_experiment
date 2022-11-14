@@ -38,8 +38,8 @@ sites <- read_csv(
         "north", "south"
       )),
       survey_year = "c"
-    )
-) %>%
+      )
+  ) %>%
   ### Exclude data of seed mixtures
   filter(survey_year != "seeded") %>%
   pivot_longer(cols = c(B, C), names_to = "index", values_to = "n",
@@ -47,7 +47,8 @@ sites <- read_csv(
   filter(index == "B" & presabu == "presence") %>%
   mutate(
     survey_year_fct = factor(survey_year),
-    id = factor(id)
+    id = factor(id),
+    n = 1 - n
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
@@ -55,10 +56,11 @@ sites <- read_csv(
   )
 
 ### * Model ####
-load(file = "model_persistence_1.Rdata")
+load(file = here("data", "processed", "model_persistence_1.Rdata"))
 
 model <- sites %>%
-  add_predicted_draws(m1, allow_new_levels = TRUE)
+  add_epred_draws(m1, allow_new_levels = TRUE) %>%
+  mutate(.epred = 1 - .epred)
 
 ### * Functions ####
 theme_mb <- function() {
@@ -96,14 +98,14 @@ theme_mb <- function() {
      cex = .5
    ) +
    stat_pointinterval(
-     aes(y = .prediction, x = sand_ratio, color = target_type),
+     aes(y = .epred, x = sand_ratio, color = target_type),
      data = model,
      .width = c(0.66, 0.95),
      point_size = 2,
      position = "dodge"
    ) +
    geom_hline(
-     yintercept = 0.5,
+     yintercept = c(0.5, 0.75),
      linetype = "dashed",
      linewidth = .3,
      color = "black"
@@ -122,7 +124,7 @@ theme_mb <- function() {
                      values = c("#00BFC4", "#F8766D")) +
    labs(
      x = "Sand ratio [%]", fill = "", color = "",
-     y = expression(Persistence)
+     y = expression("Persistence")
    ) +
    theme_mb())
 
