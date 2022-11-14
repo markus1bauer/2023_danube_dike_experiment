@@ -209,19 +209,6 @@ m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
           save_pars = save_pars(all = TRUE),
           cores = parallel::detectCores(),
           seed = 123)
-m1_sqrt <- brm(sqrt(n) ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
-            substrate_depth + seed_density +
-            (1 | site/plot),
-          data = sites, 
-          family = gaussian("identity"),
-          prior = priors,
-          chains = chains,
-          iter = iter,
-          thin = thin,
-          warmup = floor(iter / 2),
-          save_pars = save_pars(all = TRUE),
-          cores = parallel::detectCores(),
-          seed = 123)
 
 m2 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
             substrate_depth + seed_density +
