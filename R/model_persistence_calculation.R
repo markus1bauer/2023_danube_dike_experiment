@@ -157,12 +157,12 @@ chains = 4
 thin = 2
 priors <- c(
   set_prior("normal(0, 1)", class = "b"),
-  set_prior("normal(-0.05, 1)", class = "b", coef = "sand_ratio25"),
-  set_prior("normal(-0.10, 1)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(-0.05, 1)", class = "b", coef = "expositionsouth"),
-  set_prior("normal(-0.05, 1)", class = "b", coef = "survey_year_fct2019"),
-  set_prior("normal(-0.10, 1)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(-0.15, 1)", class = "b", coef = "survey_year_fct2021"),
+  set_prior("normal(-0.025, 1)", class = "b", coef = "sand_ratio25"),
+  set_prior("normal(-0.050, 1)", class = "b", coef = "sand_ratio50"),
+  set_prior("normal(0.050, 1)", class = "b", coef = "expositionsouth"),
+  set_prior("normal(-0.025, 1)", class = "b", coef = "survey_year_fct2019"),
+  set_prior("normal(-0.050, 1)", class = "b", coef = "survey_year_fct2020"),
+  set_prior("normal(-0.075, 1)", class = "b", coef = "survey_year_fct2021"),
   set_prior("cauchy(0, 1)", class = "sigma")
 )
 ### Models ###
@@ -197,6 +197,19 @@ m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
               seed = 123)
 
 m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
+            substrate_depth + seed_density +
+            (1 | site/plot),
+          data = sites, 
+          family = gaussian("identity"),
+          prior = priors,
+          chains = chains,
+          iter = iter,
+          thin = thin,
+          warmup = floor(iter / 2),
+          save_pars = save_pars(all = TRUE),
+          cores = parallel::detectCores(),
+          seed = 123)
+m1_sqrt <- brm(sqrt(n) ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
             substrate_depth + seed_density +
             (1 | site/plot),
           data = sites, 
