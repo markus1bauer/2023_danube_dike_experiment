@@ -16,6 +16,7 @@
 library(here)
 library(tidyverse)
 library(ggbeeswarm)
+library(ggrepel)
 
 ### Start ###
 rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
@@ -48,7 +49,7 @@ sites <- read_csv(
   mutate(
     survey_year_fct = factor(survey_year),
     id = factor(id),
-    n = 1 - n
+    n = (1 - n) * 100
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
@@ -60,7 +61,7 @@ load(file = here("data", "processed", "model_persistence_1.Rdata"))
 
 model <- sites %>%
   add_epred_draws(m1, allow_new_levels = TRUE) %>%
-  mutate(.epred = 1 - .epred)
+  mutate(.epred = (1 - .epred) * 100)
 
 ### * Functions ####
 theme_mb <- function() {
@@ -88,7 +89,7 @@ theme_mb <- function() {
 
 
 
-## 1 Marginal effects #########################################################
+## 1 Expectations of predicted draws ###########################################
 
 (p1 <- ggplot(data = sites) +
    geom_quasirandom(
@@ -105,8 +106,14 @@ theme_mb <- function() {
      position = "dodge"
    ) +
    geom_hline(
-     yintercept = c(0.5, 0.75),
+     yintercept = c(25, 75),
      linetype = "dashed",
+     linewidth = .3,
+     color = "black"
+   ) +
+   geom_hline(
+     yintercept = c(50),
+     linetype = "solid",
      linewidth = .3,
      color = "black"
    ) +
@@ -117,26 +124,26 @@ theme_mb <- function() {
          "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
      )
    ) +
-   scale_y_continuous(limits = c(0, .91), breaks = seq(-100, 400, .1)) +
+   scale_y_continuous(limits = c(0, 100), breaks = seq(-100, 400, 10)) +
    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
                       values = c("#00BFC4", "#F8766D")) +
    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
                      values = c("#00BFC4", "#F8766D")) +
    labs(
      x = "Sand ratio [%]", fill = "", color = "",
-     y = expression("Persistence")
+     y = expression("Persistence [%]")
    ) +
    theme_mb())
 
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_4_persistence_pred_800dpi_27x9cm.tiff"),
+            "figure_4_persistence_epred_800dpi_27x9cm.tiff"),
        dpi = 800, width = 27, height = 9, units = "cm")
 
 p1 + theme(legend.position = "bottom")
 ggsave(here("outputs", "figures",
-            "figure_4_persistence_pred_800dpi_16.5x14cm.tiff"),
+            "figure_4_persistence_epred_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")
 
 
@@ -171,10 +178,12 @@ m1 %>%
       "2018 vs. 2021" = "b_survey_year_fct2021"
     )
   ) %>%
+  mutate(.value = ((1 - .value) * 100) - 100) %>%
   ggplot(aes(x = .value, y = .variable)) +
   stat_halfeye() +
   geom_vline(xintercept = 0, linetype = "dashed") +
-  labs(x = "Persistence", y = "") +
+  scale_x_continuous(breaks = seq(-100, 400, 10)) +
+  labs(x = expression(Delta ~ Persistence ~ "[%]"), y = "") +
   theme_mb()
 
 ### Save ###
