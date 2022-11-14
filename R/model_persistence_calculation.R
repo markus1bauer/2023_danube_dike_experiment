@@ -24,37 +24,37 @@ library(brms)
 rm(list = ls())
 
 ### Load data ###
-sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
-                  col_names = TRUE, na = c("na", "NA", ""), col_types =
-                    cols(
-                      .default = "?",
-                      plot = "f",
-                      site = "f",
-                      sand_ratio = "f",
-                      substrate_depth = "f",
-                      target_type = col_factor(levels = c(
-                        "dry_grassland", "hay_meadow"
-                      )),
-                      seed_density = "f",
-                      exposition = col_factor(levels = c(
-                        "north", "south"
-                      )),
-                      survey_year = "d"
-                    )) %>%
+sites <- read_csv(
+  here("data", "processed", "data_processed_sites_temporal.csv"),
+  col_names = TRUE, na = c("na", "NA", ""), col_types =
+    cols(
+      .default = "?",
+      plot = "f",
+      site = "f",
+      sand_ratio = "f",
+      substrate_depth = "f",
+      target_type = col_factor(levels = c(
+        "dry_grassland", "hay_meadow"
+      )),
+      seed_density = "f",
+      exposition = col_factor(levels = c(
+        "north", "south"
+      )),
+      survey_year = "c"
+    )
+  ) %>%
   ### Exclude data of seed mixtures
   filter(survey_year != "seeded") %>%
   pivot_longer(cols = c(B, C), names_to = "index", values_to = "n",
                names_transform = as.factor) %>%
-  filter(index = C) %>%
+  filter(index == "B" & presabu == "presence") %>%
   mutate(
     survey_year_fct = factor(survey_year),
-    botanist_year = str_c(survey_year, botanist, sep = " "),
-    botanist_year = factor(botanist_year),
     id = factor(id)
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
-    seed_density, survey_year_fct, survey_year, botanist_year, n
+    seed_density, survey_year_fct, survey_year, n
   )
 
 
@@ -97,11 +97,7 @@ plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
 plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Blocks (Data of 2021)")
-plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
-  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Botanists and survey year") +
-  theme(axis.text.x = element_text(angle = 90))
-(plot1 + plot2) / (plot3 + plot4)
+(plot1 + plot2) / (plot3)
 ggplot(data = sites,
        aes(x = sand_ratio, y = n, color = target_type)) + 
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
@@ -122,7 +118,7 @@ ggplot(data = sites,
   labs(title = "Target type vs. Seed density [g/m²]")
 
 
-### b Outliers, zero-inflation, transformations? ----------------------------
+### b Outliers, zero-inflation, transformations? ------------------------------
 
 sites %>% group_by(exposition) %>% count(site)
 boxplot(sites$n)
@@ -141,7 +137,7 @@ ggplot(sites, aes(sqrt(n))) + geom_density()
 ### Posssible priors ###
 get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
-            (1 | site/plot) + (1 | botanist_year),
+            (1 | site/plot),
           data = sites)
 ### Example of normal distribution
 ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
@@ -161,12 +157,12 @@ chains = 4
 thin = 2
 priors <- c(
   set_prior("normal(0, 1)", class = "b"),
-  set_prior("normal(0.1, 1)", class = "b", coef = "sand_ratio25"),
-  set_prior("normal(0.2, 1)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(0.1, 1)", class = "b", coef = "expositionsouth"),
-  set_prior("normal(0.1, 1)", class = "b", coef = "survey_year_fct2019"),
-  set_prior("normal(0.2, 1)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(0.3, 1)", class = "b",coef = "survey_year_fct2021"),
+  set_prior("normal(-0.05, 1)", class = "b", coef = "sand_ratio25"),
+  set_prior("normal(-0.10, 1)", class = "b", coef = "sand_ratio50"),
+  set_prior("normal(-0.05, 1)", class = "b", coef = "expositionsouth"),
+  set_prior("normal(-0.05, 1)", class = "b", coef = "survey_year_fct2019"),
+  set_prior("normal(-0.10, 1)", class = "b", coef = "survey_year_fct2020"),
+  set_prior("normal(-0.15, 1)", class = "b",coef = "survey_year_fct2021"),
   set_prior("cauchy(0, 1)", class = "sigma")
 )
 ### Models ###
