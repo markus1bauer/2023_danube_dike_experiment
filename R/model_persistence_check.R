@@ -27,37 +27,37 @@ library(emmeans)
 rm(list = ls())
 
 ### Load data ###
-sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
-                  col_names = TRUE, na = c("na", "NA", ""), col_types =
-                    cols(
-                      .default = "?",
-                      plot = "f",
-                      site = "f",
-                      sand_ratio = "f",
-                      substrate_depth = "f",
-                      target_type = col_factor(levels = c(
-                        "dry_grassland", "hay_meadow"
-                      )),
-                      seed_density = "f",
-                      exposition = col_factor(levels = c(
-                        "north", "south"
-                      )),
-                      survey_year = "d"
-                    )) %>%
+sites <- read_csv(
+  here("data", "processed", "data_processed_sites_temporal.csv"),
+  col_names = TRUE, na = c("na", "NA", ""), col_types =
+    cols(
+      .default = "?",
+      plot = "f",
+      site = "f",
+      sand_ratio = "f",
+      substrate_depth = "f",
+      target_type = col_factor(levels = c(
+        "dry_grassland", "hay_meadow"
+      )),
+      seed_density = "f",
+      exposition = col_factor(levels = c(
+        "north", "south"
+      )),
+      survey_year = "c"
+    )
+) %>%
   ### Exclude data of seed mixtures
   filter(survey_year != "seeded") %>%
   pivot_longer(cols = c(B, C), names_to = "index", values_to = "n",
                names_transform = as.factor) %>%
-  filter(index = C) %>%
+  filter(index == "B" & presabu == "presence") %>%
   mutate(
     survey_year_fct = factor(survey_year),
-    botanist_year = str_c(survey_year, botanist, sep = " "),
-    botanist_year = factor(botanist_year),
     id = factor(id)
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
-    seed_density, survey_year_fct, survey_year, botanist_year, n
+    seed_density, survey_year_fct, survey_year, n
   )
 load(file = here("data", "processed", "model_persistence_1.Rdata"))
 load(file = here("data", "processed", "model_persistence_2.Rdata"))
