@@ -819,13 +819,13 @@ rm(list = setdiff(ls(), c(
 
 
 ### Prepare data ###
-data_sites <- sites %>%
+data_sites <- sites_experiment %>%
   # Choose only plots which were surveyed in each year:
-  filter(accumulatedCov > 0) %>%
+  filter(accumulated_cover > 0) %>%
   add_count(plot) %>%
   filter(n == max(n)) %>%
   select(id, plot)
-data_species <- species %>%
+data_species <- species_experiment %>%
   select(where(~ !all(is.na(.x)))) %>%
   mutate(across(where(is.numeric), ~ replace(., is.na(.), 0))) %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
@@ -848,6 +848,7 @@ for (i in unique(data_species$year)) {
 
 ### a Calculate TBI Presence --------------------------------------------------
 
+### Temporal Beta diversity Index
 ### Legendre (2019) Ecol Evol
 ### https://doi.org/10.1002/ece3.4984
 
@@ -855,8 +856,8 @@ for (i in unique(data_species$year)) {
 res18 <- TBI(species_seeded, species_2018,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res18$BCD.summary # B = .566, C = .308, D = .874 (.647 vs. .352)
-res18$t.test_B.C # p.perm = 1e-04
+res18$BCD.summary # B = .571, C = .304, D = .875 (.652 vs. .347)
+res18$t.test_B.C
 tbi18 <- res18$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "2018")
@@ -867,8 +868,8 @@ plot(res18, type = "BC")
 res19 <- TBI(species_seeded, species_2019,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res19$BCD.summary # B = .372, C = .361, D = .733 (.507 vs. .492)
-res19$t.test_B.C # p.perm = .422
+res19$BCD.summary # B = .377, C = .357, D = .735 (.513 vs. .486)
+res19$t.test_B.C
 tbi19 <- res19$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "2019")
@@ -879,8 +880,8 @@ plot(res19, type = "BC")
 res20 <- TBI(species_seeded, species_2020,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res20$BCD.summary # B = .318, C = .396, D = .715 (.445 vs. .554)
-res20$t.test_B.C # p.perm = 1e-04
+res20$BCD.summary # B = .324, C = .392, D = .717 (.452 vs. .547)
+res20$t.test_B.C
 tbi20 <- res20$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "2020")
@@ -891,8 +892,8 @@ plot(res20, type = "BC")
 res21 <- TBI(species_seeded, species_2021,
              method = "sorensen",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res21$BCD.summary # B = .343, C = .394, D = .738 (.465 vs. .534)
-res21$t.test_B.C # p.perm = 1e-04
+res21$BCD.summary # B = .349, C = .391, D = .740 (.471 vs. .528)
+res21$t.test_B.C
 tbi21 <- res21$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "2021")
@@ -904,10 +905,11 @@ data_presence <- bind_rows(tbi18, tbi19, tbi20, tbi21) %>%
   mutate(presabu = "presence")
 
 rm(list = setdiff(ls(), c(
-  "sites", "species", "traits", "seedmixes", "species_seeded",
-  "species_2018", "species_2019", "species_2020", "species_2021",
-  "data_presence", "data_sites", "data_species"
-)))
+  "sites_experiment", "species_experiment", "traits",
+  "sites_bauer", "sites_splot", "species_bauer", "species_splot",
+  "species_seeded", "species_2018", "species_2019", "species_2020",
+  "species_2021", "data_presence", "data_sites", "data_species"
+  )))
 
 ### b Calculate TBI Abundance -------------------------------------------------
 
@@ -915,8 +917,8 @@ rm(list = setdiff(ls(), c(
 res18 <- TBI(species_seeded, species_2018,
              method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res18$BCD.summary # B = .654, C = .318, D = .973 (.672 vs. .327)
-res18$t.test_B.C # p.perm = 1e-04
+res18$BCD.summary # B = .657, C = .315, D = .973 (.675 vs. .324)
+res18$t.test_B.C
 tbi18 <- res18$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "2018")
@@ -927,8 +929,8 @@ plot(res18, type = "BC")
 res19 <- TBI(species_seeded, species_2019,
              method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res19$BCD.summary # B = .519, C = .386, D = .905 (.573 vs. .426)
-res19$t.test_B.C # p.perm = .1e-04
+res19$BCD.summary # B = .522, C = .383, D = .906 (.576 vs. .423)
+res19$t.test_B.C
 tbi19 <- res19$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "2019")
@@ -939,8 +941,8 @@ plot(res19, type = "BC")
 res20 <- TBI(species_seeded, species_2020,
              method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res20$BCD.summary # B = .484, C = .385, D = .870 (.557 vs. .442)
-res20$t.test_B.C # p.perm = 1e-04
+res20$BCD.summary # B = .488, C = .382, D = .870 (.560 vs. .439)
+res20$t.test_B.C
 tbi20 <- res20$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "2020")
@@ -951,8 +953,8 @@ plot(res20, type = "BC")
 res21 <- TBI(species_seeded, species_2021,
              method = "%difference",
              nperm = 9999, test.t.perm = TRUE, clock = TRUE)
-res21$BCD.summary # B = .470, C = .392, D = .862 (.544 vs. .455)
-res21$t.test_B.C # p.perm = 1e-04
+res21$BCD.summary # B = .473, C = .390, D = .863 (.548 vs. .451)
+res21$t.test_B.C
 tbi21 <- res21$BCD.mat %>%
   as_tibble() %>%
   mutate(comparison = "2021")
@@ -983,12 +985,19 @@ data <- data_presence %>%
     across(c(B, C, D, change), ~ round(.x, digits = 4))
   ) %>%
   select(id, B, C, D, presabu)
-sites <- sites %>%
-  left_join(data, by = "id")
+sites_temporal <- sites_experiment %>%
+  filter(survey_year != "seeded") %>%
+  left_join(data, by = "id") %>%
+  select(
+    id, plot, site, longitude, latitude, elevation, plot_size, exposition,
+    orientation, sand_ratio, substrate_depth, target_type, seed_density,
+    survey_year, B, C, D, presabu
+    )
 
 rm(list = setdiff(ls(), c(
-  "sites", "species", "traits", "seedmixes"
-)))
+  "sites_experiment", "species_experiment", "traits", "sites_temporal",
+  "sites_bauer", "sites_splot", "species_bauer", "species_splot"
+  )))
 
 
 
@@ -1609,6 +1618,10 @@ write_csv(
   sites_experiment,
   here("data", "processed", "data_processed_sites.csv")
   )
+write_csv(
+  sites_temporal,
+  here("data", "processed", "data_processed_sites_temporal.csv")
+)
 write_csv(
   species_experiment,
   here("data", "processed", "data_processed_species.csv")
