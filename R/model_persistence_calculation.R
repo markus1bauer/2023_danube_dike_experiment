@@ -44,13 +44,11 @@ sites <- read_csv(
     )
   ) %>%
   ### Exclude data of seed mixtures
-  filter(survey_year != "seeded") %>%
-  pivot_longer(cols = c(B, C), names_to = "index", values_to = "n",
-               names_transform = as.factor) %>%
-  filter(index == "B" & presabu == "presence") %>%
+  filter(presabu == "presence") %>%
   mutate(
     survey_year_fct = factor(survey_year),
-    id = factor(id)
+    id = factor(id),
+    n = persistence
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,

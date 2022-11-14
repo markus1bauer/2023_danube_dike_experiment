@@ -39,17 +39,14 @@ sites <- read_csv(
         "north", "south"
       )),
       survey_year = "c"
-      )
+    )
   ) %>%
   ### Exclude data of seed mixtures
-  filter(survey_year != "seeded") %>%
-  pivot_longer(cols = c(B, C), names_to = "index", values_to = "n",
-               names_transform = as.factor) %>%
-  filter(index == "B" & presabu == "presence") %>%
+  filter(presabu == "presence") %>%
   mutate(
     survey_year_fct = factor(survey_year),
     id = factor(id),
-    n = (1 - n) * 100
+    n = persistence
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
@@ -60,8 +57,7 @@ sites <- read_csv(
 load(file = here("data", "processed", "model_persistence_1.Rdata"))
 
 model <- sites %>%
-  add_epred_draws(m1, allow_new_levels = TRUE) %>%
-  mutate(.epred = (1 - .epred) * 100)
+  add_epred_draws(m1, allow_new_levels = TRUE)
 
 ### * Functions ####
 theme_mb <- function() {

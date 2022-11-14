@@ -53,7 +53,7 @@ sites <- read_csv("data_processed_sites.csv",
 load(file = "model_fcs_3.Rdata")
 
 model <- sites %>%
-  add_predicted_draws(m3, allow_new_levels = TRUE)
+  add_epred_draws(m3, allow_new_levels = TRUE)
 
 ### * Functions ####
 theme_mb <- function() {
@@ -90,18 +90,18 @@ theme_mb <- function() {
     dodge.width = 0.9,
     cex = .5
     ) +
-  stat_pointinterval(
-    aes(y = .prediction, x = sand_ratio, color = target_type),
-    data = model,
-    .width = c(0.66, 0.95),
-    point_size = 2,
-    position = "dodge"
-  ) +
   geom_hline(
     yintercept = 0,
     linetype = "dashed",
     linewidth = .3,
     color = "black"
+  ) +
+  stat_pointinterval(
+    aes(y = .epred, x = sand_ratio, color = target_type),
+    data = model,
+    .width = c(0.66, 0.95),
+    point_size = 2,
+    position = "dodge"
   ) +
   facet_grid(
     exposition ~ survey_year_fct,
@@ -126,12 +126,12 @@ theme_mb <- function() {
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_2_fcs_pred_800dpi_27x9cm.tiff"),
+            "figure_3_fcs_epred_800dpi_27x9cm.tiff"),
        dpi = 800, width = 27, height = 9, units = "cm")
 
 p1 + theme(legend.position = "bottom")
 ggsave(here("outputs", "figures",
-            "figure_2_fcs_pred_800dpi_16.5x14cm.tiff"),
+            "figure_3_fcs_epred_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")
 
 
@@ -169,14 +169,14 @@ m3 %>%
   ggplot(aes(x = .value, y = .variable)) +
   stat_halfeye() +
   geom_vline(xintercept = 0, linetype = "dashed") +
-  labs(x = "Coefficient (Favourabale Conservation Status (FCS))", y = "") +
+  labs(x = expression(Delta ~ Favourabale ~ Conservation ~ Status ~ "(FCS)"), y = "") +
   theme_mb()
 
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_2_stat_fcs_coef_800dpi_27x9cm.tiff"),
+            "figure_3_fcs_coef_800dpi_27x9cm.tiff"),
        dpi = 800, width = 27, height = 9, units = "cm")
 ggsave(here("outputs", "figures",
-            "figure_2_stat_fcs_coef_800dpi_16.5x14cm.tiff"),
+            "figure_3_fcs_coef_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")

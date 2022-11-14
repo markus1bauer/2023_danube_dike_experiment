@@ -992,7 +992,8 @@ sites_temporal <- sites_experiment %>%
     id, plot, site, longitude, latitude, elevation, plot_size, exposition,
     orientation, sand_ratio, substrate_depth, target_type, seed_density,
     survey_year, B, C, D, presabu
-    )
+    ) %>%
+  mutate(persistence = (1 - B) * 100)
 
 rm(list = setdiff(ls(), c(
   "sites_experiment", "species_experiment", "traits", "sites_temporal",
