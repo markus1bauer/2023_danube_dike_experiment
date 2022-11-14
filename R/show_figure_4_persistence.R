@@ -94,13 +94,6 @@ theme_mb <- function() {
      dodge.width = 0.9,
      cex = .5
    ) +
-   stat_pointinterval(
-     aes(y = .epred, x = sand_ratio, color = target_type),
-     data = model,
-     .width = c(0.66, 0.95),
-     point_size = 2,
-     position = "dodge"
-   ) +
    geom_hline(
      yintercept = c(25, 75),
      linetype = "dashed",
@@ -112,6 +105,13 @@ theme_mb <- function() {
      linetype = "solid",
      linewidth = .3,
      color = "black"
+   ) +
+   stat_pointinterval(
+     aes(y = .epred, x = sand_ratio, color = target_type),
+     data = model,
+     .width = c(0.66, 0.95),
+     point_size = 2,
+     position = "dodge"
    ) +
    facet_grid(
      exposition ~ survey_year_fct,

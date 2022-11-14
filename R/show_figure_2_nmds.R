@@ -250,14 +250,14 @@ for (group in levels(data_nmds$group_type)) {
          "dry_grassland" = "Dry grassland", "hay_meadow" = "Hay meadow")
      )
    ) +
+   geom_vline(xintercept = 0, linetype = "dashed") +
+   geom_hline(yintercept = 0, linetype = "dashed") +
    geom_path(
      aes(x = NMDS1, y = NMDS2, color = reference),
      data = data_ellipses,
      size = 1,
      show.legend = FALSE
    ) +
-   geom_vline(xintercept = 0, linetype = "dashed") +
-   geom_hline(yintercept = 0, linetype = "dashed") +
    coord_fixed() +
    scale_shape_manual(
      values = c(
