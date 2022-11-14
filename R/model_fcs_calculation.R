@@ -237,7 +237,7 @@ m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
                  sand_ratio:exposition:survey_year_fct +
                  seed_density:exposition:survey_year_fct +
                  (1 | site/plot) + (1 | botanist_year),
-               data = sites, 
+               data = sites,
                family = gaussian("identity"),
                prior = priors,
                chains = chains,
@@ -249,10 +249,15 @@ m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
                seed = 123)
 
 
-m1_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
+m3_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
                  substrate_depth + seed_density +
+                 substrate_depth:sand_ratio +
+                 seed_density:exposition +
+                 target_type:exposition:survey_year_fct +
+                 sand_ratio:exposition:survey_year_fct +
+                 seed_density:exposition:survey_year_fct +
                  (1 | site/plot) + (1 | botanist_year),
-               data = sites, 
+               data = sites,
                family = gaussian("identity"),
                prior = c(
                  set_prior("cauchy(0, 1)", class = "sigma")
@@ -271,4 +276,4 @@ save(m_full, file = here("data", "processed", "model_fcs_full_.Rdata"))
 save(m1, file = here("data", "processed", "model_fcs_1.Rdata"))
 save(m2, file = here("data", "processed", "model_fcs_2.Rdata"))
 save(m3, file = here("data", "processed", "model_fcs_3.Rdata"))
-save(m1_flat, file = here("data", "processed", "model_fcs_1_flat.Rdata"))
+save(m3_flat, file = here("data", "processed", "model_fcs_3_flat.Rdata"))

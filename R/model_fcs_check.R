@@ -42,7 +42,7 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
                       exposition = col_factor(levels = c(
                         "north", "south"
                       )),
-                      survey_year = "d"
+                      survey_year = "c",
                     )) %>%
   ### Exclude data of seed mixtures
   filter(survey_year != "seeded") %>%
@@ -57,10 +57,12 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
     seed_density, survey_year_fct, survey_year, botanist_year, n
     )
+load(file = here("data", "processed", "model_fcs_simple.Rdata"))
+load(file = here("data", "processed", "model_fcs_full.Rdata"))
 load(file = here("data", "processed", "model_fcs_1.Rdata"))
 load(file = here("data", "processed", "model_fcs_2.Rdata"))
 load(file = here("data", "processed", "model_fcs_3.Rdata"))
-load(file = here("data", "processed", "model_fcs_1_flat.Rdata"))
+load(file = here("data", "processed", "model_fcs_3_flat.Rdata"))
 
 
 
