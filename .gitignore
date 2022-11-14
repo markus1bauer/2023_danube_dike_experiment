@@ -17,3 +17,4 @@ data/raw/data_raw_traitbase_try_20210318_14157.txt
 data/raw/sabatini_etal_2021/sPlotOpen_DT.txt
 .RDataTmp1
 data/processed/model_fcs_full.Rdata
+data/processed/model_persistence_full.Rdata

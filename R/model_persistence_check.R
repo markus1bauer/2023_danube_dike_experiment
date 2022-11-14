@@ -62,6 +62,8 @@ sites <- read_csv(
 load(file = here("data", "processed", "model_persistence_1.Rdata"))
 load(file = here("data", "processed", "model_persistence_2.Rdata"))
 load(file = here("data", "processed", "model_persistence_3.Rdata"))
+load(file = here("data", "processed", "model_persistence_simple.Rdata"))
+load(file = here("data", "processed", "model_persistence_full.Rdata"))
 load(file = here("data", "processed", "model_persistence_1_flat.Rdata"))
 
 
