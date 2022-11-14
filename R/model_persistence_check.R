@@ -78,7 +78,7 @@ load(file = here("data", "processed", "model_persistence_1_flat.Rdata"))
 ### a Model comparison ---------------------------------------------------------
 
 m_1 <- m1
-m_2 <- m3
+m_2 <- m2
 m_1$formula
 m_2$formula
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -99,14 +99,14 @@ createDHARMa(
   observedResponse = sites$n,
   fittedPredictedResponse = apply(t(posterior_epred(m_1)), 1, mean),
   integerResponse = TRUE
-) %>%
+  ) %>%
   plot()
 createDHARMa(
   simulatedResponse = t(posterior_predict(m_2)),
   observedResponse = sites$n,
   fittedPredictedResponse = apply(t(posterior_epred(m_2)), 1, mean),
   integerResponse = TRUE
-) %>%
+  ) %>%
   plot()
 
 #### * Preparation ####
@@ -125,7 +125,6 @@ posterior1 <- m_1 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
-      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
@@ -144,7 +143,6 @@ posterior2 <- m_2 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
-      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
