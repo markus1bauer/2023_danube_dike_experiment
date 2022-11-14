@@ -78,7 +78,7 @@ load(file = here("data", "processed", "model_persistence_1_flat.Rdata"))
 ### a Model comparison ---------------------------------------------------------
 
 m_1 <- m1
-m_2 <- m2
+m_2 <- m3
 m_1$formula
 m_2$formula
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
