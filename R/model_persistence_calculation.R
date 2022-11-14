@@ -162,13 +162,13 @@ priors <- c(
   set_prior("normal(-0.05, 1)", class = "b", coef = "expositionsouth"),
   set_prior("normal(-0.05, 1)", class = "b", coef = "survey_year_fct2019"),
   set_prior("normal(-0.10, 1)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(-0.15, 1)", class = "b",coef = "survey_year_fct2021"),
+  set_prior("normal(-0.15, 1)", class = "b", coef = "survey_year_fct2021"),
   set_prior("cauchy(0, 1)", class = "sigma")
 )
 ### Models ###
 m_simple <- brm(n ~ target_type + exposition + sand_ratio + survey_year_fct +
                   seed_density + substrate_depth +
-                  (1 | site/plot) + (1 | botanist_year),
+                  (1 | site/plot),
                 data = sites, 
                 family = gaussian("identity"),
                 prior = priors,
@@ -184,7 +184,7 @@ m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
                      seed_density + substrate_depth)^3 +
                 target_type:sand_ratio:exposition:survey_year_fct +
                 substrate_depth:sand_ratio:exposition:survey_year_fct +
-                (1 | site/plot) + (1 | botanist_year),
+                (1 | site/plot),
               data = sites, 
               family = gaussian("identity"),
               prior = priors,
@@ -198,7 +198,7 @@ m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
 
 m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
             substrate_depth + seed_density +
-            (1 | site/plot) + (1 | botanist_year),
+            (1 | site/plot),
           data = sites, 
           family = gaussian("identity"),
           prior = priors,
@@ -215,7 +215,7 @@ m2 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
             sand_ratio:substrate_depth +
             substrate_depth:exposition +
             seed_density:exposition +
-            (1 | site/plot) + (1 | botanist_year),
+            (1 | site/plot),
           data = sites, 
           family = gaussian("identity"),
           prior = priors,
@@ -234,7 +234,7 @@ m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
             target_type:exposition:survey_year_fct +
             sand_ratio:exposition:survey_year_fct +
             seed_density:exposition:survey_year_fct +
-            (1 | site/plot) + (1 | botanist_year),
+            (1 | site/plot),
           data = sites, 
           family = gaussian("identity"),
           prior = priors,
@@ -249,7 +249,7 @@ m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
 
 m1_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
                  substrate_depth + seed_density +
-                 (1 | site/plot) + (1 | botanist_year),
+                 (1 | site/plot),
                data = sites, 
                family = gaussian("identity"),
                prior = c(
