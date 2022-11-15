@@ -34,7 +34,8 @@ theme_mb <- function() {
                               color = "black"),
     axis.line = element_line(),
     legend.key = element_rect(fill = "white"),
-    legend.position = "right",
+    legend.position = "bottom",
+    legend.text = element_text(size = 9),
     legend.margin = margin(0, 0, 0, 0, "cm"),
     plot.margin = margin(0, 0, 0, 0, "cm")
   )
@@ -145,22 +146,14 @@ species <- species_experiment %>%
 sites <- sites %>%
   semi_join(species, by = "id")
 
-species <- species %>%
-  column_to_rownames("id")
-
 rm(list = setdiff(ls(), c(
-  "sites", "species", "theme_mb", "vegan_cov_ellipse", "ordi"
+  "sites", "theme_mb", "vegan_cov_ellipse", "ordi"
   )))
 
 #### * Model ####
 
-set.seed(12)
-(ordi <- metaMDS(species, binary = TRUE,
-                 try = 50, previous.best = TRUE, na.rm = TRUE))
-save(ordi, file = here(
-  "outputs", "models", "model_nmds.Rdata"))
-#Wisonsin sqrt transformation, stress type 1
-stressplot(ordi) # stress: 0.205; Non-metric fit R² =.958
+load(file = here("outputs", "models", "model_nmds.Rdata"))
+ordi
 
 
 
@@ -285,5 +278,8 @@ for (group in levels(data_nmds$group_type)) {
 
 
 ### Save ###
-ggsave(here("outputs", "figures", "figure_2_nmds_800dpi_16.5x16cm_presentation.tiff"),
+ggsave(here("outputs", "figures", "figure_2_nmds_800dpi_16.5x16cm.tiff"),
        dpi = 800, width = 16.5, height = 16, units = "cm")
+graph_a + theme(legend.position = "right")
+ggsave(here("outputs", "figures", "figure_2_nmds_800dpi_18x13cm_.tiff"),
+       dpi = 800, width = 18, height = 13, units = "cm")
