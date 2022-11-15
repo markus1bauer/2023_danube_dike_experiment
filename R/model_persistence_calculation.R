@@ -263,9 +263,9 @@ m1_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
 
 ### c Save ---------------------------------------------------------------------
 save(m_simple, file = here(
-  "outputs", "models", "model_persistence_simple.Rdata"))
-save(m_full, file = here("outputs", "models", "model_persistence_full.Rdata"
-                         ))
+  "outputs", "models", "model_persistence_simple.Rdata"
+  ))
+save(m_full, file = here("outputs", "models", "model_persistence_full.Rdata"))
 save(m1, file = here("outputs", "models", "model_persistence_1.Rdata"))
 save(m2, file = here("outputs", "models", "model_persistence_2.Rdata"))
 save(m3, file = here("outputs", "models", "model_persistence_3.Rdata"))
