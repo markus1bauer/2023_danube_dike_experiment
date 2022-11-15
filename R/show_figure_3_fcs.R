@@ -1,6 +1,6 @@
 # Dike grassland field experiment
 # Favourable conservation status ####
-# Show figure 2
+# Show figure 3
 
 # Markus Bauer
 # 2022-11-10

@@ -1,7 +1,9 @@
-# Dike grassland experiment
-# Show_figure species composition ####
+# Dike grassland field experiment
+# NMDS ordination ####
+# Show figure 2
+
 # Markus Bauer
-# 2022-10-28
+# 2022-11-15
 
 
 
