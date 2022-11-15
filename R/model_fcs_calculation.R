@@ -143,13 +143,16 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
           data = sites)
 ### Example of normal distribution
 ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1))
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1)) +
+  expand_limits(y = 0)
 ### Example of cauchy distribution
 ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1))
+  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
+  expand_limits(y = 0)
 ### Example of a student t distribution
 ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5))
+  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
+  expand_limits(y = 0)
 
 ### a Models ------------------------------------------------------------------
 

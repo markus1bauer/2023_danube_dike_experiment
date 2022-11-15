@@ -48,12 +48,12 @@ sites <- read_csv(
       survey_year = "c"
     )
 ) %>%
-  ### Exclude data of seed mixtures
+  ### Exclude data of seed mixtures and scale
   filter(presabu == "presence") %>%
   mutate(
     survey_year_fct = factor(survey_year),
     id = factor(id),
-    n = scale(persistence)
+    n = persistence
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,

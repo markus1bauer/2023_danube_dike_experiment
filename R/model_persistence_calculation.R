@@ -48,7 +48,7 @@ sites <- read_csv(
   mutate(
     survey_year_fct = factor(survey_year),
     id = factor(id),
-    n = scale(persistence)
+    n = persistence
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
@@ -138,14 +138,17 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             (1 | site/plot),
           data = sites)
 ### Example of normal distribution
-ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1))
+ggplot(data = data.frame(x = c(-30, 30)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 10)) +
+  expand_limits(y = 0)
 ### Example of cauchy distribution
-ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1))
+ggplot(data = data.frame(x = c(-30, 30)), aes(x = x)) +
+  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 10)) +
+  expand_limits(y = 0)
 ### Example of a student t distribution
-ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5))
+ggplot(data.frame(x = c(-30, 30)), aes(x = x)) +
+  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 10)) +
+  expand_limits(y = 0)
 
 ### a Models ------------------------------------------------------------------
 
@@ -154,14 +157,14 @@ iter = 10000
 chains = 4
 thin = 2
 priors <- c(
-  set_prior("normal(0, 1)", class = "b"),
-  set_prior("normal(-0.025, 1)", class = "b", coef = "sand_ratio25"),
-  set_prior("normal(-0.050, 1)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(0.050, 1)", class = "b", coef = "expositionsouth"),
-  set_prior("normal(-0.025, 1)", class = "b", coef = "survey_year_fct2019"),
-  set_prior("normal(-0.050, 1)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(-0.075, 1)", class = "b", coef = "survey_year_fct2021"),
-  set_prior("cauchy(0, 1)", class = "sigma")
+  set_prior("normal(0, 20)", class = "b"),
+  set_prior("normal(-2.5, 20)", class = "b", coef = "sand_ratio25"),
+  set_prior("normal(-5, 20)", class = "b", coef = "sand_ratio50"),
+  set_prior("normal(5, 20)", class = "b", coef = "expositionsouth"),
+  set_prior("normal(-2.5, 20)", class = "b", coef = "survey_year_fct2019"),
+  set_prior("normal(-5, 20)", class = "b", coef = "survey_year_fct2020"),
+  set_prior("normal(-7.5, 20)", class = "b", coef = "survey_year_fct2021"),
+  set_prior("cauchy(0, 10)", class = "sigma")
 )
 ### Models ###
 m_simple <- brm(n ~ target_type + exposition + sand_ratio + survey_year_fct +

@@ -3,7 +3,7 @@
 # Show figure
 
 # Markus Bauer
-# 2022-11-14
+# 2022-11-15
 
 
 
@@ -54,10 +54,15 @@ sites <- read_csv(
   )
 
 ### * Model ####
-load(file = here("data", "processed", "model_persistence_1.Rdata"))
+load(file = here("outputs", "models", "model_persistence_1.Rdata"))
 
 model <- sites %>%
-  add_epred_draws(m1, allow_new_levels = TRUE)
+  add_epred_draws(m1, allow_new_levels = TRUE) %>%
+  mutate(
+    mean = mean(n),
+    sd = sd(n),
+    .epred = .epred * sd + mean
+  )
 
 ### * Functions ####
 theme_mb <- function() {
