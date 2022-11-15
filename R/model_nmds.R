@@ -29,24 +29,18 @@ sites <- read_csv("data_processed_sites.csv",
                       .default = "?",
                       id = "f",
                       plot = "f",
-                      block = "f",
+                      site = "f",
                       exposition = col_factor(levels = c("north", "south")),
-                      sandRatio = "f",
-                      substrateDepth = "f",
-                      targetType = "c",
-                      seedDensity = "f"
+                      sand_ratio = "f",
+                      substrate_depth = "f",
+                      target_type = "c",
+                      seed_density = "f"
                     )) %>%
   select(
-    id, plot, block, exposition, sandRatio, substrateDepth, targetType,
-    seedDensity, surveyYear
+    id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
+    seed_density, survey_year
   ) %>%
-  filter(targetType != "non_ffh") %>%
-  mutate(
-    targetType = if_else(targetType == "mixed", "hay_meadow", targetType),
-    surveyYear_fac = as.character(surveyYear),
-    surveyYear_fac = if_else(block == "C", "reference", surveyYear_fac),
-    surveyYear_fac = factor(surveyYear_fac)
-  )
+  mutate(survey_year_fct = factor(survey_year))
 
 species <- read_csv("data_processed_species.csv",
                   col_names = TRUE,
@@ -77,6 +71,7 @@ set.seed(123)
 (ordi <- metaMDS(species,
                  dist = "bray", binary = FALSE, autotransform = TRUE,
                  try = 99, previous.best = TRUE, na.rm = TRUE))
+save(ordi, file = here("outputs", "models", "model_fcs_simple.Rdata"))
 stressplot(ordi) # stress: 0.207; Non-metric fit R² =.957
 
 #### b environmental factors --------------------------------------------------

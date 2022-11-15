@@ -18,3 +18,6 @@ data/raw/sabatini_etal_2021/sPlotOpen_DT.txt
 .RDataTmp1
 data/processed/model_fcs_full.Rdata
 data/processed/model_persistence_full.Rdata
+outputs/models/model_persistence_full.Rdata
+outputs/models/model_fcs_full.Rdata
+.RDataTmp3

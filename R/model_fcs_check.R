@@ -276,3 +276,10 @@ mcmc_intervals(
 
 (emm <- emmeans(m_2, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
+
+(draws <- m %>%
+    posterior::as_draws() %>%
+    posterior::summarize_draws() %>%
+    filter(str_starts(variable, "b_")))
+
+write.csv(draws, here("outputs", "statistics", "table_cwm_abu_sla.csv"))
