@@ -67,6 +67,7 @@ theme_mb <- function() {
                               color = "black"),
     axis.line = element_line(),
     legend.key = element_rect(fill = "white"),
+    legend.text = element_text(size = 9),
     legend.position = "right",
     legend.margin = margin(0, 0, 0, 0, "cm"),
     plot.margin = margin(0, 0, 0, 0, "cm")
