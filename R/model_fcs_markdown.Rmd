@@ -155,9 +155,9 @@ priors <- c(
 Model caluclations
 
 ```{r}
-load(file = here("data", "processed", "model_fcs_1.Rdata"))
-load(file = here("data", "processed", "model_fcs_2.Rdata"))
-load(file = here("data", "processed", "model_fcs_3.Rdata"))
+load(file = here("outputs", "models", "model_fcs_1.Rdata"))
+load(file = here("outputs", "models", "model_fcs_2.Rdata"))
+load(file = here("outputs", "models", "model_fcs_3.Rdata"))
 ```
 
 ### Model comparison
@@ -282,6 +282,8 @@ range(draws2$ess_tail)
 ```{r}
 mcmc_trace(posterior1, np = hmc_diagnostics1)
 mcmc_trace(posterior2, np = hmc_diagnostics2)
+mcmc_parcoord(posterior1, np = hmc_diagnostics1)
+mcmc_parcoord(posterior2, np = hmc_diagnostics2)
 ```
 
 #### Posterior predictive check
@@ -392,7 +394,7 @@ mcmc_intervals(
 ### Effect sizes
 
 ```{r}
-(emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
+(emm <- emmeans(m_3, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 ```
 

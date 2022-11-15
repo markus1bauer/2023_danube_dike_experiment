@@ -283,6 +283,8 @@ range(draws2$ess_tail)
 ```{r}
 mcmc_trace(posterior1, np = hmc_diagnostics1)
 mcmc_trace(posterior2, np = hmc_diagnostics2)
+mcmc_parcoord(posterior1, np = hmc_diagnostics1)
+mcmc_parcoord(posterior2, np = hmc_diagnostics2)
 ```
 
 #### Posterior predictive check

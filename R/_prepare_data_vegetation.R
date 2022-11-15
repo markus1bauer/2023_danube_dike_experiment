@@ -25,10 +25,24 @@
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+remove.packages("rlang")
+remove.packages("tidyselect")
+remove.packages("tidyverse")
+remove.packages("Brobdingnag")
+remove.packages("dbplyr")
+remove.packages("Matrix")
 
+#devtools::install_github("RobinHankin/Brobdingnag") 
+install.packages("Matrix", dependencies = TRUE)
+install.packages("rlang", dependencies = TRUE)
+install.packages("Brobdingnag", dependencies = TRUE)
+install.packages("tidyselect", dependencies = TRUE)
+install.packages("dbplyr", dependencies = TRUE)
+install.packages("tidyverse", dependencies = TRUE)
+library(tidyverse)
 
 ### Packages ###
-library(renv)
+suppressPackageStartupMessages(library(renv))
 library(here)
 library(tidyverse)
 suppressPackageStartupMessages(library(lubridate))

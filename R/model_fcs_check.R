@@ -3,7 +3,7 @@
 # Model check
 
 # Markus Bauer
-# 2022-11-11
+# 2022-11-15
 
 
 
@@ -57,12 +57,12 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
     seed_density, survey_year_fct, survey_year, botanist_year, n
     )
-load(file = here("data", "processed", "model_fcs_simple.Rdata"))
-load(file = here("data", "processed", "model_fcs_full.Rdata"))
-load(file = here("data", "processed", "model_fcs_1.Rdata"))
-load(file = here("data", "processed", "model_fcs_2.Rdata"))
-load(file = here("data", "processed", "model_fcs_3.Rdata"))
-load(file = here("data", "processed", "model_fcs_3_flat.Rdata"))
+load(file = here("outputs", "models", "model_fcs_simple.Rdata"))
+load(file = here("outputs", "models", "model_fcs_full.Rdata"))
+load(file = here("outputs", "models", "model_fcs_1.Rdata"))
+load(file = here("outputs", "models", "model_fcs_2.Rdata"))
+load(file = here("outputs", "models", "model_fcs_3.Rdata"))
+load(file = here("outputs", "models", "model_fcs_3_flat.Rdata"))
 
 
 
@@ -75,8 +75,8 @@ load(file = here("data", "processed", "model_fcs_3_flat.Rdata"))
 
 ### a Model comparison ---------------------------------------------------------
 
-m_1 <- m_simple
-m_2 <- m_full
+m_1 <- m_1
+m_2 <- m_3
 m_1$formula
 m_2$formula
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -277,9 +277,4 @@ mcmc_intervals(
 (emm <- emmeans(m_2, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 
-(draws <- m %>%
-    posterior::as_draws() %>%
-    posterior::summarize_draws() %>%
-    filter(str_starts(variable, "b_")))
-
-write.csv(draws, here("outputs", "statistics", "table_cwm_abu_sla.csv"))
+write.csv(draws2, here("outputs", "statistics", "table_fcs.csv"))

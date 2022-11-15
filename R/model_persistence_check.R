@@ -246,7 +246,7 @@ mcmc_acf(posterior2, lags = 10)
 
 ### a Model output ------------------------------------------------------------
 
-prior_summary(m_2, all = FALSE)
+prior_summary(m_1, all = FALSE)
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -255,7 +255,7 @@ bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
-draws2
+draws1
 mcmc_intervals(
   posterior1,
   prob = 0.66,
@@ -272,5 +272,7 @@ mcmc_intervals(
 
 ### b Effect sizes ------------------------------------------------------------
 
-(emm <- emmeans(m_2, revpairwise ~ target_type + sand_ratio |
+(emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
+
+write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
