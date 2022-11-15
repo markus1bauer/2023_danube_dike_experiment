@@ -167,8 +167,8 @@ m3 %>%
       )
   ) %>%
   ggplot(aes(x = .value, y = .variable)) +
-  stat_halfeye() +
   geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_halfeye() +
   labs(x = expression(Delta ~ Favourabale ~ Conservation ~ Status ~ "(FCS)"), y = "") +
   theme_mb()
 

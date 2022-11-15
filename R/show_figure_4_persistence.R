@@ -176,8 +176,8 @@ m1 %>%
   ) %>%
   mutate(.value = ((1 - .value) * 100) - 100) %>%
   ggplot(aes(x = .value, y = .variable)) +
-  stat_halfeye() +
   geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_halfeye() +
   scale_x_continuous(breaks = seq(-100, 400, 10)) +
   labs(x = expression(Delta ~ Persistence ~ "[%]"), y = "") +
   theme_mb()

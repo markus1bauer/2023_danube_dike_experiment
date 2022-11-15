@@ -48,7 +48,7 @@ sites <- read_csv(
   mutate(
     survey_year_fct = factor(survey_year),
     id = factor(id),
-    n = persistence
+    n = scale(persistence)
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,

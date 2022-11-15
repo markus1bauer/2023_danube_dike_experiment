@@ -51,18 +51,18 @@ sites <- read_csv(
   mutate(
     survey_year_fct = factor(survey_year),
     id = factor(id),
-    n = persistence
+    n = scale(persistence)
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
     seed_density, survey_year_fct, survey_year, n
   )
-load(file = here("data", "processed", "model_persistence_1.Rdata"))
-load(file = here("data", "processed", "model_persistence_2.Rdata"))
-load(file = here("data", "processed", "model_persistence_3.Rdata"))
-load(file = here("data", "processed", "model_persistence_simple.Rdata"))
-load(file = here("data", "processed", "model_persistence_full.Rdata"))
-load(file = here("data", "processed", "model_persistence_1_flat.Rdata"))
+load(file = here("outputs", "models", "model_persistence_1.Rdata"))
+load(file = here("outputs", "models", "model_persistence_2.Rdata"))
+load(file = here("outputs", "models", "model_persistence_3.Rdata"))
+load(file = here("outputs", "models", "model_persistence_simple.Rdata"))
+load(file = here("outputs", "models", "model_persistence_full.Rdata"))
+load(file = here("outputs", "models", "model_persistence_1_flat.Rdata"))
 
 
 
@@ -80,9 +80,9 @@ m_2 <- m3
 m_1$formula
 m_2$formula
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+         re_formula =  ~ (1 | site/plot)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+         re_formula =  ~ (1 | site/plot)) 
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -248,12 +248,8 @@ mcmc_acf(posterior2, lags = 10)
 
 prior_summary(m_1, all = FALSE)
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
-bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+         re_formula =  ~ (1 | site/plot) ) 
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula = 1 ~ 1)
-bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 draws1
 mcmc_intervals(
@@ -264,7 +260,7 @@ mcmc_intervals(
 )
 mcmc_intervals(
   posterior2,
-  prob = 0.5,
+  prob = 0.66,
   prob_outer = 0.95,
   point_est = "mean"
 )
@@ -275,4 +271,4 @@ mcmc_intervals(
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 
-write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
+write.csv(draws1, here("outputs", "statistics", "table_persistence.csv"))
