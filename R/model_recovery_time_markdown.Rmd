@@ -1,5 +1,5 @@
 ---
-title: "Persistence of seed mixture species: <br> Analysis of Bauer et al. (unpublished) Field experiment"
+title: "Recover time to reference state: <br> Analysis of Bauer et al. (unpublished) Field experiment"
 author: "Markus Bauer <br>"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
 output: github_document
@@ -35,36 +35,7 @@ rm(list = ls())
 #### Load data
 
 ```{r}
-sites <- read_csv(
-  here("data", "processed", "data_processed_sites_temporal.csv"),
-  col_names = TRUE, na = c("na", "NA", ""), col_types =
-    cols(
-      .default = "?",
-      plot = "f",
-      site = "f",
-      sand_ratio = "f",
-      substrate_depth = "f",
-      target_type = col_factor(levels = c(
-        "dry_grassland", "hay_meadow"
-      )),
-      seed_density = "f",
-      exposition = col_factor(levels = c(
-        "north", "south"
-      )),
-      survey_year = "c"
-    )
-  ) %>%
-  ### Exclude data of seed mixtures
-  filter(presabu == "presence") %>%
-  mutate(
-    survey_year_fct = factor(survey_year),
-    id = factor(id),
-    n = persistence
-  ) %>%
-  select(
-    id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
-    seed_density, survey_year_fct, survey_year, n
-  )
+
 ```
 
 # Statistics
@@ -74,25 +45,20 @@ sites <- read_csv(
 ### Graphs of raw data
 
 ```{r echo = FALSE}
-plot1 <- ggplot(sites %>% filter(survey_year == 2021),
-                aes(y = n, x = sand_ratio)) +
+plot1 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = sand_ratio)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Sand ratio [vol%] (Data of 2021)")
-plot2 <- ggplot(sites %>% filter(survey_year == 2021),
-                aes(y = n, x = substrate_depth)) +
+plot2 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = substrate_depth)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Substrate depth [cm] (Data of 2021)")
-plot3 <- ggplot(sites %>% filter(survey_year == 2021),
-                aes(y = n, x = target_type)) +
+plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = target_type)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Target type (Data of 2021)")
-plot4 <- ggplot(sites %>% filter(survey_year == 2021),
-                aes(y = n, x = seed_density)) +
+plot4 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = seed_density)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Seed density [g/m²] (Data of 2021)")
 (plot1 + plot2) / (plot3 + plot4)
-plot1 <- ggplot(sites %>% filter(survey_year == 2021),
-                aes(y = n, x = exposition)) +
+plot1 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = exposition)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Exposition (Data of 2021)")
 plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
@@ -101,7 +67,11 @@ plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
 plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Blocks (Data of 2021)")
-(plot1 + plot2) / (plot3)
+plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Botanists and survey year") +
+  theme(axis.text.x = element_text(angle = 90))
+(plot1 + plot2) / (plot3 + plot4)
 ggplot(data = sites,
        aes(x = sand_ratio, y = n, color = target_type)) + 
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
@@ -143,22 +113,23 @@ iter = 10000
 chains = 4
 thin = 2
 priors <- c(
-  set_prior("normal(0, 20)", class = "b"),
-  set_prior("normal(-2.5, 20)", class = "b", coef = "sand_ratio25"),
-  set_prior("normal(-5, 20)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(5, 20)", class = "b", coef = "expositionsouth"),
-  set_prior("normal(-2.5, 20)", class = "b", coef = "survey_year_fct2019"),
-  set_prior("normal(-5, 20)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(-7.5, 20)", class = "b", coef = "survey_year_fct2021"),
-  set_prior("cauchy(0, 10)", class = "sigma")
+  set_prior("normal(0, 1)", class = "b"),
+  set_prior("normal(0.1, 1)", class = "b", coef = "sand_ratio25"),
+  set_prior("normal(0.2, 1)", class = "b", coef = "sand_ratio50"),
+  set_prior("normal(0.1, 1)", class = "b", coef = "expositionsouth"),
+  set_prior("normal(0.1, 1)", class = "b", coef = "survey_year_fct2019"),
+  set_prior("normal(0.2, 1)", class = "b", coef = "survey_year_fct2020"),
+  set_prior("normal(0.3, 1)", class = "b",coef = "survey_year_fct2021"),
+  set_prior("cauchy(0, 1)", class = "sigma")
 )
 ```
 
 Model caluclations
 
 ```{r}
-load(file = here("outputs", "models", "model_persistence_1.Rdata"))
-load(file = here("outputs", "models", "model_persistence_3.Rdata"))
+load(file = here("outputs", "models", "model_fcs_1.Rdata"))
+load(file = here("outputs", "models", "model_fcs_2.Rdata"))
+load(file = here("outputs", "models", "model_fcs_3.Rdata"))
 ```
 
 ### Model comparison
@@ -174,9 +145,9 @@ Conditional R² values
 
 ```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot)) 
+         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot))
+         re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
 ```
 
 Marginal R² values
@@ -215,6 +186,7 @@ posterior1 <- m_1 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
+      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
@@ -233,6 +205,7 @@ posterior2 <- m_2 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
+      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
@@ -353,17 +326,17 @@ mcmc_acf(posterior2, lags = 10)
 Priors and conditional and marignal R²
 
 ```{r}
-prior_summary(m_1, all = FALSE)
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot)) 
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+prior_summary(m_2, all = FALSE)
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ```
 
 Posteriors
 
 ```{r}
-draws1
+draws2
 mcmc_intervals(
   posterior1,
   prob = 0.66,
@@ -381,7 +354,7 @@ mcmc_intervals(
 ### Effect sizes
 
 ```{r}
-(emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
+(emm <- emmeans(m_2, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 ```
 

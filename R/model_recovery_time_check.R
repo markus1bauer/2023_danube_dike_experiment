@@ -334,4 +334,4 @@ mcmc_intervals(
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 
-write.csv(draws1, here("outputs", "statistics", "table_recover_time.csv"))
+write.csv(draws1, here("outputs", "statistics", "table_recovery_time.csv"))

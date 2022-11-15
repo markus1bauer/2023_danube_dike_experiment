@@ -22,39 +22,116 @@ library(ggrepel)
 rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 
 ### Load data ###
-sites <- read_csv(
-  here("data", "processed", "data_processed_sites_temporal.csv"),
-  col_names = TRUE, na = c("na", "NA", ""), col_types =
-    cols(
-      .default = "?",
-      plot = "f",
-      site = "f",
-      sand_ratio = "f",
-      substrate_depth = "f",
-      target_type = col_factor(levels = c(
-        "dry_grassland", "hay_meadow"
-      )),
-      seed_density = "f",
-      exposition = col_factor(levels = c(
-        "north", "south"
-      )),
-      survey_year = "c"
-    )
-) %>%
-  ### Exclude data of seed mixtures
-  filter(presabu == "presence") %>%
+sites_experiment <- read_csv("data_processed_sites.csv",
+                             col_names = TRUE, na = c("na", "NA", ""),
+                             col_types = cols(.default = "?")) %>%
+  mutate(reference = survey_year)
+sites_splot <- read_csv("data_processed_sites_splot.csv",
+                        col_names = TRUE, na = c("na", "NA", ""),
+                        col_types = cols(
+                          .default = "?",
+                          survey_year = "c"
+                        )) %>%
   mutate(
-    survey_year_fct = factor(survey_year),
-    id = factor(id),
-    n = persistence
-  ) %>%
-  select(
-    id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
-    seed_density, survey_year_fct, survey_year, n
+    reference = if_else(
+      esy == "E12a", "+Reference", if_else(
+        esy == "E22", "+Reference", "other"
+      )
+    ),
+    target_type = if_else(
+      esy == "E12a", "dry_grassland", if_else(
+        esy == "E22", "hay_meadow", "other"
+      )
+    ),
+    exposition = "other"
   )
+sites_bauer <- read_csv("data_processed_sites_bauer.csv",
+                        col_names = TRUE, na = c("na", "NA", ""),
+                        col_types = cols(
+                          .default = "?",
+                          survey_year = "c"
+                        )) %>%
+  filter(exposition == "south" | exposition == "north") %>%
+  mutate(
+    reference = if_else(
+      esy == "R1A", "+Reference", if_else(
+        esy == "R22", "+Reference", if_else(
+          esy == "R", "Grassland", if_else(
+            esy == "?", "no", if_else(
+              esy == "+", "no", if_else(
+                esy == "R21", "Grassland", if_else(
+                  esy == "V38", "-Reference", "other"
+                )
+              )
+            )
+          )
+        )
+      )
+    ),
+    target_type = if_else(
+      esy == "R1A", "dry_grassland", if_else(
+        esy == "R22", "hay_meadow", "other"
+      )
+    )
+  )
+sites <- sites_experiment %>%
+  bind_rows(sites_splot, sites_bauer) %>%
+  select(
+    id, esy, reference,
+    exposition, sand_ratio, substrate_depth, target_type, seed_density,
+    survey_year, longitude, latitude, elevation, plot_size
+  ) %>%
+  arrange(id)
+
+
+#### * Load species data ####
+
+species_experiment <- read_csv("data_processed_species.csv",
+                               col_names = TRUE, na = c("na", "NA", ""),
+                               col_types = cols(.default = "?"))
+species_splot <- read_csv("data_processed_species_splot.csv",
+                          col_names = TRUE, na = c("na", "NA", ""),
+                          col_types = cols(.default = "?"))
+species_bauer <- read_csv("data_processed_species_bauer.csv",
+                          col_names = TRUE, na = c("na", "NA", ""),
+                          col_types = cols(.default = "?"))
+
+### Exclude rare species (< 0.5% accumulated cover in all plots)
+data <- species_experiment %>%
+  full_join(species_splot, by = "name") %>%
+  full_join(species_bauer, by = "name") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
+  group_by(name) %>%
+  summarise(total_cover_species = sum(value)) %>%
+  filter(total_cover_species < 0.5)
+
+species <- species_experiment %>%
+  full_join(species_splot, by = "name") %>%
+  full_join(species_bauer, by = "name") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
+  filter(!(name %in% data$name)) %>% # use 'data' to filter
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  arrange(id) %>%
+  semi_join(sites, by = "id")
+
+sites <- sites %>%
+  semi_join(species, by = "id")
+
+load(file = here("outputs", "models", "model_nmds.Rdata"))
+
+sites2 <- sites %>%
+  mutate(nmds1 = ordi$points[, 1], nmds2 = ordi$points[, 2]) %>%
+  group_by(exposition, target_type)
+mutate(data = sites %>% filter(reference == "+Reference"), mean = mean(nmds1))
+
+rm(list = setdiff(ls(), c(
+  "sites", "theme_mb", "vegan_cov_ellipse", "ordi"
+)))
 
 ### * Model ####
-load(file = here("outputs", "models", "model_persistence_1.Rdata"))
+load(file = here("outputs", "models", "model_recovery_time_1.Rdata"))
 
 model <- sites %>%
   add_epred_draws(m1, allow_new_levels = TRUE) %>%
@@ -133,19 +210,19 @@ theme_mb <- function() {
                      values = c("#00BFC4", "#F8766D")) +
    labs(
      x = "Sand ratio [%]", fill = "", color = "",
-     y = expression("Persistence [%]")
+     y = expression("Recovery")
    ) +
    theme_mb())
 
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_5_recover_time_epred_800dpi_24x8cm.tiff"),
+            "figure_5_recovery_time_epred_800dpi_24x8cm.tiff"),
        dpi = 800, width = 24, height = 8, units = "cm")
 
 p1 + theme(legend.position = "bottom")
 ggsave(here("outputs", "figures",
-            "figure_5_recover_time_epred_800dpi_16.5x14cm.tiff"),
+            "figure_5_recovery_time_epred_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")
 
 
@@ -191,8 +268,8 @@ m1 %>%
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_5_recover_time_coef_800dpi_24x8cm.tiff"),
+            "figure_5_recovery_time_coef_800dpi_24x8cm.tiff"),
        dpi = 800, width = 24, height = 8, units = "cm")
 ggsave(here("outputs", "figures",
-            "figure_5_recover_time_coef_800dpi_16.5x14cm.tiff"),
+            "figure_5_recovery_time_coef_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")

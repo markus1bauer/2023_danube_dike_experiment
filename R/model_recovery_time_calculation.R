@@ -31,8 +31,19 @@ rm(list = ls())
 ### Load data ###
 sites_experiment <- read_csv("data_processed_sites.csv",
                              col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(.default = "?")) %>%
-  mutate(reference = survey_year)
+                             col_types = cols(
+                               .default = "?",
+                               sand_ratio = "f",
+                               substrate_depth = "f",
+                               target_type = "f",
+                               seed_density = "f",
+                               exposition = "f",
+                               site = "f"
+                               )) %>%
+  mutate(
+    reference = survey_year,
+    survey_year_fct = factor(survey_year)
+    )
 sites_splot <- read_csv("data_processed_sites_splot.csv",
                         col_names = TRUE, na = c("na", "NA", ""),
                         col_types = cols(
@@ -128,15 +139,30 @@ sites <- sites %>%
 
 load(file = here("outputs", "models", "model_nmds.Rdata"))
 
-sites2 <- sites %>%
+sites %>%
   mutate(nmds1 = ordi$points[, 1], nmds2 = ordi$points[, 2]) %>%
-  group_by(exposition, target_type)
-  mutate(data = sites %>% filter(reference == "+Reference"), mean = mean(nmds1))
-  
-rm(list = setdiff(ls(), c(
-  "sites", "theme_mb", "vegan_cov_ellipse", "ordi"
-)))
+  filter(reference == "+Reference") %>%
+  group_by(exposition, target_type) %>%
+  summarise(mean_reference = mean(nmds1))
 
+sites <- sites %>%
+  mutate(
+    nmds1 = ordi$points[, 1], nmds2 = ordi$points[, 2],
+    mean_reference = if_else(
+      exposition == "north" & target_type == "dry_grassland", 0.644, if_else(
+        exposition == "north" & target_type == "hay_meadow", 0.485, if_else(
+          exposition == "south" & target_type == "dry_grassland", 0.542, if_else(
+            exposition == "south" & target_type == "hay_meadow", 0.469, NA_real_
+          )
+        )
+      )
+    ),
+    n = mean_reference - nmds1
+    ) %>%
+  filter(reference == "2018" | reference == "2019" | reference == "2020" |
+           reference == "2021")
+
+rm(list = setdiff(ls(), c("sites")))
 
 
 
