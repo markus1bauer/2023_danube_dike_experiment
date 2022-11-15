@@ -169,6 +169,7 @@ m3 %>%
   ggplot(aes(x = .value, y = .variable)) +
   geom_vline(xintercept = 0, linetype = "dashed") +
   stat_halfeye() +
+  scale_x_continuous(breaks = seq(-100, 400, .5)) +
   labs(x = expression(Delta ~ Favourabale ~ Conservation ~ Status ~ "(FCS)"), y = "") +
   theme_mb()
 

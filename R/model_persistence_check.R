@@ -18,6 +18,8 @@ library(here)
 library(tidyverse)
 library(brms)
 library(DHARMa)
+#remotes::install_github("Pakillo/DHARMa.helpers")
+library(DHARMa.helpers)
 library(bayesplot)
 library(loo)
 library(tidybayes)
@@ -92,20 +94,8 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 ### b Model check -----------------------------------------------------------
 
 #### * DHARMa ####
-createDHARMa(
-  simulatedResponse = t(posterior_predict(m_1)),
-  observedResponse = sites$n,
-  fittedPredictedResponse = apply(t(posterior_epred(m_1)), 1, mean),
-  integerResponse = TRUE
-  ) %>%
-  plot()
-createDHARMa(
-  simulatedResponse = t(posterior_predict(m_2)),
-  observedResponse = sites$n,
-  fittedPredictedResponse = apply(t(posterior_epred(m_2)), 1, mean),
-  integerResponse = TRUE
-  ) %>%
-  plot()
+DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
+DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 
 #### * Preparation ####
 posterior1 <- m_1 %>%

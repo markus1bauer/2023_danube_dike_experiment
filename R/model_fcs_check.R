@@ -18,6 +18,8 @@ library(here)
 library(tidyverse)
 library(brms)
 library(DHARMa)
+#remotes::install_github("Pakillo/DHARMa.helpers")
+library(DHARMa.helpers)
 library(bayesplot)
 library(loo)
 library(tidybayes)
@@ -75,8 +77,8 @@ load(file = here("outputs", "models", "model_fcs_3_flat.Rdata"))
 
 ### a Model comparison ---------------------------------------------------------
 
-m_1 <- m_1
-m_2 <- m_3
+m_1 <- m1
+m_2 <- m3
 m_1$formula
 m_2$formula
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -92,20 +94,8 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 ### b Model check -----------------------------------------------------------
 
 #### * DHARMa ####
-createDHARMa(
-  simulatedResponse = t(posterior_predict(m_1)),
-  observedResponse = sites$n,
-  fittedPredictedResponse = apply(t(posterior_epred(m_1)), 1, mean),
-  integerResponse = TRUE
-  ) %>%
-  plot()
-createDHARMa(
-  simulatedResponse = t(posterior_predict(m_2)),
-  observedResponse = sites$n,
-  fittedPredictedResponse = apply(t(posterior_epred(m_2)), 1, mean),
-  integerResponse = TRUE
-  ) %>%
-  plot()
+DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
+DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 
 #### * Preparation ####
 posterior1 <- m_1 %>%
@@ -249,12 +239,8 @@ mcmc_acf(posterior2, lags = 10)
 ### a Model output ------------------------------------------------------------
 
 prior_summary(m_2, all = FALSE)
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula = 1 ~ 1)
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 draws2
