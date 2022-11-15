@@ -127,8 +127,8 @@ theme_mb <- function() {
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_3_fcs_epred_800dpi_27x9cm.tiff"),
-       dpi = 800, width = 27, height = 9, units = "cm")
+            "figure_3_fcs_epred_800dpi_24x8cm.tiff"),
+       dpi = 800, width = 24, height = 8, units = "cm")
 
 p1 + theme(legend.position = "bottom")
 ggsave(here("outputs", "figures",
@@ -177,8 +177,8 @@ m3 %>%
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_3_fcs_coef_800dpi_27x9cm.tiff"),
-       dpi = 800, width = 27, height = 9, units = "cm")
+            "figure_3_fcs_coef_800dpi_24x8cm.tiff"),
+       dpi = 800, width = 24, height = 8, units = "cm")
 ggsave(here("outputs", "figures",
             "figure_3_fcs_coef_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")
