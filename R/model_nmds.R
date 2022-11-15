@@ -83,6 +83,7 @@ sites <- sites_experiment %>%
     exposition, sand_ratio, substrate_depth, target_type, seed_density,
     survey_year, longitude, latitude, elevation, plot_size
   ) %>%
+  mutate(survey_year_fct = factor(survey_year)) %>%
   arrange(id)
 
 
@@ -128,59 +129,6 @@ rm(list = setdiff(ls(), c(
   "sites", "species", "theme_mb", "vegan_cov_ellipse", "ordi"
 )))
 
-#### * Model ####
-
-set.seed(12)
-(ordi <- metaMDS(species, binary = TRUE,
-                 try = 50, previous.best = TRUE, na.rm = TRUE))
-#Wisonsin sqrt transformation, stress type 1
-stressplot(ordi) # stress: 0.205; Non-metric fit R² =.958
-
-
-
-library(tidyverse)
-library(vegan)
-
-### Start ###
-rm(list = ls())
-setwd(here("data", "processed"))
-
-### Load data ###
-sites <- read_csv("data_processed_sites.csv",
-                  col_names = TRUE,
-                  na = c("na", "NA", ""),
-                  col_types =
-                    cols(
-                      .default = "?",
-                      id = "f",
-                      plot = "f",
-                      site = "f",
-                      exposition = col_factor(levels = c("north", "south")),
-                      sand_ratio = "f",
-                      substrate_depth = "f",
-                      target_type = "c",
-                      seed_density = "f"
-                    )) %>%
-  select(
-    id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
-    seed_density, survey_year
-  ) %>%
-  mutate(survey_year_fct = factor(survey_year))
-
-species <- read_csv("data_processed_species.csv",
-                  col_names = TRUE,
-                  na = c("na", "NA", ""),
-                  col_types = cols(
-                    .default = "d",
-                    name = "f",
-                  )) %>%
-  pivot_longer(-name, names_to = "id", values_to = "value") %>%
-  pivot_wider(names_from = "name", values_from = "value") %>%
-  arrange(id) %>%
-  semi_join(sites, by = "id") %>%
-  column_to_rownames("id") %>%
-  mutate(across(where(is.numeric), ~replace(., 0, NA)))
-
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -189,26 +137,12 @@ species <- read_csv("data_processed_species.csv",
 
 
 
-### 1 NMDS ####################################################################
-
-#### a ordination -------------------------------------------------------------
-set.seed(123)
-(ordi <- metaMDS(species,
-                 dist = "bray", binary = FALSE, autotransform = TRUE,
-                 try = 99, previous.best = TRUE, na.rm = TRUE))
-save(ordi, file = here("outputs", "models", "model_nmds.Rdata"))
-stressplot(ordi) # stress: 0.207; Non-metric fit R² =.957
-
-#### b environmental factors --------------------------------------------------
-dist <- dist(ordi, method = "euclidean")
-(ef <- envfit(ordi ~ surveyYear_fac + exposition + sandRatio + substrateDepth +
-                targetType + seedDensity,
-              data = sites,
-              permu = 999,
-              na.rm = TRUE))
-plot(ordi, type = "n")
-plot(ef, add = TRUE, p. = .05)
-text(ordi, dis = "sites", cex = .7)
-ordiellipse(ordi, sites$surveyYear_fac, kind = "sd", draw = "lines", label = TRUE)
+set.seed(12)
+(ordi <- metaMDS(species, binary = TRUE,
+                 try = 50, previous.best = TRUE, na.rm = TRUE))
+#save(ordi, file = here("outputs", "models", "model_nmds.Rdata"))
+load(file = here("outputs", "models", "model_nmds.Rdata"))
+ordi
+stressplot(ordi)
 
 

@@ -15,6 +15,7 @@ library(ggbeeswarm)
 library(patchwork)
 library(brms)
 library(DHARMa)
+library(DHARMa.helpers)
 library(bayesplot)
 library(loo)
 library(tidybayes)
@@ -203,26 +204,17 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 #### DHARMa
 
 ``` r
-createDHARMa(
-  simulatedResponse = t(posterior_predict(m_1)),
-  observedResponse = sites$n,
-  fittedPredictedResponse = apply(t(posterior_epred(m_1)), 1, mean),
-  integerResponse = TRUE
-  ) %>%
-  plot()
+DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
 ```
 
 ![](model_fcs_markdown_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
-createDHARMa(
-  simulatedResponse = t(posterior_predict(m_2)),
-  observedResponse = sites$n,
-  fittedPredictedResponse = apply(t(posterior_epred(m_2)), 1, mean),
-  integerResponse = TRUE
-  ) %>%
-  plot()
+DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ```
+
+    ## Warning in newton(lsp = lsp, X = G$X, y = G$y, Eb = G$Eb, UrS = G$UrS, L =
+    ## G$L, : Anpassung beendet mit Schrittweitenfehler - Ergebnisse sorgfältig prüfen
 
 ![](model_fcs_markdown_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
 

@@ -157,6 +157,8 @@ rm(list = setdiff(ls(), c(
 set.seed(12)
 (ordi <- metaMDS(species, binary = TRUE,
                  try = 50, previous.best = TRUE, na.rm = TRUE))
+save(ordi, file = here(
+  "outputs", "models", "model_nmds.Rdata"))
 #Wisonsin sqrt transformation, stress type 1
 stressplot(ordi) # stress: 0.205; Non-metric fit R² =.958
 

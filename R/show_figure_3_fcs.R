@@ -50,7 +50,7 @@ sites <- read_csv("data_processed_sites.csv",
   )
 
 ### * Model ####
-load(file = "model_fcs_3.Rdata")
+load(file = here("outputs", "models", "model_fcs_3.Rdata"))
 
 model <- sites %>%
   add_epred_draws(m3, allow_new_levels = TRUE)
