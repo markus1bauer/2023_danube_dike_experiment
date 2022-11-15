@@ -1,9 +1,9 @@
 # Dike grassland field experiment
-# Favourable conservation status ####
+# Persistence ####
 # Model check
 
 # Markus Bauer
-# 2022-11-11
+# 2022-11-15
 
 
 
@@ -73,7 +73,9 @@ load(file = here("outputs", "models", "model_persistence_1_flat.Rdata"))
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+
 ## 1 Model check ###############################################################
+
 
 ### a Model comparison ---------------------------------------------------------
 

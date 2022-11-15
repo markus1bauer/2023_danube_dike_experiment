@@ -1,0 +1,337 @@
+# Dike grassland field experiment
+# Recover time ####
+# Model check
+
+# Markus Bauer
+# 2022-11-15
+
+
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ###############################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+### Packages ###
+library(here)
+library(tidyverse)
+library(ggbeeswarm)
+library(brms)
+library(DHARMa)
+library(bayesplot)
+library(loo)
+library(tidybayes)
+library(emmeans)
+
+### Start ###
+rm(list = ls())
+
+### Load data ###
+sites_experiment <- read_csv("data_processed_sites.csv",
+                             col_names = TRUE, na = c("na", "NA", ""),
+                             col_types = cols(.default = "?")) %>%
+  mutate(reference = survey_year)
+sites_splot <- read_csv("data_processed_sites_splot.csv",
+                        col_names = TRUE, na = c("na", "NA", ""),
+                        col_types = cols(
+                          .default = "?",
+                          survey_year = "c"
+                        )) %>%
+  mutate(
+    reference = if_else(
+      esy == "E12a", "+Reference", if_else(
+        esy == "E22", "+Reference", "other"
+      )
+    ),
+    target_type = if_else(
+      esy == "E12a", "dry_grassland", if_else(
+        esy == "E22", "hay_meadow", "other"
+      )
+    ),
+    exposition = "other"
+  )
+sites_bauer <- read_csv("data_processed_sites_bauer.csv",
+                        col_names = TRUE, na = c("na", "NA", ""),
+                        col_types = cols(
+                          .default = "?",
+                          survey_year = "c"
+                        )) %>%
+  filter(exposition == "south" | exposition == "north") %>%
+  mutate(
+    reference = if_else(
+      esy == "R1A", "+Reference", if_else(
+        esy == "R22", "+Reference", if_else(
+          esy == "R", "Grassland", if_else(
+            esy == "?", "no", if_else(
+              esy == "+", "no", if_else(
+                esy == "R21", "Grassland", if_else(
+                  esy == "V38", "-Reference", "other"
+                )
+              )
+            )
+          )
+        )
+      )
+    ),
+    target_type = if_else(
+      esy == "R1A", "dry_grassland", if_else(
+        esy == "R22", "hay_meadow", "other"
+      )
+    )
+  )
+sites <- sites_experiment %>%
+  bind_rows(sites_splot, sites_bauer) %>%
+  select(
+    id, esy, reference,
+    exposition, sand_ratio, substrate_depth, target_type, seed_density,
+    survey_year, longitude, latitude, elevation, plot_size
+  ) %>%
+  arrange(id)
+
+
+#### * Load species data ####
+
+species_experiment <- read_csv("data_processed_species.csv",
+                               col_names = TRUE, na = c("na", "NA", ""),
+                               col_types = cols(.default = "?"))
+species_splot <- read_csv("data_processed_species_splot.csv",
+                          col_names = TRUE, na = c("na", "NA", ""),
+                          col_types = cols(.default = "?"))
+species_bauer <- read_csv("data_processed_species_bauer.csv",
+                          col_names = TRUE, na = c("na", "NA", ""),
+                          col_types = cols(.default = "?"))
+
+### Exclude rare species (< 0.5% accumulated cover in all plots)
+data <- species_experiment %>%
+  full_join(species_splot, by = "name") %>%
+  full_join(species_bauer, by = "name") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
+  group_by(name) %>%
+  summarise(total_cover_species = sum(value)) %>%
+  filter(total_cover_species < 0.5)
+
+species <- species_experiment %>%
+  full_join(species_splot, by = "name") %>%
+  full_join(species_bauer, by = "name") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
+  filter(!(name %in% data$name)) %>% # use 'data' to filter
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  arrange(id) %>%
+  semi_join(sites, by = "id")
+
+sites <- sites %>%
+  semi_join(species, by = "id")
+
+load(file = here("outputs", "models", "model_nmds.Rdata"))
+
+sites2 <- sites %>%
+  mutate(nmds1 = ordi$points[, 1], nmds2 = ordi$points[, 2]) %>%
+  group_by(exposition, target_type)
+mutate(data = sites %>% filter(reference == "+Reference"), mean = mean(nmds1))
+
+rm(list = setdiff(ls(), c(
+  "sites", "theme_mb", "vegan_cov_ellipse", "ordi"
+)))
+
+
+
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Statistics #################################################################
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+## 1 Model check ###############################################################
+
+
+### a Model comparison ---------------------------------------------------------
+
+m_1 <- m1
+m_2 <- m3
+m_1$formula
+m_2$formula
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | site/plot)) 
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | site/plot)) 
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula = 1 ~ 1)
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+         re_formula = 1 ~ 1)
+
+
+### b Model check -----------------------------------------------------------
+
+#### * DHARMa ####
+DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
+DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
+
+#### * Preparation ####
+posterior1 <- m_1 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(
+    variable = c(
+      "b_sand_ratio25",
+      "b_sand_ratio50",
+      "b_substrate_depth30",
+      "b_target_typehay_meadow",
+      "b_seed_density8",
+      "b_expositionsouth",
+      "b_survey_year_fct2019",
+      "b_survey_year_fct2020",
+      "b_survey_year_fct2021",
+      "sd_site__Intercept",
+      "sd_site:plot__Intercept",
+      "sigma"
+    )
+  )
+posterior2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(
+    variable = c(
+      "b_sand_ratio25",
+      "b_sand_ratio50",
+      "b_substrate_depth30",
+      "b_target_typehay_meadow",
+      "b_seed_density8",
+      "b_expositionsouth",
+      "b_survey_year_fct2019",
+      "b_survey_year_fct2020",
+      "b_survey_year_fct2021",
+      "sd_site__Intercept",
+      "sd_site:plot__Intercept",
+      "sigma"
+    )
+  )
+hmc_diagnostics1 <- nuts_params(m_1)
+hmc_diagnostics2 <- nuts_params(m_2)
+y <- sites$n
+yrep1 <- posterior_predict(m_1, draws = 500)
+yrep2 <- posterior_predict(m_2, draws = 500)
+loo1 <- loo(m_1, save_psis = TRUE, moment_match = FALSE)
+loo2 <- loo(m_2, save_psis = TRUE, moment_match = FALSE)
+draws1 <- m_1 %>%
+  posterior::as_draws() %>%
+  posterior::summarize_draws() %>%
+  filter(str_starts(variable, "b_"))
+draws2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::summarize_draws() %>%
+  filter(str_starts(variable, "b_"))
+
+#### * Samling efficency/effectiveness (Rhat and EFF) ####
+range(draws1$rhat)
+range(draws2$rhat)
+range(draws1$ess_bulk)
+range(draws2$ess_bulk)
+range(draws1$ess_tail)
+range(draws2$ess_tail)
+
+#### * MCMC diagnostics ####
+mcmc_trace(posterior1, np = hmc_diagnostics1)
+mcmc_trace(posterior2, np = hmc_diagnostics2)
+mcmc_pairs(posterior1, off_diag_args = list(size = 1.2))
+mcmc_pairs(posterior2, off_diag_args = list(size = 1.2))
+mcmc_scatter(m_1, np = hmc_diagnostics1, size = 1,
+             pars = c("b_survey_year_fct2020", "b_survey_year_fct2019"))
+mcmc_scatter(m_2, np = hmc_diagnostics2, size = 1,
+             pars = c("b_survey_year_fct2020", "b_survey_year_fct2019"))
+mcmc_parcoord(posterior1, np = hmc_diagnostics1)
+mcmc_parcoord(posterior2, np = hmc_diagnostics2)
+
+#### * Posterior predictive check ####
+#### Kernel density
+p1 <- ppc_dens_overlay(y, yrep1[1:50, ])
+p2 <- ppc_dens_overlay(y, yrep2[1:50, ])
+p1 / p2
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$exposition)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$exposition)
+p1 / p2
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$survey_year_fct)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$survey_year_fct)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$target_type)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$target_type)
+p1 / p2
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$seed_density)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$seed_density)
+p1 / p2
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$sand_ratio)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$sand_ratio)
+p1 / p2
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$substrate_depth)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$substrate_depth)
+p1 / p2
+#### Histograms of statistics skew
+p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
+p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
+p1 / p2
+ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
+p1 / p2
+ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
+p1 / p2
+#### LOO-PIT plots
+p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
+p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+p1 / p2
+plot(loo1)
+plot(loo2)
+
+
+#### * Autocorrelation ####
+mcmc_acf(posterior1, lags = 10)
+mcmc_acf(posterior2, lags = 10)
+
+
+
+## 2 Output of chosen model ####################################################
+
+
+### a Model output ------------------------------------------------------------
+
+prior_summary(m_1, all = FALSE)
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | site/plot) ) 
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula = 1 ~ 1)
+draws1
+mcmc_intervals(
+  posterior1,
+  prob = 0.66,
+  prob_outer = 0.95,
+  point_est = "mean"
+)
+mcmc_intervals(
+  posterior2,
+  prob = 0.66,
+  prob_outer = 0.95,
+  point_est = "mean"
+)
+
+
+### b Effect sizes ------------------------------------------------------------
+
+(emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
+                  exposition | survey_year_fct, type = "response"))
+
+write.csv(draws1, here("outputs", "statistics", "table_recover_time.csv"))

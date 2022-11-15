@@ -1,9 +1,9 @@
 # Dike grassland field experiment
-# Favourable conservation status ####
+# Persistence ####
 # Model building
 
 # Markus Bauer
-# 2022-11-10
+# 2022-11-15
 
 
 
@@ -130,7 +130,9 @@ ggplot(sites, aes(sqrt(n))) + geom_density()
 ## 2 Model building ###########################################################
 
 
+
 ### a Preparation -------------------------------------------------------------
+
 
 ### Posssible priors ###
 get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
@@ -150,7 +152,8 @@ ggplot(data.frame(x = c(-30, 30)), aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 10)) +
   expand_limits(y = 0)
 
-### a Models ------------------------------------------------------------------
+
+### b Models ------------------------------------------------------------------
 
 ### Specifications ###
 iter = 10000
@@ -264,7 +267,9 @@ m1_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
                cores = parallel::detectCores(),
                seed = 123)
 
+
 ### c Save ---------------------------------------------------------------------
+
 save(m_simple, file = here(
   "outputs", "models", "model_persistence_simple.Rdata"
   ))

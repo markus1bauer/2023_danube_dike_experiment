@@ -57,12 +57,7 @@ sites <- read_csv(
 load(file = here("outputs", "models", "model_persistence_1.Rdata"))
 
 model <- sites %>%
-  add_epred_draws(m1, allow_new_levels = TRUE) %>%
-  mutate(
-    mean = mean(n),
-    sd = sd(n),
-    .epred = .epred * sd + mean
-  )
+  add_epred_draws(m1, allow_new_levels = TRUE)
 
 ### * Functions ####
 theme_mb <- function() {
@@ -180,7 +175,6 @@ m1 %>%
       "2018 vs. 2021" = "b_survey_year_fct2021"
     )
   ) %>%
-  mutate(.value = ((1 - .value) * 100) - 100) %>%
   ggplot(aes(x = .value, y = .variable)) +
   geom_vline(xintercept = 0, linetype = "dashed") +
   stat_halfeye() +
