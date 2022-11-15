@@ -45,8 +45,8 @@ sites <- read_csv("data_processed_sites.csv",
     botanist_year = str_replace_all(botanist_year, " ", "_")
   ) %>%
   select(
-    id, plot, site, botanist_year, exposition, sand_ratio, substrate_depth, target_type,
-    seed_density, survey_year_fct, n
+    id, plot, site, botanist_year, exposition, sand_ratio, substrate_depth,
+    target_type, seed_density, survey_year_fct, n
   )
 
 ### * Model ####
@@ -171,7 +171,8 @@ m3 %>%
   geom_vline(xintercept = 0, linetype = "dashed") +
   stat_halfeye() +
   scale_x_continuous(breaks = seq(-100, 400, .5)) +
-  labs(x = expression(Delta ~ Favourabale ~ Conservation ~ Status ~ "(FCS)"), y = "") +
+  labs(x = expression(Delta ~ Favourabale ~ Conservation ~ Status ~ "(FCS)"),
+       y = "") +
   theme_mb()
 
 ### Save ###
