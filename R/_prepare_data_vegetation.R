@@ -42,7 +42,6 @@ install.packages("tidyverse", dependencies = TRUE)
 library(tidyverse)
 
 ### Packages ###
-suppressPackageStartupMessages(library(renv))
 library(here)
 library(tidyverse)
 suppressPackageStartupMessages(library(lubridate))
@@ -76,7 +75,7 @@ sites_experiment <- read_csv("data_raw_sites.csv", col_names = TRUE,
                   na = c("", "NA", "na"),
                   col_types =
                     cols(
-                      .default = "f",
+                      .default = "?",
                       survey_date.seeded = col_date(format = "%Y-%m-%d"),
                       survey_date.2018 = col_date(format = "%Y-%m-%d"),
                       survey_date.2019 = col_date(format = "%Y-%m-%d"),
@@ -829,8 +828,112 @@ rm(list = setdiff(ls(), c(
 
 
 
+#____________________________-__________________________________________________
+## 5 NMDS ######################################################################
+
+
+### Create reference variable ###
+data_experiment <- sites_experiment %>%
+  mutate(reference = survey_year)
+data_splot <- sites_splot %>%
+  mutate(
+    survey_year = as.character(survey_year),
+    reference = if_else(
+      esy == "E12a", "+Reference", if_else(
+        esy == "E22", "+Reference", "other"
+      )
+    ),
+    target_type = if_else(
+      esy == "E12a", "dry_grassland", if_else(
+        esy == "E22", "hay_meadow", "other"
+      )
+    ),
+    exposition = "other"
+  )
+data_bauer <- sites_bauer %>%
+  filter(exposition == "south" | exposition == "north") %>%
+  mutate(
+    survey_year = as.character(survey_year),
+    reference = if_else(
+      esy == "R1A", "+Reference", if_else(
+        esy == "R22", "+Reference", if_else(
+          esy == "R", "Grassland", if_else(
+            esy == "?", "no", if_else(
+              esy == "+", "no", if_else(
+                esy == "R21", "Grassland", if_else(
+                  esy == "V38", "-Reference", "other"
+                )
+              )
+            )
+          )
+        )
+      )
+    ),
+    target_type = if_else(
+      esy == "R1A", "dry_grassland", if_else(
+        esy == "R22", "hay_meadow", "other"
+      )
+    )
+  )
+data_sites <- data_experiment %>%
+  bind_rows(data_splot, data_bauer) %>%
+  select(
+    id, esy, reference,
+    exposition, sand_ratio, substrate_depth, target_type, seed_density,
+    survey_year, longitude, latitude, elevation, plot_size
+  ) %>%
+  mutate(survey_year_fct = factor(survey_year)) %>%
+  arrange(id)
+
+#### Prepare species data ###
+### Exclude rare species (< 0.5% accumulated cover in all plots)
+rare <- species_experiment %>%
+  full_join(species_splot, by = "name") %>%
+  full_join(species_bauer, by = "name") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
+  group_by(name) %>%
+  summarise(total_cover_species = sum(value)) %>%
+  filter(total_cover_species < 0.5)
+
+data_species <- species_experiment %>%
+  full_join(species_splot, by = "name") %>%
+  full_join(species_bauer, by = "name") %>%
+  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
+  filter(!(name %in% rare$name)) %>% # use 'rare' to filter
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  arrange(id) %>%
+  semi_join(data_sites, by = "id")
+
+data_sites <- data_sites %>%
+  semi_join(data_species, by = "id")
+
+data_species <- data_species %>%
+  column_to_rownames("id")
+
+### NMDS ###
+set.seed(12)
+(ordi <- metaMDS(data_species, binary = TRUE,
+                 try = 50, previous.best = TRUE, na.rm = TRUE))
+#save(ordi, file = here("outputs", "models", "model_nmds.Rdata"))
+base::load(here("outputs", "models", "model_nmds.Rdata"))
+ordi
+stressplot(ordi)
+
+sites_nmds <- data_sites %>%
+  mutate(NMDS1 = ordi$points[, 1], NMDS2 = ordi$points[, 2])
+
+rm(list = setdiff(ls(), c(
+  "sites_experiment", "sites_splot", "sites_bauer", "sites_nmds",
+  "species_experiment", "species_splot", "species_bauer",
+  "traits", "results.classification"
+)))
+
+
+
 #______________________________________________________________________________
-## 5 Temporal beta diversity ###################################################
+## 6 Temporal beta diversity ###################################################
 
 
 ### Prepare data ###
@@ -1000,6 +1103,7 @@ data <- data_presence %>%
     across(c(B, C, D, change), ~ round(.x, digits = 4))
   ) %>%
   select(id, B, C, D, presabu)
+
 sites_temporal <- sites_experiment %>%
   filter(survey_year != "seeded") %>%
   left_join(data, by = "id") %>%
@@ -1642,11 +1746,15 @@ write_csv(
   species_experiment,
   here("data", "processed", "data_processed_species.csv")
   )
-
 write_csv(
   traits,
   here("data", "processed", "data_processed_traits.csv")
   )
+write_csv(
+  sites_nmds,
+  here("data", "processed", "data_processed_sites_nmds.csv")
+)
+
 
 #### Data of sPlotOpen ###
 write_csv(
