@@ -25,21 +25,21 @@
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-remove.packages("rlang")
-remove.packages("tidyselect")
-remove.packages("tidyverse")
-remove.packages("Brobdingnag")
-remove.packages("dbplyr")
-remove.packages("Matrix")
+#remove.packages("rlang")
+#remove.packages("tidyselect")
+#remove.packages("tidyverse")
+#remove.packages("Brobdingnag")
+#remove.packages("dbplyr")
+#remove.packages("Matrix")
 
 #devtools::install_github("RobinHankin/Brobdingnag") 
-install.packages("Matrix", dependencies = TRUE)
-install.packages("rlang", dependencies = TRUE)
-install.packages("Brobdingnag", dependencies = TRUE)
-install.packages("tidyselect", dependencies = TRUE)
-install.packages("dbplyr", dependencies = TRUE)
-install.packages("tidyverse", dependencies = TRUE)
-library(tidyverse)
+#install.packages("Matrix", dependencies = TRUE)
+#install.packages("rlang", dependencies = TRUE)
+#install.packages("Brobdingnag", dependencies = TRUE)
+#install.packages("tidyselect", dependencies = TRUE)
+#install.packages("dbplyr", dependencies = TRUE)
+#install.packages("tidyverse", dependencies = TRUE)
+#library(tidyverse)
 
 ### Packages ###
 library(here)
@@ -878,11 +878,10 @@ data_bauer <- sites_bauer %>%
 data_sites <- data_experiment %>%
   bind_rows(data_splot, data_bauer) %>%
   select(
-    id, esy, reference,
+    id, plot, site, esy, reference,
     exposition, sand_ratio, substrate_depth, target_type, seed_density,
-    survey_year, longitude, latitude, elevation, plot_size
+    survey_year, longitude, latitude, elevation, plot_size, botanist
   ) %>%
-  mutate(survey_year_fct = factor(survey_year)) %>%
   arrange(id)
 
 #### Prepare species data ###

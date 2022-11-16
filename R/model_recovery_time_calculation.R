@@ -18,136 +18,38 @@
 library(here)
 library(tidyverse)
 library(ggbeeswarm)
+library(patchwork)
 library(brms)
-library(DHARMa)
-library(bayesplot)
-library(loo)
-library(tidybayes)
-library(emmeans)
 
 ### Start ###
 rm(list = ls())
 
 ### Load data ###
-sites_experiment <- read_csv("data_processed_sites.csv",
-                             col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(
-                               .default = "?",
-                               sand_ratio = "f",
-                               substrate_depth = "f",
-                               target_type = "f",
-                               seed_density = "f",
-                               exposition = "f",
-                               site = "f"
-                               )) %>%
+sites <- read_csv(here("data", "processed", "data_processed_sites_nmds.csv"),
+                  col_names = TRUE, na = c("na", "NA", ""),
+                  col_types = cols(
+                    .default = "?",
+                    id = "f",
+                    plot = "f",
+                    site = "f",
+                    exposition = col_factor(levels = c("north", "south", "other")),
+                    sand_ratio = "f",
+                    substrate_depth = col_factor(levels = c("30", "15")),
+                    target_type = "f",
+                    seed_density = "f"
+                    )) %>%
   mutate(
-    reference = survey_year,
-    survey_year_fct = factor(survey_year)
+    survey_year_fct = factor(survey_year),
+    botanist_year = str_c(survey_year, botanist, sep = " ")
     )
-sites_splot <- read_csv("data_processed_sites_splot.csv",
-                        col_names = TRUE, na = c("na", "NA", ""),
-                        col_types = cols(
-                          .default = "?",
-                          survey_year = "c"
-                        )) %>%
-  mutate(
-    reference = if_else(
-      esy == "E12a", "+Reference", if_else(
-        esy == "E22", "+Reference", "other"
-      )
-    ),
-    target_type = if_else(
-      esy == "E12a", "dry_grassland", if_else(
-        esy == "E22", "hay_meadow", "other"
-      )
-    ),
-    exposition = "other"
-  )
-sites_bauer <- read_csv("data_processed_sites_bauer.csv",
-                        col_names = TRUE, na = c("na", "NA", ""),
-                        col_types = cols(
-                          .default = "?",
-                          survey_year = "c"
-                        )) %>%
-  filter(exposition == "south" | exposition == "north") %>%
-  mutate(
-    reference = if_else(
-      esy == "R1A", "+Reference", if_else(
-        esy == "R22", "+Reference", if_else(
-          esy == "R", "Grassland", if_else(
-            esy == "?", "no", if_else(
-              esy == "+", "no", if_else(
-                esy == "R21", "Grassland", if_else(
-                  esy == "V38", "-Reference", "other"
-                )
-              )
-            )
-          )
-        )
-      )
-    ),
-    target_type = if_else(
-      esy == "R1A", "dry_grassland", if_else(
-        esy == "R22", "hay_meadow", "other"
-      )
-    )
-  )
-sites <- sites_experiment %>%
-  bind_rows(sites_splot, sites_bauer) %>%
-  select(
-    id, esy, reference,
-    exposition, sand_ratio, substrate_depth, target_type, seed_density,
-    survey_year, longitude, latitude, elevation, plot_size
-  ) %>%
-  arrange(id)
-
-
-#### * Load species data ####
-
-species_experiment <- read_csv("data_processed_species.csv",
-                               col_names = TRUE, na = c("na", "NA", ""),
-                               col_types = cols(.default = "?"))
-species_splot <- read_csv("data_processed_species_splot.csv",
-                          col_names = TRUE, na = c("na", "NA", ""),
-                          col_types = cols(.default = "?"))
-species_bauer <- read_csv("data_processed_species_bauer.csv",
-                          col_names = TRUE, na = c("na", "NA", ""),
-                          col_types = cols(.default = "?"))
-
-### Exclude rare species (< 0.5% accumulated cover in all plots)
-data <- species_experiment %>%
-  full_join(species_splot, by = "name") %>%
-  full_join(species_bauer, by = "name") %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
-  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
-  group_by(name) %>%
-  summarise(total_cover_species = sum(value)) %>%
-  filter(total_cover_species < 0.5)
-
-species <- species_experiment %>%
-  full_join(species_splot, by = "name") %>%
-  full_join(species_bauer, by = "name") %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
-  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
-  filter(!(name %in% data$name)) %>% # use 'data' to filter
-  pivot_wider(names_from = "name", values_from = "value") %>%
-  arrange(id) %>%
-  semi_join(sites, by = "id")
-
-sites <- sites %>%
-  semi_join(species, by = "id")
-
-load(file = here("outputs", "models", "model_nmds.Rdata"))
 
 sites %>%
-  mutate(nmds1 = ordi$points[, 1], nmds2 = ordi$points[, 2]) %>%
   filter(reference == "+Reference") %>%
   group_by(exposition, target_type) %>%
-  summarise(mean_reference = mean(nmds1))
+  summarise(mean_reference = mean(NMDS1), sd_reference = sd(NMDS1))
 
 sites <- sites %>%
   mutate(
-    nmds1 = ordi$points[, 1], nmds2 = ordi$points[, 2],
     mean_reference = if_else(
       exposition == "north" & target_type == "dry_grassland", 0.644, if_else(
         exposition == "north" & target_type == "hay_meadow", 0.485, if_else(
@@ -157,10 +59,21 @@ sites <- sites %>%
         )
       )
     ),
-    n = mean_reference - nmds1
+    sd_reference = if_else(
+      exposition == "north" & target_type == "dry_grassland", 0.259, if_else(
+        exposition == "north" & target_type == "hay_meadow", 0.212, if_else(
+          exposition == "south" & target_type == "dry_grassland", 0.298, if_else(
+            exposition == "south" & target_type == "hay_meadow", 0.173, NA_real_
+          )
+        )
+      )
+    ),
+    recovery_time = NMDS1 - mean_reference,
+    n = recovery_time
     ) %>%
   filter(reference == "2018" | reference == "2019" | reference == "2020" |
-           reference == "2021")
+           reference == "2021") %>%
+  mutate(survey_year = as.numeric(survey_year))
 
 rm(list = setdiff(ls(), c("sites")))
 
@@ -252,13 +165,16 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
           data = sites)
 ### Example of normal distribution
 ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1))
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 2)) +
+  expand_limits(y = 0)
 ### Example of cauchy distribution
 ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1))
+  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
+  expand_limits(y = 0)
 ### Example of a student t distribution
 ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
-  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5))
+  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
+  expand_limits(y = 0)
 
 ### a Models ------------------------------------------------------------------
 
@@ -267,13 +183,13 @@ iter = 10000
 chains = 4
 thin = 2
 priors <- c(
-  set_prior("normal(0, 1)", class = "b"),
-  set_prior("normal(0.1, 1)", class = "b", coef = "sand_ratio25"),
-  set_prior("normal(0.2, 1)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(0.1, 1)", class = "b", coef = "expositionsouth"),
-  set_prior("normal(0.1, 1)", class = "b", coef = "survey_year_fct2019"),
-  set_prior("normal(0.2, 1)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(0.3, 1)", class = "b",coef = "survey_year_fct2021"),
+  set_prior("normal(0, 2)", class = "b"),
+  set_prior("normal(0.1, 2)", class = "b", coef = "sand_ratio25"),
+  set_prior("normal(0.2, 2)", class = "b", coef = "sand_ratio50"),
+  set_prior("normal(-0.1, 2)", class = "b", coef = "expositionsouth"),
+  set_prior("normal(0.1, 2)", class = "b", coef = "survey_year_fct2019"),
+  set_prior("normal(0.2, 2)", class = "b", coef = "survey_year_fct2020"),
+  set_prior("normal(0.3, 2)", class = "b",coef = "survey_year_fct2021"),
   set_prior("cauchy(0, 1)", class = "sigma")
 )
 ### Models ###
@@ -379,10 +295,11 @@ m3_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
                cores = parallel::detectCores(),
                seed = 123)
 
-### Save ###
-save(m_simple, file = here("outputs", "models", "model_recover_simple.Rdata"))
-save(m_full, file = here("outputs", "models", "model_recover_full.Rdata"))
-save(m1, file = here("outputs", "models", "model_recover_1.Rdata"))
-save(m2, file = here("outputs", "models", "model_recover_2.Rdata"))
-save(m3, file = here("outputs", "models", "model_recover_3.Rdata"))
-save(m3_flat, file = here("outputs", "models", "model_recover_3_flat.Rdata"))
+### * Save ####
+
+save(m_simple, file = here("outputs", "models", "model_recovery_simple.Rdata"))
+save(m_full, file = here("outputs", "models", "model_recovery_full.Rdata"))
+save(m1, file = here("outputs", "models", "model_recovery_1.Rdata"))
+save(m2, file = here("outputs", "models", "model_recovery_2.Rdata"))
+save(m3, file = here("outputs", "models", "model_recovery_3.Rdata"))
+save(m3_flat, file = here("outputs", "models", "model_recovery_3_flat.Rdata"))
