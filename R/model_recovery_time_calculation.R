@@ -38,42 +38,14 @@ sites <- read_csv(here("data", "processed", "data_processed_sites_nmds.csv"),
                     target_type = "f",
                     seed_density = "f"
                     )) %>%
-  mutate(
-    survey_year_fct = factor(survey_year),
-    botanist_year = str_c(survey_year, botanist, sep = " ")
-    )
-
-sites %>%
-  filter(reference == "+Reference") %>%
-  group_by(exposition, target_type) %>%
-  summarise(mean_reference = mean(NMDS1), sd_reference = sd(NMDS1))
-
-sites <- sites %>%
-  mutate(
-    mean_reference = if_else(
-      exposition == "north" & target_type == "dry_grassland", 0.644, if_else(
-        exposition == "north" & target_type == "hay_meadow", 0.485, if_else(
-          exposition == "south" & target_type == "dry_grassland", 0.542, if_else(
-            exposition == "south" & target_type == "hay_meadow", 0.469, NA_real_
-          )
-        )
-      )
-    ),
-    sd_reference = if_else(
-      exposition == "north" & target_type == "dry_grassland", 0.259, if_else(
-        exposition == "north" & target_type == "hay_meadow", 0.212, if_else(
-          exposition == "south" & target_type == "dry_grassland", 0.298, if_else(
-            exposition == "south" & target_type == "hay_meadow", 0.173, NA_real_
-          )
-        )
-      )
-    ),
-    recovery_time = NMDS1 - mean_reference,
-    n = recovery_time
-    ) %>%
   filter(reference == "2018" | reference == "2019" | reference == "2020" |
            reference == "2021") %>%
-  mutate(survey_year = as.numeric(survey_year))
+  mutate(
+    survey_year_fct = factor(survey_year),
+    survey_year = as.numeric(survey_year),
+    botanist_year = str_c(survey_year, botanist, sep = " "),
+    n = recovery_time
+    )
 
 rm(list = setdiff(ls(), c("sites")))
 

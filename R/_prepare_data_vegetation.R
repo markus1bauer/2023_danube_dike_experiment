@@ -911,7 +911,7 @@ data_sites <- data_sites %>%
 data_species <- data_species %>%
   column_to_rownames("id")
 
-### NMDS ###
+### * Model ####
 set.seed(12)
 (ordi <- metaMDS(data_species, binary = TRUE,
                  try = 50, previous.best = TRUE, na.rm = TRUE))
@@ -920,8 +920,40 @@ base::load(here("outputs", "models", "model_nmds.Rdata"))
 ordi
 stressplot(ordi)
 
+
+### Integrate NMDS in dataset ###
 sites_nmds <- data_sites %>%
   mutate(NMDS1 = ordi$points[, 1], NMDS2 = ordi$points[, 2])
+
+sites_nmds %>%
+  filter(reference == "+Reference") %>%
+  group_by(exposition, target_type) %>%
+  summarise(mean_reference = mean(NMDS1), sd_reference = sd(NMDS1))
+
+sites_nmds <- sites_nmds %>%
+  mutate(
+    mean_reference = if_else(
+      exposition == "north" & target_type == "dry_grassland", 0.644, if_else(
+        exposition == "north" & target_type == "hay_meadow", 0.485, if_else(
+          exposition == "south" & target_type == "dry_grassland", 0.542,
+          if_else(
+            exposition == "south" & target_type == "hay_meadow", 0.469, NA_real_
+          )
+        )
+      )
+    ),
+    sd_reference = if_else(
+      exposition == "north" & target_type == "dry_grassland", 0.259, if_else(
+        exposition == "north" & target_type == "hay_meadow", 0.212, if_else(
+          exposition == "south" & target_type == "dry_grassland", 0.298,
+          if_else(
+            exposition == "south" & target_type == "hay_meadow", 0.173, NA_real_
+          )
+        )
+      )
+    ),
+    recovery_time = NMDS1 - mean_reference
+  )
 
 rm(list = setdiff(ls(), c(
   "sites_experiment", "sites_splot", "sites_bauer", "sites_nmds",

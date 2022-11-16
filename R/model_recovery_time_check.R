@@ -28,114 +28,37 @@ library(emmeans)
 rm(list = ls())
 
 ### Load data ###
-sites_experiment <- read_csv("data_processed_sites.csv",
-                             col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(.default = "?")) %>%
-  mutate(reference = survey_year)
-sites_splot <- read_csv("data_processed_sites_splot.csv",
-                        col_names = TRUE, na = c("na", "NA", ""),
-                        col_types = cols(
-                          .default = "?",
-                          survey_year = "c"
-                        )) %>%
+sites <- read_csv(here("data", "processed", "data_processed_sites_nmds.csv"),
+                  col_names = TRUE, na = c("na", "NA", ""),
+                  col_types = cols(
+                    .default = "?",
+                    id = "f",
+                    plot = "f",
+                    site = "f",
+                    exposition = col_factor(levels = c("north", "south", "other")),
+                    sand_ratio = "f",
+                    substrate_depth = col_factor(levels = c("30", "15")),
+                    target_type = "f",
+                    seed_density = "f"
+                  )) %>%
+  filter(reference == "2018" | reference == "2019" | reference == "2020" |
+           reference == "2021") %>%
   mutate(
-    reference = if_else(
-      esy == "E12a", "+Reference", if_else(
-        esy == "E22", "+Reference", "other"
-      )
-    ),
-    target_type = if_else(
-      esy == "E12a", "dry_grassland", if_else(
-        esy == "E22", "hay_meadow", "other"
-      )
-    ),
-    exposition = "other"
+    survey_year_fct = factor(survey_year),
+    survey_year = as.numeric(survey_year),
+    botanist_year = str_c(survey_year, botanist, sep = " "),
+    n = recovery_time
   )
-sites_bauer <- read_csv("data_processed_sites_bauer.csv",
-                        col_names = TRUE, na = c("na", "NA", ""),
-                        col_types = cols(
-                          .default = "?",
-                          survey_year = "c"
-                        )) %>%
-  filter(exposition == "south" | exposition == "north") %>%
-  mutate(
-    reference = if_else(
-      esy == "R1A", "+Reference", if_else(
-        esy == "R22", "+Reference", if_else(
-          esy == "R", "Grassland", if_else(
-            esy == "?", "no", if_else(
-              esy == "+", "no", if_else(
-                esy == "R21", "Grassland", if_else(
-                  esy == "V38", "-Reference", "other"
-                )
-              )
-            )
-          )
-        )
-      )
-    ),
-    target_type = if_else(
-      esy == "R1A", "dry_grassland", if_else(
-        esy == "R22", "hay_meadow", "other"
-      )
-    )
-  )
-sites <- sites_experiment %>%
-  bind_rows(sites_splot, sites_bauer) %>%
-  select(
-    id, esy, reference,
-    exposition, sand_ratio, substrate_depth, target_type, seed_density,
-    survey_year, longitude, latitude, elevation, plot_size
-  ) %>%
-  arrange(id)
 
+rm(list = setdiff(ls(), c("sites")))
 
-#### * Load species data ####
-
-species_experiment <- read_csv("data_processed_species.csv",
-                               col_names = TRUE, na = c("na", "NA", ""),
-                               col_types = cols(.default = "?"))
-species_splot <- read_csv("data_processed_species_splot.csv",
-                          col_names = TRUE, na = c("na", "NA", ""),
-                          col_types = cols(.default = "?"))
-species_bauer <- read_csv("data_processed_species_bauer.csv",
-                          col_names = TRUE, na = c("na", "NA", ""),
-                          col_types = cols(.default = "?"))
-
-### Exclude rare species (< 0.5% accumulated cover in all plots)
-data <- species_experiment %>%
-  full_join(species_splot, by = "name") %>%
-  full_join(species_bauer, by = "name") %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
-  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
-  group_by(name) %>%
-  summarise(total_cover_species = sum(value)) %>%
-  filter(total_cover_species < 0.5)
-
-species <- species_experiment %>%
-  full_join(species_splot, by = "name") %>%
-  full_join(species_bauer, by = "name") %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
-  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
-  filter(!(name %in% data$name)) %>% # use 'data' to filter
-  pivot_wider(names_from = "name", values_from = "value") %>%
-  arrange(id) %>%
-  semi_join(sites, by = "id")
-
-sites <- sites %>%
-  semi_join(species, by = "id")
-
-load(file = here("outputs", "models", "model_nmds.Rdata"))
-
-sites2 <- sites %>%
-  mutate(nmds1 = ordi$points[, 1], nmds2 = ordi$points[, 2]) %>%
-  group_by(exposition, target_type)
-mutate(data = sites %>% filter(reference == "+Reference"), mean = mean(nmds1))
-
-rm(list = setdiff(ls(), c(
-  "sites", "theme_mb", "vegan_cov_ellipse", "ordi"
-)))
-
+### Load models ###
+base::load(file = here("outputs", "models", "model_recovery_simple.Rdata"))
+base::load(file = here("outputs", "models", "model_recovery_full.Rdata"))
+base::load(file = here("outputs", "models", "model_recovery_1.Rdata"))
+base::load(file = here("outputs", "models", "model_recovery_2.Rdata"))
+base::load(file = here("outputs", "models", "model_recovery_3.Rdata"))
+base::load(file = here("outputs", "models", "model_recovery_3_flat.Rdata"))
 
 
 
