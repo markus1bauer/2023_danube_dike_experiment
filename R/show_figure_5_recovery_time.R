@@ -88,6 +88,8 @@ sd <- sum(as.numeric(as.character(
   ))) / 4
 
 (p1 <- ggplot(data = sites) +
+    geom_rect(aes(ymin = 0 - sd, ymax = 0 + sd, xmin = -Inf, xmax = Inf),
+              fill = "grey85") +
    geom_quasirandom(
      aes(y = n, x = sand_ratio, color = target_type),
      alpha = 0.2,
@@ -95,14 +97,8 @@ sd <- sum(as.numeric(as.character(
      cex = .5
    ) +
    geom_hline(
-     yintercept = c((0 - sd), (0 + sd)),
-     linetype = "dashed",
-     linewidth = .3,
-     color = "black"
-   ) +
-   geom_hline(
      yintercept = 0,
-     linetype = "solid",
+     linetype = "dashed",
      linewidth = .3,
      color = "black"
    ) +
@@ -128,7 +124,8 @@ sd <- sum(as.numeric(as.character(
      ) +
    labs(
      x = "Sand ratio [%]", fill = "", color = "",
-     y = expression(Successional ~ distance ~ italic("(d[jt,0])"))
+     y = expression(Successional ~ distance ~
+                      "(" * italic(d)[italic(jt) * ",0"] * ")")
    ) +
    theme_mb())
 
@@ -148,26 +145,26 @@ ggsave(here("outputs", "figures",
 
 m1 %>%
   gather_draws(
-    b_sand_ratio25, b_sand_ratio50, b_substrate_depth30,
-    b_target_typehay_meadow, b_seed_density8,
+    b_sand_ratio25, b_sand_ratio50, b_substrate_depth15,
+    b_target_typedry_grassland, b_seed_density8,
     b_expositionsouth, b_survey_year_fct2019,
     b_survey_year_fct2020, b_survey_year_fct2021
   ) %>%
   mutate(
     .variable = as.factor(.variable),
     .variable = fct_relevel(
-      .variable, "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth30",
-      "b_target_typehay_meadow", "b_seed_density8",
+      .variable, "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+      "b_target_typedry_grassland", "b_seed_density8",
       "b_expositionsouth", "b_survey_year_fct2019",
       "b_survey_year_fct2020", "b_survey_year_fct2021"
     ),
     .variable = fct_relevel(.variable, rev),
     .variable = fct_recode(
       .variable,
-      "Dry grassland vs. hay meadow" = "b_target_typehay_meadow",
+      "Hay meadow vs. Dry grassland" = "b_target_typedry_grassland",
       "Sand ratio: 0 vs. 25 %" = "b_sand_ratio25",
       "Sand ratio: 0 vs. 50 %" = "b_sand_ratio50",
-      "Substrate depth: 15 vs. 30 cm" = "b_substrate_depth30",
+      "Substrate depth: 30 vs. 15 cm" = "b_substrate_depth15",
       "Seed density: 4 vs. 8 g/m²" = "b_seed_density8",
       "North vs. south" = "b_expositionsouth",
       "2018 vs. 2019" = "b_survey_year_fct2019",
@@ -175,12 +172,12 @@ m1 %>%
       "2018 vs. 2021" = "b_survey_year_fct2021"
     )
   ) %>%
-  mutate(.value = ((1 - .value) * 100) - 100) %>%
   ggplot(aes(x = .value, y = .variable)) +
   geom_vline(xintercept = 0, linetype = "dashed") +
   stat_halfeye() +
-  scale_x_continuous(breaks = seq(-100, 400, 10)) +
-  labs(x = expression(Delta ~ Persistence ~ "[%]"), y = "") +
+  scale_x_continuous(breaks = seq(-100, 400, .5)) +
+  labs(x = expression(Delta ~ Successional ~ distance ~
+                        "(" * italic(d)[italic(jt) * ",0"] * ")"), y = "") +
   theme_mb()
 
 ### Save ###
