@@ -21,3 +21,4 @@ data/processed/model_persistence_full.Rdata
 outputs/models/model_persistence_full.Rdata
 outputs/models/model_fcs_full.Rdata
 .RDataTmp3
+outputs/models/model_recovery_full.Rdata

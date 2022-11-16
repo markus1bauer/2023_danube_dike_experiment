@@ -1,6 +1,5 @@
 # Dike grassland field experiment
-# Dike grassland field experiment
-# Recover time ####
+# Recovery time ####
 # Model building
 
 # Markus Bauer
