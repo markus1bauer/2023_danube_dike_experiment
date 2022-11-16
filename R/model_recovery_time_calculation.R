@@ -35,7 +35,8 @@ sites <- read_csv(here("data", "processed", "data_processed_sites_nmds.csv"),
                                                        "other")),
                     sand_ratio = "f",
                     substrate_depth = col_factor(levels = c("30", "15")),
-                    target_type = "f",
+                    target_type = col_factor(levels = c("dry_grassland",
+                                                        "hay_meadow", "other")),
                     seed_density = "f"
                     )) %>%
   filter(reference == "2018" | reference == "2019" | reference == "2020" |
@@ -184,7 +185,7 @@ m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
                 target_type:sand_ratio:exposition:survey_year_fct +
                 substrate_depth:sand_ratio:exposition:survey_year_fct +
                 (1 | site/plot) + (1 | botanist_year),
-              data = sites, 
+              data = sites,
               family = gaussian("identity"),
               prior = priors,
               chains = chains,
@@ -198,7 +199,7 @@ m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
 m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
             substrate_depth + seed_density +
             (1 | site/plot) + (1 | botanist_year),
-          data = sites, 
+          data = sites,
           family = gaussian("identity"),
           prior = priors,
           chains = chains,
@@ -215,7 +216,7 @@ m2 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
             substrate_depth:exposition +
             seed_density:exposition +
             (1 | site/plot) + (1 | botanist_year),
-          data = sites, 
+          data = sites,
           family = gaussian("identity"),
           prior = priors,
           chains = chains,
@@ -246,13 +247,8 @@ m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
           seed = 123)
 
 
-m3_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
+m1_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
                  substrate_depth + seed_density +
-                 substrate_depth:sand_ratio +
-                 seed_density:exposition +
-                 target_type:exposition:survey_year_fct +
-                 sand_ratio:exposition:survey_year_fct +
-                 seed_density:exposition:survey_year_fct +
                  (1 | site/plot) + (1 | botanist_year),
                data = sites,
                family = gaussian("identity"),

@@ -38,7 +38,8 @@ sites <- read_csv(here("data", "processed", "data_processed_sites_nmds.csv"),
                     exposition = col_factor(levels = c("north", "south", "other")),
                     sand_ratio = "f",
                     substrate_depth = col_factor(levels = c("30", "15")),
-                    target_type = "f",
+                    target_type = col_factor(levels = c("dry_grassland",
+                                                        "hay_meadow", "other")),
                     seed_density = "f"
                   )) %>%
   filter(reference == "2018" | reference == "2019" | reference == "2020" |
@@ -49,8 +50,6 @@ sites <- read_csv(here("data", "processed", "data_processed_sites_nmds.csv"),
     botanist_year = str_c(survey_year, botanist, sep = " "),
     n = recovery_time
   )
-
-rm(list = setdiff(ls(), c("sites")))
 
 ### Load models ###
 base::load(file = here("outputs", "models", "model_recovery_simple.Rdata"))
@@ -74,7 +73,8 @@ base::load(file = here("outputs", "models", "model_recovery_3_flat.Rdata"))
 ### a Model comparison ---------------------------------------------------------
 
 m_1 <- m1
-m_2 <- m3
+m_2 <- m2
+rm(list = setdiff(ls(), c("sites", "m_1", "m_2")))
 m_1$formula
 m_2$formula
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -100,8 +100,8 @@ posterior1 <- m_1 %>%
     variable = c(
       "b_sand_ratio25",
       "b_sand_ratio50",
-      "b_substrate_depth30",
-      "b_target_typehay_meadow",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
       "b_seed_density8",
       "b_expositionsouth",
       "b_survey_year_fct2019",
@@ -109,6 +109,7 @@ posterior1 <- m_1 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
+      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
@@ -118,8 +119,8 @@ posterior2 <- m_2 %>%
     variable = c(
       "b_sand_ratio25",
       "b_sand_ratio50",
-      "b_substrate_depth30",
-      "b_target_typehay_meadow",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
       "b_seed_density8",
       "b_expositionsouth",
       "b_survey_year_fct2019",
@@ -127,6 +128,7 @@ posterior2 <- m_2 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
+      "sd_botanist_year__Intercept",
       "sigma"
     )
   )

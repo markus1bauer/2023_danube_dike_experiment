@@ -22,124 +22,38 @@ library(ggrepel)
 rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 
 ### Load data ###
-sites_experiment <- read_csv("data_processed_sites.csv",
-                             col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(.default = "?")) %>%
-  mutate(reference = survey_year)
-sites_splot <- read_csv("data_processed_sites_splot.csv",
-                        col_names = TRUE, na = c("na", "NA", ""),
-                        col_types = cols(
-                          .default = "?",
-                          survey_year = "c"
-                        )) %>%
+sites <- read_csv(here("data", "processed", "data_processed_sites_nmds.csv"),
+                  col_names = TRUE, na = c("na", "NA", ""),
+                  col_types = cols(
+                    .default = "?",
+                    id = "f",
+                    plot = "f",
+                    site = "f",
+                    exposition = col_factor(levels = c("north", "south",
+                                                       "other")),
+                    sand_ratio = "f",
+                    substrate_depth = col_factor(levels = c("30", "15")),
+                    target_type = col_factor(levels = c(
+                      "hay_meadow", "dry_grassland", "other"
+                      )),
+                    seed_density = "f"
+                  )) %>%
+  filter(reference == "2018" | reference == "2019" | reference == "2020" |
+           reference == "2021") %>%
   mutate(
-    reference = if_else(
-      esy == "E12a", "+Reference", if_else(
-        esy == "E22", "+Reference", "other"
-      )
-    ),
-    target_type = if_else(
-      esy == "E12a", "dry_grassland", if_else(
-        esy == "E22", "hay_meadow", "other"
-      )
-    ),
-    exposition = "other"
+    survey_year_fct = factor(survey_year),
+    survey_year = as.numeric(survey_year),
+    botanist_year = str_c(survey_year, botanist, sep = " "),
+    exposition = factor(exposition),
+    target_type = factor(target_type),
+    n = recovery_time
   )
-sites_bauer <- read_csv("data_processed_sites_bauer.csv",
-                        col_names = TRUE, na = c("na", "NA", ""),
-                        col_types = cols(
-                          .default = "?",
-                          survey_year = "c"
-                        )) %>%
-  filter(exposition == "south" | exposition == "north") %>%
-  mutate(
-    reference = if_else(
-      esy == "R1A", "+Reference", if_else(
-        esy == "R22", "+Reference", if_else(
-          esy == "R", "Grassland", if_else(
-            esy == "?", "no", if_else(
-              esy == "+", "no", if_else(
-                esy == "R21", "Grassland", if_else(
-                  esy == "V38", "-Reference", "other"
-                )
-              )
-            )
-          )
-        )
-      )
-    ),
-    target_type = if_else(
-      esy == "R1A", "dry_grassland", if_else(
-        esy == "R22", "hay_meadow", "other"
-      )
-    )
-  )
-sites <- sites_experiment %>%
-  bind_rows(sites_splot, sites_bauer) %>%
-  select(
-    id, esy, reference,
-    exposition, sand_ratio, substrate_depth, target_type, seed_density,
-    survey_year, longitude, latitude, elevation, plot_size
-  ) %>%
-  arrange(id)
-
-
-#### * Load species data ####
-
-species_experiment <- read_csv("data_processed_species.csv",
-                               col_names = TRUE, na = c("na", "NA", ""),
-                               col_types = cols(.default = "?"))
-species_splot <- read_csv("data_processed_species_splot.csv",
-                          col_names = TRUE, na = c("na", "NA", ""),
-                          col_types = cols(.default = "?"))
-species_bauer <- read_csv("data_processed_species_bauer.csv",
-                          col_names = TRUE, na = c("na", "NA", ""),
-                          col_types = cols(.default = "?"))
-
-### Exclude rare species (< 0.5% accumulated cover in all plots)
-data <- species_experiment %>%
-  full_join(species_splot, by = "name") %>%
-  full_join(species_bauer, by = "name") %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
-  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
-  group_by(name) %>%
-  summarise(total_cover_species = sum(value)) %>%
-  filter(total_cover_species < 0.5)
-
-species <- species_experiment %>%
-  full_join(species_splot, by = "name") %>%
-  full_join(species_bauer, by = "name") %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
-  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
-  filter(!(name %in% data$name)) %>% # use 'data' to filter
-  pivot_wider(names_from = "name", values_from = "value") %>%
-  arrange(id) %>%
-  semi_join(sites, by = "id")
-
-sites <- sites %>%
-  semi_join(species, by = "id")
-
-load(file = here("outputs", "models", "model_nmds.Rdata"))
-
-sites2 <- sites %>%
-  mutate(nmds1 = ordi$points[, 1], nmds2 = ordi$points[, 2]) %>%
-  group_by(exposition, target_type)
-mutate(data = sites %>% filter(reference == "+Reference"), mean = mean(nmds1))
-
-rm(list = setdiff(ls(), c(
-  "sites", "theme_mb", "vegan_cov_ellipse", "ordi"
-)))
 
 ### * Model ####
-load(file = here("outputs", "models", "model_recovery_time_1.Rdata"))
+base::load(file = here("outputs", "models", "model_recovery_1.Rdata"))
 
 model <- sites %>%
-  add_epred_draws(m1, allow_new_levels = TRUE) %>%
-  mutate(
-    mean = mean(n),
-    sd = sd(n),
-    .epred = .epred * sd + mean
-  )
+  add_epred_draws(m1, allow_new_levels = TRUE)
 
 ### * Functions ####
 theme_mb <- function() {
@@ -169,6 +83,9 @@ theme_mb <- function() {
 
 
 ## 1 Expectations of predicted draws ###########################################
+sd <- sum(as.numeric(as.character(
+  as.data.frame(table(sites$sd_reference))$Var1
+  ))) / 4
 
 (p1 <- ggplot(data = sites) +
    geom_quasirandom(
@@ -178,13 +95,13 @@ theme_mb <- function() {
      cex = .5
    ) +
    geom_hline(
-     yintercept = c(25, 75),
+     yintercept = c((0 - sd), (0 + sd)),
      linetype = "dashed",
      linewidth = .3,
      color = "black"
    ) +
    geom_hline(
-     yintercept = c(50),
+     yintercept = 0,
      linetype = "solid",
      linewidth = .3,
      color = "black"
@@ -203,14 +120,15 @@ theme_mb <- function() {
          "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
      )
    ) +
-   scale_y_continuous(limits = c(0, 100), breaks = seq(-100, 400, 10)) +
-   scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-                      values = c("#00BFC4", "#F8766D")) +
-   scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-                     values = c("#00BFC4", "#F8766D")) +
+   scale_y_continuous(limits = c(-2, .25), breaks = seq(-100, 400, .5)) +
+   scale_color_manual(
+     breaks = c("hay_meadow", "dry_grassland"),
+     labels = c("Hay meadow", "Dry grassland"),
+     values = c("#00BFC4", "#F8766D")
+     ) +
    labs(
      x = "Sand ratio [%]", fill = "", color = "",
-     y = expression("Recovery")
+     y = expression(Successional ~ distance ~ italic("(d[jt,0])"))
    ) +
    theme_mb())
 
