@@ -24,21 +24,24 @@ library(brms)
 rm(list = ls())
 
 ### Load data ###
-sites <- read_csv(here("data", "processed", "data_processed_sites_nmds.csv"),
-                  col_names = TRUE, na = c("na", "NA", ""),
-                  col_types = cols(
-                    .default = "?",
-                    id = "f",
-                    plot = "f",
-                    site = "f",
-                    exposition = col_factor(levels = c("north", "south",
-                                                       "other")),
-                    sand_ratio = "f",
-                    substrate_depth = col_factor(levels = c("30", "15")),
-                    target_type = col_factor(levels = c("dry_grassland",
-                                                        "hay_meadow", "other")),
-                    seed_density = "f"
-                    )) %>%
+sites <- read_csv(
+  here("data", "processed", "data_processed_sites_nmds.csv"),
+  col_names = TRUE, na = c("na", "NA", ""),
+  col_types = cols(
+    .default = "?",
+    id = "f",
+    plot = "f",
+    site = "f",
+    exposition = col_factor(levels = c("north", "south",
+                                       "other")),
+    sand_ratio = "f",
+    substrate_depth = col_factor(levels = c("30", "15")),
+    target_type = col_factor(
+      levels = c("hay_meadow", "dry_grassland", "other")
+      ),
+    seed_density = "f"
+    )
+  ) %>%
   filter(reference == "2018" | reference == "2019" | reference == "2020" |
            reference == "2021") %>%
   mutate(
@@ -66,30 +69,36 @@ rm(list = setdiff(ls(), c("sites")))
 plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = sand_ratio)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Sand ratio [vol%] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Sand ratio [vol%]")
 plot2 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = substrate_depth)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Substrate depth [cm] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Substrate depth [cm]")
 plot3 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = target_type)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Target type (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Target type")
 plot4 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = seed_density)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Seed density [g/m²] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Seed density [g/m²]")
 (plot1 + plot2) / (plot3 + plot4)
 plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = exposition)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Exposition (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Exposition")
 plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Survey year")
 plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Blocks (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Blocks")
 plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Botanists and survey year") +
@@ -155,6 +164,7 @@ ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
 iter = 10000
 chains = 4
 thin = 2
+seed = 123
 priors <- c(
   set_prior("normal(0, 2)", class = "b"),
   set_prior("normal(0.1, 2)", class = "b", coef = "sand_ratio25"),
@@ -178,7 +188,7 @@ m_simple <- brm(n ~ target_type + exposition + sand_ratio + survey_year_fct +
                 warmup = floor(iter / 2),
                 save_pars = save_pars(all = TRUE),
                 cores = parallel::detectCores(),
-                seed = 121)
+                seed = seed)
 
 m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
                      seed_density + substrate_depth)^3 +
@@ -194,7 +204,7 @@ m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
               warmup = floor(iter / 2),
               save_pars = save_pars(all = TRUE),
               cores = parallel::detectCores(),
-              seed = 123)
+              seed = seed)
 
 m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
             substrate_depth + seed_density +
@@ -208,7 +218,7 @@ m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
           warmup = floor(iter / 2),
           save_pars = save_pars(all = TRUE),
           cores = parallel::detectCores(),
-          seed = 123)
+          seed = seed)
 
 m2 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
             substrate_depth + seed_density +
@@ -225,7 +235,7 @@ m2 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
           warmup = floor(iter / 2),
           save_pars = save_pars(all = TRUE),
           cores = parallel::detectCores(),
-          seed = 123)
+          seed = seed)
 
 m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
             substrate_depth + seed_density +
@@ -244,7 +254,7 @@ m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
           warmup = floor(iter / 2),
           save_pars = save_pars(all = TRUE),
           cores = parallel::detectCores(),
-          seed = 123)
+          seed = seed)
 
 
 m1_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
@@ -261,7 +271,7 @@ m1_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
                warmup = floor(iter / 2),
                save_pars = save_pars(all = TRUE),
                cores = parallel::detectCores(),
-               seed = 123)
+               seed = seed)
 
 ### * Save ####
 

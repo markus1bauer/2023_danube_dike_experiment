@@ -152,6 +152,7 @@ Specifications for the models
 iter = 10000
 chains = 4
 thin = 2
+seed = 123
 priors <- c(
   set_prior("normal(0, 1)", class = "b"),
   set_prior("normal(0.1, 1)", class = "b", coef = "sand_ratio25"),
@@ -167,16 +168,15 @@ priors <- c(
 Model caluclations
 
 ```{r}
-load(file = here("outputs", "models", "model_fcs_1.Rdata"))
 load(file = here("outputs", "models", "model_fcs_2.Rdata"))
-load(file = here("outputs", "models", "model_fcs_3.Rdata"))
+load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 ```
 
 ### Model comparison
 
 ```{r}
-m_1 <- m1
-m_2 <- m3
+m_1 <- m2
+m_2 <- m_full
 m_1$formula
 m_2$formula
 ```
@@ -352,14 +352,22 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001
 p1 / p2
 ```
 
-##### LOO-PIT plots
+##### LOO Leave one out
+
+```{r}
+loo1
+loo2
+plot(loo1)
+plot(loo2)
+```
+
+Leave one out probability integral transform
 
 ```{r}
 p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
 p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
 p1 / p2
-plot(loo1)
-plot(loo2)
+
 ```
 
 #### Autocorrelation check
@@ -376,15 +384,15 @@ mcmc_acf(posterior2, lags = 10)
 Prior summary 
 
 ```{r}
-prior_summary(m_2, all = FALSE)
+prior_summary(m_1, all = FALSE)
 ```
 
 Conditional and marignal italic(R)²
 
 ```{r}
-bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
-bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ```
 
@@ -397,19 +405,21 @@ mcmc_intervals(
   prob = 0.66,
   prob_outer = 0.95,
   point_est = "mean"
-)
+  ) +
+  theme_classic()
 mcmc_intervals(
   posterior2,
   prob = 0.66,
   prob_outer = 0.95,
   point_est = "mean"
-)
+  ) +
+  theme_classic()
 ```
 
 ### Effect sizes
 
 ```{r}
-(emm <- emmeans(m_2, revpairwise ~ target_type + sand_ratio |
+(emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 ```
 

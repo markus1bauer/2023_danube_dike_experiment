@@ -23,6 +23,7 @@ library(DHARMa.helpers)
 library(bayesplot)
 library(loo)
 library(tidybayes)
+library(patchwork)
 library(emmeans)
 
 ### Start ###
@@ -64,7 +65,7 @@ load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 load(file = here("outputs", "models", "model_fcs_1.Rdata"))
 load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 load(file = here("outputs", "models", "model_fcs_3.Rdata"))
-load(file = here("outputs", "models", "model_fcs_3_flat.Rdata"))
+load(file = here("outputs", "models", "model_fcs_2_flat.Rdata"))
 
 
 
@@ -77,7 +78,7 @@ load(file = here("outputs", "models", "model_fcs_3_flat.Rdata"))
 
 ### a Model comparison ---------------------------------------------------------
 
-m_1 <- m_simple
+m_1 <- m2
 m_2 <- m_full
 m_1$formula
 m_2$formula
@@ -257,13 +258,15 @@ mcmc_intervals(
   prob = 0.66,
   prob_outer = 0.95,
   point_est = "mean"
-)
+  ) +
+  theme_classic()
 mcmc_intervals(
   posterior2,
   prob = 0.66,
   prob_outer = 0.95,
   point_est = "mean"
-)
+  ) +
+  theme_classic()
 
 
 ### b Effect sizes ------------------------------------------------------------

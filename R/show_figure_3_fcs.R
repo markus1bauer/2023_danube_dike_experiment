@@ -44,8 +44,7 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
   mutate(
     n = fcs_target,
     survey_year_fct = factor(survey_year),
-    botanist_year = str_c(survey_year_fct, botanist, sep = "_"),
-    botanist_year = str_replace_all(botanist_year, " ", "_")
+    botanist_year = str_c(survey_year_fct, botanist, sep = " "),
   ) %>%
   select(
     id, plot, site, botanist_year, exposition, sand_ratio, substrate_depth,
@@ -53,10 +52,10 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
   )
 
 ### * Model ####
-load(file = here("outputs", "models", "model_fcs_3.Rdata"))
+load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 
 model <- sites %>%
-  add_epred_draws(m3, allow_new_levels = TRUE)
+  add_epred_draws(m2, allow_new_levels = TRUE)
 
 ### * Functions ####
 theme_mb <- function() {
@@ -114,7 +113,7 @@ theme_mb <- function() {
          "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
      )
    ) +
-   scale_y_continuous(limits = c(-2.8, 1.9), breaks = seq(-100, 400, 1)) +
+   scale_y_continuous(limits = c(-2.8, 2.0), breaks = seq(-100, 400, 1)) +
    scale_color_manual(breaks = c("hay_meadow", "dry_grassland"),
                       labels = c("Hay meadow", "Dry grassland"),
                       values = c("#00BFC4", "#F8766D")) +
@@ -139,28 +138,27 @@ ggsave(here("outputs", "figures",
 
 ## 2 Coefficients #############################################################
 
-m3 %>%
+m2 %>%
   gather_draws(
-    b_sand_ratio25, b_sand_ratio50, b_substrate_depth30,
-    b_target_typehay_meadow, b_seed_density8,
-    b_expositionsouth, b_survey_year_fct2019,
-    b_survey_year_fct2020, b_survey_year_fct2021
+    b_sand_ratio25, b_sand_ratio50, b_substrate_depth15,
+    b_target_typedry_grassland, b_seed_density8,
+    b_expositionsouth,
   ) %>%
   mutate(
     .variable = as.factor(.variable),
     .variable = fct_relevel(
-      .variable, "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth30",
-      "b_target_typehay_meadow", "b_seed_density8",
+      .variable, "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+      "b_target_typedry_grassland", "b_seed_density8",
       "b_expositionsouth", "b_survey_year_fct2019",
       "b_survey_year_fct2020", "b_survey_year_fct2021"
     ),
     .variable = fct_relevel(.variable, rev),
     .variable = fct_recode(
       .variable,
-      "Dry grassland vs. hay meadow" = "b_target_typehay_meadow",
+      "Hay meadow vs. Dry grassland" = "b_target_typedry_grassland",
       "Sand ratio: 0 vs. 25 %" = "b_sand_ratio25",
       "Sand ratio: 0 vs. 50 %" = "b_sand_ratio50",
-      "Substrate depth: 15 vs. 30 cm" = "b_substrate_depth30",
+      "Substrate depth: 30 vs. 15 cm" = "b_substrate_depth15",
       "Seed density: 4 vs. 8 g/m²" = "b_seed_density8",
       "North vs. south" = "b_expositionsouth",
       "2018 vs. 2019" = "b_survey_year_fct2019",
@@ -179,8 +177,8 @@ m3 %>%
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_3_fcs_coef_800dpi_24x8cm.tiff"),
+            "figure_3_fcs_coef_800dpi_24x8cm2.tiff"),
        dpi = 800, width = 24, height = 8, units = "cm")
 ggsave(here("outputs", "figures",
-            "figure_3_fcs_coef_800dpi_16.5x14cm.tiff"),
-       dpi = 800, width = 16.5, height = 14, units = "cm")
+            "figure_3_fcs_coef_800dpi_16.5x5cm.tiff"),
+       dpi = 800, width = 16.5, height = 5, units = "cm")

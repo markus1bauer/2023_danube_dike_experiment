@@ -245,13 +245,15 @@ mcmc_intervals(
   prob = 0.66,
   prob_outer = 0.95,
   point_est = "mean"
-)
+  ) +
+  theme_classic()
 mcmc_intervals(
   posterior2,
   prob = 0.66,
   prob_outer = 0.95,
   point_est = "mean"
-)
+  ) +
+  theme_classic()
 
 
 ### b Effect sizes ------------------------------------------------------------

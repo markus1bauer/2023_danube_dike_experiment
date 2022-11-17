@@ -32,9 +32,9 @@ sites <- read_csv(
       plot = "f",
       site = "f",
       sand_ratio = "f",
-      substrate_depth = "f",
+      substrate_depth = col_factor(levels = c("30", "15")),
       target_type = col_factor(levels = c(
-        "dry_grassland", "hay_meadow"
+        "hay_meadow", "dry_grassland"
       )),
       seed_density = "f",
       exposition = col_factor(levels = c(
@@ -71,31 +71,41 @@ sites <- read_csv(
 plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = sand_ratio)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Sand ratio [vol%] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Sand ratio [vol%]")
 plot2 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = substrate_depth)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Substrate depth [cm] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Substrate depth [cm]")
 plot3 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = target_type)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Target type (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Target type")
 plot4 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = seed_density)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Seed density [g/m²] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Seed density [g/m²]")
 (plot1 + plot2) / (plot3 + plot4)
 plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = exposition)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Exposition (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Exposition")
 plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Survey year")
 plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Blocks (Data of 2021)")
-(plot1 + plot2) / (plot3)
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Blocks")
+plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Botanists and survey year") +
+  theme(axis.text.x = element_text(angle = 90))
+(plot1 + plot2) / (plot3 + plot4)
 ggplot(data = sites,
        aes(x = sand_ratio, y = n, color = target_type)) + 
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
@@ -140,15 +150,15 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             (1 | site/plot),
           data = sites)
 ### Example of normal distribution
-ggplot(data = data.frame(x = c(-30, 30)), aes(x = x)) +
+ggplot(data = data.frame(x = c(-40, 40)), aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 10)) +
   expand_limits(y = 0)
 ### Example of cauchy distribution
-ggplot(data = data.frame(x = c(-30, 30)), aes(x = x)) +
+ggplot(data = data.frame(x = c(-40, 40)), aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 10)) +
   expand_limits(y = 0)
 ### Example of a student t distribution
-ggplot(data.frame(x = c(-30, 30)), aes(x = x)) +
+ggplot(data.frame(x = c(-40, 40)), aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 10)) +
   expand_limits(y = 0)
 

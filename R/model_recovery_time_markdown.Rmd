@@ -35,7 +35,32 @@ rm(list = ls())
 #### Load data
 
 ```{r}
-
+sites <- read_csv(
+  here("data", "processed", "data_processed_sites_nmds.csv"),
+  col_names = TRUE, na = c("na", "NA", ""),
+  col_types = cols(
+    .default = "?",
+    id = "f",
+    plot = "f",
+    site = "f",
+    exposition = col_factor(levels = c("north", "south",
+                                       "other")),
+    sand_ratio = "f",
+    substrate_depth = col_factor(levels = c("30", "15")),
+    target_type = col_factor(
+      levels = c("hay_meadow", "dry_grassland", "other")
+      ),
+    seed_density = "f"
+    )
+  ) %>%
+  filter(reference == "2018" | reference == "2019" | reference == "2020" |
+           reference == "2021") %>%
+  mutate(
+    survey_year_fct = factor(survey_year),
+    survey_year = as.numeric(survey_year),
+    botanist_year = str_c(survey_year, botanist, sep = " "),
+    n = recovery_time
+    )
 ```
 
 # Statistics
@@ -45,28 +70,39 @@ rm(list = ls())
 ### Graphs of raw data
 
 ```{r echo = FALSE}
-plot1 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = sand_ratio)) +
+plot1 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = sand_ratio)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Sand ratio [vol%] (Data of 2021)")
-plot2 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = substrate_depth)) +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Sand ratio [vol%]")
+plot2 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = substrate_depth)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Substrate depth [cm] (Data of 2021)")
-plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = target_type)) +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Substrate depth [cm]")
+plot3 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = target_type)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Target type (Data of 2021)")
-plot4 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = seed_density)) +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Target type")
+plot4 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = seed_density)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Seed density [g/m²] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Seed density [g/m²]")
 (plot1 + plot2) / (plot3 + plot4)
-plot1 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = exposition)) +
+plot1 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = exposition)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Exposition (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Exposition")
 plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Survey year")
 plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Blocks (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Blocks")
 plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Botanists and survey year") +
@@ -302,7 +338,7 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001
 p1 / p2
 ```
 
-##### LOO-PIT plots
+##### LOO-PIT: Leave one out probability integral transform checks
 
 ```{r}
 p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
