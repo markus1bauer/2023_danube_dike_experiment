@@ -23,19 +23,22 @@ rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 setwd(here("data", "processed"))
 
 ### Load data ###
-sites <- read_csv("data_processed_sites.csv",
-                  col_names = TRUE,
-                  na = c("na", "NA", ""), col_types =
+sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
+                  col_names = TRUE, na = c("na", "NA", ""), col_types =
                     cols(
                       .default = "?",
-                      id = "f",
                       plot = "f",
                       site = "f",
-                      exposition = col_factor(levels = c("north", "south")),
                       sand_ratio = "f",
                       substrate_depth = col_factor(levels = c("30", "15")),
-                      target_type = "f",
-                      seed_density = "f"
+                      target_type = col_factor(levels = c(
+                        "hay_meadow", "dry_grassland"
+                      )),
+                      seed_density = "f",
+                      exposition = col_factor(levels = c(
+                        "north", "south"
+                      )),
+                      survey_year = "c"
                     )) %>%
   filter(survey_year != "seeded") %>%
   mutate(
@@ -85,44 +88,42 @@ theme_mb <- function() {
 ## 1 Marginal effects #########################################################
 
 (p1 <- ggplot(data = sites) +
-  geom_quasirandom(
-    aes(y = n, x = sand_ratio, color = target_type),
-    alpha = 0.2,
-    dodge.width = 0.9,
-    cex = .5
-    ) +
-  geom_hline(
-    yintercept = 0,
-    linetype = "dashed",
-    linewidth = .3,
-    color = "black"
-  ) +
-  stat_pointinterval(
-    aes(y = .epred, x = sand_ratio, color = target_type),
-    data = model,
-    .width = c(0.66, 0.95),
-    point_size = 2,
-    position = "dodge"
-  ) +
-  facet_grid(
-    exposition ~ survey_year_fct,
-    labeller = as_labeller(
-      c(south = "South", north = "North",
-        "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
-    )
-  ) +
-  scale_y_continuous(limits = c(-2.8, 1.9), breaks = seq(-100, 400, 1)) +
-  scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
-                     values = c("#00BFC4", "#F8766D")) +
-  scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
-                    values = c("#00BFC4", "#F8766D")) +
-  labs(
-    x = "Sand ratio [%]", fill = "", color = "",
-    y = expression(
-      Favourable ~ Conservation ~ Status ~ "(FCS)"
-    )
-  ) +
-  theme_mb())
+   geom_quasirandom(
+     aes(y = n, x = sand_ratio, color = target_type),
+     alpha = 0.2,
+     dodge.width = 0.9,
+     cex = .5
+   ) +
+   geom_hline(
+     yintercept = 0,
+     linetype = "dashed",
+     linewidth = .3,
+     color = "black"
+   ) +
+   stat_pointinterval(
+     aes(y = .epred, x = sand_ratio, color = target_type),
+     data = model,
+     .width = c(0.66, 0.95),
+     point_size = 2,
+     position = "dodge"
+   ) +
+   facet_grid(
+     exposition ~ survey_year_fct,
+     labeller = as_labeller(
+       c(south = "South", north = "North",
+         "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
+     )
+   ) +
+   scale_y_continuous(limits = c(-2.8, 1.9), breaks = seq(-100, 400, 1)) +
+   scale_color_manual(breaks = c("hay_meadow", "dry_grassland"),
+                      labels = c("Hay meadow", "Dry grassland"),
+                      values = c("#00BFC4", "#F8766D")) +
+   labs(
+     x = "Sand ratio [%]", color = "", y = expression(
+       Favourable ~ Conservation ~ Status ~ "(FCS)"
+     )
+   ) +
+   theme_mb())
   
 ### Save ###
 

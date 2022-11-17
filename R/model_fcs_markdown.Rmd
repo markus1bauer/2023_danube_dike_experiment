@@ -42,15 +42,15 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
                       plot = "f",
                       site = "f",
                       sand_ratio = "f",
-                      substrate_depth = "f",
+                      substrate_depth = col_factor(levels = c("30", "15")),
                       target_type = col_factor(levels = c(
-                        "dry_grassland", "hay_meadow"
-                        )),
+                        "hay_meadow", "dry_grassland"
+                      )),
                       seed_density = "f",
                       exposition = col_factor(levels = c(
                         "north", "south"
                       )),
-                      survey_year = "d"
+                      survey_year = "c"
                     )) %>%
   ### Exclude data of seed mixtures
   filter(survey_year != "seeded") %>%
@@ -74,28 +74,39 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
 ### Graphs of raw data
 
 ```{r echo = FALSE}
-plot1 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = sand_ratio)) +
+plot1 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = sand_ratio)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Sand ratio [vol%] (Data of 2021)")
-plot2 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = substrate_depth)) +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Sand ratio [vol%]")
+plot2 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = substrate_depth)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Substrate depth [cm] (Data of 2021)")
-plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = target_type)) +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Substrate depth [cm]")
+plot3 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = target_type)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Target type (Data of 2021)")
-plot4 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = seed_density)) +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Target type")
+plot4 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = seed_density)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Seed density [g/m²] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Seed density [g/m²]")
 (plot1 + plot2) / (plot3 + plot4)
-plot1 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = exposition)) +
+plot1 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = exposition)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Exposition (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Exposition")
 plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Survey year")
 plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Blocks (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Blocks")
 plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Botanists and survey year") +
@@ -170,7 +181,7 @@ m_1$formula
 m_2$formula
 ```
 
-Conditional R² values
+Conditional italic(R)² values
 
 ```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -179,7 +190,7 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
 ```
 
-Marginal R² values
+Marginal italic(R)² values
 
 ```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -206,8 +217,8 @@ posterior1 <- m_1 %>%
     variable = c(
       "b_sand_ratio25",
       "b_sand_ratio50",
-      "b_substrate_depth30",
-      "b_target_typehay_meadow",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
       "b_seed_density8",
       "b_expositionsouth",
       "b_survey_year_fct2019",
@@ -225,8 +236,8 @@ posterior2 <- m_2 %>%
     variable = c(
       "b_sand_ratio25",
       "b_sand_ratio50",
-      "b_substrate_depth30",
-      "b_target_typehay_meadow",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
       "b_seed_density8",
       "b_expositionsouth",
       "b_survey_year_fct2019",
@@ -352,10 +363,15 @@ mcmc_acf(posterior2, lags = 10)
 
 ### Model output
 
-Priors and conditional and marignal R²
+Prior summary 
 
 ```{r}
 prior_summary(m_2, all = FALSE)
+```
+
+Conditional and marignal italic(R)²
+
+```{r}
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),

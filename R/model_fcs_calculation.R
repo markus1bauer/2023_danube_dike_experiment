@@ -31,15 +31,15 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
                       plot = "f",
                       site = "f",
                       sand_ratio = "f",
-                      substrate_depth = "f",
+                      substrate_depth = col_factor(levels = c("30", "15")),
                       target_type = col_factor(levels = c(
-                        "dry_grassland", "hay_meadow"
+                        "hay_meadow", "dry_grassland"
                       )),
                       seed_density = "f",
                       exposition = col_factor(levels = c(
                         "north", "south"
                       )),
-                      survey_year = "d"
+                      survey_year = "c"
                     )) %>%
   ### Exclude data of seed mixtures
   filter(survey_year != "seeded") %>%
@@ -71,30 +71,36 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
 plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = sand_ratio)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Sand ratio [vol%] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Sand ratio [vol%]")
 plot2 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = substrate_depth)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Substrate depth [cm] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Substrate depth [cm]")
 plot3 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = target_type)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Target type (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Target type")
 plot4 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = seed_density)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Seed density [g/m²] (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Seed density [g/m²]")
 (plot1 + plot2) / (plot3 + plot4)
 plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = exposition)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Exposition (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Exposition")
 plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Survey year")
 plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Blocks (Data of 2021)")
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Blocks")
 plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Botanists and survey year") +
@@ -127,7 +133,6 @@ boxplot(sites$n)
 ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
 ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03)
 ggplot(sites, aes(x = n)) + geom_density()
-ggplot(sites, aes(sqrt(n))) + geom_density()
 
 
 
@@ -160,6 +165,7 @@ ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
 iter = 10000
 chains = 4
 thin = 2
+seed = 123
 priors <- c(
   set_prior("normal(0, 1)", class = "b"),
   set_prior("normal(0.1, 1)", class = "b", coef = "sand_ratio25"),
@@ -171,95 +177,99 @@ priors <- c(
   set_prior("cauchy(0, 1)", class = "sigma")
 )
 ### Models ###
-m_simple <- brm(n ~ target_type + exposition + sand_ratio + survey_year_fct +
-                   seed_density + substrate_depth +
-                   (1 | site/plot) + (1 | botanist_year),
-                 data = sites, 
-                 family = gaussian("identity"),
-                 prior = priors,
-                 chains = chains,
-                 iter = iter,
-                 thin = thin,
-                 warmup = floor(iter / 2),
-                 save_pars = save_pars(all = TRUE),
-                 cores = parallel::detectCores(),
-                 seed = 121)
+m_simple <- brm(n ~ sand_ratio + target_type + exposition + survey_year_fct +
+                  substrate_depth + seed_density +
+                  botanist_year +
+                  (1 | site/plot),
+                data = sites, 
+                family = gaussian("identity"),
+                prior = priors,
+                chains = chains,
+                iter = iter,
+                thin = thin,
+                control = list(max_treedepth = 13),
+                warmup = floor(iter / 2),
+                save_pars = save_pars(all = TRUE),
+                cores = parallel::detectCores(),
+                seed = seed)
 
-m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
-                      seed_density + substrate_depth)^3 +
-                 target_type:sand_ratio:exposition:survey_year_fct +
-                 substrate_depth:sand_ratio:exposition:survey_year_fct +
-                 (1 | site/plot) + (1 | botanist_year),
-               data = sites, 
-               family = gaussian("identity"),
-               prior = priors,
-               chains = chains,
-               iter = iter,
-               thin = thin,
-               warmup = floor(iter / 2),
-               save_pars = save_pars(all = TRUE),
-               cores = parallel::detectCores(),
-               seed = 123)
+m_full <- brm(n ~ sand_ratio * target_type * exposition * survey_year_fct +
+                substrate_depth * seed_density +
+                substrate_depth:exposition +
+                seed_density:exposition +
+                substrate_depth:survey_year_fct +
+                seed_density:survey_year_fct +
+                substrate_depth:exposition:survey_year_fct +
+                seed_density:exposition:survey_year_fct +
+                botanist_year +
+                (1 | site/plot),
+              data = sites, 
+              family = gaussian("identity"),
+              prior = priors,
+              chains = chains,
+              iter = iter,
+              thin = thin,
+              control = list(max_treedepth = 13),
+              warmup = floor(iter / 2),
+              save_pars = save_pars(all = TRUE),
+              cores = parallel::detectCores(),
+              seed = seed)
 
-m1 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
-             substrate_depth + seed_density +
-             (1 | site/plot) + (1 | botanist_year),
-           data = sites, 
-           family = gaussian("identity"),
-           prior = priors,
-           chains = chains,
-           iter = iter,
-           thin = thin,
-           warmup = floor(iter / 2),
-           save_pars = save_pars(all = TRUE),
-           cores = parallel::detectCores(),
-           seed = 123)
-
-m2 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
-            substrate_depth + seed_density +
-            sand_ratio:substrate_depth +
-            substrate_depth:exposition +
-            seed_density:exposition +
-            (1 | site/plot) + (1 | botanist_year),
+m1 <- brm(n ~ sand_ratio * substrate_depth * exposition * survey_year_fct +
+            target_type + seed_density + botanist_year +
+            (1 | site/plot),
           data = sites, 
           family = gaussian("identity"),
           prior = priors,
           chains = chains,
           iter = iter,
           thin = thin,
+          control = list(max_treedepth = 13),
           warmup = floor(iter / 2),
           save_pars = save_pars(all = TRUE),
           cores = parallel::detectCores(),
-          seed = 123)
+          seed = seed)
 
-m3 <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
-                 substrate_depth + seed_density +
-                 substrate_depth:sand_ratio +
-                 seed_density:exposition +
-                 target_type:exposition:survey_year_fct +
-                 sand_ratio:exposition:survey_year_fct +
-                 seed_density:exposition:survey_year_fct +
-                 (1 | site/plot) + (1 | botanist_year),
-               data = sites,
-               family = gaussian("identity"),
-               prior = priors,
-               chains = chains,
-               iter = iter,
-               thin = thin,
-               warmup = floor(iter / 2),
-               save_pars = save_pars(all = TRUE),
-               cores = parallel::detectCores(),
-               seed = 123)
+m2 <- brm(n ~ sand_ratio * target_type * exposition * survey_year_fct +
+            substrate_depth + seed_density +
+            substrate_depth:exposition +
+            seed_density:exposition +
+            substrate_depth:survey_year_fct +
+            seed_density:survey_year_fct +
+            botanist_year +
+            (1 | site/plot),
+          data = sites, 
+          family = gaussian("identity"),
+          prior = priors,
+          chains = chains,
+          iter = iter,
+          thin = thin,
+          control = list(max_treedepth = 13),
+          warmup = floor(iter / 2),
+          save_pars = save_pars(all = TRUE),
+          cores = parallel::detectCores(),
+          seed = seed)
 
+m3 <- brm(n ~ (sand_ratio + target_type + seed_density + substrate_depth) *
+            exposition * survey_year_fct +
+            botanist_year +
+            (1 | site/plot),
+          data = sites,
+          family = gaussian("identity"),
+          prior = priors,
+          chains = chains,
+          iter = iter,
+          thin = thin,
+          control = list(max_treedepth = 13),
+          warmup = floor(iter / 2),
+          save_pars = save_pars(all = TRUE),
+          cores = parallel::detectCores(),
+          seed = seed)
 
-m3_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
-                 substrate_depth + seed_density +
-                 substrate_depth:sand_ratio +
-                 seed_density:exposition +
-                 target_type:exposition:survey_year_fct +
-                 sand_ratio:exposition:survey_year_fct +
-                 seed_density:exposition:survey_year_fct +
-                 (1 | site/plot) + (1 | botanist_year),
+m3_flat <- brm(n ~ (sand_ratio + target_type + seed_density + substrate_depth) *
+                 exposition * survey_year_fct +
+                 botanist_year +
+                 (1 | site/plot),
                data = sites,
                family = gaussian("identity"),
                prior = c(
@@ -268,10 +278,12 @@ m3_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^2 +
                chains = chains,
                iter = iter,
                thin = thin,
+               control = list(max_treedepth = 13),
                warmup = floor(iter / 2),
                save_pars = save_pars(all = TRUE),
                cores = parallel::detectCores(),
-               seed = 123)
+               seed = seed)
+# -> 1549 divergent transitions + Rhat and ESS problems
 
 ### Save ###
 save(m_simple, file = here("outputs", "models", "model_fcs_simple.Rdata"))

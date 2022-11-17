@@ -36,15 +36,15 @@ sites <- read_csv(here("data", "processed", "data_processed_sites.csv"),
                       plot = "f",
                       site = "f",
                       sand_ratio = "f",
-                      substrate_depth = "f",
+                      substrate_depth = col_factor(levels = c("30", "15")),
                       target_type = col_factor(levels = c(
-                        "dry_grassland", "hay_meadow"
+                        "hay_meadow", "dry_grassland"
                       )),
                       seed_density = "f",
                       exposition = col_factor(levels = c(
                         "north", "south"
                       )),
-                      survey_year = "c",
+                      survey_year = "c"
                     )) %>%
   ### Exclude data of seed mixtures
   filter(survey_year != "seeded") %>%
