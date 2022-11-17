@@ -77,8 +77,8 @@ load(file = here("outputs", "models", "model_fcs_3_flat.Rdata"))
 
 ### a Model comparison ---------------------------------------------------------
 
-m_1 <- m1
-m_2 <- m3
+m_1 <- m_simple
+m_2 <- m_full
 m_1$formula
 m_2$formula
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -104,8 +104,8 @@ posterior1 <- m_1 %>%
     variable = c(
       "b_sand_ratio25",
       "b_sand_ratio50",
-      "b_substrate_depth30",
-      "b_target_typehay_meadow",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
       "b_seed_density8",
       "b_expositionsouth",
       "b_survey_year_fct2019",
@@ -113,7 +113,6 @@ posterior1 <- m_1 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
-      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
@@ -123,8 +122,8 @@ posterior2 <- m_2 %>%
     variable = c(
       "b_sand_ratio25",
       "b_sand_ratio50",
-      "b_substrate_depth30",
-      "b_target_typehay_meadow",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
       "b_seed_density8",
       "b_expositionsouth",
       "b_survey_year_fct2019",
@@ -132,7 +131,6 @@ posterior2 <- m_2 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
-      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
@@ -163,8 +161,18 @@ range(draws2$ess_tail)
 #### * MCMC diagnostics ####
 mcmc_trace(posterior1, np = hmc_diagnostics1)
 mcmc_trace(posterior2, np = hmc_diagnostics2)
-mcmc_pairs(posterior1, off_diag_args = list(size = 1.2))
-mcmc_pairs(posterior2, off_diag_args = list(size = 1.2))
+mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
+mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
 mcmc_scatter(m_1, np = hmc_diagnostics1, size = 1,
              pars = c("b_survey_year_fct2020", "b_survey_year_fct2019"))
 mcmc_scatter(m_2, np = hmc_diagnostics2, size = 1,
