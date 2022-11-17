@@ -226,7 +226,6 @@ posterior1 <- m_1 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
-      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
@@ -245,7 +244,6 @@ posterior2 <- m_2 %>%
       "b_survey_year_fct2021",
       "sd_site__Intercept",
       "sd_site:plot__Intercept",
-      "sd_botanist_year__Intercept",
       "sigma"
     )
   )
@@ -282,6 +280,18 @@ range(draws2$ess_tail)
 ```{r}
 mcmc_trace(posterior1, np = hmc_diagnostics1)
 mcmc_trace(posterior2, np = hmc_diagnostics2)
+mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
+mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
 mcmc_parcoord(posterior1, np = hmc_diagnostics1)
 mcmc_parcoord(posterior2, np = hmc_diagnostics2)
 ```
