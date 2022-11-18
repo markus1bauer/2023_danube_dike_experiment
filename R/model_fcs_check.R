@@ -225,8 +225,10 @@ p1 / p2
 p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
 p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
 p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth,
+                       binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth,
+                       binwidth = 0.001)
 p1 / p2
 #### LOO-PIT plots
 p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))

@@ -26,23 +26,19 @@ rm(list = ls())
 ### Load data ###
 sites <- read_csv(
   here("data", "processed", "data_processed_sites_temporal.csv"),
-  col_names = TRUE, na = c("na", "NA", ""), col_types =
-    cols(
-      .default = "?",
-      plot = "f",
-      site = "f",
-      sand_ratio = "f",
-      substrate_depth = col_factor(levels = c("30", "15")),
-      target_type = col_factor(levels = c(
-        "hay_meadow", "dry_grassland"
-      )),
-      seed_density = "f",
-      exposition = col_factor(levels = c(
-        "north", "south"
-      )),
-      survey_year = "c"
-    )
-  ) %>%
+  col_names = TRUE, na = c("na", "NA", ""),
+  col_types = cols(
+    .default = "?",
+    plot = "f",
+    site = "f",
+    sand_ratio = "f",
+    substrate_depth = col_factor(levels = c("30", "15")),
+    target_type = col_factor(levels = c("hay_meadow", "dry_grassland")),
+    seed_density = "f",
+    exposition = col_factor(levels = c("north", "south")),
+    survey_year = "c"
+  )
+) %>%
   ### Exclude data of seed mixtures
   filter(presabu == "presence") %>%
   mutate(
@@ -180,19 +176,21 @@ priors <- c(
   set_prior("cauchy(0, 10)", class = "sigma")
 )
 ### Models ###
-m_simple <- brm(n ~ target_type + exposition + sand_ratio + survey_year_fct +
-                  seed_density + substrate_depth +
-                  (1 | site/plot),
-                data = sites, 
-                family = gaussian("identity"),
-                prior = priors,
-                chains = chains,
-                iter = iter,
-                thin = thin,
-                warmup = floor(iter / 2),
-                save_pars = save_pars(all = TRUE),
-                cores = parallel::detectCores(),
-                seed = 121)
+m_simple <- brm(
+  n ~ target_type + exposition + sand_ratio + survey_year_fct +
+    seed_density + substrate_depth +
+    (1 | site/plot),
+  data = sites, 
+  family = gaussian("identity"),
+  prior = priors,
+  chains = chains,
+  iter = iter,
+  thin = thin,
+  warmup = floor(iter / 2),
+  save_pars = save_pars(all = TRUE),
+  cores = parallel::detectCores(),
+  seed = seed
+)
 
 m_full <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct +
                      seed_density + substrate_depth)^3 +
