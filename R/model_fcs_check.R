@@ -254,7 +254,7 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
-draws2
+draws1
 mcmc_intervals(
   posterior1,
   prob = 0.66,

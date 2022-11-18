@@ -415,7 +415,7 @@ bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
 Posteriors
 
 ```{r}
-draws2
+draws1
 mcmc_intervals(
   posterior1,
   prob = 0.66,
