@@ -157,9 +157,8 @@ ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
   expand_limits(y = 0) + ggtitle("Cauchy distribution")
 ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
-  expand_limits(y = 0) + ggtitle(expression(Student ~ italic(t)"-distribution"))
+  expand_limits(y = 0) + ggtitle(expression(Student~italic(t)*"-distribution"))
 ```
-
 
 Specifications for the models
 
