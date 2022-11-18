@@ -134,7 +134,7 @@ ggplot(data = sites,
 
 ### Outliers, zero-inflation, transformations?
 
-```{r}
+```{r echo = FALSE}
 sites %>% group_by(exposition) %>% count(site)
 boxplot(sites$n)
 ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
@@ -352,7 +352,7 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001
 p1 / p2
 ```
 
-##### LOO Leave one out
+##### LOO (Leave one out)
 
 ```{r}
 loo1

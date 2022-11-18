@@ -273,11 +273,12 @@ m1_flat <- brm(n ~ (target_type + exposition + sand_ratio + survey_year_fct)^4 +
                cores = parallel::detectCores(),
                seed = seed)
 
-### * Save ####
+
+### c Save ---------------------------------------------------------------------
 
 save(m_simple, file = here("outputs", "models", "model_recovery_simple.Rdata"))
 save(m_full, file = here("outputs", "models", "model_recovery_full.Rdata"))
 save(m1, file = here("outputs", "models", "model_recovery_1.Rdata"))
 save(m2, file = here("outputs", "models", "model_recovery_2.Rdata"))
 save(m3, file = here("outputs", "models", "model_recovery_3.Rdata"))
-save(m3_flat, file = here("outputs", "models", "model_recovery_3_flat.Rdata"))
+save(m1_flat, file = here("outputs", "models", "model_recovery_1_flat.Rdata"))

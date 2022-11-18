@@ -278,6 +278,18 @@ range(draws2$ess_tail)
 ```{r}
 mcmc_trace(posterior1, np = hmc_diagnostics1)
 mcmc_trace(posterior2, np = hmc_diagnostics2)
+mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
+mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
 mcmc_parcoord(posterior1, np = hmc_diagnostics1)
 mcmc_parcoord(posterior2, np = hmc_diagnostics2)
 ```
@@ -338,14 +350,22 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001
 p1 / p2
 ```
 
-##### LOO-PIT: Leave one out probability integral transform checks
+##### LOO (Leave one out)
+
+```{r}
+loo1
+loo2
+plot(loo1)
+plot(loo2)
+```
+
+Leave one out probability integral transform
 
 ```{r}
 p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
 p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
 p1 / p2
-plot(loo1)
-plot(loo2)
+
 ```
 
 #### Autocorrelation check
