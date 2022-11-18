@@ -32,13 +32,12 @@ sites <- read_csv(
     id = "f",
     plot = "f",
     site = "f",
-    exposition = col_factor(levels = c("north", "south",
-                                       "other")),
+    exposition = col_factor(levels = c("north", "south", "other")),
     sand_ratio = "f",
     substrate_depth = col_factor(levels = c("30", "15")),
-    target_type = col_factor(
-      levels = c("hay_meadow", "dry_grassland", "other")
-      ),
+    target_type = col_factor(levels = c(
+      "hay_meadow", "dry_grassland", "other"
+      )),
     seed_density = "f"
     )
   ) %>%

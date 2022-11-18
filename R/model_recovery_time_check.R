@@ -28,20 +28,23 @@ library(emmeans)
 rm(list = ls())
 
 ### Load data ###
-sites <- read_csv(here("data", "processed", "data_processed_sites_nmds.csv"),
-                  col_names = TRUE, na = c("na", "NA", ""),
-                  col_types = cols(
-                    .default = "?",
-                    id = "f",
-                    plot = "f",
-                    site = "f",
-                    exposition = col_factor(levels = c("north", "south", "other")),
-                    sand_ratio = "f",
-                    substrate_depth = col_factor(levels = c("30", "15")),
-                    target_type = col_factor(levels = c("dry_grassland",
-                                                        "hay_meadow", "other")),
-                    seed_density = "f"
-                  )) %>%
+sites <- read_csv(
+  here("data", "processed", "data_processed_sites_nmds.csv"),
+  col_names = TRUE, na = c("na", "NA", ""),
+  col_types = cols(
+    .default = "?",
+    id = "f",
+    plot = "f",
+    site = "f",
+    exposition = col_factor(levels = c("north", "south", "other")),
+    sand_ratio = "f",
+    substrate_depth = col_factor(levels = c("30", "15")),
+    target_type = col_factor(levels = c(
+      "dry_grassland", "hay_meadow", "other"
+      )),
+    seed_density = "f"
+  )
+) %>%
   filter(reference == "2018" | reference == "2019" | reference == "2020" |
            reference == "2021") %>%
   mutate(
@@ -159,8 +162,18 @@ range(draws2$ess_tail)
 #### * MCMC diagnostics ####
 mcmc_trace(posterior1, np = hmc_diagnostics1)
 mcmc_trace(posterior2, np = hmc_diagnostics2)
-mcmc_pairs(posterior1, off_diag_args = list(size = 1.2))
-mcmc_pairs(posterior2, off_diag_args = list(size = 1.2))
+mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
+mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
 mcmc_scatter(m_1, np = hmc_diagnostics1, size = 1,
              pars = c("b_survey_year_fct2020", "b_survey_year_fct2019"))
 mcmc_scatter(m_2, np = hmc_diagnostics2, size = 1,
@@ -221,7 +234,6 @@ p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
 p1 / p2
 plot(loo1)
 plot(loo2)
-
 
 #### * Autocorrelation ####
 mcmc_acf(posterior1, lags = 10)

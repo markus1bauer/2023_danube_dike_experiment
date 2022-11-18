@@ -31,20 +31,16 @@ rm(list = ls())
 ### Load data ###
 sites <- read_csv(
   here("data", "processed", "data_processed_sites_temporal.csv"),
-  col_names = TRUE, na = c("na", "NA", ""), col_types =
-    cols(
+  col_names = TRUE, na = c("na", "NA", ""),
+  col_types = cols(
       .default = "?",
       plot = "f",
       site = "f",
       sand_ratio = "f",
       substrate_depth = "f",
-      target_type = col_factor(levels = c(
-        "dry_grassland", "hay_meadow"
-      )),
+      target_type = col_factor(levels = c("dry_grassland", "hay_meadow")),
       seed_density = "f",
-      exposition = col_factor(levels = c(
-        "north", "south"
-      )),
+      exposition = col_factor(levels = c("north", "south")),
       survey_year = "c"
     )
 ) %>%
@@ -163,8 +159,18 @@ range(draws2$ess_tail)
 #### * MCMC diagnostics ####
 mcmc_trace(posterior1, np = hmc_diagnostics1)
 mcmc_trace(posterior2, np = hmc_diagnostics2)
-mcmc_pairs(posterior1, off_diag_args = list(size = 1.2))
-mcmc_pairs(posterior2, off_diag_args = list(size = 1.2))
+mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
+mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
 mcmc_scatter(m_1, np = hmc_diagnostics1, size = 1,
              pars = c("b_survey_year_fct2020", "b_survey_year_fct2019"))
 mcmc_scatter(m_2, np = hmc_diagnostics2, size = 1,
