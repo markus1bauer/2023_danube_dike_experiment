@@ -1,5 +1,5 @@
 ---
-title: "Recover time to reference state: <br> Analysis of Bauer et al. (unpublished) Field experiment"
+title: "Successional distance to reference state: <br> Analysis of Bauer et al. (unpublished) Field experiment"
 author: "Markus Bauer <br>"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
 output: github_document
@@ -8,6 +8,8 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+Successional distance sensu https://doi.org/10.1111/1365-2664.13526
 
 # Preparation
 
