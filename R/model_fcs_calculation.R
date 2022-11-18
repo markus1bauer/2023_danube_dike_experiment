@@ -144,22 +144,18 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
             (1 | site/plot) + (1 | botanist_year),
           data = sites)
-### Example of normal distribution
+### Examples of normal, cauchy and student t distributions
 ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1)) +
   expand_limits(y = 0)
-### Example of cauchy distribution
 ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0)
-### Example of a student t distribution
 ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0)
 
-### a Models ------------------------------------------------------------------
-
-### Specifications ###
+### Model specifications ###
 iter = 10000
 chains = 4
 thin = 2
@@ -174,7 +170,10 @@ priors <- c(
   set_prior("normal(0.3, 1)", class = "b",coef = "survey_year_fct2021"),
   set_prior("cauchy(0, 1)", class = "sigma")
 )
-### Models ###
+
+
+### b Models ------------------------------------------------------------------
+
 m_simple <- brm(
   n ~ sand_ratio + target_type + exposition + survey_year_fct +
     substrate_depth + seed_density +
