@@ -1,5 +1,5 @@
 ---
-title: "Successional distance to reference state: <br> Analysis of Bauer et al. (unpublished) Field experiment"
+title: "Recovery completeness: <br> Analysis of Bauer et al. (unpublished) Field experiment"
 author: "Markus Bauer <br>"
 date: "`r format(Sys.time(), '%Y-%m-%d')`"
 output: github_document
@@ -9,7 +9,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Successional distance sensu https://doi.org/10.1111/1365-2664.13526
+Recovery completeness sensu Rydgren et al. (2018) https://doi.org/10.1111/1365-2664.13526
 
 # Preparation
 
@@ -61,7 +61,7 @@ sites <- read_csv(
     survey_year_fct = factor(survey_year),
     survey_year = as.numeric(survey_year),
     botanist_year = str_c(survey_year, botanist, sep = " "),
-    n = recovery_time
+    n = recovery_completeness
     )
 ```
 

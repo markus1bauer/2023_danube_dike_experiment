@@ -1,5 +1,5 @@
 # Dike grassland field experiment
-# Recover time ####
+# Recover completeness ####
 # Model check
 
 # Markus Bauer
@@ -51,7 +51,7 @@ sites <- read_csv(
     survey_year_fct = factor(survey_year),
     survey_year = as.numeric(survey_year),
     botanist_year = str_c(survey_year, botanist, sep = " "),
-    n = recovery_time
+    n = recovery_completeness
   )
 
 ### Load models ###
@@ -273,4 +273,4 @@ mcmc_intervals(
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 
-write.csv(draws1, here("outputs", "statistics", "table_recovery_time.csv"))
+write.csv(draws1, here("outputs", "statistics", "table_recovery.csv"))

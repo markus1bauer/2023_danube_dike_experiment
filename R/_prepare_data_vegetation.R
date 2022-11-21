@@ -952,7 +952,7 @@ sites_nmds <- sites_nmds %>%
         )
       )
     ),
-    recovery_time = NMDS1 - mean_reference
+    recovery_completeness = NMDS1 - mean_reference
   )
 
 rm(list = setdiff(ls(), c(

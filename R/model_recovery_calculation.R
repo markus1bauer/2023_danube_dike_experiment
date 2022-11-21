@@ -1,5 +1,5 @@
 # Dike grassland field experiment
-# Recovery time ####
+# Recovery completeness ####
 # Model building
 
 # Markus Bauer
@@ -47,7 +47,7 @@ sites <- read_csv(
     survey_year_fct = factor(survey_year),
     survey_year = as.numeric(survey_year),
     botanist_year = str_c(survey_year, botanist, sep = " "),
-    n = recovery_time
+    n = recovery_completeness
     )
 
 rm(list = setdiff(ls(), c("sites")))
