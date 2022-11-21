@@ -189,11 +189,14 @@ load(file = here("outputs", "models", "model_fcs_3.Rdata"))
 ```{r}
 m_1 <- m1
 m_2 <- m3
+```
+
+```{r echo = FALSE}
 m_1$formula
 m_2$formula
 ```
 
-Conditional R² values
+Conditional _R_² values
 
 ```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -202,7 +205,7 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
 ```
 
-Marginal R² values
+Marginal _R_² values
 
 ```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -395,7 +398,7 @@ mcmc_acf(posterior2, lags = 10)
 
 ### Model output
 
-Priors and conditional and marignal R²
+Priors and conditional and marignal _R_²
 
 ```{r}
 prior_summary(m_2, all = FALSE)

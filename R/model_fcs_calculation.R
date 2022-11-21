@@ -282,7 +282,7 @@ m2_flat <- brm(
     set_prior("cauchy(0, 1)", class = "sigma")
   ),
   chains = chains,
-  iter = iter,
+  iter = 1000,
   thin = thin,
   control = list(max_treedepth = 13),
   warmup = warmup,

@@ -193,11 +193,14 @@ load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 ```{r}
 m_1 <- m2
 m_2 <- m_full
+```
+
+```{r echo = FALSE}
 m_1$formula
 m_2$formula
 ```
 
-Conditional italic(R)² values
+Conditional _R_² values
 
 ```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -206,7 +209,7 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
 ```
 
-Marginal italic(R)² values
+Marginal _R_² values
 
 ```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -403,7 +406,7 @@ Prior summary
 prior_summary(m_1, all = FALSE)
 ```
 
-Conditional and marignal italic(R)²
+Conditional and marignal _R_²
 
 ```{r}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),

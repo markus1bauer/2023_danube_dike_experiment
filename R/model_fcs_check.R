@@ -178,8 +178,10 @@ mcmc_scatter(m_1, np = hmc_diagnostics1, size = 1,
              pars = c("b_survey_year_fct2020", "b_survey_year_fct2019"))
 mcmc_scatter(m_2, np = hmc_diagnostics2, size = 1,
              pars = c("b_survey_year_fct2020", "b_survey_year_fct2019"))
-mcmc_parcoord(posterior1, np = hmc_diagnostics1)
-mcmc_parcoord(posterior2, np = hmc_diagnostics2)
+mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
+  theme(axis.text.x = element_text(angle = 90))
+mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
+  theme(axis.text.x = element_text(angle = 90))
 
 #### * Posterior predictive check ####
 #### Kernel density
