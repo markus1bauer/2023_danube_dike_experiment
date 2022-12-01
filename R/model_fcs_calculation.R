@@ -161,6 +161,7 @@ thin = 2
 seed = 123
 warmup = floor(iter / 2)
 priors <- c(
+  set_prior("normal(0, 1)", class = "Intercept"),
   set_prior("normal(0, 1)", class = "b"),
   set_prior("normal(0.1, 1)", class = "b", coef = "sand_ratio25"),
   set_prior("normal(0.2, 1)", class = "b", coef = "sand_ratio50"),
@@ -276,13 +277,15 @@ m2_flat <- brm(
     substrate_depth:survey_year_fct +
     seed_density:survey_year_fct +
     botanist_year + (1 | site/plot),
-  data = sites,
+  data = sites, 
   family = gaussian("identity"),
   prior = c(
+    set_prior("normal(0, 4)", class = "Intercept"),
+    set_prior("normal(0, 4)", class = "b"),
     set_prior("cauchy(0, 1)", class = "sigma")
   ),
-  chains = chains,
-  iter = 1000,
+  chains = 3,
+  iter = iter,
   thin = thin,
   control = list(max_treedepth = 13),
   warmup = warmup,
