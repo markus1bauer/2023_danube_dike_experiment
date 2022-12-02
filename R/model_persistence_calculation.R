@@ -299,6 +299,6 @@ save(m_full, file = here("outputs", "models", "model_persistence_full.Rdata"))
 save(m1, file = here("outputs", "models", "model_persistence_1.Rdata"))
 save(m2, file = here("outputs", "models", "model_persistence_2.Rdata"))
 save(m3, file = here("outputs", "models", "model_persistence_3.Rdata"))
-save(m1_flat, file = here(
+save(m2_flat, file = here(
   "outputs", "models", "model_persistence_1_flat.Rdata"
   ))
