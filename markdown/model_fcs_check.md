@@ -128,10 +128,16 @@ load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 m_1 <- m2
 m_2 <- m_full
+```
+
+``` r
 m_1$formula
 ## n ~ sand_ratio * target_type * exposition * survey_year_fct + substrate_depth + seed_density + substrate_depth:exposition + seed_density:exposition + substrate_depth:survey_year_fct + seed_density:survey_year_fct + botanist_year + (1 | site/plot)
 m_2$formula
 ## n ~ sand_ratio * target_type * exposition * survey_year_fct + substrate_depth * seed_density + substrate_depth:exposition + seed_density:exposition + substrate_depth:survey_year_fct + seed_density:survey_year_fct + substrate_depth:exposition:survey_year_fct + seed_density:exposition:survey_year_fct + botanist_year + (1 | site/plot)
+```
+
+``` r
 m_1$family
 ## 
 ## Family: gaussian 
@@ -154,7 +160,7 @@ ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
   expand_limits(y = 0) + ggtitle("Normal distribution")
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-7-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-9-1.jpeg)<!-- -->
 
 ``` r
 ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
@@ -164,7 +170,7 @@ ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
   expand_limits(y = 0) + ggtitle("Cauchy distribution")
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-7-2.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-9-2.jpeg)<!-- -->
 
 ``` r
 ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
@@ -174,7 +180,7 @@ ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
   expand_limits(y = 0) + ggtitle(expression(Student~italic(t)*"-distribution"))
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-7-3.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-9-3.jpeg)<!-- -->
 
 #### Prior summary
 
@@ -237,13 +243,13 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-11-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-13-1.jpeg)<!-- -->
 
 ``` r
 DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-11-2.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-13-2.jpeg)<!-- -->
 
 #### Preparation
 
@@ -323,13 +329,13 @@ Rhat
 mcmc_rhat(draws1$rhat)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-13-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-1.jpeg)<!-- -->
 
 ``` r
 mcmc_rhat(draws2$rhat)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-13-2.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-2.jpeg)<!-- -->
 
 Effective sampling size (ESS)
 
@@ -337,13 +343,13 @@ Effective sampling size (ESS)
 mcmc_neff(neff_ratio(m_1))
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-14-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-1.jpeg)<!-- -->
 
 ``` r
 mcmc_neff(neff_ratio(m_2))
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-14-2.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-2.jpeg)<!-- -->
 
 #### MCMC diagnostics
 
@@ -353,7 +359,7 @@ mcmc_trace(posterior1, np = hmc_diagnostics1)
 
     ## No divergences to plot.
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-1.jpeg)<!-- -->
 
 ``` r
 mcmc_trace(posterior2, np = hmc_diagnostics2)
@@ -361,7 +367,7 @@ mcmc_trace(posterior2, np = hmc_diagnostics2)
 
     ## No divergences to plot.
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-2.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-2.jpeg)<!-- -->
 
 ``` r
 mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
@@ -372,7 +378,7 @@ mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            ))
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-3.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-3.jpeg)<!-- -->
 
 ``` r
 mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
@@ -383,19 +389,19 @@ mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
            ))
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-4.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-4.jpeg)<!-- -->
 
 ``` r
 mcmc_parcoord(posterior1, np = hmc_diagnostics1)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-5.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-5.jpeg)<!-- -->
 
 ``` r
 mcmc_parcoord(posterior2, np = hmc_diagnostics2)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-6.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-6.jpeg)<!-- -->
 
 #### Posterior predictive check
 
@@ -407,19 +413,19 @@ p2 <- ppc_dens_overlay(y, yrep2[1:50, ])
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-1.jpeg)<!-- -->
 
 ``` r
 ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-2.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-2.jpeg)<!-- -->
 
 ``` r
 ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-3.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-3.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$exposition)
@@ -427,19 +433,19 @@ p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$exposition)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-4.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-4.jpeg)<!-- -->
 
 ``` r
 ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$survey_year_fct)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-5.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-5.jpeg)<!-- -->
 
 ``` r
 ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$survey_year_fct)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-6.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-6.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$target_type)
@@ -447,7 +453,7 @@ p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$target_type)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-7.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-7.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$seed_density)
@@ -455,7 +461,7 @@ p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$seed_density)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-8.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-8.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$sand_ratio)
@@ -463,7 +469,7 @@ p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$sand_ratio)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-9.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-9.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$substrate_depth)
@@ -471,7 +477,7 @@ p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$substrate_depth)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-16-10.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-10.jpeg)<!-- -->
 
 ##### Histograms of statistics skew
 
@@ -481,19 +487,19 @@ p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-1.jpeg)<!-- -->
 
 ``` r
 ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-2.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-2.jpeg)<!-- -->
 
 ``` r
 ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-3.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-3.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
@@ -501,19 +507,19 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-4.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-4.jpeg)<!-- -->
 
 ``` r
 ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-5.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-5.jpeg)<!-- -->
 
 ``` r
 ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-6.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-6.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
@@ -521,7 +527,7 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-7.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-7.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
@@ -529,7 +535,7 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-8.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-8.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
@@ -537,7 +543,7 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-9.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-9.jpeg)<!-- -->
 
 ``` r
 p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
@@ -545,7 +551,7 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-17-10.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-10.jpeg)<!-- -->
 
 ##### LOO (Leave one out)
 
@@ -597,13 +603,13 @@ loo2
 plot(loo1)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-20-1.jpeg)<!-- -->
 
 ``` r
 plot(loo2)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-18-2.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-20-2.jpeg)<!-- -->
 
 Leave one out probability integral transform
 
@@ -623,7 +629,7 @@ p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
 p1 / p2
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-19-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-21-1.jpeg)<!-- -->
 
 #### Autocorrelation check
 
@@ -631,13 +637,13 @@ p1 / p2
 mcmc_acf(posterior1, lags = 10)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-20-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-22-1.jpeg)<!-- -->
 
 ``` r
 mcmc_acf(posterior2, lags = 10)
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-20-2.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-22-2.jpeg)<!-- -->
 
 ## Output of choosen model
 
@@ -688,7 +694,7 @@ mcmc_intervals(
   theme_classic()
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-22-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-24-1.jpeg)<!-- -->
 
 Posteriors of second model:
 
@@ -702,7 +708,7 @@ mcmc_intervals(
   theme_classic()
 ```
 
-![](model_fcs_check_files/figure-gfm/unnamed-chunk-23-1.jpeg)<!-- -->
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-25-1.jpeg)<!-- -->
 
 ### Effect sizes
 

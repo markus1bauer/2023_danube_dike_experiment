@@ -1,5 +1,5 @@
 ---
-title: "Favourable Conservation Status (FCS): <br> Analysis of Bauer et al. (unpublished) Field experiment"
+title: "Analysis of Bauer et al. (unpublished) Field experiment: <br> Favourable Conservation Status (FCS)"
 author: "<b>Markus Bauer*</b> <br>"
 date: "<b>`r format(Sys.time(), '%Y-%m-%d')`</b>"
 output:
@@ -7,8 +7,8 @@ output:
     toc: true
     toc_depth: 3
     dev: jpeg
-    fig_width: 12
-    fig_height: 6
+    fig_width: 7
+    fig_height: 5
 ---
 
 ```{r setup, include=FALSE}
@@ -173,8 +173,14 @@ load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 m_1 <- m2
 m_2 <- m_full
+```
+
+```{r collapse = TRUE}
 m_1$formula
 m_2$formula
+```
+
+```{r collapse = TRUE}
 m_1$family
 m_2$family
 ```
