@@ -1064,13 +1064,81 @@ figure
     ## Point estimate displayed: median 
     ## HPD interval probability: 0.95
 
-The system for this calculations
+The system for these calculations
 
 ``` r
-Sys.info()
+sessionInfo()
 ```
 
-    ##         sysname         release         version        nodename         machine 
-    ##       "Windows"        "10 x64"   "build 22621" "LENOVO-MARKUS"        "x86-64" 
-    ##           login            user  effective_user 
-    ##        "Markus"        "Markus"        "Markus"
+    ## R version 4.2.2 (2022-10-31 ucrt)
+    ## Platform: x86_64-w64-mingw32/x64 (64-bit)
+    ## Running under: Windows 10 x64 (build 22621)
+    ## 
+    ## Matrix products: default
+    ## 
+    ## locale:
+    ## [1] LC_COLLATE=German_Germany.utf8  LC_CTYPE=German_Germany.utf8   
+    ## [3] LC_MONETARY=German_Germany.utf8 LC_NUMERIC=C                   
+    ## [5] LC_TIME=German_Germany.utf8    
+    ## 
+    ## attached base packages:
+    ## [1] stats     graphics  grDevices utils     datasets  methods   base     
+    ## 
+    ## other attached packages:
+    ##  [1] emmeans_1.8.2             tidybayes_3.0.2          
+    ##  [3] loo_2.5.1                 bayesplot_1.10.0         
+    ##  [5] DHARMa.helpers_0.0.0.9000 DHARMa_0.4.6             
+    ##  [7] brms_2.18.0               Rcpp_1.0.9               
+    ##  [9] patchwork_1.1.2           ggbeeswarm_0.6.0         
+    ## [11] forcats_0.5.2             stringr_1.4.1            
+    ## [13] dplyr_1.0.10              purrr_0.3.5              
+    ## [15] readr_2.1.3               tidyr_1.2.1              
+    ## [17] tibble_3.1.8              ggplot2_3.4.0            
+    ## [19] tidyverse_1.3.2           here_1.0.1               
+    ## 
+    ## loaded via a namespace (and not attached):
+    ##   [1] readxl_1.4.1         backports_1.4.1      plyr_1.8.8          
+    ##   [4] igraph_1.3.5         svUnit_1.0.6         splines_4.2.2       
+    ##   [7] crosstalk_1.2.0      gap.datasets_0.0.5   rstantools_2.2.0    
+    ##  [10] inline_0.3.19        digest_0.6.30        foreach_1.5.2       
+    ##  [13] htmltools_0.5.3      fansi_1.0.3          magrittr_2.0.3      
+    ##  [16] checkmate_2.1.0      doParallel_1.0.17    googlesheets4_1.0.1 
+    ##  [19] tzdb_0.3.0           modelr_0.1.10        RcppParallel_5.1.5  
+    ##  [22] matrixStats_0.63.0   vroom_1.6.0          xts_0.12.2          
+    ##  [25] timechange_0.1.1     prettyunits_1.1.1    colorspace_2.0-3    
+    ##  [28] rvest_1.0.3          ggdist_3.2.0         haven_2.5.1         
+    ##  [31] xfun_0.35            callr_3.7.3          crayon_1.5.2        
+    ##  [34] jsonlite_1.8.3       lme4_1.1-31          iterators_1.0.14    
+    ##  [37] zoo_1.8-11           glue_1.6.2           gtable_0.3.1        
+    ##  [40] gargle_1.2.1         V8_4.2.2             distributional_0.3.1
+    ##  [43] pkgbuild_1.4.0       rstan_2.26.13        abind_1.4-5         
+    ##  [46] scales_1.2.1         mvtnorm_1.1-3        DBI_1.1.3           
+    ##  [49] miniUI_0.1.1.1       xtable_1.8-4         bit_4.0.5           
+    ##  [52] stats4_4.2.2         StanHeaders_2.26.13  DT_0.26             
+    ##  [55] htmlwidgets_1.5.4    httr_1.4.4           threejs_0.3.3       
+    ##  [58] arrayhelpers_1.1-0   posterior_1.3.1      ellipsis_0.3.2      
+    ##  [61] pkgconfig_2.0.3      farver_2.1.1         qgam_1.3.4          
+    ##  [64] dbplyr_2.2.1         utf8_1.2.2           labeling_0.4.2      
+    ##  [67] tidyselect_1.2.0     rlang_1.0.6          reshape2_1.4.4      
+    ##  [70] later_1.3.0          munsell_0.5.0        cellranger_1.1.0    
+    ##  [73] tools_4.2.2          cli_3.4.1            generics_0.1.3      
+    ##  [76] broom_1.0.1          evaluate_0.18        fastmap_1.1.0       
+    ##  [79] yaml_2.3.6           bit64_4.0.5          processx_3.8.0      
+    ##  [82] knitr_1.41           fs_1.5.2             nlme_3.1-160        
+    ##  [85] mime_0.12            formatR_1.12         xml2_1.3.3          
+    ##  [88] gap_1.3-1            compiler_4.2.2       shinythemes_1.2.0   
+    ##  [91] rstudioapi_0.14      beeswarm_0.4.0       curl_4.3.3          
+    ##  [94] reprex_2.0.2         stringi_1.7.8        highr_0.9           
+    ##  [97] ps_1.7.2             Brobdingnag_1.2-9    lattice_0.20-45     
+    ## [100] Matrix_1.5-3         nloptr_2.0.3         markdown_1.4        
+    ## [103] shinyjs_2.1.0        tensorA_0.36.2       vctrs_0.5.1         
+    ## [106] pillar_1.8.1         lifecycle_1.0.3      bridgesampling_1.1-2
+    ## [109] estimability_1.4.1   httpuv_1.6.6         R6_2.5.1            
+    ## [112] promises_1.2.0.1     gridExtra_2.3        vipor_0.4.5         
+    ## [115] codetools_0.2-18     boot_1.3-28          MASS_7.3-58.1       
+    ## [118] colourpicker_1.2.0   gtools_3.9.4         assertthat_0.2.1    
+    ## [121] rprojroot_2.0.3      withr_2.5.0          shinystan_2.6.0     
+    ## [124] mgcv_1.8-41          parallel_4.2.2       hms_1.1.2           
+    ## [127] grid_4.2.2           minqa_1.2.5          coda_0.19-4         
+    ## [130] rmarkdown_2.18       googledrive_2.0.0    shiny_1.7.3         
+    ## [133] lubridate_1.9.0      base64enc_0.1-3      dygraphs_1.1.1.6
