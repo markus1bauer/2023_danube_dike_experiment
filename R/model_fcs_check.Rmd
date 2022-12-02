@@ -1,14 +1,14 @@
 ---
 title: "Favourable Conservation Status (FCS): <br> Analysis of Bauer et al. (unpublished) Field experiment"
-author: "Markus Bauer^* <br>"
-date: "`r format(Sys.time(), '%Y-%m-%d')`"
+author: "<b>Markus Bauer*</b> <br>"
+date: "<b>`r format(Sys.time(), '%Y-%m-%d')`</b>"
 output:
   github_document:
     toc: true
-    toc_depth: 2
+    toc_depth: 3
     dev: jpeg
     fig_width: 12
-    fig_height: 12
+    fig_height: 7
 ---
 
 ```{r setup, include=FALSE}
@@ -17,15 +17,26 @@ knitr::opts_chunk$set(
   )
 ```
 
+```{r, include=FALSE}
+knitr::knit_hooks$set(output = function(x, options){
+  if(!is.null(options$max_height)){
+    paste('<pre style = "max-height:', options$max_height, '; float: left; width: 910px; overflow-y: auto;">', x, "</pre>", sep = "")
+  }else{
+    x
+  }
+  
+})
+```
+
 Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
 
-* Corresponding author: [markus1.bauer@tum.de](mailto:markus1.bauer@tum.de)
+<span>&#42;</span> Corresponding author: [markus1.bauer@tum.de](mailto:markus1.bauer@tum.de)
 <br>
-[ORCiD ID: 0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
+ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
 <br>
 [Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
 <br>
-[GitHub: markus1bauer](https://github.com/markus1bauer)
+GitHub: [markus1bauer](https://github.com/markus1bauer)
 
 Favourable Conservation Status (FSC) sensu Helm et al. (2015) Divers Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
 
@@ -175,6 +186,8 @@ m_1 <- m2
 m_2 <- m_full
 m_1$formula
 m_2$formula
+m_1$family
+m_2$family
 ```
 
 ### Priors
@@ -294,17 +307,15 @@ draws2 <- m_2 %>%
 Rhat
 
 ```{r collapse = TRUE}
-range(draws1$rhat)
-range(draws2$rhat)
+mcmc_rhat(draws1$rhat)
+mcmc_rhat(draws2$rhat)
 ```
 
 Effective sampling size (ESS)
 
 ```{r collapse = TRUE}
-range(draws1$ess_bulk)
-range(draws2$ess_bulk)
-range(draws1$ess_tail)
-range(draws2$ess_tail)
+mcmc_neff(neff_ratio(m_1))
+mcmc_neff(neff_ratio(m_2))
 ```
 
 #### MCMC diagnostics
@@ -451,7 +462,7 @@ mcmc_intervals(
 
 Just, to get exact values if necessary, which is not possible from the figure
 
-```{r}
+```{r max_height = '100px'}
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 ```
@@ -460,8 +471,8 @@ Just, to get exact values if necessary, which is not possible from the figure
 write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
 ```
 
-## Session info
+# Session info
 
-```{r echo = FALSE}
+```{r echo = FALSE, max_height = "100px"}
 sessionInfo()
 ```
