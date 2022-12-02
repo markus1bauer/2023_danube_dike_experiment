@@ -6,9 +6,10 @@ output:
   github_document:
     toc: true
     toc_depth: 3
-    dev: jpeg
+    dev: png
     fig_width: 7
     fig_height: 5
+    df_print: tibble
 ---
 
 ```{r setup, include=FALSE}
@@ -162,11 +163,7 @@ ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03)
 ggplot(sites, aes(x = n)) + geom_density()
 ```
 
-## Model building
-
-### Models
-
-Model caluclations
+## Models
 
 ```{r collapse = TRUE}
 load(file = here("outputs", "models", "model_fcs_2.Rdata"))
@@ -232,16 +229,16 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ```
 
-### Model check
+## Model check
 
-#### DHARMa
+### DHARMa
 
 ```{r collapse = TRUE}
 DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
 DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ```
 
-#### Preparation
+### Preparation
 
 ```{r}
 posterior1 <- m_1 %>%
@@ -297,23 +294,23 @@ draws2 <- m_2 %>%
   filter(str_starts(variable, "b_"))
 ```
 
-#### Sampling efficency and effectiveness
+### Sampling efficency and effectiveness
 
-Rhat
+#### Rhat
 
 ```{r collapse = TRUE}
 mcmc_rhat(draws1$rhat)
 mcmc_rhat(draws2$rhat)
 ```
 
-Effective sampling size (ESS)
+#### Effective sampling size (ESS)
 
 ```{r collapse = TRUE}
 mcmc_neff(neff_ratio(m_1))
 mcmc_neff(neff_ratio(m_2))
 ```
 
-#### MCMC diagnostics
+### MCMC diagnostics
 
 ```{r}
 mcmc_trace(posterior1, np = hmc_diagnostics1)
@@ -334,9 +331,9 @@ mcmc_parcoord(posterior1, np = hmc_diagnostics1)
 mcmc_parcoord(posterior2, np = hmc_diagnostics2)
 ```
 
-#### Posterior predictive check
+### Posterior predictive check
 
-##### Kernel density
+#### Kernel density
 
 ```{r}
 p1 <- ppc_dens_overlay(y, yrep1[1:50, ])
@@ -363,7 +360,7 @@ p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$substrate_depth)
 p1 / p2
 ```
 
-##### Histograms of statistics skew
+#### Histograms of statistics skew
 
 ```{r}
 p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
@@ -390,7 +387,7 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001
 p1 / p2
 ```
 
-##### LOO (Leave one out)
+#### LOO (Leave one out)
 
 ```{r}
 loo1
@@ -408,7 +405,7 @@ p1 / p2
 
 ```
 
-#### Autocorrelation check
+### Autocorrelation check
 
 ```{r}
 mcmc_acf(posterior1, lags = 10)
