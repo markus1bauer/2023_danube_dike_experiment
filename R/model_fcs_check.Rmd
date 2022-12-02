@@ -8,24 +8,13 @@ output:
     toc_depth: 3
     dev: jpeg
     fig_width: 12
-    fig_height: 7
+    fig_height: 6
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE
   )
-```
-
-```{r, include=FALSE}
-knitr::knit_hooks$set(output = function(x, options){
-  if(!is.null(options$max_height)){
-    paste('<pre style = "max-height:', options$max_height, '; float: left; width: 910px; overflow-y: auto;">', x, "</pre>", sep = "")
-  }else{
-    x
-  }
-  
-})
 ```
 
 Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
@@ -462,7 +451,7 @@ mcmc_intervals(
 
 Just, to get exact values if necessary, which is not possible from the figure
 
-```{r max_height = '100px'}
+```{r max_height = "1000px"}
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 ```
@@ -473,6 +462,6 @@ write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
 
 # Session info
 
-```{r echo = FALSE, max_height = "100px"}
+```{r echo = FALSE, max_height = "500px"}
 sessionInfo()
 ```

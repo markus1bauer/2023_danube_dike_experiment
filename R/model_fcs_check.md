@@ -118,18 +118,6 @@ al. (unpublished) Field experiment
     id="toc-r2-08078335-0004578375-08000471-08080261-0815036">R2 0.8078335
     0.004578375 0.8000471 0.8080261 0.815036</a>
     - <a href="#model-check" id="toc-model-check">Model check</a>
-  - <a href="#1-09998772-10010835" id="toc-1-09998772-10010835">[1]
-    0.9998772 1.0010835</a>
-  - <a href="#1-09997552-10007494" id="toc-1-09997552-10007494">[1]
-    0.9997552 1.0007494</a>
-  - <a href="#1-4885057-10007119" id="toc-1-4885057-10007119">[1] 4885.057
-    10007.119</a>
-  - <a href="#1-4682083-10002631" id="toc-1-4682083-10002631">[1] 4682.083
-    10002.631</a>
-  - <a href="#1-7096046-9531096" id="toc-1-7096046-9531096">[1] 7096.046
-    9531.096</a>
-  - <a href="#1-6564480-9577983" id="toc-1-6564480-9577983">[1] 6564.480
-    9577.983</a>
   - <a href="#section-2" id="toc-section-2"></a>
   - <a href="#computed-from-10000-by-1152-log-likelihood-matrix"
     id="toc-computed-from-10000-by-1152-log-likelihood-matrix">Computed from
@@ -617,42 +605,30 @@ draws2 <- m_2 %>%
 Rhat
 
 ``` r
-range(draws1$rhat)
+mcmc_rhat(draws1$rhat)
 ```
 
-## \[1\] 0.9998772 1.0010835
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-14-1.jpeg)<!-- -->
 
 ``` r
-range(draws2$rhat)
+mcmc_rhat(draws2$rhat)
 ```
 
-## \[1\] 0.9997552 1.0007494
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-14-2.jpeg)<!-- -->
 
 Effective sampling size (ESS)
 
 ``` r
-range(draws1$ess_bulk)
+mcmc_neff(neff_ratio(m_1))
 ```
 
-## \[1\] 4885.057 10007.119
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-1.jpeg)<!-- -->
 
 ``` r
-range(draws2$ess_bulk)
+mcmc_neff(neff_ratio(m_2))
 ```
 
-## \[1\] 4682.083 10002.631
-
-``` r
-range(draws1$ess_tail)
-```
-
-## \[1\] 7096.046 9531.096
-
-``` r
-range(draws2$ess_tail)
-```
-
-## \[1\] 6564.480 9577.983
+![](model_fcs_check_files/figure-gfm/unnamed-chunk-15-2.jpeg)<!-- -->
 
 #### MCMC diagnostics
 
