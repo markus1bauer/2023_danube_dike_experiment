@@ -43,12 +43,14 @@ sites <- read_csv(
   filter(presabu == "presence") %>%
   mutate(
     survey_year_fct = factor(survey_year),
+    botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
+    botanist_year = factor(botanist_year),
     id = factor(id),
     n = persistence
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
-    seed_density, survey_year_fct, survey_year, n
+    seed_density, survey_year_fct, survey_year, botanist_year, n
   )
 
 
@@ -97,7 +99,10 @@ plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   facet_grid(~ survey_year_fct) +
   labs(title = "Blocks")
-(plot1 + plot2) / (plot3)
+plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Botanist:survey year")
+(plot1 + plot2) / (plot3 + plot4)
 ggplot(data = sites,
        aes(x = sand_ratio, y = n, color = target_type)) + 
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
@@ -172,7 +177,7 @@ priors <- c(
 m_simple <- brm(
   n ~ sand_ratio + target_type + exposition + survey_year_fct +
     substrate_depth + seed_density +
-    (1 | site/plot),
+    (1 | site/plot) + (1 | botanist_year),
   data = sites, 
   family = gaussian("identity"),
   prior = priors,
