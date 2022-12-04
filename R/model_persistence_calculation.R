@@ -38,7 +38,7 @@ sites <- read_csv(
     exposition = col_factor(levels = c("north", "south")),
     survey_year = "c"
   )
-) %>%
+  ) %>%
   ### Exclude data of seed mixtures
   filter(presabu == "presence") %>%
   mutate(
@@ -200,6 +200,7 @@ m_full <- brm(
     seed_density:survey_year_fct +
     substrate_depth:exposition:survey_year_fct +
     seed_density:exposition:survey_year_fct +
+    botanist_year +
     (1 | site/plot),
   data = sites, 
   family = gaussian("identity"),
@@ -217,6 +218,7 @@ m_full <- brm(
 m1 <- brm(
   n ~ sand_ratio * substrate_depth * exposition * survey_year_fct +
     target_type + seed_density +
+    botanist_year +
     (1 | site/plot),
   data = sites, 
   family = gaussian("identity"),
@@ -238,7 +240,7 @@ m2 <- brm(
     seed_density:exposition +
     substrate_depth:survey_year_fct +
     seed_density:survey_year_fct +
-    (1 | site/plot),
+    (1 | site/plot) + (1 | botanist_year),
   data = sites, 
   family = gaussian("identity"),
   prior = priors,
@@ -255,7 +257,7 @@ m2 <- brm(
 m3 <- brm(
   n ~ (sand_ratio + target_type + seed_density + substrate_depth) *
     exposition * survey_year_fct +
-    (1 | site/plot),
+    (1 | site/plot) + (1 | botanist_year),
   data = sites,
   family = gaussian("identity"),
   prior = priors,
@@ -276,7 +278,7 @@ m2_flat <- brm(
     seed_density:exposition +
     substrate_depth:survey_year_fct +
     seed_density:survey_year_fct +
-    (1 | site/plot),
+    (1 | site/plot) + (1 | botanist_year),
   data = sites, 
   family = gaussian("identity"),
   prior = c(
