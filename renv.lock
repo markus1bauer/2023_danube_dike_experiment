@@ -374,8 +374,7 @@
     "StanHeaders": {
       "Package": "StanHeaders",
       "Version": "2.26.13",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Source": "unknown",
       "Hash": "f54ef22dec1b0710070e2d9bd3fc0174",
       "Requirements": [
         "RcppEigen",
@@ -3335,8 +3334,7 @@
     "rstan": {
       "Package": "rstan",
       "Version": "2.26.13",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Source": "unknown",
       "Hash": "a23e5a0f93ed81cf2f0fd8f380fce9ec",
       "Requirements": [
         "BH",
