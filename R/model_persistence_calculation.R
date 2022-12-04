@@ -240,7 +240,8 @@ m2 <- brm(
     seed_density:exposition +
     substrate_depth:survey_year_fct +
     seed_density:survey_year_fct +
-    (1 | site/plot) + (1 | botanist_year),
+    botanist_year +
+    (1 | site/plot),
   data = sites, 
   family = gaussian("identity"),
   prior = priors,
