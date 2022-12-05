@@ -129,16 +129,16 @@ sites <- read_csv(
 
 ``` r
 load(file = here("outputs", "models", "model_persistence_2.Rdata"))
-load(file = here("outputs", "models", "model_persistence_2_flat.Rdata"))
+load(file = here("outputs", "models", "model_persistence_full.Rdata"))
 m_1 <- m2
-m_2 <- m2_flat
+m_2 <- m_full
 ```
 
 ``` r
 m_1$formula
 ## n ~ sand_ratio * target_type * exposition * survey_year_fct + substrate_depth + seed_density + substrate_depth:exposition + seed_density:exposition + substrate_depth:survey_year_fct + seed_density:survey_year_fct + botanist_year + (1 | site/plot)
 m_2$formula
-## n ~ sand_ratio * target_type * exposition * survey_year_fct + substrate_depth + seed_density + substrate_depth:exposition + seed_density:exposition + substrate_depth:survey_year_fct + seed_density:survey_year_fct + botanist_year + (1 | site/plot)
+## n ~ sand_ratio * target_type * exposition * survey_year_fct + substrate_depth * seed_density + substrate_depth:exposition + seed_density:exposition + substrate_depth:survey_year_fct + seed_density:survey_year_fct + substrate_depth:exposition:survey_year_fct + seed_density:exposition:survey_year_fct + botanist_year + (1 | site/plot)
 ```
 
 ``` r
@@ -232,12 +232,12 @@ prior_summary(m_1, all = FALSE)
 
     ##                  prior     class                coef group resp dpar nlpar lb
     ##          normal(0, 20)         b                                             
-    ##          normal(5, 20)         b     expositionsouth                         
-    ##       normal(-2.5, 20)         b        sand_ratio25                         
-    ##         normal(-5, 20)         b        sand_ratio50                         
-    ##       normal(-2.5, 20)         b survey_year_fct2019                         
-    ##         normal(-5, 20)         b survey_year_fct2020                         
-    ##       normal(-7.5, 20)         b survey_year_fct2021                         
+    ##         normal(-5, 20)         b     expositionsouth                         
+    ##        normal(2.5, 20)         b        sand_ratio25                         
+    ##          normal(5, 20)         b        sand_ratio50                         
+    ##        normal(2.5, 20)         b survey_year_fct2019                         
+    ##          normal(5, 20)         b survey_year_fct2020                         
+    ##        normal(7.5, 20)         b survey_year_fct2021                         
     ##          normal(0, 20) Intercept                                             
     ##  student_t(3, 0, 23.5)        sd                                            0
     ##          cauchy(0, 10)     sigma                                            0
@@ -258,12 +258,12 @@ Conditional <i>R</i>² values
 ``` r
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
-##     Estimate   Est.Error        Q5       Q50       Q95
-## R2 0.8943171 0.003328029 0.8886081 0.8944525 0.8995968
+##     Estimate  Est.Error        Q5       Q50       Q95
+## R2 0.8944769 0.00336097 0.8887784 0.8946214 0.8997545
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
 ##     Estimate   Est.Error        Q5       Q50       Q95
-## R2 0.8946516 0.003363445 0.8888842 0.8947961 0.8999034
+## R2 0.8940185 0.003336802 0.8883183 0.8941352 0.8992336
 ```
 
 Marginal <i>R</i>² values
@@ -272,11 +272,11 @@ Marginal <i>R</i>² values
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ##     Estimate   Est.Error        Q5       Q50       Q95
-## R2 0.8586445 0.003560814 0.8524362 0.8588164 0.8641239
+## R2 0.8587825 0.003575485 0.8526128 0.8589943 0.8643421
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
-##     Estimate   Est.Error        Q5       Q50      Q95
-## R2 0.8591105 0.003523118 0.8530791 0.8592547 0.864556
+##     Estimate   Est.Error        Q5       Q50       Q95
+## R2 0.8585192 0.003539931 0.8524192 0.8587055 0.8639556
 ```
 
 ## Model check
@@ -593,16 +593,16 @@ loo1
     ## Computed from 10000 by 1152 log-likelihood matrix
     ## 
     ##          Estimate   SE
-    ## elpd_loo  -3855.6 25.7
-    ## p_loo       199.7  8.0
-    ## looic      7711.2 51.4
+    ## elpd_loo  -3854.8 25.7
+    ## p_loo       199.3  8.0
+    ## looic      7709.6 51.4
     ## ------
     ## Monte Carlo SE of elpd_loo is 0.3.
     ## 
     ## Pareto k diagnostic values:
     ##                          Count Pct.    Min. n_eff
-    ## (-Inf, 0.5]   (good)     1135  98.5%   736       
-    ##  (0.5, 0.7]   (ok)         17   1.5%   350       
+    ## (-Inf, 0.5]   (good)     1130  98.1%   568       
+    ##  (0.5, 0.7]   (ok)         22   1.9%   404       
     ##    (0.7, 1]   (bad)         0   0.0%   <NA>      
     ##    (1, Inf)   (very bad)    0   0.0%   <NA>      
     ## 
@@ -614,19 +614,19 @@ loo2
 ```
 
     ## 
-    ## Computed from 7500 by 1152 log-likelihood matrix
+    ## Computed from 10000 by 1152 log-likelihood matrix
     ## 
     ##          Estimate   SE
-    ## elpd_loo  -3855.3 25.8
-    ## p_loo       200.6  8.1
-    ## looic      7710.6 51.6
+    ## elpd_loo  -3861.7 25.6
+    ## p_loo       204.8  8.2
+    ## looic      7723.3 51.3
     ## ------
     ## Monte Carlo SE of elpd_loo is 0.3.
     ## 
     ## Pareto k diagnostic values:
     ##                          Count Pct.    Min. n_eff
-    ## (-Inf, 0.5]   (good)     1135  98.5%   554       
-    ##  (0.5, 0.7]   (ok)         17   1.5%   399       
+    ## (-Inf, 0.5]   (good)     1133  98.4%   666       
+    ##  (0.5, 0.7]   (ok)         19   1.6%   315       
     ##    (0.7, 1]   (bad)         0   0.0%   <NA>      
     ##    (1, Inf)   (very bad)    0   0.0%   <NA>      
     ## 
@@ -688,12 +688,12 @@ Conditional and marignal <i>R</i>²
 ``` r
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
-##     Estimate   Est.Error        Q5       Q50       Q95
-## R2 0.8943171 0.003328029 0.8886081 0.8944525 0.8995968
+##     Estimate  Est.Error        Q5       Q50       Q95
+## R2 0.8944769 0.00336097 0.8887784 0.8946214 0.8997545
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ##     Estimate   Est.Error        Q5       Q50       Q95
-## R2 0.8586445 0.003560814 0.8524362 0.8588164 0.8641239
+## R2 0.8587825 0.003575485 0.8526128 0.8589943 0.8643421
 ```
 
 Posteriors of chosen model
@@ -703,18 +703,18 @@ draws1
 ```
 
     ## # A tibble: 70 × 10
-    ##    variable       mean  median     sd    mad      q5   q95  rhat ess_b…¹ ess_t…²
-    ##    <chr>         <dbl>   <dbl>  <dbl>  <dbl>   <dbl> <dbl> <dbl>   <dbl>   <dbl>
-    ##  1 b_Intercept  50.1    50.2    1.95   1.85   46.9   53.2   1.00   5606.   6203.
-    ##  2 b_sand_rat…  15.1    15.1    1.91   1.86   11.9   18.3   1.00   4931.   7524.
-    ##  3 b_sand_rat…  11.3    11.2    1.92   1.91    8.08  14.4   1.00   4902.   7581.
-    ##  4 b_target_t…  -0.243  -0.234  1.86   1.84   -3.31   2.85  1.00   4570.   7180.
-    ##  5 b_expositi… -13.3   -13.3    9.60   9.67  -29.0    2.41  1.00   7612.   8942.
-    ##  6 b_survey_y…  11.5    11.6   12.5   12.4    -8.91  32.1   1.00   9056.   9206.
-    ##  7 b_survey_y…  18.8    18.9   10.6   10.7     1.41  36.0   1.00   8786.   8643.
-    ##  8 b_survey_y…  11.3    11.4   12.8   12.7    -9.79  32.3   1.00   9672.   9090.
-    ##  9 b_substrat…   0.987   0.979  0.989  0.997  -0.625  2.63  1.00   8776.   9431.
-    ## 10 b_seed_den…  -0.364  -0.367  0.992  0.989  -2.00   1.27  1.00   9175.   9305.
+    ##    variable      mean  median     sd    mad      q5    q95  rhat ess_b…¹ ess_t…²
+    ##    <chr>        <dbl>   <dbl>  <dbl>  <dbl>   <dbl>  <dbl> <dbl>   <dbl>   <dbl>
+    ##  1 b_Interce…  50.0    50.0    1.95   1.87   46.8   53.1    1.00   6244.   6831.
+    ##  2 b_sand_ra…  15.2    15.2    1.90   1.90   12.1   18.4    1.00   5964.   8005.
+    ##  3 b_sand_ra…  11.4    11.4    1.93   1.94    8.28  14.7    1.00   5439.   7820.
+    ##  4 b_target_…  -0.124  -0.102  1.86   1.86   -3.25   2.92   1.00   5060.   7249.
+    ##  5 b_exposit… -16.8   -16.8    9.53   9.46  -32.6   -0.894  1.00   8754.   8549.
+    ##  6 b_survey_…  14.5    14.5   12.6   12.5    -6.34  35.3    1.00   9667.   8937.
+    ##  7 b_survey_…  22.2    22.1   10.6   10.5     4.96  39.7    1.00   9337.   9548.
+    ##  8 b_survey_…  18.0    18.1   12.8   12.8    -3.20  38.7    1.00   8857.   8351.
+    ##  9 b_substra…   1.01    1.01   0.987  0.982  -0.605  2.64   1.00   9546.   9093.
+    ## 10 b_seed_de…  -0.350  -0.354  0.993  1.00   -1.96   1.28   1.00   9837.   9408.
     ## # … with 60 more rows, and abbreviated variable names ¹​ess_bulk, ²​ess_tail
 
 ``` r
@@ -759,75 +759,75 @@ figure
     ## $emmeans
     ## exposition = north, survey_year_fct = 2018:
     ##  target_type   sand_ratio emmean lower.HPD upper.HPD
-    ##  hay_meadow    0            47.5      44.2      50.8
-    ##  dry_grassland 0            47.2      43.9      50.6
-    ##  hay_meadow    25           62.6      59.3      66.0
-    ##  dry_grassland 25           55.9      52.4      59.2
-    ##  hay_meadow    50           58.7      55.4      62.2
-    ##  dry_grassland 50           55.4      52.1      58.9
+    ##  hay_meadow    0            47.4      44.0      50.8
+    ##  dry_grassland 0            47.3      43.8      50.6
+    ##  hay_meadow    25           62.6      59.2      66.1
+    ##  dry_grassland 25           55.8      52.6      59.6
+    ##  hay_meadow    50           58.8      55.4      62.3
+    ##  dry_grassland 50           55.4      51.8      58.8
     ## 
     ## exposition = south, survey_year_fct = 2018:
     ##  target_type   sand_ratio emmean lower.HPD upper.HPD
-    ##  hay_meadow    0            30.5      27.0      33.9
-    ##  dry_grassland 0            32.8      29.4      36.3
-    ##  hay_meadow    25           31.0      27.5      34.4
-    ##  dry_grassland 25           36.7      33.2      40.1
-    ##  hay_meadow    50           28.0      24.5      31.4
-    ##  dry_grassland 50           31.7      28.2      35.1
+    ##  hay_meadow    0            30.5      27.0      34.0
+    ##  dry_grassland 0            32.8      29.3      36.3
+    ##  hay_meadow    25           30.9      27.5      34.5
+    ##  dry_grassland 25           36.7      33.0      40.1
+    ##  hay_meadow    50           27.9      24.4      31.4
+    ##  dry_grassland 50           31.6      28.0      35.0
     ## 
     ## exposition = north, survey_year_fct = 2019:
     ##  target_type   sand_ratio emmean lower.HPD upper.HPD
-    ##  hay_meadow    0            80.4      76.9      83.9
-    ##  dry_grassland 0            76.1      72.6      79.5
-    ##  hay_meadow    25           83.6      80.1      87.0
-    ##  dry_grassland 25           75.3      71.8      78.6
-    ##  hay_meadow    50           78.7      75.2      82.0
-    ##  dry_grassland 50           75.9      72.5      79.4
+    ##  hay_meadow    0            80.4      76.8      83.9
+    ##  dry_grassland 0            76.1      72.6      79.7
+    ##  hay_meadow    25           83.5      80.1      87.0
+    ##  dry_grassland 25           75.4      71.8      78.8
+    ##  hay_meadow    50           78.7      75.2      82.2
+    ##  dry_grassland 50           76.0      72.5      79.5
     ## 
     ## exposition = south, survey_year_fct = 2019:
     ##  target_type   sand_ratio emmean lower.HPD upper.HPD
-    ##  hay_meadow    0            45.6      42.1      49.2
-    ##  dry_grassland 0            43.3      39.7      46.7
-    ##  hay_meadow    25           45.9      42.4      49.6
-    ##  dry_grassland 25           44.8      41.2      48.4
-    ##  hay_meadow    50           42.0      38.4      45.5
-    ##  dry_grassland 50           41.8      38.2      45.3
+    ##  hay_meadow    0            45.6      41.8      49.0
+    ##  dry_grassland 0            43.2      39.5      46.8
+    ##  hay_meadow    25           45.9      42.2      49.5
+    ##  dry_grassland 25           44.8      41.3      48.6
+    ##  hay_meadow    50           41.9      38.4      45.6
+    ##  dry_grassland 50           41.8      38.1      45.3
     ## 
     ## exposition = north, survey_year_fct = 2020:
     ##  target_type   sand_ratio emmean lower.HPD upper.HPD
-    ##  hay_meadow    0            82.4      79.0      85.9
-    ##  dry_grassland 0            79.5      75.9      82.9
-    ##  hay_meadow    25           85.0      81.7      88.6
-    ##  dry_grassland 25           80.4      77.0      83.8
-    ##  hay_meadow    50           84.0      80.5      87.3
-    ##  dry_grassland 50           79.9      76.3      83.2
+    ##  hay_meadow    0            82.5      79.0      86.0
+    ##  dry_grassland 0            79.5      76.0      83.0
+    ##  hay_meadow    25           85.0      81.4      88.5
+    ##  dry_grassland 25           80.4      76.9      83.9
+    ##  hay_meadow    50           84.0      80.5      87.6
+    ##  dry_grassland 50           79.9      76.6      83.5
     ## 
     ## exposition = south, survey_year_fct = 2020:
     ##  target_type   sand_ratio emmean lower.HPD upper.HPD
-    ##  hay_meadow    0            51.6      48.3      55.2
+    ##  hay_meadow    0            51.6      48.2      55.2
     ##  dry_grassland 0            51.8      48.3      55.3
-    ##  hay_meadow    25           54.2      50.6      57.5
-    ##  dry_grassland 25           54.7      51.3      58.1
-    ##  hay_meadow    50           50.0      46.5      53.3
-    ##  dry_grassland 50           55.3      51.9      58.8
+    ##  hay_meadow    25           54.1      50.7      57.7
+    ##  dry_grassland 25           54.7      51.1      58.2
+    ##  hay_meadow    50           50.0      46.4      53.5
+    ##  dry_grassland 50           55.3      51.8      58.9
     ## 
     ## exposition = north, survey_year_fct = 2021:
     ##  target_type   sand_ratio emmean lower.HPD upper.HPD
-    ##  hay_meadow    0            76.9      73.5      80.3
-    ##  dry_grassland 0            75.4      72.1      79.0
-    ##  hay_meadow    25           81.8      78.3      85.2
-    ##  dry_grassland 25           78.3      74.7      81.7
-    ##  hay_meadow    50           82.0      78.4      85.2
-    ##  dry_grassland 50           80.6      77.2      84.0
+    ##  hay_meadow    0            77.0      73.5      80.5
+    ##  dry_grassland 0            75.4      71.9      78.9
+    ##  hay_meadow    25           81.8      78.3      85.4
+    ##  dry_grassland 25           78.4      75.0      82.0
+    ##  hay_meadow    50           81.9      78.4      85.4
+    ##  dry_grassland 50           80.6      77.3      84.3
     ## 
     ## exposition = south, survey_year_fct = 2021:
     ##  target_type   sand_ratio emmean lower.HPD upper.HPD
-    ##  hay_meadow    0            52.6      49.2      56.2
-    ##  dry_grassland 0            49.4      45.9      52.9
+    ##  hay_meadow    0            52.6      49.1      56.2
+    ##  dry_grassland 0            49.4      46.0      53.0
     ##  hay_meadow    25           48.4      44.8      51.8
-    ##  dry_grassland 25           50.7      47.2      54.1
-    ##  hay_meadow    50           51.1      47.5      54.6
-    ##  dry_grassland 50           51.7      48.2      55.1
+    ##  dry_grassland 25           50.7      47.0      54.0
+    ##  hay_meadow    50           51.0      47.4      54.4
+    ##  dry_grassland 50           51.7      48.1      55.2
     ## 
     ## Results are averaged over the levels of: substrate_depth, seed_density, botanist_year 
     ## Point estimate displayed: median 
@@ -836,275 +836,275 @@ figure
     ## $contrasts
     ## exposition = north, survey_year_fct = 2018:
     ##  contrast                                                estimate lower.HPD
-    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -0.234  -3.80148
-    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0          15.089  11.28034
-    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0       15.327  11.52450
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0        8.349   4.40976
-    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     8.611   4.81339
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -6.729 -10.60462
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          11.228   7.67718
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0       11.482   7.74207
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -3.832  -7.60560
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       2.884  -1.22332
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0        7.897   4.03471
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     8.174   4.34105
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -7.180 -11.00782
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25   -0.479  -4.31519
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -3.325  -7.27254
+    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -0.102  -3.94761
+    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0          15.220  11.46424
+    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0       15.380  11.56729
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0        8.426   4.75619
+    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     8.564   4.76090
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -6.762 -10.68313
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          11.401   7.60268
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0       11.523   7.59152
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -3.812  -7.61106
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       2.976  -0.99515
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0        8.001   4.14689
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     8.138   4.19042
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -7.259 -11.22055
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25   -0.429  -4.61796
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -3.402  -7.57230
     ##  upper.HPD
-    ##     3.5416
-    ##    18.8486
-    ##    19.3112
-    ##    12.1425
-    ##    12.3877
-    ##    -2.9358
-    ##    15.1965
-    ##    15.4356
-    ##     0.1263
-    ##     6.6267
-    ##    11.8561
-    ##    12.0036
-    ##    -3.1609
-    ##     3.4259
-    ##     0.5976
+    ##    3.32155
+    ##   18.90104
+    ##   19.41742
+    ##   12.41211
+    ##   12.39221
+    ##   -3.05578
+    ##   15.12607
+    ##   15.37757
+    ##    0.23661
+    ##    6.82857
+    ##   11.92903
+    ##   12.00546
+    ##   -3.25404
+    ##    3.20477
+    ##    0.24863
     ## 
     ## exposition = south, survey_year_fct = 2018:
     ##  contrast                                                estimate lower.HPD
-    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0         2.293  -1.58662
-    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           0.413  -3.57903
-    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0       -1.861  -5.57430
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0        6.155   2.17522
-    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     3.897  -0.00879
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25       5.744   1.73060
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -2.560  -6.56414
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0       -4.901  -8.98830
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -3.003  -7.03415
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25      -8.771 -12.57556
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0        1.114  -2.90769
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0    -1.193  -5.09610
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25       0.704  -3.00649
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25   -5.086  -8.84133
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50       3.717  -0.10687
+    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0         2.331  -1.65366
+    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           0.457  -3.46316
+    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0       -1.860  -5.74993
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0        6.180   2.25157
+    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     3.893   0.00419
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25       5.755   1.92949
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -2.529  -6.44047
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0       -4.881  -8.67942
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -3.018  -6.90615
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25      -8.737 -12.67325
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0        1.159  -2.82112
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0    -1.156  -5.10963
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25       0.731  -3.38374
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25   -5.024  -9.16533
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50       3.706  -0.25168
     ##  upper.HPD
-    ##     6.0966
-    ##     4.1340
-    ##     2.2566
-    ##    10.0453
-    ##     7.8789
-    ##     9.5013
-    ##     1.2161
-    ##    -1.0401
-    ##     0.9236
-    ##    -4.6864
-    ##     5.0080
-    ##     2.8311
-    ##     4.8085
-    ##    -1.0457
-    ##     7.6758
+    ##    5.98008
+    ##    4.26286
+    ##    2.22265
+    ##   10.16516
+    ##    7.95325
+    ##    9.85572
+    ##    1.23412
+    ##   -0.84307
+    ##    0.97113
+    ##   -4.75983
+    ##    5.08801
+    ##    2.73054
+    ##    4.59908
+    ##   -1.09411
+    ##    7.64175
     ## 
     ## exposition = north, survey_year_fct = 2019:
     ##  contrast                                                estimate lower.HPD
-    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -4.356  -8.21500
-    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           3.167  -0.64741
-    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        7.505   3.60041
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0       -5.086  -9.07517
-    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0    -0.729  -4.85042
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -8.241 -12.20005
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -1.733  -5.71323
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0        2.582  -1.34618
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -4.901  -8.95014
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       3.306  -0.63003
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0       -4.490  -8.49151
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0    -0.152  -4.09647
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -7.656 -11.59700
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25    0.604  -3.40572
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -2.718  -6.69931
+    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -4.328  -8.22216
+    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           3.125  -0.65547
+    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        7.461   3.56344
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0       -5.082  -9.09001
+    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0    -0.780  -4.79164
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -8.219 -12.32187
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -1.753  -5.79049
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0        2.563  -1.30712
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -4.884  -8.99753
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       3.348  -0.56073
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0       -4.452  -8.42009
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0    -0.139  -3.98628
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -7.580 -11.60087
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25    0.627  -3.28254
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -2.713  -6.67056
     ##  upper.HPD
-    ##    -0.3330
-    ##     7.2484
-    ##    11.6893
-    ##    -1.0422
-    ##     3.0471
-    ##    -4.2722
-    ##     2.1690
-    ##     6.5960
-    ##    -1.0064
-    ##     7.2709
-    ##    -0.5210
-    ##     4.0118
-    ##    -3.5522
-    ##     4.6435
-    ##     1.3148
+    ##   -0.37944
+    ##    7.17864
+    ##   11.35442
+    ##   -1.09955
+    ##    3.15250
+    ##   -4.23788
+    ##    2.19094
+    ##    6.62232
+    ##   -1.02557
+    ##    7.41349
+    ##   -0.36217
+    ##    3.92773
+    ##   -3.78350
+    ##    4.74329
+    ##    1.30851
     ## 
     ## exposition = south, survey_year_fct = 2019:
     ##  contrast                                                estimate lower.HPD
-    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -2.311  -6.40462
-    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           0.317  -3.41292
-    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        2.624  -1.26344
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0       -0.717  -4.71571
-    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     1.586  -2.53594
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -1.049  -5.08029
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -3.592  -7.67203
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0       -1.316  -5.49063
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -3.950  -7.93624
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25      -2.882  -6.80136
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0       -3.783  -7.54567
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0    -1.522  -5.46484
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -4.114  -7.85163
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25   -3.029  -7.00539
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -0.174  -4.11858
+    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -2.379  -6.32764
+    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           0.336  -3.71741
+    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        2.669  -1.33542
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0       -0.702  -4.74043
+    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     1.621  -2.54137
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -1.054  -5.00080
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -3.618  -7.58551
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0       -1.261  -5.29306
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -3.922  -7.89765
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25      -2.879  -6.80423
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0       -3.806  -7.84252
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0    -1.418  -5.33951
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -4.100  -7.91187
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25   -3.075  -6.95885
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -0.167  -3.97627
     ##  upper.HPD
-    ##     1.6385
-    ##     4.5048
-    ##     6.7194
-    ##     3.3118
-    ##     5.4674
-    ##     2.8732
-    ##     0.2203
-    ##     2.5592
-    ##     0.0444
-    ##     1.1380
-    ##     0.2808
-    ##     2.6017
-    ##     0.0832
-    ##     0.9253
-    ##     3.7913
+    ##    1.58555
+    ##    4.19240
+    ##    6.64427
+    ##    3.19976
+    ##    5.47995
+    ##    2.88576
+    ##    0.28423
+    ##    2.56878
+    ##    0.00461
+    ##    1.15259
+    ##   -0.05158
+    ##    2.53942
+    ##    0.01955
+    ##    1.02708
+    ##    3.77580
     ## 
     ## exposition = north, survey_year_fct = 2020:
     ##  contrast                                                estimate lower.HPD
-    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -2.952  -6.78117
-    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           2.540  -1.31323
-    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        5.511   1.62740
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0       -2.071  -5.84743
-    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     0.885  -2.93957
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -4.600  -8.65895
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0           1.529  -2.27107
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0        4.501   0.50181
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -1.015  -4.92012
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       3.580  -0.33380
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0       -2.598  -6.62316
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     0.385  -3.63519
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -5.161  -8.99079
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25   -0.491  -4.47856
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -4.134  -7.97804
+    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -3.010  -6.90382
+    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           2.529  -1.54968
+    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        5.525   1.41486
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0       -2.137  -5.98869
+    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     0.870  -3.03282
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -4.646  -8.47647
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0           1.495  -2.45925
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0        4.471   0.52451
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -1.039  -5.05807
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       3.616  -0.39404
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0       -2.627  -6.63501
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     0.364  -3.55183
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -5.145  -9.23512
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25   -0.465  -4.40309
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -4.112  -8.04513
     ##  upper.HPD
-    ##     1.0830
-    ##     6.4900
-    ##     9.7551
-    ##     1.9645
-    ##     4.8214
-    ##    -0.8625
-    ##     5.5403
-    ##     8.4773
-    ##     2.8955
-    ##     7.6262
-    ##     1.3617
-    ##     4.2810
-    ##    -1.0794
-    ##     3.4647
-    ##    -0.1313
+    ##    0.85421
+    ##    6.34355
+    ##    9.34264
+    ##    1.93756
+    ##    4.95802
+    ##   -0.48454
+    ##    5.39503
+    ##    8.40902
+    ##    2.85304
+    ##    7.42142
+    ##    1.35160
+    ##    4.46420
+    ##   -1.24894
+    ##    3.44734
+    ##   -0.13575
     ## 
     ## exposition = south, survey_year_fct = 2020:
     ##  contrast                                                estimate lower.HPD
-    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0         0.220  -3.85073
-    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           2.559  -1.32724
-    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        2.361  -1.51917
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0        3.090  -0.79246
-    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     2.881  -0.95407
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25       0.534  -3.42257
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -1.616  -5.60189
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0       -1.834  -5.69635
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -4.167  -8.09059
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25      -4.722  -8.86836
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0        3.724  -0.24863
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     3.523  -0.46594
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25       1.185  -2.84290
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25    0.645  -3.46307
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50       5.363   1.26199
+    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0         0.236  -3.64319
+    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           2.551  -1.41871
+    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        2.320  -1.59909
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0        3.110  -0.93150
+    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     2.894  -1.00014
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25       0.559  -3.26229
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -1.567  -5.45114
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0       -1.826  -5.93720
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25         -4.160  -8.15322
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25      -4.761  -8.62096
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0        3.731  -0.09129
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     3.535  -0.63210
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25       1.185  -2.79990
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25    0.632  -3.36110
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50       5.331   1.39744
     ##  upper.HPD
-    ##     4.0915
-    ##     6.4635
-    ##     6.4932
-    ##     7.0918
-    ##     6.9590
-    ##     4.4933
-    ##     2.2337
-    ##     2.3227
-    ##    -0.2192
-    ##    -0.9602
-    ##     7.7372
-    ##     7.5547
-    ##     5.0678
-    ##     4.6017
-    ##     9.1711
+    ##    4.23273
+    ##    6.55359
+    ##    6.37356
+    ##    7.09837
+    ##    6.89397
+    ##    4.66551
+    ##    2.62666
+    ##    1.98202
+    ##   -0.12668
+    ##   -0.77842
+    ##    7.87808
+    ##    7.25856
+    ##    5.14685
+    ##    4.64769
+    ##    9.30476
     ## 
     ## exposition = north, survey_year_fct = 2021:
     ##  contrast                                                estimate lower.HPD
-    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -1.496  -5.30032
-    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           4.844   0.96540
-    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        6.329   2.42825
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0        1.374  -2.64256
-    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     2.881  -1.14422
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -3.466  -7.32576
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0           5.014   1.16046
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0        6.502   2.36127
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25          0.184  -3.68276
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       3.637  -0.60942
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0        3.668  -0.12851
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     5.119   1.22588
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -1.188  -5.36698
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25    2.274  -1.71806
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -1.380  -5.37805
+    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -1.546  -5.48095
+    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0           4.823   0.89155
+    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0        6.358   2.31569
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0        1.361  -2.61448
+    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     2.905  -0.89245
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25      -3.481  -7.32179
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0           4.958   0.82660
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0        6.526   2.67595
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25          0.133  -3.68171
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       3.605  -0.43030
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0        3.615  -0.42663
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     5.167   1.09883
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25      -1.186  -5.07506
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25    2.267  -1.79387
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50      -1.344  -5.18588
     ##  upper.HPD
-    ##     2.6473
-    ##     8.8919
-    ##    10.3122
-    ##     5.3851
-    ##     6.6646
-    ##     0.5951
-    ##     9.0617
-    ##    10.2716
-    ##     4.2463
-    ##     7.4118
-    ##     7.7265
-    ##     9.1629
-    ##     2.6351
-    ##     6.2858
-    ##     2.4985
+    ##    2.34828
+    ##    8.78205
+    ##   10.38846
+    ##    5.23302
+    ##    7.04396
+    ##    0.57174
+    ##    8.74647
+    ##   10.66019
+    ##    4.33777
+    ##    7.46239
+    ##    7.56133
+    ##    8.99179
+    ##    2.80401
+    ##    6.18142
+    ##    2.74929
     ## 
     ## exposition = south, survey_year_fct = 2021:
     ##  contrast                                                estimate lower.HPD
-    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -3.217  -7.13472
-    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0          -4.226  -8.18956
-    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0       -0.998  -4.85682
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0       -1.953  -5.82466
-    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     1.255  -2.76035
-    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25       2.249  -1.58493
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -1.577  -5.77773
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0        1.647  -2.29497
-    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25          2.648  -1.37458
-    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       0.411  -3.48899
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0       -0.928  -4.96309
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     2.264  -1.66515
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25       3.264  -0.74759
-    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25    1.014  -2.84138
-    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50       0.659  -3.50665
+    ##  dry_grassland sand_ratio0 - hay_meadow sand_ratio0        -3.193  -7.29347
+    ##  hay_meadow sand_ratio25 - hay_meadow sand_ratio0          -4.222  -8.17146
+    ##  hay_meadow sand_ratio25 - dry_grassland sand_ratio0       -0.999  -5.07531
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio0       -1.941  -6.10138
+    ##  dry_grassland sand_ratio25 - dry_grassland sand_ratio0     1.234  -2.64438
+    ##  dry_grassland sand_ratio25 - hay_meadow sand_ratio25       2.281  -1.78616
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio0          -1.578  -5.66846
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio0        1.603  -2.18288
+    ##  hay_meadow sand_ratio50 - hay_meadow sand_ratio25          2.629  -1.17573
+    ##  hay_meadow sand_ratio50 - dry_grassland sand_ratio25       0.370  -3.52279
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio0       -0.959  -4.90147
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio0     2.225  -1.60826
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio25       3.253  -0.50123
+    ##  dry_grassland sand_ratio50 - dry_grassland sand_ratio25    0.976  -2.90933
+    ##  dry_grassland sand_ratio50 - hay_meadow sand_ratio50       0.631  -3.39109
     ##  upper.HPD
-    ##     0.8073
-    ##    -0.1604
-    ##     3.1026
-    ##     2.2063
-    ##     5.1723
-    ##     6.3069
-    ##     2.1908
-    ##     5.7630
-    ##     6.7662
-    ##     4.4966
-    ##     2.9894
-    ##     6.2628
-    ##     7.1685
-    ##     5.0270
-    ##     4.5039
+    ##    0.65651
+    ##   -0.28111
+    ##    2.77205
+    ##    1.88116
+    ##    5.26500
+    ##    6.13787
+    ##    2.26291
+    ##    5.73252
+    ##    6.72738
+    ##    4.41452
+    ##    3.02597
+    ##    6.24588
+    ##    7.41299
+    ##    5.08383
+    ##    4.53325
     ## 
     ## Results are averaged over the levels of: substrate_depth, seed_density, botanist_year 
     ## Point estimate displayed: median 
