@@ -9,7 +9,6 @@ output:
     dev: png
     fig_width: 7
     fig_height: 5
-    df_print: tibble
 ---
 
 ```{r setup, include=FALSE}

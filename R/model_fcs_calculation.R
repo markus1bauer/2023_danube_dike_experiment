@@ -43,7 +43,7 @@ sites <- read_csv(
   filter(survey_year != "seeded") %>%
   mutate(
     survey_year_fct = factor(survey_year),
-    botanist_year = str_c(survey_year, botanist, sep = " "),
+    botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
     botanist_year = factor(botanist_year),
     n = fcs_target,
     id = factor(id)
@@ -231,7 +231,7 @@ m1 <- brm(
   seed = seed
 )
 
-m2 <- brm(
+m2_new <- brm(
   n ~ sand_ratio * target_type * exposition * survey_year_fct +
     substrate_depth + seed_density +
     substrate_depth:exposition +
