@@ -3,7 +3,7 @@
 # Model building
 
 # Markus Bauer
-# 2022-12-02
+# 2022-12-05
 
 
 
@@ -38,17 +38,19 @@ sites <- read_csv(
     exposition = col_factor(levels = c("north", "south")),
     survey_year = "c"
   )
-) %>%
+  ) %>%
   ### Exclude data of seed mixtures
   filter(presabu == "presence") %>%
   mutate(
     survey_year_fct = factor(survey_year),
+    botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
+    botanist_year = factor(botanist_year),
     id = factor(id),
     n = persistence
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
-    seed_density, survey_year_fct, survey_year, n
+    seed_density, survey_year_fct, survey_year, botanist_year, n
   )
 
 
@@ -97,7 +99,10 @@ plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   facet_grid(~ survey_year_fct) +
   labs(title = "Blocks")
-(plot1 + plot2) / (plot3)
+plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Botanist:survey year")
+(plot1 + plot2) / (plot3 + plot4)
 ggplot(data = sites,
        aes(x = sand_ratio, y = n, color = target_type)) + 
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
@@ -157,12 +162,12 @@ warmup = floor(iter / 2)
 priors <- c(
   set_prior("normal(0, 20)", class = "Intercept"),
   set_prior("normal(0, 20)", class = "b"),
-  set_prior("normal(-2.5, 20)", class = "b", coef = "sand_ratio25"),
-  set_prior("normal(-5, 20)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(5, 20)", class = "b", coef = "expositionsouth"),
-  set_prior("normal(-2.5, 20)", class = "b", coef = "survey_year_fct2019"),
-  set_prior("normal(-5, 20)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(-7.5, 20)", class = "b", coef = "survey_year_fct2021"),
+  set_prior("normal(2.5, 20)", class = "b", coef = "sand_ratio25"),
+  set_prior("normal(5, 20)", class = "b", coef = "sand_ratio50"),
+  set_prior("normal(-5, 20)", class = "b", coef = "expositionsouth"),
+  set_prior("normal(2.5, 20)", class = "b", coef = "survey_year_fct2019"),
+  set_prior("normal(5, 20)", class = "b", coef = "survey_year_fct2020"),
+  set_prior("normal(7.5, 20)", class = "b", coef = "survey_year_fct2021"),
   set_prior("cauchy(0, 10)", class = "sigma")
 )
 
@@ -172,7 +177,7 @@ priors <- c(
 m_simple <- brm(
   n ~ sand_ratio + target_type + exposition + survey_year_fct +
     substrate_depth + seed_density +
-    (1 | site/plot),
+    (1 | site/plot) + (1 | botanist_year),
   data = sites, 
   family = gaussian("identity"),
   prior = priors,
@@ -195,6 +200,7 @@ m_full <- brm(
     seed_density:survey_year_fct +
     substrate_depth:exposition:survey_year_fct +
     seed_density:exposition:survey_year_fct +
+    botanist_year +
     (1 | site/plot),
   data = sites, 
   family = gaussian("identity"),
@@ -212,6 +218,7 @@ m_full <- brm(
 m1 <- brm(
   n ~ sand_ratio * substrate_depth * exposition * survey_year_fct +
     target_type + seed_density +
+    botanist_year +
     (1 | site/plot),
   data = sites, 
   family = gaussian("identity"),
@@ -233,6 +240,7 @@ m2 <- brm(
     seed_density:exposition +
     substrate_depth:survey_year_fct +
     seed_density:survey_year_fct +
+    botanist_year +
     (1 | site/plot),
   data = sites, 
   family = gaussian("identity"),
@@ -250,6 +258,7 @@ m2 <- brm(
 m3 <- brm(
   n ~ (sand_ratio + target_type + seed_density + substrate_depth) *
     exposition * survey_year_fct +
+    botanist_year +
     (1 | site/plot),
   data = sites,
   family = gaussian("identity"),
@@ -271,6 +280,7 @@ m2_flat <- brm(
     seed_density:exposition +
     substrate_depth:survey_year_fct +
     seed_density:survey_year_fct +
+    botanist_year +
     (1 | site/plot),
   data = sites, 
   family = gaussian("identity"),
@@ -299,6 +309,6 @@ save(m_full, file = here("outputs", "models", "model_persistence_full.Rdata"))
 save(m1, file = here("outputs", "models", "model_persistence_1.Rdata"))
 save(m2, file = here("outputs", "models", "model_persistence_2.Rdata"))
 save(m3, file = here("outputs", "models", "model_persistence_3.Rdata"))
-save(m1_flat, file = here(
-  "outputs", "models", "model_persistence_1_flat.Rdata"
+save(m2_flat, file = here(
+  "outputs", "models", "model_persistence_2_flat.Rdata"
   ))
