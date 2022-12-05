@@ -1,0 +1,466 @@
+---
+title: "Analysis of Bauer et al. (unpublished) Field experiment: <br> Persistence"
+author: "<b>Markus Bauer*</b> <br>"
+date: "<b>`r format(Sys.time(), '%Y-%m-%d')`</b>"
+output:
+  github_document:
+    toc: true
+    toc_depth: 3
+    dev: png
+    fig_width: 7
+    fig_height: 5
+    df_print: tibble
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE
+  )
+```
+
+Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
+
+<span>&#42;</span> Corresponding author: [markus1.bauer@tum.de](mailto:markus1.bauer@tum.de)
+<br>
+ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
+<br>
+[Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
+<br>
+GitHub: [markus1bauer](https://github.com/markus1bauer)
+
+Persistence sensu Wilsey (2021) Restor Ecol [DOI: 10.1111/rec.13132](https://doi.org/10.1111/rec.13132)
+
+
+# Preparation
+
+#### Packages
+
+```{r message = FALSE}
+library(here)
+library(tidyverse)
+library(ggbeeswarm)
+library(patchwork)
+library(brms)
+library(DHARMa)
+library(DHARMa.helpers)
+library(bayesplot)
+library(loo)
+library(tidybayes)
+library(emmeans)
+```
+
+```{r echo = FALSE}
+rm(list = ls())
+```
+
+#### Load data
+
+```{r}
+sites <- read_csv(
+  here("data", "processed", "data_processed_sites_temporal.csv"),
+  col_names = TRUE, na = c("na", "NA", ""),
+  col_types = cols(
+    .default = "?",
+    plot = "f",
+    site = "f",
+    sand_ratio = "f",
+    substrate_depth = col_factor(levels = c("30", "15")),
+    target_type = col_factor(levels = c("hay_meadow", "dry_grassland")),
+    seed_density = "f",
+    exposition = col_factor(levels = c("north", "south")),
+    survey_year = "c"
+  )
+  ) %>%
+  ### Exclude data of seed mixtures
+  filter(presabu == "presence") %>%
+  mutate(
+    survey_year_fct = factor(survey_year),
+    botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
+    botanist_year = factor(botanist_year),
+    id = factor(id),
+    n = persistence
+  ) %>%
+  select(
+    id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
+    seed_density, survey_year_fct, survey_year, botanist_year, n
+  )
+```
+
+# Statistics
+
+## Data exploration
+
+### Graphs of raw data
+
+```{r echo = FALSE}
+plot1 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = sand_ratio)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Sand ratio [vol%]")
+plot2 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = substrate_depth)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Substrate depth [cm]")
+plot3 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = target_type)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Target type")
+plot4 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = seed_density)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Seed density [g/m²]")
+(plot1 + plot2) / (plot3 + plot4)
+plot1 <- ggplot(sites %>% filter(survey_year == 2021),
+                aes(y = n, x = exposition)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Exposition")
+plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Survey year")
+plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  facet_grid(~ survey_year_fct) +
+  labs(title = "Blocks")
+plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
+  geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
+  labs(title = "Botanists and survey year") +
+  theme(axis.text.x = element_text(angle = 90))
+(plot1 + plot2) / (plot3 + plot4)
+ggplot(data = sites,
+       aes(x = sand_ratio, y = n, color = target_type)) + 
+  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
+  geom_boxplot(fill = "transparent") +
+  facet_grid(exposition ~ survey_year_fct) +
+  labs(title = "Target type vs. sand ratio [vol%]")
+ggplot(data = sites,
+       aes(x = sand_ratio, y = n, color = substrate_depth)) + 
+  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
+  geom_boxplot(fill = "transparent") +
+  facet_grid(exposition ~ survey_year_fct) +
+  labs(title = "Substrate depth [cm] vs. sand ratio [vol%]")
+ggplot(data = sites,
+       aes(x = seed_density, y = n, color = target_type)) + 
+  geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
+  geom_boxplot(fill = "transparent") +
+  facet_grid(exposition ~ survey_year_fct) +
+  labs(title = "Target type vs. Seed density [g/m²]")
+```
+
+### Outliers, zero-inflation, transformations?
+
+```{r echo = FALSE}
+sites %>% group_by(exposition) %>% count(site)
+boxplot(sites$n)
+ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
+ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03)
+ggplot(sites, aes(x = n)) + geom_density()
+```
+
+## Models
+
+```{r collapse = TRUE}
+load(file = here("outputs", "models", "model_persistence_1.Rdata"))
+load(file = here("outputs", "models", "model_persistence_full.Rdata"))
+m_1 <- m1
+m_2 <- m_full
+```
+
+```{r collapse = TRUE}
+m_1$formula
+m_2$formula
+```
+
+```{r collapse = TRUE}
+m_1$family
+m_2$family
+```
+
+### Priors
+
+#### Possible prior distributions
+
+```{r}
+get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
+            seed_density + substrate_depth +
+            (1 | site/plot),
+          data = sites)
+ggplot(data = data.frame(x = c(-40, 40)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 10)) +
+  expand_limits(y = 0) + ggtitle("Normal distribution")
+ggplot(data = data.frame(x = c(-40, 40)), aes(x = x)) +
+  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 10)) +
+  expand_limits(y = 0) + ggtitle("Cauchy distribution")
+ggplot(data.frame(x = c(-40, 40)), aes(x = x)) +
+  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 10)) +
+  expand_limits(y = 0) + ggtitle(expression(Student~italic(t)*"-distribution"))
+```
+
+#### Prior summary 
+
+```{r}
+prior_summary(m_1, all = FALSE)
+```
+
+
+Conditional <i>R</i>² values
+
+```{r collapse = TRUE}
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
+```
+
+Marginal <i>R</i>² values
+
+```{r collapse = TRUE}
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula = 1 ~ 1)
+bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+         re_formula = 1 ~ 1)
+```
+
+## Model check
+
+### DHARMa
+
+```{r collapse = TRUE}
+DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
+DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
+```
+
+### Preparation
+
+```{r}
+posterior1 <- m_1 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(
+    variable = c(
+      "b_sand_ratio25",
+      "b_sand_ratio50",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
+      "b_seed_density8",
+      "b_expositionsouth",
+      "b_survey_year_fct2019",
+      "b_survey_year_fct2020",
+      "b_survey_year_fct2021",
+      "sd_site__Intercept",
+      "sd_site:plot__Intercept",
+      "sigma"
+    )
+  )
+posterior2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(
+    variable = c(
+      "b_sand_ratio25",
+      "b_sand_ratio50",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
+      "b_seed_density8",
+      "b_expositionsouth",
+      "b_survey_year_fct2019",
+      "b_survey_year_fct2020",
+      "b_survey_year_fct2021",
+      "sd_site__Intercept",
+      "sd_site:plot__Intercept",
+      "sigma"
+    )
+  )
+hmc_diagnostics1 <- nuts_params(m_1)
+hmc_diagnostics2 <- nuts_params(m_2)
+y <- sites$n
+yrep1 <- posterior_predict(m_1, draws = 500)
+yrep2 <- posterior_predict(m_2, draws = 500)
+loo1 <- loo(m_1, save_psis = TRUE, moment_match = FALSE)
+loo2 <- loo(m_2, save_psis = TRUE, moment_match = FALSE)
+draws1 <- m_1 %>%
+  posterior::as_draws() %>%
+  posterior::summarize_draws() %>%
+  filter(str_starts(variable, "b_"))
+draws2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::summarize_draws() %>%
+  filter(str_starts(variable, "b_"))
+```
+
+### Sampling efficency and effectiveness
+
+#### Rhat
+
+```{r collapse = TRUE}
+mcmc_rhat(draws1$rhat)
+mcmc_rhat(draws2$rhat)
+```
+
+#### Effective sampling size (ESS)
+
+```{r collapse = TRUE}
+mcmc_neff(neff_ratio(m_1))
+mcmc_neff(neff_ratio(m_2))
+```
+
+### MCMC diagnostics
+
+```{r}
+mcmc_trace(posterior1, np = hmc_diagnostics1)
+mcmc_trace(posterior2, np = hmc_diagnostics2)
+mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
+mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
+           pars = c(
+             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+             "b_target_typedry_grassland", "b_seed_density8",
+             "b_expositionsouth", "sigma"
+           ))
+mcmc_parcoord(posterior1, np = hmc_diagnostics1)
+mcmc_parcoord(posterior2, np = hmc_diagnostics2)
+```
+
+### Posterior predictive check
+
+#### Kernel density
+
+```{r}
+p1 <- ppc_dens_overlay(y, yrep1[1:50, ])
+p2 <- ppc_dens_overlay(y, yrep2[1:50, ])
+p1 / p2
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$exposition)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$exposition)
+p1 / p2
+ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$survey_year_fct)
+ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$survey_year_fct)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$target_type)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$target_type)
+p1 / p2
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$seed_density)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$seed_density)
+p1 / p2
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$sand_ratio)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$sand_ratio)
+p1 / p2
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$substrate_depth)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$substrate_depth)
+p1 / p2
+```
+
+#### Histograms of statistics skew
+
+```{r}
+p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
+p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
+p1 / p2
+ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
+p1 / p2
+ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
+p1 / p2
+```
+
+#### LOO (Leave one out)
+
+```{r}
+loo1
+loo2
+plot(loo1)
+plot(loo2)
+```
+
+Leave one out probability integral transform
+
+```{r}
+p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
+p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+p1 / p2
+
+```
+
+### Autocorrelation check
+
+```{r}
+mcmc_acf(posterior1, lags = 10)
+mcmc_acf(posterior2, lags = 10)
+```
+
+## Output of choosen model
+
+### Model output
+
+Conditional and marignal <i>R</i>²
+
+```{r collapse = TRUE}
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+         re_formula = 1 ~ 1)
+```
+
+Posteriors of chosen model
+
+```{r}
+draws1
+mcmc_intervals(
+  posterior1,
+  prob = 0.66,
+  prob_outer = 0.95,
+  point_est = "mean"
+  ) +
+  theme_classic()
+```
+
+Posteriors of second model:
+
+```{r}
+mcmc_intervals(
+  posterior2,
+  prob = 0.66,
+  prob_outer = 0.95,
+  point_est = "mean"
+  ) +
+  theme_classic()
+```
+
+### Effect sizes
+
+Just, to get exact values if necessary, which is not possible from the figure
+
+```{r max_height = "1000px"}
+(emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
+                  exposition | survey_year_fct, type = "response"))
+```
+
+```{r echo = FALSE}
+write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
+```
+
+# Session info
+
+```{r echo = FALSE, max_height = "500px"}
+sessionInfo()
+```
