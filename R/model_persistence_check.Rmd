@@ -9,7 +9,6 @@ output:
     dev: png
     fig_width: 7
     fig_height: 5
-    df_print: tibble
 ---
 
 ```{r setup, include=FALSE}
@@ -163,10 +162,10 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ## Models
 
-```{r collapse = TRUE}
-load(file = here("outputs", "models", "model_persistence_1.Rdata"))
+```{r collapse = TRUE, message = FALSE}
+load(file = here("outputs", "models", "model_persistence_2.Rdata"))
 load(file = here("outputs", "models", "model_persistence_full.Rdata"))
-m_1 <- m1
+m_1 <- m2
 m_2 <- m_full
 ```
 

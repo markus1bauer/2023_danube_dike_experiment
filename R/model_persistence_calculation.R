@@ -162,12 +162,12 @@ warmup = floor(iter / 2)
 priors <- c(
   set_prior("normal(0, 20)", class = "Intercept"),
   set_prior("normal(0, 20)", class = "b"),
-  set_prior("normal(-2.5, 20)", class = "b", coef = "sand_ratio25"),
-  set_prior("normal(-5, 20)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(5, 20)", class = "b", coef = "expositionsouth"),
-  set_prior("normal(-2.5, 20)", class = "b", coef = "survey_year_fct2019"),
-  set_prior("normal(-5, 20)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(-7.5, 20)", class = "b", coef = "survey_year_fct2021"),
+  set_prior("normal(2.5, 20)", class = "b", coef = "sand_ratio25"),
+  set_prior("normal(5, 20)", class = "b", coef = "sand_ratio50"),
+  set_prior("normal(-5, 20)", class = "b", coef = "expositionsouth"),
+  set_prior("normal(2.5, 20)", class = "b", coef = "survey_year_fct2019"),
+  set_prior("normal(5, 20)", class = "b", coef = "survey_year_fct2020"),
+  set_prior("normal(7.5, 20)", class = "b", coef = "survey_year_fct2021"),
   set_prior("cauchy(0, 10)", class = "sigma")
 )
 
@@ -310,5 +310,5 @@ save(m1, file = here("outputs", "models", "model_persistence_1.Rdata"))
 save(m2, file = here("outputs", "models", "model_persistence_2.Rdata"))
 save(m3, file = here("outputs", "models", "model_persistence_3.Rdata"))
 save(m2_flat, file = here(
-  "outputs", "models", "model_persistence_1_flat.Rdata"
+  "outputs", "models", "model_persistence_2_flat.Rdata"
   ))
