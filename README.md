@@ -8,7 +8,7 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
 
 **DOI**: [https://doi.org/???](https://doi.org/???)
 
-**Study region**: [River Danube around Deggendorf](https://www.openstreetmap.org/#map=17/48.83977/12.88445)
+**Study region**: [Experiment at River Danube](https://www.openstreetmap.org/#map=17/48.83977/12.88445)
 
 ## Content of the repository
 
@@ -16,7 +16,7 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
     * `Raw` and `processed` data of the sites variables (.csv) 
     * `Raw` and `processed` data of the species' abundances (.csv) 
     * `Raw` and `processed` data of the species' traits (.csv)
-    * Raw and processed `spatial` data (.shp)
+    * Raw and processed `raws/spatial` data (.shp)
     * `photos` of the plots (.jpg)
  
 2. __Outputs__: the folder `outputs` contains  
