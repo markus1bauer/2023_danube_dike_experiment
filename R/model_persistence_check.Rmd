@@ -455,7 +455,7 @@ Just, to get exact values if necessary, which is not possible from the figure
 ```
 
 ```{r echo = FALSE}
-write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
+write.csv(draws1, here("outputs", "statistics", "table_persistenc.csv"))
 ```
 
 # Session info
