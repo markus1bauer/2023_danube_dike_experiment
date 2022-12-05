@@ -8,22 +8,31 @@ _Markus Bauer <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://
 
 **DOI**: [https://doi.org/???](https://doi.org/???)
 
-**Supporting information**: [link](https://www.???.org/supplementarydata.pdf)
+**Study region**: [River Danube around Deggendorf](https://www.openstreetmap.org/#map=17/48.83977/12.88445)
 
 ## Content of the repository
 
 1. __Data__: the folder `data` contains  
-    * The raw and processed data files of the first and second sub-experiment with the dependent metadata files (.csv) 
-
-2. __Images__: the folder `images` contains 
-    * The images of the grain size distribution (.tiff)
+    * `Raw` and `processed` data of the sites variables (.csv) 
+    * `Raw` and `processed` data of the species' abundances (.csv) 
+    * `Raw` and `processed` data of the species' traits (.csv)
+    * Raw and processed `spatial` data (.shp)
+    * `photos` of the plots (.jpg)
+ 
+2. __Outputs__: the folder `outputs` contains  
+    * The figures generated (.tiff)
+    * The tables generated (.html/.png)
+    * The models calculated (.Rdata)
+    * The summary statistics of the models (.csv)
     
-3. __Outputs__: the folder `outputs` contains  
-    * The figures (.tiff) generated.
-    * The tables (.html/.png) generated.
+3. __R__: the folder `R` contains  
+     * Scripts to calculate all models (.R)
+    * Scripts to generate all figures and tables (.R)
+    * Metadata script for creating EML file
+    * Folder for calculating habitat types (ESY)
     
-4. __R__: the folder `R` contains  
-    * Scripts (.R) to generate all figures used in the manuscript and in the supporting information.
+4. __Markdown__: the folder `markdown` contains 
+    * Markdown documents of the analyses with model evaluations and comparisons (.md)
 
 ***
 
@@ -46,8 +55,13 @@ This work is licensed under a
 
 When using the __data available__ in this repository, please cite the original publication and the dataset.  
 
+__Publication__
+
+> Bauer M, Huber J, & Kollmann J (Under preparation) XXX
+
+__Dataset__
+
+> Bauer M, Huber J & Kollmann J (2022) Data and code for Bauer et al. (submitted): Dike grassland experiment (v1.0.0) [Data set]. – *Zenodo*. https://doi.org/10.xxx
+
 Contact markus1.bauer@tum.de for any further information.  
 
-**Citation:**
-
-> Bauer M, Huber J & Kollmann J (20XX). XXX. XX, XXX-XXX. https://doi.org/10.xxx
