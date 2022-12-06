@@ -231,7 +231,7 @@ m1 <- brm(
   seed = seed
 )
 
-m2_new <- brm(
+m2 <- brm(
   n ~ sand_ratio * target_type * exposition * survey_year_fct +
     substrate_depth + seed_density +
     substrate_depth:exposition +
