@@ -46,7 +46,7 @@ sites <- read_csv(
     botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
     botanist_year = factor(botanist_year),
     id = factor(id),
-    n = persistence
+    n = persistence / 100
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
@@ -143,14 +143,17 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
             (1 | site/plot),
           data = sites)
-ggplot(data = data.frame(x = c(-40, 40)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 10)) +
-  expand_limits(y = 0) + ggtitle("Normal distribution")
-ggplot(data = data.frame(x = c(-40, 40)), aes(x = x)) +
-  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 10)) +
+ggplot(data = data.frame(x = c(0, 1)), aes(x = x)) +
+  stat_function(fun = dbeta, n = 101, args = list(shape1 = 3.5, shape2 = 2.2)) +
+  expand_limits(y = 0) + ggtitle("Beta distribution for Intercept")
+ggplot(data = data.frame(x = c(-.4, .4)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = .2)) +
+  expand_limits(y = 0) + ggtitle("Normal distribution for treatments")
+ggplot(data = data.frame(x = c(-.4, .4)), aes(x = x)) +
+  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0) + ggtitle("Cauchy distribution")
-ggplot(data.frame(x = c(-40, 40)), aes(x = x)) +
-  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 10)) +
+ggplot(data.frame(x = c(-.4, .4)), aes(x = x)) +
+  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) + ggtitle(expression(Student~italic(t)*"-distribution"))
 
 ### Model specifications ###
@@ -160,7 +163,7 @@ thin = 2
 seed = 123
 warmup = floor(iter / 2)
 priors <- c(
-  set_prior("normal(0, 20)", class = "Intercept"),
+  set_prior("beta(3.5, 2.2)", class = "Intercept"),
   set_prior("normal(0, 20)", class = "b"),
   set_prior("normal(2.5, 20)", class = "b", coef = "sand_ratio25"),
   set_prior("normal(5, 20)", class = "b", coef = "sand_ratio50"),

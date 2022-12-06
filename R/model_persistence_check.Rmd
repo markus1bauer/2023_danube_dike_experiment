@@ -162,6 +162,8 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ## Models
 
+Only here you have to modify the script to compare other models
+
 ```{r collapse = TRUE, message = FALSE}
 load(file = here("outputs", "models", "model_persistence_2.Rdata"))
 load(file = here("outputs", "models", "model_persistence_full.Rdata"))
@@ -206,16 +208,18 @@ prior_summary(m_1, all = FALSE)
 ```
 
 
-Conditional <i>R</i>² values
+### Coefficient of determination (<i>R</i>²)
+
+#### Conditional <i>R</i>² values
 
 ```{r collapse = TRUE}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+         re_formula =  ~ (1 | site/plot)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
+         re_formula =  ~ (1 | site/plot))
 ```
 
-Marginal <i>R</i>² values
+#### Marginal <i>R</i>² values
 
 ```{r collapse = TRUE}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -308,8 +312,8 @@ mcmc_neff(neff_ratio(m_2))
 ### MCMC diagnostics
 
 ```{r}
-mcmc_trace(posterior1, np = hmc_diagnostics1)
-mcmc_trace(posterior2, np = hmc_diagnostics2)
+mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncolumn = 2))
+mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncolumn = 2))
 mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
@@ -322,8 +326,10 @@ mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
              "b_target_typedry_grassland", "b_seed_density8",
              "b_expositionsouth", "sigma"
            ))
-mcmc_parcoord(posterior1, np = hmc_diagnostics1)
-mcmc_parcoord(posterior2, np = hmc_diagnostics2)
+mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
+  theme(axis.text.x = element_text(angle = 90))
+mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
+  theme(axis.text.x = element_text(angle = 90))
 ```
 
 ### Posterior predictive check
@@ -415,7 +421,7 @@ Conditional and marignal <i>R</i>²
 
 ```{r collapse = TRUE}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+         re_formula =  ~ (1 | site/plot)) 
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ```
@@ -455,7 +461,7 @@ Just, to get exact values if necessary, which is not possible from the figure
 ```
 
 ```{r echo = FALSE}
-write.csv(draws1, here("outputs", "statistics", "table_persistenc.csv"))
+write.csv(draws1, here("outputs", "statistics", "table_persistence.csv"))
 ```
 
 # Session info
