@@ -131,16 +131,18 @@ sites <- read_csv(
 
 ``` r
 load(file = here("outputs", "models", "model_fcs_2.Rdata"))
-load(file = here("outputs", "models", "model_fcs_full.Rdata"))
+load(file = here("outputs", "models", "model_fcs_2_test.Rdata"))
+#load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 m_1 <- m2
-m_2 <- m_full
+m_2 <- m2_test
+#m_2 <- m_full
 ```
 
 ``` r
 m_1$formula
 ## n ~ sand_ratio * target_type * exposition * survey_year_fct + substrate_depth + seed_density + substrate_depth:exposition + seed_density:exposition + substrate_depth:survey_year_fct + seed_density:survey_year_fct + botanist_year + (1 | site/plot)
 m_2$formula
-## n ~ sand_ratio * target_type * exposition * survey_year_fct + substrate_depth * seed_density + substrate_depth:exposition + seed_density:exposition + substrate_depth:survey_year_fct + seed_density:survey_year_fct + substrate_depth:exposition:survey_year_fct + seed_density:exposition:survey_year_fct + botanist_year + (1 | site/plot)
+## n ~ sand_ratio * target_type * exposition * survey_year_fct + substrate_depth + seed_density + substrate_depth:exposition + seed_density:exposition + substrate_depth:survey_year_fct + seed_density:survey_year_fct + botanist_year + (1 | site/plot)
 ```
 
 ``` r
@@ -161,7 +163,7 @@ m_2$family
 ``` r
 ggplot(data = data.frame(x = c(-3, 3)), aes(x = x)) +
   stat_function(
-    fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1)
+    fun = dnorm, n = 101, args = list(mean = 0.1, sd = 2)
     ) +
   expand_limits(y = 0) + ggtitle("Normal distribution")
 ```
@@ -225,7 +227,7 @@ bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
 ##     Estimate   Est.Error        Q5       Q50       Q95
-## R2 0.8457806 0.005093254 0.8370864 0.8459597 0.8539238
+## R2 0.8464731 0.005100259 0.8376967 0.8466772 0.8544419
 ```
 
 Marginal <i>R</i>² values
@@ -238,7 +240,7 @@ bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ##     Estimate   Est.Error        Q5       Q50       Q95
-## R2 0.8081253 0.004574755 0.8004376 0.8083452 0.8153329
+## R2 0.8084947 0.004562813 0.8005822 0.8087267 0.8155298
 ```
 
 ## Model check
@@ -591,17 +593,17 @@ loo2
     ## Computed from 10000 by 1152 log-likelihood matrix
     ## 
     ##          Estimate   SE
-    ## elpd_loo   -472.7 30.4
-    ## p_loo       189.6  9.1
-    ## looic       945.4 60.8
+    ## elpd_loo   -466.8 30.3
+    ## p_loo       185.2  8.9
+    ## looic       933.7 60.7
     ## ------
     ## Monte Carlo SE of elpd_loo is NA.
     ## 
     ## Pareto k diagnostic values:
     ##                          Count Pct.    Min. n_eff
-    ## (-Inf, 0.5]   (good)     1137  98.7%   456       
-    ##  (0.5, 0.7]   (ok)         13   1.1%   205       
-    ##    (0.7, 1]   (bad)         2   0.2%   201       
+    ## (-Inf, 0.5]   (good)     1141  99.0%   701       
+    ##  (0.5, 0.7]   (ok)          9   0.8%   338       
+    ##    (0.7, 1]   (bad)         2   0.2%   118       
     ##    (1, Inf)   (very bad)    0   0.0%   <NA>      
     ## See help('pareto-k-diagnostic') for details.
 
