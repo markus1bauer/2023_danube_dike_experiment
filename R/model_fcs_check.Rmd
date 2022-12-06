@@ -166,11 +166,9 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ```{r collapse = TRUE, message = FALSE}
 load(file = here("outputs", "models", "model_fcs_2.Rdata"))
-load(file = here("outputs", "models", "model_fcs_2_test.Rdata"))
-#load(file = here("outputs", "models", "model_fcs_full.Rdata"))
+load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 m_1 <- m2
-m_2 <- m2_test
-#m_2 <- m_full
+m_2 <- m_full
 ```
 
 ```{r collapse = TRUE}
@@ -453,9 +451,9 @@ mcmc_intervals(
 
 ### Effect sizes
 
-Just, to get exact values if necessary, which is not possible from the figure
+Effect sizes are presented just to get exact values of the means if necessary.
 
-```{r max_height = "1000px"}
+```{r}
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 ```
@@ -466,6 +464,6 @@ write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
 
 # Session info
 
-```{r echo = FALSE, max_height = "500px"}
+```{r echo = FALSE}
 sessionInfo()
 ```

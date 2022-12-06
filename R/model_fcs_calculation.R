@@ -300,7 +300,6 @@ m2_flat <- brm(
 save(m_simple, file = here("outputs", "models", "model_fcs_simple.Rdata"))
 save(m_full, file = here("outputs", "models", "model_fcs_full.Rdata"))
 save(m1, file = here("outputs", "models", "model_fcs_1.Rdata"))
-#save(m2, file = here("outputs", "models", "model_fcs_2.Rdata"))
-save(m2_test, file = here("outputs", "models", "model_fcs_2_test.Rdata"))
+save(m2, file = here("outputs", "models", "model_fcs_2.Rdata"))
 save(m3, file = here("outputs", "models", "model_fcs_3.Rdata"))
 save(m2_flat, file = here("outputs", "models", "model_fcs_2_flat.Rdata"))
