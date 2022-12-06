@@ -9,7 +9,6 @@ output:
     dev: png
     fig_width: 7
     fig_height: 5
-    df_print: tibble
 ---
 
 ```{r setup, include=FALSE}
@@ -77,7 +76,7 @@ sites <- read_csv(
   filter(survey_year != "seeded") %>%
   mutate(
     survey_year_fct = factor(survey_year),
-    botanist_year = str_c(survey_year, botanist, sep = " "),
+    botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
     botanist_year = factor(botanist_year),
     n = fcs_target,
     id = factor(id)
@@ -165,7 +164,7 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ## Models
 
-```{r collapse = TRUE}
+```{r collapse = TRUE, message = FALSE}
 load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 m_1 <- m2
@@ -187,17 +186,17 @@ m_2$family
 #### Possible prior distributions
 
 ```{r}
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data = data.frame(x = c(-3, 3)), aes(x = x)) +
   stat_function(
-    fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1)
+    fun = dnorm, n = 101, args = list(mean = 0.1, sd = 2)
     ) +
   expand_limits(y = 0) + ggtitle("Normal distribution")
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data = data.frame(x = c(-3, 3)), aes(x = x)) +
   stat_function(
     fun = dcauchy, n = 101, args = list(location = 0, scale = 1)
     ) +
   expand_limits(y = 0) + ggtitle("Cauchy distribution")
-ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data.frame(x = c(-3, 3)), aes(x = x)) +
   stat_function(
     fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)
     ) +
@@ -452,9 +451,9 @@ mcmc_intervals(
 
 ### Effect sizes
 
-Just, to get exact values if necessary, which is not possible from the figure
+Effect sizes are presented just to get exact values of the means if necessary.
 
-```{r max_height = "1000px"}
+```{r}
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 ```
@@ -465,6 +464,6 @@ write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
 
 # Session info
 
-```{r echo = FALSE, max_height = "500px"}
+```{r echo = FALSE}
 sessionInfo()
 ```
