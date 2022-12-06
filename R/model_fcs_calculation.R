@@ -3,7 +3,7 @@
 # Model building
 
 # Markus Bauer
-# 2022-11-18
+# 2022-12-06
 
 
 
@@ -144,13 +144,13 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
             (1 | site/plot) + (1 | botanist_year),
           data = sites)
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1)) +
+ggplot(data = data.frame(x = c(-3, 3)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 2)) +
   expand_limits(y = 0) + ggtitle("Normal distribution")
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data = data.frame(x = c(-3, 3)), aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0) + ggtitle("Cauchy distribution")
-ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data.frame(x = c(-3, 3)), aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) + ggtitle(expression(Student~italic(t)*"-distribution"))
 
@@ -161,13 +161,13 @@ thin = 2
 seed = 123
 warmup = floor(iter / 2)
 priors <- c(
-  set_prior("normal(0, 1)", class = "Intercept"),
-  set_prior("normal(0, 1)", class = "b"),
-  set_prior("normal(0.1, 1)", class = "b", coef = "sand_ratio25"),
-  set_prior("normal(0.2, 1)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(0.1, 1)", class = "b", coef = "survey_year_fct2019"),
-  set_prior("normal(0.2, 1)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(0.3, 1)", class = "b",coef = "survey_year_fct2021"),
+  set_prior("normal(0, 2)", class = "Intercept"),
+  set_prior("normal(0, 2)", class = "b"),
+  set_prior("normal(0.1, 2)", class = "b", coef = "sand_ratio25"),
+  set_prior("normal(0.2, 2)", class = "b", coef = "sand_ratio50"),
+  set_prior("normal(0.1, 2)", class = "b", coef = "survey_year_fct2019"),
+  set_prior("normal(0.2, 2)", class = "b", coef = "survey_year_fct2020"),
+  set_prior("normal(0.3, 2)", class = "b",coef = "survey_year_fct2021"),
   set_prior("cauchy(0, 1)", class = "sigma")
 )
 
@@ -300,6 +300,7 @@ m2_flat <- brm(
 save(m_simple, file = here("outputs", "models", "model_fcs_simple.Rdata"))
 save(m_full, file = here("outputs", "models", "model_fcs_full.Rdata"))
 save(m1, file = here("outputs", "models", "model_fcs_1.Rdata"))
-save(m2, file = here("outputs", "models", "model_fcs_2.Rdata"))
+#save(m2, file = here("outputs", "models", "model_fcs_2.Rdata"))
+save(m2_test, file = here("outputs", "models", "model_fcs_2_test.Rdata"))
 save(m3, file = here("outputs", "models", "model_fcs_3.Rdata"))
 save(m2_flat, file = here("outputs", "models", "model_fcs_2_flat.Rdata"))
