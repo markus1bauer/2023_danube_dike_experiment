@@ -34,7 +34,7 @@ Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.135
 
 Analysis guided by
 <br>
-Bayesian analysis reporting guidelines (BARG): Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
+Reporting: Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
 <br>
 Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378)
 <br>
@@ -46,7 +46,7 @@ To compare different models, you only have to change the models in section 'Load
 
 # Preparation
 
-#### Packages (BARG 2.A)
+#### Packages
 
 ```{r libraries message = FALSE}
 library(here)
@@ -54,7 +54,6 @@ library(tidyverse)
 library(ggbeeswarm)
 library(patchwork)
 library(brms)
-library(DHARMa)
 library(DHARMa.helpers)
 library(bayesplot)
 library(loo)
@@ -174,19 +173,22 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ## Models
 
-### Load models (BARG 1.D/6.G)
+### Load models (6.G)
 
 Only here you have to modify the script to compare other models
 
 ```{r load-models collapse = TRUE, message = FALSE}
 load(file = here("outputs", "models", "model_recovery_full.Rdata"))
-# BARG 5
-load(file = here("outputs", "models", "model_recovery_full_flat.Rdata"))
-# BARG 1.E
 load(file = here("outputs", "models", "model_recovery_full_prior.Rdata"))
+# BARG 1.E
+#load(file = here("outputs", "models", "model_recovery_2_prior.Rdata"))
+# BARG 5.A/B/C
+#load(file = here("outputs", "models", "model_recovery_2_flat.Rdata"))
 m_1 <- m_full
 m_2 <- mfull_prior
 ```
+
+### Model specifications (BARG 1.D)
 
 ```{r formulas collapse = TRUE}
 m_1$formula
@@ -196,6 +198,26 @@ m_2$formula
 ```{r families collapse = TRUE}
 m_1$family
 m_2$family
+```
+
+```{r model-specification-chains collapse = TRUE}
+m_1$fit@sim$chains
+m_2$fit@sim$chains
+```
+
+```{r model-specification-iterations collapse = TRUE}
+m_1$fit@sim$iter
+m_2$fit@sim$iter
+```
+
+```{r model-specification-warmup collapse = TRUE}
+m_1$fit@sim$warmup
+m_2$fit@sim$warmup
+```
+
+```{r model-specification-thinning collapse = TRUE}
+m_1$fit@sim$thin
+m_2$fit@sim$thin
 ```
 
 ### Priors
@@ -279,8 +301,8 @@ posterior2 <- m_2 %>%
       "sigma"
     )
   )
-hmc_diagnostics1 <- bayesplot::nuts_params(m_1)
-hmc_diagnostics2 <- bayesplot::nuts_params(m_2)
+hmc_diagnostics1 <- brms::nuts_params(m_1)
+hmc_diagnostics2 <- brms::nuts_params(m_2)
 y <- sites$n
 yrep1 <- brms::posterior_predict(m_1, draws = 500)
 yrep2 <- brms::posterior_predict(m_2, draws = 500)
@@ -335,7 +357,7 @@ mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
   theme(axis.text.x = element_text(angle = 45))
 ```
 
-### Posterior predictive check (BARG 3.A)
+### Posterior predictive check
 
 #### Kernel density
 
@@ -403,8 +425,8 @@ plot(loo1)
 Leave one out probability integral transform
 
 ```{r loo-pit}
-p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
-#p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+p1 <- loo::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
+#p2 <- loo::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
 #p1 / p2
 
 ```
@@ -418,18 +440,18 @@ mcmc_acf(posterior1, lags = 10, facet_args = list(ncol = 4))
 
 ## Model comparison
 
-### Conditional <i>R</i>^2 values
+### Conditional <i>R</i>² values
 
-```{r conditonal-r2 collapse = TRUE}
+```{r collapse = TRUE}
 brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year)) 
+         re_formula =  ~ (1 | site/plot)) 
 brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot) + (1 | botanist_year))
+         re_formula =  ~ (1 | site/plot))
 ```
 
-### Marginal <i>R</i>^2 values
+### Marginal <i>R</i>² values
 
-```{r marginal-r2 collapse = TRUE}
+```{r collapse = TRUE}
 brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -460,7 +482,7 @@ mcmc_intervals(
 
 Second model:
 
-```{r posteriors-2nd-model}
+```{r posterors-2nd-model}
 mcmc_intervals(
   posterior2,
   prob = 0.66,
