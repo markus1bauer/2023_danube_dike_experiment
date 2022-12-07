@@ -147,33 +147,33 @@ ggplot(data = data.frame(x = c(0, 1)), aes(x = x)) +
   stat_function(fun = dbeta, n = 101, args = list(shape1 = 3.5, shape2 = 2.2)) +
   expand_limits(y = 0) +
   ggtitle("Beta distribution for Intercept")
-ggplot(data = data.frame(x = c(-.4, .4)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = .2)) +
+ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = .35)) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for treatments")
-ggplot(data = data.frame(x = c(-.4, .4)), aes(x = x)) +
+ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0) + ggtitle("Cauchy distribution") # See Lemoine 2019 https://doi.org/10.1111/oik.05985
-ggplot(data.frame(x = c(-.4, .4)), aes(x = x)) +
+ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) +
   ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
 
 ### Model specifications ###
-iter = 20000 # See Deapoli & Schoot 2017 https://doi.org/10.1037/met0000065
+iter = 10000
 chains = 4
 thin = 2
 seed = 123
 warmup = floor(iter / 2)
 priors <- c(
   set_prior("beta(3.5, 2.2)", class = "Intercept", lb = 0, ub = 1),
-  set_prior("normal(0, .2)", class = "b", lb = -1, ub = 1),
-  set_prior("normal(.025, .2)", class = "b", coef = "sand_ratio25"),
-  set_prior("normal(.05, .2)", class = "b", coef = "sand_ratio50"),
-  set_prior("normal(-.05, .2)", class = "b", coef = "expositionsouth"),
-  set_prior("normal(.025, .2)", class = "b", coef = "survey_year_fct2019"),
-  set_prior("normal(.05, .2)", class = "b", coef = "survey_year_fct2020"),
-  set_prior("normal(.075, .2)", class = "b", coef = "survey_year_fct2021"),
+  set_prior("normal(0, .35)", class = "b", lb = -1, ub = 1),
+  set_prior("normal(.025, .35)", class = "b", coef = "sand_ratio25"),
+  set_prior("normal(.05, .35)", class = "b", coef = "sand_ratio50"),
+  set_prior("normal(-.05, .35)", class = "b", coef = "expositionsouth"),
+  set_prior("normal(.025, .35)", class = "b", coef = "survey_year_fct2019"),
+  set_prior("normal(.05, .35)", class = "b", coef = "survey_year_fct2020"),
+  set_prior("normal(.075, .35)", class = "b", coef = "survey_year_fct2021"),
   set_prior("cauchy(0, .1)", class = "sigma")
 )
 
@@ -291,8 +291,7 @@ m2_flat <- brm(
   data = sites, 
   family = gaussian("identity"),
   prior = c(
-    set_prior("normal(0, 40)", class = "Intercept"),
-    set_prior("normal(0, 40)", class = "b"),
+    set_prior("normal(0, 1)", class = "b"),
     set_prior("cauchy(0, 1)", class = "sigma")
   ),
   chains = 3,
