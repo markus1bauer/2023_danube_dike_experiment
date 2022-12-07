@@ -205,27 +205,35 @@ m_1$family
 m_2$family
 ```
 
+Amount of chains for MCMC
+
 ```{r model-specification-chains, collapse = TRUE}
 m_1$fit@sim$chains
 m_2$fit@sim$chains
 ```
+
+Total amount of iterations for MCMC
 
 ```{r model-specification-iterations, collapse = TRUE}
 m_1$fit@sim$iter
 m_2$fit@sim$iter
 ```
 
+Amount of iterations before burn-in
+
 ```{r model-specification-warmup, collapse = TRUE}
 m_1$fit@sim$warmup
 m_2$fit@sim$warmup
 ```
+
+Thinning rate
 
 ```{r model-specification-thinning, collapse = TRUE}
 m_1$fit@sim$thin
 m_2$fit@sim$thin
 ```
 
-### Priors
+### Priors (BARG 1.D)
 
 #### Possible prior distributions
 
@@ -358,7 +366,7 @@ mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
 
 #### Pairs plot
 
-```{r mcmc-pairs, collapse = TRUE, fig.height = 7}
+```{r mcmc-pairs, collapse = TRUE, fig.height = 6.5}
 mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
@@ -414,28 +422,28 @@ p1 / p2
 #### Histograms of statistics skew
 
 ```{r histogram}
-p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
-p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
-p1 / p2
-ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
-ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
-p1 / p2
-ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
-ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
-p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
-p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
-p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
-p1 / p2
+#p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
+#p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
+#p1 / p2
+#ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
+#ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
+#p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
+#p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
+#p1 / p2
+#ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
+#ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
+#p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
+#p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
+#p1 / p2
+#p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
+#p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
+#p1 / p2
+#p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
+#p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
+#p1 / p2
+#p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
+#p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
+#p1 / p2
 ```
 
 #### LOO (Leave one out)
