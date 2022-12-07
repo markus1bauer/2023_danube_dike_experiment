@@ -1,6 +1,6 @@
 ---
 title: "Analysis of Bauer et al. (unpublished) Field experiment: <br> Favourable Conservation Status (FCS)"
-author: "<b>Markus Bauer*</b> <br>"
+author: "<b>Markus Bauer</b> <br>"
 date: "<b>`r format(Sys.time(), '%Y-%m-%d')`</b>"
 output:
   github_document:
@@ -17,10 +17,11 @@ knitr::opts_chunk$set(
   )
 ```
 
+<b>Markus Bauer</b>
+
 Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
-<br/>
-<br/>
-<span>&#42;</span> Corresponding author: [markus1.bauer@tum.de](mailto:markus1.bauer@tum.de)
+
+[markus1.bauer@tum.de](mailto:markus1.bauer@tum.de)
 
 ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
 <br>
@@ -28,21 +29,23 @@ ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
 <br>
 GitHub: [markus1bauer](https://github.com/markus1bauer)
 
+To compare different models, you only have to change the models in section 'Load models'
+
+# Preparation
+
 Favourable Conservation Status (FSC) sensu Helm et al. (2015) Divers Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
 
 Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
 
 Analysis guided by
 <br>
-Reporting: Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
+<b>BARG</b> (Bayesian Analysis Reporting Guidelines): Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
 <br>
 Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378)
 <br>
 Priors: Lemoine (2019) Oikos [DOI: 10.1111/oik.05985](https://doi.org/10.1111/oik.05985)
 <br>
 Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](https://doi.org/10.1037/met0000065)
-
-# Preparation
 
 #### Packages (BARG 2.A)
 
@@ -346,9 +349,16 @@ mcmc_neff(neff_ratio(m_2))
 
 ### MCMC diagnostics
 
-```{r mcmc}
+#### Trace plots
+
+```{r mcmc-trace, fig.height = 14}
 mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
 mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
+```
+
+#### Pairs plot
+
+```{r mcmc-pairs, collapse = TRUE, fig.height = 7}
 mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
@@ -361,6 +371,11 @@ mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
              "b_target_typedry_grassland", "b_seed_density8",
              "b_expositionsouth", "sigma"
            ))
+```
+
+#### Parallel coordinate plot
+
+```{r mcmc-parcoord, collapse = TRUE}
 mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
   theme(axis.text.x = element_text(angle = 45))
 mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
@@ -428,22 +443,22 @@ p1 / p2
 ```{r loo}
 loo1
 loo2
-plot(loo1)
-plot(loo2)
+#plot(loo1)
+#plot(loo2)
 ```
 
 Leave one out probability integral transform
 
 ```{r loo-pit}
-p1 <- loo::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
-p2 <- loo::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
-p1 / p2
+#p1 <- bayesplot::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
+#p2 <- bayesplot::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+#p1 / p2
 
 ```
 
 ### Autocorrelation check
 
-```{r autocorrelation}
+```{r autocorrelation, fig.height = 7}
 mcmc_acf(posterior1, lags = 10)
 mcmc_acf(posterior2, lags = 10)
 ```
