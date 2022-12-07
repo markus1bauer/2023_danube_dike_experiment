@@ -34,7 +34,7 @@ Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.135
 
 Analysis guided by
 <br>
-Reporting: Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
+Bayesian analysis reporting guidelines (BARG): Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
 <br>
 Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378)
 <br>
@@ -44,7 +44,7 @@ Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](h
 
 # Preparation
 
-#### Packages
+#### Packages (BARG 2.A)
 
 ```{r libraries message = FALSE}
 library(here)
@@ -176,16 +176,22 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ## Models
 
-### Load models
+### Load models (BARG 1.D/6.G)
 
 Only here you have to modify the script to compare other models
 
 ```{r load-models collapse = TRUE}
 load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 load(file = here("outputs", "models", "model_fcs_full.Rdata"))
+# BARG 5
+load(file = here("outputs", "models", "model_fcs_2_flat.Rdata"))
+# BARG 1.E
+load(file = here("outputs", "models", "model_fcs_2_prior.Rdata"))
 m_1 <- m2
 m_2 <- m_full
 ```
+
+### Model comparison
 
 ```{r formulas collapse = TRUE}
 m_1$formula
@@ -197,24 +203,28 @@ m_1$family
 m_2$family
 ```
 
-### Coefficient of determination (<i>R</i>²)
-
 #### Conditional <i>R</i>² values
 
 ```{r conditional-r2 collapse = TRUE}
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot)) 
-bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot))
 ```
 
 #### Marginal <i>R</i>² values
 
 ```{r marginal-r2 collapse = TRUE}
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
-bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
+```
+
+#### Bayes factor (BARG 3.C)
+
+```{r}
+brms::bayes_factor(m_1, m_2)
 ```
 
 ### Priors
@@ -252,10 +262,10 @@ ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
   ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
 ```
 
-#### Prior summary 
+#### Prior summary (BARG 1.D)
 
 ```{r prior-summary}
-prior_summary(m_1, all = FALSE)
+brms::prior_summary(m_1, all = FALSE)
 ```
 
 ## Model check
@@ -306,13 +316,13 @@ posterior2 <- m_2 %>%
       "sigma"
     )
   )
-hmc_diagnostics1 <- nuts_params(m_1)
-hmc_diagnostics2 <- nuts_params(m_2)
+hmc_diagnostics1 <- bayesplot::nuts_params(m_1)
+hmc_diagnostics2 <- bayesplot::nuts_params(m_2)
 y <- sites$n
-yrep1 <- posterior_predict(m_1, draws = 500)
-yrep2 <- posterior_predict(m_2, draws = 500)
-loo1 <- loo(m_1, save_psis = TRUE, moment_match = FALSE)
-loo2 <- loo(m_2, save_psis = TRUE, moment_match = FALSE)
+yrep1 <- brms::posterior_predict(m_1, draws = 500)
+yrep2 <- brms::posterior_predict(m_2, draws = 500)
+loo1 <- brms::loo(m_1, save_psis = TRUE, moment_match = FALSE)
+loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
 draws1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::summarize_draws() %>%
@@ -325,14 +335,16 @@ draws2 <- m_2 %>%
 
 ### Sampling efficency and effectiveness
 
-#### Rhat
+All 'mcmc_' functions are from library 'bayesplot'
+
+#### Rhat (BARG 2.B)
 
 ```{r rhat collapse = TRUE}
 mcmc_rhat(draws1$rhat)
 mcmc_rhat(draws2$rhat)
 ```
 
-#### Effective sampling size (ESS)
+#### Effective sampling size (ESS) (BARG 2.C)
 
 ```{r ess collapse = TRUE}
 mcmc_neff(neff_ratio(m_1))
@@ -342,8 +354,8 @@ mcmc_neff(neff_ratio(m_2))
 ### MCMC diagnostics
 
 ```{r mcmc}
-mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncolumn = 2))
-mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncolumn = 2))
+mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
+mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
 mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
@@ -362,7 +374,7 @@ mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
   theme(axis.text.x = element_text(angle = 45))
 ```
 
-### Posterior predictive check
+### Posterior predictive check (BARG 3.A)
 
 #### Kernel density
 
@@ -443,23 +455,13 @@ mcmc_acf(posterior1, lags = 10)
 mcmc_acf(posterior2, lags = 10)
 ```
 
-## Output of choosen model
+## Posterior distributions (BARG 3.B)
 
-### Model output
+### Forest plot
 
-Conditional and marignal <i>R</i>²
+Chosen model:
 
-```{r conditional-marginal-r2 collapse = TRUE}
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot)) 
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula = 1 ~ 1)
-```
-
-Posteriors of chosen model
-
-```{r posterior-chosen-model}
-draws1
+```{r posteriors-chosen-model}
 mcmc_intervals(
   posterior1,
   prob = 0.66,
@@ -469,9 +471,9 @@ mcmc_intervals(
   theme_classic()
 ```
 
-Posteriors of second model:
+Second model:
 
-```{r posterior-second-model}
+```{r posteriors-2nd-model}
 mcmc_intervals(
   posterior2,
   prob = 0.66,
@@ -483,7 +485,8 @@ mcmc_intervals(
 
 ### Effect sizes
 
-Effect sizes are presented just to get exact values of the means if necessary.
+Effect sizes of chosen model just to get exact values of means etc. if necessary.
+
 
 ```{r effect-sizes}
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
@@ -494,7 +497,7 @@ Effect sizes are presented just to get exact values of the means if necessary.
 write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
 ```
 
-# Session info
+# Session info (BARG 2.A/6.A/6.B)
 
 ```{r session-info echo = FALSE}
 sessionInfo()

@@ -305,6 +305,28 @@ m2_flat <- brm(
   seed = seed
 )
 
+m2_prior <- brm(
+  n ~ sand_ratio * target_type * exposition * survey_year_fct +
+    substrate_depth + seed_density +
+    substrate_depth:exposition +
+    seed_density:exposition +
+    substrate_depth:survey_year_fct +
+    seed_density:survey_year_fct +
+    botanist_year +
+    (1 | site/plot),
+  data = sites, 
+  family = gaussian("identity"),
+  prior = priors,
+  sample_prior = "only",
+  chains = chains,
+  iter = iter,
+  thin = thin,
+  control = list(max_treedepth = 13),
+  warmup = warmup,
+  save_pars = save_pars(all = TRUE),
+  cores = parallel::detectCores(),
+  seed = seed
+)
 
 ### c Save ---------------------------------------------------------------------
 
@@ -318,3 +340,6 @@ save(m3, file = here("outputs", "models", "model_persistence_3.Rdata"))
 save(m2_flat, file = here(
   "outputs", "models", "model_persistence_2_flat.Rdata"
   ))
+save(m2_prior, file = here(
+  "outputs", "models", "model_persistence_2_prior.Rdata"
+))
