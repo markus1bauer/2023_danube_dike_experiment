@@ -9,7 +9,6 @@ output:
     dev: png
     fig_width: 7
     fig_height: 5
-    df_print: tibble
 ---
 
 ```{r setup, include=FALSE}
@@ -89,7 +88,7 @@ sites <- read_csv(
   filter(survey_year != "seeded") %>%
   mutate(
     survey_year_fct = factor(survey_year),
-    botanist_year = str_c(survey_year, botanist, sep = " "),
+    botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
     botanist_year = factor(botanist_year),
     n = fcs_target,
     id = factor(id)
@@ -245,7 +244,7 @@ ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
   ggtitle("Normal distribution for Intercept")
 ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
   stat_function(
-    fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1)
+    fun = dnorm, n = 101, args = list(mean = 0.1, sd = 2)
     ) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for treatments")
@@ -487,6 +486,7 @@ mcmc_intervals(
 ### Effect sizes
 
 Effect sizes of chosen model just to get exact values of means etc. if necessary.
+
 
 ```{r effect-sizes}
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
