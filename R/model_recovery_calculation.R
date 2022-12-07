@@ -142,17 +142,24 @@ ggplot(sites, aes(x = n)) + geom_density()
 ### Posssible priors ###
 get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
-            (1 | site/plot),
+            (1 | site/plot) + (1|botanist_year),
           data = sites)
 ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = -1, sd = 1)) +
+  expand_limits(y = 0) +
+  ggtitle("Normal distribution for Intecepts")
+ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 1)) +
-  expand_limits(y = 0) + ggtitle("Normal distribution")
+  expand_limits(y = 0) +
+  ggtitle("Normal distribution for treatments")
 ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
-  expand_limits(y = 0) + ggtitle("Cauchy distribution")
+  expand_limits(y = 0) +
+  ggtitle("Cauchy distribution") # See Lemoine 2019 https://doi.org/10.1111/oik.05985
 ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
-  expand_limits(y = 0) + ggtitle(expression(Student~italic(t)*"-distribution"))
+  expand_limits(y = 0) +
+  ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
 
 ### Model specifications ###
 iter = 10000
@@ -161,7 +168,7 @@ thin = 2
 seed = 123
 warmup = floor(iter / 2)
 priors <- c(
-  set_prior("normal(0, 1)", class = "Intercept"),
+  set_prior("normal(-1, 1)", class = "Intercept"),
   set_prior("normal(0, 1)", class = "b"),
   set_prior("normal(0.1, 1)", class = "b", coef = "sand_ratio25"),
   set_prior("normal(0.2, 1)", class = "b", coef = "sand_ratio50"),
@@ -342,3 +349,4 @@ save(m1, file = here("outputs", "models", "model_recovery_1.Rdata"))
 save(m2, file = here("outputs", "models", "model_recovery_2.Rdata"))
 save(m3, file = here("outputs", "models", "model_recovery_3.Rdata"))
 save(mfull_flat, file = here("outputs", "models", "model_recovery_full_flat.Rdata"))
+save(mfull_prior, file = here("outputs", "models", "model_recovery_full_prior.Rdata"))
