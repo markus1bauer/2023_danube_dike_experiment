@@ -185,12 +185,12 @@ Only here you have to modify the script to compare other models
 ```{r load-models, collapse = TRUE}
 load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 load(file = here("outputs", "models", "model_fcs_full.Rdata"))
-# BARG 1.E
-#load(file = here("outputs", "models", "model_fcs_2_prior.Rdata"))
+load(file = here("outputs", "models", "model_fcs_2_prior.Rdata"))
 # BARG 5.A/B/C
 #load(file = here("outputs", "models", "model_fcs_2_flat.Rdata"))
 m_1 <- m2
 m_2 <- m_full
+m_prior <- m2_prior
 ```
 
 ### Model specifications (BARG 1.D)
@@ -233,7 +233,78 @@ m_1$fit@sim$thin
 m_2$fit@sim$thin
 ```
 
-### Priors (BARG 1.D)
+### Preparation for analysis
+
+```{r analysis-preparation}
+posterior1 <- m_1 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(
+    variable = c(
+      "b_sand_ratio25",
+      "b_sand_ratio50",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
+      "b_seed_density8",
+      "b_expositionsouth",
+      "b_survey_year_fct2019",
+      "b_survey_year_fct2020",
+      "b_survey_year_fct2021",
+      "sd_site__Intercept",
+      "sd_site:plot__Intercept",
+      "sigma"
+    )
+  )
+posterior2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(
+    variable = c(
+      "b_sand_ratio25",
+      "b_sand_ratio50",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
+      "b_seed_density8",
+      "b_expositionsouth",
+      "b_survey_year_fct2019",
+      "b_survey_year_fct2020",
+      "b_survey_year_fct2021",
+      "sd_site__Intercept",
+      "sd_site:plot__Intercept",
+      "sigma"
+    )
+  )
+posterior_prior <- m_prior %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(
+    variable = c(
+      "b_sand_ratio25",
+      "b_sand_ratio50",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
+      "b_seed_density8",
+      "b_expositionsouth",
+      "b_survey_year_fct2019",
+      "b_survey_year_fct2020",
+      "b_survey_year_fct2021"
+    )
+  )
+hmc_diagnostics1 <- brms::nuts_params(m_1)
+hmc_diagnostics2 <- brms::nuts_params(m_2)
+y <- sites$n
+yrep1 <- brms::posterior_predict(m_1, draws = 500)
+yrep2 <- brms::posterior_predict(m_2, draws = 500)
+loo1 <- brms::loo(m_1, save_psis = TRUE, moment_match = FALSE)
+loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
+draws1 <- m_1 %>%
+  posterior::as_draws() %>%
+  posterior::summarize_draws() %>%
+  filter(str_starts(variable, "b_"))
+draws2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::summarize_draws() %>%
+  filter(str_starts(variable, "b_"))
+```
+
+### Priors (BARG 1.D/E)
 
 #### Possible prior distributions
 
@@ -274,6 +345,18 @@ ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
 brms::prior_summary(m_1, all = FALSE)
 ```
 
+#### Prior predictive check (BARG 1.E)
+
+```{r prior-predictive-check}
+bayesplot::mcmc_intervals(
+  posterior_prior,
+  prob = 0.66,
+  prob_outer = 0.95,
+  point_est = "mean"
+  ) +
+  theme_classic()
+```
+
 ## Model check
 
 ### DHARMa
@@ -283,63 +366,7 @@ DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
 DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ```
 
-### Preparation
-
-```{r analysis-preparation}
-posterior1 <- m_1 %>%
-  posterior::as_draws() %>%
-  posterior::subset_draws(
-    variable = c(
-      "b_sand_ratio25",
-      "b_sand_ratio50",
-      "b_substrate_depth15",
-      "b_target_typedry_grassland",
-      "b_seed_density8",
-      "b_expositionsouth",
-      "b_survey_year_fct2019",
-      "b_survey_year_fct2020",
-      "b_survey_year_fct2021",
-      "sd_site__Intercept",
-      "sd_site:plot__Intercept",
-      "sigma"
-    )
-  )
-posterior2 <- m_2 %>%
-  posterior::as_draws() %>%
-  posterior::subset_draws(
-    variable = c(
-      "b_sand_ratio25",
-      "b_sand_ratio50",
-      "b_substrate_depth15",
-      "b_target_typedry_grassland",
-      "b_seed_density8",
-      "b_expositionsouth",
-      "b_survey_year_fct2019",
-      "b_survey_year_fct2020",
-      "b_survey_year_fct2021",
-      "sd_site__Intercept",
-      "sd_site:plot__Intercept",
-      "sigma"
-    )
-  )
-hmc_diagnostics1 <- brms::nuts_params(m_1)
-hmc_diagnostics2 <- brms::nuts_params(m_2)
-y <- sites$n
-yrep1 <- brms::posterior_predict(m_1, draws = 500)
-yrep2 <- brms::posterior_predict(m_2, draws = 500)
-loo1 <- brms::loo(m_1, save_psis = TRUE, moment_match = FALSE)
-loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
-draws1 <- m_1 %>%
-  posterior::as_draws() %>%
-  posterior::summarize_draws() %>%
-  filter(str_starts(variable, "b_"))
-draws2 <- m_2 %>%
-  posterior::as_draws() %>%
-  posterior::summarize_draws() %>%
-  filter(str_starts(variable, "b_"))
-```
-
-### Sampling efficency and effectiveness
+### Sampling efficency and effectiveness (BARG 2.B/C)
 
 #### Rhat (BARG 2.B)
 

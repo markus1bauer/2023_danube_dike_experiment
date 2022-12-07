@@ -182,14 +182,13 @@ Only here you have to modify the script to compare other models
 
 ```{r load-models, collapse = TRUE, message = FALSE}
 load(file = here("outputs", "models", "model_persistence_2.Rdata"))
-#load(file = here("outputs", "models", "model_persistence_full.Rdata"))
-# BARG 1.E
+load(file = here("outputs", "models", "model_persistence_full.Rdata"))
 load(file = here("outputs", "models", "model_persistence_2_prior.Rdata"))
 # BARG 5.A/B/C
 #load(file = here("outputs", "models", "model_persistence_2_flat.Rdata"))
 m_1 <- m2
-#m_2 <- m_full
-m_2 <- m2_prior
+m_2 <- m_full
+m_prior <- m2_prior
 ```
 
 ### Model specifications (BARG 1.D)
@@ -232,49 +231,7 @@ m_1$fit@sim$thin
 m_2$fit@sim$thin
 ```
 
-### Priors (BARG 1.D)
-
-#### Possible prior distributions
-
-```{r possible-priors}
-get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
-            seed_density + substrate_depth +
-            (1 | site/plot) + (1 | botanist_year),
-          data = sites)
-ggplot(data = data.frame(x = c(0, 1)), aes(x = x)) +
-  stat_function(fun = dbeta, n = 101, args = list(shape1 = 3.5, shape2 = 2.2)) +
-  expand_limits(y = 0) +
-  ggtitle("Beta distribution for Intercept")
-ggplot(data = data.frame(x = c(-.4, .4)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = .2)) +
-  expand_limits(y = 0) +
-  ggtitle("Normal distribution for treatments")
-ggplot(data = data.frame(x = c(-.4, .4)), aes(x = x)) +
-  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
-  expand_limits(y = 0) +
-  ggtitle("Cauchy distribution") # See Lemoine 2019 https://doi.org/10.1111/oik.05985
-ggplot(data.frame(x = c(-.4, .4)), aes(x = x)) +
-  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
-  expand_limits(y = 0) +
-  ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
-```
-
-#### Prior summary (BARG 1.D)
-
-```{r prior-summary}
-brms::prior_summary(m_1, all = FALSE)
-```
-
-## Model check
-
-### DHARMa
-
-```{r dharma, collapse = TRUE}
-DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
-DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
-```
-
-### Preparation
+### Preparation for analysis
 
 ```{r analysis-preparation}
 posterior1 <- m_1 %>%
@@ -313,6 +270,21 @@ posterior2 <- m_2 %>%
       "sigma"
     )
   )
+posterior_prior <- m_prior %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(
+    variable = c(
+      "b_sand_ratio25",
+      "b_sand_ratio50",
+      "b_substrate_depth15",
+      "b_target_typedry_grassland",
+      "b_seed_density8",
+      "b_expositionsouth",
+      "b_survey_year_fct2019",
+      "b_survey_year_fct2020",
+      "b_survey_year_fct2021"
+    )
+  )
 hmc_diagnostics1 <- brms::nuts_params(m_1)
 hmc_diagnostics2 <- brms::nuts_params(m_2)
 y <- sites$n
@@ -330,7 +302,61 @@ draws2 <- m_2 %>%
   filter(str_starts(variable, "b_"))
 ```
 
-### Sampling efficency and effectiveness
+### Priors (BARG 1.D/E)
+
+#### Possible prior distributions
+
+```{r possible-priors}
+get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
+            seed_density + substrate_depth +
+            (1 | site/plot) + (1 | botanist_year),
+          data = sites)
+ggplot(data = data.frame(x = c(0, 1)), aes(x = x)) +
+  stat_function(fun = dbeta, n = 101, args = list(shape1 = 3.5, shape2 = 2.2)) +
+  expand_limits(y = 0) +
+  ggtitle("Beta distribution for Intercept")
+ggplot(data = data.frame(x = c(-.4, .4)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = .2)) +
+  expand_limits(y = 0) +
+  ggtitle("Normal distribution for treatments")
+ggplot(data = data.frame(x = c(-.4, .4)), aes(x = x)) +
+  stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
+  expand_limits(y = 0) +
+  ggtitle("Cauchy distribution") # See Lemoine 2019 https://doi.org/10.1111/oik.05985
+ggplot(data.frame(x = c(-.4, .4)), aes(x = x)) +
+  stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
+  expand_limits(y = 0) +
+  ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
+```
+
+#### Prior summary (BARG 1.D)
+
+```{r prior-summary}
+brms::prior_summary(m_1, all = FALSE)
+```
+
+#### Prior predictive check (BARG 1.E)
+
+```{r prior-predictive-check}
+bayesplot::mcmc_intervals(
+  posterior_prior,
+  prob = 0.66,
+  prob_outer = 0.95,
+  point_est = "mean"
+  ) +
+  theme_classic()
+```
+
+## Model check
+
+### DHARMa
+
+```{r dharma, collapse = TRUE}
+DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
+DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
+```
+
+### Sampling efficency and effectiveness (BARG 2.B/C)
 
 #### Rhat (BARG 2.B)
 
@@ -507,7 +533,7 @@ mcmc_intervals(
 Second model:
 
 ```{r posterors-2nd-model}
-mcmc_intervals(
+bayesplot::mcmc_intervals(
   posterior2,
   prob = 0.66,
   prob_outer = 0.95,

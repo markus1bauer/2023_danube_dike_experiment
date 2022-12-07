@@ -141,7 +141,7 @@ ggplot(sites, aes(x = n)) + geom_density()
 ### Posssible priors ###
 get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
-            (1 | site/plot),
+            (1 | site/plot) + (1|botanist_year),
           data = sites)
 ggplot(data = data.frame(x = c(0, 1)), aes(x = x)) +
   stat_function(fun = dbeta, n = 101, args = list(shape1 = 3.5, shape2 = 2.2)) +
