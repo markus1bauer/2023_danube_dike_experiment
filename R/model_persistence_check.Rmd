@@ -521,8 +521,8 @@ mcmc_intervals(
 Effect sizes of chosen model just to get exact values of means etc. if necessary.
 
 ```{r effect-sizes}
-(emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
-                  exposition | survey_year_fct, type = "response"))
+#emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
+#survey_year_fct, type = "response"))
 ```
 
 ```{r write-csv, echo = FALSE}
