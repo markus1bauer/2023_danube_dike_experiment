@@ -48,7 +48,7 @@ To compare different models, you only have to change the models in section 'Load
 
 #### Packages
 
-```{r libraries message = FALSE}
+```{r libraries, message = FALSE}
 library(here)
 library(tidyverse)
 library(ggbeeswarm)
@@ -102,7 +102,7 @@ sites <- read_csv(
 
 ### Graphs of raw data
 
-```{r data-exploration echo = FALSE}
+```{r data-exploration, echo = FALSE}
 plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = sand_ratio)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
@@ -163,7 +163,7 @@ ggplot(data = sites,
 
 ### Outliers, zero-inflation, transformations?
 
-```{r outliers echo = FALSE}
+```{r outliers, echo = FALSE}
 sites %>% group_by(exposition) %>% count(site)
 boxplot(sites$n)
 ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
@@ -177,7 +177,7 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 Only here you have to modify the script to compare other models
 
-```{r load-models collapse = TRUE, message = FALSE}
+```{r load-models, collapse = TRUE, message = FALSE}
 load(file = here("outputs", "models", "model_recovery_full.Rdata"))
 load(file = here("outputs", "models", "model_recovery_full_prior.Rdata"))
 # BARG 1.E
@@ -190,32 +190,32 @@ m_2 <- mfull_prior
 
 ### Model specifications (BARG 1.D)
 
-```{r formulas collapse = TRUE}
+```{r formulas, collapse = TRUE}
 m_1$formula
 m_2$formula
 ```
 
-```{r families collapse = TRUE}
+```{r families, collapse = TRUE}
 m_1$family
 m_2$family
 ```
 
-```{r model-specification-chains collapse = TRUE}
+```{r model-specification-chains, collapse = TRUE}
 m_1$fit@sim$chains
 m_2$fit@sim$chains
 ```
 
-```{r model-specification-iterations collapse = TRUE}
+```{r model-specification-iterations, collapse = TRUE}
 m_1$fit@sim$iter
 m_2$fit@sim$iter
 ```
 
-```{r model-specification-warmup collapse = TRUE}
+```{r model-specification-warmup, collapse = TRUE}
 m_1$fit@sim$warmup
 m_2$fit@sim$warmup
 ```
 
-```{r model-specification-thinning collapse = TRUE}
+```{r model-specification-thinning, collapse = TRUE}
 m_1$fit@sim$thin
 m_2$fit@sim$thin
 ```
@@ -257,7 +257,7 @@ brms::prior_summary(m_1, all = FALSE)
 
 ### DHARMa
 
-```{r dharma collapse = TRUE}
+```{r dharma, collapse = TRUE}
 DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
 DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ```
@@ -322,14 +322,14 @@ draws2 <- m_2 %>%
 
 #### Rhat (BARG 2.B)
 
-```{r rhat collapse = TRUE}
+```{r rhat, collapse = TRUE}
 mcmc_rhat(draws1$rhat)
 mcmc_rhat(draws2$rhat)
 ```
 
 #### Effective sampling size (ESS) (BARG 2.C)
 
-```{r ess collapse = TRUE}
+```{r ess, collapse = TRUE}
 mcmc_neff(neff_ratio(m_1))
 mcmc_neff(neff_ratio(m_2))
 ```
@@ -442,7 +442,7 @@ mcmc_acf(posterior1, lags = 10, facet_args = list(ncol = 4))
 
 ### Conditional <i>R</i>² values
 
-```{r collapse = TRUE}
+```{r conditional-r2, collapse = TRUE}
 brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot)) 
 brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -451,7 +451,7 @@ brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 
 ### Marginal <i>R</i>² values
 
-```{r collapse = TRUE}
+```{r marginal-r2, collapse = TRUE}
 brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -460,7 +460,7 @@ brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 
 ### Bayes factor (BARG 3.C)
 
-```{r}
+```{r bayes-factor}
 brms::bayes_factor(m_1, m_2)
 ```
 
@@ -501,12 +501,12 @@ Effect sizes of chosen model just to get exact values of means etc. if necessary
                   exposition | survey_year_fct, type = "response"))
 ```
 
-```{r write-csv echo = FALSE}
+```{r write-csv, echo = FALSE}
 write.csv(draws1, here("outputs", "statistics", "table_recovery.csv"))
 ```
 
 # Session info (BARG 2.A/6.A/6.B)
 
-```{r session-info echo = FALSE}
+```{r session-info, echo = FALSE}
 sessionInfo()
 ```
