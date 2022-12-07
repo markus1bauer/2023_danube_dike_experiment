@@ -347,8 +347,8 @@ mcmc_neff(neff_ratio(m_2))
 ### MCMC diagnostics
 
 ```{r mcmc}
-mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncolumn = 2))
-mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncolumn = 2))
+mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
+mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
 mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
