@@ -203,18 +203,18 @@ m_2$family
 #### Conditional <i>R</i>² values
 
 ```{r conditional-r2 collapse = TRUE}
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot)) 
-bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot))
 ```
 
 #### Marginal <i>R</i>² values
 
 ```{r marginal-r2 collapse = TRUE}
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
-bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ```
 
@@ -256,7 +256,7 @@ ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
 #### Prior summary 
 
 ```{r prior-summary}
-prior_summary(m_1, all = FALSE)
+brms::prior_summary(m_1, all = FALSE)
 ```
 
 ## Model check
@@ -307,13 +307,13 @@ posterior2 <- m_2 %>%
       "sigma"
     )
   )
-hmc_diagnostics1 <- nuts_params(m_1)
-hmc_diagnostics2 <- nuts_params(m_2)
+hmc_diagnostics1 <- bayesplot::nuts_params(m_1)
+hmc_diagnostics2 <- bayesplot::nuts_params(m_2)
 y <- sites$n
-yrep1 <- posterior_predict(m_1, draws = 500)
-yrep2 <- posterior_predict(m_2, draws = 500)
-loo1 <- loo(m_1, save_psis = TRUE, moment_match = FALSE)
-loo2 <- loo(m_2, save_psis = TRUE, moment_match = FALSE)
+yrep1 <- brms::posterior_predict(m_1, draws = 500)
+yrep2 <- brms::posterior_predict(m_2, draws = 500)
+loo1 <- brms::loo(m_1, save_psis = TRUE, moment_match = FALSE)
+loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
 draws1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::summarize_draws() %>%
@@ -325,6 +325,8 @@ draws2 <- m_2 %>%
 ```
 
 ### Sampling efficency and effectiveness
+
+All 'mcmc_' functions are from library 'bayesplot'
 
 #### Rhat
 
@@ -343,8 +345,8 @@ mcmc_neff(neff_ratio(m_2))
 ### MCMC diagnostics
 
 ```{r mcmc}
-mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncolumn = 2))
-mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncolumn = 2))
+mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
+mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
 mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
@@ -451,9 +453,9 @@ mcmc_acf(posterior2, lags = 10)
 Conditional and marignal <i>R</i>²
 
 ```{r conditional-marginal-r2 collapse = TRUE}
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot)) 
-bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
+brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ```
 
