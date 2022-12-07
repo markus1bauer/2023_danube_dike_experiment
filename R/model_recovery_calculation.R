@@ -162,7 +162,7 @@ ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
   ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
 
 ### Model specifications ###
-iter = 10000
+iter = 20000
 chains = 4
 thin = 2
 seed = 123
