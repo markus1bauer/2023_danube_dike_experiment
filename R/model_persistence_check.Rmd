@@ -182,13 +182,14 @@ Only here you have to modify the script to compare other models
 
 ```{r load-models, collapse = TRUE, message = FALSE}
 load(file = here("outputs", "models", "model_persistence_2.Rdata"))
-load(file = here("outputs", "models", "model_persistence_full.Rdata"))
+#load(file = here("outputs", "models", "model_persistence_full.Rdata"))
 # BARG 1.E
-#load(file = here("outputs", "models", "model_persistence_2_prior.Rdata"))
+load(file = here("outputs", "models", "model_persistence_2_prior.Rdata"))
 # BARG 5.A/B/C
 #load(file = here("outputs", "models", "model_persistence_2_flat.Rdata"))
 m_1 <- m2
-m_2 <- m_full
+#m_2 <- m_full
+m_2 <- m2_prior
 ```
 
 ### Model specifications (BARG 1.D)
@@ -203,27 +204,35 @@ m_1$family
 m_2$family
 ```
 
+Amount of chains for MCMC
+
 ```{r model-specification-chains, collapse = TRUE}
 m_1$fit@sim$chains
 m_2$fit@sim$chains
 ```
+
+Total amount of iterations for MCMC
 
 ```{r model-specification-iterations, collapse = TRUE}
 m_1$fit@sim$iter
 m_2$fit@sim$iter
 ```
 
+Amount of iterations before burn-in
+
 ```{r model-specification-warmup, collapse = TRUE}
 m_1$fit@sim$warmup
 m_2$fit@sim$warmup
 ```
+
+Thinning rate
 
 ```{r model-specification-thinning, collapse = TRUE}
 m_1$fit@sim$thin
 m_2$fit@sim$thin
 ```
 
-### Priors
+### Priors (BARG 1.D)
 
 #### Possible prior distributions
 
@@ -348,7 +357,7 @@ mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
 
 #### Pairs plot
 
-```{r mcmc-pairs, collapse = TRUE, fig.height = 7}
+```{r mcmc-pairs, collapse = TRUE, fig.height = 6.5}
 mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
