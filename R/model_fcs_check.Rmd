@@ -19,9 +19,10 @@ knitr::opts_chunk$set(
 ```
 
 Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
-
+<br/>
+<br/>
 <span>&#42;</span> Corresponding author: [markus1.bauer@tum.de](mailto:markus1.bauer@tum.de)
-<br>
+
 ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
 <br>
 [Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
@@ -30,12 +31,23 @@ GitHub: [markus1bauer](https://github.com/markus1bauer)
 
 Favourable Conservation Status (FSC) sensu Helm et al. (2015) Divers Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
 
+Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
+
+Analysis guided by
+<br>
+Reporting: Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
+<br>
+Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378)
+<br>
+Priors: Lemoine (2019) Oikos [DOI: 10.1111/oik.05985](https://doi.org/10.1111/oik.05985)
+<br>
+Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](https://doi.org/10.1037/met0000065)
 
 # Preparation
 
 #### Packages
 
-```{r message = FALSE}
+```{r libraries message = FALSE}
 library(here)
 library(tidyverse)
 library(ggbeeswarm)
@@ -55,7 +67,7 @@ rm(list = ls())
 
 #### Load data
 
-```{r}
+```{r load-data}
 sites <- read_csv(
   here("data", "processed", "data_processed_sites.csv"),
   col_names = TRUE, na = c("na", "NA", ""), col_types =
@@ -94,7 +106,7 @@ sites <- read_csv(
 
 ### Graphs of raw data
 
-```{r echo = FALSE}
+```{r data-exploration echo = FALSE}
 plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = sand_ratio)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
@@ -155,7 +167,7 @@ ggplot(data = sites,
 
 ### Outliers, zero-inflation, transformations?
 
-```{r echo = FALSE}
+```{r outliers echo = FALSE}
 sites %>% group_by(exposition) %>% count(site)
 boxplot(sites$n)
 ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
@@ -165,59 +177,32 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ## Models
 
+### Load models
+
 Only here you have to modify the script to compare other models
 
-```{r collapse = TRUE}
+```{r load-models collapse = TRUE}
 load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 m_1 <- m2
 m_2 <- m_full
 ```
 
-```{r collapse = TRUE}
+```{r formulas collapse = TRUE}
 m_1$formula
 m_2$formula
 ```
 
-```{r collapse = TRUE}
+```{r families collapse = TRUE}
 m_1$family
 m_2$family
 ```
-
-### Priors
-
-#### Possible prior distributions
-
-```{r}
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
-  stat_function(
-    fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1)
-    ) +
-  expand_limits(y = 0) + ggtitle("Normal distribution")
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
-  stat_function(
-    fun = dcauchy, n = 101, args = list(location = 0, scale = 1)
-    ) +
-  expand_limits(y = 0) + ggtitle("Cauchy distribution")
-ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
-  stat_function(
-    fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)
-    ) +
-  expand_limits(y = 0) + ggtitle(expression(Student~italic(t)*"-distribution"))
-```
-
-#### Prior summary 
-
-```{r}
-prior_summary(m_1, all = FALSE)
-```
-
 
 ### Coefficient of determination (<i>R</i>²)
 
 #### Conditional <i>R</i>² values
 
-```{r collapse = TRUE}
+```{r conditional-r2 collapse = TRUE}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot)) 
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
@@ -226,25 +211,66 @@ bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 
 #### Marginal <i>R</i>² values
 
-```{r collapse = TRUE}
+```{r marginal-r2 collapse = TRUE}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula = 1 ~ 1)
 ```
 
+### Priors
+
+#### Possible prior distributions
+
+```{r possible-priors}
+get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
+            seed_density + substrate_depth +
+            (1 | site/plot) + (1 | botanist_year),
+          data = sites)
+ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+  stat_function(
+    fun = dnorm, n = 101, args = list(mean = 0, sd = 1)
+    ) +
+  expand_limits(y = 0) +
+  ggtitle("Normal distribution for Intercept")
+ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+  stat_function(
+    fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1)
+    ) +
+  expand_limits(y = 0) +
+  ggtitle("Normal distribution for treatments")
+ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+  stat_function(
+    fun = dcauchy, n = 101, args = list(location = 0, scale = 1)
+    ) +
+  expand_limits(y = 0) +
+  ggtitle("Cauchy distribution") # See Lemoine 2019 https://doi.org/10.1111/oik.05985
+ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
+  stat_function(
+    fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)
+    ) +
+  expand_limits(y = 0) +
+  ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
+```
+
+#### Prior summary 
+
+```{r prior-summary}
+prior_summary(m_1, all = FALSE)
+```
+
 ## Model check
 
 ### DHARMa
 
-```{r collapse = TRUE}
+```{r dharma collapse = TRUE}
 DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
 DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ```
 
 ### Preparation
 
-```{r}
+```{r analysis-preparation}
 posterior1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::subset_draws(
@@ -302,21 +328,21 @@ draws2 <- m_2 %>%
 
 #### Rhat
 
-```{r collapse = TRUE}
+```{r rhat collapse = TRUE}
 mcmc_rhat(draws1$rhat)
 mcmc_rhat(draws2$rhat)
 ```
 
 #### Effective sampling size (ESS)
 
-```{r collapse = TRUE}
+```{r ess collapse = TRUE}
 mcmc_neff(neff_ratio(m_1))
 mcmc_neff(neff_ratio(m_2))
 ```
 
 ### MCMC diagnostics
 
-```{r}
+```{r mcmc}
 mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncolumn = 2))
 mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncolumn = 2))
 mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
@@ -332,16 +358,16 @@ mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
              "b_expositionsouth", "sigma"
            ))
 mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
-  theme(axis.text.x = element_text(angle = 90))
+  theme(axis.text.x = element_text(angle = 45))
 mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
-  theme(axis.text.x = element_text(angle = 90))
+  theme(axis.text.x = element_text(angle = 45))
 ```
 
 ### Posterior predictive check
 
 #### Kernel density
 
-```{r}
+```{r kernel-density}
 p1 <- ppc_dens_overlay(y, yrep1[1:50, ])
 p2 <- ppc_dens_overlay(y, yrep2[1:50, ])
 p1 / p2
@@ -368,7 +394,7 @@ p1 / p2
 
 #### Histograms of statistics skew
 
-```{r}
+```{r histogram}
 p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
 p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
 p1 / p2
@@ -395,7 +421,7 @@ p1 / p2
 
 #### LOO (Leave one out)
 
-```{r}
+```{r loo}
 loo1
 loo2
 plot(loo1)
@@ -404,7 +430,7 @@ plot(loo2)
 
 Leave one out probability integral transform
 
-```{r}
+```{r loo-pit}
 p1 <- ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
 p2 <- ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
 p1 / p2
@@ -413,7 +439,7 @@ p1 / p2
 
 ### Autocorrelation check
 
-```{r}
+```{r autocorrelation}
 mcmc_acf(posterior1, lags = 10)
 mcmc_acf(posterior2, lags = 10)
 ```
@@ -424,7 +450,7 @@ mcmc_acf(posterior2, lags = 10)
 
 Conditional and marignal <i>R</i>²
 
-```{r collapse = TRUE}
+```{r conditional-marginal-r2 collapse = TRUE}
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot)) 
 bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -433,7 +459,7 @@ bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
 
 Posteriors of chosen model
 
-```{r}
+```{r posterior-chosen-model}
 draws1
 mcmc_intervals(
   posterior1,
@@ -446,7 +472,7 @@ mcmc_intervals(
 
 Posteriors of second model:
 
-```{r}
+```{r posterior-second-model}
 mcmc_intervals(
   posterior2,
   prob = 0.66,
@@ -460,17 +486,17 @@ mcmc_intervals(
 
 Just, to get exact values if necessary, which is not possible from the figure
 
-```{r max_height = "1000px"}
+```{r effect-sizes}
 (emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio |
                   exposition | survey_year_fct, type = "response"))
 ```
 
-```{r echo = FALSE}
+```{r write-csv echo = FALSE}
 write.csv(draws1, here("outputs", "statistics", "table_fcs.csv"))
 ```
 
 # Session info
 
-```{r echo = FALSE, max_height = "500px"}
+```{r session-info echo = FALSE}
 sessionInfo()
 ```
