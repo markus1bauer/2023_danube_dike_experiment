@@ -16,7 +16,8 @@ knitr::opts_chunk$set(
   echo = TRUE
   )
 ```
-
+<br/>
+<br/>
 <b>Markus Bauer</b>
 
 Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
@@ -178,7 +179,7 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ## Models
 
-### Load models (6.G)
+### Load models (BARG 5.B/6.G)
 
 Only here you have to modify the script to compare other models
 
@@ -204,6 +205,8 @@ m_2$formula
 m_1$family
 m_2$family
 ```
+
+NUTS sampler is used.
 
 Amount of chains for MCMC
 
@@ -276,6 +279,7 @@ posterior_prior <- m_prior %>%
   posterior::as_draws() %>%
   posterior::subset_draws(
     variable = c(
+      "Intercept",
       "b_sand_ratio25",
       "b_sand_ratio50",
       "b_substrate_depth15",
@@ -493,14 +497,14 @@ Leave one out probability integral transform
 
 ### Autocorrelation check
 
-```{r autocorrelation, fig.height = 7}
+```{r autocorrelation}
 mcmc_acf(posterior1, lags = 10)
 mcmc_acf(posterior2, lags = 10)
 ```
 
 ## Model comparison
 
-### Conditional <i>R</i>² values
+### Conditional <i>R</i><sup>2</sup> values
 
 ```{r conditional-r2, collapse = TRUE}
 brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -509,7 +513,7 @@ brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot))
 ```
 
-### Marginal <i>R</i>² values
+### Marginal <i>R</i><sup>2</sup> values
 
 ```{r marginal-r2, collapse = TRUE}
 brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),

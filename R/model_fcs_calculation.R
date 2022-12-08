@@ -164,6 +164,7 @@ ggplot(data.frame(x = c(-5, 5)), aes(x = x)) +
 
 ### b Model specifications -----------------------------------------------------
 
+# NUTS sampler used
 iter = 10000
 chains = 4
 thin = 2
