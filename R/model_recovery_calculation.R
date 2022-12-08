@@ -146,7 +146,7 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
 ggplot(data = data.frame(x = c(-2, 0)), aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = -1, sd = 1)) +
   expand_limits(y = 0) +
-  ggtitle("Normal distribution for Intecepts")
+  ggtitle("Normal distribution for Intecept")
 ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = .8)) +
   expand_limits(y = 0) +
@@ -163,6 +163,7 @@ ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
 
 ### b Model specifications -----------------------------------------------------
 
+# NUTS sampler used
 iter = 20000
 chains = 4
 thin = 2

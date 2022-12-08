@@ -16,7 +16,8 @@ knitr::opts_chunk$set(
   echo = TRUE
   )
 ```
-
+<br/>
+<br/>
 <b>Markus Bauer</b>
 
 Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
@@ -175,18 +176,19 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ## Models
 
-### Load models (6.G)
+### Load models (BARG 5.B/6.G)
 
 Only here you have to modify the script to compare other models
 
 ```{r load-models, collapse = TRUE, message = FALSE}
+load(file = here("outputs", "models", "model_recovery_2.Rdata"))
 load(file = here("outputs", "models", "model_recovery_full.Rdata"))
-load(file = here("outputs", "models", "model_recovery_full_prior.Rdata"))
 load(file = here("outputs", "models", "model_recovery_2_prior.Rdata"))
 # BARG 5.A/B/C
-#load(file = here("outputs", "models", "model_recovery_2_flat.Rdata"))
-m_1 <- m_full
-m_2 <- mfull_prior
+load(file = here("outputs", "models", "model_recovery_2_flat.Rdata"))
+m_1 <- m2
+m_2 <- m2_flat
+#m_2 <- m_full
 m_prior <- m2_prior
 ```
 
@@ -201,6 +203,8 @@ m_2$formula
 m_1$family
 m_2$family
 ```
+
+NUTS sampler is used.
 
 Amount of chains for MCMC
 
@@ -273,6 +277,7 @@ posterior_prior <- m_prior %>%
   posterior::as_draws() %>%
   posterior::subset_draws(
     variable = c(
+      "Intercept",
       "b_sand_ratio25",
       "b_sand_ratio50",
       "b_substrate_depth15",
@@ -313,7 +318,7 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
 ggplot(data = data.frame(x = c(-2, 0)), aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = -1, sd = 1)) +
   expand_limits(y = 0) +
-  ggtitle("Normal distribution for Intecepts")
+  ggtitle("Normal distribution for Intecept")
 ggplot(data = data.frame(x = c(-2, 2)), aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = .8)) +
   expand_limits(y = 0) +
@@ -466,7 +471,7 @@ p1 / p2
 
 ```{r loo}
 loo1
-#loo2
+loo2
 #plot(loo1)
 #plot(loo2)
 ```
@@ -482,14 +487,14 @@ Leave one out probability integral transform
 
 ### Autocorrelation check
 
-```{r autocorrelation, fig.height = 7}
-mcmc_acf(posterior1, lags = 10, facet_args = list(ncol = 4))
-#mcmc_acf(posterior2, lags = 10, facet_args = list(ncol = 4))
+```{r autocorrelation}
+mcmc_acf(posterior1, lags = 10)
+mcmc_acf(posterior2, lags = 10)
 ```
 
 ## Model comparison
 
-### Conditional <i>R</i>^2 values
+### Conditional <i>R</i><sup>2</sup> values
 
 ```{r conditional-r2, collapse = TRUE}
 brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -498,7 +503,7 @@ brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
          re_formula =  ~ (1 | site/plot))
 ```
 
-### Marginal <i>R</i>^2 values
+### Marginal <i>R</i><sup>2</sup> values
 
 ```{r marginal-r2, collapse = TRUE}
 brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
@@ -519,14 +524,20 @@ brms::bayes_factor(m_1, m_2)
 
 Chosen model:
 
-```{r posteriors-chosen-model}
-mcmc_intervals(
-  posterior1,
-  prob = 0.66,
-  prob_outer = 0.95,
-  point_est = "mean"
-  ) +
-  theme_classic()
+```{r posteriors}
+combined <- rbind(
+  mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95),
+  mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95)
+  )
+combined$model <- rep(
+  c("Model 1", "Model 2"),
+  each = ncol(posterior1)
+  )
+pos <- position_nudge(y = ifelse(combined$model == "Model 2", 0, 0.1))
+ggplot(data = combined, aes(x = m, y = parameter, color = model)) + 
+  geom_linerange(aes(xmin = l, xmax = h), position = pos, size = 2) +
+  geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
+  geom_point(position = pos, color = "black")
 ```
 
 Second model:
