@@ -145,19 +145,19 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             (1 | site/plot) + (1 | botanist_year),
           data = sites)
 
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 1)) +
+ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 2)) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for Intercept")
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
-  stat_function(fun = dnorm, n = 101, args = list(mean = 0.1, sd = 1)) +
+ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 0.3, sd = 2)) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for treatments")
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0) +
   ggtitle("Cauchy distribution")
-ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data.frame(x = c(-5, 5)), aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) +
   ggtitle(expression(Student~italic(t)*"-distribution"))
@@ -292,7 +292,29 @@ m2_flat <- brm(
     set_prior("normal(0, 4)", class = "b"),
     set_prior("cauchy(0, 1)", class = "sigma")
   ),
-  chains = 3,
+  chains = chains,
+  iter = iter,
+  thin = thin,
+  control = list(max_treedepth = 13),
+  warmup = warmup,
+  save_pars = save_pars(all = TRUE),
+  cores = parallel::detectCores(),
+  seed = seed
+)
+
+m2_prior <- brm(
+  n ~ sand_ratio * target_type * exposition * survey_year_fct +
+    substrate_depth + seed_density +
+    substrate_depth:exposition +
+    seed_density:exposition +
+    substrate_depth:survey_year_fct +
+    seed_density:survey_year_fct +
+    botanist_year + (1 | site/plot),
+  data = sites, 
+  family = gaussian("identity"),
+  prior = priors,
+  sample_prior = "only",
+  chains = chains,
   iter = iter,
   thin = thin,
   control = list(max_treedepth = 13),
@@ -311,3 +333,4 @@ save(m1, file = here("outputs", "models", "model_fcs_1.Rdata"))
 save(m2, file = here("outputs", "models", "model_fcs_2.Rdata"))
 save(m3, file = here("outputs", "models", "model_fcs_3.Rdata"))
 save(m2_flat, file = here("outputs", "models", "model_fcs_2_flat.Rdata"))
+save(m2_prior, file = here("outputs", "models", "model_fcs_2_prior.Rdata"))
