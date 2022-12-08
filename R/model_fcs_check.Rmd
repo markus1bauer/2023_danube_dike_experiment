@@ -527,8 +527,8 @@ combined$model <- rep(
 pos <- position_nudge(
   y = if_else(
     combined$model == "m_2", -.2, if_else(
-      combined$model == "m_prior", -.4, if_else(
-        combined$model == "m_flat", -.6, 0
+      combined$model == "m_flat", -.4, if_else(
+        combined$model == "m_prior", -.6, 0
         )
       )
     )
