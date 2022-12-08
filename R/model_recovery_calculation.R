@@ -137,9 +137,8 @@ ggplot(sites, aes(x = n)) + geom_density()
 ## 2 Model building ###########################################################
 
 
-### a Preparation -------------------------------------------------------------
+### a Possible priors ----------------------------------------------------------
 
-### Posssible priors ###
 get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
             (1 | site/plot) + (1|botanist_year),
@@ -161,7 +160,9 @@ ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
   expand_limits(y = 0) +
   ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
 
-### Model specifications ###
+
+### b Model specifications -----------------------------------------------------
+
 iter = 20000
 chains = 4
 thin = 2
@@ -180,7 +181,8 @@ priors <- c(
   set_prior("cauchy(0, 1)", class = "sigma")
 )
 
-### b Models ------------------------------------------------------------------
+
+### c Models ------------------------------------------------------------------
 
 m_simple <- brm(
   n ~ sand_ratio + target_type + exposition + survey_year_fct +
@@ -334,7 +336,7 @@ m2_prior <- brm(
 )
 
 
-### c Save ---------------------------------------------------------------------
+### d Save ---------------------------------------------------------------------
 
 save(m_simple, file = here("outputs", "models", "model_recovery_simple.Rdata"))
 save(m_full, file = here("outputs", "models", "model_recovery_full.Rdata"))
