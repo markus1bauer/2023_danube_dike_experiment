@@ -187,9 +187,9 @@ load(file = here("outputs", "models", "model_recovery_2_prior.Rdata"))
 # BARG 5.A/B/C
 load(file = here("outputs", "models", "model_recovery_2_flat.Rdata"))
 m_1 <- m2
-m_2 <- m2_flat
-#m_2 <- m_full
+m_2 <- m_full
 m_prior <- m2_prior
+m_flat <- m2_flat
 ```
 
 ### Model specifications (BARG 1.D)
@@ -237,46 +237,8 @@ m_2$fit@sim$thin
 ### Preparation for analysis
 
 ```{r analysis-preparation}
-posterior1 <- m_1 %>%
-  posterior::as_draws() %>%
-  posterior::subset_draws(
-    variable = c(
-      "b_sand_ratio25",
-      "b_sand_ratio50",
-      "b_substrate_depth15",
-      "b_target_typedry_grassland",
-      "b_seed_density8",
-      "b_expositionsouth",
-      "b_survey_year_fct2019",
-      "b_survey_year_fct2020",
-      "b_survey_year_fct2021",
-      "sd_site__Intercept",
-      "sd_site:plot__Intercept",
-      "sigma"
-    )
-  )
-posterior2 <- m_2 %>%
-  posterior::as_draws() %>%
-  posterior::subset_draws(
-    variable = c(
-      "b_sand_ratio25",
-      "b_sand_ratio50",
-      "b_substrate_depth15",
-      "b_target_typedry_grassland",
-      "b_seed_density8",
-      "b_expositionsouth",
-      "b_survey_year_fct2019",
-      "b_survey_year_fct2020",
-      "b_survey_year_fct2021",
-      "sd_site__Intercept",
-      "sd_site:plot__Intercept",
-      "sigma"
-    )
-  )
-posterior_prior <- m_prior %>%
-  posterior::as_draws() %>%
-  posterior::subset_draws(
-    variable = c(
+# Chose variables
+variables <- c(
       "Intercept",
       "b_sand_ratio25",
       "b_sand_ratio50",
@@ -286,16 +248,41 @@ posterior_prior <- m_prior %>%
       "b_expositionsouth",
       "b_survey_year_fct2019",
       "b_survey_year_fct2020",
-      "b_survey_year_fct2021"
+      "b_survey_year_fct2021",
+      "sd_site__Intercept",
+      "sd_site:plot__Intercept",
+      "sigma"
     )
-  )
+# Subset draws
+posterior1 <- m_1 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(variable = variables)
+posterior2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(variable = variables)
+posterior_prior <- m_prior %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(variable = variables)
+posterior_flat <- m_flat %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(variable = variables)
+# R hat
+rhat1 <- rhat(m_1)
+rhat2 <- rhat(m_2)
+# NEFF ratio
+neff1 <- neff_ratio(m_1)
+neff2 <- neff_ratio(m_2)
+# Long format of draws
 hmc_diagnostics1 <- brms::nuts_params(m_1)
 hmc_diagnostics2 <- brms::nuts_params(m_2)
 y <- sites$n
+# Posterior predictive distribution
 yrep1 <- brms::posterior_predict(m_1, draws = 500)
 yrep2 <- brms::posterior_predict(m_2, draws = 500)
+# Leave-one-out cross validation based on posterior likelihood
 loo1 <- brms::loo(m_1, save_psis = TRUE, moment_match = FALSE)
 loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
+# Summary statistics
 draws1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::summarize_draws() %>%
@@ -339,18 +326,6 @@ ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
 brms::prior_summary(m_1, all = FALSE)
 ```
 
-#### Prior predictive check (BARG 1.E)
-
-```{r prior-predictive-check}
-bayesplot::mcmc_intervals(
-  posterior_prior,
-  prob = 0.66,
-  prob_outer = 0.95,
-  point_est = "mean"
-  ) +
-  theme_classic()
-```
-
 ## Model check
 
 ### DHARMa
@@ -365,15 +340,15 @@ DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 #### Rhat (BARG 2.B)
 
 ```{r rhat, collapse = TRUE}
-mcmc_rhat(draws1$rhat)
-mcmc_rhat(draws2$rhat)
+mcmc_rhat(rhat1)
+mcmc_rhat(rhat2)
 ```
 
 #### Effective sampling size (ESS) (BARG 2.C)
 
 ```{r ess, collapse = TRUE}
-mcmc_neff(neff_ratio(m_1))
-mcmc_neff(neff_ratio(m_2))
+mcmc_neff(neff1)
+mcmc_neff(neff2)
 ```
 
 ### MCMC diagnostics
@@ -443,28 +418,28 @@ p1 / p2
 #### Histograms of statistics skew
 
 ```{r histograms}
-#p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
-#p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
-#p1 / p2
-#ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
-#ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
-#p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
-#p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
-#p1 / p2
-#ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
-#ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
-#p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
-#p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
-#p1 / p2
-#p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
-#p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
-#p1 / p2
-#p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
-#p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
-#p1 / p2
-#p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
-#p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
-#p1 / p2
+p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
+p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
+p1 / p2
+ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
+p1 / p2
+ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
+ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
+p1 / p2
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
+p1 / p2
 ```
 
 #### LOO (Leave one out)
@@ -472,16 +447,16 @@ p1 / p2
 ```{r loo}
 loo1
 loo2
-#plot(loo1)
-#plot(loo2)
+plot(loo1)
+plot(loo2)
 ```
 
 Leave one out probability integral transform
 
 ```{r loo-pit}
-#p1 <- bayesplot::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
-#p2 <- bayesplot::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
-#p1 / p2
+p1 <- bayesplot::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
+p2 <- bayesplot::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+p1 / p2
 
 ```
 
@@ -522,34 +497,34 @@ brms::bayes_factor(m_1, m_2)
 
 ### Forest plot
 
-Chosen model:
-
-```{r posteriors}
+```{r posteriors, fig.height = 7}
 combined <- rbind(
-  mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95),
-  mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95)
+  bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95),
+  bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95),
+  bayesplot::mcmc_intervals_data(posterior_prior, prob = 0.66, prob_outer = 0.95),
+  bayesplot::mcmc_intervals_data(posterior_flat, prob = 0.66, prob_outer = 0.95)
   )
 combined$model <- rep(
-  c("Model 1", "Model 2"),
-  each = ncol(posterior1)
+  c("m_1", "m_2", "m_flat", "m_prior"),
+  each = posterior1$"1" %>% as_tibble() %>% ncol()
   )
-pos <- position_nudge(y = ifelse(combined$model == "Model 2", 0, 0.1))
-ggplot(data = combined, aes(x = m, y = parameter, color = model)) + 
-  geom_linerange(aes(xmin = l, xmax = h), position = pos, size = 2) +
+pos <- position_nudge(
+  y = if_else(
+    combined$model == "m_2", -.2, if_else(
+      combined$model == "m_prior", -.4, if_else(
+        combined$model == "m_flat", -.6, 0
+        )
+      )
+    )
+  )
+ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)) + 
+  geom_vline(xintercept = 0, color = "grey") +
+  geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
   geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
-  geom_point(position = pos, color = "black")
-```
-
-Second model:
-
-```{r posterors-2nd-model}
-mcmc_intervals(
-  posterior2,
-  prob = 0.66,
-  prob_outer = 0.95,
-  point_est = "mean"
-  ) +
-  theme_classic()
+  geom_point(position = pos, color = "black") +
+  coord_cartesian(xlim = c(-1, .6)) +
+  bayesplot::theme_default() +
+  ggtitle("Posterior distbributions (mean, CI66, CI95)")
 ```
 
 ### Effect sizes
@@ -557,8 +532,8 @@ mcmc_intervals(
 Effect sizes of chosen model just to get exact values of means etc. if necessary.
 
 ```{r effect-sizes}
-#emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
-#survey_year_fct, type = "response"))
+emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
+          survey_year_fct, type = "response")
 ```
 
 ```{r write-csv, echo = FALSE}

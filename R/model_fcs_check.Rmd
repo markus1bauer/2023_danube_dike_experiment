@@ -9,6 +9,9 @@ output:
     dev: png
     fig_width: 7
     fig_height: 5
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
@@ -16,37 +19,39 @@ knitr::opts_chunk$set(
   echo = TRUE
   )
 ```
-<br/>
-<br/>
-<b>Markus Bauer</b>
 
-Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
+<br/> <br/> <b>Markus Bauer</b>
 
-[markus1.bauer@tum.de](mailto:markus1.bauer@tum.de)
+Technichal University of Munich, TUM School of Life Sciences, Chair of
+Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
+
+[markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de)
 
 ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
-<br>
-[Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
-<br>
-GitHub: [markus1bauer](https://github.com/markus1bauer)
+<br> [Google
+Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
+<br> GitHub: [markus1bauer](https://github.com/markus1bauer)
 
-To compare different models, you only have to change the models in section 'Load models'
+To compare different models, you only have to change the models in
+section 'Load models'
 
 # Preparation
 
-Favourable Conservation Status (FSC) sensu Helm et al. (2015) Divers Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
+Favourable Conservation Status (FSC) sensu Helm et al. (2015) Divers
+Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
 
-Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
+Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI:
+10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
 
-Analysis guided by
-<br>
-<b>BARG</b> (Bayesian Analysis Reporting Guidelines): Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
-<br>
-Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378)
-<br>
-Priors: Lemoine (2019) Oikos [DOI: 10.1111/oik.05985](https://doi.org/10.1111/oik.05985)
-<br>
-Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](https://doi.org/10.1037/met0000065)
+Analysis guided by <br> <b>BARG</b> (Bayesian Analysis Reporting
+Guidelines): Kruschke (2021) Nat Hum Behav [DOI:
+10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
+<br> Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI:
+10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378) <br> Priors:
+Lemoine (2019) Oikos [DOI:
+10.1111/oik.05985](https://doi.org/10.1111/oik.05985) <br> Model check:
+Deapoli & Schoot (2017) Psychol Methods [DOI:
+10.1037/met0000065](https://doi.org/10.1037/met0000065)
 
 #### Packages (BARG 2.A)
 
@@ -188,10 +193,11 @@ load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 load(file = here("outputs", "models", "model_fcs_full.Rdata"))
 load(file = here("outputs", "models", "model_fcs_2_prior.Rdata"))
 # BARG 5.A/B/C
-#load(file = here("outputs", "models", "model_fcs_2_flat.Rdata"))
+load(file = here("outputs", "models", "model_fcs_2_flat.Rdata"))
 m_1 <- m2
 m_2 <- m_full
 m_prior <- m2_prior
+m_flat <- m2_flat
 ```
 
 ### Model specifications (BARG 1.D)
@@ -239,46 +245,8 @@ m_2$fit@sim$thin
 ### Preparation for analysis
 
 ```{r analysis-preparation}
-posterior1 <- m_1 %>%
-  posterior::as_draws() %>%
-  posterior::subset_draws(
-    variable = c(
-      "b_sand_ratio25",
-      "b_sand_ratio50",
-      "b_substrate_depth15",
-      "b_target_typedry_grassland",
-      "b_seed_density8",
-      "b_expositionsouth",
-      "b_survey_year_fct2019",
-      "b_survey_year_fct2020",
-      "b_survey_year_fct2021",
-      "sd_site__Intercept",
-      "sd_site:plot__Intercept",
-      "sigma"
-    )
-  )
-posterior2 <- m_2 %>%
-  posterior::as_draws() %>%
-  posterior::subset_draws(
-    variable = c(
-      "b_sand_ratio25",
-      "b_sand_ratio50",
-      "b_substrate_depth15",
-      "b_target_typedry_grassland",
-      "b_seed_density8",
-      "b_expositionsouth",
-      "b_survey_year_fct2019",
-      "b_survey_year_fct2020",
-      "b_survey_year_fct2021",
-      "sd_site__Intercept",
-      "sd_site:plot__Intercept",
-      "sigma"
-    )
-  )
-posterior_prior <- m_prior %>%
-  posterior::as_draws() %>%
-  posterior::subset_draws(
-    variable = c(
+# Chose variables
+variables <- c(
       "Intercept",
       "b_sand_ratio25",
       "b_sand_ratio50",
@@ -288,16 +256,41 @@ posterior_prior <- m_prior %>%
       "b_expositionsouth",
       "b_survey_year_fct2019",
       "b_survey_year_fct2020",
-      "b_survey_year_fct2021"
+      "b_survey_year_fct2021",
+      "sd_site__Intercept",
+      "sd_site:plot__Intercept",
+      "sigma"
     )
-  )
+# Subset draws
+posterior1 <- m_1 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(variable = variables)
+posterior2 <- m_2 %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(variable = variables)
+posterior_prior <- m_prior %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(variable = variables)
+posterior_flat <- m_flat %>%
+  posterior::as_draws() %>%
+  posterior::subset_draws(variable = variables)
+# R hat
+rhat1 <- rhat(m_1)
+rhat2 <- rhat(m_2)
+# NEFF ratio
+neff1 <- neff_ratio(m_1)
+neff2 <- neff_ratio(m_2)
+# Long format of draws
 hmc_diagnostics1 <- brms::nuts_params(m_1)
 hmc_diagnostics2 <- brms::nuts_params(m_2)
 y <- sites$n
+# Posterior predictive distribution
 yrep1 <- brms::posterior_predict(m_1, draws = 500)
 yrep2 <- brms::posterior_predict(m_2, draws = 500)
+# Leave-one-out cross validation based on posterior likelihood
 loo1 <- brms::loo(m_1, save_psis = TRUE, moment_match = FALSE)
 loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
+# Summary statistics
 draws1 <- m_1 %>%
   posterior::as_draws() %>%
   posterior::summarize_draws() %>%
@@ -349,18 +342,6 @@ ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
 brms::prior_summary(m_1, all = FALSE)
 ```
 
-#### Prior predictive check (BARG 1.E)
-
-```{r prior-predictive-check}
-bayesplot::mcmc_intervals(
-  posterior_prior,
-  prob = 0.66,
-  prob_outer = 0.95,
-  point_est = "mean"
-  ) +
-  theme_classic()
-```
-
 ## Model check
 
 ### DHARMa
@@ -375,15 +356,15 @@ DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 #### Rhat (BARG 2.B)
 
 ```{r rhat, collapse = TRUE}
-mcmc_rhat(draws1$rhat)
-mcmc_rhat(draws2$rhat)
+mcmc_rhat(rhat1)
+mcmc_rhat(rhat2)
 ```
 
 #### Effective sampling size (ESS) (BARG 2.C)
 
 ```{r ess, collapse = TRUE}
-mcmc_neff(neff_ratio(m_1))
-mcmc_neff(neff_ratio(m_2))
+mcmc_neff(neff1)
+mcmc_neff(neff2)
 ```
 
 ### MCMC diagnostics
@@ -532,33 +513,40 @@ brms::bayes_factor(m_1, m_2)
 
 ### Forest plot
 
-Chosen model:
-
-```{r posteriors-chosen-model}
-mcmc_intervals(
-  posterior1,
-  prob = 0.66,
-  prob_outer = 0.95,
-  point_est = "mean"
-  ) +
-  theme_classic()
-```
-
-Second model:
-
-```{r posterors-2nd-model}
-mcmc_intervals(
-  posterior2,
-  prob = 0.66,
-  prob_outer = 0.95,
-  point_est = "mean"
-  ) +
-  theme_classic()
+```{r posteriors, fig.height = 7}
+combined <- rbind(
+  bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95),
+  bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95),
+  bayesplot::mcmc_intervals_data(posterior_prior, prob = 0.66, prob_outer = 0.95),
+  bayesplot::mcmc_intervals_data(posterior_flat, prob = 0.66, prob_outer = 0.95)
+  )
+combined$model <- rep(
+  c("m_1", "m_2", "m_flat", "m_prior"),
+  each = posterior1$"1" %>% as_tibble() %>% ncol()
+  )
+pos <- position_nudge(
+  y = if_else(
+    combined$model == "m_2", -.2, if_else(
+      combined$model == "m_prior", -.4, if_else(
+        combined$model == "m_flat", -.6, 0
+        )
+      )
+    )
+  )
+ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)) + 
+  geom_vline(xintercept = 0, color = "grey") +
+  geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
+  geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
+  geom_point(position = pos, color = "black") +
+  coord_cartesian(xlim = c(-1, .6)) +
+  bayesplot::theme_default() +
+  ggtitle("Posterior distbributions (mean, CI66, CI95)")
 ```
 
 ### Effect sizes
 
-Effect sizes of chosen model just to get exact values of means etc. if necessary.
+Effect sizes of chosen model just to get exact values of means etc. if
+necessary.
 
 ```{r effect-sizes}
 #emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
