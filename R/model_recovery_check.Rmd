@@ -29,9 +29,12 @@ ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
 [Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
 <br>
 GitHub: [markus1bauer](https://github.com/markus1bauer)
-<br/>
-<br/>
-Favourable Conservation Status (FSC) sensu Helm et al. (2015) Divers Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
+
+To compare different models, you only have to change the models in section 'Load models'
+
+# Preparation
+
+Recovery sensu Rydgren et al. (2019)  [DOI: 10.1111/1365-2664.13254](https://doi.org/10.1111/1365-2664.13254)
 
 Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
 
@@ -44,10 +47,6 @@ Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](h
 Priors: Lemoine (2019) Oikos [DOI: 10.1111/oik.05985](https://doi.org/10.1111/oik.05985)
 <br>
 Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](https://doi.org/10.1037/met0000065)
-
-To compare different models, you only have to change the models in section 'Load models'
-
-# Preparation
 
 #### Packages
 
@@ -176,7 +175,7 @@ ggplot(sites, aes(x = n)) + geom_density()
 
 ## Models
 
-### Load models (BARG 5.B/6.G)
+### Load models (BARG 6.G)
 
 Only here you have to modify the script to compare other models
 
@@ -279,6 +278,7 @@ y <- sites$n
 # Posterior predictive distribution
 yrep1 <- brms::posterior_predict(m_1, draws = 500)
 yrep2 <- brms::posterior_predict(m_2, draws = 500)
+yrep_prior <- brms::posterior_predict(m_prior, draws = 500)
 # Leave-one-out cross validation based on posterior likelihood
 loo1 <- brms::loo(m_1, save_psis = TRUE, moment_match = FALSE)
 loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
@@ -297,7 +297,7 @@ draws2 <- m_2 %>%
 
 #### Possible prior distributions
 
-```{r possible priors}
+```{r possible-priors}
 get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
             (1 | site/plot) + (1|botanist_year),
@@ -324,6 +324,34 @@ ggplot(data.frame(x = c(-2, 2)), aes(x = x)) +
 
 ```{r prior-summary}
 brms::prior_summary(m_1, all = FALSE)
+```
+
+#### Prior predictive check (BARG 1.E)
+
+```{r prior-predictive-check}
+ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
+  coord_cartesian(xlim = c(-2, 2))
+ppd_stat_grouped(yrep_prior[1:500, ], group = sites$site,
+                 binwidth = 0.2) +
+  coord_cartesian(xlim = c(-2, 2))
+ppd_stat_grouped(yrep_prior[1:500, ], group = sites$exposition,
+                 binwidth = 0.2) +
+  coord_cartesian(xlim = c(-2, 2))
+ppd_stat_grouped(yrep_prior[1:500, ], group = sites$survey_year_fct,
+                 binwidth = 0.2) +
+  coord_cartesian(xlim = c(-2, 2))
+ppd_stat_grouped(yrep_prior[1:500, ], group = sites$target_type,
+                 binwidth = 0.2) +
+  coord_cartesian(xlim = c(-2, 2))
+ppd_stat_grouped(yrep_prior[1:500, ], group = sites$seed_density,
+                 binwidth = 0.1) +
+  coord_cartesian(xlim = c(-2, 2))
+ppd_stat_grouped(yrep_prior[1:500, ], group = sites$sand_ratio,
+                 binwidth = 0.2) +
+  coord_cartesian(xlim = c(-2, 2))
+ppd_stat_grouped(yrep_prior[1:500, ], group = sites$substrate_depth,
+                 binwidth = 0.2) +
+  coord_cartesian(xlim = c(-2, 2))
 ```
 
 ## Model check
@@ -386,7 +414,7 @@ mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
   theme(axis.text.x = element_text(angle = 45))
 ```
 
-### Posterior predictive check
+### Posterior predictive check (BARG 3.A)
 
 #### Kernel density
 
@@ -495,14 +523,14 @@ brms::bayes_factor(m_1, m_2)
 
 ## Posterior distributions (BARG 3.B)
 
-### Forest plot
+### Forest plot (BARG 3.B/5.B)
 
 ```{r posteriors, fig.height = 7}
 combined <- rbind(
   bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95),
   bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95),
-  bayesplot::mcmc_intervals_data(posterior_prior, prob = 0.66, prob_outer = 0.95),
-  bayesplot::mcmc_intervals_data(posterior_flat, prob = 0.66, prob_outer = 0.95)
+  bayesplot::mcmc_intervals_data(posterior_flat, prob = 0.66, prob_outer = 0.95),
+  bayesplot::mcmc_intervals_data(posterior_prior, prob = 0.66, prob_outer = 0.95)
   )
 combined$model <- rep(
   c("m_1", "m_2", "m_flat", "m_prior"),
