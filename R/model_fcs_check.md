@@ -73,8 +73,8 @@ section ‘Load models’
 Favourable Conservation Status (FSC) sensu Helm et al. (2015) Divers
 Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
 
-Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI:
-10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
+Bayesian analysis motivated by Applestein et al. (2021) Restor Ecol
+[DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
 
 Analysis guided by <br> <b>BARG</b> (Bayesian Analysis Reporting
 Guidelines): Kruschke (2021) Nat Hum Behav [DOI:
@@ -891,52 +891,31 @@ brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 ### Bayes factor (BARG 3.C)
 
 ``` r
-brms::bayes_factor(m_1, m_2)
+bayes_factor <- brms::bayes_factor(m_1, m_2)
 ```
 
-    ## Iteration: 1
-    ## Iteration: 2
-    ## Iteration: 3
-    ## Iteration: 4
-    ## Iteration: 5
-    ## Iteration: 6
-    ## Iteration: 7
-    ## Iteration: 8
-    ## Iteration: 9
-    ## Iteration: 10
-    ## Iteration: 1
-    ## Iteration: 2
-    ## Iteration: 3
-    ## Iteration: 4
-    ## Iteration: 5
-    ## Iteration: 6
-    ## Iteration: 7
-    ## Iteration: 8
-    ## Iteration: 9
-    ## Iteration: 10
-    ## Iteration: 11
-    ## Iteration: 12
-    ## Iteration: 13
-    ## Iteration: 14
-    ## Iteration: 15
+``` r
+bayes_factor
+```
 
-    ## Estimated Bayes factor in favor of m_1 over m_2: 688544238.70493
+    ## Estimated Bayes factor in favor of m_1 over m_2: 661450905.32954
 
 ## Posterior distributions (BARG 3.B)
 
 ### Forest plot(BARG 3.B/5.B)
 
 ``` r
-combined <- rbind(
-  bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95),
-  bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95),
-  bayesplot::mcmc_intervals_data(posterior_flat, prob = 0.66, prob_outer = 0.95),
-  bayesplot::mcmc_intervals_data(posterior_prior, prob = 0.66, prob_outer = 0.95)
+combined <- bind_rows(
+  bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95) %>%
+    mutate(model = "m_1"),
+  bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95) %>%
+    mutate(model = "m_2"),
+  bayesplot::mcmc_intervals_data(posterior_flat, prob = 0.66, prob_outer = 0.95) %>%
+    mutate(model = "m_flat"),
+  bayesplot::mcmc_intervals_data(posterior_prior, prob = 0.66, prob_outer = 0.95) %>%
+    mutate(model = "m_prior")
   )
-combined$model <- rep(
-  c("m_1", "m_2", "m_flat", "m_prior"),
-  each = posterior1$"1" %>% as_tibble() %>% ncol()
-  )
+
 pos <- position_nudge(
   y = if_else(
     combined$model == "m_2", -.2, if_else(
@@ -946,6 +925,7 @@ pos <- position_nudge(
       )
     )
   )
+
 ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)) + 
   geom_vline(xintercept = 0, color = "grey") +
   geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
@@ -962,6 +942,26 @@ ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), colo
 
 Effect sizes of chosen model just to get exact values of means etc. if
 necessary.
+
+``` r
+draws1
+```
+
+    ## # A tibble: 70 × 10
+    ##    varia…¹    mean  median     sd    mad       q5      q95  rhat ess_b…² ess_t…³
+    ##    <chr>     <dbl>   <dbl>  <dbl>  <dbl>    <dbl>    <dbl> <dbl>   <dbl>   <dbl>
+    ##  1 b_Inte… -0.678  -0.678  0.0949 0.0939 -0.836   -5.23e-1  1.00   5620.   7282.
+    ##  2 b_sand…  0.184   0.183  0.103  0.104   0.0142   3.54e-1  1.00   4956.   7020.
+    ##  3 b_sand…  0.161   0.162  0.104  0.104  -0.00906  3.34e-1  1.00   4749.   7063.
+    ##  4 b_targ…  0.0219  0.0233 0.102  0.101  -0.145    1.90e-1  1.00   3964.   6678.
+    ##  5 b_expo… -0.390  -0.398  0.956  0.957  -1.96     1.16e+0  1.00   8893.   8547.
+    ##  6 b_surv…  0.764   0.753  1.25   1.26   -1.29     2.82e+0  1.00   9685.   9376.
+    ##  7 b_surv…  1.04    1.04   1.05   1.06   -0.701    2.76e+0  1.00   9203.   9453.
+    ##  8 b_surv…  1.03    1.03   1.28   1.29   -1.09     3.15e+0  1.00   9148.   9344.
+    ##  9 b_subs… -0.0831 -0.0829 0.0507 0.0504 -0.167    1.06e-4  1.00   9531.   8645.
+    ## 10 b_seed…  0.110   0.110  0.0509 0.0510  0.0244   1.92e-1  1.00   9792.   9571.
+    ## # … with 60 more rows, and abbreviated variable names ¹​variable, ²​ess_bulk,
+    ## #   ³​ess_tail
 
 ``` r
 emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
