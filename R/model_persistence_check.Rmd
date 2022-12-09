@@ -36,7 +36,7 @@ To compare different models, you only have to change the models in section 'Load
 
 Persistence sensu Wilsey (2021) Restor Ecol [DOI: 10.1111/rec.13132](https://doi.org/10.1111/rec.13132)
 
-Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
+Bayesian analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
 
 Analysis guided by
 <br>
@@ -331,28 +331,28 @@ brms::prior_summary(m_1, all = FALSE)
 
 ```{r prior-predictive-check}
 ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
-  coord_cartesian(xlim = c(-2, 2))
+  coord_cartesian(xlim = c(-1, 1))
 ppd_stat_grouped(yrep_prior[1:500, ], group = sites$site,
                  binwidth = 0.2) +
-  coord_cartesian(xlim = c(-2, 2))
+  coord_cartesian(xlim = c(-1, 1))
 ppd_stat_grouped(yrep_prior[1:500, ], group = sites$exposition,
                  binwidth = 0.2) +
-  coord_cartesian(xlim = c(-2, 2))
+  coord_cartesian(xlim = c(-1, 1))
 ppd_stat_grouped(yrep_prior[1:500, ], group = sites$survey_year_fct,
                  binwidth = 0.2) +
-  coord_cartesian(xlim = c(-2, 2))
+  coord_cartesian(xlim = c(-1, 1))
 ppd_stat_grouped(yrep_prior[1:500, ], group = sites$target_type,
                  binwidth = 0.2) +
-  coord_cartesian(xlim = c(-2, 2))
+  coord_cartesian(xlim = c(-1, 1))
 ppd_stat_grouped(yrep_prior[1:500, ], group = sites$seed_density,
                  binwidth = 0.1) +
-  coord_cartesian(xlim = c(-2, 2))
+  coord_cartesian(xlim = c(-1, 1))
 ppd_stat_grouped(yrep_prior[1:500, ], group = sites$sand_ratio,
                  binwidth = 0.2) +
-  coord_cartesian(xlim = c(-2, 2))
+  coord_cartesian(xlim = c(-1, 1))
 ppd_stat_grouped(yrep_prior[1:500, ], group = sites$substrate_depth,
                  binwidth = 0.2) +
-  coord_cartesian(xlim = c(-2, 2))
+  coord_cartesian(xlim = c(-1, 1))
 ```
 
 ## Model check
@@ -518,8 +518,12 @@ brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 
 ### Bayes factor (BARG 3.C)
 
-```{r bayes-factor}
-brms::bayes_factor(m_1, m_2)
+```{r bayes-factor-1, results = FALSE}
+bayes_factor <- brms::bayes_factor(m_1, m_2)
+```
+
+```{r bayes-factor-2}
+bayes_factor
 ```
 
 ## Posterior distributions (BARG 3.B)
@@ -527,16 +531,17 @@ brms::bayes_factor(m_1, m_2)
 ### Forest plot (BARG 2.B/5.B)
 
 ```{r posteriors, fig.height = 7}
-combined <- rbind(
-  bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95),
-  bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95),
-  bayesplot::mcmc_intervals_data(posterior_flat, prob = 0.66, prob_outer = 0.95),
-  bayesplot::mcmc_intervals_data(posterior_prior, prob = 0.66, prob_outer = 0.95)
+combined <- bind_rows(
+  bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95) %>%
+    mutate(model = "m_1"),
+  bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95) %>%
+    mutate(model = "m_2"),
+  bayesplot::mcmc_intervals_data(posterior_flat, prob = 0.66, prob_outer = 0.95) %>%
+    mutate(model = "m_flat"),
+  bayesplot::mcmc_intervals_data(posterior_prior, prob = 0.66, prob_outer = 0.95) %>%
+    mutate(model = "m_prior")
   )
-combined$model <- rep(
-  c("m_1", "m_2", "m_flat", "m_prior"),
-  each = posterior1$"1" %>% as_tibble() %>% ncol()
-  )
+
 pos <- position_nudge(
   y = if_else(
     combined$model == "m_2", -.2, if_else(
@@ -546,12 +551,13 @@ pos <- position_nudge(
       )
     )
   )
+
 ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)) + 
   geom_vline(xintercept = 0, color = "grey") +
   geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
   geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
   geom_point(position = pos, color = "black") +
-  coord_cartesian(xlim = c(-1, 1)) +
+  coord_cartesian(xlim = c(-.25, .65)) +
   bayesplot::theme_default() +
   ggtitle("Posterior distbributions (mean, CI66, CI95)")
 ```
@@ -561,8 +567,9 @@ ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), colo
 Effect sizes of chosen model just to get exact values of means etc. if necessary.
 
 ```{r effect-sizes}
+draws1
 emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
-          survey_year_fct, type = "response"))
+          survey_year_fct, type = "response")
 ```
 
 ```{r write-csv, echo = FALSE}
