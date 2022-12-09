@@ -146,14 +146,15 @@ ggplot(data = data.frame(x = c(0, 1)), aes(x = x)) +
   stat_function(fun = dbeta, n = 101, args = list(shape1 = 3.5, shape2 = 2.2)) +
   expand_limits(y = 0) +
   ggtitle("Beta distribution for Intercept")
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+data <- data.frame(x = c(-1, 1))
+ggplot(data, aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = .35)) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for treatments")
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data, aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0) + ggtitle("Cauchy distribution") # See Lemoine 2019 https://doi.org/10.1111/oik.05985
-ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data, aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) +
   ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
