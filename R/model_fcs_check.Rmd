@@ -43,7 +43,7 @@ section 'Load models'
 Favourable Conservation Status (FSC) sensu Helm et al. (2015) Divers
 Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
 
-Analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
+Bayesian analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
 
 Analysis guided by
 <br>
@@ -530,8 +530,12 @@ brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
 
 ### Bayes factor (BARG 3.C)
 
-```{r bayes-factor}
-brms::bayes_factor(m_1, m_2)
+```{r bayes-factor-1, results = FALSE}
+bayes_factor <- brms::bayes_factor(m_1, m_2)
+```
+
+```{r bayes-factor-2}
+bayes_factor
 ```
 
 ## Posterior distributions (BARG 3.B)
@@ -576,6 +580,7 @@ Effect sizes of chosen model just to get exact values of means etc. if
 necessary.
 
 ```{r effect-sizes}
+draws1
 emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
           survey_year_fct, type = "response")
 ```
