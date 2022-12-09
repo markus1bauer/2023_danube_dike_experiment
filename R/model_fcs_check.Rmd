@@ -563,7 +563,7 @@ ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), colo
   geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
   geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
   geom_point(position = pos, color = "black") +
-  coord_cartesian(xlim = c(-1, .6)) +
+  coord_cartesian(xlim = c(-1, 1)) +
   bayesplot::theme_default() +
   ggtitle("Posterior distbributions (mean, CI66, CI95)")
 ```
@@ -575,7 +575,7 @@ necessary.
 
 ```{r effect-sizes}
 emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
-          survey_year_fct, type = "response"))
+          survey_year_fct, type = "response")
 ```
 
 ```{r write-csv, echo = FALSE}
