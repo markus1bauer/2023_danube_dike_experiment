@@ -1,5 +1,5 @@
 # Dike grassland field experiment
-# Favourable conservation status ####
+# Favourable Conservation Status (FCS) ####
 # Show figure
 
 # Markus Bauer
@@ -24,40 +24,38 @@ rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 ### Load data ###
 sites <- read_csv(
   here("data", "processed", "data_processed_sites_temporal.csv"),
-  col_names = TRUE, na = c("na", "NA", ""), col_types =
-    cols(
-      .default = "?",
-      plot = "f",
-      site = "f",
-      sand_ratio = "f",
-      substrate_depth = "f",
-      target_type = col_factor(levels = c(
-        "dry_grassland", "hay_meadow"
-      )),
-      seed_density = "f",
-      exposition = col_factor(levels = c(
-        "north", "south"
-      )),
-      survey_year = "c"
-    )
-  ) %>%
+  col_names = TRUE, na = c("na", "NA", ""),
+  col_types = cols(
+    .default = "?",
+    plot = "f",
+    site = "f",
+    sand_ratio = "f",
+    substrate_depth = col_factor(levels = c("30", "15")),
+    target_type = col_factor(levels = c("hay_meadow", "dry_grassland")),
+    seed_density = "f",
+    exposition = col_factor(levels = c("north", "south")),
+    survey_year = "c"
+  )
+) %>%
   ### Exclude data of seed mixtures
   filter(presabu == "presence") %>%
   mutate(
     survey_year_fct = factor(survey_year),
+    botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
+    botanist_year = factor(botanist_year),
     id = factor(id),
-    n = persistence
+    n = persistence / 100
   ) %>%
   select(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
-    seed_density, survey_year_fct, survey_year, n
+    seed_density, survey_year_fct, survey_year, botanist_year, n
   )
 
 ### * Model ####
-load(file = here("outputs", "models", "model_persistence_1.Rdata"))
+load(file = here("outputs", "models", "model_persistence_2.Rdata"))
 
 model <- sites %>%
-  add_epred_draws(m1, allow_new_levels = TRUE)
+  tidybayes::add_epred_draws(m2, allow_new_levels = TRUE)
 
 ### * Functions ####
 theme_mb <- function() {
@@ -96,18 +94,18 @@ theme_mb <- function() {
      cex = .5
    ) +
    geom_hline(
-     yintercept = c(25, 75),
+     yintercept = c(.25, .75),
      linetype = "dashed",
      linewidth = .3,
      color = "black"
    ) +
    geom_hline(
-     yintercept = c(50),
+     yintercept = c(.5),
      linetype = "solid",
      linewidth = .3,
      color = "black"
    ) +
-   stat_pointinterval(
+   tidybayes::stat_pointinterval(
      aes(y = .epred, x = sand_ratio, color = target_type),
      data = model,
      .width = c(0.66, 0.95),
@@ -121,7 +119,7 @@ theme_mb <- function() {
          "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
      )
    ) +
-   scale_y_continuous(limits = c(0, 100), breaks = seq(-100, 400, 10)) +
+   scale_y_continuous(limits = c(0, 1.02), breaks = seq(-100, 400, .1)) +
    scale_color_manual(labels = c("Hay meadow", "Dry grassland"),
                       values = c("#00BFC4", "#F8766D")) +
    scale_fill_manual(labels = c("Hay meadow", "Dry grassland"),
@@ -135,12 +133,12 @@ theme_mb <- function() {
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_4_persistence_epred_800dpi_24x8cm.tiff"),
+            "figure_2_persistence_epred_800dpi_24x8cm.tiff"),
        dpi = 800, width = 24, height = 8, units = "cm")
 
 p1 + theme(legend.position = "bottom")
 ggsave(here("outputs", "figures",
-            "figure_4_persistence_epred_800dpi_16.5x14cm.tiff"),
+            "figure_2_persistence_epred_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")
 
 
@@ -185,8 +183,8 @@ m1 %>%
 ### Save ###
 
 ggsave(here("outputs", "figures",
-            "figure_4_persistence_coef_800dpi_24x8cm.tiff"),
+            "figure_2_persistence_coef_800dpi_24x8cm.tiff"),
        dpi = 800, width = 24, height = 8, units = "cm")
 ggsave(here("outputs", "figures",
-            "figure_4_persistence_coef_800dpi_16.5x14cm.tiff"),
+            "figure_2_persistence_coef_800dpi_16.5x14cm.tiff"),
        dpi = 800, width = 16.5, height = 14, units = "cm")
