@@ -1,0 +1,149 @@
+---
+title: "Dike experiment"
+author: Markus Bauer*, Jakob Huber, Johannes Kollmann
+output:
+  bookdown::word_document2:
+    reference_docx: 2111_Wissenschaftliche_Arbeit.docx # template containing the formatting you want to have in your knitted word document
+    # number_sections: false # only works for html or pdf...
+    # using bookdown cross-referencing of sections possible, for flextable with pictures: officedown::rdocx_document
+fontfamily: Arial
+fontsize: 11pt
+geometry: margin = 1in
+csl: journal-of-vegetation-science.csl
+---
+
+Chair of Restoration Ecology, TUM School of Life Sciences, Technichal University of Munich, Germany
+
+\* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de){.email}
+
+Open Research: Data and code are permanently available on Zenodo under: <https://doi.org/10.XXXX>.
+
+\clearpage
+
+\newpage
+
+```{r set.up, include = F}
+# Create objects for easy access to the folders related to the project
+figures_dir <- file.path("outputs", "figures")
+
+# plot figures high resolution
+knitr::opts_chunk$set(dpi = 600)
+
+library(knitr) # importing figures
+
+# read analysis
+#rmarkdown::render(here::here("results", "scripts", "Models.Rmd"), quiet = TRUE) # quiet to not get text from rendering
+```
+
+# Abstract {.unnumbered}
+
+We looked at blablabla
+
+**keywords:** keyword1, keyword2, keyword3, keyword4, keyword5
+
+# Introduction {.unnumbered}
+
+Climate change is globally one of the main drivers restructuring species communities [@halsch2021; @parmesan2006; @hill2021]. [...] to answer the following questions:
+
+-   Question 1?
+-   Question 2?
+
+# Material & Methods {.unnumbered}
+
+## Study area {.unnumbered}
+
+Text
+
+## Data Collection {.unnumbered}
+
+Text
+
+## Statistical analyses {.unnumbered}
+
+Text
+
+# Results {.unnumbered}
+
+
+# Discussion {.unnumbered}
+
+Text
+
+# Conclusions
+
+Text
+
+# Acknowledgements {.unnumbered}
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
+
+\clearpage
+
+\newpage
+
+# Figure legends {.unnumbered}
+
+**Figure 1:**
+
+Description Figure 1.
+
+**Figure 2:** Description Figure 2.
+
+**Figure 3:** Description Figure 3.
+
+\clearpage
+
+\newpage
+
+**Figure 1:**
+
+```{r chunk-figure1, fig.cap = "", echo=FALSE}
+include_graphics(here::here(figures_dir, "figure_1_map_tmap_300dpi_8x11cm.tiff"))
+```
+
+\clearpage
+
+\newpage
+
+**Figure 2:**
+
+```{r chunk-figure2, fig.cap = "", echo = FALSE}
+include_graphics(here::here(figures_dir, "figure_2_800dpi_16.5x5cm.tiff"))
+```
+
+\clearpage
+
+\newpage
+
+# Supplementary Material {.unnumbered}
+
+**Figure S1:**
+
+```{r chunk-supp-1, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Legend Figure S1", dpi=600}
+#include_graphics(here::here("text", "supplementary", "figureS1.png"))
+```
+
+\clearpage
+
+\newpage
+
+**Figure S2:**
+
+```{r chunk-supp-2, echo=FALSE, warning=FALSE, message=FALSE, fig.cap="Legend Figure S2", dpi=600}
+#include_graphics(here::here("text", "supplementary", "figureS2.png"))
+```
+
+\clearpage
+
+\newpage
+
+## Session Info
+
+*R version, the OS and attached or loaded packages:*
+
+```{r sessioninfo}
+sessionInfo()
+```
