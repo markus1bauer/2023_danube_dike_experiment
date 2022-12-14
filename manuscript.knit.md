@@ -22,17 +22,7 @@ Open Research: Data and code are permanently available on Zenodo under: <https:/
 
 \newpage
 
-```{r set-up, include = FALSE}
-library(knitr)
-knitr::opts_chunk$set(
-  echo = FALSE,
-  dpi = 50
-  )
 
-
-# read analysis
-#rmarkdown::render(here::here("results", "scripts", "Models.Rmd"), quiet = TRUE) # quiet to not get text from rendering
-```
 
 # Abstract (max 300 words) {.unnumbered}
 
@@ -159,9 +149,7 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Table 1 {.unnumbered}
 
-```{r table-1, fig.cap = "table-1"}
-#include_graphics(here::here("outputs", "tables", "figureS1.png"))
-```
+
 
 \clearpage
 
@@ -169,9 +157,7 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Table 2 {.unnumbered}
 
-```{r table-2, fig.cap = ""}
-#include_graphics(here::here("outputs", "tables", "figureS1.png"))
-```
+
 
 \clearpage
 
@@ -181,9 +167,10 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Figure 1 {.unnumbered}
 
-```{r figure-1, fig.cap = "figure-1"}
-knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300dpi_8x11cm.tiff"))
-```
+<div class="figure">
+<img src="outputs/figures/figure_1_map_tmap_300dpi_8x11cm.tiff" alt="figure-1"  />
+<p class="caption">(\#fig:figure-1)figure-1</p>
+</div>
 
 \clearpage
 
@@ -191,9 +178,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 2 {.unnumbered}
 
-```{r figure-2, fig.cap = ""}
-knitr::include_graphics(here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff"))
-```
+![](outputs/figures/figure_2_800dpi_16.5x5cm.tiff)<!-- -->
 
 \clearpage
 
@@ -201,9 +186,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_2_800dpi_16.5x5
 
 ## Figure 3 {.unnumbered}
 
-```{r figure-3, fig.cap = ""}
-knitr::include_graphics(here::here("outputs", "figures", "figure_3_persistence_epred_800dpi_16.5x14cm.tiff"))
-```
+![](outputs/figures/figure_3_persistence_epred_800dpi_16.5x14cm.tiff)<!-- -->
 
 \clearpage
 
@@ -211,9 +194,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_3_persistence_e
 
 ## Figure 4 {.unnumbered}
 
-```{r figure-4, fig.cap = ""}
-knitr::include_graphics(here::here("outputs", "figures", "figure_4_fcs_epred_800dpi_16.5x14cm.tiff"))
-```
+![](outputs/figures/figure_4_fcs_epred_800dpi_16.5x14cm.tiff)<!-- -->
 
 \clearpage
 
@@ -221,9 +202,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_4_fcs_epred_800
 
 ## Figure 5 {.unnumbered}
 
-```{r figure-5, fig.cap = ""}
-knitr::include_graphics(here::here("outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x14cm.tiff"))
-```
+![](outputs/figures/figure_5_recovery_epred_800dpi_16.5x14cm.tiff)<!-- -->
 
 Fig. 5:
 
@@ -233,9 +212,7 @@ Fig. 5:
 
 ## Figure 6 {.unnumbered}
 
-```{r figure-6, fig.cap = ""}
-knitr::include_graphics(here::here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff"))
-```
+![](outputs/figures/figure_6_nmds_800dpi_16.5x16cm.tiff)<!-- -->
 
 Fig. 6:
 
@@ -249,9 +226,7 @@ Fig. 6:
 
 Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten (mean, 1981--2010; ID, 3271; WGS84 (lat/lon), 48.85476 and 12.918911; CDC, 2022a, 2022b) and stream gauge Pfelling (ID, 10078000; WGS84 (lat/lon), 48.87975 and 12.74716; LfU, 2021a). HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
 
-```{r table-s1}
-#knitr::include_graphics(here::here("outputs", "tables", "figureS1.png"))
-```
+
 
 \clearpage
 
@@ -259,9 +234,7 @@ Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred 
 
 ## Table S2 {.unnumbered}
 
-```{r table-s2}
-#knitr::include_graphics(here::here("outputs", "tables", "figureS2.png"))
-```
+
 
 \clearpage
 
@@ -269,9 +242,7 @@ Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred 
 
 ## Table S3 {.unnumbered}
 
-```{r table-s3}
-#knitr::include_graphics(here::here("outputs", "tables", "table_a3_seedmixes.csv"))
-```
+
 
 \clearpage
 
@@ -279,6 +250,32 @@ Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred 
 
 ## Session Info {.unnumbered}
 
-```{r sessioninfo}
-sessionInfo()
+
+```
+## R version 4.2.2 (2022-10-31 ucrt)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 22621)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=German_Germany.utf8  LC_CTYPE=German_Germany.utf8   
+## [3] LC_MONETARY=German_Germany.utf8 LC_NUMERIC=C                   
+## [5] LC_TIME=German_Germany.utf8    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices datasets  utils     methods   base     
+## 
+## other attached packages:
+## [1] knitr_1.41
+## 
+## loaded via a namespace (and not attached):
+##  [1] rstudioapi_0.14 magrittr_2.0.3  here_1.0.1      R6_2.5.1       
+##  [5] rlang_1.0.6     fastmap_1.1.0   highr_0.9       stringr_1.5.0  
+##  [9] tools_4.2.2     xfun_0.35       cli_3.4.1       jquerylib_0.1.4
+## [13] htmltools_0.5.3 yaml_2.3.6      digest_0.6.30   rprojroot_2.0.3
+## [17] lifecycle_1.0.3 bookdown_0.31   sass_0.4.4      vctrs_0.5.1    
+## [21] glue_1.6.2      cachem_1.0.6    evaluate_0.19   rmarkdown_2.18 
+## [25] stringi_1.7.8   compiler_4.2.2  bslib_0.4.1     jsonlite_1.8.4 
+## [29] renv_0.16.0
 ```
