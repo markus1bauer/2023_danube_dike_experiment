@@ -98,6 +98,7 @@ sites <- read_csv(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
     seed_density, survey_year_fct, survey_year, botanist_year, n
   )
+sites
 ```
 
 # Statistics
@@ -568,7 +569,8 @@ ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), colo
 Effect sizes of chosen model just to get exact values of means etc. if necessary.
 
 ```{r effect-sizes}
-draws1
+draws1 %>%
+  gt::gt()
 emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
           survey_year_fct, type = "response")
 ```
