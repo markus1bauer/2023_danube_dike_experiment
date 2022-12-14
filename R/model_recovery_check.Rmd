@@ -96,6 +96,7 @@ sites <- read_csv(
     botanist_year = factor(botanist_year),
     n = recovery_time
     )
+sites
 ```
 
 # Statistics
@@ -567,7 +568,8 @@ ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), colo
 Effect sizes of chosen model just to get exact values of means etc. if necessary.
 
 ```{r effect-sizes}
-draws1
+draws1 %>%
+  gt::gt()
 emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
           survey_year_fct, type = "response")
 ```
