@@ -3,16 +3,13 @@ title: "Dike experiment"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
   bookdown::word_document2:
-  reference_docx: StylesTemplate.docx
-fontfamily: Arial
-fontsize: 10pt
-geometry: margin = 1in
+    reference_docx: template_word.docx
+    global_numbering: TRUE
 csl: template-journal-of-vegetation-science.csl
 bibliography: bibliography.bib
-github-repo: markus1bauer/2023_danube_dike_experiment
 ---
 
-Chair of Restoration Ecology, TUM School of Life Sciences, Technical University of Munich, Germany
+Restoration Ecology, TUM School of Life Sciences, Technical University of Munich, Germany
 
 \* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de)
 
@@ -20,11 +17,14 @@ Open Research: Data and code are permanently available on Zenodo under: <https:/
 
 **Max 8000 words**
 
+See Figure \@ref(fig:figure-map)
+
 \clearpage
 
 \newpage
 
 ```{r set-up, include = FALSE}
+library(bookdown)
 library(knitr)
 knitr::opts_chunk$set(
   echo = FALSE,
@@ -37,8 +37,6 @@ knitr::opts_chunk$set(
 ```
 
 # Abstract (max 300 words) {.unnumbered}
-
-We looked at blablabla
 
 # Keywords {.unnumbered}
 
@@ -90,9 +88,9 @@ We asked following question to evaluate the restoration success after four years
 
 ## Experimental design {.unnumbered}
 
-The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(figure-1)), 314 m above sea level (asl); WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and precipitation of 984 mm (**Deutscher Wetterdienst [DWD], 2021**). During the study, three exceptionally dry years (2018--2020) occurred **(Climate Data Center of the German Meteorological Service [CDC], 2022a, 2022b**), and three minor floods which did not reach the plots (**Bayerisches Landesamt für Umwelt [LfU], 2021a, 2021b)** (Table \@ref(table-s1)). Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike <mark>Is that right?</mark> and a with an excavator the substrates were mixed <mark>Is that right?</mark> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland (Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, **Mucina et al., 2016**). The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species <mark>check numbers</mark>, respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(table-2))<mark>check</mark>. The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(table-3)) <mark>more details and check</mark>. The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
+The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(figure-1)), 314 m above sea level (asl); WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [@lfu2021waterlevel,@lfu2021discharge] (Table \@ref(table-s1)). Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike <mark>Is that right?</mark> and a with an excavator the substrates were mixed <mark>Is that right?</mark> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland (Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, @mucina2016 ). The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species <mark>check numbers</mark>, respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(table-2))<mark>check</mark>. The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(table-3)) <mark>more details and check</mark>. The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
 
-We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(figure-1)). The split plot was cuased by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(table-1)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m^-2 ). The vegetation was surveyed in June or July 2018--2021 (**Braun-Blanquet, 1928/1964**). Establishment rates of species
+We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(figure-1)). The split plot was cuased by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(table-1)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m\^-2 ). The vegetation was surveyed in June or July 2018--2021 (**Braun-Blanquet, 1928/1964**). Establishment rates of species
 
 ## Statistical analyses {.unnumbered}
 
@@ -105,8 +103,6 @@ We performed all analyses in R (Version 4.2.2; @base), with the functions 'blme'
 \newpage
 
 # Results
-
-Figure \@ref(figure-1)
 
 \clearpage
 
@@ -181,7 +177,7 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Figure 1 {.unnumbered}
 
-```{r figure-1, fig.cap = ""}
+```{r figure-1, fig.cap = "\\label{fig:figure-1}This is a caption"}
 knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300dpi_8x11cm.tiff"))
 ```
 
