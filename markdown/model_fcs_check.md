@@ -2,7 +2,7 @@ Analysis of Bauer et al. (unpublished) Field experiment: <br> Favourable
 Conservation Status (FCS)
 ================
 <b>Markus Bauer</b> <br>
-<b>2022-12-09</b>
+<b>2022-12-14</b>
 
 - <a href="#preparation" id="toc-preparation">Preparation</a>
 - <a href="#statistics" id="toc-statistics">Statistics</a>
@@ -134,7 +134,14270 @@ sites <- read_csv(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
     seed_density, survey_year_fct, survey_year, botanist_year, n
     )
+library(gt)
+sites %>%
+  gt()
 ```
+
+<div id="wtoufrdltx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#wtoufrdltx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wtoufrdltx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wtoufrdltx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wtoufrdltx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wtoufrdltx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wtoufrdltx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wtoufrdltx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wtoufrdltx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wtoufrdltx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wtoufrdltx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wtoufrdltx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wtoufrdltx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wtoufrdltx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wtoufrdltx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtoufrdltx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wtoufrdltx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wtoufrdltx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtoufrdltx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wtoufrdltx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtoufrdltx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wtoufrdltx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtoufrdltx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wtoufrdltx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wtoufrdltx .gt_left {
+  text-align: left;
+}
+
+#wtoufrdltx .gt_center {
+  text-align: center;
+}
+
+#wtoufrdltx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wtoufrdltx .gt_font_normal {
+  font-weight: normal;
+}
+
+#wtoufrdltx .gt_font_bold {
+  font-weight: bold;
+}
+
+#wtoufrdltx .gt_font_italic {
+  font-style: italic;
+}
+
+#wtoufrdltx .gt_super {
+  font-size: 65%;
+}
+
+#wtoufrdltx .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#wtoufrdltx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wtoufrdltx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wtoufrdltx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wtoufrdltx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wtoufrdltx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wtoufrdltx .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="id">id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="plot">plot</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="site">site</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="exposition">exposition</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="sand_ratio">sand_ratio</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="substrate_depth">substrate_depth</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="target_type">target_type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="seed_density">seed_density</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="survey_year_fct">survey_year_fct</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="survey_year">survey_year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="botanist_year">botanist_year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="id" class="gt_row gt_center">L1_01_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_01</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_01_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_01</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_01_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_01</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_01_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_01</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_02_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_02</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_02_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_02</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_02_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_02</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_02_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_02</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_03_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_03</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_03_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_03</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_03_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_03</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_03_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_03</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_04_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_04</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.946</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_04_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_04</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_04_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_04</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_04_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_04</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_05_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_05</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_05_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_05</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_05_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_05</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_05_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_05</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_06_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_06</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_06_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_06</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.956</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_06_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_06</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_06_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_06</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_07_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_07</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_07_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_07</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.087</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_07_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_07</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_07_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_07</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.629</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_08_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_08</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_08_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_08</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.262</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_08_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_08</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_08_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_08</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_09_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_09</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_09_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_09</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_09_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_09</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_09_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_09</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_10_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_10</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.946</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_10_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_10</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_10_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_10</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_10_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_10</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_11_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_11</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.204</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_11_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_11</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_11_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_11</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_11_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_11</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.167</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_12_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_12</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_12_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_12</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_12_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_12</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_12_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_12</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_13_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_13</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.079</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_13_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_13</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_13_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_13</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_13_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_13</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_14_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_14</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_14_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_14</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_14_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_14</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_14_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_14</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_15_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_15</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_15_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_15</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_15_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_15</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_15_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_15</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_16_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_16</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_16_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_16</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_16_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_16</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_16_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_16</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.486</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_17_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_17</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.946</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_17_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_17</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_17_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_17</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_17_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_17</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_18_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_18</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_18_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_18</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_18_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_18</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_18_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_18</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_19_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_19</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_19_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_19</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_19_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_19</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">1.179</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_19_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_19</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_20_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_20</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_20_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_20</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_20_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_20</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_20_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_20</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_21_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_21</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_21_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_21</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_21_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_21</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_21_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_21</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.310</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_22_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_22</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_22_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_22</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_22_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_22</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_22_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_22</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_23_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_23</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_23_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_23</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_23_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_23</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_23_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_23</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_24_2018</td>
+<td headers="plot" class="gt_row gt_center">L1_24</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_24_2019</td>
+<td headers="plot" class="gt_row gt_center">L1_24</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_24_2020</td>
+<td headers="plot" class="gt_row gt_center">L1_24</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L1_24_2021</td>
+<td headers="plot" class="gt_row gt_center">L1_24</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">1.163</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_01_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_01</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_01_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_01</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_01_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_01</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.773</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_01_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_01</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_02_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_02</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_02_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_02</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_02_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_02</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_02_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_02</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_03_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_03</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_03_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_03</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_03_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_03</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_03_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_03</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.486</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_04_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_04</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_04_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_04</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_04_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_04</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_04_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_04</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_05_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_05</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.079</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_05_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_05</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_05_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_05</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.368</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_05_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_05</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_06_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_06</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_06_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_06</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_06_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_06</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_06_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_06</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.486</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_07_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_07</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_07_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_07</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_07_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_07</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_07_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_07</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_08_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_08</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_08_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_08</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_08_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_08</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_08_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_08</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_09_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_09</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_09_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_09</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_09_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_09</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.486</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_09_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_09</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_10_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_10</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_10_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_10</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_10_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_10</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_10_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_10</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_11_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_11</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.398</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_11_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_11</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_11_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_11</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_11_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_11</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_12_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_12</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.079</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_12_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_12</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_12_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_12</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_12_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_12</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_13_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_13</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_13_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_13</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_13_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_13</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_13_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_13</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.773</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_14_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_14</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_14_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_14</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_14_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_14</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_14_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_14</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_15_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_15</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_15_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_15</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_15_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_15</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.087</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_15_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_15</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_16_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_16</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_16_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_16</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_16_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_16</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_16_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_16</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_17_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_17</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.504</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_17_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_17</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_17_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_17</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_17_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_17</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_18_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_18</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.398</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_18_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_18</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_18_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_18</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_18_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_18</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_19_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_19</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.204</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_19_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_19</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_19_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_19</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_19_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_19</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_20_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_20</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_20_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_20</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.368</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_20_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_20</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_20_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_20</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_21_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_21</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_21_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_21</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.442</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_21_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_21</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_21_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_21</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_22_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_22</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_22_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_22</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_22_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_22</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_22_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_22</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_23_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_23</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_23_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_23</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_23_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_23</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_23_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_23</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_24_2018</td>
+<td headers="plot" class="gt_row gt_center">L2_24</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_24_2019</td>
+<td headers="plot" class="gt_row gt_center">L2_24</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_24_2020</td>
+<td headers="plot" class="gt_row gt_center">L2_24</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L2_24_2021</td>
+<td headers="plot" class="gt_row gt_center">L2_24</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_01_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_01</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_01_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_01</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_01_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_01</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_01_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_01</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_02_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_02</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_02_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_02</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_02_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_02</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_02_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_02</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_03_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_03</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_03_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_03</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_03_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_03</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_03_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_03</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.486</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_04_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_04</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.299</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_04_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_04</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_04_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_04</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_04_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_04</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_05_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_05</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.204</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_05_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_05</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_05_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_05</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_05_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_05</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_06_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_06</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_06_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_06</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_06_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_06</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_06_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_06</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_07_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_07</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_07_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_07</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_07_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_07</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_07_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_07</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_08_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_08</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.565</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_08_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_08</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_08_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_08</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_08_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_08</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_09_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_09</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_09_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_09</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_09_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_09</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_09_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_09</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">1.050</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_10_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_10</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_10_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_10</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_10_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_10</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_10_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_10</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_11_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_11</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_11_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_11</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_11_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_11</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_11_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_11</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_12_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_12</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_12_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_12</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_12_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_12</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_12_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_12</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_13_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_13</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_13_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_13</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_13_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_13</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_13_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_13</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_14_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_14</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_14_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_14</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_14_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_14</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.788</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_14_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_14</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.087</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_15_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_15</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_15_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_15</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_15_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_15</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.087</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_15_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_15</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_16_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_16</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_16_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_16</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_16_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_16</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_16_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_16</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.087</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_17_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_17</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_17_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_17</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_17_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_17</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_17_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_17</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_18_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_18</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_18_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_18</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_18_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_18</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_18_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_18</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_19_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_19</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.303</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_19_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_19</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_19_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_19</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_19_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_19</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_20_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_20</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.708</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_20_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_20</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_20_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_20</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.087</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_20_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_20</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_21_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_21</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.303</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_21_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_21</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_21_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_21</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_21_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_21</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_22_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_22</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.705</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_22_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_22</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_22_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_22</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.080</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_22_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_22</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_23_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_23</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_23_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_23</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_23_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_23</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_23_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_23</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_24_2018</td>
+<td headers="plot" class="gt_row gt_center">L3_24</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_24_2019</td>
+<td headers="plot" class="gt_row gt_center">L3_24</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_24_2020</td>
+<td headers="plot" class="gt_row gt_center">L3_24</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L3_24_2021</td>
+<td headers="plot" class="gt_row gt_center">L3_24</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_01_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_01</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_01_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_01</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_01_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_01</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_01_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_01</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_02_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_02</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_02_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_02</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_02_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_02</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_02_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_02</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_03_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_03</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_03_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_03</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_03_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_03</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_03_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_03</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_04_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_04</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_04_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_04</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_04_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_04</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_04_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_04</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_05_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_05</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_05_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_05</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_05_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_05</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_05_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_05</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_06_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_06</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.946</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_06_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_06</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_06_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_06</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_06_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_06</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_07_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_07</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.299</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_07_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_07</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_07_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_07</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_07_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_07</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_08_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_08</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_08_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_08</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_08_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_08</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_08_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_08</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_09_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_09</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.946</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_09_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_09</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_09_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_09</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_09_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_09</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_10_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_10</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.504</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_10_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_10</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_10_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_10</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_10_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_10</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_11_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_11</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_11_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_11</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_11_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_11</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_11_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_11</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_12_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_12</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.946</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_12_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_12</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_12_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_12</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_12_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_12</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_13_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_13</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_13_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_13</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_13_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_13</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_13_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_13</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_14_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_14</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_14_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_14</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_14_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_14</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_14_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_14</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_15_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_15</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_15_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_15</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_15_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_15</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_15_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_15</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_16_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_16</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.079</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_16_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_16</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_16_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_16</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_16_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_16</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_17_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_17</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.398</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_17_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_17</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_17_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_17</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_17_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_17</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_18_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_18</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_18_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_18</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.486</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_18_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_18</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_18_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_18</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_19_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_19</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_19_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_19</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_19_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_19</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_19_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_19</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_20_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_20</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_20_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_20</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_20_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_20</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_20_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_20</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_21_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_21</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.705</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_21_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_21</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_21_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_21</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_21_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_21</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_22_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_22</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_22_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_22</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_22_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_22</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_22_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_22</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_23_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_23</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_23_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_23</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_23_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_23</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_23_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_23</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_24_2018</td>
+<td headers="plot" class="gt_row gt_center">L4_24</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_24_2019</td>
+<td headers="plot" class="gt_row gt_center">L4_24</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.788</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_24_2020</td>
+<td headers="plot" class="gt_row gt_center">L4_24</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L4_24_2021</td>
+<td headers="plot" class="gt_row gt_center">L4_24</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_01_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_01</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_01_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_01</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_01_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_01</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_01_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_01</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_02_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_02</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_02_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_02</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_02_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_02</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_02_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_02</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_03_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_03</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.204</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_03_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_03</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_03_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_03</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_03_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_03</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_04_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_04</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_04_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_04</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_04_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_04</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_04_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_04</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_05_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_05</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.079</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_05_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_05</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_05_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_05</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_05_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_05</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_06_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_06</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_06_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_06</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_06_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_06</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_06_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_06</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">1.179</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_07_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_07</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_07_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_07</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_07_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_07</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_07_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_07</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_08_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_08</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_08_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_08</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_08_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_08</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_08_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_08</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_09_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_09</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_09_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_09</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_09_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_09</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.575</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_09_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_09</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.827</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_10_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_10</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_10_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_10</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_10_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_10</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_10_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_10</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_11_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_11</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_11_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_11</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_11_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_11</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.074</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_11_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_11</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_12_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_12</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_12_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_12</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_12_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_12</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_12_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_12</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_13_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_13</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.504</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_13_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_13</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_13_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_13</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_13_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_13</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_14_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_14</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_14_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_14</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_14_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_14</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_14_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_14</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_15_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_15</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.012</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_15_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_15</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_15_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_15</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_15_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_15</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_16_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_16</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_16_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_16</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_16_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_16</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_16_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_16</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_17_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_17</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_17_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_17</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_17_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_17</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_17_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_17</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_18_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_18</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.792</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_18_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_18</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_18_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_18</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_18_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_18</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_19_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_19</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.079</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_19_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_19</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_19_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_19</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">-0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_19_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_19</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_20_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_20</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_20_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_20</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_20_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_20</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.262</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_20_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_20</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_21_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_21</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_21_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_21</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_21_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_21</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_21_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_21</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_22_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_22</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.079</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_22_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_22</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_22_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_22</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_22_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_22</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.629</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_23_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_23</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_23_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_23</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_23_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_23</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_23_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_23</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_24_2018</td>
+<td headers="plot" class="gt_row gt_center">L5_24</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_24_2019</td>
+<td headers="plot" class="gt_row gt_center">L5_24</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_24_2020</td>
+<td headers="plot" class="gt_row gt_center">L5_24</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber south</td>
+<td headers="n" class="gt_row gt_right">0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L5_24_2021</td>
+<td headers="plot" class="gt_row gt_center">L5_24</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_01_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_01</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_01_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_01</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_01_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_01</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_01_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_01</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.486</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_02_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_02</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_02_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_02</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_02_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_02</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_02_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_02</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.486</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_03_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_03</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_03_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_03</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_03_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_03</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_03_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_03</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_04_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_04</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_04_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_04</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_04_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_04</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_04_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_04</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.262</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_05_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_05</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.398</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_05_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_05</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_05_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_05</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_05_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_05</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_06_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_06</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_06_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_06</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_06_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_06</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_06_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_06</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_07_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_07</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.504</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_07_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_07</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_07_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_07</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_07_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_07</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_08_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_08</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_08_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_08</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_08_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_08</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_08_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_08</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_09_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_09</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_09_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_09</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_09_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_09</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_09_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_09</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.368</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_10_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_10</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_10_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_10</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_10_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_10</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_10_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_10</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.773</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_11_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_11</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_11_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_11</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_11_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_11</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.262</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_11_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_11</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_12_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_12</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_12_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_12</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_12_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_12</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_12_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_12</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.788</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_13_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_13</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_13_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_13</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_13_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_13</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_13_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_13</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_14_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_14</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_14_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_14</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_14_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_14</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_14_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_14</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_15_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_15</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_15_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_15</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_15_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_15</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_15_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_15</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_16_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_16</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.204</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_16_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_16</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_16_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_16</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.368</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_16_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_16</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_17_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_17</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_17_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_17</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_17_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_17</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.087</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_17_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_17</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_18_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_18</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_18_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_18</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_18_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_18</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_18_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_18</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_19_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_19</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.705</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_19_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_19</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_19_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_19</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.262</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_19_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_19</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">-0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_20_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_20</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_20_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_20</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.788</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_20_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_20</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_20_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_20</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_21_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_21</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_21_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_21</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_21_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_21</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_21_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_21</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_22_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_22</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_22_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_22</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_22_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_22</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_22_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_22</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_23_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_23</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.504</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_23_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_23</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_23_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_23</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_23_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_23</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_24_2018</td>
+<td headers="plot" class="gt_row gt_center">L6_24</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith south</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_24_2019</td>
+<td headers="plot" class="gt_row gt_center">L6_24</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Linda Weggler south</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_24_2020</td>
+<td headers="plot" class="gt_row gt_center">L6_24</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck south</td>
+<td headers="n" class="gt_row gt_right">-0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">L6_24_2021</td>
+<td headers="plot" class="gt_row gt_center">L6_24</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">south</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer south</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_01_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_01</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.504</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_01_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_01</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.310</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_01_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_01</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.435</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_01_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_01</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.435</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_02_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_02</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_02_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_02</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_02_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_02</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_02_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_02</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_03_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_03</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_03_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_03</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.268</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_03_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_03</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_03_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_03</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_04_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_04</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.299</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_04_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_04</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.642</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_04_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_04</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.965</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_04_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_04</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_05_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_05</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_05_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_05</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.435</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_05_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_05</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.799</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_05_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_05</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_06_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_06</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_06_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_06</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.629</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_06_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_06</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.642</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_06_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_06</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.012</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_07_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_07</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_07_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_07</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.194</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_07_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_07</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_07_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_07</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.999</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_08_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_08</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.163</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_08_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_08</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_08_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_08</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_08_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_08</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_09_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_09</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_09_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_09</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.057</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_09_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_09</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.651</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_09_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_09</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.135</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_10_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_10</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_10_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_10</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_10_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_10</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_10_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_10</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.190</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_11_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_11</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_11_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_11</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_11_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_11</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.860</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_11_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_11</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_12_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_12</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_12_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_12</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_12_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_12</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_12_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_12</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_13_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_13</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_13_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_13</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_13_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_13</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_13_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_13</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_14_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_14</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_14_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_14</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.431</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_14_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_14</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_14_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_14</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.273</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_15_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_15</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">0.134</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_15_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_15</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.580</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_15_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_15</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.742</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_15_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_15</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.938</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_16_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_16</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_16_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_16</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_16_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_16</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.488</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_16_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_16</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.322</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_17_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_17</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.956</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_17_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_17</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.111</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_17_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_17</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.728</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_17_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_17</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.969</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_18_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_18</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.773</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_18_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_18</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.095</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_18_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_18</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.135</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_18_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_18</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.738</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_19_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_19</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_19_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_19</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.642</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_19_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_19</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_19_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_19</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.661</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_20_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_20</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_20_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_20</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.799</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_20_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_20</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.934</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_20_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_20</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.190</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_21_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_21</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_21_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_21</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.799</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_21_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_21</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.061</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_21_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_21</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.329</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_22_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_22</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.762</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_22_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_22</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.531</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_22_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_22</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.208</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_22_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_22</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.030</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_23_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_23</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.087</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_23_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_23</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.050</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_23_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_23</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_23_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_23</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.135</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_24_2018</td>
+<td headers="plot" class="gt_row gt_center">W1_24</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_24_2019</td>
+<td headers="plot" class="gt_row gt_center">W1_24</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.056</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_24_2020</td>
+<td headers="plot" class="gt_row gt_center">W1_24</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.956</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W1_24_2021</td>
+<td headers="plot" class="gt_row gt_center">W1_24</td>
+<td headers="site" class="gt_row gt_center">1</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.799</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_01_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_01</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.368</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_01_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_01</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_01_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_01</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.773</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_01_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_01</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.526</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_02_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_02</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_02_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_02</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.526</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_02_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_02</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.993</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_02_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_02</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.056</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_03_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_03</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_03_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_03</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.305</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_03_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_03</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_03_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_03</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.865</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_04_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_04</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_04_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_04</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_04_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_04</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_04_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_04</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_05_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_05</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.368</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_05_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_05</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.325</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_05_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_05</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_05_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_05</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_06_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_06</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_06_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_06</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_06_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_06</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_06_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_06</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_07_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_07</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_07_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_07</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.268</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_07_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_07</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_07_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_07</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.237</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_08_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_08</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_08_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_08</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.054</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_08_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_08</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_08_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_08</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.213</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_09_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_09</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_09_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_09</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.636</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_09_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_09</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.773</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_09_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_09</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_10_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_10</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_10_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_10</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.057</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_10_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_10</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_10_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_10</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.624</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_11_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_11</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_11_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_11</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.636</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_11_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_11</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.431</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_11_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_11</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_12_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_12</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_12_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_12</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.754</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_12_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_12</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_12_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_12</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.170</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_13_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_13</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_13_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_13</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_13_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_13</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.651</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_13_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_13</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_14_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_14</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_14_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_14</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.460</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_14_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_14</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.767</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_14_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_14</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.232</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_15_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_15</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_15_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_15</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_15_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_15</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.860</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_15_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_15</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_16_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_16</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_16_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_16</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.613</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_16_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_16</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.170</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_16_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_16</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_17_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_17</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_17_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_17</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.526</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_17_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_17</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_17_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_17</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_18_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_18</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_18_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_18</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.827</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_18_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_18</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.216</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_18_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_18</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_19_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_19</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_19_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_19</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.302</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_19_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_19</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.882</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_19_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_19</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.860</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_20_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_20</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_20_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_20</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.460</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_20_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_20</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.496</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_20_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_20</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.030</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_21_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_21</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_21_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_21</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_21_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_21</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.821</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_21_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_21</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.269</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_22_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_22</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_22_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_22</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.827</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_22_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_22</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_22_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_22</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.734</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_23_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_23</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_23_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_23</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_23_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_23</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.738</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_23_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_23</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.938</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_24_2018</td>
+<td headers="plot" class="gt_row gt_center">W2_24</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_24_2019</td>
+<td headers="plot" class="gt_row gt_center">W2_24</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.305</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_24_2020</td>
+<td headers="plot" class="gt_row gt_center">W2_24</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W2_24_2021</td>
+<td headers="plot" class="gt_row gt_center">W2_24</td>
+<td headers="site" class="gt_row gt_center">2</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.050</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_01_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_01</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_01_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_01</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.268</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_01_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_01</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.379</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_01_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_01</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_02_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_02</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_02_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_02</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.325</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_02_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_02</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.383</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_02_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_02</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.788</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_03_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_03</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_03_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_03</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.375</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_03_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_03</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.738</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_03_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_03</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.547</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_04_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_04</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_04_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_04</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.788</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_04_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_04</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.061</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_04_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_04</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_05_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_05</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.827</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_05_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_05</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_05_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_05</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.613</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_05_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_05</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.531</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_06_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_06</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_06_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_06</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.833</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_06_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_06</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.216</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_06_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_06</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.310</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_07_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_07</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_07_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_07</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.069</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_07_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_07</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.651</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_07_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_07</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_08_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_08</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_08_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_08</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.194</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_08_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_08</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_08_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_08</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_09_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_09</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_09_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_09</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_09_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_09</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.348</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_09_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_09</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.571</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_10_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_10</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-1.466</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_10_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_10</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_10_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_10</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_10_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_10</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.216</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_11_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_11</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.754</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_11_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_11</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.647</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_11_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_11</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.012</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_11_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_11</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.956</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_12_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_12</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.575</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_12_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_12</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_12_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_12</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_12_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_12</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.131</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_13_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_13</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_13_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_13</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.598</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_13_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_13</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_13_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_13</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.651</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_14_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_14</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_14_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_14</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.742</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_14_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_14</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_14_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_14</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_15_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_15</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_15_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_15</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.065</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_15_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_15</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.642</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_15_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_15</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.550</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_16_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_16</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_16_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_16</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_16_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_16</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_16_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_16</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.492</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_17_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_17</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.105</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_17_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_17</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.827</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_17_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_17</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.636</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_17_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_17</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.375</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_18_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_18</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_18_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_18</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.833</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_18_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_18</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.647</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_18_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_18</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_19_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_19</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_19_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_19</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.054</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_19_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_19</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.550</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_19_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_19</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.865</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_20_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_20</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.773</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_20_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_20</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.143</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_20_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_20</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.272</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_20_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_20</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.647</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_21_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_21</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_21_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_21</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_21_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_21</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.065</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_21_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_21</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.642</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_22_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_22</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_22_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_22</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_22_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_22</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.526</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_22_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_22</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.754</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_23_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_23</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.629</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_23_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_23</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.262</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_23_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_23</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.647</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_23_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_23</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.938</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_24_2018</td>
+<td headers="plot" class="gt_row gt_center">W3_24</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_24_2019</td>
+<td headers="plot" class="gt_row gt_center">W3_24</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_24_2020</td>
+<td headers="plot" class="gt_row gt_center">W3_24</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.647</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W3_24_2021</td>
+<td headers="plot" class="gt_row gt_center">W3_24</td>
+<td headers="site" class="gt_row gt_center">3</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.965</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_01_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_01</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_01_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_01</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_01_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_01</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_01_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_01</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.273</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_02_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_02</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_02_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_02</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.598</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_02_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_02</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.780</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_02_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_02</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.773</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_03_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_03</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_03_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_03</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.531</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_03_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_03</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.190</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_03_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_03</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.651</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_04_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_04</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_04_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_04</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.747</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_04_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_04</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.305</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_04_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_04</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.865</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_05_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_05</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_05_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_05</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_05_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_05</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.742</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_05_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_05</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.145</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_06_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_06</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.629</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_06_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_06</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.211</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_06_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_06</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_06_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_06</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.056</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_07_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_07</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_07_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_07</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.241</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_07_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_07</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.780</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_07_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_07</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_08_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_08</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.179</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_08_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_08</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_08_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_08</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.571</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_08_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_08</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.999</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_09_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_09</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_09_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_09</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.598</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_09_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_09</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.767</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_09_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_09</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.435</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_10_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_10</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_10_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_10</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.799</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_10_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_10</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.934</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_10_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_10</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.232</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_11_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_11</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_11_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_11</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.379</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_11_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_11</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_11_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_11</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.738</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_12_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_12</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.201</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_12_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_12</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.773</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_12_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_12</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.460</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_12_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_12</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_13_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_13</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_13_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_13</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_13_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_13</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_13_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_13</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_14_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_14</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-2.197</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_14_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_14</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.598</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_14_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_14</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.938</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_14_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_14</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_15_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_15</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_15_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_15</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.268</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_15_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_15</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_15_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_15</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.375</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_16_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_16</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_16_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_16</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_16_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_16</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.526</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_16_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_16</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_17_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_17</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_17_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_17</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_17_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_17</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_17_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_17</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_18_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_18</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_18_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_18</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.118</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_18_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_18</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_18_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_18</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.887</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_19_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_19</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_19_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_19</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.236</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_19_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_19</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.636</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_19_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_19</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_20_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_20</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_20_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_20</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.379</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_20_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_20</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.747</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_20_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_20</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_21_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_21</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_21_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_21</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.069</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_21_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_21</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.074</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_21_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_21</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.325</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_22_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_22</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">0.486</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_22_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_22</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.460</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_22_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_22</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_22_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_22</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.642</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_23_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_23</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.251</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_23_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_23</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_23_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_23</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.860</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_23_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_23</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.993</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_24_2018</td>
+<td headers="plot" class="gt_row gt_center">W4_24</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.504</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_24_2019</td>
+<td headers="plot" class="gt_row gt_center">W4_24</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_24_2020</td>
+<td headers="plot" class="gt_row gt_center">W4_24</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W4_24_2021</td>
+<td headers="plot" class="gt_row gt_center">W4_24</td>
+<td headers="site" class="gt_row gt_center">4</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.056</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_01_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_01</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_01_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_01</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_01_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_01</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_01_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_01</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.003</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_02_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_02</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_02_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_02</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.788</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_02_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_02</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.821</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_02_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_02</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.299</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_03_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_03</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.539</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_03_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_03</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.827</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_03_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_03</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.821</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_03_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_03</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.204</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_04_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_04</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_04_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_04</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.747</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_04_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_04</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_04_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_04</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.526</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_05_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_05</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_05_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_05</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_05_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_05</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_05_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_05</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.802</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_06_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_06</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.167</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_06_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_06</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_06_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_06</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.056</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_06_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_06</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.312</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_07_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_07</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.167</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_07_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_07</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.788</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_07_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_07</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.847</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_07_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_07</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.056</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_08_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_08</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.636</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_08_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_08</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.944</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_08_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_08</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.944</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_08_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_08</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.322</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_09_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_09</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.087</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_09_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_09</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.050</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_09_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_09</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_09_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_09</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.417</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_10_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_10</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-1.609</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_10_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_10</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.658</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_10_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_10</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_10_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_10</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.065</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_11_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_11</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-1.163</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_11_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_11</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.754</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_11_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_11</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.299</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_11_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_11</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.273</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_12_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_12</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.754</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_12_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_12</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.480</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_12_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_12</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_12_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_12</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.041</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_13_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_13</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_13_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_13</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_13_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_13</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.865</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_13_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_13</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.065</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_14_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_14</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_14_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_14</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.041</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_14_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_14</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.738</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_14_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_14</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.216</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_15_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_15</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_15_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_15</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.139</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_15_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_15</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.145</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_15_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_15</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.355</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_16_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_16</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_16_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_16</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.232</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_16_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_16</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.833</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_16_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_16</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.344</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_17_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_17</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.470</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_17_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_17</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.194</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_17_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_17</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_17_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_17</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.802</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_18_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_18</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.262</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_18_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_18</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_18_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_18</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.061</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_18_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_18</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.898</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_19_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_19</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.629</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_19_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_19</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.788</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_19_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_19</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_19_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_19</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_20_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_20</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_20_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_20</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.860</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_20_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_20</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_20_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_20</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_21_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_21</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_21_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_21</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.145</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_21_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_21</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_21_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_21</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.799</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_22_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_22</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.442</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_22_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_22</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_22_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_22</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">0.833</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_22_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_22</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_23_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_23</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.336</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_23_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_23</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.827</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_23_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_23</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.482</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_23_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_23</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_24_2018</td>
+<td headers="plot" class="gt_row gt_center">W5_24</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_24_2019</td>
+<td headers="plot" class="gt_row gt_center">W5_24</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.747</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_24_2020</td>
+<td headers="plot" class="gt_row gt_center">W5_24</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Katharina Beck north</td>
+<td headers="n" class="gt_row gt_right">1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W5_24_2021</td>
+<td headers="plot" class="gt_row gt_center">W5_24</td>
+<td headers="site" class="gt_row gt_center">5</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.427</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_01_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_01</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_01_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_01</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_01_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_01</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.783</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_01_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_01</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.204</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_02_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_02</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">0.223</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_02_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_02</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.865</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_02_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_02</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.003</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_02_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_02</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.993</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_03_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_03</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.154</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_03_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_03</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.560</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_03_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_03</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.821</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_03_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_03</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.273</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_04_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_04</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_04_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_04</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_04_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_04</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_04_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_04</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.492</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_05_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_05</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.179</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_05_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_05</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.480</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_05_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_05</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.046</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_05_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_05</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.030</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_06_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_06</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.466</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_06_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_06</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.245</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_06_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_06</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.322</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_06_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_06</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.350</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_07_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_07</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.619</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_07_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_07</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.234</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_07_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_07</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_07_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_07</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.488</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_08_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_08</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.575</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_08_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_08</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_08_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_08</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.956</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_08_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_08</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.216</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_09_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_09</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.030</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_09_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_09</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.598</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_09_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_09</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_09_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_09</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.237</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_10_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_10</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_10_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_10</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.050</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_10_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_10</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.916</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_10_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_10</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.934</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_11_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_11</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.368</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_11_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_11</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.405</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_11_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_11</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.875</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_11_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_11</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.435</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_12_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_12</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.182</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_12_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_12</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_12_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_12</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_12_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_12</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">15</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.511</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_13_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_13</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-2.303</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_13_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_13</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.442</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_13_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_13</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.613</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_13_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_13</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.811</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_14_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_14</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.872</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_14_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_14</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_14_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_14</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.949</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_14_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_14</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.012</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_15_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_15</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.204</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_15_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_15</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_15_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_15</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.216</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_15_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_15</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.488</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_16_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_16</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_16_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_16</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.588</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_16_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_16</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_16_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_16</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">0</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.860</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_17_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_17</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.762</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_17_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_17</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_17_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_17</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.693</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_17_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_17</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.738</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_18_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_18</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.386</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_18_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_18</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.318</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_18_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_18</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.969</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_18_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_18</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.598</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_19_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_19</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.981</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_19_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_19</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.236</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_19_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_19</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.022</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_19_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_19</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.099</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_20_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_20</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-1.224</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_20_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_20</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.143</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_20_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_20</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.288</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_20_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_20</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">25</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">0.606</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_21_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_21</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_21_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_21</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.946</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_21_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_21</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.179</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_21_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_21</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.273</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_22_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_22</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_22_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_22</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.050</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_22_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_22</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.723</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_22_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_22</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">8</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.179</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_23_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_23</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.357</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_23_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_23</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.299</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_23_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_23</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.253</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_23_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_23</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">hay_meadow</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.135</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_24_2018</td>
+<td headers="plot" class="gt_row gt_center">W6_24</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2018</td>
+<td headers="survey_year" class="gt_row gt_right">2018</td>
+<td headers="botanist_year" class="gt_row gt_center">2018 Simon Reith north</td>
+<td headers="n" class="gt_row gt_right">-0.452</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_24_2019</td>
+<td headers="plot" class="gt_row gt_center">W6_24</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2019</td>
+<td headers="survey_year" class="gt_row gt_right">2019</td>
+<td headers="botanist_year" class="gt_row gt_center">2019 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">1.749</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_24_2020</td>
+<td headers="plot" class="gt_row gt_center">W6_24</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2020</td>
+<td headers="survey_year" class="gt_row gt_right">2020</td>
+<td headers="botanist_year" class="gt_row gt_center">2020 Jakob Huber north</td>
+<td headers="n" class="gt_row gt_right">0.780</td></tr>
+    <tr><td headers="id" class="gt_row gt_center">W6_24_2021</td>
+<td headers="plot" class="gt_row gt_center">W6_24</td>
+<td headers="site" class="gt_row gt_center">6</td>
+<td headers="exposition" class="gt_row gt_center">north</td>
+<td headers="sand_ratio" class="gt_row gt_center">50</td>
+<td headers="substrate_depth" class="gt_row gt_center">30</td>
+<td headers="target_type" class="gt_row gt_center">dry_grassland</td>
+<td headers="seed_density" class="gt_row gt_center">4</td>
+<td headers="survey_year_fct" class="gt_row gt_center">2021</td>
+<td headers="survey_year" class="gt_row gt_right">2021</td>
+<td headers="botanist_year" class="gt_row gt_center">2021 Markus Bauer north</td>
+<td headers="n" class="gt_row gt_right">1.427</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
 
 # Statistics
 
@@ -385,7 +14648,8 @@ get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
     ##              0         default
 
 ``` r
-ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
+data <- data.frame(x = c(-5, 5))
+ggplot(data, aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 2)) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for Intercept")
@@ -394,7 +14658,7 @@ ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
 ![](model_fcs_check_files/figure-gfm/possible-priors-1.png)<!-- -->
 
 ``` r
-ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
+ggplot(data, aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0.3, sd = 2)) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for treatments")
@@ -403,7 +14667,7 @@ ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
 ![](model_fcs_check_files/figure-gfm/possible-priors-2.png)<!-- -->
 
 ``` r
-ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
+ggplot(data, aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0) +
   ggtitle("Cauchy distribution")
@@ -412,7 +14676,7 @@ ggplot(data = data.frame(x = c(-5, 5)), aes(x = x)) +
 ![](model_fcs_check_files/figure-gfm/possible-priors-3.png)<!-- -->
 
 ``` r
-ggplot(data.frame(x = c(-5, 5)), aes(x = x)) +
+ggplot(data, aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) +
   ggtitle(expression(Student~italic(t)*"-distribution"))
@@ -898,7 +15162,7 @@ bayes_factor <- brms::bayes_factor(m_1, m_2)
 bayes_factor
 ```
 
-    ## Estimated Bayes factor in favor of m_1 over m_2: 661450905.32954
+    ## Estimated Bayes factor in favor of m_1 over m_2: 484058908.01661
 
 ## Posterior distributions (BARG 3.B)
 
@@ -1342,16 +15606,16 @@ emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ##  [1] emmeans_1.8.3             tidybayes_3.0.2          
-    ##  [3] loo_2.5.1                 bayesplot_1.10.0         
-    ##  [5] DHARMa.helpers_0.0.0.9000 brms_2.18.0              
-    ##  [7] Rcpp_1.0.9                patchwork_1.1.2          
-    ##  [9] ggbeeswarm_0.6.0          forcats_0.5.2            
-    ## [11] stringr_1.5.0             dplyr_1.0.10             
-    ## [13] purrr_0.3.5               readr_2.1.3              
-    ## [15] tidyr_1.2.1               tibble_3.1.8             
-    ## [17] ggplot2_3.4.0             tidyverse_1.3.2          
-    ## [19] here_1.0.1               
+    ##  [1] gt_0.8.0                  emmeans_1.8.3            
+    ##  [3] tidybayes_3.0.2           loo_2.5.1                
+    ##  [5] bayesplot_1.10.0          DHARMa.helpers_0.0.0.9000
+    ##  [7] brms_2.18.0               Rcpp_1.0.9               
+    ##  [9] patchwork_1.1.2           ggbeeswarm_0.6.0         
+    ## [11] forcats_0.5.2             stringr_1.5.0            
+    ## [13] dplyr_1.0.10              purrr_0.3.5              
+    ## [15] readr_2.1.3               tidyr_1.2.1              
+    ## [17] tibble_3.1.8              ggplot2_3.4.0            
+    ## [19] tidyverse_1.3.2           here_1.0.1               
     ## 
     ## loaded via a namespace (and not attached):
     ##   [1] utf8_1.2.2           tidyselect_1.2.0     lme4_1.1-31         
@@ -1382,7 +15646,7 @@ emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
     ##  [76] ggdist_3.2.0         colourpicker_1.2.0   reprex_2.0.2        
     ##  [79] googledrive_2.0.0    mvtnorm_1.1-3        matrixStats_0.63.0  
     ##  [82] hms_1.1.2            shinyjs_2.1.0        mime_0.12           
-    ##  [85] evaluate_0.18        arrayhelpers_1.1-0   xtable_1.8-4        
+    ##  [85] evaluate_0.19        arrayhelpers_1.1-0   xtable_1.8-4        
     ##  [88] XML_3.99-0.13        shinystan_2.6.0      jpeg_0.1-10         
     ##  [91] readxl_1.4.1         gridExtra_2.3        rstantools_2.2.0    
     ##  [94] compiler_4.2.2       KernSmooth_2.23-20   V8_4.2.2            
@@ -1405,5 +15669,5 @@ emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
     ## [145] lattice_0.20-45      fastmap_1.1.0        httr_1.4.4          
     ## [148] pkgbuild_1.4.0       glue_1.6.2           xts_0.12.2          
     ## [151] iterators_1.0.14     png_0.1-8            shinythemes_1.2.0   
-    ## [154] bit_4.0.5            stringi_1.7.8        latticeExtra_0.6-30 
-    ## [157] ape_5.6-2
+    ## [154] bit_4.0.5            stringi_1.7.8        sass_0.4.4          
+    ## [157] latticeExtra_0.6-30  ape_5.6-2

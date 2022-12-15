@@ -2,33 +2,39 @@
 title: "Dike experiment"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
-  bookdown::word_document2:
+  officedown::rdocx_document:
     reference_docx: template_word.docx
-    global_numbering: TRUE
 csl: template-journal-of-vegetation-science.csl
 bibliography: bibliography.bib
 ---
+
+# Start
 
 Restoration Ecology, TUM School of Life Sciences, Technical University of Munich, Germany
 
 \* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de)
 
-Open Research: Data and code are permanently available on Zenodo under: <https://doi.org/10.XXXX>.
+Open Research: Data and code are permanently available on Zenodo under: <!--# https://doi.org/10.XXXX -->.
 
 **Max 8000 words**
-
-See Figure \@ref(fig:figure-map)
-
-\clearpage
 
 \newpage
 
 ```{r set-up, include = FALSE}
-library(bookdown)
 library(knitr)
+library(bookdown)
+library(officedown)
+library(officer)
+library(tidyverse)
+library(flextable)
 knitr::opts_chunk$set(
   echo = FALSE,
+  message = FALSE,
   dpi = 50
+  )
+set_flextable_defaults(
+  font.family = "Times New Roman",
+  font.size = 10
   )
 
 
@@ -88,13 +94,13 @@ We asked following question to evaluate the restoration success after four years
 
 ## Experimental design {.unnumbered}
 
-The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(figure-1)), 314 m above sea level (asl); WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [@lfu2021waterlevel,@lfu2021discharge] (Table \@ref(table-s1)). Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike <mark>Is that right?</mark> and a with an excavator the substrates were mixed <mark>Is that right?</mark> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland (Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, @mucina2016 ). The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species <mark>check numbers</mark>, respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(table-2))<mark>check</mark>. The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(table-3)) <mark>more details and check</mark>. The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
+The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-1)), 314 m above sea level (asl); WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [@lfu2021waterlevel,@lfu2021discharge] (Table \@ref(fig:table-s1)). Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike <!--# Is that right?  --> and a with an excavator the substrates were mixed <!--# Is that right?  --> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland (Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, @mucina2016 ). The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species <!--# check numbers  -->, respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(fig:table-2))<!--# check  -->. The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(fig:table-3)) <!--# More details and check  -->. The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
 
-We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(figure-1)). The split plot was cuased by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(table-1)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m\^-2 ). The vegetation was surveyed in June or July 2018--2021 (**Braun-Blanquet, 1928/1964**). Establishment rates of species
+We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-1)). The split plot was cuased by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(fig:table-1)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m\^-2 ). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964]. Establishment rates of species
 
 ## Statistical analyses {.unnumbered}
 
-We performed all analyses in R (Version 4.2.2; @base), with the functions 'blme' (based on 'lme4') for BLMM [@lme4] **Chung, Rabe-Hesketh, Dorie, Gelman, & Liu, 2013)**; and 'DHARMa' for model evaluation [@DHARMa].
+We performed all analyses in R [Version 4.2.2; @base], with the functions 'blme' (based on 'lme4') for BLMM [@lme4, @chung2013]; and 'DHARMa' for model evaluation [@DHARMa].
 
 <mark>We calculated Bayesian linear mixed-effects models (BLMM) with the random effect 'plot' and used the restricted maximum-likelihood estimation (REML), the optimiser Nelder-Mead and, for the random effect, the Wishart prior. To identify the final model, we first reviewed the residual diagnostics of the candidate models and subsequently compared the remaining models using the Akaike information criterion adjusted for a small sample size (AICc) and chose the most parsimonious model (Appendix A4). Finally, we calculated the marginal and conditional coefficients of determination (R²m, R²c) and the 95% confidence intervals of the response variables.</mark>
 
@@ -126,7 +132,7 @@ Text
 
 # Acknowledgements {.unnumbered}
 
-We would like to thank our project partners Dr. Markus Fischer, Frank Schuster, and Christoph Schwahn (WIGES GmbH) for numerous discussions on restoration and management of dike grasslands. Field work was supported by Clemens Berger and Uwe Kleber-Lerchbaumer (Wasserwirtschaftsamt Deggendorf). <mark>Mention Naturschutzbehörde and funding from WIGES.</mark> We thank Holger Paetsch, Simon Reith, Anna Ritter, Jakob Strak, Leonardo H. Teixeira, and Linda Weggler for assisting with the field surveys or soil analyses in 2018--2020. The German Federal Environmental Foundation (DBU) supported MB with a doctoral scholarship.
+We would like to thank our project partners Dr. Markus Fischer, Frank Schuster, and Christoph Schwahn (WIGES GmbH) and Klaus Rachl and Stefan Radlmair (Regierung von Niederbayern) for numerous discussions on restoration and management of dike grasslands. Field work was supported by Clemens Berger and Uwe Kleber-Lerchbaumer (Wasserwirtschaftsamt Deggendorf). We thank Holger Paetsch, Simon Reith, Anna Ritter, Jakob Strak, Leonardo H. Teixeira, and Linda Weggler for assisting with the field surveys or soil analyses in 2018--2020. The German Federal Environmental Foundation (DBU) supported MB with a doctoral scholarship.
 
 # Author contribution {.unnumbered}
 
@@ -134,13 +140,13 @@ JH and JK designed the experiment. JH did the surveys in the years 2018--2020 an
 
 # Open research {.unnumbered}
 
-Data and code is available on Zenodo: <mark><https://doi.org/10.XXXX></mark>
+Data and code is available on Zenodo: <!--# https://doi.org/10.XXXX -->
 
 Model evaluation is stored on GitHub: [github.com/markus1bauer/2023_danube_dike_experiment](https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown)
 
 # Funding {.unnumbered}
 
-MB is funded by a doctoral scholarship of the German Federal Environmental Foundation (DBU) (No. 20021/698). The establishment of the experiment and the vegetation surveys were financed by the WIGES GmbH in the years 2018--2020. <mark>funding number WIGES</mark>
+MB is funded by a doctoral scholarship of the German Federal Environmental Foundation (DBU) (No. 20021/698). The establishment of the experiment and the vegetation surveys were financed by the WIGES GmbH in the years 2018--2020. <!--# funding number of WIGES -->
 
 # References {.unnumbered}
 
@@ -151,12 +157,24 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 \newpage
 
+<!---BLOCK_LANDSCAPE_START--->
+
 # Tables {.unnumbered}
 
-## Table 1 {.unnumbered}
+\## Table 1
 
-```{r table-1, fig.cap = "table-1"}
-#include_graphics(here::here("outputs", "tables", "figureS1.png"))
+Mischprobe aus mehreren Plots. Measured in \< 2mm fraction <!--# Write full description -->
+
+```{r table-1, fig.cap = "table_1"}
+read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>%
+  slice(-1) %>%
+  flextable() %>%
+  bold(part = "header") %>%
+  add_header_row(
+    top = FALSE,
+    values = read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>% slice(1)
+    ) %>%
+  fit_to_width(16.5, inc = 1L, max_iter = 20, unit = "cm")
 ```
 
 \clearpage
@@ -165,11 +183,19 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Table 2 {.unnumbered}
 
-```{r table-2, fig.cap = ""}
-#include_graphics(here::here("outputs", "tables", "figureS1.png"))
+Each plot received a individual set of 20 species with some restrictions to the number of species per functional group. <!--# Full description -->
+
+```{r table-2, fig.cap = "table_2"}
+read_csv(here::here("data", "raw", "data_raw_table_2.csv")) %>%
+  flextable() %>%
+  bold(part = "header") %>%
+  add_header_row(top = FALSE, values = c("", "", "#", "#", "%", "%")) %>%
+  autofit()
 ```
 
 \clearpage
+
+<!---BLOCK_LANDSCAPE_STOP--->
 
 \newpage
 
@@ -177,7 +203,7 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Figure 1 {.unnumbered}
 
-```{r figure-1, fig.cap = "\\label{fig:figure-1}This is a caption"}
+```{r figure-1, fig.cap = "figure-1"}
 knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300dpi_8x11cm.tiff"))
 ```
 
@@ -187,7 +213,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 2 {.unnumbered}
 
-```{r figure-2, fig.cap = ""}
+```{r figure-2, fig.cap = "figure-2"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff"))
 ```
 
@@ -197,7 +223,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 3 {.unnumbered}
 
-```{r figure-3, fig.cap = ""}
+```{r figure-3, fig.cap = "figure-3"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_3_persistence_epred_800dpi_16.5x14cm.tiff"))
 ```
 
@@ -207,7 +233,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 4 {.unnumbered}
 
-```{r figure-4, fig.cap = ""}
+```{r figure-4, fig.cap = "figure-4"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_4_fcs_epred_800dpi_16.5x14cm.tiff"))
 ```
 
@@ -217,7 +243,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 5 {.unnumbered}
 
-```{r figure-5, fig.cap = ""}
+```{r figure-5, fig.cap = "figure-5"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x14cm.tiff"))
 ```
 
@@ -229,7 +255,7 @@ Fig. 5:
 
 ## Figure 6 {.unnumbered}
 
-```{r figure-6, fig.cap = ""}
+```{r figure-6, fig.cap = "figure-6"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff"))
 ```
 
@@ -243,10 +269,14 @@ Fig. 6:
 
 ## Table S1 {.unnumbered}
 
-Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten (mean, 1981--2010; ID, 3271; WGS84 (lat/lon), 48.85476 and 12.918911; CDC, 2022a, 2022b) and stream gauge Pfelling (ID, 10078000; WGS84 (lat/lon), 48.87975 and 12.74716; LfU, 2021a). HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
+Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911; @cdc2022prec, @cdc2022temp] and stream gauge Pfelling [ID, 10078000; WGS84, lat/lon, 48.87975, 12.74716; @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
 
-```{r table-s1}
-#knitr::include_graphics(here::here("outputs", "tables", "figureS1.png"))
+```{r table-s1, fig.cap = "table-s1"}
+read_csv(here::here("data", "raw", "data_raw_table_s1.csv")) %>%
+  flextable() %>%
+  bold(part = "header") %>%
+  compose(part = "body", i = ~ Unit == "m3 s−1", j = "Unit", value = as_paragraph("m", as_sup("3"), " s", as_sup("−1"))) %>%
+  autofit()
 ```
 
 \clearpage
@@ -255,8 +285,10 @@ Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred 
 
 ## Table S2 {.unnumbered}
 
-```{r table-s2}
-#knitr::include_graphics(here::here("outputs", "tables", "figureS2.png"))
+Establishment rate <!--# Full description an include it here -->
+
+```{r table-s2, fig.cap = "table-s2"}
+knitr::include_graphics(here::here("outputs", "tables", "table_a2_establishment.html"))
 ```
 
 \clearpage
@@ -265,9 +297,7 @@ Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred 
 
 ## Table S3 {.unnumbered}
 
-```{r table-s3}
-#knitr::include_graphics(here::here("outputs", "tables", "table_a3_seedmixes.csv"))
-```
+See repository outputs/tables/table_a3_seedmixes.csv <!--# Write full link and full description -->
 
 \clearpage
 
