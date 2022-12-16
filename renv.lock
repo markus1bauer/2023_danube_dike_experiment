@@ -1376,6 +1376,25 @@
       "Hash": "dabc225759a2c2b241e60e42bf0e8e54",
       "Requirements": []
     },
+    "flextable": {
+      "Package": "flextable",
+      "Version": "0.8.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "df0b526f6c280d1dc3f88a5fe64695a2",
+      "Requirements": [
+        "base64enc",
+        "data.table",
+        "gdtools",
+        "htmltools",
+        "knitr",
+        "officer",
+        "rlang",
+        "rmarkdown",
+        "uuid",
+        "xml2"
+      ]
+    },
     "fontawesome": {
       "Package": "fontawesome",
       "Version": "0.4.0",
@@ -1481,6 +1500,17 @@
         "rlang",
         "rstudioapi",
         "withr"
+      ]
+    },
+    "gdtools": {
+      "Package": "gdtools",
+      "Version": "0.2.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bdfa7431687797edff8c9b0eb9271cc8",
+      "Requirements": [
+        "Rcpp",
+        "systemfonts"
       ]
     },
     "generics": {
@@ -2637,6 +2667,42 @@
       "Hash": "df58958f293b166e4ab885ebcad90e02",
       "Requirements": []
     },
+    "officedown": {
+      "Package": "officedown",
+      "Version": "0.2.5.004",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "officedown",
+      "RemoteUsername": "davidgohel",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "6ed420dc7d500e425af20a3a7cc01a109286ed8c",
+      "Hash": "dec7a204710ab361c8f742df90e7304f",
+      "Requirements": [
+        "knitr",
+        "memoise",
+        "officer",
+        "rlang",
+        "rmarkdown",
+        "rvg",
+        "uuid",
+        "xml2",
+        "yaml"
+      ]
+    },
+    "officer": {
+      "Package": "officer",
+      "Version": "0.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b5e49bde43eb75525059d8194b61e49b",
+      "Requirements": [
+        "R6",
+        "uuid",
+        "xml2",
+        "zip"
+      ]
+    },
     "openssl": {
       "Package": "openssl",
       "Version": "2.0.5",
@@ -3258,10 +3324,10 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.18",
+      "Version": "2.19",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8063c4e953cefb651e8cd58c82c82d2d",
+      "Hash": "4e29299e1f4c7eabb0b8365b338adf3c",
       "Requirements": [
         "bslib",
         "evaluate",
@@ -3403,6 +3469,20 @@
         "selectr",
         "tibble",
         "withr",
+        "xml2"
+      ]
+    },
+    "rvg": {
+      "Package": "rvg",
+      "Version": "0.3.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "01cc7cc67b13b8226707415828a2a7be",
+      "Requirements": [
+        "Rcpp",
+        "gdtools",
+        "officer",
+        "rlang",
         "xml2"
       ]
     },
@@ -4442,6 +4522,14 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "9b570515751dcbae610f29885e025b41",
+      "Requirements": []
+    },
+    "zip": {
+      "Package": "zip",
+      "Version": "2.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c42bfcec3fa6a0cce17ce1f8bc684f88",
       "Requirements": []
     },
     "zoo": {
