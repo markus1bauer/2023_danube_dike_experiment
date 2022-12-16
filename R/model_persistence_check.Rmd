@@ -46,7 +46,6 @@ library(brms)
 library(DHARMa.helpers)
 library(bayesplot)
 library(loo)
-library(tidybayes)
 library(emmeans)
 ```
 
@@ -256,11 +255,11 @@ posterior_flat <- m_flat %>%
   posterior::as_draws() %>%
   posterior::subset_draws(variable = variables)
 # R hat
-rhat1 <- rhat(m_1)
-rhat2 <- rhat(m_2)
+rhat1 <- brms::rhat(m_1)
+rhat2 <- brms::rhat(m_2)
 # NEFF ratio
-neff1 <- neff_ratio(m_1)
-neff2 <- neff_ratio(m_2)
+neff1 <- brms::neff_ratio(m_1)
+neff2 <- brms::neff_ratio(m_2)
 # Long format of draws
 hmc_diagnostics1 <- brms::nuts_params(m_1)
 hmc_diagnostics2 <- brms::nuts_params(m_2)
@@ -288,7 +287,7 @@ draws2 <- m_2 %>%
 #### Possible prior distributions
 
 ```{r possible-priors}
-get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
+brms::get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
             (1 | site/plot) + (1|botanist_year),
           data = sites)
@@ -319,7 +318,7 @@ brms::prior_summary(m_1, all = FALSE)
 #### Prior predictive check (BARG 1.E)
 
 ```{r prior-predictive-check}
-ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
+bayesplot::ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
   coord_cartesian(xlim = c(-1, 1))
 ppd_stat_grouped(yrep_prior[1:500, ], group = sites$site,
                  binwidth = 0.2) +
@@ -346,48 +345,39 @@ ppd_stat_grouped(yrep_prior[1:500, ], group = sites$substrate_depth,
 
 ## Model check
 
-### DHARMa
-
-```{r dharma, collapse = TRUE}
-DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
-DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
-```
-
-### Sampling efficency and effectiveness (BARG 2.B/C)
-
-#### Rhat (BARG 2.B)
-
-```{r rhat, collapse = TRUE}
-mcmc_rhat(rhat1)
-mcmc_rhat(rhat1)
-```
-
-#### Effective sampling size (ESS) (BARG 2.C)
-
-```{r ess, collapse = TRUE}
-mcmc_neff(neff1)
-mcmc_neff(neff2)
-```
-
-### MCMC diagnostics
+### Check computation (MCMC diagnostics, BARG 2.B/C)
 
 #### Trace plots
 
 ```{r mcmc-trace, fig.height = 14}
-mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
-mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
+bayesplot::mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
+bayesplot::mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
+```
+
+#### Sampling efficency: Rhat (BARG 2.B)
+
+```{r rhat, collapse = TRUE}
+bayesplot::mcmc_rhat(rhat1)
+bayesplot::mcmc_rhat(rhat1)
+```
+
+#### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
+
+```{r ess, collapse = TRUE}
+bayesplot::mcmc_neff(neff1)
+bayesplot::mcmc_neff(neff2)
 ```
 
 #### Pairs plot
 
 ```{r mcmc-pairs, collapse = TRUE, fig.height = 6.5}
-mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
+bayesplot::mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
              "b_target_typedry_grassland", "b_seed_density8",
              "b_expositionsouth", "sigma"
            ))
-mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
+bayesplot::mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
              "b_target_typedry_grassland", "b_seed_density8",
@@ -398,10 +388,17 @@ mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
 #### Parallel coordinate plot
 
 ```{r mcmc-parcoord, collapse = TRUE}
-mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
+bayesplot::mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
   theme(axis.text.x = element_text(angle = 45))
-mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
+bayesplot::mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
   theme(axis.text.x = element_text(angle = 45))
+```
+
+#### Autocorrelation check
+
+```{r autocorrelation}
+bayesplot::mcmc_acf(posterior1, lags = 10)
+bayesplot::mcmc_acf(posterior2, lags = 10)
 ```
 
 ### Posterior predictive check (BARG 3.A)
@@ -409,8 +406,8 @@ mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
 #### Kernel density
 
 ```{r kernel-density}
-p1 <- ppc_dens_overlay(y, yrep1[1:50, ])
-p2 <- ppc_dens_overlay(y, yrep2[1:50, ])
+p1 <- bayesplot::ppc_dens_overlay(y, yrep1[1:50, ])
+p2 <- bayesplot::ppc_dens_overlay(y, yrep2[1:50, ])
 p1 / p2
 ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site)
 ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site)
@@ -436,8 +433,8 @@ p1 / p2
 #### Histograms of statistics skew
 
 ```{r histograms}
-p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
-p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
+p1 <- bayesplot::ppc_stat(y, yrep1, binwidth = 0.001)
+p2 <- bayesplot::ppc_stat(y, yrep2, binwidth = 0.001)
 p1 / p2
 ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
 ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
@@ -460,7 +457,7 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001
 p1 / p2
 ```
 
-#### LOO (Leave one out)
+#### LOO cross-validation (Leave one out)
 
 ```{r loo}
 loo1
@@ -478,11 +475,11 @@ p1 / p2
 
 ```
 
-### Autocorrelation check
+### DHARMa
 
-```{r autocorrelation}
-mcmc_acf(posterior1, lags = 10)
-mcmc_acf(posterior2, lags = 10)
+```{r dharma, collapse = TRUE}
+DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
+DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ```
 
 ## Model comparison
@@ -520,7 +517,7 @@ bayes_factor
 ### Forest plot (BARG 2.B/5.B)
 
 ```{r posteriors, fig.height = 7}
-combined <- bind_rows(
+combined_models <- bind_rows(
   bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95) %>%
     mutate(model = "m_1"),
   bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95) %>%
@@ -533,15 +530,18 @@ combined <- bind_rows(
 
 pos <- position_nudge(
   y = if_else(
-    combined$model == "m_2", -.2, if_else(
-      combined$model == "m_flat", -.4, if_else(
-        combined$model == "m_prior", -.6, 0
+    combined_models$model == "m_2", -.2, if_else(
+      combined_models$model == "m_flat", -.4, if_else(
+        combined_models$model == "m_prior", -.6, 0
         )
       )
     )
   )
 
-ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)) + 
+ggplot(
+  data = combined_models,
+  aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)
+  ) + 
   geom_vline(xintercept = 0, color = "grey") +
   geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
   geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
