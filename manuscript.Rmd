@@ -2,7 +2,7 @@
 title: "Dike experiment"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
-  officedown::rdocx_document:
+  bookdown::word_document2:
     reference_docx: template_word.docx
 csl: template-journal-of-vegetation-science.csl
 bibliography: bibliography.bib
@@ -94,9 +94,9 @@ We asked following question to evaluate the restoration success after four years
 
 ## Experimental design {.unnumbered}
 
-The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-1)), 314 m above sea level (asl); WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [@lfu2021waterlevel,@lfu2021discharge] (Table \@ref(fig:table-s1)). Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike <!--# Is that right?  --> and a with an excavator the substrates were mixed <!--# Is that right?  --> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland (Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, @mucina2016 ). The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species <!--# check numbers  -->, respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(fig:table-2))<!--# check  -->. The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(fig:table-3)) <!--# More details and check  -->. The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
+The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)), 314 m above sea level (asl); WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [@lfu2021waterlevel,@lfu2021discharge] (Table \@ref(fig:table-flood-weather)). Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike <!--# Is that right?  --> and a with an excavator the substrates were mixed <!--# Is that right?  --> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland (Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, @mucina2016 ). The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species <!--# check numbers  -->, respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(fig:table-seedmix))<!--# check  -->. The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(fig:table-3)) <!--# More details and check  -->. The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
 
-We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-1)). The split plot was cuased by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(fig:table-1)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m\^-2 ). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964]. Establishment rates of species
+We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was cuased by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(fig:table-substrate)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m\^-2 ). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964]. Establishment rates of species
 
 ## Statistical analyses {.unnumbered}
 
@@ -161,11 +161,11 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 # Tables {.unnumbered}
 
-\## Table 1
+## Table 1
 
 Mischprobe aus mehreren Plots. Measured in \< 2mm fraction <!--# Write full description -->
 
-```{r table-1, fig.cap = "table_1"}
+```{r table-substrate, fig.cap = "table_substrate"}
 read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>%
   slice(-1) %>%
   flextable() %>%
@@ -174,7 +174,7 @@ read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>%
     top = FALSE,
     values = read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>% slice(1)
     ) %>%
-  fit_to_width(16.5, inc = 1L, max_iter = 20, unit = "cm")
+  autofit()
 ```
 
 \clearpage
@@ -185,7 +185,7 @@ read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>%
 
 Each plot received a individual set of 20 species with some restrictions to the number of species per functional group. <!--# Full description -->
 
-```{r table-2, fig.cap = "table_2"}
+```{r table-seedmix, fig.cap = "table_seedmix"}
 read_csv(here::here("data", "raw", "data_raw_table_2.csv")) %>%
   flextable() %>%
   bold(part = "header") %>%
@@ -195,6 +195,19 @@ read_csv(here::here("data", "raw", "data_raw_table_2.csv")) %>%
 
 \clearpage
 
+\newpage
+
+## Table 3
+
+functional traits <!--# full description + table -->
+
+```{r table-traits, fig.cap = "table_traits"}
+read_csv(here::here("data", "raw", "data_raw_table_2.csv")) %>%
+  flextable() %>%
+  bold(part = "header") %>%
+  autofit()
+```
+
 <!---BLOCK_LANDSCAPE_STOP--->
 
 \newpage
@@ -203,7 +216,7 @@ read_csv(here::here("data", "raw", "data_raw_table_2.csv")) %>%
 
 ## Figure 1 {.unnumbered}
 
-```{r figure-1, fig.cap = "figure-1"}
+```{r figure-map, fig.cap = "figure-map"}
 knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300dpi_8x11cm.tiff"))
 ```
 
@@ -213,7 +226,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 2 {.unnumbered}
 
-```{r figure-2, fig.cap = "figure-2"}
+```{r figure-effects, fig.cap = "figure-effects"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff"))
 ```
 
@@ -223,7 +236,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 3 {.unnumbered}
 
-```{r figure-3, fig.cap = "figure-3"}
+```{r figure-persistence, fig.cap = "figure-3"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_3_persistence_epred_800dpi_16.5x14cm.tiff"))
 ```
 
@@ -233,7 +246,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 4 {.unnumbered}
 
-```{r figure-4, fig.cap = "figure-4"}
+```{r figure-fcs, fig.cap = "figure-4"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_4_fcs_epred_800dpi_16.5x14cm.tiff"))
 ```
 
@@ -243,7 +256,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 5 {.unnumbered}
 
-```{r figure-5, fig.cap = "figure-5"}
+```{r figure-recovery, fig.cap = "figure-5"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x14cm.tiff"))
 ```
 
@@ -255,7 +268,7 @@ Fig. 5:
 
 ## Figure 6 {.unnumbered}
 
-```{r figure-6, fig.cap = "figure-6"}
+```{r figure-nmds, fig.cap = "figure-6"}
 #knitr::include_graphics(here::here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff"))
 ```
 
@@ -271,7 +284,7 @@ Fig. 6:
 
 Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911; @cdc2022prec, @cdc2022temp] and stream gauge Pfelling [ID, 10078000; WGS84, lat/lon, 48.87975, 12.74716; @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
 
-```{r table-s1, fig.cap = "table-s1"}
+```{r table-flood-weather, fig.cap = "table-s1"}
 read_csv(here::here("data", "raw", "data_raw_table_s1.csv")) %>%
   flextable() %>%
   bold(part = "header") %>%
@@ -287,7 +300,7 @@ read_csv(here::here("data", "raw", "data_raw_table_s1.csv")) %>%
 
 Establishment rate <!--# Full description an include it here -->
 
-```{r table-s2, fig.cap = "table-s2"}
+```{r table-establishment, fig.cap = "table-s2"}
 knitr::include_graphics(here::here("outputs", "tables", "table_a2_establishment.html"))
 ```
 
