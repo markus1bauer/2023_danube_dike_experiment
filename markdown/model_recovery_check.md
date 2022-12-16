@@ -24,17 +24,15 @@ completeness
     - <a href="#priors-barg-1de" id="toc-priors-barg-1de">Priors (BARG
       1.D/E)</a>
   - <a href="#model-check" id="toc-model-check">Model check</a>
-    - <a href="#dharma" id="toc-dharma">DHARMa</a>
-    - <a href="#sampling-efficency-and-effectiveness-barg-2bc"
-      id="toc-sampling-efficency-and-effectiveness-barg-2bc">Sampling
-      efficency and effectiveness (BARG 2.B/C)</a>
-    - <a href="#mcmc-diagnostics" id="toc-mcmc-diagnostics">MCMC
-      diagnostics</a>
+    - <a href="#check-computation-mcmc-diagnostics-barg-2bc"
+      id="toc-check-computation-mcmc-diagnostics-barg-2bc">Check computation
+      (MCMC diagnostics, BARG 2.B/C)</a>
+    - <a href="#autocorrelation-check"
+      id="toc-autocorrelation-check">Autocorrelation check</a>
     - <a href="#posterior-predictive-check-barg-3a"
       id="toc-posterior-predictive-check-barg-3a">Posterior predictive check
       (BARG 3.A)</a>
-    - <a href="#autocorrelation-check"
-      id="toc-autocorrelation-check">Autocorrelation check</a>
+    - <a href="#dharma" id="toc-dharma">DHARMa</a>
   - <a href="#model-comparison" id="toc-model-comparison">Model
     comparison</a>
     - <a href="#conditional-r2-values"
@@ -97,7 +95,6 @@ library(brms)
 library(DHARMa.helpers)
 library(bayesplot)
 library(loo)
-library(tidybayes)
 library(emmeans)
 ```
 
@@ -291,11 +288,11 @@ posterior_flat <- m_flat %>%
   posterior::as_draws() %>%
   posterior::subset_draws(variable = variables)
 # R hat
-rhat1 <- rhat(m_1)
-rhat2 <- rhat(m_2)
+rhat1 <- brms::rhat(m_1)
+rhat2 <- brms::rhat(m_2)
 # NEFF ratio
-neff1 <- neff_ratio(m_1)
-neff2 <- neff_ratio(m_2)
+neff1 <- brms::neff_ratio(m_1)
+neff2 <- brms::neff_ratio(m_2)
 # Long format of draws
 hmc_diagnostics1 <- brms::nuts_params(m_1)
 hmc_diagnostics2 <- brms::nuts_params(m_2)
@@ -323,7 +320,7 @@ draws2 <- m_2 %>%
 #### Possible prior distributions
 
 ``` r
-get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
+brms::get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
             (1 | site/plot) + (1|botanist_year),
           data = sites)
@@ -439,7 +436,7 @@ brms::prior_summary(m_1, all = FALSE)
 #### Prior predictive check (BARG 1.E)
 
 ``` r
-ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
+bayesplot::ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
   coord_cartesian(xlim = c(-2, 2))
 ```
 
@@ -503,72 +500,56 @@ ppd_stat_grouped(yrep_prior[1:500, ], group = sites$substrate_depth,
 
 ## Model check
 
-### DHARMa
-
-``` r
-DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
-```
-
-![](model_recovery_check_files/figure-gfm/dharma-1.png)<!-- -->
-
-``` r
-DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
-```
-
-![](model_recovery_check_files/figure-gfm/dharma-2.png)<!-- -->
-
-### Sampling efficency and effectiveness (BARG 2.B/C)
-
-#### Rhat (BARG 2.B)
-
-``` r
-mcmc_rhat(rhat1)
-```
-
-![](model_recovery_check_files/figure-gfm/rhat-1.png)<!-- -->
-
-``` r
-mcmc_rhat(rhat2)
-```
-
-![](model_recovery_check_files/figure-gfm/rhat-2.png)<!-- -->
-
-#### Effective sampling size (ESS) (BARG 2.C)
-
-``` r
-mcmc_neff(neff1)
-```
-
-![](model_recovery_check_files/figure-gfm/ess-1.png)<!-- -->
-
-``` r
-mcmc_neff(neff2)
-```
-
-![](model_recovery_check_files/figure-gfm/ess-2.png)<!-- -->
-
-### MCMC diagnostics
+### Check computation (MCMC diagnostics, BARG 2.B/C)
 
 #### Trace plots
 
 ``` r
-mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
+bayesplot::mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
 ```
 
 ![](model_recovery_check_files/figure-gfm/mcmc-trace-1.png)<!-- -->
 
 ``` r
-mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
+bayesplot::mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
 ```
 
     ## No divergences to plot.
 
 ![](model_recovery_check_files/figure-gfm/mcmc-trace-2.png)<!-- -->
 
+#### Sampling efficency: Rhat (BARG 2.B)
+
+``` r
+bayesplot::mcmc_rhat(rhat1)
+```
+
+![](model_recovery_check_files/figure-gfm/rhat-1.png)<!-- -->
+
+``` r
+bayesplot::mcmc_rhat(rhat1)
+```
+
+![](model_recovery_check_files/figure-gfm/rhat-2.png)<!-- -->
+
+#### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
+
+``` r
+bayesplot::mcmc_neff(neff1)
+```
+
+![](model_recovery_check_files/figure-gfm/ess-1.png)<!-- -->
+
+``` r
+bayesplot::mcmc_neff(neff2)
+```
+
+![](model_recovery_check_files/figure-gfm/ess-2.png)<!-- -->
+
 #### Pairs plot
 
 ``` r
-mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
+bayesplot::mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
              "b_target_typedry_grassland", "b_seed_density8",
@@ -579,7 +560,7 @@ mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
 ![](model_recovery_check_files/figure-gfm/mcmc-pairs-1.png)<!-- -->
 
 ``` r
-mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
+bayesplot::mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
              "b_target_typedry_grassland", "b_seed_density8",
@@ -592,26 +573,40 @@ mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
 #### Parallel coordinate plot
 
 ``` r
-mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
+bayesplot::mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
   theme(axis.text.x = element_text(angle = 45))
 ```
 
 ![](model_recovery_check_files/figure-gfm/mcmc-parcoord-1.png)<!-- -->
 
 ``` r
-mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
+bayesplot::mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
   theme(axis.text.x = element_text(angle = 45))
 ```
 
 ![](model_recovery_check_files/figure-gfm/mcmc-parcoord-2.png)<!-- -->
+
+### Autocorrelation check
+
+``` r
+bayesplot::mcmc_acf(posterior1, lags = 10)
+```
+
+![](model_recovery_check_files/figure-gfm/autocorrelation-1.png)<!-- -->
+
+``` r
+bayesplot::mcmc_acf(posterior2, lags = 10)
+```
+
+![](model_recovery_check_files/figure-gfm/autocorrelation-2.png)<!-- -->
 
 ### Posterior predictive check (BARG 3.A)
 
 #### Kernel density
 
 ``` r
-p1 <- ppc_dens_overlay(y, yrep1[1:50, ])
-p2 <- ppc_dens_overlay(y, yrep2[1:50, ])
+p1 <- bayesplot::ppc_dens_overlay(y, yrep1[1:50, ])
+p2 <- bayesplot::ppc_dens_overlay(y, yrep2[1:50, ])
 p1 / p2
 ```
 
@@ -684,8 +679,8 @@ p1 / p2
 #### Histograms of statistics skew
 
 ``` r
-p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
-p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
+p1 <- bayesplot::ppc_stat(y, yrep1, binwidth = 0.001)
+p2 <- bayesplot::ppc_stat(y, yrep2, binwidth = 0.001)
 p1 / p2
 ```
 
@@ -755,7 +750,7 @@ p1 / p2
 
 ![](model_recovery_check_files/figure-gfm/histograms-10.png)<!-- -->
 
-#### LOO (Leave one out)
+#### LOO cross-validation (Leave one out)
 
 ``` r
 loo1
@@ -837,19 +832,19 @@ p1 / p2
 
 ![](model_recovery_check_files/figure-gfm/loo-pit-1.png)<!-- -->
 
-### Autocorrelation check
+### DHARMa
 
 ``` r
-mcmc_acf(posterior1, lags = 10)
+DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
 ```
 
-![](model_recovery_check_files/figure-gfm/autocorrelation-1.png)<!-- -->
+![](model_recovery_check_files/figure-gfm/dharma-1.png)<!-- -->
 
 ``` r
-mcmc_acf(posterior2, lags = 10)
+DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ```
 
-![](model_recovery_check_files/figure-gfm/autocorrelation-2.png)<!-- -->
+![](model_recovery_check_files/figure-gfm/dharma-2.png)<!-- -->
 
 ## Model comparison
 
@@ -889,14 +884,14 @@ bayes_factor <- brms::bayes_factor(m_1, m_2)
 bayes_factor
 ```
 
-    ## Estimated Bayes factor in favor of m_1 over m_2: 8678.32629
+    ## Estimated Bayes factor in favor of m_1 over m_2: 5707.21489
 
 ## Posterior distributions (BARG 3.B)
 
 ### Forest plot (BARG 3.B/5.B)
 
 ``` r
-combined <- bind_rows(
+combined_models <- bind_rows(
   bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95) %>%
     mutate(model = "m_1"),
   bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95) %>%
@@ -909,15 +904,18 @@ combined <- bind_rows(
 
 pos <- position_nudge(
   y = if_else(
-    combined$model == "m_2", -.2, if_else(
-      combined$model == "m_flat", -.4, if_else(
-        combined$model == "m_prior", -.6, 0
+    combined_models$model == "m_2", -.2, if_else(
+      combined_models$model == "m_flat", -.4, if_else(
+        combined_models$model == "m_prior", -.6, 0
         )
       )
     )
   )
 
-ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)) + 
+ggplot(
+  data = combined_models,
+  aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)
+  ) + 
   geom_vline(xintercept = 0, color = "grey") +
   geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
   geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
@@ -1332,16 +1330,15 @@ emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ##  [1] emmeans_1.8.3             tidybayes_3.0.2          
-    ##  [3] loo_2.5.1                 bayesplot_1.10.0         
-    ##  [5] DHARMa.helpers_0.0.0.9000 brms_2.18.0              
-    ##  [7] Rcpp_1.0.9                patchwork_1.1.2          
-    ##  [9] ggbeeswarm_0.6.0          forcats_0.5.2            
-    ## [11] stringr_1.5.0             dplyr_1.0.10             
-    ## [13] purrr_0.3.5               readr_2.1.3              
-    ## [15] tidyr_1.2.1               tibble_3.1.8             
-    ## [17] ggplot2_3.4.0             tidyverse_1.3.2          
-    ## [19] here_1.0.1               
+    ##  [1] emmeans_1.8.3             loo_2.5.1                
+    ##  [3] bayesplot_1.10.0          DHARMa.helpers_0.0.0.9000
+    ##  [5] brms_2.18.0               Rcpp_1.0.9               
+    ##  [7] patchwork_1.1.2           ggbeeswarm_0.6.0         
+    ##  [9] forcats_0.5.2             stringr_1.5.0            
+    ## [11] dplyr_1.0.10              purrr_0.3.5              
+    ## [13] readr_2.1.3               tidyr_1.2.1              
+    ## [15] tibble_3.1.8              ggplot2_3.4.0            
+    ## [17] tidyverse_1.3.2           here_1.0.1               
     ## 
     ## loaded via a namespace (and not attached):
     ##   [1] utf8_1.2.2           tidyselect_1.2.0     lme4_1.1-31         
@@ -1357,8 +1354,8 @@ emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
     ##  [31] xfun_0.35            timechange_0.1.1     adegenet_2.1.8      
     ##  [34] doParallel_1.0.17    R6_2.5.1             markdown_1.4        
     ##  [37] assertthat_0.2.1     promises_1.2.0.1     scales_1.2.1        
-    ##  [40] vroom_1.6.0          googlesheets4_1.0.1  phylobase_0.8.10    
-    ##  [43] beeswarm_0.4.0       gtable_0.3.1         processx_3.8.0      
+    ##  [40] vroom_1.6.0          googlesheets4_1.0.1  beeswarm_0.4.0      
+    ##  [43] gtable_0.3.1         phylobase_0.8.10     processx_3.8.0      
     ##  [46] rlang_1.0.6          splines_4.2.2        gargle_1.2.1        
     ##  [49] broom_1.0.1          checkmate_2.1.0      inline_0.3.19       
     ##  [52] yaml_2.3.6           reshape2_1.4.4       abind_1.4-5         
@@ -1367,33 +1364,32 @@ emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
     ##  [61] tools_4.2.2          ellipsis_0.3.2       posterior_1.3.1     
     ##  [64] RColorBrewer_1.1-3   plyr_1.8.8           progress_1.2.2      
     ##  [67] base64enc_0.1-3      ps_1.7.2             prettyunits_1.1.1   
-    ##  [70] deldir_1.0-6         zoo_1.8-11           cluster_2.1.4       
-    ##  [73] haven_2.5.1          fs_1.5.2             magrittr_2.0.3      
-    ##  [76] ggdist_3.2.0         colourpicker_1.2.0   reprex_2.0.2        
-    ##  [79] googledrive_2.0.0    mvtnorm_1.1-3        matrixStats_0.63.0  
-    ##  [82] hms_1.1.2            shinyjs_2.1.0        mime_0.12           
-    ##  [85] evaluate_0.19        arrayhelpers_1.1-0   xtable_1.8-4        
-    ##  [88] XML_3.99-0.13        shinystan_2.6.0      jpeg_0.1-10         
-    ##  [91] readxl_1.4.1         gridExtra_2.3        rstantools_2.2.0    
-    ##  [94] compiler_4.2.2       KernSmooth_2.23-20   V8_4.2.2            
-    ##  [97] crayon_1.5.2         minqa_1.2.5          StanHeaders_2.26.13 
-    ## [100] htmltools_0.5.3      mgcv_1.8-41          later_1.3.0         
-    ## [103] tzdb_0.3.0           RcppParallel_5.1.5   lubridate_1.9.0     
-    ## [106] DBI_1.1.3            dbplyr_2.2.1         MASS_7.3-58.1       
-    ## [109] boot_1.3-28          Matrix_1.5-3         ade4_1.7-20         
-    ## [112] permute_0.9-7        cli_3.4.1            adegraphics_1.0-16  
-    ## [115] DHARMa_0.4.6         parallel_4.2.2       igraph_1.3.5        
-    ## [118] pkgconfig_2.0.3      rncl_0.8.6           sp_1.5-1            
-    ## [121] foreach_1.5.2        xml2_1.3.3           svUnit_1.0.6        
-    ## [124] dygraphs_1.1.1.6     vipor_0.4.5          estimability_1.4.1  
-    ## [127] rvest_1.0.3          distributional_0.3.1 callr_3.7.3         
-    ## [130] digest_0.6.30        vegan_2.6-4          rmarkdown_2.19      
-    ## [133] cellranger_1.1.0     gap_1.3-1            curl_4.3.3          
-    ## [136] shiny_1.7.3          gtools_3.9.4         nloptr_2.0.3        
-    ## [139] lifecycle_1.0.3      nlme_3.1-160         jsonlite_1.8.4      
-    ## [142] seqinr_4.2-23        fansi_1.0.3          pillar_1.8.1        
-    ## [145] lattice_0.20-45      fastmap_1.1.0        httr_1.4.4          
-    ## [148] pkgbuild_1.4.0       glue_1.6.2           xts_0.12.2          
-    ## [151] diffobj_0.3.5        iterators_1.0.14     png_0.1-8           
-    ## [154] shinythemes_1.2.0    bit_4.0.5            stringi_1.7.8       
-    ## [157] latticeExtra_0.6-30  ape_5.6-2
+    ##  [70] deldir_1.0-6         zoo_1.8-11           haven_2.5.1         
+    ##  [73] cluster_2.1.4        fs_1.5.2             magrittr_2.0.3      
+    ##  [76] colourpicker_1.2.0   reprex_2.0.2         googledrive_2.0.0   
+    ##  [79] mvtnorm_1.1-3        matrixStats_0.63.0   hms_1.1.2           
+    ##  [82] shinyjs_2.1.0        mime_0.12            evaluate_0.19       
+    ##  [85] xtable_1.8-4         XML_3.99-0.13        shinystan_2.6.0     
+    ##  [88] jpeg_0.1-10          readxl_1.4.1         gridExtra_2.3       
+    ##  [91] rstantools_2.2.0     compiler_4.2.2       KernSmooth_2.23-20  
+    ##  [94] V8_4.2.2             crayon_1.5.2         minqa_1.2.5         
+    ##  [97] StanHeaders_2.26.13  htmltools_0.5.3      mgcv_1.8-41         
+    ## [100] later_1.3.0          tzdb_0.3.0           RcppParallel_5.1.5  
+    ## [103] lubridate_1.9.0      DBI_1.1.3            dbplyr_2.2.1        
+    ## [106] MASS_7.3-58.1        boot_1.3-28          Matrix_1.5-3        
+    ## [109] ade4_1.7-20          permute_0.9-7        cli_3.4.1           
+    ## [112] adegraphics_1.0-16   DHARMa_0.4.6         parallel_4.2.2      
+    ## [115] igraph_1.3.5         pkgconfig_2.0.3      rncl_0.8.6          
+    ## [118] sp_1.5-1             foreach_1.5.2        xml2_1.3.3          
+    ## [121] dygraphs_1.1.1.6     vipor_0.4.5          estimability_1.4.1  
+    ## [124] rvest_1.0.3          distributional_0.3.1 callr_3.7.3         
+    ## [127] digest_0.6.30        vegan_2.6-4          rmarkdown_2.19      
+    ## [130] cellranger_1.1.0     gap_1.3-1            curl_4.3.3          
+    ## [133] shiny_1.7.3          gtools_3.9.4         nloptr_2.0.3        
+    ## [136] lifecycle_1.0.3      nlme_3.1-160         jsonlite_1.8.4      
+    ## [139] seqinr_4.2-23        fansi_1.0.3          pillar_1.8.1        
+    ## [142] lattice_0.20-45      fastmap_1.1.0        httr_1.4.4          
+    ## [145] pkgbuild_1.4.0       glue_1.6.2           xts_0.12.2          
+    ## [148] diffobj_0.3.5        iterators_1.0.14     png_0.1-8           
+    ## [151] shinythemes_1.2.0    bit_4.0.5            stringi_1.7.8       
+    ## [154] latticeExtra_0.6-30  ape_5.6-2
