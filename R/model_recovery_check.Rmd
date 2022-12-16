@@ -59,7 +59,6 @@ library(brms)
 library(DHARMa.helpers)
 library(bayesplot)
 library(loo)
-library(tidybayes)
 library(emmeans)
 ```
 
@@ -299,7 +298,7 @@ draws2 <- m_2 %>%
 #### Possible prior distributions
 
 ```{r possible-priors}
-get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
+brms::get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
             (1 | site/plot) + (1|botanist_year),
           data = sites)
@@ -358,40 +357,27 @@ ppd_stat_grouped(yrep_prior[1:500, ], group = sites$substrate_depth,
 
 ## Model check
 
-### DHARMa
-
-```{r dharma, collapse = TRUE}
-DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
-DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
-```
-
-### Sampling efficency and effectiveness (BARG 2.B/C)
-
-#### Rhat (BARG 2.B)
-
-```{r rhat, collapse = TRUE}
-bayesplot::mcmc_rhat(rhat1)
-bayesplot::mcmc_rhat(rhat2)
-```
-
-#### Effective sampling size (ESS) (BARG 2.C)
-
-```{r ess, collapse = TRUE}
-bayesplot::mcmc_neff(neff1)
-bayesplot::mcmc_neff(neff2)
-```
-
-### MCMC diagnostics
+### Check computation (MCMC diagnostics, BARG 2.B/C)
 
 #### Trace plots
 
 ```{r mcmc-trace, fig.height = 14}
-bayesplot::mcmc_trace(
-  posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2)
-  )
-bayesplot::mcmc_trace(
-  posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2)
-  )
+bayesplot::mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
+bayesplot::mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
+```
+
+#### Sampling efficency: Rhat (BARG 2.B)
+
+```{r rhat, collapse = TRUE}
+bayesplot::mcmc_rhat(rhat1)
+bayesplot::mcmc_rhat(rhat1)
+```
+
+#### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
+
+```{r ess, collapse = TRUE}
+bayesplot::mcmc_neff(neff1)
+bayesplot::mcmc_neff(neff2)
 ```
 
 #### Pairs plot
@@ -418,6 +404,13 @@ bayesplot::mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
   theme(axis.text.x = element_text(angle = 45))
 bayesplot::mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
   theme(axis.text.x = element_text(angle = 45))
+```
+
+### Autocorrelation check
+
+```{r autocorrelation}
+bayesplot::mcmc_acf(posterior1, lags = 10)
+bayesplot::mcmc_acf(posterior2, lags = 10)
 ```
 
 ### Posterior predictive check (BARG 3.A)
@@ -476,7 +469,7 @@ p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001
 p1 / p2
 ```
 
-#### LOO (Leave one out)
+#### LOO cross-validation (Leave one out)
 
 ```{r loo}
 loo1
@@ -494,11 +487,11 @@ p1 / p2
 
 ```
 
-### Autocorrelation check
+### DHARMa
 
-```{r autocorrelation}
-mcmc_acf(posterior1, lags = 10)
-mcmc_acf(posterior2, lags = 10)
+```{r dharma, collapse = TRUE}
+DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
+DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ```
 
 ## Model comparison
@@ -536,7 +529,7 @@ bayes_factor
 ### Forest plot (BARG 3.B/5.B)
 
 ```{r posteriors, fig.height = 7}
-combined <- bind_rows(
+combined_models <- bind_rows(
   bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95) %>%
     mutate(model = "m_1"),
   bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95) %>%
@@ -549,15 +542,18 @@ combined <- bind_rows(
 
 pos <- position_nudge(
   y = if_else(
-    combined$model == "m_2", -.2, if_else(
-      combined$model == "m_flat", -.4, if_else(
-        combined$model == "m_prior", -.6, 0
+    combined_models$model == "m_2", -.2, if_else(
+      combined_models$model == "m_flat", -.4, if_else(
+        combined_models$model == "m_prior", -.6, 0
         )
       )
     )
   )
 
-ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)) + 
+ggplot(
+  data = combined_models,
+  aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)
+  ) + 
   geom_vline(xintercept = 0, color = "grey") +
   geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
   geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
