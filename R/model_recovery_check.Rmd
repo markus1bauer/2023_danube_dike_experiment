@@ -267,11 +267,11 @@ posterior_flat <- m_flat %>%
   posterior::as_draws() %>%
   posterior::subset_draws(variable = variables)
 # R hat
-rhat1 <- rhat(m_1)
-rhat2 <- rhat(m_2)
+rhat1 <- brms::rhat(m_1)
+rhat2 <- brms::rhat(m_2)
 # NEFF ratio
-neff1 <- neff_ratio(m_1)
-neff2 <- neff_ratio(m_2)
+neff1 <- brms::neff_ratio(m_1)
+neff2 <- brms::neff_ratio(m_2)
 # Long format of draws
 hmc_diagnostics1 <- brms::nuts_params(m_1)
 hmc_diagnostics2 <- brms::nuts_params(m_2)
@@ -331,7 +331,7 @@ brms::prior_summary(m_1, all = FALSE)
 #### Prior predictive check (BARG 1.E)
 
 ```{r prior-predictive-check}
-ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
+bayesplot::ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
   coord_cartesian(xlim = c(-2, 2))
 ppd_stat_grouped(yrep_prior[1:500, ], group = sites$site,
                  binwidth = 0.2) +
@@ -370,15 +370,15 @@ DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 #### Rhat (BARG 2.B)
 
 ```{r rhat, collapse = TRUE}
-mcmc_rhat(rhat1)
-mcmc_rhat(rhat2)
+bayesplot::mcmc_rhat(rhat1)
+bayesplot::mcmc_rhat(rhat2)
 ```
 
 #### Effective sampling size (ESS) (BARG 2.C)
 
 ```{r ess, collapse = TRUE}
-mcmc_neff(neff1)
-mcmc_neff(neff2)
+bayesplot::mcmc_neff(neff1)
+bayesplot::mcmc_neff(neff2)
 ```
 
 ### MCMC diagnostics
@@ -386,20 +386,24 @@ mcmc_neff(neff2)
 #### Trace plots
 
 ```{r mcmc-trace, fig.height = 14}
-mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
-mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
+bayesplot::mcmc_trace(
+  posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2)
+  )
+bayesplot::mcmc_trace(
+  posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2)
+  )
 ```
 
 #### Pairs plot
 
 ```{r mcmc-pairs, collapse = TRUE, fig.height = 6.5}
-mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
+bayesplot::mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
              "b_target_typedry_grassland", "b_seed_density8",
              "b_expositionsouth", "sigma"
            ))
-mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
+bayesplot::mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
            pars = c(
              "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
              "b_target_typedry_grassland", "b_seed_density8",
@@ -410,9 +414,9 @@ mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
 #### Parallel coordinate plot
 
 ```{r mcmc-parcoord, collapse = TRUE}
-mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
+bayesplot::mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
   theme(axis.text.x = element_text(angle = 45))
-mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
+bayesplot::mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
   theme(axis.text.x = element_text(angle = 45))
 ```
 
@@ -421,8 +425,8 @@ mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
 #### Kernel density
 
 ```{r kernel-density}
-p1 <- ppc_dens_overlay(y, yrep1[1:50, ])
-p2 <- ppc_dens_overlay(y, yrep2[1:50, ])
+p1 <- bayesplot::ppc_dens_overlay(y, yrep1[1:50, ])
+p2 <- bayesplot::ppc_dens_overlay(y, yrep2[1:50, ])
 p1 / p2
 ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site)
 ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site)
@@ -448,8 +452,8 @@ p1 / p2
 #### Histograms of statistics skew
 
 ```{r histograms}
-p1 <- ppc_stat(y, yrep1, binwidth = 0.001)
-p2 <- ppc_stat(y, yrep2, binwidth = 0.001)
+p1 <- bayesplot::ppc_stat(y, yrep1, binwidth = 0.001)
+p2 <- bayesplot::ppc_stat(y, yrep2, binwidth = 0.001)
 p1 / p2
 ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
 ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
@@ -568,8 +572,9 @@ ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), colo
 Effect sizes of chosen model just to get exact values of means etc. if necessary.
 
 ```{r effect-sizes}
-draws1 %>%
-  gt::gt()
+posterior1 %>%
+  posterior::summarize_draws() %>%
+  knitr::kable()
 emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
           survey_year_fct, type = "response")
 ```
