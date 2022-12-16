@@ -2,7 +2,7 @@ Analysis of Bauer et al. (unpublished) Field experiment: <br>
 Persistence
 ================
 <b>Markus Bauer</b> <br>
-<b>2022-12-09</b>
+<b>2022-12-16</b>
 
 - <a href="#preparation" id="toc-preparation">Preparation</a>
 - <a href="#statistics" id="toc-statistics">Statistics</a>
@@ -132,7 +132,25 @@ sites <- read_csv(
     id, plot, site, exposition, sand_ratio, substrate_depth, target_type,
     seed_density, survey_year_fct, survey_year, botanist_year, n
   )
+sites
 ```
+
+    ## # A tibble: 1,152 × 12
+    ##    id        plot  site  expos…¹ sand_…² subst…³ targe…⁴ seed_…⁵ surve…⁶ surve…⁷
+    ##    <fct>     <fct> <fct> <fct>   <fct>   <fct>   <fct>   <fct>   <fct>   <chr>  
+    ##  1 L1_01_20… L1_01 1     south   0       15      hay_me… 4       2018    2018   
+    ##  2 L1_01_20… L1_01 1     south   0       15      hay_me… 4       2019    2019   
+    ##  3 L1_01_20… L1_01 1     south   0       15      hay_me… 4       2020    2020   
+    ##  4 L1_01_20… L1_01 1     south   0       15      hay_me… 4       2021    2021   
+    ##  5 L1_02_20… L1_02 1     south   0       15      dry_gr… 4       2018    2018   
+    ##  6 L1_02_20… L1_02 1     south   0       15      dry_gr… 4       2019    2019   
+    ##  7 L1_02_20… L1_02 1     south   0       15      dry_gr… 4       2020    2020   
+    ##  8 L1_02_20… L1_02 1     south   0       15      dry_gr… 4       2021    2021   
+    ##  9 L1_03_20… L1_03 1     south   0       15      dry_gr… 8       2018    2018   
+    ## 10 L1_03_20… L1_03 1     south   0       15      dry_gr… 8       2019    2019   
+    ## # … with 1,142 more rows, 2 more variables: botanist_year <fct>, n <dbl>, and
+    ## #   abbreviated variable names ¹​exposition, ²​sand_ratio, ³​substrate_depth,
+    ## #   ⁴​target_type, ⁵​seed_density, ⁶​survey_year_fct, ⁷​survey_year
 
 # Statistics
 
@@ -291,12 +309,12 @@ loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
 # Summary statistics
 draws1 <- m_1 %>%
   posterior::as_draws() %>%
-  posterior::summarize_draws() %>%
-  filter(str_starts(variable, "b_"))
+  posterior::subset_draws(variable = variables) %>%
+  posterior::summarize_draws()
 draws2 <- m_2 %>%
   posterior::as_draws() %>%
-  posterior::summarize_draws() %>%
-  filter(str_starts(variable, "b_"))
+  posterior::subset_draws(variable = variables) %>%
+  posterior::summarize_draws()
 ```
 
 ### Priors (BARG 1.D/E)
@@ -361,7 +379,8 @@ ggplot(data = data.frame(x = c(0, 1)), aes(x = x)) +
 ![](model_persistence_check_files/figure-gfm/possible-priors-1.png)<!-- -->
 
 ``` r
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+data <- data.frame(x = c(-1, 1))
+ggplot(data, aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = .35)) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for treatments")
@@ -370,7 +389,7 @@ ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
 ![](model_persistence_check_files/figure-gfm/possible-priors-2.png)<!-- -->
 
 ``` r
-ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data, aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0) + ggtitle("Cauchy distribution") # See Lemoine 2019 https://doi.org/10.1111/oik.05985
 ```
@@ -378,7 +397,7 @@ ggplot(data = data.frame(x = c(-1, 1)), aes(x = x)) +
 ![](model_persistence_check_files/figure-gfm/possible-priors-3.png)<!-- -->
 
 ``` r
-ggplot(data.frame(x = c(-1, 1)), aes(x = x)) +
+ggplot(data, aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) +
   ggtitle(expression(Student~italic(t)*"-distribution")) # Software standard
@@ -870,7 +889,7 @@ bayes_factor <- brms::bayes_factor(m_1, m_2)
 bayes_factor
 ```
 
-    ## Estimated Bayes factor in favor of m_1 over m_2: 1808416830.36119
+    ## Estimated Bayes factor in favor of m_1 over m_2: 2600391805.13329
 
 ## Posterior distributions (BARG 3.B)
 
@@ -916,24 +935,25 @@ Effect sizes of chosen model just to get exact values of means etc. if
 necessary.
 
 ``` r
-draws1
+draws1 %>%
+  knitr::kable()
 ```
 
-    ## # A tibble: 70 × 10
-    ##    variable          mean   median      sd     mad       q5    q95  rhat ess_b…¹
-    ##    <chr>            <dbl>    <dbl>   <dbl>   <dbl>    <dbl>  <dbl> <dbl>   <dbl>
-    ##  1 b_Intercept    0.495    0.495   0.0198  0.0195   0.463   0.527   1.00   6518.
-    ##  2 b_sand_ratio…  0.163    0.163   0.0199  0.0202   0.130   0.195   1.00   5611.
-    ##  3 b_sand_ratio…  0.124    0.124   0.0198  0.0199   0.0914  0.156   1.00   6289.
-    ##  4 b_target_typ…  0.00698  0.00695 0.0199  0.0195  -0.0261  0.0398  1.00   4858.
-    ##  5 b_exposition… -0.162   -0.163   0.167   0.168   -0.435   0.114   1.00   9152.
-    ##  6 b_survey_yea…  0.148    0.147   0.220   0.220   -0.218   0.509   1.00   9615.
-    ##  7 b_survey_yea…  0.226    0.226   0.184   0.183   -0.0752  0.523   1.00   8938.
-    ##  8 b_survey_yea…  0.180    0.180   0.225   0.221   -0.199   0.550   1.00   9086.
-    ##  9 b_substrate_…  0.0101   0.00998 0.00987 0.00975 -0.00598 0.0266  1.00   9754.
-    ## 10 b_seed_densi… -0.00353 -0.00355 0.00996 0.00983 -0.0200  0.0127  1.00   9447.
-    ## # … with 60 more rows, 1 more variable: ess_tail <dbl>, and abbreviated
-    ## #   variable name ¹​ess_bulk
+| variable                   |       mean |     median |        sd |       mad |         q5 |       q95 |      rhat | ess_bulk | ess_tail |
+|:---------------------------|-----------:|-----------:|----------:|----------:|-----------:|----------:|----------:|---------:|---------:|
+| Intercept                  |  0.5944691 |  0.5944148 | 0.0105651 | 0.0083161 |  0.5783117 | 0.6108637 | 0.9999924 | 8228.161 | 7759.707 |
+| b_sand_ratio25             |  0.1629138 |  0.1627834 | 0.0198663 | 0.0201759 |  0.1304551 | 0.1951647 | 1.0003440 | 5611.360 | 7468.423 |
+| b_sand_ratio50             |  0.1239641 |  0.1241038 | 0.0198153 | 0.0198744 |  0.0913716 | 0.1559511 | 0.9998823 | 6289.196 | 7983.976 |
+| b_substrate_depth15        |  0.0101416 |  0.0099812 | 0.0098659 | 0.0097535 | -0.0059755 | 0.0266390 | 1.0007889 | 9753.914 | 8890.196 |
+| b_target_typedry_grassland |  0.0069816 |  0.0069519 | 0.0199225 | 0.0194931 | -0.0261071 | 0.0397884 | 1.0001588 | 4858.414 | 7268.457 |
+| b_seed_density8            | -0.0035258 | -0.0035464 | 0.0099620 | 0.0098253 | -0.0200419 | 0.0127137 | 1.0005525 | 9446.772 | 8704.235 |
+| b_expositionsouth          | -0.1623368 | -0.1631068 | 0.1668115 | 0.1677477 | -0.4345318 | 0.1138825 | 0.9998916 | 9151.530 | 8691.794 |
+| b_survey_year_fct2019      |  0.1477288 |  0.1472272 | 0.2203043 | 0.2198598 | -0.2176602 | 0.5085812 | 1.0001857 | 9614.605 | 8491.399 |
+| b_survey_year_fct2020      |  0.2261840 |  0.2262132 | 0.1836348 | 0.1829072 | -0.0752112 | 0.5230531 | 0.9999417 | 8938.285 | 8311.033 |
+| b_survey_year_fct2021      |  0.1796636 |  0.1800636 | 0.2245523 | 0.2214183 | -0.1987946 | 0.5498593 | 1.0002732 | 9085.575 | 7946.737 |
+| sd_site\_\_Intercept       |  0.0214049 |  0.0184556 | 0.0119059 | 0.0076674 |  0.0096681 | 0.0428464 | 1.0001555 | 5477.219 | 6429.565 |
+| sd_site:plot\_\_Intercept  |  0.0337731 |  0.0337479 | 0.0027881 | 0.0027855 |  0.0292011 | 0.0384400 | 1.0002648 | 6023.220 | 8685.868 |
+| sigma                      |  0.0620646 |  0.0620346 | 0.0015170 | 0.0015379 |  0.0596365 | 0.0645971 | 0.9999730 | 7336.198 | 8681.113 |
 
 ``` r
 emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
@@ -1354,7 +1374,7 @@ emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
     ##  [76] ggdist_3.2.0         colourpicker_1.2.0   reprex_2.0.2        
     ##  [79] googledrive_2.0.0    mvtnorm_1.1-3        matrixStats_0.63.0  
     ##  [82] hms_1.1.2            shinyjs_2.1.0        mime_0.12           
-    ##  [85] evaluate_0.18        arrayhelpers_1.1-0   xtable_1.8-4        
+    ##  [85] evaluate_0.19        arrayhelpers_1.1-0   xtable_1.8-4        
     ##  [88] XML_3.99-0.13        shinystan_2.6.0      jpeg_0.1-10         
     ##  [91] readxl_1.4.1         gridExtra_2.3        rstantools_2.2.0    
     ##  [94] compiler_4.2.2       KernSmooth_2.23-20   V8_4.2.2            
@@ -1369,7 +1389,7 @@ emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
     ## [121] foreach_1.5.2        xml2_1.3.3           svUnit_1.0.6        
     ## [124] dygraphs_1.1.1.6     vipor_0.4.5          estimability_1.4.1  
     ## [127] rvest_1.0.3          distributional_0.3.1 callr_3.7.3         
-    ## [130] digest_0.6.30        vegan_2.6-4          rmarkdown_2.18      
+    ## [130] digest_0.6.30        vegan_2.6-4          rmarkdown_2.19      
     ## [133] cellranger_1.1.0     gap_1.3-1            curl_4.3.3          
     ## [136] shiny_1.7.3          gtools_3.9.4         nloptr_2.0.3        
     ## [139] lifecycle_1.0.3      nlme_3.1-160         jsonlite_1.8.4      
