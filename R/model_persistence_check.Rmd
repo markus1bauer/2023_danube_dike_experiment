@@ -16,19 +16,14 @@ knitr::opts_chunk$set(
   echo = TRUE
   )
 ```
-<br/>
-<br/>
-<b>Markus Bauer</b>
+
+<br/> <br/> <b>Markus Bauer</b>
 
 Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
 
-[markus1.bauer@tum.de](mailto:markus1.bauer@tum.de)
+[markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de)
 
-ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
-<br>
-[Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
-<br>
-GitHub: [markus1bauer](https://github.com/markus1bauer)
+ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174) <br> [Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao) <br> GitHub: [markus1bauer](https://github.com/markus1bauer)
 
 To compare different models, you only have to change the models in section 'Load models'
 
@@ -38,15 +33,7 @@ Persistence sensu Wilsey (2021) Restor Ecol [DOI: 10.1111/rec.13132](https://doi
 
 Bayesian analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
 
-Analysis guided by
-<br>
-<b>BARG</b> (Bayesian Analysis Reporting Guidelines): Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
-<br>
-Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378)
-<br>
-Priors: Lemoine (2019) Oikos [DOI: 10.1111/oik.05985](https://doi.org/10.1111/oik.05985)
-<br>
-Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](https://doi.org/10.1037/met0000065)
+Analysis guided by <br> <b>BARG</b> (Bayesian Analysis Reporting Guidelines): Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7) <br> Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378) <br> Priors: Lemoine (2019) Oikos [DOI: 10.1111/oik.05985](https://doi.org/10.1111/oik.05985) <br> Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](https://doi.org/10.1037/met0000065)
 
 #### Packages (BARG 2.A)
 
@@ -569,8 +556,9 @@ ggplot(data = combined, aes(x = m, y = forcats::fct_rev(factor(parameter)), colo
 Effect sizes of chosen model just to get exact values of means etc. if necessary.
 
 ```{r effect-sizes}
-draws1 %>%
-  gt::gt()
+posterior1 %>%
+  posterior::summarize_draws() %>%
+  knitr::kable()
 emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
           survey_year_fct, type = "response")
 ```

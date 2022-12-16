@@ -309,12 +309,12 @@ loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
 # Summary statistics
 draws1 <- m_1 %>%
   posterior::as_draws() %>%
-  posterior::subset_draws(variable = variables) %>%
-  posterior::summarize_draws()
+  posterior::summarize_draws() %>%
+  filter(str_starts(variable, "b_"))
 draws2 <- m_2 %>%
   posterior::as_draws() %>%
-  posterior::subset_draws(variable = variables) %>%
-  posterior::summarize_draws()
+  posterior::summarize_draws() %>%
+  filter(str_starts(variable, "b_"))
 ```
 
 ### Priors (BARG 1.D/E)
@@ -889,7 +889,7 @@ bayes_factor <- brms::bayes_factor(m_1, m_2)
 bayes_factor
 ```
 
-    ## Estimated Bayes factor in favor of m_1 over m_2: 2600391805.13329
+    ## Estimated Bayes factor in favor of m_1 over m_2: 3852672497.95588
 
 ## Posterior distributions (BARG 3.B)
 
@@ -935,7 +935,8 @@ Effect sizes of chosen model just to get exact values of means etc. if
 necessary.
 
 ``` r
-draws1 %>%
+posterior1 %>%
+  posterior::summarize_draws() %>%
   knitr::kable()
 ```
 
