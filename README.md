@@ -57,11 +57,11 @@ When using the __data available__ in this repository, please cite the original p
 
 __Publication__
 
-> Bauer M, Huber J, & Kollmann J (Under preparation) XXX
+> Bauer M, Huber J, & Kollmann J (Under preparation) &ndash; *XXX*
 
 __Dataset__
 
-> Bauer M, Huber J & Kollmann J (2022) Data and code for Bauer et al. (submitted): Dike grassland experiment (v1.0.0) [Data set]. – *Zenodo*. https://doi.org/10.xxx
+> Bauer M, Huber J & Kollmann J (2022) Data and code for Bauer et al. (submitted): Dike grassland experiment (v1.0.0) [Data set]. &ndash; *Zenodo*. https://doi.org/10.xxx
 
 Contact markus1.bauer@tum.de for any further information.  
 
