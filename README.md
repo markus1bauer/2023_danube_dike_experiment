@@ -37,7 +37,7 @@ Bauer M, Huber J, Kollmann J (2023) EcoEvoRxiv
 
 #### Package versioning
 
-The used versions of R and the packages are saved in `2022_waste_bricks_trees/renv.lock`.
+The used versions of R and the packages are saved in `2023_danube_dike_experiment/renv.lock`.
 
 You can restore this state by executing `renv::restore()` in the console.
     
