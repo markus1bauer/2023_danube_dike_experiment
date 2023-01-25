@@ -186,7 +186,7 @@ species_bauer <- read_csv(here("data", "raw", "bauer_etal_2022",
 
 ### Create list with species names and their frequency ###
 specieslist <- species_experiment %>%
-  mutate(across(where(is.numeric), ~1 * (. != 0))) %>%
+  mutate(across(where(is.numeric), ~1 * (. != 0))) %>% 
   mutate(sum = rowSums(across(where(is.numeric)), na.rm = TRUE),
          .keep = "unused") %>%
   group_by(name) %>%
@@ -292,6 +292,21 @@ species_experiment %>%
   select(name, starts_with("L1_19"), -ends_with("_seeded")) %>%
   filter(if_any(starts_with("L"), ~ . > 0)) %>%
   print(n = 100)
+
+### Check seeded species pool ###
+species_experiment %>%
+  mutate(across(where(is.numeric), ~1 * (. != 0))) %>%
+  pivot_longer(-name, names_to = "id", values_to = "value") %>%
+  left_join(sites_experiment %>% select(id, target_type), by = "id") %>%
+  separate(id, sep = "_", c("group", "plot", "year")) %>%
+  filter(year == "seeded") %>%
+  group_by(group, target_type, name) %>%
+  summarise(sum = sum(value)) %>%
+  mutate(sum = if_else(sum > 0, 1, 0)) %>%
+  group_by(group, target_type) %>%
+  summarise(species_pool = sum(sum)) %>%
+  group_by(species_pool) %>%
+  count()
 
 ### Check missing data ###
 miss_var_summary(sites_experiment, order = TRUE)
