@@ -99,8 +99,6 @@ sites_nmds <- sites_nmds %>%
   group_by(group_type) %>%
   mutate(mean1 = mean(NMDS1),
          mean2 = mean(NMDS2)) %>%
-  ### Exclude not needed reference categories ###
-  filter(reference != "Grassland" & reference != "no") %>%
   mutate(group_type = factor(group_type))
 
 ### Calculate ellipses for plot ###
