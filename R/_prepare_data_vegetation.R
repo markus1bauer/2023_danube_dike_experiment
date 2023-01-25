@@ -53,7 +53,6 @@ suppressPackageStartupMessages(library(FD))
 
 ### Start ###
 rm(list = ls())
-setwd(here("data", "raw"))
 #installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE, start_new_R = TRUE, quit_R = TRUE, print_R_versions = TRUE, GUI = FALSE)
 #checklist::setup_source()
 #checklist::check_source()
@@ -71,26 +70,29 @@ setwd(here("data", "raw"))
 ## 1 Sites ####################################################################
 
 
-sites_experiment <- read_csv("data_raw_sites.csv", col_names = TRUE,
-                  na = c("", "NA", "na"),
-                  col_types =
-                    cols(
-                      .default = "?",
-                      survey_date.seeded = col_date(format = "%Y-%m-%d"),
-                      survey_date.2018 = col_date(format = "%Y-%m-%d"),
-                      survey_date.2019 = col_date(format = "%Y-%m-%d"),
-                      survey_date.2020 = col_date(format = "%Y-%m-%d"),
-                      survey_date.2021 = col_date(format = "%Y-%m-%d"),
-                      botanist.2018 = "c",
-                      botanist.2019 = "c",
-                      botanist.2020 = "c",
-                      botanist.2021 = "c",
-                      vegetation_cover.2018 = "d",
-                      vegetation_cover.2019 = "d",
-                      vegetation_cover.2020 = "d",
-                      vegetation_cover.2021 = "d",
-                      biomass.2019 = "d"
-                      )) %>%
+sites_experiment <- read_csv(
+  here("data", "raw", "data_raw_sites.csv"),
+  col_names = TRUE,
+  na = c("", "NA", "na"),
+  col_types =
+    cols(
+      .default = "?",
+      survey_date.seeded = col_date(format = "%Y-%m-%d"),
+      survey_date.2018 = col_date(format = "%Y-%m-%d"),
+      survey_date.2019 = col_date(format = "%Y-%m-%d"),
+      survey_date.2020 = col_date(format = "%Y-%m-%d"),
+      survey_date.2021 = col_date(format = "%Y-%m-%d"),
+      botanist.2018 = "c",
+      botanist.2019 = "c",
+      botanist.2020 = "c",
+      botanist.2021 = "c",
+      vegetation_cover.2018 = "d",
+      vegetation_cover.2019 = "d",
+      vegetation_cover.2020 = "d",
+      vegetation_cover.2021 = "d",
+      biomass.2019 = "d"
+      )
+  ) %>%
   pivot_longer(
     starts_with("vegetation_cover") |
       starts_with("botanist") |
@@ -118,22 +120,25 @@ sites_experiment <- read_csv("data_raw_sites.csv", col_names = TRUE,
 
 ### Sabatini et al. (2021) Global Ecol Biogeogr:
 ### https://doi.org/10.1111/geb.13346
-sites_splot <- read_delim(here("data", "raw", "sabatini_etal_2021",
-                               "sPlotOpen_header.txt"),
-                          col_names = TRUE, na = c("", "NA", "na"),
-                          col_types = cols(
-                            .default = "?",
-                            Cover_algae_layer = "d"
-                          ))
+sites_splot <- read_delim(
+  here("data", "raw", "sabatini_etal_2021", "sPlotOpen_header.txt"),
+  col_names = TRUE, na = c("", "NA", "na"),
+  col_types = cols(
+    .default = "?",
+    Cover_algae_layer = "d"
+  )
+)
 
 ### Bauer et al. (2022) Zenodo:
 ### https://doi.org/10.5281/zenodo.6334100
-sites_bauer <- read_csv(here("data", "raw", "bauer_etal_2022",
-                               "data_sites_bauer_etal_2022.csv"),
-                          col_names = TRUE, na = c("", "NA", "na"),
-                          col_types = cols(
-                            .default = "?"
-                          ))
+sites_bauer <- read_csv(
+  here("data", "raw", "bauer_etal_2022", "data_sites_bauer_etal_2022.csv"),
+  col_names = TRUE,
+  na = c("", "NA", "na"),
+  col_types = cols(
+    .default = "?"
+  )
+)
 
 
 
@@ -142,15 +147,17 @@ sites_bauer <- read_csv(here("data", "raw", "bauer_etal_2022",
 ## 2 Species ###################################################################
 
 
-species_experiment <- data.table::fread("data_raw_species_20211112.csv",
-                             sep = ",",
-                             dec = ".",
-                             skip = 0,
-                             header = TRUE,
-                             na.strings = c("", "NA", "na"),
-                             colClasses = list(
-                               character = "name"
-                             )) %>%
+species_experiment <- data.table::fread(
+  here("data", "raw", "data_raw_species_20211112.csv"),
+  sep = ",",
+  dec = ".",
+  skip = 0,
+  header = TRUE,
+  na.strings = c("", "NA", "na"),
+  colClasses = list(
+    character = "name"
+    )
+  ) %>%
   ### Check that each species occurs at least one time ###
   group_by(name) %>%
   arrange(name) %>%
@@ -167,22 +174,25 @@ species_experiment <- data.table::fread("data_raw_species_20211112.csv",
 
 ### Sabatini et al. (2021) Global Ecol Biogeogr:
 ### https://doi.org/10.1111/geb.13346
-species_splot <- read_delim(here("data", "raw", "sabatini_etal_2021",
-                                 "sPlotOpen_DT.txt"),
-                            col_names = TRUE, na = c("", "NA", "na"), col_types =
-                              cols(
-                                .default = "?"
-                              )) %>%
+species_splot <- read_delim(
+  here("data", "raw", "sabatini_etal_2021", "sPlotOpen_DT.txt"),
+  col_names = TRUE, na = c("", "NA", "na"), col_types =
+    cols(
+      .default = "?"
+      )
+  ) %>%
   filter(Abundance_scale == "CoverPerc")
 
 ### Bauer et al. (2022) Zenodo:
 ### https://doi.org/10.5281/zenodo.6334100
-species_bauer <- read_csv(here("data", "raw", "bauer_etal_2022",
-                             "data_species_bauer_etal_2022.csv"),
-                        col_names = TRUE, na = c("", "NA", "na"),
-                        col_types = cols(
-                          .default = "?"
-                        ))
+species_bauer <- read_csv(
+  here("data", "raw", "bauer_etal_2022",
+       "data_species_bauer_etal_2022.csv"),
+  col_names = TRUE, na = c("", "NA", "na"),
+  col_types = cols(
+    .default = "?"
+  )
+)
 
 ### Create list with species names and their frequency ###
 specieslist <- species_experiment %>%
@@ -199,19 +209,22 @@ specieslist <- species_experiment %>%
 ## 3 Traits ####################################################################
 
 
-traits <- read_csv("data_raw_traits.csv", col_names = TRUE,
-                   na = c("", "NA", "na"),
-                   col_types =
-                     cols(
-                       .default = "c",
-                       name = "c",
-                       l = "d",
-                       t = "d",
-                       k = "d",
-                       f = "d",
-                       r = "d",
-                       n = "d",
-                     )) %>%
+traits <- read_csv(
+  here("data", "raw", "data_raw_traits.csv"),
+  col_names = TRUE,
+  na = c("", "NA", "na"),
+  col_types =
+    cols(
+      .default = "c",
+      name = "c",
+      l = "d",
+      t = "d",
+      k = "d",
+      f = "d",
+      r = "d",
+      n = "d",
+    )
+) %>%
   separate(name, c("genus", "species", "ssp", "subspecies"), "_",
            remove = FALSE, extra = "drop", fill = "right") %>%
   mutate(genus = str_sub(genus, 1, 4),
@@ -774,7 +787,22 @@ data_sites <- sites_splot %>%
     latitude = latitude * 10^5
   ) %>%
   select(id, givd_id, longitude, latitude, elevation, plot_size, survey_year,
-         reference, esy)
+         reference, esy) %>%
+  mutate(
+    survey_year = as.character(survey_year),
+    source = "sPlotOpen",
+    reference = if_else(
+      esy == "E12a", "+Reference", if_else(
+        esy == "E22", "+Reference", "other"
+      )
+    ),
+    target_type = if_else(
+      esy == "E12a", "dry_grassland", if_else(
+        esy == "E22", "hay_meadow", "other"
+      )
+    ),
+    exposition = "other"
+  )
 sites_splot <- data_sites
 
 data_species <- species_splot %>%
@@ -821,54 +849,11 @@ data_sites <- sites_bauer %>%
     plot_size = 25
     ) %>%
   select(id, longitude, latitude, plot_size, survey_year, reference,
-         esy, exposition, orientation, plot_age, species_richness)
-sites_bauer <- data_sites
-
-data_species <- species_bauer
-
-### Check species name congruency ###
-data <- data_species %>%
-  anti_join(traits, by = "name") %>%
-  select(name) %>%
-  print(n = 50)
-
-species_bauer <- data_species
-
-
-rm(list = setdiff(ls(), c(
-  "sites_experiment", "sites_splot", "sites_bauer",
-  "species_experiment", "species_splot", "species_bauer",
-  "traits", "results.classification"
-)))
-
-
-
-#____________________________-__________________________________________________
-## 5 NMDS ######################################################################
-
-
-### Create reference variable ###
-data_experiment <- sites_experiment %>%
-  mutate(reference = survey_year)
-data_splot <- sites_splot %>%
-  mutate(
-    survey_year = as.character(survey_year),
-    reference = if_else(
-      esy == "E12a", "+Reference", if_else(
-        esy == "E22", "+Reference", "other"
-      )
-    ),
-    target_type = if_else(
-      esy == "E12a", "dry_grassland", if_else(
-        esy == "E22", "hay_meadow", "other"
-      )
-    ),
-    exposition = "other"
-  )
-data_bauer <- sites_bauer %>%
+         esy, exposition, orientation, plot_age, species_richness) %>%
   filter(exposition == "south" | exposition == "north") %>%
   mutate(
     survey_year = as.character(survey_year),
+    source = "bauer et al. survey data",
     reference = if_else(
       esy == "R1A", "+Reference", if_else(
         esy == "R22", "+Reference", if_else(
@@ -889,16 +874,44 @@ data_bauer <- sites_bauer %>%
         esy == "R22", "hay_meadow", "other"
       )
     )
-  )
+  ) %>%
+  filter(reference != "no" & reference != "Grassland")
+sites_bauer <- data_sites
+
+data_species <- species_bauer
+
+### Check species name congruency ###
+data <- data_species %>%
+  anti_join(traits, by = "name") %>%
+  select(name) %>%
+  print(n = 50)
+  
+
+rm(list = setdiff(ls(), c(
+  "sites_experiment", "sites_splot", "sites_bauer",
+  "species_experiment", "species_splot", "species_bauer",
+  "traits", "results.classification"
+)))
+
+
+
+#_______________________________________________________________________________
+## 5 NMDS ######################################################################
+
+
+### Create reference variable ###
+data_experiment <- sites_experiment %>%
+  mutate(reference = survey_year,
+         source = "experiment")
+
 data_sites <- data_experiment %>%
-  bind_rows(data_splot, data_bauer) %>%
+  bind_rows(sites_splot, sites_bauer) %>%
   select(
     id, plot, site, esy, reference,
     exposition, sand_ratio, substrate_depth, target_type, seed_density,
     survey_year, longitude, latitude, elevation, plot_size, botanist
   ) %>%
   arrange(id)
-
 #### Prepare species data ###
 ### Exclude rare species (< 0.5% accumulated cover in all plots)
 rare <- species_experiment %>%
@@ -919,6 +932,8 @@ data_species <- species_experiment %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   arrange(id) %>%
   semi_join(data_sites, by = "id")
+
+anti_join(data_sites, data_species, by = "id")
 
 data_sites <- data_sites %>%
   semi_join(data_species, by = "id")
