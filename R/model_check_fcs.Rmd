@@ -40,7 +40,7 @@ section 'Load models'
 
 # Preparation
 
-Favourable Conservation Status (FSC) sensu Helm et al. (2015) Divers
+Favourable Conservation Status (FCS) sensu Helm et al. (2015) Divers
 Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
 
 Bayesian analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
