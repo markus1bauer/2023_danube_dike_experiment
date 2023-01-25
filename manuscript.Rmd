@@ -2,9 +2,10 @@
 title: "Dike experiment"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
-  bookdown::word_document2:
+  officedown::rdocx_document:
     reference_docx: StylesTemplate.docx
-    global_numbering: true
+  #bookdown::word_document2:
+    #global_numbering: true
 csl: template-journal-of-vegetation-science.csl
 bibliography: bibliography.bib
 ---
@@ -95,6 +96,8 @@ vegetation
 
 -   The aim of the study is
 
+-   <!--# We measured FCS, recovery, persistence -->
+
 We asked following question to evaluate the restoration success after four years:
 
 1.  How strong differs the persistence of the sown species among the seed mixture-substrate combinations?
@@ -111,17 +114,19 @@ We asked following question to evaluate the restoration success after four years
 
 ## Experimental design {.unnumbered}
 
-The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:map)), 314 m above sea level (asl); WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table \@ref(tab:flood-weather), @lfu2021waterlevel;@lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike <!--# Is that right?  --> and a with an excavator the substrates were mixed <!--# Is that right?  --> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland [Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, @mucina2016]. The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species <!--# check numbers  -->, respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)) . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
+The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table \@ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike <!--# Is that right?  --> and a with an excavator the substrates were mixed <!--# Is that right?  --> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland [Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, @mucina2016]. The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species , respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)) . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
 
-We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(tab:substrate)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m\^-2 ) <!--# include superscript -->. The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species <!--# Refer to Table Sx -->.
+We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(tab:substrate)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g^-2^). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(fig:table-establishment)).
 
-<!--# We measured FCS, recovery, persistence -->
+## External data
+
+Reference vegetation surveys were extracted from sPlotOpen [@Sabatini.2021] and our owen surveys in the surroundings on Danube dikes [@bauer2023]. We chose
 
 <!--# Mention traits -->
 
 ## Statistical analyses {.unnumbered}
 
-A non-metric multidimensional scaling ordination (NMDS) with Jaccard dissimilarity was used to visualize variation in species composition in space and time. Rare species with an accumulated cover over all plots of less than 0.5% were excluded (2D-stress: 0.21).
+A non-metric multidimensional scaling ordination (NMDS) with Jaccard dissimilarity was used to visualize variation in species composition in space and time. Rare species with an accumulated cover over all plots of less than 0.5% were excluded (2D-stress: 0.21). <!--# Refer to Table Sx -->
 
 To measure the effects of the treatments on our three response variables, we calculated Bayesian linear mixed effects models (BLMM) with the random effect plot nested in block with the Cauchy prior [see @lemoine2019]. Furthermore, we included as a fixed effect the botanists of each plot. For the simple effects of the treatments we chose plausible weakly informative priors. To evaluate the influence of the priors, prior predictive checks and models with non-informative priors were calculated. For the computation, we used 4 chains, a thinning rate of 2, 5,000 iterations for warm-up and 10,000 in total. For evaluating the computation, MCMC chain convergence was checked with trace plots and by the R-hat values and MCMC chain resolution by the effective sampling size (ESS). Posterior predictive check was done with Kernel density estimates histograms of statistics skew and leave-one-out (LOO) cross-validation [see @gabry2019]. Finally, models were compared with the Bayes factor (BF) and Bayesian *R*² values [@gelman2019].
 
@@ -169,9 +174,7 @@ We would like to thank our project partners Dr. Markus Fischer, Frank Schuster, 
 
 JH and JK designed the experiment. JH did the surveys in the years 2018--2020 and MB in 2019 and 2021. MB did the analyses and wrote the manuscript. JK and JH critically revised the manuscript.
 
-# Open research {open-research, .unnumbered}
-
-Data and code is available on Zenodo: <!--# https://doi.org/10.XXXX -->
+# Open research {#sec-open-research-open-research-.unnumbered .unnumbered}
 
 Model evaluation is stored on GitHub: [github.com/markus1bauer/2023_danube_dike_experiment](https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown)
 
@@ -187,6 +190,8 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 \clearpage
 
 \newpage
+
+<!---BLOCK_LANDSCAPE_START--->
 
 # Tables {.unnumbered}
 
@@ -211,10 +216,10 @@ read_csv(here::here("data", "raw", "data_raw_table_2.csv")) %>%
 functional traits <!--# full description -->
 
 ```{r table-traits, tab.id = "traits", tab.cap = "Traits"}
-read_csv(here::here("data", "raw", "data_raw_table_2.csv")) %>%
-  flextable() %>%
-  bold(part = "header") %>%
-  autofit()
+#read_csv(here::here("data", "raw", "data_raw_table_3.csv")) %>%
+  #flextable() %>%
+  #bold(part = "header") %>%
+  #autofit()
 ```
 
 \clearpage
@@ -228,7 +233,7 @@ Mischprobe aus mehreren Plots. Measured in \< 2mm fraction <!--# Write full desc
 ```{r table-substrate, tab.id = "substrate", tab.cap = "Substrate"}
 read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>%
   slice(-1) %>%
-  flextable() %>%
+  qflextable() %>%
   bold(part = "header") %>%
   add_header_row(
     top = FALSE,
@@ -238,6 +243,8 @@ read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>%
 ```
 
 \newpage
+
+<!---BLOCK_LANDSCAPE_STOP--->
 
 # Figures {.unnumbered}
 
@@ -296,7 +303,7 @@ Fig. 5:
 ## Figure 6 {.unnumbered}
 
 ```{r figure-nmds, fig.cap = "NMDS"}
-#knitr::include_graphics(here::here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff"))
+knitr::include_graphics(here::here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff"))
 ```
 
 Fig. 6:
@@ -304,6 +311,8 @@ Fig. 6:
 \clearpage
 
 \newpage
+
+<!---BLOCK_LANDSCAPE_START--->
 
 # Supplementary Material {.unnumbered}
 
@@ -323,12 +332,14 @@ read_csv(here::here("data", "raw", "data_raw_table_s1.csv")) %>%
 
 \newpage
 
+<!---BLOCK_LANDSCAPE_STOP--->
+
 ## Table S2 {.unnumbered}
 
 Establishment rate <!--# Full description an include it here -->
 
 ```{r table-establishment, fig.cap = "table-s2"}
-knitr::include_graphics(here::here("outputs", "tables", "table_a2_establishment.html"))
+#knitr::include_graphics(here::here("outputs", "tables", "table_a2_establishment.html"))
 ```
 
 \clearpage
