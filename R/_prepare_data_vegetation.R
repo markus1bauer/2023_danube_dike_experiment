@@ -955,6 +955,7 @@ stressplot(ordi)
 sites_nmds <- data_sites %>%
   mutate(NMDS1 = ordi$points[, 1], NMDS2 = ordi$points[, 2])
 
+### Calculate centroids of +Reference ###
 sites_nmds %>%
   filter(reference == "+Reference") %>%
   group_by(exposition, target_type) %>%
