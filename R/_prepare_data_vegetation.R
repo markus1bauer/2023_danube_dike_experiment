@@ -878,7 +878,8 @@ data_sites <- sites_bauer %>%
   filter(reference != "no" & reference != "Grassland")
 sites_bauer <- data_sites
 
-data_species <- species_bauer
+data_species <- species_bauer %>%
+  semi_join(data_sites, by = "id") %>%
 
 ### Check species name congruency ###
 data <- data_species %>%
@@ -886,6 +887,7 @@ data <- data_species %>%
   select(name) %>%
   print(n = 50)
   
+species_bauer <- data_species
 
 rm(list = setdiff(ls(), c(
   "sites_experiment", "sites_splot", "sites_bauer",
