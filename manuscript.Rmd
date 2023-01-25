@@ -5,7 +5,6 @@ output:
   officedown::rdocx_document:
     reference_docx: StylesTemplate.docx
   #bookdown::word_document2:
-    #global_numbering: true
 csl: template-journal-of-vegetation-science.csl
 bibliography: bibliography.bib
 ---
@@ -16,7 +15,7 @@ Restoration Ecology, TUM School of Life Sciences, Technical University of Munich
 
 \* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de) <!--# check if it still treated as bullet point -->
 
-Max 8000 words <!--# Remove -->
+<mark>Max 8000 words</mark> <!--# Remove -->
 
 \newpage
 
@@ -36,10 +35,6 @@ set_flextable_defaults(
   font.family = "Times New Roman",
   font.size = 11
   )
-
-
-# read analysis
-#rmarkdown::render(here::here("results", "scripts", "Models.Rmd"), quiet = TRUE) # quiet to not get text from rendering
 ```
 
 # Abstract (max 300 words) {.unnumbered}
@@ -228,18 +223,18 @@ functional traits <!--# full description -->
 
 ## Table 3 {.unnumbered}
 
-Mischprobe aus mehreren Plots. Measured in \< 2mm fraction <!--# Write full description -->
+Mischprobe aus mehreren Plots. Measured in \< 2mm fraction <!--# Write full description + superscript and subscript in header -->
 
 ```{r table-substrate, tab.id = "substrate", tab.cap = "Substrate"}
 read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>%
   slice(-1) %>%
-  qflextable() %>%
+  flextable() %>%
   bold(part = "header") %>%
   add_header_row(
     top = FALSE,
     values = read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>% slice(1)
     ) %>%
-  autofit()
+  set_table_properties(layout = "autofit", width = 1)
 ```
 
 \newpage
