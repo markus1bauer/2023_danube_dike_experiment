@@ -1,5 +1,5 @@
 ---
-title: "Dike experiment"
+title: "Development of restored dike grasslands to reference needs more than four years and can hardly modifyed by local site conditions"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
   officedown::rdocx_document:
@@ -8,16 +8,6 @@ output:
 csl: template-journal-of-vegetation-science.csl
 bibliography: bibliography.bib
 ---
-
-# Document head {.unnumbered}
-
-Restoration Ecology, TUM School of Life Sciences, Technical University of Munich, Germany
-
-\* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de) <!--# check if it still treated as bullet point -->
-
-<mark>Max 8000 words</mark> <!--# Remove -->
-
-\newpage
 
 ```{r set-up, include = FALSE}
 library(knitr)
@@ -36,6 +26,16 @@ set_flextable_defaults(
   font.size = 11
   )
 ```
+
+# Document head <!--# Remove --> {.unnumbered}
+
+Restoration Ecology, TUM School of Life Sciences, Technical University of Munich, Germany
+
+\* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de)
+
+Max 8000 words <!--# Remove -->
+
+\newpage
 
 # Abstract (max 300 words) {.unnumbered}
 
@@ -121,13 +121,11 @@ Reference vegetation surveys were extracted from sPlotOpen [@Sabatini.2021] and 
 
 ## Statistical analyses {.unnumbered}
 
+To measure the effects of the treatments on our three response variables, we calculated Bayesian linear mixed effects models (BLMM) with the random effect plot nested in block with the Cauchy prior [see @lemoine2019]. Furthermore, we included as a fixed effect the botanists of each plot. For the simple effects of the treatments, we chose plausible weakly informative priors. To evaluate the influence of the priors, prior predictive checks and models with non-informative priors were calculated. For the computation, we used 4 chains, a thinning rate of 2, 5,000 iterations for warm-up and 10,000 in total. For evaluating the computation, MCMC chain convergence was checked with trace plots and by the R-hat values and MCMC chain resolution by the effective sampling size (ESS). Posterior predictive check was done with Kernel density estimates histograms of statistics skew and leave-one-out (LOO) cross-validation [see @gabry2019]. Finally, models were compared with the Bayes factor (BF) and Bayesian *R*² values [@gelman2019].
+
 A non-metric multidimensional scaling ordination (NMDS) with Jaccard dissimilarity was used to visualize variation in species composition in space and time. Seven species which had an accumulated cover over all plots of less than 0.5% were excluded (2D-stress: 0.21).
 
-To measure the effects of the treatments on our three response variables, we calculated Bayesian linear mixed effects models (BLMM) with the random effect plot nested in block with the Cauchy prior [see @lemoine2019]. Furthermore, we included as a fixed effect the botanists of each plot. For the simple effects of the treatments we chose plausible weakly informative priors. To evaluate the influence of the priors, prior predictive checks and models with non-informative priors were calculated. For the computation, we used 4 chains, a thinning rate of 2, 5,000 iterations for warm-up and 10,000 in total. For evaluating the computation, MCMC chain convergence was checked with trace plots and by the R-hat values and MCMC chain resolution by the effective sampling size (ESS). Posterior predictive check was done with Kernel density estimates histograms of statistics skew and leave-one-out (LOO) cross-validation [see @gabry2019]. Finally, models were compared with the Bayes factor (BF) and Bayesian *R*² values [@gelman2019].
-
-The software and the whole model specification and evaluation is stored on Zenodo and in an easily accessible a scroll-down document on GitHub (see \@ref(open-research)). There, the sections are referenced to the Bayesian analysis reporting guidelines [BARG, @kruschke2021].
-
-All analyses were performed in R [Version 4.2.2, @base] with the functions 'brm' from the package 'brms' [@brms] for model calculation, several functions from 'brms' and 'bayesplot' [@bayesplot] for model evaluation and 'metaMDS' from 'vegan' for the ordination [@vegan].
+Data, code and the whole model specification and evaluation is stored on Zenodo and in an easily accessible a scroll-down document on GitHub [cite Zenoto]<!--# Cite Zenodo--> There, the sections are referenced to the Bayesian analysis reporting guidelines [BARG, @kruschke2021]. All analyses were performed in R [Version 4.2.2, @base] with the functions 'brm' from the package 'brms' [@brms] for model calculation, several functions from 'brms' and 'bayesplot' [@bayesplot] for model evaluation and 'metaMDS' from 'vegan' for the ordination [@vegan].
 
 \clearpage
 
@@ -135,11 +133,9 @@ All analyses were performed in R [Version 4.2.2, @base] with the functions 'brm'
 
 # Results
 
-We could identify a statistically clear positive effect of sand addition on the persistence of sown species and on the recovery rate (Figure \@ref(fig:figure-effects)). Furthermore, sown hay meadows were clearly closer to their reference plots than sown dry grasslands were to their references (Figure \@ref(fig:figure-effects)).
+We could identify a statistically clear positive effect of sand addition on the persistence of sown species and on the recovery rate (Figure \@ref(fig:figure-effects)). Furthermore, sown hay meadows were clearly closer to their reference plots than sown dry grasslands were to their references. The posterior distributions which are shown in the interactions plots which separates exposition and survey year indicate for all three responses a strong positive development after one year with slow increase in following years (Figures \@ref(fig:figure-persistence); \@ref(fig:figure-fcs); \@ref(fig:figure-recovery)) . Both expositions have similar trends but for all responses the values are clearly lower on the south exposition. Persistence values are more than 50% higher on the north exposition (Figure \@ref(fig:figure-persistence)). The effect of restoration treatments is in the interaction plots not clear. Hay meadow seed mixture led to a closer development to hay meadow references and almost reached on the north exposition the area of the standard deviation of reference sites (Figure \@ref(fig:figure-recovery)). Though, the sand admixture had no clear effect on the development. Persistence of both seed mixture types seems to be slightly positive affected by sand admixture on the north exposition (Figure \@ref(fig:figure-persistence)).
 
-The posterior distributions which are shown in the interactions plots which separates exposition and survey year indicate for all three responses a strong positive development after one year with slow increase in following years (Figures \@ref(fig:figure-persistence); \@ref(fig:figure-fcs); \@ref(fig:figure-recovery)) . Both expositions have similar trends but for all responses the values are clearly lower on the south exposition. Persistence values are more than 50% higher on the north exposition (Figure \@ref(fig:figure-persistence)). The effect of restoration treatments is in the interaction plots not clear. Hay meadow seed mixture led to a closer development to hay meadow references and almost reached on the north exposition the area of the standard deviation of reference sites (Figure \@ref(fig:figure-recovery)). Though, the sand admixture had no clear effect on the development. Persistence of both seed mixture types seems to be slightly positive affected by sand admixture on the north exposition (Figure \@ref(fig:figure-persistence)).
-
-<!--# Go on here -->
+The ordination visualizes the species composition of seed mixtures and the development of the plots over time (Figure \@ref(fig:figure-nmds)). The NMDS confirms that the seed mixtures are variable, but distinctive for hay meadows and dry grasslands. In addition, it visualizes the decreasing recovery rate on the NMDS1 axis which was already presented (Figure \@ref(fig:figure-recovery)) but the right direction of the development. One exception is that the development of intended hay meadows on the south exposition does not develop towards its seed mixture compositions. The ordination presents the experimental plots not only in context with seed mixtures, but also with reference sites. The reference sites have a bigger variation than the seed mixtures and are close to the seed mixtures but hardly overlap. The positions of reference sites is shifted to the left on the NMDS1 axis which means in the direction of early successional states. On the south exposition, we had negative reference sites which are located in the NMDS in between the positive reference sites and the recent state of restored plots. However, most of negative reference sites (ruderal, dry and anthropogenic vegetation) are situated in the upper half and explicitly recent restoration sites on the south exposition are close to them.
 
 \clearpage
 
@@ -169,7 +165,9 @@ We would like to thank our project partners Dr. Markus Fischer, Frank Schuster, 
 
 JH and JK designed the experiment. JH did the surveys in the years 2018--2020 and MB in 2019 and 2021. MB did the analyses and wrote the manuscript. JK and JH critically revised the manuscript.
 
-# Open research {#sec-open-research-open-research-.unnumbered .unnumbered}
+# Open research {#sec-open-research .unnumbered}
+
+Data and code is stored on Zenodo (Bauer et al. 2023) <!--# Update citation after upload -->
 
 Model evaluation is stored on GitHub: [github.com/markus1bauer/2023_danube_dike_experiment](https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown)
 
