@@ -134,12 +134,12 @@ bbox <- st_bbox(c(ymin = 48.835, ymax = 48.845, xmin = 12.87, xmax = 12.895))
     tm_fill("red", ) +
     tm_text("block", size = 1, col = "black", ymod = 0.7) +
     tm_compass(position = c("right", "bottom"), size = 2) +
-    tm_scale_bar(position = c("right", "bottom", with = 0.4)) +
+    tm_scale_bar(position = c("right", "bottom", with = 0.4), breaks = c(.25, .5)) +
     tm_layout(frame = FALSE))
 (tmap_ger <- tm_shape(germany) +
     tm_borders(col = "black") +
     tm_shape(experiment) +
-    tm_dots(size = .3) +
+    tm_dots(size = .075) +
     tm_layout(frame = FALSE))
 
 ### b Save ---------------------------------------------------------------------
@@ -147,13 +147,11 @@ tmap_save(
   tmap,
   insets_tm = tmap_ger,
   insets_vp = viewport(
-    x = unit(3.1, "cm"),
-    y = unit(3.3, "cm"),
-    width = unit(3, "cm"),
-    height = unit(4, "cm")
+    x = unit(1.1, "cm"), y = unit(1.1, "cm"),
+    width = unit(1, "cm"), height = unit(1.5, "cm")
   ), 
+  dpi = 300, width = 8, height = 5, units = "cm",
   filename = paste0(
-    here("outputs/figures"), "/", "figure_1_map_tmap_300dpi_8x11cm.tiff"
-    ),
-  dpi = 300
+    here("outputs/figures"), "/", "figure_1_map_tmap_300dpi_8x5cm.tiff"
+    )
 )
