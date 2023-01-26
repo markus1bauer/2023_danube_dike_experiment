@@ -133,8 +133,8 @@ ggsave(here("outputs", "figures",
 
 p1 + theme(legend.position = "bottom")
 ggsave(here("outputs", "figures",
-            "figure_4_fcs_epred_800dpi_16.5x14cm.tiff"),
-       dpi = 800, width = 16.5, height = 14, units = "cm")
+            "figure_4_fcs_epred_800dpi_16.5x8cm.tiff"),
+       dpi = 800, width = 16.5, height = 8, units = "cm")
 
 
 ## 2 Coefficients #############################################################
