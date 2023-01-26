@@ -1,5 +1,5 @@
 ---
-title: "Development of restored dike grasslands to reference needs more than four years and can hardly modifyed by local site conditions"
+title: "Development of restored dike grasslands to reference needs more than four years and can hardly modified by local site conditions"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
   officedown::rdocx_document:
@@ -109,9 +109,9 @@ We asked following question to evaluate the restoration success after four years
 
 ## Experimental design {.unnumbered}
 
-The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table \@ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike <!--# Is that right?  --> and a with an excavator the substrates were mixed <!--# Is that right?  --> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland [Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, @mucina2016]. The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species , respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)) . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
+The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table \@ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike<!--# Is that right?  --> and a with an excavator the substrates were mixed <!--# Is that right?  --> and the plots prepared. The target vegetation were lowland hay meadows (Arrhenatherion elatioris, CM01A) and calcareous grassland [Cirsio-Brachypodion pinnati, DA01B code of the EuroVegChecklist, @mucina2016]. The species pool of hay meadows and calcareous grasslands consisted of 55 and 58 species , respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)) . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
 
-We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(tab:substrate)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g^-2^). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(fig:table-establishment)).
+We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. We tested soil samples of the three substrates on both expositions by mixing several subsamples. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(tab:substrate)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m^-2^). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(fig:table-establishment)).
 
 ## External data
 
@@ -190,13 +190,19 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Table 1 {.unnumbered}
 
-Each plot received a individual set of 20 species with some restrictions to the number of species per functional group. <!--# Full description -->
+Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for calcareous grassland 58. In total, seed mixtures had 16 or 32 g per plot.
 
 ```{r table-seedmix, tab.id = "seedmix", tab.cap = "Seedmix"}
-read_csv(here::here("data", "raw", "data_raw_table_2.csv")) %>%
+read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
+         show_col_types = FALSE) %>%
+  slice(-1) %>%
   flextable() %>%
-  bold(part = "header") %>%
-  add_header_row(top = FALSE, values = c("", "", "#", "#", "%", "%")) %>%
+  merge_at(part = "header", j = 2:3) %>%
+  align(align = "center", part = "all") %>%
+  align(align = "left", part = "all", j = 1) %>%
+  add_header_row(top = FALSE, values = c("", "Hay meadow", "Calcareous grassland", "", "", "")) %>%
+  add_header_row(top = FALSE, values = c("", "#", "#", "#", "%", "%")) %>%
+  bold(part = "header", i = 1) %>%
   autofit()
 ```
 
@@ -221,17 +227,30 @@ functional traits <!--# full description -->
 
 ## Table 3 {.unnumbered}
 
-Mischprobe aus mehreren Plots. Measured in \< 2mm fraction <!--# Write full description + superscript and subscript in header -->
+Soil of the three substrates was analyzed for the fraction \< 2mm fraction. Soil texture was classified according to the *Bodenkundliche Kartieranleitung* [@BodenkundlKartieranl.2005]. The pH was measured in CaCl~2~ solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl~2~ extract. For calculating CaCO~3~, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was ashed at 1000 °C.
 
 ```{r table-substrate, tab.id = "substrate", tab.cap = "Substrate"}
-read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>%
+read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
+         show_col_types = FALSE) %>%
   slice(-1) %>%
   flextable() %>%
   bold(part = "header") %>%
   add_header_row(
     top = FALSE,
-    values = read_csv(here::here("data", "raw", "data_raw_table_1.csv")) %>% slice(1)
+    values = read_csv(
+      here::here("data", "raw", "data_raw_table_3_substrate.csv"),
+                 show_col_types = FALSE) %>%
+      slice(1)
     ) %>%
+  align(align = "center", part = "all") %>%
+  align(align = "left", part = "all", j = 1) %>%
+  compose(i = 1, j = 10, part = "header", value = as_paragraph("P", as_sub("2"), "O", as_sub("5"))) %>%
+  compose(i = 1, j = 11, part = "header", value = as_paragraph("K", as_sub("2"), "O")) %>%
+  compose(i = 1, j = 12, part = "header", value = as_paragraph("Mg", as_sup("2+"))) %>%
+  compose(i = 1, j = 14, part = "header", value = as_paragraph("CaCO", as_sub("3"))) %>%
+  compose(i = 2, j = 10, part = "header", value = as_paragraph("mg 100g", as_sup("−1"))) %>%
+  compose(i = 2, j = 11, part = "header", value = as_paragraph("mg 100g", as_sup("−1"))) %>%
+  compose(i = 2, j = 12, part = "header", value = as_paragraph("mg 100g", as_sup("−1"))) %>%
   set_table_properties(layout = "autofit", width = 1)
 ```
 
