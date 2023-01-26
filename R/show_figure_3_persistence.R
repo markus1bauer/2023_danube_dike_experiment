@@ -143,10 +143,11 @@ ggsave(here("outputs", "figures",
             "figure_3_persistence_epred_800dpi_24x8cm.tiff"),
        dpi = 800, width = 24, height = 8, units = "cm")
 
-p1 + theme(legend.position = "bottom")
+p1 + theme(legend.position = "bottom") +
+  scale_y_continuous(limits = c(0, 1.02), breaks = seq(-100, 400, .25))
 ggsave(here("outputs", "figures",
-            "figure_3_persistence_epred_800dpi_16.5x14cm.tiff"),
-       dpi = 800, width = 16.5, height = 14, units = "cm")
+            "figure_3_persistence_epred_800dpi_16.5x8cm.tiff"),
+       dpi = 800, width = 16.5, height = 8, units = "cm")
 
 
 ## 2 Coefficients #############################################################
