@@ -19,7 +19,8 @@ library(flextable)
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE,
-  dpi = 50
+  dpi = 300,
+  fig.cap = FALSE
   )
 set_flextable_defaults(
   font.family = "Times New Roman",
@@ -227,7 +228,7 @@ functional traits <!--# full description -->
 
 ## Table 3 {.unnumbered}
 
-Soil of the three substrates was analyzed for the fraction \< 2mm fraction. Soil texture was classified according to the *Bodenkundliche Kartieranleitung* [@BodenkundlKartieranl.2005]. The pH was measured in CaCl~2~ solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl~2~ extract. For calculating CaCO~3~, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was ashed at 1000 °C.
+Soil of the three substrates was analyzed for the fraction \< 2mm fraction. Soil texture was classified according to the *Bodenkundliche Kartieranleitung* [@BodenkundlKartieranl.2005]. The pH was measured in CaCl~2~ solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl~2~ extract. For calculating CaCO~3~, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was incinerated at 1000 °C.
 
 ```{r table-substrate, tab.id = "substrate", tab.cap = "Substrate"}
 read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
@@ -262,9 +263,11 @@ read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
 
 ## Figure 1 {.unnumbered}
 
-```{r figure-map, fig.cap = "Map"}
+```{r figure-map, fig.cap = "Map", fig.asp = 0.7272}
 knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300dpi_8x11cm.tiff"))
 ```
+
+The experiment was located
 
 \clearpage
 
@@ -272,7 +275,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_1_map_tmap_300d
 
 ## Figure 2 {.unnumbered}
 
-```{r figure-effects, fig.cap = "Effects"}
+```{r figure-effects, fig.cap = "Effects", fig.asp = 3.3}
 knitr::include_graphics(here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff"))
 ```
 
@@ -282,7 +285,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_2_800dpi_16.5x5
 
 ## Figure 3 {.unnumbered}
 
-```{r figure-persistence, fig.cap = "Persistence"}
+```{r figure-persistence, fig.cap = "Persistence", fig.asp = 1.785}
 knitr::include_graphics(here::here("outputs", "figures", "figure_3_persistence_epred_800dpi_16.5x14cm.tiff"))
 ```
 
@@ -292,7 +295,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_3_persistence_e
 
 ## Figure 4 {.unnumbered}
 
-```{r figure-fcs, fig.cap = "Favourable Conservation Status (FCS)"}
+```{r figure-fcs, fig.cap = "Favourable Conservation Status (FCS)", fig.asp = 1.785}
 knitr::include_graphics(here::here("outputs", "figures", "figure_4_fcs_epred_800dpi_16.5x14cm.tiff"))
 ```
 
@@ -302,7 +305,7 @@ knitr::include_graphics(here::here("outputs", "figures", "figure_4_fcs_epred_800
 
 ## Figure 5 {.unnumbered}
 
-```{r figure-recovery, fig.cap = "Recovery"}
+```{r figure-recovery, fig.cap = "Recovery", fig.asp = 1.785}
 knitr::include_graphics(here::here("outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x14cm.tiff"))
 ```
 
@@ -314,7 +317,7 @@ Fig. 5:
 
 ## Figure 6 {.unnumbered}
 
-```{r figure-nmds, fig.cap = "NMDS"}
+```{r figure-nmds, fig.cap = "NMDS", fig.asp = 1.0312}
 knitr::include_graphics(here::here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff"))
 ```
 
