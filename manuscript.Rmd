@@ -110,7 +110,7 @@ We asked following question to evaluate the restoration success after four years
 
 ## Experimental design {.unnumbered}
 
-The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table @ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike<!--# Is that right?  --> and a with an excavator the substrates were mixed<!--# Is that right?  --> and the plots prepared. The target vegetation were lowland hay meadows [EUNIS code: R22, @Chytry.2020; Arrhenatherion elatioris, EuroVegChecklist: CM01A, @mucina2016] and semi-dry calcareous grassland (R1A; Cirsio-Brachypodion pinnati, DA01B). The species pool of hay meadows and dry grasslands consisted of 55 and 58 species, respectively. The seeds were received from a commercial producer of autochtonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)) . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, Bromus hordeaceus was seeded as a nursery grass to provide safe sites under drought conditions.
+The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table @ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from the dike<!--# Is that right?  --> and a with an excavator the substrates were mixed<!--# Is that right?  --> and the plots prepared. The target vegetation were lowland hay meadows [EUNIS code: R22, @Chytry.2020; Arrhenatherion elatioris, EuroVegChecklist: CM01A, @mucina2016] and semi-dry calcareous grassland (R1A; Cirsio-Brachypodion pinnati, DA01B). The species pool of hay meadows and dry grasslands consisted of 55 and 58 species, respectively. The seeds were received from a commercial producer of autochthonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)) . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, *Bromus hordeaceus* was seeded as a nursery grass to provide safe sites under drought conditions.
 
 We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. We tested soil samples of the three substrates on both expositions by mixing several subsamples. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(tab:substrate)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m^-2^). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(fig:table-establishment)).
 
@@ -124,7 +124,7 @@ Reference vegetation surveys were extracted from sPlotOpen [@Sabatini.2021] and 
 
 To measure the effects of the treatments on our three response variables, we calculated Bayesian linear mixed-effects models (BLMM) with the random effect plot nested in block with the Cauchy prior [see @lemoine2019]. Furthermore, we included as a fixed effect the botanists of each plot. For the simple effects of the treatments, we chose plausible weakly informative priors. To evaluate the influence of the priors, prior predictive checks and models with non-informative priors were calculated. For the computation, we used 4 chains, a thinning rate of 2, 5,000 iterations for warm-up and 10,000 in total. For evaluating the computation, MCMC chain convergence was checked with trace plots and by the R-hat values and MCMC chain resolution by the effective sampling size (ESS). Posterior predictive check was done with Kernel density estimates histograms of statistics skew and leave-one-out (LOO) cross-validation [see @gabry2019]. Finally, models were compared with the Bayes factor (BF) and Bayesian *R*² values [@gelman2019].
 
-A non-metric multidimensional scaling ordination (NMDS) with Jaccard dissimilarity was used to visualize variation in species composition in space and time. Seven species which had an accumulated cover over all plots of less than 0.5% were excluded (2D-stress: 0.21).
+A non-metric multidimensional scaling ordination (NMDS) with Jaccard dissimilarity was used to visualize variation in species composition in space and time. Seven species which had an accumulated cover over all plots of less than 0.5% were excluded (2D-stress 0.21).
 
 Data, code and the whole model specification and evaluation is stored on Zenodo and in an easily accessible a scroll-down document on GitHub [cite Zenoto]<!--# Cite Zenodo--> There, the sections are referenced to the Bayesian analysis reporting guidelines [BARG, @kruschke2021]. All analyses were performed in R [Version 4.2.2, @base] with the functions 'brm' from the package 'brms' [@brms] for model calculation, several functions from 'brms' and 'bayesplot' [@bayesplot] for model evaluation and 'metaMDS' from 'vegan' for the ordination [@vegan].
 
@@ -357,10 +357,23 @@ read_csv(here::here("data", "raw", "data_raw_table_s1.csv")) %>%
 
 ## Table S2 {.unnumbered}
 
-Establishment rate <!--# Full description an include it here -->
+Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of seeded plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the seeded plots were included. The shades of grey indicate values of 0--33%, 33--50%, \>50%.
 
-```{r table-establishment, fig.cap = "table-s2"}
-#knitr::include_graphics(here::here("outputs", "tables", "table_a2_establishment.html"))
+```{r table-establishment, tab.id = "establishment", tab.cap = "Establishment rate"}
+read_csv(
+  "data_processed_traits.csv",
+                 col_names = TRUE, na = c("na", "NA"), col_types =
+                   cols(.default = "?", name = "f")
+  ) %>%
+  select(name, family, total_seeded_2018, starts_with("rate_")) %>%
+  drop_na(total_seeded_2018) %>%
+  arrange(match(family, c("Poaceae", "Fabaceae"))) %>%
+  mutate(across(starts_with("rate"), ~ .x * 100),
+         name = str_replace_all(name, "_", " ")) %>%
+  flextable() %>%
+  bold(part = "header") %>%
+  bg(bg = scales::col_numeric(palette = "viridis", domain = c(0, 1))) %>%
+  autofit()
 ```
 
 \clearpage
