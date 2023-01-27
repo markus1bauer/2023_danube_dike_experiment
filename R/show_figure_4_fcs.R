@@ -165,7 +165,7 @@ ggsave(here("outputs", "figures",
   ) %>%
   ggplot(aes(x = .value, y = .variable)) +
   geom_vline(xintercept = 0, linetype = "dashed") +
-  stat_halfeye() +
+  ggdist::stat_halfeye(point_interval = "median_qi", .width = c(0.66, 0.95)) +
   scale_x_continuous(breaks = seq(-100, 400, .5), limits = c(-.5, .7)) +
   labs(x = expression(Delta ~ Favourabale ~ Conservation ~ Status ~ "(FCS)"),
        y = "") +

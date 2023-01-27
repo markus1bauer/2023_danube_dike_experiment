@@ -173,7 +173,7 @@ ggsave(here("outputs", "figures",
   ) %>%
   ggplot(aes(x = .value, y = .variable)) +
   geom_vline(xintercept = 0, linetype = "dashed") +
-  tidybayes::stat_halfeye() +
+  ggdist::stat_halfeye(point_interval = "median_qi", .width = c(0.66, 0.95)) +
   scale_x_continuous(breaks = seq(-100, 400, .2)) +
   labs(x = expression(Delta ~ Successional ~ distance ~
                         "(" * italic(d)[italic(jt) * ",0"] * ")"), y = "") +
