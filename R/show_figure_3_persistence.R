@@ -25,7 +25,8 @@ rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 ### Load data ###
 sites <- read_csv(
   here("data", "processed", "data_processed_sites_temporal.csv"),
-  col_names = TRUE, na = c("na", "NA", ""),
+  col_names = TRUE,
+  na = c("na", "NA", ""),
   col_types = cols(
     .default = "?",
     plot = "f",
