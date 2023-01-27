@@ -139,18 +139,18 @@ ggsave(here("outputs", "figures",
 
 ## 2 Coefficients #############################################################
 
+get_variables(m2)
+
 (p2 <- m2 %>%
   gather_draws(
     b_sand_ratio25, b_sand_ratio50, b_substrate_depth15,
-    b_target_typedry_grassland, b_seed_density8#,
-    #b_expositionsouth,
+    b_target_typedry_grassland, b_seed_density8
   ) %>%
   mutate(
     .variable = as.factor(.variable),
     .variable = fct_relevel(
       .variable, "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
-      "b_target_typedry_grassland", "b_seed_density8"#,
-      #"b_expositionsouth"
+      "b_target_typedry_grassland", "b_seed_density8"
     ),
     .variable = fct_relevel(.variable, rev),
     .variable = fct_recode(
@@ -159,8 +159,7 @@ ggsave(here("outputs", "figures",
       "Sand ratio: 0 vs. 25 %" = "b_sand_ratio25",
       "Sand ratio: 0 vs. 50 %" = "b_sand_ratio50",
       "Substrate depth: 30 vs. 15 cm" = "b_substrate_depth15",
-      "Seed density: 4 vs. 8 g/m²" = "b_seed_density8"#,
-      #"North vs. south" = "b_expositionsouth"
+      "Seed density: 4 vs. 8 g/m²" = "b_seed_density8"
       )
   ) %>%
   ggplot(aes(x = .value, y = .variable)) +
