@@ -10,6 +10,7 @@ bibliography: bibliography.bib
 ---
 
 ```{r set-up, include = FALSE}
+library(here)
 library(knitr)
 library(bookdown)
 library(officedown)
@@ -24,7 +25,8 @@ knitr::opts_chunk$set(
   )
 set_flextable_defaults(
   font.family = "Times New Roman",
-  font.size = 11
+  font.size = 11,
+  text.align = "center"
   )
 ```
 
@@ -191,19 +193,17 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Table 1 {.unnumbered}
 
-Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, seed mixtures had 16 or 32 g per plot.
-
-```{r table-seedmix, tab.id = "seedmix", tab.cap = "Seedmix"}
+```{r table-seedmix, tab.id = "seedmix", tab.cap = "Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, seed mixtures had 16 or 32 g per plot. All individual seed mixtures are stored in the repository in Zenodo ("outputs/tables/table_a3_seedmixes"")."}
 read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
          show_col_types = FALSE) %>%
   slice(-1) %>%
   flextable() %>%
   merge_at(part = "header", j = 2:3) %>%
-  align(align = "center", part = "all") %>%
-  align(align = "left", part = "all", j = 1) %>%
+  align(align = "center", part = "all", j = -1) %>%
   add_header_row(top = FALSE, values = c("", "Hay meadow", "Dry grassland", "", "", "")) %>%
   add_header_row(top = FALSE, values = c("", "#", "#", "#", "%", "%")) %>%
   bold(part = "header", i = 1) %>%
+  border_inner_h(part = "header", border = fp_border(width = 1)) %>%
   autofit()
 ```
 
@@ -228,9 +228,7 @@ functional traits <!--# full description -->
 
 ## Table 3 {.unnumbered}
 
-Soil of the three substrates was analyzed for the fraction \< 2mm fraction. Soil texture was classified according to the *Bodenkundliche Kartieranleitung* [@BodenkundlKartieranl.2005]. The pH was measured in CaCl~2~ solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl~2~ extract. For calculating CaCO~3~, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was incinerated at 1000 °C.
-
-```{r table-substrate, tab.id = "substrate", tab.cap = "Substrate"}
+```{r table-substrate, ft.align = "left",tab.id = "substrate", tab.cap = "Soil of the three substrates was analyzed for the fraction < 2mm fraction. Soil texture was classified according to the Bodenkundliche Kartieranleitung [@BodenkundlKartieranl.2005]. The pH was measured in CaCl2 solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl2 extract. For calculating CaCO3, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was incinerated at 1000 °C."}
 read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
          show_col_types = FALSE) %>%
   slice(-1) %>%
@@ -243,8 +241,8 @@ read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
                  show_col_types = FALSE) %>%
       slice(1)
     ) %>%
-  align(align = "center", part = "all") %>%
-  align(align = "left", part = "all", j = 1) %>%
+  border_inner_h(part = "header", border = fp_border(width = 1)) %>%
+  align(align = "center", part = "all", j = -1) %>%
   compose(i = 1, j = 10, part = "header", value = as_paragraph("P", as_sub("2"), "O", as_sub("5"))) %>%
   compose(i = 1, j = 11, part = "header", value = as_paragraph("K", as_sub("2"), "O")) %>%
   compose(i = 1, j = 12, part = "header", value = as_paragraph("Mg", as_sup("2+"))) %>%
@@ -263,7 +261,7 @@ read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
 
 ## Figure 1 {.unnumbered}
 
-```{r figure-map, fig.asp = 1.2854, fig.width = 5, fig.cap = "The experiment was located on a dike at river Danube in SE Germany.  The 288 plots were allocated in six blocks (red squares on upper photo) and on the north and south exposition (central photo). Four treatments were conducted (Sand admixture, substrate depth, seeding density, seed mixture type (H, D)) . The western half of a block was with a shallow substrate depth for the blocks and within this half the substrates. The photo on the bottom shows one block from the side (Photo: Markus Bauer)."}
+```{r figure-map, fig.asp = 1.2854, fig.width = 5, fig.cap = "The experiment was located on a dike at river Danube in SE Germany.  The 288 plots were allocated in six blocks (red squares on upper photo) and on the north and south exposition (central photo). Four treatments were conducted (Sand admixture, substrate depth, seeding density, seed mixture types H and D). The western half of a block was with a shallow substrate depth for the blocks and within this half the substrates. The photo on the bottom shows one block from the side after four years (Photo: Markus Bauer)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_1_map.png")
   )
@@ -311,7 +309,7 @@ knitr::include_graphics(
 
 ## Figure 5 {.unnumbered}
 
-```{r fig.id = "figure-recovery", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The successional distance (d~jt,0~) of plots of a experiment on a dike to its respective reference sites (hay meadows or dry grasslands). The substrates had different sand admixtures and different seed mixture types were sown. The zero lines indicate the mean position of the reference sites on the NMDS axis 1 (@ref(fig:figure-nmds)). The grey area mark the standard deviation of the position of the reference sites. Shown are the posterior distributions, their medians and 95 % credible intervals derived from a Bayesian linear mixed-effects model (BLMM)."}
+```{r fig.id = "figure-recovery", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The successional distance (*d~jt,0~*) of plots of an experiment on a dike to its respective reference sites (hay meadows or dry grasslands). The substrates had different sand admixtures and different seed mixture types were sown. The zero lines indicate the mean position of the reference sites on the NMDS axis 1 (Figure 5). The grey area marks the standard deviation of the position of the reference sites. Shown are the posterior distributions, their medians and 95 % credible intervals derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x8cm.tiff")
   )
@@ -323,7 +321,7 @@ knitr::include_graphics(
 
 ## Figure 6 {.unnumbered}
 
-```{r fig.id = "figure-nmds", fig.asp = 0.9696, fig.width = 6.49, fig.cap = "NMDS ordination based on Sørensen dissimilarity of the species composition of 288 plots on dike grasslands over four years after sowing the seed mixtures (black squares).  In addition, 98 positive and negative reference plots were included from older dike grasslands in the surroundings [@bauer2023] and six plots from sPlotOpen [@Sabatini.2021].  The circles show the standard error of the groups. 2D stress: 0.21."}
+```{r fig.id = "figure-nmds", fig.asp = 0.9696, fig.width = 6.49, fig.cap = "NMDS ordination based on Sørensen dissimilarity of the species composition of 288 plots on dike grasslands over four years after sowing the seed mixtures (black squares).  In addition, 98 positive and negative reference plots were included (filled symbols) from older dike grasslands in the surroundings [@bauer2023] and six plots from sPlotOpen [@Sabatini.2021].  The circles show the standard error of the groups. 2D stress: 0.21."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff")
   )
@@ -357,11 +355,9 @@ read_csv(here::here("data", "raw", "data_raw_table_s1.csv")) %>%
 
 ## Table S2 {.unnumbered}
 
-Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of seeded plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the seeded plots were included. The shades of grey indicate values of 0--33%, 33--50%, \>50%.
-
-```{r table-establishment, tab.id = "establishment", tab.cap = "Establishment rate"}
+```{r table-establishment, tab.id = "establishment", tab.cap = "Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of seeded plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the seeded plots were included. The shades of grey indicate the success of establishment."}
 read_csv(
-  "data_processed_traits.csv",
+  here("data", "processed", "data_processed_traits.csv"),
                  col_names = TRUE, na = c("na", "NA"), col_types =
                    cols(.default = "?", name = "f")
   ) %>%
@@ -370,19 +366,17 @@ read_csv(
   arrange(match(family, c("Poaceae", "Fabaceae"))) %>%
   mutate(across(starts_with("rate"), ~ .x * 100),
          name = str_replace_all(name, "_", " ")) %>%
+  rename(Species = name, Family = family, "Seeded plots [#]" = total_seeded_2018, "Establishment rate [%]" = rate_2018, "2019" = rate_2019, "2020" = rate_2020, "2021" = rate_2021) %>%
   flextable() %>%
+  align(part = "all", align = "center", j = -1) %>%
+  merge_at(part = "header", j = 4:7) %>%
+  add_header_row(top = FALSE, values = c("", "", "", "2018", "2019", "2020", "2021")) %>%
+  border_inner_h(part = "header", border = fp_border(width = 1)) %>%
   bold(part = "header") %>%
-  bg(bg = scales::col_numeric(palette = "viridis", domain = c(0, 1))) %>%
+  style(j = 1, pr_t = fp_text_default(italic = TRUE)) %>%
+  bg(j = 4:7, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 100))) %>%
   autofit()
 ```
-
-\clearpage
-
-\newpage
-
-## Table S3 {.unnumbered}
-
-See repository outputs/tables/table_a3_seedmixes.csv <!--# Write full link and full description -->
 
 \clearpage
 
