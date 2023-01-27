@@ -95,19 +95,19 @@ theme_mb <- function() {
      cex = .5
    ) +
    geom_hline(
-     yintercept = c(.25),
+     yintercept = c(.5),
      linetype = "dotted",
      linewidth = .3,
      color = "black"
    ) +
    geom_hline(
-     yintercept = c(.5),
+     yintercept = c(.75),
      linetype = "dashed",
      linewidth = .3,
      color = "black"
    ) +
    geom_hline(
-     yintercept = c(.75),
+     yintercept = c(1),
      linetype = "solid",
      linewidth = .3,
      color = "black"
