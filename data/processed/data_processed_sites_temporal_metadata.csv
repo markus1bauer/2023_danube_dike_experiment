@@ -1,0 +1,21 @@
+﻿attributeName,attributeDefinition,formatString,definition,unit,numberType,type,factor,comment
+id,ID of the plot in a special year,NA,"L = land/1 = site/01 = plot number within this site/ plot W_5_08/09 is a plot between the plots W_5_08 and W_5_09 		",NA,NA,character,NA,NA
+plot,ID of the plot,NA,"L = land/1 = site/01 = plot number within this site/ plot W_5_08/09 is a plot between the plots W_5_08 and W_5_09 		",NA,NA,character,NA,NA
+site,ID of the site,NA,NA,NA,NA,factor,1 = site in the east/2/3/4/5/6 = site in the west,NA
+longitude,Coordinates X of site (EPSG: 4326 / WGS84),NA,NA,degree,real,numeric,NA,NA
+latitude,Coordinates Y of site (EPSG: 4326 / WGS84),NA,NA,degree,real,numeric,NA,NA
+elevation,Meters above sea level,NA,NA,meter,integer,numeric,NA,NA
+plot_size,Size of the plot (2m x 2m),NA,NA,meterSquared,integer,numeric,NA,NA
+exposition,Exposition of the plots,NA,NA,NA,NA,factor,north/south,NA
+orientation,On which side is the plot on the dike?,NA,NA,NA,NA,factor,water/land,NA
+sand_ratio,Ratio of sand of the total substrate in weigth percentage,NA,NA,percent,real,factor,0/25/50,NA
+substrate_depth,"The depht of the built in substrate (holes were digged in the existing dike and filled with prepared substrate				)",NA,NA,centimeter,integer,factor,15/50,NA
+target_type,Target vegetation of the seedmixture,NA,NA,NA,NA,factor,hay_meadow/dry_grassland,NA
+seed_density,How dense were the seed mixtures seeded?,NA,NA,gramPerMeterSquared,integer,factor,4 vs. 8,NA
+survey_year,Year of survey,NA,NA,NA,NA,factor,2018/2019/2020/2021,NA
+botanist,Botanist for that plot,NA,Botanist for that plot,NA,NA,character,NA,NA
+B,Additive component of D: losses,NA,NA,dimensionless,real,numeric,NA,Legendre (2019) Ecol Evol https://doi.org/10.1002/ece3.4984
+C,Additive component of D: gains,NA,NA,dimensionless,real,numeric,NA,Legendre (2019) Ecol Evol https://doi.org/10.1002/ece3.4984
+D,Temporal beta-diversity index (TBI),NA,NA,dimensionless,real,numeric,NA,Legendre (2019) Ecol Evol https://doi.org/10.1002/ece3.4984
+presabu,TBI calculated with presence-absence or abundance data,NA,NA,NA,NA,factor,presence/abundance,NA
+persistence,Percentage of established species of the 20 species initially seeded,NA,NA,percent,real,numeric,NA,Wilsey (2021) Restor Ecol https://doi.org/10.1111/rec.13132
