@@ -10,8 +10,8 @@ rlb,Red list Bavaria (StMUGV 2005),NA,NA,NA,NA,factor,"NA = not threatened	 V = 
 neophyte,Is species a neophyte? (BfN 2021),NA,NA,NA,NA,factor,yes/no,BfN (Bundesamt fuer Naturschutz) (2021) FloraWeb. Category Floristischer Status of each species description. URL: https://www.floraweb.de
 l,Ellenberg L value (Ellenberg et al. 2001),NA,NA,dimensionless,integer,numeric,NA,Ellenbeg H (2001) Zeigerwerte von Pflanzen in Mitteleuropa. 3rd ed. Scripta geobotanica 18: 9-166. ISBN 3884525182
 t,Ellenberg T value (Ellenberg et al. 2001),NA,NA,dimensionless,integer,numeric,NA,Ellenbeg H (2001) Zeigerwerte von Pflanzen in Mitteleuropa. 3rd ed. Scripta geobotanica 18: 9-166. ISBN 3884525182
-f,Ellenberg F value (Ellenberg et al. 2001),NA,NA,dimensionless,integer,numeric,NA,Ellenbeg H (2001) Zeigerwerte von Pflanzen in Mitteleuropa. 3rd ed. Scripta geobotanica 18: 9-166. ISBN 3884525182
 k,Ellenberg K value (Ellenberg et al. 2001),NA,NA,dimensionless,integer,numeric,NA,Ellenbeg H (2001) Zeigerwerte von Pflanzen in Mitteleuropa. 3rd ed. Scripta geobotanica 18: 9-166. ISBN 3884525182
+f,Ellenberg F value (Ellenberg et al. 2001),NA,NA,dimensionless,integer,numeric,NA,Ellenbeg H (2001) Zeigerwerte von Pflanzen in Mitteleuropa. 3rd ed. Scripta geobotanica 18: 9-166. ISBN 3884525182
 fchange,Ellenberg value for changing moisture conditions (Ellenberg et al. 2001),NA,NA,NA,NA,factor,1 = changing moist/2 = intensive chaning moist conditions,Ellenbeg H (2001) Zeigerwerte von Pflanzen in Mitteleuropa. 3rd ed. Scripta geobotanica 18: 9-166. ISBN 3884525182
 r,Ellenberg R value (Ellenberg et al. 2001),NA,NA,dimensionless,integer,numeric,NA,Ellenbeg H (2001) Zeigerwerte von Pflanzen in Mitteleuropa. 3rd ed. Scripta geobotanica 18: 9-166. ISBN 3884525182
 n,Ellenberg N value (Ellenberg et al. 2001),NA,NA,dimensionless,integer,numeric,NA,Ellenbeg H (2001) Zeigerwerte von Pflanzen in Mitteleuropa. 3rd ed. Scripta geobotanica 18: 9-166. ISBN 3884525182
@@ -24,4 +24,6 @@ table_35,LfU(2018a): Tafel 35,NA,NA,NA,NA,factor,1 = high prioriy / 2 / 3 / 4 = 
 table_36,LfU(2018a): Tafel 36,NA,NA,NA,NA,factor,1 = high prioriy / 2 / 3 / 4 = lower but still priority,LfU (Bayerisches Landesamt fuer Umwelt) (2018a) Bestimmungsschluessel fuer Flaechen nach paragraph 30 BNatSchG/Art. 23 BayNatSchG
 mapped_2011,Mapped on dikes in the whole region along the Danube? (ArGe Danubia 2011),NA,NA,NA,NA,factor,1 = yes / 0 = no,"ArGe Danubia (2011) Kartierbericht Pflanzengesellschaften, Biotoptypen, Nutzungstypen, FFH-Lebensraumtypen, Gef‰ﬂpflanzen."
 special_target,"Decided by the authors to be part of the species pool (e.g., Rhinanthus)",NA,NA,NA,NA,factor,1 = yes / 0 = no,NA
-seed_availability,Available from the commercial seed producer for regional seeds Krimmer GbR in Freising-Pulling?,NA,NA,NA,NA,factor,1 = yes / 0 = no,NA
+seed_availability,Species was available from the commercial seed producer for regional seeds Krimmer GbR in Freising-Pulling,NA,NA,NA,NA,factor,1 = yes / 0 = no,NA
+seeded_hay_meadow,Species was part of the species pool for hay meadow seed mixtures,NA,NA,NA,NA,factor,2 = yes / 0 = no,NA
+seeded_dry_grassland,Species was part of the species pool for dry grassland seed mixtures,NA,NA,NA,NA,factor,3 = yes / 0 = no,NA
