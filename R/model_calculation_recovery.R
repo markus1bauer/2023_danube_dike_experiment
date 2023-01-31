@@ -48,7 +48,7 @@ sites <- read_csv(
     survey_year = as.numeric(survey_year),
     botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
     botanist_year = factor(botanist_year),
-    n = recovery_time
+    n = recovery_completeness
     )
 
 rm(list = setdiff(ls(), c("sites")))
