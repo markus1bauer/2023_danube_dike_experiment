@@ -1,5 +1,5 @@
 ﻿attributeName,attributeDefinition,formatString,definition,unit,numberType,type,factor,comment
-plot,ID of the plot,NA,"L = land	 1 = block	 01 = plot number within this block	 plot W_5_08/09 is a plot between the plots W_5_08 and W_5_09 		",NA,NA,character,NA,NA
+plot,ID of the plot,NA,"L = land	/1 = site/01 = plot number within this site/ plot W_5_08/09 is a plot between the plots W_5_08 and W_5_09 		",NA,NA,character,NA,NA
 site,ID of the site,NA,NA,NA,NA,factor,1 = site in the east/2/3/4/5/6 = site in the west,NA
 latitude,Coordinates Y of site (EPSG: 4326 / WGS84),NA,NA,degree,real,numeric,NA,NA
 longitude,Coordinates X of site (EPSG: 4326 / WGS84),NA,NA,degree,real,numeric,NA,NA
