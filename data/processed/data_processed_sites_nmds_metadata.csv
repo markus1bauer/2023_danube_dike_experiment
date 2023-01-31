@@ -1,0 +1,24 @@
+﻿attributeName,attributeDefinition,formatString,definition,unit,numberType,type,factor,comment
+id,ID of the plot in a special year,NA,"L = land/1 = site/01 = plot number within this site/ plot W_5_08/09 is a plot between the plots W_5_08 and W_5_09 		",NA,NA,character,NA,NA
+plot,ID of the plot,NA,"L = land/1 = site/01 = plot number within this site/ plot W_5_08/09 is a plot between the plots W_5_08 and W_5_09 		",NA,NA,character,NA,NA
+site,ID of the site,NA,NA,NA,NA,factor,1 = site in the east/2/3/4/5/6 = site in the west,NA
+esy,EUNIS Habitat Classification by the expert system (ESy),NA,EUNIS Habitat Classification by the expert system (ESy),NA,NA,character,NA,Chytrý et al. (2020) Appl Veg Sci https://doi.org/10.1111/avsc.12519
+reference,"Type of reference (positive, general, negative) or survey year or seeding of experiment plots",NA,NA,NA,NA,factor,Grassland/+Reference/-Reference/seeding/2018/2019/2020/2021,NA
+exposition,Exposition of the plots,NA,NA,NA,NA,factor,north/south,NA
+sand_ratio,Ratio of sand of the total substrate in weigth percentage,NA,NA,percent,real,factor,0/25/50,NA
+substrate_depth,"The depht of the built in substrate (holes were digged in the existing dike and filled with prepared substrate				)",NA,NA,centimeter,integer,factor,15/50,NA
+target_type,Target vegetation of the seedmixture,NA,NA,NA,NA,factor,hay_meadow/dry_grassland,NA
+seed_density,How dense were the seed mixtures seeded?,NA,NA,gramPerMeterSquared,integer,factor,4 vs. 8,NA
+survey_year,Year of survey,NA,NA,NA,NA,factor,2018/2019/2020/2021,NA
+longitude,Coordinates X of site (EPSG: 4326 / WGS84),NA,NA,degree,real,numeric,NA,NA
+latitude,Coordinates Y of site (EPSG: 4326 / WGS84),NA,NA,degree,real,numeric,NA,NA
+elevation,Meters above sea level,NA,NA,meter,integer,numeric,NA,NA
+plot_size,Size of the plot (2m x 2m),NA,NA,meterSquared,integer,numeric,NA,NA
+botanist,Botanist for that plot,NA,Botanist for that plot,NA,NA,character,NA,NA
+NMDS1,Position of the plot on the NMDS1 axis,NA,NA,dimensionless,real,numeric,NA,NA
+NMDS2,Position of the plot on the NMDS2 axis,NA,NA,dimensionless,real,numeric,NA,NA
+mean_reference,Mean position of all +Reference plots along NMDS1 axis,NA,NA,dimensionless,real,numeric,NA,NA
+sd_reference,Standard deviation of all +Reference plots along NMDS1 axis,NA,NA,dimensionless,real,numeric,NA,NA
+recovery_completeness,Distance of each plot to the mean_reference,NA,NA,dimensionless,real,numeric,NA,Rydgren et al. (2018) J Appl Ecol https://doi.org/10.1111/1365-2664.13254
+givd_id,ID of the data base in the Global Index of Vegetation-Plot Databases (GIVD),NA,ID of the data base in the Global Index of Vegetation-Plot Databases (GIVD),NA,NA,character,NA,www.givd.info / hosted bei the International Association of Vegetations Science and the European Vegetation Survey and the University Greifswald
+source,Reference of the data set,NA,Reference of the data set,NA,NA,character,NA,NA
