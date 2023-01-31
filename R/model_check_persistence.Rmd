@@ -559,8 +559,9 @@ Effect sizes of chosen model just to get exact values of means etc. if necessary
 posterior1 %>%
   posterior::summarize_draws() %>%
   knitr::kable()
-emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
+emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
           survey_year_fct, type = "response")
+emm$emmeans
 ```
 
 ```{r write-csv, echo = FALSE}
