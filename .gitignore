@@ -40,3 +40,7 @@ outputs/models/model_recovery_simple.Rdata
 20221017_bauer_etal_dike_experiment_manuscript.docx
 outputs/models/model_fcs_2_prior.Rdata
 outputs/models/model_persistence_2_prior.Rdata
+data/raw/vegetweb/projectHeader.csv
+data/raw/vegetweb/PRESENTS.csv
+data/raw/vegetweb/plotHeader.csv
+data/raw/vegetweb/COVERAGE_MEAN.csv
