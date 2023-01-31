@@ -538,7 +538,7 @@ bayes_factor
 
 ## Posterior distributions (BARG 3.B)
 
-### Forest plot(BARG 3.B/5.B)
+### Forest plot (BARG 3.B/5.B)
 
 ```{r posteriors, fig.height = 7}
 combined_models <- bind_rows(
