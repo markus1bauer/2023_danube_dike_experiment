@@ -77,8 +77,6 @@ theme_mb <- function() {
   )
 }
 
-emmeans::emmeans(m2, revpairwise ~ target_type * sand_ratio | survey_year | exposition,
-                 type = "response")
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
