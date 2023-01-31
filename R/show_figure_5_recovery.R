@@ -1,5 +1,5 @@
 # Dike grassland field experiment
-# Favourable conservation status ####
+# Recovery completeness ####
 # Show figure 5
 
 # Markus Bauer
@@ -45,7 +45,7 @@ sites <- read_csv(
     survey_year = as.numeric(survey_year),
     botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
     botanist_year = factor(botanist_year),
-    n = recovery_time
+    n = recovery_completeness
   )
 
 ### * Model ####
