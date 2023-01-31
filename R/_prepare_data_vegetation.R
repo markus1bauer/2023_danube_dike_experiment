@@ -1,7 +1,7 @@
 # Grassland experiment on dikes
 # Prepare species, sites, and traits data ####
 # Markus Bauer
-# 2022-05-24
+# 2023-01-31
 
 
 
@@ -104,19 +104,25 @@ sites_experiment <- read_csv(
     values_transform = list (n = as.character)
   ) %>%
   pivot_wider(names_from = "x", values_from = "n") %>%
-  mutate(plot = str_replace(plot, "-", "_"),
-         plot = str_replace(plot, "L_", "L"),
-         plot = str_replace(plot, "W_", "W"),
-         id = str_c(plot, survey_year, sep = "_"),
-         plot = factor(plot),
-         id = factor(id),
-         vegetation_cover = as.numeric(vegetation_cover),
-         biomass = as.numeric(biomass)) %>%
-  filter(!(site == "C" & (survey_year == "seeded" |
-                             survey_year == "2018" |
-                             survey_year == "2019" |
-                             survey_year == "2020" |
-                            survey_year == "2021")))
+  mutate(
+    plot = str_replace(plot, "-", "_"),
+    plot = str_replace(plot, "L_", "L"),
+    plot = str_replace(plot, "W_", "W"),
+    id = str_c(plot, survey_year, sep = "_"),
+    plot = factor(plot),
+    id = factor(id),
+    vegetation_cover = as.numeric(vegetation_cover),
+    biomass = as.numeric(biomass)
+  ) %>%
+  filter(
+    !(site == "C" & (
+      survey_year == "seeded" |
+        survey_year == "2018" |
+        survey_year == "2019" |
+        survey_year == "2020" |
+        survey_year == "2021"
+    ))
+  )
 
 ### Sabatini et al. (2021) Global Ecol Biogeogr:
 ### https://doi.org/10.1111/geb.13346
@@ -162,10 +168,12 @@ species_experiment <- data.table::fread(
   group_by(name) %>%
   arrange(name) %>%
   select(name, all_of(sites_experiment$id)) %>%
-  mutate(total = sum(c_across(
-    starts_with("L") | starts_with("W")),
-    na.rm = TRUE),
-    presence = if_else(total > 0, 1, 0)) %>%
+  mutate(
+    total = sum(c_across(
+      starts_with("L") | starts_with("W")),
+      na.rm = TRUE),
+    presence = if_else(total > 0, 1, 0)
+    ) %>%
   # filter only species which occur at least one time:
   filter(presence == 1) %>%
   ungroup() %>%
@@ -358,14 +366,15 @@ traits <- traits %>%
   )
 
 sites <- sites_experiment %>%
-  mutate(surveyDate = as_date(survey_date),
-         seeding_date = if_else(
-           exposition == "north", ymd("20180413"), ymd("20180427")
-           ),
-         age = interval(seeding_date, survey_date) %/% days(1),
-         block = str_c(site, exposition, sep = "_"),
-         block = factor(block)
-         )
+  mutate(
+    surveyDate = as_date(survey_date),
+    seeding_date = if_else(
+      exposition == "north", ymd("20180413"), ymd("20180427")
+    ),
+    age = interval(seeding_date, survey_date) %/% days(1),
+    block = str_c(site, exposition, sep = "_"),
+    block = factor(block)
+  )
 
 
 ### b Establishment of species -------------------------------------------------
@@ -376,7 +385,7 @@ data <- species_experiment %>%
   mutate(n = if_else(n > 0 & survey_year == "seeded", 1, n)) %>%
   select(plot, name, survey_year, n) %>%
   pivot_wider(names_from = "survey_year", values_from = "n") %>%
-  pivot_longer(-c(plot, name, seeded),
+  pivot_longer(-c(plot, name, seeded), 
                names_to = "survey_year", values_to = "n") %>%
   mutate(n = if_else(seeded == 1 & n > 0, 1, 0)) %>%
   group_by(name, survey_year) %>%
@@ -386,9 +395,11 @@ data <- species_experiment %>%
     .groups = "keep"
     ) %>%
   filter(total_seeded > 0) %>%
-  mutate(rate = total_established / total_seeded,
-         rate = round(rate, digits = 2),
-         seeded = "1") %>%
+  mutate(
+    rate = total_established / total_seeded,
+    rate = round(rate, digits = 2),
+    seeded = "1"
+  ) %>%
   pivot_wider(names_from = "survey_year",
               values_from = c("rate", "total_seeded", "total_established")) %>%
   select(-total_seeded_2019, -total_seeded_2020, -total_seeded_2021)
@@ -437,16 +448,20 @@ cover <- species_experiment %>%
 cover_total_and_graminoid <- cover %>%
   group_by(id, family) %>%
   summarise(total = sum(n, na.rm = TRUE), .groups = "keep") %>%
-  mutate(type = if_else(
-    family == "Poaceae" |
-      family == "Cyperaceae" |
-      family == "Juncaceae",
-    "graminoid_cover", "herb_cover")) %>%
+  mutate(
+    type = if_else(
+      family == "Poaceae" |
+        family == "Cyperaceae" |
+        family == "Juncaceae",
+      "graminoid_cover", "herb_cover")
+  ) %>%
   group_by(id, type) %>%
   summarise(total = sum(total, na.rm = TRUE), .groups = "keep") %>%
   spread(type, total) %>%
-  mutate(accumulated_cover = graminoid_cover + herb_cover,
-         accumulated_cover = round(accumulated_cover, 1)) %>%
+  mutate(
+    accumulated_cover = graminoid_cover + herb_cover,
+    accumulated_cover = round(accumulated_cover, 1)
+  ) %>%
   ungroup()
 
 #### Target specis' coverage ###
@@ -485,7 +500,7 @@ sites_experiment <- sites_experiment %>%
   left_join(cover_total_and_graminoid, by = "id") %>%
   left_join(cover_target, by = "id") %>%
   left_join(cover_seeded, by = "id") %>%
-  ### Calcute the ratio of target richness of total species richness
+  ### Calculate the ratio of target cover of total cover
   mutate(
     target_cover_ratio = target_cover / accumulated_cover,
     graminoid_cover_ratio = graminoid_cover / accumulated_cover,
@@ -778,27 +793,32 @@ data_sites <- sites_splot %>%
     id = paste0("S", id),
     reference = str_replace(reference, "Germany", "reference"),
     survey_year = year(survey_year),
-    givd_database = if_else(
+    source = if_else(
       givd_id == "EU-DE-014",
-      "Jandt & Bruelheide (2012) https://doi.org/10.7809/b-e.00146",
+      "Jandt & Bruelheide (2012) Biodivers Ecol https://doi.org/10.7809/b-e.00146",
       "other"
       ),
     longitude = longitude * 10^5,
     latitude = latitude * 10^5
   ) %>%
-  select(id, givd_id, longitude, latitude, elevation, plot_size, survey_year,
-         reference, esy) %>%
+  select(id, givd_id, source, longitude, latitude, elevation, plot_size,
+         survey_year, reference, esy) %>%
   mutate(
     survey_year = as.character(survey_year),
-    source = "sPlotOpen",
+    source = "Sabatini et al. (2021) Global Ecol Biogeogr https://doi.org/10.1111/geb.13346",
     reference = if_else(
-      esy == "E12a", "+Reference", if_else(
-        esy == "E22", "+Reference", "other"
+      esy == "E12a", "positive_reference", if_else(
+        esy == "E22", "positive_reference", "other"
       )
     ),
     target_type = if_else(
       esy == "E12a", "dry_grassland", if_else(
         esy == "E22", "hay_meadow", "other"
+      )
+    ),
+    esy = if_else(
+      esy == "E12a", "R1A", if_else(
+        esy == "E22", "R22", "other"
       )
     ),
     exposition = "other"
@@ -853,15 +873,15 @@ data_sites <- sites_bauer %>%
   filter(exposition == "south" | exposition == "north") %>%
   mutate(
     survey_year = as.character(survey_year),
-    source = "bauer et al. survey data",
+    source = "Bauer et al. (2023) EcoEvoRxiv https://doi.org/10.32942/X2959J",
     reference = if_else(
-      esy == "R1A", "+Reference", if_else(
-        esy == "R22", "+Reference", if_else(
+      esy == "R1A", "positive_reference", if_else(
+        esy == "R22", "positive_reference", if_else(
           esy == "R", "Grassland", if_else(
             esy == "?", "no", if_else(
               esy == "+", "no", if_else(
                 esy == "R21", "Grassland", if_else(
-                  esy == "V38", "-Reference", "other"
+                  esy == "V38", "negative_reference", "other"
                 )
               )
             )
@@ -879,7 +899,11 @@ data_sites <- sites_bauer %>%
 sites_bauer <- data_sites
 
 data_species <- species_bauer %>%
+  pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
   semi_join(data_sites, by = "id") %>%
+  pivot_longer(cols = -id, names_to = "name", values_to = "value") %>%
+  pivot_wider(names_from = "id", values_from = "value")
 
 ### Check species name congruency ###
 data <- data_species %>%
@@ -903,19 +927,22 @@ rm(list = setdiff(ls(), c(
 
 ### Create reference variable ###
 data_experiment <- sites_experiment %>%
-  mutate(reference = survey_year,
-         source = "experiment")
+  mutate(
+    reference = survey_year,
+    source = "experiment"
+  )
 
 data_sites <- data_experiment %>%
   bind_rows(sites_splot, sites_bauer) %>%
   select(
     id, plot, site, esy, reference,
     exposition, sand_ratio, substrate_depth, target_type, seed_density,
-    survey_year, longitude, latitude, elevation, plot_size, botanist
+    survey_year, longitude, latitude, elevation, plot_size, botanist,
+    givd_id, source
   ) %>%
   arrange(id)
 #### Prepare species data ###
-### Exclude rare species (< 0.5% accumulated cover in all plots)
+### Calculate rare species (< 0.5% accumulated cover in all plots)
 rare <- species_experiment %>%
   full_join(species_splot, by = "name") %>%
   full_join(species_bauer, by = "name") %>%
@@ -930,7 +957,7 @@ data_species <- species_experiment %>%
   full_join(species_bauer, by = "name") %>%
   mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
   pivot_longer(cols = -name, names_to = "id", values_to = "value") %>%
-  filter(!(name %in% rare$name)) %>% # use 'rare' to filter
+  filter(!(name %in% rare$name)) %>% # Use 'rare' to exclude rare species
   pivot_wider(names_from = "name", values_from = "value") %>%
   arrange(id) %>%
   semi_join(data_sites, by = "id")
@@ -957,9 +984,9 @@ stressplot(ordi)
 sites_nmds <- data_sites %>%
   mutate(NMDS1 = ordi$points[, 1], NMDS2 = ordi$points[, 2])
 
-### Calculate centroids of +Reference ###
+### Calculate centroids of positive_reference ###
 sites_nmds %>%
-  filter(reference == "+Reference") %>%
+  filter(reference == "positive_reference") %>%
   group_by(exposition, target_type) %>%
   summarise(mean_reference = mean(NMDS1), sd_reference = sd(NMDS1))
 
@@ -967,25 +994,26 @@ sites_nmds <- sites_nmds %>%
   mutate(
     mean_reference = if_else(
       exposition == "north" & target_type == "dry_grassland", 0.644, if_else(
-        exposition == "north" & target_type == "hay_meadow", 0.485, if_else(
-          exposition == "south" & target_type == "dry_grassland", 0.542,
+        exposition == "north" & target_type == "hay_meadow", 0.491, if_else(
+          exposition == "south" & target_type == "dry_grassland", 0.512,
           if_else(
-            exposition == "south" & target_type == "hay_meadow", 0.469, NA_real_
+            exposition == "south" & target_type == "hay_meadow", 0.478, NA_real_
           )
         )
       )
     ),
     sd_reference = if_else(
-      exposition == "north" & target_type == "dry_grassland", 0.259, if_else(
-        exposition == "north" & target_type == "hay_meadow", 0.212, if_else(
-          exposition == "south" & target_type == "dry_grassland", 0.298,
+      exposition == "north" & target_type == "dry_grassland", 0.279, if_else(
+        exposition == "north" & target_type == "hay_meadow", 0.217, if_else(
+          exposition == "south" & target_type == "dry_grassland", 0.337,
           if_else(
-            exposition == "south" & target_type == "hay_meadow", 0.173, NA_real_
+            exposition == "south" & target_type == "hay_meadow", 0.186, NA_real_
           )
         )
       )
     ),
-    recovery_completeness = NMDS1 - mean_reference
+    recovery_completeness = NMDS1 - mean_reference,
+    recovery_completeness = round(recovery_completeness, digits = 3)
   )
 
 rm(list = setdiff(ls(), c(
@@ -1195,11 +1223,15 @@ rm(list = setdiff(ls(), c(
 #### Data of experiment ###
 write_csv(
   sites_experiment,
-  here("data", "processed", "data_processed_sites.csv")
+  here("data", "processed", "data_processed_sites_spatial.csv")
   )
 write_csv(
   sites_temporal,
   here("data", "processed", "data_processed_sites_temporal.csv")
+)
+write_csv(
+  sites_nmds,
+  here("data", "processed", "data_processed_sites_nmds.csv")
 )
 write_csv(
   species_experiment,
@@ -1208,29 +1240,4 @@ write_csv(
 write_csv(
   traits,
   here("data", "processed", "data_processed_traits.csv")
-  )
-write_csv(
-  sites_nmds,
-  here("data", "processed", "data_processed_sites_nmds.csv")
-)
-
-
-#### Data of sPlotOpen ###
-write_csv(
-  sites_splot,
-  here("data", "processed", "data_processed_sites_splot.csv")
-  )
-write_csv(
-  species_splot,
-  here("data", "processed", "data_processed_species_splot.csv")
-  )
-
-#### Data of Bauer et al. (2022) Zenodo ###
-write_csv(
-  sites_bauer,
-  here("data", "processed", "data_processed_sites_bauer.csv")
-  )
-write_csv(
-  species_bauer,
-  here("data", "processed", "data_processed_species_bauer.csv")
   )
