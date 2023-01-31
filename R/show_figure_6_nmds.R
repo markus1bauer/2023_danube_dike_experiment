@@ -53,6 +53,11 @@ sites_nmds <- read_csv("data_processed_sites_nmds.csv",
                              col_names = TRUE, na = c("na", "NA", ""),
                              col_types = cols(.default = "?"))
 
+sites_nmds %>%
+  group_by(source, esy) %>%
+  filter(esy == "R1A" | esy == "R22" | esy == "V38") %>%
+  count()
+
 base::load(file = here("outputs", "models", "model_nmds.Rdata"))
 ordi
 
@@ -86,7 +91,7 @@ data <- data %>%
 sites_nmds <- sites_nmds %>%
   filter(!(target_type == "other")) %>%
   bind_rows(data) %>%
-  filter(!(reference == "-Reference" & exposition == "north"))
+  filter(!(reference == "negative_reference" & exposition == "north"))
 
 sites_nmds <- sites_nmds %>%
   ### Select variables to plot ###
