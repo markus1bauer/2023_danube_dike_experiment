@@ -24,7 +24,7 @@ setwd(here("data", "processed"))
 
 ### Load data ###
 sites <- read_csv(
-  here("data", "processed", "data_processed_sites.csv"),
+  here("data", "processed", "data_processed_sites_spatial.csv"),
   col_names = TRUE, na = c("na", "NA", ""), col_types =
     cols(
       .default = "?",
@@ -77,6 +77,8 @@ theme_mb <- function() {
   )
 }
 
+emmeans::emmeans(m2, revpairwise ~ target_type * sand_ratio | survey_year | exposition,
+                 type = "response")
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -100,9 +102,10 @@ theme_mb <- function() {
      linewidth = .3,
      color = "black"
    ) +
-   stat_pointinterval(
+   tidybayes::stat_pointinterval(
      aes(y = .epred, x = sand_ratio, color = target_type),
      data = model,
+     point_interval = median_qi,
      .width = c(0.66, 0.95),
      point_size = 2,
      position = "dodge"
