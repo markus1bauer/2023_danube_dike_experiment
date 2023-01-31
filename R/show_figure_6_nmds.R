@@ -49,9 +49,12 @@ vegan_cov_ellipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
 
 #### Load sites data and model ###
 
-sites_nmds <- read_csv("data_processed_sites_nmds.csv",
-                             col_names = TRUE, na = c("na", "NA", ""),
-                             col_types = cols(.default = "?"))
+sites_nmds <- read_csv(
+  "data_processed_sites_nmds.csv",
+  col_names = TRUE,
+  na = c("na", "NA", ""),
+  col_types = cols(.default = "?")
+)
 
 sites_nmds %>%
   group_by(source, esy) %>%
@@ -97,14 +100,22 @@ sites_nmds <- sites_nmds %>%
   ### Select variables to plot ###
   select(id, NMDS1, NMDS2, reference, exposition, target_type) %>% # modify group
   mutate(
+    reference = if_else(
+      reference == "positive_reference", "+Reference", if_else(
+        reference == "negative_reference", "-Reference", reference
+      )
+    ),
     group_type = str_c(
       reference, exposition, target_type, sep = "." # modify group
       )
     ) %>%
   group_by(group_type) %>%
-  mutate(mean1 = mean(NMDS1),
-         mean2 = mean(NMDS2)) %>%
-  mutate(group_type = factor(group_type))
+  mutate(
+    mean1 = mean(NMDS1),
+    mean2 = mean(NMDS2),
+    group_type = factor(group_type),
+    reference = factor(reference)
+  )
 
 ### Calculate ellipses for plot ###
 for (group in levels(sites_nmds$group_type)) {
