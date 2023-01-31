@@ -25,7 +25,7 @@ rm(list = ls())
 
 ### Load data ###
 sites <- read_csv(
-  here("data", "processed", "data_processed_sites.csv"),
+  here("data", "processed", "data_processed_sites_spatial.csv"),
   col_names = TRUE, na = c("na", "NA", ""), col_types =
     cols(
       .default = "?",
