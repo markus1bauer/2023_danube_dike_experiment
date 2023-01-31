@@ -110,6 +110,7 @@ theme_mb <- function() {
    tidybayes::stat_pointinterval(
      aes(y = .epred, x = sand_ratio, color = target_type),
      data = model,
+     point_interval = median_qi,
      .width = c(0.66, 0.95),
      point_size = 2,
      position = "dodge"
