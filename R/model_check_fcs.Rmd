@@ -36,7 +36,7 @@ ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
 GitHub: [markus1bauer](https://github.com/markus1bauer)
 
 To compare different models, you only have to change the models in
-section 'Load models'
+section `Load models`
 
 # Preparation
 
