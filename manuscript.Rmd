@@ -4,14 +4,14 @@ author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
   officedown::rdocx_document:
     reference_docx: StylesTemplate.docx
-csl: template-journal-of-vegetation-science.csl
+csl: template-journal-of-applied-ecology.csl
 bibliography: bibliography.bib
 ---
 
 ```{r set-up, include = FALSE, message = FALSE}
 library(here)
 library(knitr)
-library(bookdown)
+#library(bookdown)
 library(officedown)
 library(officer)
 library(tidyverse)
@@ -75,9 +75,9 @@ vegetation
 
 # Introduction
 
-Sowing as an approach to restore semi-natural grasslands has long been established [@Kiehl.2010; @Torok.2011]<!--# Cite Hedberg -->, is also able to restore functional diversity [@Engst.2016] and is continuously developed [e.g. @Freitag.2021]. Restoration is seen as a key factor to sustain ecosystem services and biodiversity [@COP.2014; @UnitedNations.2019b] It is necessary to successfully restore grasslands since this habitat type provide several ecosystem services and a high biodiversity while it is worldwide endangered [@Dengler.2014; @Bardgett.2021] and even by restoration through unsuited afforestation [@dudley2020]. In Europe, calcareous grasslands and hay meadows are on the red list [Category 3, vulnerable, @Janssen.2016].
+Sowing as an approach to restore semi-natural grasslands has long been established [@Kiehl.2010; @Torok.2011]<!--# Cite Hedberg -->, is also able to restore functional diversity [@Engst.2016] and is continuously developed [e.g., @Freitag.2021]. Restoration is seen as a key factor to sustain ecosystem services and biodiversity [@COP.2014; @UnitedNations.2019b] It is necessary to successfully restore grasslands since this habitat type provide several ecosystem services and a high biodiversity while it is worldwide endangered [@Dengler.2014; @Bardgett.2021] and even by restoration through unsuited afforestation [@dudley2020]. In Europe, calcareous grasslands and hay meadows are on the red list [Category 3, vulnerable, @Janssen.2016].
 
-Sowing high-diversity seed mixtures of local provenance produced by commercial but specialised seed companies is a promising way to scale up restoration efforts. Though, there are still open questions about specifying the seed mixtures to specific site conditions or even more to future climate conditions to improve efficiency and effectiveness of restoration efforts [@Torok.2021]. For this reason, restoration ecology has to increase predictability of restoration approaches [@Suding.2011; @Mouquet.2015]. Rigorous, repeatable and transparent experiments linked to a hypothesis derived from theory are needed to guide evidence-based restoration [@Cooke.2018; @Wainwright.2018]. Local site conditions and the restoration approach are key predictors of the development of vegetation after sowing [@Brudvig.2017b]. Seeding in general is a way to overcome the dispersal filter<!--# e.g. Cite Martin & Wilsey 2014 -->, but we focus on environmental and the biotic filtering which are the main assembly processes to be manipulated by the choice of the right substrate-seed mixture combination [@Torok.2017]. This means that a mutually adaption of the substrate to the preferences of the target vegetation, and the seed mixtures to the characteristics of the chosen substrate. The right substrates should reduce habitat filtering and the right seed mixture should minimize competitive exclusion.
+Sowing high-diversity seed mixtures of local provenance produced by commercial but specialised seed companies is a promising way to scale up restoration efforts. Though, there are still open questions about specifying the seed mixtures to specific site conditions or even more to future climate conditions to improve efficiency and effectiveness of restoration efforts [@Torok.2021]. For this reason, restoration ecology has to increase predictability of restoration approaches [@Suding.2011; @Mouquet.2015]. Rigorous, repeatable, and transparent experiments linked to a hypothesis derived from theory are needed to guide evidence-based restoration [@Cooke.2018; @Wainwright.2018]. Local site conditions and the restoration approach are key predictors of the development of vegetation after sowing [@Brudvig.2017b]. Seeding in general is a way to overcome the dispersal filter<!--# e.g. Cite Martin & Wilsey 2014 -->, but we focus on environmental and the biotic filtering which are the main assembly processes to be manipulated by the choice of the right substrate-seed mixture combination [@Torok.2017]. This means that a mutually adaption of the substrate to the preferences of the target vegetation, and the seed mixtures to the characteristics of the chosen substrate. The right substrates should reduce habitat filtering and the right seed mixture should minimize competitive exclusion.
 
 -   Dike grasslands as case study, potential of dike grasslands
 
@@ -107,7 +107,7 @@ We asked following question to evaluate the restoration success after four years
 
 The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table @ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from removed agricultural soil of a dike construction site near Steinkirchen. The substrates were mixed with a big roller and an excavator preparted the plots. The target vegetation were lowland hay meadows [EUNIS code: R22, @Chytry.2020; Arrhenatherion elatioris, EuroVegChecklist: CM01A, @mucina2016] and semi-dry calcareous grassland (R1A; Cirsio-Brachypodion pinnati, DA01B). The species pool of hay meadows and dry grasslands consisted of 55 and 58 species, respectively. The seeds were received from a commercial producer of autochthonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)) . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, *Bromus hordeaceus* was seeded as a nursery grass to provide safe sites under drought conditions.
 
-We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. We tested soil samples of the three substrates on both expositions by mixing several subsamples. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(tab:substrate)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m^-2^). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(fig:table-establishment)).
+We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. We tested soil samples of the three substrates on both expositions by mixing several subsamples. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(tab:substrate)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m^-2^). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(tab:establishment)).
 
 ## External data
 
@@ -129,7 +129,7 @@ Data, code and the whole model specification and evaluation is stored on Zenodo 
 
 # Results
 
-We could identify a statistically clear positive effect of sand addition on the persistence of sown species and on the recovery rate (Figure \@ref(fig:figure-effects)). Furthermore, sown hay meadows were clearly closer to their reference plots than sown dry grasslands were to their references. The posterior distributions which are shown in the interactions plots which separates exposition and survey year indicate for all three responses a strong positive development after one year with slow increase in following years (Figures \@ref(fig:figure-persistence); \@ref(fig:figure-fcs); \@ref(fig:figure-recovery)) . Both expositions have similar trends but for all responses the values are clearly lower on the south exposition. Persistence values are more than 50% higher on the north exposition <!--# insert further percentages--> (Figure \@ref(fig:figure-persistence)). The effect of restoration treatments is in the interaction plots not clear. Hay meadow seed mixture led to a closer development to hay meadow references and almost reached on the north exposition the area of the standard deviation of reference sites (Figure \@ref(fig:figure-recovery)). Though, the sand admixture had no clear effect on the development. Persistence of both seed mixture types seems to be slightly positive affected <!--# insert percentage-->by sand admixture on the north exposition (Figure \@ref(fig:figure-persistence)).
+We could identify a statistically clear positive effect of sand addition on the persistence of sown species and on the recovery rate (Figure \@ref(fig:figure-effects)). Furthermore, sown hay meadows were clearly closer to their reference plots than sown dry grasslands were to their references. The posterior distributions which are shown in the interactions plots which separates exposition and survey year indicate for all three responses a strong positive development after one year with slow increase in following years (Figures \@ref(fig:figure-persistence); \@ref(fig:figure-fcs); \@ref(fig:figure-recovery)) . Both expositions have similar trends but for all responses the values are clearly lower on the south exposition. Persistence values are more than 50% higher on the north exposition<!--# insert further percentages--> (Figure \@ref(fig:figure-persistence)). The effect of restoration treatments is in the interaction plots not clear. Hay meadow seed mixture led to a closer development to hay meadow references and almost reached on the north exposition the area of the standard deviation of reference sites (Figure \@ref(fig:figure-recovery)). Though, the sand admixture had no clear effect on the development. Persistence of both seed mixture types seems to be slightly positive affected <!--# insert percentage-->by sand admixture on the north exposition (Figure \@ref(fig:figure-persistence)).
 
 The ordination visualizes the species composition of seed mixtures and the development of the plots over time (Figure \@ref(fig:figure-nmds)). The NMDS confirms that the seed mixtures are variable, but distinctive for hay meadows and dry grasslands. In addition, it visualizes the decreasing recovery rate on the NMDS1 axis which was already presented (Figure \@ref(fig:figure-recovery)) but the right direction of the development. One exception is that the development of intended hay meadows on the south exposition does not develop towards its seed mixture compositions. The ordination presents the experimental plots not only in context with seed mixtures, but also with reference sites. The reference sites have a bigger variation than the seed mixtures and are close to the seed mixtures but hardly overlap. The positions of reference sites are shifted to the left on the NMDS1 axis which means in the direction of early successional states. On the south exposition, we had negative reference sites which are located in the NMDS in between the positive reference sites and the recent state of restored plots. However, most of negative reference sites (ruderal, dry and anthropogenic vegetation) are situated in the upper half and explicitly recent restoration sites on the south exposition are close to them.
 
@@ -165,7 +165,7 @@ JH and JK designed the experiment. JH did the surveys in the years 2018--2020 an
 
 # Open research {#sec-open-research .unnumbered}
 
-Data and code is stored on Zenodo (Bauer et al. 2023) <!--# Update citation after upload -->
+Data and code are stored on Zenodo (Bauer et al. 2023) <!--# Update citation after upload -->
 
 Model evaluation is stored on GitHub: [github.com/markus1bauer/2023_danube_dike_experiment](https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown)
 
@@ -188,7 +188,7 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Table 1 {.unnumbered}
 
-```{r table-seedmix, tab.id = "seedmix", tab.cap = "Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, seed mixtures had 16 or 32 g per plot. All individual seed mixtures are stored in the repository in Zenodo (outputs/tables/table_a3_seedmixes)."}
+```{r tab.id = "seedmix", tab.cap = "Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, seed mixtures had 16 or 32 g per plot. All individual seed mixtures are stored in the repository in Zenodo ('outputs/tables/table_a3_seedmixes')."}
 read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
          show_col_types = FALSE) %>%
   slice(-1) %>%
@@ -210,7 +210,7 @@ read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
 
 functional traits <!--# full description -->
 
-```{r table-traits, tab.id = "traits", tab.cap = "Traits"}
+```{r tab.id = "traits", tab.cap = "Traits"}
 #read_csv(here::here("data", "raw", "data_raw_table_3.csv")) %>%
   #flextable() %>%
   #bold(part = "header") %>%
@@ -223,7 +223,7 @@ functional traits <!--# full description -->
 
 ## Table 3 {.unnumbered}
 
-```{r table-substrate, ft.align = "left",tab.id = "substrate", tab.cap = "Soil of the three substrates was analyzed for the fraction < 2mm fraction. Soil texture was classified according to the Bodenkundliche Kartieranleitung [@BodenkundlKartieranl.2005]. The pH was measured in CaCl2 solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl2 extract. For calculating CaCO3, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand."}
+```{r tab.id = "substrate", ft.align = "left",tab.cap = "Soil of the three substrates was analyzed for the fraction < 2mm fraction. Soil texture was classified according to the Bodenkundliche Kartieranleitung [@BodenkundlKartieranl.2005]. The pH was measured in CaCl2 solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl2 extract. For calculating CaCO3, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand."}
 read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
          show_col_types = FALSE) %>%
   slice(-1) %>%
@@ -351,7 +351,7 @@ read_csv(here::here("data", "raw", "data_raw_table_s1.csv")) %>%
 
 ## Table S2 {.unnumbered}
 
-```{r table-establishment, tab.id = "establishment", tab.cap = "Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of seeded plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the seeded plots were included. The shades of grey indicate the success of establishment."}
+```{r tab.id = "establishment", tab.cap = "Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of seeded plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the seeded plots were included. The shades of grey indicate the success of establishment."}
 read_csv(
   here("data", "processed", "data_processed_traits.csv"),
                  col_names = TRUE, na = c("na", "NA"), col_types =
