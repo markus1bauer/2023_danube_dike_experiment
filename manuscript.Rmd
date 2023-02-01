@@ -75,15 +75,11 @@ vegetation
 
 # Introduction
 
-"Ecological theory can point restoration toward important processes that need manipulation [...]. However, for this information to be relevant, restoration ecology needs to employ evidence-based assessments [...]" (Suding 2011) --\> No evidence for theory with our project
+Sowing as an approach to restore semi-natural grasslands has long been established [@Kiehl.2010; @Torok.2011]<!--# Cite Hedberg -->, is also able to restore functional diversity [@Engst.2016] and is continuously developed [e.g. @Freitag.2021]. Restoration is seen as a key factor to sustain ecosystem services and biodiversity [@COP.2014; @UnitedNations.2019b] It is necessary to successfully restore grasslands since this habitat type provide several ecosystem services and a high biodiversity while it is worldwide endangered [@Dengler.2014; @Bardgett.2021] and even by restoration through unsuited afforestation [@dudley2020]. In Europe, calcareous grasslands and hay meadows are on the red list [Category 3, vulnerable, @Janssen.2016].
 
--   Endangered grasslands
+Sowing high-diversity seed mixtures of local provenance produced by commercial but specialised seed companies is a promising way to scale up restoration efforts. Though, there are still open questions about specifying the seed mixtures to specific site conditions or even more to future climate conditions to improve efficiency and effectiveness of restoration efforts [@Torok.2021]. For this reason, restoration ecology has to increase predictability of restoration approaches [@Suding.2011; @Mouquet.2015]. Rigorous, repeatable and transparent experiments are needed to guide evidence-based restoration [@Cooke.2018]. Local site conditions and the restoration approach are key predictors of the development of vegetation after sowing [@Brudvig.2017b]. Seeding in general is a way to overcome the dispersal filter, but we focus on environmental and the biotic filtering which are the main processes to be manipulated by the choice of the right substrate-seed mixture combination [@Torok.2017]. This means that we can mutually adapt the substrate to the preferences of the target vegetation, and the seed mixtures to the characteristics of the chosen substrate. The right substrates should reduce habitat filtering and the right seed mixture should minimize competitive exclusion.
 
--   Predictability of restorations --\> experiments, evidence-based restoration (cooke 2018)
-
--   Brudvig 2017 among restoration outcomes and in comparison to reference
-
--   Substrate modification to influence habitat filtering
+-   Evaluation: Brudvig 2017 among restoration outcomes and in comparison to reference
 
 -   Sowing a typical approach + priority effects + species pool
 
@@ -146,6 +142,8 @@ The ordination visualizes the species composition of seed mixtures and the devel
 # Discussion
 
 Mention drought in 2018 and 2019
+
+Compare with Mitchley 2012, Engst 2016, Freitag 2021, Kaulfuß 2022
 
 \clearpage
 
