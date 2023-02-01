@@ -77,19 +77,17 @@ vegetation
 
 Sowing as an approach to restore semi-natural grasslands has long been established [@Kiehl.2010; @Torok.2011]<!--# Cite Hedberg -->, is also able to restore functional diversity [@Engst.2016] and is continuously developed [e.g. @Freitag.2021]. Restoration is seen as a key factor to sustain ecosystem services and biodiversity [@COP.2014; @UnitedNations.2019b] It is necessary to successfully restore grasslands since this habitat type provide several ecosystem services and a high biodiversity while it is worldwide endangered [@Dengler.2014; @Bardgett.2021] and even by restoration through unsuited afforestation [@dudley2020]. In Europe, calcareous grasslands and hay meadows are on the red list [Category 3, vulnerable, @Janssen.2016].
 
-Sowing high-diversity seed mixtures of local provenance produced by commercial but specialised seed companies is a promising way to scale up restoration efforts. Though, there are still open questions about specifying the seed mixtures to specific site conditions or even more to future climate conditions to improve efficiency and effectiveness of restoration efforts [@Torok.2021]. For this reason, restoration ecology has to increase predictability of restoration approaches [@Suding.2011; @Mouquet.2015]. Rigorous, repeatable and transparent experiments are needed to guide evidence-based restoration [@Cooke.2018]. Local site conditions and the restoration approach are key predictors of the development of vegetation after sowing [@Brudvig.2017b]. Seeding in general is a way to overcome the dispersal filter, but we focus on environmental and the biotic filtering which are the main processes to be manipulated by the choice of the right substrate-seed mixture combination [@Torok.2017]. This means that we can mutually adapt the substrate to the preferences of the target vegetation, and the seed mixtures to the characteristics of the chosen substrate. The right substrates should reduce habitat filtering and the right seed mixture should minimize competitive exclusion.
+Sowing high-diversity seed mixtures of local provenance produced by commercial but specialised seed companies is a promising way to scale up restoration efforts. Though, there are still open questions about specifying the seed mixtures to specific site conditions or even more to future climate conditions to improve efficiency and effectiveness of restoration efforts [@Torok.2021]. For this reason, restoration ecology has to increase predictability of restoration approaches [@Suding.2011; @Mouquet.2015]. Rigorous, repeatable and transparent experiments linked to a hypothesis derived from theory are needed to guide evidence-based restoration [@Cooke.2018; @Wainwright.2018]. Local site conditions and the restoration approach are key predictors of the development of vegetation after sowing [@Brudvig.2017b]. Seeding in general is a way to overcome the dispersal filter<!--# e.g. Cite Martin & Wilsey 2014 -->, but we focus on environmental and the biotic filtering which are the main assembly processes to be manipulated by the choice of the right substrate-seed mixture combination [@Torok.2017]. This means that a mutually adaption of the substrate to the preferences of the target vegetation, and the seed mixtures to the characteristics of the chosen substrate. The right substrates should reduce habitat filtering and the right seed mixture should minimize competitive exclusion.
+
+-   Dike grasslands as case study, potential of dike grasslands
 
 -   Evaluation: Brudvig 2017 among restoration outcomes and in comparison to reference
 
--   Sowing a typical approach + priority effects + species pool
+-   Sowing: priority effects + species pool
 
 -   Introduce FCS, Recovery time, Persistence
 
--   Dike grasslands as case study
-
 -   The aim of the study is
-
--   <!--# We measured FCS, recovery, persistence -->
 
 We asked following question to evaluate the restoration success after four years:
 
@@ -190,7 +188,7 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Table 1 {.unnumbered}
 
-```{r table-seedmix, tab.id = "seedmix", tab.cap = "Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, seed mixtures had 16 or 32 g per plot. All individual seed mixtures are stored in the repository in Zenodo ("outputs/tables/table_a3_seedmixes"")."}
+```{r table-seedmix, tab.id = "seedmix", tab.cap = "Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, seed mixtures had 16 or 32 g per plot. All individual seed mixtures are stored in the repository in Zenodo (outputs/tables/table_a3_seedmixes)."}
 read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
          show_col_types = FALSE) %>%
   slice(-1) %>%
