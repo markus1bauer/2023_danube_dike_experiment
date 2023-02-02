@@ -11,7 +11,6 @@ bibliography: bibliography.bib
 ```{r set-up, include = FALSE, message = FALSE}
 library(here)
 library(knitr)
-#library(bookdown)
 library(officedown)
 library(officer)
 library(tidyverse)
@@ -75,25 +74,23 @@ vegetation
 
 # Introduction
 
-Sowing as an approach to restore semi-natural grasslands has long been established [@Kiehl.2010; @Torok.2011]<!--# Cite Hedberg -->, is also able to restore functional diversity [@Engst.2016] and is continuously developed [e.g., @Freitag.2021]. Restoration is seen as a key factor to sustain ecosystem services and biodiversity [@COP.2014; @UnitedNations.2019b] It is necessary to successfully restore grasslands since this habitat type provide several ecosystem services and a high biodiversity while it is worldwide endangered [@Dengler.2014; @Bardgett.2021] and even by restoration through unsuited afforestation [@dudley2020]. In Europe, calcareous grasslands and hay meadows are on the red list [Category 3, vulnerable, @Janssen.2016].
+Sowing as an approach to restore semi-natural grasslands has long been established [@Kiehl.2010], is also able to restore functional diversity [@Engst.2016] and is continuously developed [e.g., @Freitag.2021]. Restoration is seen as a key factor to sustain ecosystem services and biodiversity [@COP.2014; @UnitedNations.2019b]. It is necessary to successfully restore grasslands since this habitat type provide several ecosystem services and a high biodiversity while it is worldwide endangered [@Dengler.2014; @Bardgett.2021] and even by restoration through unsuited afforestation [@dudley2020]. In Europe, calcareous grasslands and hay meadows are on the red list [Category 3, vulnerable, @Janssen.2016].
 
-Sowing high-diversity seed mixtures of local provenance produced by commercial but specialised seed companies is a promising way to scale up restoration efforts. Though, there are still open questions about specifying the seed mixtures to specific site conditions or even more to future climate conditions to improve efficiency and effectiveness of restoration efforts [@Torok.2021]. For this reason, restoration ecology has to increase predictability of restoration approaches [@Suding.2011; @Mouquet.2015]. Rigorous, repeatable, and transparent experiments linked to a hypothesis derived from theory are needed to guide evidence-based restoration [@Cooke.2018; @Wainwright.2018]. Local site conditions and the restoration approach are key predictors of the development of vegetation after sowing [@Brudvig.2017b]. Seeding in general is a way to overcome the dispersal filter<!--# e.g. Cite Martin & Wilsey 2014 -->, but we focus on environmental and the biotic filtering which are the main assembly processes to be manipulated by the choice of the right substrate-seed mixture combination [@Torok.2017]. This means that a mutually adaption of the substrate to the preferences of the target vegetation, and the seed mixtures to the characteristics of the chosen substrate. The right substrates should reduce habitat filtering and the right seed mixture should minimize competitive exclusion.
+Sowing high-diversity seed mixtures of local provenance produced by commercial but specialised seed companies is a promising way to scale up restoration efforts. Though, there are still open questions about specifying the seed mixtures to specific site conditions or even more to future climate conditions to improve efficiency and effectiveness of restoration efforts [@Torok.2021]. For this reason, restoration ecology has to increase predictability of restoration approaches [@Suding.2011; @Mouquet.2015]. Rigorous, repeatable, and transparent experiments linked to a hypothesis derived from theory are needed to guide evidence-based restoration [@Cooke.2018; @Wainwright.2018]. Local site conditions and the restoration approach are key predictors of the development of vegetation after sowing [@Brudvig.2017b]. Seeding in general is a way to overcome the dispersal filter [@kiehl2006], but we focus on environmental and the biotic filtering which are the main assembly processes to be manipulated by the choice of the right substrate-seed mixture combination [@Torok.2017]. This means that a mutually adaption of the substrate to the preferences of the target vegetation, and the seed mixtures to the characteristics of the chosen substrate. The right substrates should reduce habitat filtering and the right seed mixture should minimize competitive exclusion. Modifying seed mixtures for certain site conditions came up with functional plant traits [@Funk.2008; @Laughlin.2014] but it is not easy to put it into practice for novel ecosystems like urban grasslands [@Bauer.2022]. Substrates cannot only be modified for conservation purposes in urban areas, but also in quarries [@chenot-lescure2022] or dikes [@Liebrand.1996].
 
--   Dike grasslands as case study, potential of dike grasslands
+Dikes are promising sites for the restoration of species-rich grasslands [@Liebrand.1996], because they can increase habitat area and connectivity of semi-natural grasslands and therefore significantly contribute to biodiversity conservation in an agricultural landscape [@Batori.2020]. Dikes have specific characteristics with strongly exposed slopes and river and land orientation [@Batori.2016] and need a reliable vegetation cover to conserve the functionality of the construction [@KleberLerchbaumer.2017]. Dikes can reconcile several requirements [@teixeira2022], but the substrate-seed mixture combination must be adapted.
 
--   Evaluation: Brudvig 2017 among restoration outcomes and in comparison to reference
+The aim of this study is to identify the ideal combination of substrates and seed mixtures for north and south exposed slopes in Central Europe to develop a vital and species-rich vegetation cover. We set up an experiment and tested agricultural soil with different amounts of sand admixture and different installation depths, as well as different seed mixture types and different seed densities. We expected a better development of dry grassland on the south exposition with sandy substrate and hay meadows on north exposition with less sandy substrate. Since seeds are expensive, practitioners like to know if the slopes need a higher seed density [cf. @KleberLerchbaumer.2017].
 
--   Sowing: priority effects + species pool
+To measure the success of restoration, we chose four indices. First, we observed the persistence of the seeded species, which is a key interest of seeding as a restoration approach [@Wilsey.2021]. For this, it was surveyed if the seeded species are present in the respective plot in following years. Second, we calculated the Favorable Conservation Status (FCS) which distinguishes characteristic diversity and derived diversity [@Helm.2015]. Characteristic diversity is created by established species which belong to the habitat-specific species pool. In other words, these species are target species for a habitat type of interest. Third, the successional distance to the reference was determined. This measure quantifies the distance of a plot to the average reference site from an ordination [@Rydgren.2019]. Fourth, we visualized the species composition of our experimental plots in comparison with reference sites to evaluate as well absolute success of the restoration outcomes.
 
--   Introduce FCS, Recovery time, Persistence
-
--   The aim of the study is
+<!--# Evaluation: Brudvig 2017 among restoration outcomes and in comparison to reference -->
 
 We asked following question to evaluate the restoration success after four years:
 
 1.  How strong differs the persistence of the sown species among the seed mixture-substrate combinations?
 
-2.  How strong differs the Favourable Conservation Status (FCS) among the seed mixture-substrate combinations?
+2.  How strong differs the Favorable Conservation Status (FCS) among the seed mixture-substrate combinations?
 
 3.  How close is the vegetation to the reference state?
 
@@ -105,9 +102,9 @@ We asked following question to evaluate the restoration success after four years
 
 ## Experimental design {.unnumbered}
 
-The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table @ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from removed agricultural soil of a dike construction site near Steinkirchen. The substrates were mixed with a big roller and an excavator preparted the plots. The target vegetation were lowland hay meadows [EUNIS code: R22, @Chytry.2020; Arrhenatherion elatioris, EuroVegChecklist: CM01A, @mucina2016] and semi-dry calcareous grassland (R1A; Cirsio-Brachypodion pinnati, DA01B). The species pool of hay meadows and dry grasslands consisted of 55 and 58 species, respectively. The seeds were received from a commercial producer of autochthonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)) . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, *Bromus hordeaceus* was seeded as a nursery grass to provide safe sites under drought conditions.
+The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table @ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from removed agricultural soil of a dike construction site near Steinkirchen. The substrates were mixed with a big roller and an excavator prepared the plots. The target vegetation were lowland hay meadows [EUNIS code: R22, @Chytry.2020; Arrhenatherion elatioris, EuroVegChecklist: CM01A, @mucina2016] and semi-dry calcareous grassland (R1A; Cirsio-Brachypodion pinnati, DA01B). The species pool of hay meadows and dry grasslands consisted of 55 and 58 species, respectively. The seeds were received from a commercial producer of autochthonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)) . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, *Bromus hordeaceus* was seeded as a nursery grass to provide safe sites under drought conditions.
 
-We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three substrates with 0%, 25% and 50% sand admixture and two soil depths (15 vs. 30 cm). Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. We tested soil samples of the three substrates on both expositions by mixing several subsamples. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table \@ref(tab:substrate)). The two seed mixture types were tested with two seeding densities (4 vs. 8 g m^-2^). The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(tab:establishment)).
+We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three sand admixtures (0%, 25% and 50%) and tow soil depths (15 vs. 30 cm) of practical interest [@KleberLerchbaumer.2017] and two . Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. We tested soil samples of the three substrates on both expositions by mixing several subsamples. The sand admixture changed the soil texture, increased the C/N ratio, but reduced the ratio of Calciumcarbonat, and hardly changed the pH (Table @ref(tab:substrate)). The two seed mixture types were tested with the normal seeding density and the increased density recommended for slopes [4 vs. 8 g m^-2^ @Kiehl.2010; @KleberLerchbaumer.2017]. The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(tab:establishment)).
 
 ## External data
 
@@ -143,6 +140,12 @@ Mention drought in 2018 and 2019
 
 Compare with Mitchley 2012, Engst 2016, Freitag 2021, Kaulfuß 2022
 
+Batori 2016 neither found great differences between expositions
+
+persistence influenced by neighbourig plots
+
+Outlook: landscape, management are important
+
 \clearpage
 
 \newpage
@@ -172,6 +175,10 @@ Model evaluation is stored on GitHub: [github.com/markus1bauer/2023_danube_dike_
 # Funding {.unnumbered}
 
 MB is funded by a doctoral scholarship of the German Federal Environmental Foundation (DBU) (No. 20021/698). The establishment of the experiment and the vegetation surveys were financed by the WIGES GmbH in the years 2018--2020. <!--# funding number of WIGES -->
+
+\clearpage
+
+\newpage
 
 # References {.unnumbered}
 
