@@ -1,8 +1,8 @@
-﻿Exposition,Sand admixture,Skeleton (>2 mm),Sand,Silt,Clay,Soil texture,pH,N,P2O5,K2O,Mg2+,C/N,CaCO3
-,vol%,vol%,wt%,wt%,wt%,,,wt%,mg 100 g−1,mg 100 g−1,mg 100 g−1,,wt%
-North,0,5,18,45,37,Lt3,7.4,0.35,4,6,27,8.9,12.1
-,25,26,49,29,22,Ls4,7.4,0.24,4,5,25,9,8.8
-,50,40,75,14,11,Sl3,7.5,0.11,3,4,17,9.5,5.3
-South,0,9,18,45,37,Lt3,7.3,0.37,6,7,28,8.8,12.5
-,25,26,59,23,18,Ls4,7.4,0.19,3,5,23,9.2,7.3
-,50,44,71,18,13,Sl4,7.5,0.13,4,5,16,9.5,7.3
+﻿Exposition,Sand admixture,Skeleton (>2 mm),Sand,Silt,Clay,Soil texture,pH,lfl_ph,N,P2O5,lfl_p,K2O,lfl_k,Mg2+,lfl_mg,C/N,CaCO3
+,vol%,vol%,wt%,wt%,wt%,,,Bayerisches Landesamt fuer Landwirtschaft (2022) Leitfaden fuer die Duengung von Acker- und Gruenland. Gelbes heft. Stand: 2022. LfL-Information. S. 17,wt%,mg 100 g−1,Bayerisches Landesamt fuer Landwirtschaft (2022) Leitfaden fuer die Duengung von Acker- und Gruenland. Gelbes heft. Stand: 2022. LfL-Information. S. 25,mg 100 g−1,Bayerisches Landesamt fuer Landwirtschaft (2022) Leitfaden fuer die Duengung von Acker- und Gruenland. Gelbes heft. Stand: 2022. LfL-Information. S. 27,mg 100 g−1,Bayerisches Landesamt fuer Landwirtschaft (2022) Leitfaden fuer die Duengung von Acker- und Gruenland. Gelbes heft. Stand: 2022. LfL-Information. S. 29,,wt%
+North,0,5,18,45,37,Lt3,7.4,D_E,0.35,4,A,6,B,27,D,8.9,12.1
+,25,26,49,29,22,Ls4,7.4,D_E,0.24,4,A,5,B,25,D,9,8.8
+,50,40,75,14,11,Sl3,7.5,D_E,0.11,3,A,4,B,17,C,9.5,5.3
+South,0,9,18,45,37,Lt3,7.3,D_E,0.37,6,B,7,B,28,D,8.8,12.5
+,25,26,59,23,18,Ls4,7.4,D_E,0.19,3,A,5,B,23,D,9.2,7.3
+,50,44,71,18,13,Sl4,7.5,D_E,0.13,4,A,5,B,16,C,9.5,7.3
