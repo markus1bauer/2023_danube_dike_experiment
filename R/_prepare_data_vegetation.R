@@ -11,15 +11,16 @@
 ## 1 Sites and sPlotOpen
 ## 2 Species and sPlotOpen
 ## 3 Traits
-## 4 Temperature and precipitation
 ## 5 Check data frames
 
 # B Create variables ++++++++++++++++++++++++++++++
 ## 1 Create simple variables
 ## 2 Coverages
 ## 3 Alpha diversity
-## 4 sPlotOpen
-## 5 TBI: Temporal beta diversity index
+## 4 Reference sites
+## 5 NMDS
+## 6 TBI: Temporal beta diversity index
+## 7 Functional traits
 
 # C Save processed data +++++++++++++++++++++++++++
 
@@ -1223,7 +1224,8 @@ rm(list = setdiff(ls(), c(
 ### https://doi.org/10.1111/j.1365-2745.2008.01430.x
 
 data_sla <- data.table::fread(
-  here("data", "raw", "data_raw_traitbase_leda_20210223_sla.txt"),
+  here("data", "raw", "leda_database",
+       "data_raw_traitbase_leda_20210223_sla.txt"),
   sep = ";",
   dec = ".",
   skip = 4,
@@ -1236,7 +1238,8 @@ data_sla <- data.table::fread(
   mutate(name = str_replace_all(name, " ", "_"))
 
 data_seedmass <- data.table::fread(
-  here("data", "raw", "data_raw_traitbase_leda_20210223_seedmass.txt"),
+  here("data", "raw", "leda_database",
+       "data_raw_traitbase_leda_20210223_seedmass.txt"),
   sep = ";",
   dec = ".",
   skip = 3,
@@ -1250,7 +1253,8 @@ data_seedmass <- data.table::fread(
          seedmass = round(seedmass, 3))
 
 data_height <- data.table::fread(
-  here("data", "raw", "data_raw_traitbase_leda_20210223_canopy_height.txt"),
+  here("data", "raw", "leda_database",
+       "data_raw_traitbase_leda_20210223_canopy_height.txt"),
   sep = ";",
   dec = ".",
   skip = 3,
@@ -1261,6 +1265,7 @@ data_height <- data.table::fread(
   rename(name = "SBS name",
          height = "single value [m]") %>%
   mutate(name = str_replace_all(name, " ", "_"))
+
 #### Join SLA, canopy height and seedmass of LEDA ###
 data <- data_sla %>%
   full_join(data_seedmass, by = "name") %>%
@@ -1269,7 +1274,11 @@ data <- data_sla %>%
 #### * Find synonyms ####
 
 ### Check names of 'traits' which are not present in trait database ###
-traits$name[which(!(traits$name %in% data$name))]
+traits %>%
+  filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
+  filter(group != "tree" & group != "shrub") %>%
+  anti_join(data, by = "name") %>%
+  select(name)
 
 ### Search in 'name' for certain names ###
 data %>%
@@ -1324,16 +1333,25 @@ data <- data %>%
   summarise(across(where(is.double), ~median(.x, na.rm = TRUE)))
 
 ### Check names of 'traits' which are not present in LEDA database ###
-traits$name[which(!(traits$name %in% data$name))]
+traits %>%
+  filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
+  filter(group != "tree" & group != "shrub") %>%
+  anti_join(data, by = "name") %>%
+  select(name)
 
 traits <- traits %>%
   left_join(data, by = "name")
 
 #### * Check completeness of LEDA ####
+
 traits %>%
+  filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(sla, seedmass, height) %>%
   miss_var_summary(order = TRUE)
 traits %>%
+  filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(sla, seedmass, height) %>%
   vis_miss(cluster = FALSE, sort_miss = TRUE)
 (uncomplete_cases <- traits %>%
@@ -1347,7 +1365,8 @@ traits %>%
 ### https://doi.org/10.1111/gcb.14904
 
 data <- data.table::fread(
-  here("data", "raw", "data_raw_traitbase_try_20210306_13996.txt"),
+  here("data", "raw", "try_database",
+       "data_raw_traitbase_try_20210306_13996.txt"),
   header = TRUE,
   sep = "\t",
   dec = ".",
@@ -1356,7 +1375,8 @@ data <- data.table::fread(
   as_tibble() %>%
   bind_rows(
     data.table::fread(
-      here("data", "raw", "data_raw_traitbase_try_20210318_14157.txt"),
+      here("data", "raw", "try_database",
+           "data_raw_traitbase_try_20210318_14157.txt"),
       header = TRUE,
       sep = "\t",
       dec = ".",
@@ -1384,7 +1404,10 @@ data <- data.table::fread(
 ##### * Find synonyms ####
 
 ### Check names of 'uncomplete_cases' which are not present in TRY database ###
-uncomplete_cases$name[which(!(uncomplete_cases$name %in% data$name))]
+uncomplete_cases %>%
+  filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
+  filter(group != "tree" & group != "shrub") %>%
+  anti_join(data, by = "name")
 
 ### Search in 'name' for certain names ###
 data %>%
@@ -1409,11 +1432,16 @@ data <- data %>%
     trait = as_factor(trait)
   )
 
+### Check names of 'uncomplete_cases' which are not present in TRY database ###
+uncomplete_cases %>%
+  anti_join(data, by = "name") %>%
+  filter(!str_detect(name, "_spec"))
+
 ### Show references ###
 data %>%
   group_by(Reference) %>%
   count(sort = TRUE) %>%
-  print(n = 20)
+  print(n = 10)
 
 data <- data %>%
   group_by(name, trait) %>%
@@ -1421,18 +1449,163 @@ data <- data %>%
   pivot_wider(names_from = "trait", values_from = "value")
 
 traits <- traits %>%
-  left_join(data, by = "name")
+  left_join(data, by = "name") %>%
+  mutate(
+    sla = coalesce(sla.x, sla.y),
+    seedmass = coalesce(seedmass.x, seedmass.y),
+    height = coalesce(height.x, height.y),
+    .keep = "unused",
+    name = as.character(name)
+  ) %>%
+  mutate(
+    across(c(sla, seedmass, height), ~ round(.x, digits = 3))
+    ) %>%
+  arrange(name)
 
 ### * Check completeness of LEDA + TRY ####
+
 traits %>%
+  filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(sla, seedmass, height) %>%
-  miss_var_summary(order = TRUE)
+  miss_var_summary(order = FALSE)
 traits %>%
+  filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
+  filter(group != "tree" & group != "shrub") %>%
   select(sla, seedmass, height) %>%
-  vis_miss(cluster = FALSE, sort_miss = TRUE)
+  vis_miss(cluster = TRUE, sort_miss = FALSE)
 (uncomplete_cases <- traits %>%
-   select(name, sla, seedmass, height) %>%
-   filter(!complete.cases(sla, seedmass, height)))
+    select(name, sla, seedmass, height) %>%
+    filter(!complete.cases(sla, seedmass, height)) %>%
+    filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")))
+
+
+### c Prepare data frames for calculation of functional diversity --------------
+
+data <- traits %>%
+  filter(!(str_detect(name, "_spec") | str_detect(name, "aceae"))) %>%
+  filter(group != "tree" & group != "shrub")
+data_lhs <- data %>%
+  select(name, sla, seedmass, height) %>%
+  drop_na()
+data_sla <- data %>%
+  select(name, sla) %>%
+  drop_na() 
+data_seedmass <- data %>%
+  select(name, seedmass) %>%
+  drop_na()
+data_height <- data %>%
+  select(name, height) %>%
+  drop_na()
+
+
+### d Leaf-height-seed (LHS) functional diversity ------------------------------
+
+### Preparation ###
+data_species <- semi_join(species_experiment, data_lhs, by = "name")
+data_traits <- semi_join(data_lhs, data_species, by = "name")
+data_species <- data_species %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("site")
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+### Calculation ###
+data_diversity <- dbFD(
+  log_data_traits, data_species,
+  w.abun = FALSE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "cailliez"
+)
+### Integration to dataset ###
+data <- data_diversity$FDis %>%
+  as.data.frame() %>%
+  rownames_to_column("id") %>%
+  rename("fdis_abu_lhs" = ".")
+sites_experiment2 <- sites_experiment %>%
+  left_join(data, by = "id")
+
+
+### e Specific leaf area (SLA) -------------------------------------------------
+
+### Preparation ###
+data_species <- semi_join(species_experiment, data_sla, by = "name")
+data_traits <- semi_join(data_sla, data_species, by = "name")
+data_species <- data_species %>%
+  pivot_longer(-name, "site", "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("site")
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+### Calculation ###
+data_diversity <- dbFD(
+  log_data_traits, data_species,
+  w.abun = FALSE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt"
+)
+### Integration to dataset ###
+data <- data_diversityAbu$FDis %>%
+  as.data.frame() %>%
+  add_column(data_diversity$CWM$sla) %>%
+  rownames_to_column("id") %>%
+  rename("fdis_abu_sla" = ".",
+         "cwm_abu_sla" = "data_diversityAbu$CWM$sla") %>%
+  mutate(cwmAbuSla = exp(cwmAbuSla))
+sites_experiment2 <- sites_experiment %>%
+  left_join(data, by = "id")
+
+
+### f Seed mass ----------------------------------------------------------------
+
+### Preparation ###
+data_species <- semi_join(species_experiment, data_seedmass, by = "name")
+data_traits <- semi_join(data_seedmass, data_species, by = "name")
+data_species <- data_species %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("site")
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+### Calculation ###
+data_diversity <- dbFD(
+  log_data_traits, data_species,
+  w.abun = FALSE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt"
+)
+### Integration to dataset ###
+data <- data_diversity$FDis %>%
+  as.data.frame() %>%
+  add_column(data_diversityAbu$CWM$seedmass) %>%
+  rownames_to_column("id") %>%
+  rename("fdis_abu_seedmass" = ".",
+         "cwm_abu_seedmass" = "data_diversity$CWM$seedmass") %>%
+  mutate(cwmAbuSeedmass = exp(cwmAbuSeedmass))
+sites_experiment2 <- sites_experiment %>%
+  left_join(data, by = "id")
+
+
+### d Canopy height ------------------------------------------------------------
+
+### Preparation ###
+data_species <- semi_join(species_experiment, data_height, by = "name")
+data_traits <- semi_join(data_height, data_species, by = "name")
+data_species <- data_species %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
+  pivot_wider(names_from = "name", values_from = "value") %>%
+  column_to_rownames("site")
+data_traits <- column_to_rownames(data_traits, "name")
+log_data_traits <- log(data_traits)
+### Calculation ###
+data_diversity <- dbFD(
+  log_data_traits, data_species,
+  w.abun = FALSE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt"
+)
+### Integration to dataset ###
+data <- data_diversity$FDis %>%
+  as.data.frame() %>%
+  add_column(data_diversityAbu$CWM$height) %>%
+  rownames_to_column("id") %>%
+  rename("fdis_abu_height" = ".",
+         "cwm_abu_height" = "data_diversity$CWM$height") %>%
+  mutate(cwmAbuHeight = exp(cwmAbuHeight))
+sites_experiment2 <- sites_experiment %>%
+  left_join(data, by = "id")
 
 
 
