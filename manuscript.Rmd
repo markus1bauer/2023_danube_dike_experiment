@@ -8,6 +8,8 @@ csl: template-journal-of-applied-ecology.csl
 bibliography: bibliography.bib
 ---
 
+# Document head (remove later) <!--# Remove --> {.unnumbered}
+
 ```{r set-up, include = FALSE, message = FALSE}
 library(here)
 library(knitr)
@@ -28,8 +30,6 @@ set_flextable_defaults(
   )
 ```
 
-# Document head <!--# Remove --> {.unnumbered}
-
 Restoration Ecology, TUM School of Life Sciences, Technical University of Munich, Germany
 
 \* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de)
@@ -39,6 +39,8 @@ Max 8000 words <!--# Remove -->
 \newpage
 
 # Abstract (max 300 words) {.unnumbered}
+
+<!--# Write -->
 
 \clearpage
 
@@ -82,11 +84,7 @@ Dikes are promising sites for the restoration of species-rich grasslands [@Liebr
 
 The aim of this study is to identify the ideal combination of substrates and seed mixtures for north and south exposed slopes in Central Europe to develop a vital and species-rich vegetation cover. We set up an experiment and tested agricultural soil with different amounts of sand admixture and different installation depths, as well as different seed mixture types and different seed densities. We expected a better development of dry grassland on the south exposition with sandy substrate and hay meadows on north exposition with less sandy substrate. Since seeds are expensive, practitioners like to know if the slopes need a higher seed density [cf. @KleberLerchbaumer.2017].
 
-To measure the success of restoration, we chose four indices. First, we observed the persistence of the seeded species, which is a key interest of seeding as a restoration approach [@Wilsey.2021]. For this, it was surveyed if the seeded species are present in the respective plot in following years. Second, we calculated the Favorable Conservation Status (FCS) which distinguishes characteristic diversity and derived diversity [@Helm.2015]. Characteristic diversity is created by established species which belong to the habitat-specific species pool. In other words, these species are target species for a habitat type of interest. Third, the successional distance to the reference was determined. This measure quantifies the distance of a plot to the average reference site from an ordination [@Rydgren.2019]. Fourth, we visualized the species composition of our experimental plots in comparison with reference sites to evaluate as well absolute success of the restoration outcomes.
-
-<!--# Evaluation: Brudvig 2017 among restoration outcomes and in comparison to reference -->
-
-We asked following question to evaluate the restoration success after four years:
+To measure the success of restoration, we chose four indices. First, we observed the persistence of the seeded species, which is a key interest of seeding as a restoration approach [@Wilsey.2021]. For this, it was surveyed if the seeded species are present in the respective plot in following years. Second, we calculated the Favorable Conservation Status (FCS) which distinguishes characteristic diversity and derived diversity [@Helm.2015]. Characteristic diversity is created by established species which belong to the habitat-specific species pool. In other words, these species are target species for a habitat type of interest. Third, the successional distance to the reference was determined. This measure quantifies the distance of a plot to the average reference site from an ordination [@Rydgren.2019]. To complement the indices, the success of restoration or the difference from desired conditions needs to be evaluated [@Brudvig.2017b]. Therefore, the species composition of the experimental plots were compared with reference sites. We asked following question to evaluate the restoration approaches and success after four years:
 
 1.  How strong differs the persistence of the sown species among the seed mixture-substrate combinations?
 
@@ -109,6 +107,8 @@ We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the nor
 ## External data
 
 Reference vegetation surveys were extracted from sPlotOpen [@Sabatini.2021] and our own surveys in the surroundings on Danube dikes [@bauer2023]. We selected six calcareous grassland plots [EUNIS code R1A, @Chytry.2020] within SE Germany from sPlotOpen and 98 plots of our own survey which included furthermore lowland hay meadows (R22) and as a negative reference ruderal, dry and anthropogenic vegetation (V38).
+
+Write about traits.
 
 <!--# Mention traits -->
 
