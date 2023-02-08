@@ -100,7 +100,7 @@ To measure the success of restoration, we chose four indices. First, we observed
 
 ## Experimental design {.unnumbered}
 
-The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table @ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from removed agricultural soil of a dike construction site near Steinkirchen. The substrates were mixed with a big roller and an excavator prepared the plots. The target vegetation were lowland hay meadows [EUNIS code: R22, @Chytry.2020; Arrhenatherion elatioris, EuroVegChecklist: CM01A, @mucina2016] and semi-dry calcareous grassland (R1A; Cirsio-Brachypodion pinnati, DA01B). The species pool of hay meadows and dry grasslands consisted of 55 and 58 species, respectively. The seeds were received from a commercial producer of autochthonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(tab:traits)). As expected have the hay meadows mixtures a higher specific leaf area (SLA) than the dry meadows mixtures<!--# describe difference --> . The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, *Bromus hordeaceus* was seeded as a nursery grass to provide safe sites under drought conditions.
+The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:figure-map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table @ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from removed agricultural soil of a dike construction site near Steinkirchen. The substrates were mixed with a big roller and an excavator prepared the plots. The target vegetation were lowland hay meadows [EUNIS code: R22, @Chytry.2020; Arrhenatherion elatioris, EuroVegChecklist: CM01A, @mucina2016] and semi-dry calcareous grassland (R1A; Cirsio-Brachypodion pinnati, DA01B). The species pool of hay meadows and dry grasslands consisted of 55 and 58 species, respectively. The seeds were received from a commercial producer of autochthonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Table \@ref(fig:figure-traits)). As expected, the hay meadows mixtures have a higher specific leaf area (SLA) lower seed mass and higher canopy height than the dry meadows mixtures. The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, *Bromus hordeaceus* was seeded as a nursery grass to provide safe sites under drought conditions.
 
 We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:figure-map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three sand admixtures (0%, 25% and 50%) and tow soil depths (15 vs. 30 cm) of practical interest [@KleberLerchbaumer.2017] and two . Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. We tested soil samples of the three substrates on both expositions by mixing several sub-samples. The sand admixture changed the soil texture, increased the C/N ratio, but reduced Calciumcarbonat, and hardly changed the rather high pH values (Table\@ref(tab:substrate)). Phosphate and potassium were rather scarce for agricultural soils and Magnesium rather high [@lfl2022]. The two seed mixture types were tested with the normal seeding density and the increased density recommended for slopes [4 vs. 8 g m^-2^ @Kiehl.2010; @KleberLerchbaumer.2017]. The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(tab:establishment)).
 
@@ -108,7 +108,7 @@ We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the nor
 
 Reference vegetation surveys were extracted from sPlotOpen [@Sabatini.2021] and our own surveys in the surroundings on Danube dikes [@bauer2023]. We selected six calcareous grassland plots [EUNIS code R1A, @Chytry.2020] within SE Germany from sPlotOpen and 98 plots of our own survey which included furthermore lowland hay meadows (R22) and as a negative reference ruderal, dry and anthropogenic vegetation (V38).
 
-Write about traits.
+The functional traits specific leaf area (SLA), seed mass and canopy height were retrieved from the database LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
 
 <!--# Mention traits -->
 
@@ -195,7 +195,7 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Table 1 {.unnumbered}
 
-```{r tab.id = "seedmix", tab.cap = "Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, seed mixtures had 16 or 32 g per plot. All individual seed mixtures are stored in the repository in Zenodo ('outputs/tables/table_a3_seedmixes')."}
+```{r tab.id = "seedmix", tab.cap = "Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, seed mixtures had 16 or 32 g per plot. All individual seed mixtures are stored in Table A3."}
 read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
          show_col_types = FALSE) %>%
   slice(-1) %>%
@@ -215,22 +215,7 @@ read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
 
 ## Table 2 {.unnumbered}
 
-functional traits <!--# full description -->
-
-```{r tab.id = "traits", tab.cap = "Traits"}
-#read_csv(here::here("data", "raw", "data_raw_table_3.csv")) %>%
-  #flextable() %>%
-  #bold(part = "header") %>%
-  #autofit()
-```
-
-\clearpage
-
-\newpage
-
-## Table 3 {.unnumbered}
-
-```{r tab.id = "substrate", ft.align = "left",tab.cap = "Soil of the three substrates was analyzed for the fraction < 2mm fraction. Soil texture was classified according to the 'Bodenkundliche Kartieranleitung' [@BodenkundlKartieranl.2005]. The pH was measured in CaCl2 solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl2 extract. For calculating CaCO3, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand."}
+```{r tab.id = "substrate", ft.align = "left", tab.cap = "Soil of the three substrates was analyzed for the fraction < 2mm fraction. Soil texture was classified according to the 'Bodenkundliche Kartieranleitung' [@BodenkundlKartieranl.2005]. The pH was measured in CaCl2 solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl2 extract. For calculating CaCO3, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand."}
 read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
          show_col_types = FALSE) %>%
   select(-starts_with("lfl")) %>%
@@ -266,7 +251,7 @@ read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
 
 ## Figure 1 {.unnumbered}
 
-```{r figure-map, fig.asp = 1.2854, fig.width = 5, fig.cap = "The experiment was located on a dike at river Danube in SE Germany.  The 288 plots were allocated in six blocks (red squares on upper photo) and on the north and south exposition [central photo; both aerial photos: @bayerischevermessungsverwaltung2023]. Four treatments were conducted (Sand admixture, substrate depth, seeding density, seed mixture types H and D). The western half of a block was with a shallow substrate depth for the blocks and within this half the substrates. The photo on the bottom shows one block from the side after four years (Photo: Markus Bauer)."}
+```{r fig.id = "figure-map", fig.asp = 1.2854, fig.width = 5, fig.cap = "The experiment was located on a dike at river Danube in SE Germany.  The 288 plots were allocated in six blocks (red squares on upper photo) and on the north and south exposition [central photo; both aerial photos: @bayerischevermessungsverwaltung2023]. Four treatments were conducted (Sand admixture, substrate depth, seeding density, seed mixture types H and D). The western half of a block was with a shallow substrate depth for the blocks and within this half the substrates. The photo on the bottom shows one block from the side after four years (Photo: Markus Bauer)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_1_map.png")
   )
@@ -278,6 +263,20 @@ knitr::include_graphics(
 
 ## Figure 2 {.unnumbered}
 
+functional traits <!--# full description -->
+
+```{r fig.id = "figure-traits", fig.asp = 0.3030, fig.width = 6.49, fig.cap = ""}
+knitr::include_graphics(
+  here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm_traits.tiff")
+  )
+```
+
+\clearpage
+
+\newpage
+
+## Figure 3
+
 ```{r fig.id = "figure-effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The posterior density distributions (grey) of the treatments calculated over all four surveyed years. Furthermore, the median and the 66% and 95% credible intervals are shown. We evaluated the persistence of sown species (A), the Favorable Conservation Status (FCS; B) and the successional distance to reference (recovery; C). Note that the zero lines indicate that both levels have equal values. This means that hay meadows are closer to their reference than dry grasslands  (C)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff")
@@ -288,7 +287,7 @@ knitr::include_graphics(
 
 \newpage
 
-## Figure 3 {.unnumbered}
+## Figure 4 {.unnumbered}
 
 ```{r fig.id = "figure-persistence", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "Persistence of sown species on a dike experiment over the years. The substrates had different sand admixtures and different seed mixture types were sown. Per plot were 20 species sown. Shown are the posterior distributions, their medians and 95 % credible intervals derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
@@ -300,7 +299,7 @@ knitr::include_graphics(
 
 \newpage
 
-## Figure 4 {.unnumbered}
+## Figure 5 {.unnumbered}
 
 ```{r fig.id = "figure-fcs", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The Favorable Conservation Status (FCS) of a dike experiment. The substrates had different sand admixtures and different seed mixture types were sown. The zero line indicate that target and non-target species are balanced. Positive values indicate that there are more target species.  Shown are the posterior distributions, their medians and 95 % credible intervals derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
@@ -312,7 +311,7 @@ knitr::include_graphics(
 
 \newpage
 
-## Figure 5 {.unnumbered}
+## Figure 6 {.unnumbered}
 
 ```{r fig.id = "figure-recovery", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The successional distance (*d~jt,0~*) of plots of an experiment on a dike to its respective reference sites (hay meadows or dry grasslands). The substrates had different sand admixtures and different seed mixture types were sown. The zero lines indicate the mean position of the reference sites on the NMDS axis 1 (Figure 5). The grey area marks the standard deviation of the position of the reference sites. Shown are the posterior distributions, their medians and 95 % credible intervals derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
@@ -324,7 +323,7 @@ knitr::include_graphics(
 
 \newpage
 
-## Figure 6 {.unnumbered}
+## Figure 7 {.unnumbered}
 
 ```{r fig.id = "figure-nmds", fig.asp = 0.9696, fig.width = 6.49, fig.cap = "NMDS ordination based on Sørensen dissimilarity of the species composition of 288 plots on dike grasslands over four years after sowing the seed mixtures (black squares).  In addition, 98 positive and negative reference plots were included (filled symbols) from older dike grasslands in the surroundings [@bauer2023] and six plots from sPlotOpen [@Sabatini.2021].  The circles show the standard error of the groups. 2D stress: 0.21."}
 knitr::include_graphics(
@@ -340,10 +339,10 @@ knitr::include_graphics(
 
 # Supplementary Material {.unnumbered}
 
-## Table S1 {.unnumbered}
+## Table A1 <!--# Is it cited in the text? --> {.unnumbered}
 
 ```{r table-flood-weather, tab.id = "flood-weather", tab.cap = "Three dry years (2018–2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017–2021), based on weather station Metten [mean, 1981–2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911; @cdc2022prec, @cdc2022temp] and stream gauge Pfelling [ID, 10078000; WGS84, lat/lon, 48.87975, 12.74716; @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping."}
-read_csv(here::here("data", "raw", "data_raw_table_s1.csv")) %>%
+read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
   flextable() %>%
   bold(part = "header") %>%
   compose(part = "body", i = ~ Unit == "m3 s−1", j = "Unit", value = as_paragraph("m", as_sup("3"), " s", as_sup("−1"))) %>%
@@ -356,7 +355,7 @@ read_csv(here::here("data", "raw", "data_raw_table_s1.csv")) %>%
 
 <!---BLOCK_LANDSCAPE_STOP--->
 
-## Table S2 {.unnumbered}
+## Table A2 <!--# Is it cited in the text? --> {.unnumbered}
 
 ```{r tab.id = "establishment", tab.cap = "Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of seeded plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the seeded plots were included. The shades of grey indicate the success of establishment."}
 read_csv(
@@ -384,6 +383,10 @@ read_csv(
 \clearpage
 
 \newpage
+
+## Table A3 {.unnumbered}
+
+Describe what it is and where it can be found <!--# Is it cited in teh text? Write more and explain location -->
 
 ## Session Info {.unnumbered}
 
