@@ -1513,14 +1513,15 @@ log_data_traits <- log(data_traits)
 ### Calculation ###
 data_diversity <- dbFD(
   log_data_traits, data_species,
-  w.abun = FALSE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "cailliez"
+  w.abun = TRUE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "cailliez"
 )
 ### Integration to dataset ###
 data <- data_diversity$FDis %>%
   as.data.frame() %>%
   rownames_to_column("id") %>%
-  rename("fdis_abu_lhs" = ".")
-sites_experiment2 <- sites_experiment %>%
+  rename("fdis_abu_lhs" = ".") %>%
+  mutate(across(where(is.numeric), ~ round(.x, digits = 3)))
+sites_experiment <- sites_experiment %>%
   left_join(data, by = "id")
 
 
@@ -1538,17 +1539,19 @@ log_data_traits <- log(data_traits)
 ### Calculation ###
 data_diversity <- dbFD(
   log_data_traits, data_species,
-  w.abun = FALSE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt"
+  w.abun = TRUE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt"
 )
 ### Integration to dataset ###
-data <- data_diversityAbu$FDis %>%
+data <- data_diversity$FDis %>%
   as.data.frame() %>%
   add_column(data_diversity$CWM$sla) %>%
   rownames_to_column("id") %>%
   rename("fdis_abu_sla" = ".",
-         "cwm_abu_sla" = "data_diversityAbu$CWM$sla") %>%
-  mutate(cwmAbuSla = exp(cwmAbuSla))
-sites_experiment2 <- sites_experiment %>%
+         "cwm_abu_sla" = "data_diversity$CWM$sla") %>%
+  mutate(cwm_abu_sla = exp(cwm_abu_sla)) %>%
+  mutate(across(where(is.numeric), ~ round(.x, digits = 3))) %>%
+  select(id, cwm_abu_sla)
+sites_experiment <- sites_experiment %>%
   left_join(data, by = "id")
 
 
@@ -1566,21 +1569,23 @@ log_data_traits <- log(data_traits)
 ### Calculation ###
 data_diversity <- dbFD(
   log_data_traits, data_species,
-  w.abun = FALSE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt"
+  w.abun = TRUE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt"
 )
 ### Integration to dataset ###
 data <- data_diversity$FDis %>%
   as.data.frame() %>%
-  add_column(data_diversityAbu$CWM$seedmass) %>%
+  add_column(data_diversity$CWM$seedmass) %>%
   rownames_to_column("id") %>%
   rename("fdis_abu_seedmass" = ".",
          "cwm_abu_seedmass" = "data_diversity$CWM$seedmass") %>%
-  mutate(cwmAbuSeedmass = exp(cwmAbuSeedmass))
-sites_experiment2 <- sites_experiment %>%
+  mutate(cwm_abu_seedmass = exp(cwm_abu_seedmass)) %>%
+  mutate(across(where(is.numeric), ~ round(.x, digits = 3))) %>%
+  select(id, cwm_abu_seedmass)
+sites_experiment <- sites_experiment %>%
   left_join(data, by = "id")
 
 
-### d Canopy height ------------------------------------------------------------
+### g Canopy height ------------------------------------------------------------
 
 ### Preparation ###
 data_species <- semi_join(species_experiment, data_height, by = "name")
@@ -1594,18 +1599,21 @@ log_data_traits <- log(data_traits)
 ### Calculation ###
 data_diversity <- dbFD(
   log_data_traits, data_species,
-  w.abun = FALSE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt"
+  w.abun = TRUE, calc.FRic = FALSE, calc.FDiv = FALSE, corr = "sqrt"
 )
 ### Integration to dataset ###
 data <- data_diversity$FDis %>%
   as.data.frame() %>%
-  add_column(data_diversityAbu$CWM$height) %>%
+  add_column(data_diversity$CWM$height) %>%
   rownames_to_column("id") %>%
   rename("fdis_abu_height" = ".",
          "cwm_abu_height" = "data_diversity$CWM$height") %>%
-  mutate(cwmAbuHeight = exp(cwmAbuHeight))
-sites_experiment2 <- sites_experiment %>%
-  left_join(data, by = "id")
+  mutate(cwm_abu_height = exp(cwm_abu_height)) %>%
+  mutate(across(where(is.numeric), ~ round(.x, digits = 3))) %>%
+  select(id, cwm_abu_height)
+sites_experiment <- sites_experiment %>%
+  left_join(data, by = "id") %>%
+  select(id, tidyselect::peek_vars())
 
 
 
