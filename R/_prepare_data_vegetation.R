@@ -1213,6 +1213,148 @@ rm(list = setdiff(ls(), c(
 
 
 
+#______________________________________________________________________________
+## 7 Functional plant traits ###################################################
+
+### b TRY data 1 --------------------------------------------------------------
+
+data <- data.table::fread(
+  "data_raw_traitbase_try_20210306_13996.txt",
+  header = TRUE,
+  sep = "\t",
+  dec = ".",
+  quote = ""
+  ) %>%
+  as_tibble() #%>%
+  bind_rows(
+    data.table::fread(
+      "data_raw_traitbase_try_20210318_14157.txt",
+      header = TRUE,
+      sep = "\t",
+      dec = ".",
+      quote = ""
+    ) %>%
+      as_tibble() %>%
+      slice(-1)
+  )
+  rename(
+    name = "AccSpeciesName",
+    value = "StdValue",
+    trait = "TraitID"
+  ) %>%
+  select(name, value, trait) %>%
+  mutate(name = str_replace_all(name, " ", "_")) %>%
+  drop_na %>%
+  mutate(
+    trait = str_replace(trait, "26", "seedmass"),
+    trait = str_replace(trait, "3106", "height"),
+    trait = str_replace(trait, "3107", "height"),
+    trait = str_replace(trait, "3115", "sla"),
+    trait = str_replace(trait, "3116", "sla"),
+    trait = str_replace(trait, "3117", "sla")
+  )
+
+##### * Find synonyms ####
+data <- data %>%
+  mutate(
+    name = as_factor(name),
+    name = fct_recode(
+      name,
+      Carex_praecox_ssp_praecox = "Carex_praecox",
+      Plantago_major_ssp_intermedia = "Plantago_major_subsp._intermedia",
+      Ranunculus_serpens_ssp_nemorosus =
+        "Ranunculus_serpens_subsp._nemorosus"
+    ),
+    trait = as_factor(trait)
+  ) %>%
+  group_by(name, trait) %>%
+  summarise(across(where(is.double), ~median(.x, na.rm = TRUE))) %>%
+  pivot_wider(names_from = "trait", values_from = "value")
+test$name[which(!(test$name %in% data$name))]
+#data %>%
+#group_by(name) %>%
+#summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+#filter(str_detect(name, "Equisetum"))
+traits <- traits %>%
+  left_join(data, by = "name") %>%
+  mutate(
+    sla = coalesce(sla.x, sla.y),
+    seedmass = coalesce(seedmass.x, seedmass.y),
+    height = coalesce(height.x, height.y),
+    .keep = "unused"
+  )
+
+### * check completeness of LEDA + TRY1 ####
+(test <- traits %>%
+   select(name, sla, seedmass, height) %>%
+   filter(!complete.cases(sla, seedmass, height)))
+
+### c TRY data 2 --------------------------------------------------------------
+
+data <- data.table::fread(
+  "data_raw_traitbase_try_20210318_14157.txt",
+  header = TRUE,
+  sep = "\t",
+  dec = ".",
+  quote = ""
+) %>%
+  as_tibble() %>%
+  rename(
+    name = "AccSpeciesName",
+    value = "StdValue",
+    trait = "TraitID"
+  ) %>%
+  select(name, value, trait) %>%
+  mutate(name = str_replace_all(name, " ", "_")) %>%
+  drop_na %>%
+  mutate(
+    trait = str_replace(trait, "26", "seedmass"),
+    trait = str_replace(trait, "3106", "height"),
+    trait = str_replace(trait, "3107", "height"),
+    trait = str_replace(trait, "3115", "sla"),
+    trait = str_replace(trait, "3116", "sla"),
+    trait = str_replace(trait, "3117", "sla")
+  )
+
+##### * Find Synonyms ####
+data <- data %>%
+  mutate(name = as_factor(name),
+         name = fct_recode(name,
+                           Plantago_major_ssp_intermedia =
+                             "Plantago_major_subsp._intermedia",
+                           Plantago_major =
+                             "Plantago_major_subsp._major",
+                           Cornus_controversa =
+                             "Cornus_sanguinea",
+                           Silene_latifolia_ssp_alba =
+                             "Silene_latifolia_subsp._alba",
+                           Silene_latifolia_ssp_alba =
+                             "Silene_latifolia",
+                           Silene_latifolia_ssp_alba =
+                             "Silene_latifolia_ssp._alba"),
+         trait = as_factor(trait)) %>%
+  group_by(name, trait) %>%
+  summarise(across(where(is.double), ~median(.x, na.rm = TRUE))) %>%
+  pivot_wider(names_from = "trait", values_from = "value")
+test$name[which(!(test$name %in% data$name))]
+#data %>%
+#group_by(name) %>%
+#summarise(across(where(is.double), ~median(.x, na.rm = T))) %>%
+#filter(str_detect(name, "Silene"))
+traits <- traits %>%
+  left_join(data, by = "name") %>%
+  mutate(sla = coalesce(sla.x, sla.y),
+         seedmass = coalesce(seedmass.x, seedmass.y),
+         height = coalesce(height.x, height.y),
+         .keep = "unused")
+
+### * check completeness of LEDA + TRY1 + TRY2 ####
+(test <- traits %>%
+   select(name, sla, seedmass, height) %>%
+   filter(!complete.cases(sla, seedmass, height)))
+
+
+
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # C Save processed data ########################################################
