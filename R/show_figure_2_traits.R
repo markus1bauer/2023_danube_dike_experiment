@@ -16,10 +16,11 @@
 ### Packages ###
 library(here)
 library(tidyverse)
+library(naniar)
 library(patchwork)
 
 ### Start ###
-rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
+rm(list = ls())
 
 data <- read_csv(
   here("data", "processed", "data_processed_sites_spatial.csv"),
@@ -61,11 +62,7 @@ theme_mb <- function() {
 # B Plot #######################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-traits %>%
-  filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
-  filter(group != "tree" & group != "shrub") %>%
-  select(sla, seedmass, height) %>%
-  miss_var_summary(order = FALSE)
+
 
 (graph_a <- data %>%
     filter(type == "cwm_abu_sla") %>%
