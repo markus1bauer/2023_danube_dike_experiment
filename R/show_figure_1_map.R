@@ -1,6 +1,9 @@
+# Dike grassland field experiment
 # Show map of the Danube dike experiment ####
-# Markus Bauer
+# Show figure 1
 
+# Markus Bauer
+# 2023-02-09
 
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -9,6 +12,7 @@
 
 
 ### Packages ###
+library(here)
 library(tidyverse)
 library(sf)
 library(raster)
@@ -28,18 +32,15 @@ germany <- st_read("germany.shp")
 danube <- st_read("danube.shp")
 dikes <- st_read("dikes.shp")
 blocks <- st_read("blocks.shp")
-blocks2 <- read_csv2("blocks2.csv", col_names = TRUE, col_types = 
-                      cols(block = col_factor())
+blocks_table <- read_csv2(
+  "blocks_table.csv",
+  col_names = TRUE,
+  col_types = cols(block = col_factor())
 )
-#bg_google_satellite2 <- raster("bg_google_satellite2.tif")
 load("bg_google_satellite.rda")
 load("bg_stamen_terrain.rda")
 
-
-
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Plot ######################################################################
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+### Load functions ###
 theme_mb <- function(){
   theme(
     panel.background = element_rect(fill = NA),
@@ -56,13 +57,22 @@ theme_mb <- function(){
 }
 
 
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Plot ######################################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
 ## 1 Map with ggmap ###########################################################
 
+
 ### a Map of project site -----------------------------------------------------
+
 (sitesGraph <- ggmap(bg_google_satellite) + 
-   geom_point(data = blocks2, aes(x = x, y = y), size = 2, color = "white") +
+   geom_point(data = blocks_table, aes(x = x, y = y), size = 2, color = "white") +
    geom_text_repel(
-     data = blocks2, aes(label = block, x = x, y = y),
+     data = blocks_table, aes(label = block, x = x, y = y),
      min.segment.length = 1, 
      color = "white", 
      direction = "y", 
@@ -90,7 +100,9 @@ theme_mb <- function(){
    ) +
    theme_mb())
 
+
 ### b Germany -----------------------------------------------------------------
+
 gerGraph <- ggplot() +
   geom_sf(data = germany, fill = "transparent", colour = "white") +
   geom_point(aes(x = 12.886, y = 48.839), size = 1, colour = "white") +
@@ -99,7 +111,9 @@ gerGraph <- ggplot() +
     plot.background = element_blank()
   )
 
+
 ### c Inset --------------------------------------------------------------------
+
 sitesGraph + inset_element(
   gerGraph, 
   left = .01, 
@@ -109,22 +123,26 @@ sitesGraph + inset_element(
   on_top = TRUE
 )
 
+
 ### d Save ---------------------------------------------------------------------
-ggsave("figure_1_map_300dpi_8x11cm.tiff", 
-       dpi = 300, width = 8, height = 11, units = "cm",
-       path = here("outputs", "figures")
+
+ggsave(
+  "figure_1_map_300dpi_8x11cm.tiff",
+  dpi = 300, width = 8, height = 11, units = "cm",
+  path = here("outputs", "figures")
 )
+
 
 
 # 2 Map with tmap ##############################################################
 
+
 ### a Map of project site ------------------------------------------------------
-experiment <- st_point(c(12.886, 48.839)) %>%
+
+location_experiment <- st_point(c(12.886, 48.839)) %>%
   st_sfc(crs = 4326)
 tmap_mode("plot")
 bbox <- st_bbox(c(ymin = 48.835, ymax = 48.845, xmin = 12.87, xmax = 12.895))
-#tm_shape(bg_google_satellite2, bbox = bbox) +
-  #tm_raster()
 (tmap <- tm_shape(dikes, bbox = bbox) +
     tm_lines(lwd = 3) +
     tm_shape(danube) +
@@ -138,20 +156,36 @@ bbox <- st_bbox(c(ymin = 48.835, ymax = 48.845, xmin = 12.87, xmax = 12.895))
     tm_layout(frame = FALSE))
 (tmap_ger <- tm_shape(germany) +
     tm_borders(col = "black") +
-    tm_shape(experiment) +
+    tm_shape(location_experiment) +
     tm_dots(size = .075) +
-    tm_layout(frame = FALSE))
+    tm_layout(frame = FALSE, bg.color = "transparent"))
+(tmap_ger_white <- tm_shape(germany) +
+    tm_borders(col = "white") +
+    tm_shape(location_experiment) +
+    tm_dots(size = .075, col = "white") +
+    tm_layout(frame = FALSE, bg.color = "transparent"))
+
 
 ### b Save ---------------------------------------------------------------------
+
 tmap_save(
   tmap,
   insets_tm = tmap_ger,
   insets_vp = viewport(
     x = unit(1.1, "cm"), y = unit(1.1, "cm"),
     width = unit(1, "cm"), height = unit(1.5, "cm")
-  ), 
+  ),
   dpi = 300, width = 8, height = 5, units = "cm",
   filename = paste0(
-    here("outputs/figures"), "/", "figure_1_map_tmap_300dpi_8x5cm.tiff"
+    here("outputs", "figures"), "/", "figure_1_map_tmap_300dpi_8x5cm.tiff"
     )
+)
+
+tmap_save(
+  tmap_ger_white,
+  dpi = 300, width = 2, height = 3.5, units = "cm", bg = "transparent",
+  device = tiff, type = "cairo",
+  filename = paste0(
+    here("outputs", "figures"), "/", "figure_1_germany_300dpi_2x3.5cm.tiff"
+  )
 )
