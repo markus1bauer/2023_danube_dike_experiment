@@ -47,7 +47,7 @@
 library(here)
 library(tidyverse)
 suppressPackageStartupMessages(library(lubridate))
-library(naniar) #are_na
+library(naniar)
 library(vegan)
 suppressPackageStartupMessages(library(adespatial))
 suppressPackageStartupMessages(library(FD))
@@ -1407,7 +1407,6 @@ data <- data.table::fread(
 ### Check names of 'uncomplete_cases' which are not present in TRY database ###
 uncomplete_cases %>%
   filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
-  filter(group != "tree" & group != "shrub") %>%
   anti_join(data, by = "name")
 
 ### Search in 'name' for certain names ###
@@ -1436,7 +1435,7 @@ data <- data %>%
 ### Check names of 'uncomplete_cases' which are not present in TRY database ###
 uncomplete_cases %>%
   anti_join(data, by = "name") %>%
-  filter(!str_detect(name, "_spec"))
+  filter(!str_detect(name, "_spec") & !str_detect(name, "aceae"))
 
 ### Show references ###
 data %>%
