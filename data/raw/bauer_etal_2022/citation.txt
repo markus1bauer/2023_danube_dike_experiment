@@ -1,0 +1,2 @@
+Bauer M, Huber J, Kollmann J (2023) Data and code of Bauer et al. (2023) EcoEvoRxiv (Danube dikes). - Zenodo.
+https://doi.org/10.5281/zenodo.6107806
