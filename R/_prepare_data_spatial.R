@@ -138,7 +138,10 @@ blocks_table <- bind_cols(
 
 
 
-write_csv2(blocks_table, file = "blocks2.csv")
+write_csv2(
+  blocks_table,
+  file = here("data", "processed", "spatial", "blocks_table.csv")
+)
 writeRaster(
   bg_google_satellite2,
   file = paste0(
