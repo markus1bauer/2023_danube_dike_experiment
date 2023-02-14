@@ -138,35 +138,17 @@ The vegetation of the dike experiment developed in the right direction, but with
 
 ## General effects of treatments and exposition
 
-As expected, sand admixture led to higher persistence of sown species. In addition, 50% admixture did not further improve the result and the substrate depth had no effect. Restoration on agricultural soils has often limited success due to high nutrient loads [@walker2004]. Our results suggest a slightly better adaption of hay meadows to the north exposition than dry grasslands (Figure @ref(fig:recovery)). This can be expected from the requirements of hay meadows for mesic conditions which can be provided on north exposed dike slopes [@Batori.2020; @Oberdorfer.1993b].
+As expected, sand admixture led to higher persistence of sown species but only on the north exposition and the effect size of about 6% in the fourth year after restoration is rather small. In addition, 50% admixture did not further improve the result. Restoration on agricultural soils can have limited success due to high nutrient loads [@walker2004] but can lead to positive results, if mixed with mineral material as sand and gravel [@chenot-lescure2022]. Substrate depth did not significantly affect persistence or Favorable Conservation Status (FCS) similarly to earlier studies [@baer2004]. Larger differences of soil depth might be necessary to create negative effects by greater soil depths as was shown for prairies [@dornbush2010]. Neither, seeding density had an effect on persistence and FCS which fits to result of @Kaulfuss.2022, who found out that a certain amount of seeds are necessary but higher densities do not further improve establishment of target species but have rather a slight negative effect.
 
-The vegetation on the south exposition performed consistently and significantly worse than the north exposition. One reason might be the removal of the geotextile on the south exposition which led to the drying of many seedlings why the distinction of the seed mixture types was leveled. The removal was necessary because of the death of several protected lizards. Moreover, the intense drought of 2018 and 2019 [@hari2020] might have decreased germination and establishment of sown species because a moist spring with a mesic temperature improves establishment [@Larson.2021; @orrock2023]. The interesting outcome of this unfavorable situation during establishment on the south exposition is the lasting negative effect. This suggests a legacy effect by unfavorable weather conditions after sowing [@Stuble.2017; @Groves.2020] which might have led to an alternative trajectory and could probably only be met by resowing.
+The vegetation on the south exposition performed consistently and significantly worse than the north exposition and had a different species composition which was not found in that clarity by @Batori.2016 in Hungary. One reason might be the removal of the geotextile, which had been implemented on the south exposition, because of the death of several protected lizards. This led to the drying of many seedlings why the distinction of the seed mixture types might be leveled. Moreover, the intense drought of 2018 and 2019 [@hari2020] might have decreased germination and establishment of sown species because a moist spring with a mesic temperature improves establishment [@Larson.2021; @orrock2023]. The interesting point here is the lasting negative effect which suggests a legacy effect by unfavorable weather conditions after sowing as it was observed by other studies [@Stuble.2017; @Groves.2020]. The problems during the establishment phase might have led to an alternative trajectory and could probably only be met by resowing.
 
 ## No interaction effect of seed mixture-substrate combinations
 
-Persistence, FCS
-
-substrate depth does not matter (what can be discussed?)
-
-Higher seeding density not necessary for biodiversity (ref to practioners, evtl. to Batori?)
-
-no significant effect of combination (variability important, further research, chenot with topsoil)
-
-hay meadows closer to reference
-
-Lasting effect of south exposition (drought, seeding late)
+Our aim was to identify a ideal seed mixture-substrate combination in respect of restoration effectiveness and biodiversity. For evaluating effectiveness, we measured the establishment and persistence of the sown species and for fostering plant biodiversity in general, we measured the FCS. Though, we could not identify an interaction effect for neither of the indices. We would have expected a better performance of hay meadow seed mixtures with lower sand admixture and for dry grasslands with higher sand admixture. Our results suggest that, at least after four years, the substrate conditions are within the range of both seed mixture types (hay meadows, dry grasslands). Although, both types are clearly plant-sociologically and functionally distinct, they are still relative closely related why they contain shared species and could develop on similar site conditions [Figure @ref(fig:traits); @Oberdorfer.1993; @Oberdorfer.1993b]. Other grassland studies could identify more or less clear interactions of opposing habitat preferences or functional traits along the gradients of productivity, moisture, and nutrients [@Zirbel.2020; @Freitag.2021; @Kaulfuss.2022]. Though, these two studies did not work with an experimental set up of different seed mixture-substrate combinations, but analyzed the result of habitat and biotic filtering after five and about 15 years, respectively. Furthermore, the non-existence of an ideal combination could be explained by priority effects which means that the species of the sown species could establish earlier than others and preempted the available niches [@Fukami.2015].
 
 ## The success of the restoration approaches
 
-Mention drought in 2018 and 2019
-
-Compare with Mitchley 2012, Engst 2016, Freitag 2021, Kaulfuß 2022
-
-Batori 2016 neither found great differences between expositions
-
-persistence influenced by neighbourig plots
-
-Outlook: landscape, management are important
+The seed mixtures and positive references were similar but hardly overlapped (Figure \@ref(fig:nmds)). The position on the NMDS suggests that the seed mixture represent a latter successional stage than the positive references. The NMDS shows a slightly better adaption of hay meadows to the north exposition than of dry grasslands (Figure @ref(fig:recovery)). This can be expected from the requirements of hay meadows for mesic conditions which can be provided on north exposed dike slopes [@Batori.2020; @Oberdorfer.1993b]. Though, after four years the vegetation was still distinct from positive references and seed mixtures as shown for other seeding experiments or restorations [@mitchley2012; @Engst.2016; @Kaulfuss.2022] or for dike vegetation compared with semi-natural references [@Batori.2016]. This result is not surprising since the recovery debt is a general phenomenon of grassland restoration [@MorenoMateos.2017; @jones2018]. Our results support that dikes can promote biodiversity in agricultural landscapes [@Batori.2020] but the recovery debt highlights that restored grasslands cannot substitute old-growth grasslands [@nerlekar2020; @Buisson.2022].
 
 Plant traits (Plas 2020, Orrock 2023)
 
@@ -176,7 +158,11 @@ Plant traits (Plas 2020, Orrock 2023)
 
 # Conclusions
 
-Text
+Variability important (different seed mixture types, different soils)
+
+Higher seeding density not necessary for biodiversity
+
+Outlook: landscape, management are important
 
 \clearpage
 
@@ -260,9 +246,9 @@ read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
   compose(i = 1, j = 11, part = "header", value = as_paragraph("K", as_sub("2"), "O")) %>%
   compose(i = 1, j = 12, part = "header", value = as_paragraph("Mg", as_sup("2+"))) %>%
   compose(i = 1, j = 14, part = "header", value = as_paragraph("CaCO", as_sub("3"))) %>%
-  compose(i = 2, j = 10, part = "header", value = as_paragraph("mg 100g", as_sup("−1"))) %>%
-  compose(i = 2, j = 11, part = "header", value = as_paragraph("mg 100g", as_sup("−1"))) %>%
-  compose(i = 2, j = 12, part = "header", value = as_paragraph("mg 100g", as_sup("−1"))) %>%
+  compose(i = 2, j = 10, part = "header", value = as_paragraph("mg 100 g", as_sup("−1"))) %>%
+  compose(i = 2, j = 11, part = "header", value = as_paragraph("mg 100 g", as_sup("−1"))) %>%
+  compose(i = 2, j = 12, part = "header", value = as_paragraph("mg 100 g", as_sup("−1"))) %>%
   align(align = "left", part = "footer") %>%
   set_table_properties(layout = "autofit", width = 1)
 ```
@@ -299,7 +285,7 @@ knitr::include_graphics(
 
 ## Figure 3
 
-```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The posterior density distributions (grey) of the treatments calculated over all four surveyed years. Furthermore, the median and the 66% and 95% credible intervals are shown. We evaluated the persistence of sown species (A), the Favorable Conservation Status (FCS; B) and the successional distance to reference (recovery; C). Note that the zero lines indicate that both levels have equal values. This means that hay meadows are closer to their reference than dry grasslands  (C)."}
+```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The posterior density distributions (grey) of the treatments calculated over all four surveyed years. Furthermore, the median and the 66% and 95% credible intervals are shown. We evaluated the persistence of sown species (A), the Favorable Conservation Status (FCS; B) and the successional distance to reference (recovery; C). The FCS is the ratio of target species and non-target species. Note that the zero lines indicate that both levels have equal values. This means that hay meadows are closer to their reference than dry grasslands  (C)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff")
   )
@@ -382,15 +368,25 @@ read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
 ```{r tab.id = "establishment", tab.cap = "Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment."}
 read_csv(
   here("data", "processed", "data_processed_traits.csv"),
-                 col_names = TRUE, na = c("na", "NA"), col_types =
-                   cols(.default = "?", name = "f")
+  col_names = TRUE,
+  na = c("na", "NA"),
+  col_types = cols(.default = "?", name = "f")
   ) %>%
   select(name, family, total_seeded_2018, starts_with("rate_")) %>%
   drop_na(total_seeded_2018) %>%
   arrange(match(family, c("Poaceae", "Fabaceae"))) %>%
-  mutate(across(starts_with("rate"), ~ .x * 100),
-         name = str_replace_all(name, "_", " ")) %>%
-  rename(Species = name, Family = family, "Seeded plots [#]" = total_sown_2018, "Establishment rate [%]" = rate_2018, "2019" = rate_2019, "2020" = rate_2020, "2021" = rate_2021) %>%
+  mutate(
+    across(starts_with("rate"), ~ .x * 100),
+    name = str_replace_all(name, "_", " ")) %>%
+  rename(
+    Species = name,
+    Family = family,
+    "Seeded plots [#]" = total_seeded_2018,
+    "Establishment rate [%]" = rate_2018,
+    "2019" = rate_2019,
+    "2020" = rate_2020,
+    "2021" = rate_2021
+    ) %>%
   flextable() %>%
   align(part = "all", align = "center", j = -1) %>%
   merge_at(part = "header", j = 4:7) %>%
