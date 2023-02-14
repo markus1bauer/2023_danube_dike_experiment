@@ -150,7 +150,7 @@ Our aim was to identify a ideal seed mixture-substrate combination in respect of
 
 The seed mixtures and positive references were similar but hardly overlapped (Figure \@ref(fig:nmds)). The position on the NMDS suggests that the seed mixture represent a latter successional stage than the positive references. The NMDS shows a slightly better adaption of hay meadows to the north exposition than of dry grasslands (Figure @ref(fig:recovery)). This can be expected from the requirements of hay meadows for mesic conditions which can be provided on north exposed dike slopes [@Batori.2020; @Oberdorfer.1993b]. On the south exposition, the plots of hay meadows developed rather to dry grassland references which indicates an inefficient restoration by using an non-adapted seed mixture.
 
-The vegetation developed in general in the right direction but was still distinct from positive references and seed mixtures after four years as it was shown for other seeding experiments or restorations [@mitchley2012; @Engst.2016; @Kaulfuss.2022] or for dike vegetation compared with semi-natural references [@Batori.2016]. This result is not surprising since the recovery debt is a general phenomenon of grassland restoration [@MorenoMateos.2017; @jones2018]. Our results support that dikes can promote biodiversity in agricultural landscapes [@Batori.2020] but the recovery debt highlights that restored grasslands cannot substitute old-growth grasslands [@nerlekar2020; @Buisson.2022].
+The vegetation developed in general in the right direction but was still distinct from positive references and seed mixtures after four years. It was rather similar to the negative reference of perennial ruderal vegetation. The gap between goal and restoration outcome was also shown for other seeding experiments or restorations [@mitchley2012; @Engst.2016; @Kaulfuss.2022] or for dike vegetation compared with semi-natural references [@Batori.2016]. This result is not surprising since the 'recovery debt' is a general phenomenon of grassland restoration [@MorenoMateos.2017; @jones2018].
 
 \clearpage
 
@@ -158,11 +158,7 @@ The vegetation developed in general in the right direction but was still distinc
 
 # Conclusions
 
-Variability important (different seed mixture types, different soils)
-
-Higher seeding density not necessary for biodiversity
-
-Outlook: landscape, management are important
+Our results suggest that adapted seed mixtures can increase restoration efficiency by seeding hay meadows on the north exposition and not on the south exposition of dikes. Furthermore, to reduce nutrient load by sand admixture has a clear positive effect, although the effect is small. The question remains if money is best invested in sand admixture or in other restoration measures. It seems not to be necessary to increase seeding density on dike slopes, which would reduce restoration costs. As well as the use of more deeper soil depth which would otherwise create costs for removal of topsoil. There was no perfect seed mixture-substrate combination, why we conclude that a variation of seed mixtures types and different soils along restoration sections would promote biodiversity better than a single solution [@bauer2023; @Holl.2022]. The strong and lasting negative effect of drought on the south exposition might require a resowing. To close the recovery debt, the adaption of the management might be promising since it is a relevant factor aside of restoration approach and site characteristics [@Grman.2013; @tölgyesi2021]. For example, starting sheep grazing on the restored sites will modify the disturbance regime and improve dispersal. All in all, our results support the finding that dike grasslands can promote biodiversity in agricultural landscapes [@Batori.2020]. Though, the recovery debt highlights that restored grasslands cannot substitute old-growth grasslands [@nerlekar2020; @Buisson.2022].
 
 \clearpage
 
