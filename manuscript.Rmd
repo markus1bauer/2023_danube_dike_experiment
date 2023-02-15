@@ -38,9 +38,7 @@ Max 8000 words <!--# Remove -->
 
 \newpage
 
-# Abstract (max 300 words) {.unnumbered}
-
-<!--# Write -->
+# Abstract {.unnumbered}
 
 \clearpage
 
@@ -100,11 +98,11 @@ To measure the success of restoration, we chose four indices. First, we observed
 
 ## Experimental design {.unnumbered}
 
-The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix Table @ref(tab:flood-weather), @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from removed agricultural soil of a dike construction site near Steinkirchen. The substrates were mixed with a big roller and an excavator prepared the plots. The target vegetation were lowland hay meadows [EUNIS code: R22, @Chytry.2020; Arrhenatherion elatioris, EuroVegChecklist: CM01A, @mucina2016] and semi-dry calcareous grassland (R1A; Cirsio-Brachypodion pinnati, DA01B). The species pool of hay meadows and dry grasslands consisted of 55 and 58 species, respectively. The seeds were received from a commercial producer of autochthonous seeds. From the species pools, 20 species were randomly selected for each plot. The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Figure \@ref(fig:traits)). As expected, the hay meadows mixtures have a higher specific leaf area (SLA) lower seed mass and higher canopy height than the dry meadows mixtures. The south exposed plots were sown in mid-April 2018 and the north exposition two weeks later. Due to the drought, the south exposition was protected by a geotextile consisting of straw chaff (350 g m^-2^) which was removed after two weeks.
+The seed mixture-substrate combination were tested with an experiment on a dike of the River Danube in SE Germany, which was established in March 2018 (Figure \@ref(fig:map)); 314 m above sea level; WGS84 (lat/lon), 48.83895, 12.88412). The climate is temperate-suboceanic with a mean annual temperature of 8.4 °C and an annual precipitation of 984 mm [@dwd2021]. During the study, three exceptionally dry years (2018--2020) occurred [@hari2020; @cdc2022temp; @cdc2022prec], and three minor floods which did not reach the plots [Appendix A1, @lfu2021waterlevel; @lfu2021discharge]. Regional sand (0--4 mm) was used to lean the substrate and the soil was taken from removed agricultural soil of a dike construction site near Steinkirchen. The substrates were mixed with a big roller and an excavator prepared the plots. The target vegetation were lowland hay meadows [EUNIS code: R22, @Chytry.2020; Arrhenatherion elatioris, EuroVegChecklist: CM01A, @mucina2016] and semi-dry calcareous grassland (R1A; Cirsio-Brachypodion pinnati, DA01B). The species pool of hay meadows and dry grasslands consisted of 55 and 58 species, respectively. The seeds were received from a commercial producer of autochthonous seeds. From the species pools, 20 species were randomly selected for each plot (Appendix A2). The seed mixtures always contained seven grasses (60 wt% of total seed mixture), three legumes (5%) and ten herbs (35%) (Table \@ref(tab:seedmix)). The community-weighted means (CWM) of functional traits differed between the seed mixture types (Figure \@ref(fig:traits)). As expected, the hay meadows mixtures have a higher specific leaf area (SLA) lower seed mass and higher canopy height than the dry meadows mixtures. The south exposed plots were sown in mid-April 2018 and the north exposition two weeks later. Due to the drought, the south exposition was protected by a geotextile consisting of straw chaff (350 g m^-2^) which was removed after two weeks.
 
 The management started with a cut without hay removal and a mowing height of 20 cm in August 2018, followed by 'normal' deep cuts with hay removal in July 2019 and 2020. In October 2018, *Bromus hordeaceus* was sown as a nursery grass to provide safe sites under drought conditions.
 
-We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three sand admixtures (0%, 25% and 50%) and tow soil depths (15 vs. 30 cm) of practical interest [@KleberLerchbaumer.2017] and two . Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. We tested soil samples of the three substrates on both expositions by mixing several sub-samples. The sand admixture changed the soil texture, increased the C/N ratio, but reduced Calciumcarbonat, and hardly changed the rather high pH values (Table \@ref(tab:substrate)). Phosphate and potassium were rather scarce for agricultural soils and Magnesium rather high [@lfl2022]. The two seed mixture types were tested with the normal seeding density and the increased density recommended for slopes [4 vs. 8 g m^-2^ @Kiehl.2010; @KleberLerchbaumer.2017]. The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix Table \@ref(tab:establishment)).
+We used 288 plots of the size 2.0 m × 2.0 m which were distributed over the north and south exposition, halfway up the slopes of the dike and arranged in six blocks (= replicates). The experiment used a split plot design combined with randomized complete block design (Figure \@ref(fig:map)). The split plot was caused by testing all 24 treatments on both sides of the dike. We tested three sand admixtures (0%, 25% and 50%) and tow soil depths (15 vs. 30 cm) of practical interest [@KleberLerchbaumer.2017] and two . Below the substrate, a drainage layer of 5 cm consisting of gravel (0--16 mm) was installed. We tested soil samples of the three substrates on both expositions by mixing several sub-samples. The sand admixture changed the soil texture, increased the C/N ratio, but reduced Calciumcarbonat, and hardly changed the rather high pH values (Table \@ref(tab:substrate)). Phosphate and potassium were rather scarce for agricultural soils and Magnesium rather high [@lfl2022]. The two seed mixture types were tested with the normal seeding density and the increased density recommended for slopes [4 vs. 8 g m^-2^ @Kiehl.2010; @KleberLerchbaumer.2017]. The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and Londo scale was used [@londo1976]. Establishment rates of species (Appendix A3).
 
 ## External data
 
@@ -338,69 +336,6 @@ knitr::include_graphics(
 \clearpage
 
 \newpage
-
-<!---BLOCK_LANDSCAPE_START--->
-
-# Supplementary Material {.unnumbered}
-
-## Table A1 <!--# Is it cited in the text? --> {.unnumbered}
-
-```{r table-flood-weather, tab.id = "flood-weather", tab.cap = "Three dry years (2018–2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017–2021), based on weather station Metten [mean, 1981–2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911; @cdc2022prec, @cdc2022temp] and stream gauge Pfelling [ID, 10078000; WGS84, lat/lon, 48.87975, 12.74716; @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping."}
-read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
-  flextable() %>%
-  bold(part = "header") %>%
-  compose(part = "body", i = ~ Unit == "m3 s−1", j = "Unit", value = as_paragraph("m", as_sup("3"), " s", as_sup("−1"))) %>%
-  autofit()
-```
-
-\clearpage
-
-\newpage
-
-<!---BLOCK_LANDSCAPE_STOP--->
-
-## Table A2 <!--# Is it cited in the text? --> {.unnumbered}
-
-```{r tab.id = "establishment", tab.cap = "Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment."}
-read_csv(
-  here("data", "processed", "data_processed_traits.csv"),
-  col_names = TRUE,
-  na = c("na", "NA"),
-  col_types = cols(.default = "?", name = "f")
-  ) %>%
-  select(name, family, total_seeded_2018, starts_with("rate_")) %>%
-  drop_na(total_seeded_2018) %>%
-  arrange(match(family, c("Poaceae", "Fabaceae"))) %>%
-  mutate(
-    across(starts_with("rate"), ~ .x * 100),
-    name = str_replace_all(name, "_", " ")) %>%
-  rename(
-    Species = name,
-    Family = family,
-    "Seeded plots [#]" = total_seeded_2018,
-    "Establishment rate [%]" = rate_2018,
-    "2019" = rate_2019,
-    "2020" = rate_2020,
-    "2021" = rate_2021
-    ) %>%
-  flextable() %>%
-  align(part = "all", align = "center", j = -1) %>%
-  merge_at(part = "header", j = 4:7) %>%
-  add_header_row(top = FALSE, values = c("", "", "", "2018", "2019", "2020", "2021")) %>%
-  border_inner_h(part = "header", border = fp_border(width = 1)) %>%
-  bold(part = "header") %>%
-  style(j = 1, pr_t = fp_text_default(italic = TRUE)) %>%
-  bg(j = 4:7, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 100))) %>%
-  autofit()
-```
-
-\clearpage
-
-\newpage
-
-## Table A3 {.unnumbered}
-
-Describe what it is and where it can be found <!--# Is it cited in teh text? Write more and explain location -->
 
 ## Session Info {.unnumbered}
 
