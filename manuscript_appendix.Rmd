@@ -1,0 +1,88 @@
+---
+title: "Appendix of Bauer et al. (2023)"
+author: Markus Bauer*, Jakob Huber, Johannes Kollmann
+output:
+  officedown::rdocx_document:
+    reference_docx: template_word.docx
+csl: template_references_j_appl_ecol.csl
+bibliography: bibliography.bib
+---
+
+```{r set-up, include = FALSE, message = FALSE}
+library(here)
+library(knitr)
+library(officedown)
+library(officer)
+library(tidyverse)
+library(flextable)
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  dpi = 300,
+  fig.cap = FALSE
+  )
+set_flextable_defaults(
+  font.family = "Times New Roman",
+  font.size = 11,
+  text.align = "center"
+  )
+```
+
+<!---BLOCK_LANDSCAPE_START--->
+
+# Supplementary Material {.unnumbered}
+
+## Table A1 {.unnumbered}
+
+```{r table-flood-weather, tab.id = "flood-weather", tab.cap = "Three dry years (2018–2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017–2021), based on weather station Metten [mean, 1981–2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911; @cdc2022prec, @cdc2022temp] and stream gauge Pfelling [ID, 10078000; WGS84, lat/lon, 48.87975, 12.74716; @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping."}
+read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
+  flextable() %>%
+  bold(part = "header") %>%
+  compose(part = "body", i = ~ Unit == "m3 s−1", j = "Unit", value = as_paragraph("m", as_sup("3"), " s", as_sup("−1"))) %>%
+  autofit()
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+\clearpage
+
+\newpage
+
+## Table A2 {.unnumbered}
+
+Describe what it is and where it can be found <!--# Is it cited in teh text? Write more and explain location -->
+
+## Table A3 {.unnumbered}
+
+```{r tab.id = "establishment", tab.cap = "Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment."}
+read_csv(
+  here("data", "processed", "data_processed_traits.csv"),
+  col_names = TRUE,
+  na = c("na", "NA"),
+  col_types = cols(.default = "?", name = "f")
+  ) %>%
+  select(name, family, total_seeded_2018, starts_with("rate_")) %>%
+  drop_na(total_seeded_2018) %>%
+  arrange(match(family, c("Poaceae", "Fabaceae"))) %>%
+  mutate(
+    across(starts_with("rate"), ~ .x * 100),
+    name = str_replace_all(name, "_", " ")) %>%
+  rename(
+    Species = name,
+    Family = family,
+    "Seeded plots [#]" = total_seeded_2018,
+    "Establishment rate [%]" = rate_2018,
+    "2019" = rate_2019,
+    "2020" = rate_2020,
+    "2021" = rate_2021
+    ) %>%
+  flextable() %>%
+  align(part = "all", align = "center", j = -1) %>%
+  merge_at(part = "header", j = 4:7) %>%
+  add_header_row(top = FALSE, values = c("", "", "", "2018", "2019", "2020", "2021")) %>%
+  border_inner_h(part = "header", border = fp_border(width = 1)) %>%
+  bold(part = "header") %>%
+  style(j = 1, pr_t = fp_text_default(italic = TRUE)) %>%
+  bg(j = 4:7, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 100))) %>%
+  autofit()
+```
