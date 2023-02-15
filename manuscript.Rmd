@@ -1,5 +1,5 @@
 ---
-title: "Development of restored dike grasslands to reference needs more than four years and can hardly modified by local site conditions"
+title: "Can dike grassland restoration profit from ideal seed mixture-substrate combinations?"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
   officedown::rdocx_document:
@@ -7,8 +7,6 @@ output:
 csl: template_references_j_appl_ecol.csl
 bibliography: bibliography.bib
 ---
-
-# Document head (remove later) <!--# Remove --> {.unnumbered}
 
 ```{r set-up, include = FALSE, message = FALSE}
 library(here)
@@ -34,11 +32,13 @@ Restoration Ecology, TUM School of Life Sciences, Technical University of Munich
 
 \* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de)
 
-Max 8000 words <!--# Remove -->
+\clearpage
 
 \newpage
 
 # Abstract {.unnumbered}
+
+Sowing is a well established restoration technique to overcome dispersal limitation. Though, adapted seed mixtures to certain site conditions promise a more effective restoration. This is especially important if the restored vegetation has to protect constructions like dikes. An ideal seed mixture-substrate combination would enhance erosion protection and species-rich grasslands.
 
 \clearpage
 
@@ -46,27 +46,27 @@ Max 8000 words <!--# Remove -->
 
 # Keywords {.unnumbered}
 
-Bayesian models
+artificial soil mixture
 
-dike grasslands
+community assembly
 
-embankment
+dry grasslands
 
-endangered species
+Favorable Conservation Status
 
-environmental filter
+hay meadow
+
+persistences
+
+river embankment
+
+soil restoration
+
+sowing
 
 species composition
 
-restoration
-
-sand
-
-soil properties
-
-surveys
-
-vegetation
+species-rich grassland
 
 \clearpage
 
@@ -78,7 +78,7 @@ Sowing as an approach to restore semi-natural grasslands has long been establish
 
 Sowing high-diversity seed mixtures of local provenance produced by commercial but specialized seed companies is a promising way to scale up restoration efforts. Though, there are still open questions about specifying the seed mixtures to specific site conditions or even more to future climate conditions to improve efficiency and effectiveness of restoration efforts [@Torok.2021]. For this reason, restoration ecology has to increase predictability of restoration approaches [@Suding.2011; @Mouquet.2015]. Rigorous, repeatable, and transparent experiments linked to a hypothesis derived from theory are needed to guide evidence-based restoration [@Cooke.2018; @Wainwright.2018]. Local site conditions and the restoration approach are key predictors of the development of vegetation after sowing [@Brudvig.2017b]. Seeding in general is a way to overcome the dispersal filter [@myers2009; @orrock2023], but we focus on environmental and the biotic filtering which are the main assembly processes to be manipulated by the choice of the right seed mixture-substrate combination [@Torok.2017]. This means a mutually adaption of the substrate to the preferences of the target vegetation, and the seed mixtures to the characteristics of the chosen substrate. The right substrates should reduce habitat filtering and the right seed mixture should minimize competitive exclusion of unsuited species. Modifying seed mixtures for certain site conditions came up with functional plant traits [@Funk.2008; @Laughlin.2014; @Balazs.2020] but it is not easy to put it into practice for novel ecosystems like urban grasslands [@Bauer.2022]. Substrates cannot only be modified for conservation purposes in urban areas, but also in quarries [@chenot-lescure2022] or dikes [@Liebrand.1996].
 
-Dikes are promising sites for the restoration of species-rich grasslands [@Liebrand.1996], because they can increase habitat area and connectivity of semi-natural grasslands and therefore significantly contribute to biodiversity conservation in an agricultural landscape [@Batori.2020]. Dikes have specific characteristics with strongly exposed slopes and river and land orientation [@Batori.2016] and need a reliable vegetation cover to conserve dike security [@KleberLerchbaumer.2017]. Dikes can reconcile several requirements [@teixeira2022], but the seed mixture-substrate combination must be adapted.
+Dikes are promising sites for the restoration of species-rich grasslands [@Liebrand.1996], because they can increase habitat area and connectivity of semi-natural grasslands and therefore significantly contribute to biodiversity conservation in an agricultural landscape [@Batori.2020]. Dikes have specific characteristics with strongly exposed slopes and river and land orientation [@Batori.2016] and need a reliable vegetation cover to conserve dike security [@berendse2015]. Dikes can reconcile several requirements [@teixeira2022], but the seed mixture-substrate combination must be adapted.
 
 The aim of this study is to identify the ideal combination of substrates and seed mixtures for north and south exposed slopes in Central Europe to develop a vital and species-rich vegetation cover. We set up an experiment and tested agricultural soil with different amounts of sand admixture and different installation depths, as well as different seed mixture types and different seed densities. We expected a better development of dry grassland on the south exposition with sandy substrate and hay meadows on north exposition with less sandy substrate. Since seeds are expensive, practitioners like to know if the slopes need a higher seed density [cf. @KleberLerchbaumer.2017].
 
