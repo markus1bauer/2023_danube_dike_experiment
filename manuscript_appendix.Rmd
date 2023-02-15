@@ -1,5 +1,5 @@
 ---
-title: "Appendix of Bauer et al. (2023)"
+title: "Appendix of Bauer et al. (2023) Dike experiment"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
   officedown::rdocx_document:
@@ -7,6 +7,10 @@ output:
 csl: template_references_j_appl_ecol.csl
 bibliography: bibliography.bib
 ---
+
+Restoration Ecology, TUM School of Life Sciences, Technical University of Munich, Germany
+
+\* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de), ORCiD <https://orcid.org/0000-0001-5372-4174>
 
 ```{r set-up, include = FALSE, message = FALSE}
 library(here)
@@ -30,11 +34,11 @@ set_flextable_defaults(
 
 <!---BLOCK_LANDSCAPE_START--->
 
-# Supplementary Material {.unnumbered}
+## Appendix A1 {.unnumbered}
 
-## Table A1 {.unnumbered}
+Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911; @cdc2022prec, @cdc2022temp] and stream gauge Pfelling [ID, 10078000; WGS84, lat/lon, 48.87975, 12.74716; @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
 
-```{r table-flood-weather, tab.id = "flood-weather", tab.cap = "Three dry years (2018–2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017–2021), based on weather station Metten [mean, 1981–2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911; @cdc2022prec, @cdc2022temp] and stream gauge Pfelling [ID, 10078000; WGS84, lat/lon, 48.87975, 12.74716; @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping."}
+```{r table-flood-weather, tab.id = "flood-weather", tab.cap = ""}
 read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
   flextable() %>%
   bold(part = "header") %>%
@@ -44,17 +48,15 @@ read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
 
 <!---BLOCK_LANDSCAPE_STOP--->
 
-\clearpage
-
-\newpage
-
-## Table A2 {.unnumbered}
+## Appendix A2 {.unnumbered}
 
 Describe what it is and where it can be found <!--# Is it cited in teh text? Write more and explain location -->
 
-## Table A3 {.unnumbered}
+## Appendix A3 {.unnumbered}
 
-```{r tab.id = "establishment", tab.cap = "Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment."}
+Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment.
+
+```{r tab.id = "establishment", tab.cap = ""}
 read_csv(
   here("data", "processed", "data_processed_traits.csv"),
   col_names = TRUE,
@@ -86,3 +88,8 @@ read_csv(
   bg(j = 4:7, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 100))) %>%
   autofit()
 ```
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
