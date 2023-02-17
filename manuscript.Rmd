@@ -215,7 +215,9 @@ MB is funded by a doctoral scholarship of the German Federal Environmental Found
 
 ## Table 1 {.unnumbered}
 
-```{r tab.id = "seedmix", ft.align = "left", tab.cap = "Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, plots received 16 or 32 g of seeds. All individual seed mixtures are stored in Appendix A3."}
+Each plot received an individual set of 20 species with some restrictions to the number of species per functional group. The total species pool for hay meadows was 55 and for dry grassland 58. In total, plots received 16 or 32 g of seeds. All individual seed mixtures are stored in Appendix A3.
+
+```{r tab.id = "seedmix", ft.align = "left", tab.cap = "Seedmix"}
 read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
          show_col_types = FALSE) %>%
   slice(-1) %>%
@@ -233,9 +235,11 @@ read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
 
 \newpage
 
-## Table 2<!--# Check quotation --> {.unnumbered}
+## Table 2 {.unnumbered}
 
-```{r tab.id = "substrate", ft.align = "left", tab.cap = "Soil of the three substrates was analyzed for the fraction < 2 mm. Soil texture was classified according to the 'Bodenkundliche Kartieranleitung' [@BodenkundlKartieranl.2005]. The pH was measured in CaCl2 solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl2 extract. For calculating CaCO3, a subsample was annealed at 550 °C and the measured C amount calculated with 8.33. To calculate total N and the C/N ratio, a subsample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand."}
+Soil samples of the three substrates were analyzed for the fraction \< 2 mm. Soil texture was classified according to the 'Bodenkundliche Kartieranleitung' [@BodenkundlKartieranl.2005]. The pH was measured in CaCl~2~ solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl~2~ extract. For calculating CaCO~3~, a sub-sample was annealed at 550 °C and the measured C amount multiplied with 8.33. To calculate total N and the C/N ratio, a sub-sample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand.
+
+```{r tab.id = "substrate", ft.align = "left", tab.cap = "Substrate"}
 read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
          show_col_types = FALSE) %>%
   select(-starts_with("lfl")) %>%
@@ -271,11 +275,13 @@ read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
 
 ## Figure 1 {.unnumbered}
 
-```{r fig.id = "map", fig.asp = 1.2854, fig.width = 5, fig.cap = "The experiment was located on a dike at river Danube in SE Germany.  The 288 plots were allocated in six blocks (red squares on upper photo) and on the north and south exposition [central photo; both aerial photos: @bayerischevermessungsverwaltung2023]. Four treatments were conducted (Sand admixture, substrate depth, seed density, seed mixture types H and D). The western half of a block was with a shallow substrate depth for the blocks and within this half the substrates. The photo on the bottom shows one block from the side after four years (Photo: Markus Bauer)."}
+```{r fig.id = "map", fig.asp = 1.2854, fig.width = 5, fig.cap = "Map"}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_1_map.png")
   )
 ```
+
+The experiment was located on a dike at river Danube in SE Germany. The 288 plots were allocated in six blocks (white squares on upper photo) and on the north and south exposition (central photo) [both aerial photos: @bayerischevermessungsverwaltung2023]. Four treatments were conducted: sand admixture, substrate depth, seed density, and seed mixture types H and D. The western half of a block was with a shallow substrate depth and within this half the substrates had different sand admixtures. The photo on the bottom shows one block from the side after four years (Photo: Markus Bauer).
 
 \clearpage
 
@@ -283,7 +289,7 @@ knitr::include_graphics(
 
 ## Figure 2 {.unnumbered}
 
-```{r fig.id = "traits", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The community-weighted means (CWM) of the seed mixtures used for the field experiment of the functional traits specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and  indicate differences between the target types hay meadows and dry grasslands . "}
+```{r fig.id = "traits", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The community-weighted means (CWM) of the seed mixtures used for the field experiment: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target types hay meadows and dry calcareous grasslands."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm_traits.tiff")
   )
@@ -295,7 +301,7 @@ knitr::include_graphics(
 
 ## Figure 3
 
-```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The posterior density distributions (grey) of the treatments calculated over all four surveyed years. Furthermore, the median and the 66% and 95% credible intervals are shown. We evaluated the persistence of sown species (A), the Favorable Conservation Status (FCS; B) and the successional distance to reference (recovery; C). The FCS is the ratio of target species and non-target species. Note that the zero lines indicate that both levels have equal values. This means that hay meadows are closer to their reference than dry grasslands  (C)."}
+```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The posterior density distributions (grey) of the treatments calculated over all four surveyed years. Furthermore, the median and the 66% and 95% credible intervals are shown: the persistence of sown species (A), the Favorable Conservation Status (FCS; B) and the successional distance to reference (recovery; C). The FCS is the ratio of target species and non-target species. Note that the zero lines indicate that both levels have equal values. This means for instance that hay meadows are closer to their reference than dry grasslands  (C)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff")
   )
@@ -307,7 +313,7 @@ knitr::include_graphics(
 
 ## Figure 4 {.unnumbered}
 
-```{r fig.id = "persistence", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "Persistence of sown species on a dike experiment over the years. The substrates had different sand admixtures and different seed mixture types were sown. Per plot were 20 species sown. Shown are the posterior distributions, their medians and 95 % credible intervals derived from a Bayesian linear mixed-effects model (BLMM)."}
+```{r fig.id = "persistence", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "Persistence of sown species on the dike experiment. The plots had substrates with different sand admixtures and were sown with different seed mixture types. Per plot 20 species were sown. Shown are the medians and 95 % credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_3_persistence_epred_800dpi_16.5x8cm.tiff")
   )
@@ -319,7 +325,7 @@ knitr::include_graphics(
 
 ## Figure 5 {.unnumbered}
 
-```{r fig.id = "fcs", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The Favorable Conservation Status (FCS) of a dike experiment. The substrates had different sand admixtures and different seed mixture types were sown. The zero line indicate that target and non-target species are balanced. Positive values indicate that there are more target species.  Shown are the posterior distributions, their medians and 95 % credible intervals derived from a Bayesian linear mixed-effects model (BLMM)."}
+```{r fig.id = "fcs", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The Favorable Conservation Status (FCS) of a dike experiment. The plots had substrates with different sand admixtures and were sown with different seed mixture types. The zero line indicate that target and non-target species are balanced. Positive values indicate that there are more target species. Shown are the medians and 95 % credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_4_fcs_epred_800dpi_16.5x8cm.tiff")
   )
@@ -331,7 +337,7 @@ knitr::include_graphics(
 
 ## Figure 6 {.unnumbered}
 
-```{r fig.id = "recovery", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The successional distance (*d~jt,0~*) of plots of an experiment on a dike to its respective reference sites (hay meadows or dry grasslands). The substrates had different sand admixtures and different seed mixture types were sown. The zero lines indicate the mean position of the reference sites on the NMDS axis 1 (Figure 7). The grey area marks the standard deviation of the position of the reference sites. Shown are the posterior distributions, their medians and 95 % credible intervals derived from a Bayesian linear mixed-effects model (BLMM)."}
+```{r fig.id = "recovery", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The recovery or successional distance (*d~jt,0~*) of experimental plots to its respective reference sites (hay meadows or dry calcareous grasslands). The plots had substrates with different sand admixtures and were sown with different seed mixture types. The zero lines indicate the mean position of the reference sites for each habitat type on the NMDS axis 1 (Figure 7). The grey area marks the standard deviation of the position of the reference sites. Shown are the medians and 95 % credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x8cm.tiff")
   )
