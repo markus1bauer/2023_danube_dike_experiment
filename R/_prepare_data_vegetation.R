@@ -2,7 +2,7 @@
 # Prepare species, sites, and traits data ####
 
 # Markus Bauer
-# 2023-01-31
+# 2023-02-18
 
 
 
@@ -204,15 +204,6 @@ species_bauer <- read_csv(
   )
 )
 
-### Create list with species names and their frequency ###
-specieslist <- species_experiment %>%
-  mutate(across(where(is.numeric), ~1 * (. != 0))) %>% 
-  mutate(sum = rowSums(across(where(is.numeric)), na.rm = TRUE),
-         .keep = "unused") %>%
-  group_by(name) %>%
-  summarise(sum = sum(sum))
-#write_csv(specieslist, here("outputs", "tables", "specieslist_20221102.csv"))
-
 
 
 #_______________________________________________________________________________
@@ -406,28 +397,9 @@ data <- species_experiment %>%
               values_from = c("rate", "total_seeded", "total_established")) %>%
   select(-total_seeded_2019, -total_seeded_2020, -total_seeded_2021)
 
-### Check size of species pool for seeding ###
-traits %>%
-  select(seeded_hay_meadow, seeded_dry_grassland) %>%
-  mutate(across(where(is.character), ~as.numeric(.x))) %>%
-  summarise(across(where(is.numeric), ~sum(.x)))
-
 traits <- traits %>%
   left_join(data, by = "name")
 
-
-### c Table of seedmixes -------------------------------------------------------
-
-data <- species_experiment %>%
-  select(name, ends_with("seeded")) %>%
-  mutate(across(where(is.numeric), ~replace(., is.na(.), 0))) %>%
-  pivot_longer(-name, names_to = "id", values_to = "seeded") %>%
-  separate(id, c("plot"), sep = "_(?!.*_)",
-           remove = TRUE, extra = "drop", fill = "warn", convert = FALSE) %>%
-  filter(seeded > 0) %>%
-  select(plot, name, seeded) %>%
-  arrange(plot, name)
-write_csv(data, here("outputs", "tables", "table_a3_seedmixes.csv"))
 
 
 
