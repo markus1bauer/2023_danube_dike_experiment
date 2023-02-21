@@ -24,12 +24,15 @@ traits <- read_csv(
   here("data", "processed", "data_processed_traits.csv"),
   col_names = TRUE,
   na = c("", "NA", "na"),
-  col_types = cols(.default = "?"))
+  col_types = cols(.default = "?")
+  )
+
+base::load(file = here("outputs", "models", "model_nmds.Rdata"))
 
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# B Plot ######################################################################
+# B Calculate #################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -39,6 +42,12 @@ traits %>%
   select(seeded_hay_meadow, seeded_dry_grassland) %>%
   mutate(across(where(is.character), ~as.numeric(.x))) %>%
   summarise(across(where(is.numeric), ~sum(.x)))
+
+### Check species number used for NMDS ###
+ordi$species %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "name") %>%
+  as_tibble()
 
 ### How many species of the species pool established? ###
 traits %>%
