@@ -1,7 +1,7 @@
 # Grassland experiment on dikes
-# Establishment rates ####
+# Âppendix A3: Establishment rates ####
 # Markus Bauer
-# 2022-12-15
+# 2023-02-21
 
 
 
@@ -18,20 +18,20 @@ library(gt)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data", "processed"))
 
 ### Load data ###
-data <- read_csv("data_processed_traits.csv",
-                 col_names = TRUE, na = c("na", "NA"), col_types =
-                   cols(
-                     .default = "?",
-                     name = "f"
-                   )) %>%
+data <- read_csv(
+  here("data", "processed", "data_processed_traits.csv"),
+  col_names = TRUE,
+  na = c("na", "NA"),
+  col_types = cols(.default = "?", name = "f")) %>%
   select(name, family, total_seeded_2018, starts_with("rate_")) %>%
   drop_na(total_seeded_2018) %>%
   arrange(match(family, c("Poaceae", "Fabaceae"))) %>%
-  mutate(across(starts_with("rate"), ~ .x * 100),
-         name = str_replace_all(name, "_", " "))
+  mutate(
+    across(starts_with("rate"), ~ .x * 100),
+    name = str_replace_all(name, "_", " ")
+    )
 
 
 
@@ -229,4 +229,5 @@ mean(data$rate_2021); sd(data$rate_2021)
 
 
 ### Save ###
-gtsave(table, here("outputs", "tables", "table_a2_establishment.html"))
+write_csv(data, here("outputs", "tables", "table_a3_establishment.csv"))
+gtsave(table, here("outputs", "tables", "table_a3_establishment.html"))
