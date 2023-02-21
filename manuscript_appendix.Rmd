@@ -34,9 +34,9 @@ set_flextable_defaults(
 
 <!---BLOCK_LANDSCAPE_START--->
 
-## Appendix A1 {.unnumbered}
+# Appendix A1
 
-Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911; @cdc2022prec, @cdc2022temp] and stream gauge Pfelling [ID, 10078000; WGS84, lat/lon, 48.87975, 12.74716; @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
+Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911) @cdc2022temp, @cdc2022prec] <!--# Check brackets -->and stream gauge Pfelling [ID: 10078000, WGS84, lat/lon, 48.87975, 12.74716, @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
 
 ```{r table-flood-weather, tab.id = "flood-weather", tab.cap = ""}
 read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
@@ -48,11 +48,11 @@ read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
 
 <!---BLOCK_LANDSCAPE_STOP--->
 
-## Appendix A2 {.unnumbered}
+# Appendix A2
 
-Describe what it is and where it can be found <!--# Is it cited in teh text? Write more and explain location -->
+All sown seed mixtures can be found on GitHub in the folder \`outputs/tables/table_a2_seed_mixtures.csv\`. There it is indicated which species are combined and the ratio in the specific seed mixture.
 
-## Appendix A3 {.unnumbered}
+# Appendix A3
 
 Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment.
 
@@ -86,6 +86,27 @@ read_csv(
   bold(part = "header") %>%
   style(j = 1, pr_t = fp_text_default(italic = TRUE)) %>%
   bg(j = 4:7, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 100))) %>%
+  autofit()
+```
+
+# Appendix A4
+
+All species which occurred 2018--2021 and the amount of plots in which they appeared (maximum 1152 = 4 years times 288 experimental plots). In total, 274 different species were found. The shades of grey indicate the amount of established plots.
+
+```{r tab.id = "specieslist", tab.cap = ""}
+read_csv(
+  here("outputs", "tables", "table_a4_specieslist.csv"),
+  col_names = TRUE,
+  na = c("na", "NA"),
+  col_types = cols(.default = "?", name = "f")
+  ) %>%
+  mutate(name = str_replace_all(name, "_", " ")) %>%
+  rename(Name = name, "Presence [# plots]" = sum) %>%
+  flextable() %>%
+  align(part = "all", align = "center", j = -1) %>%
+  bold(part = "header") %>%
+  style(j = 1, pr_t = fp_text_default(italic = TRUE)) %>%
+  bg(j = 2, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 931))) %>%
   autofit()
 ```
 
