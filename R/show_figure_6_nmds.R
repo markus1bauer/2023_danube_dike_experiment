@@ -71,9 +71,12 @@ ordi
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-### * Preparation ####
+
+### 1 Preparation #############################################################
+
 
 ellipses <- tibble()
+
 ### Copy references to both expositions ###
 data <- sites_nmds %>%
   filter(exposition == "other") %>%
@@ -84,6 +87,7 @@ data <- data %>%
 sites_nmds <- sites_nmds %>%
   filter(!(exposition == "other")) %>%
   bind_rows(data)
+
 ### Copy negative references to both target_types ###
 data <- sites_nmds %>%
   filter(target_type == "other") %>%
@@ -146,7 +150,10 @@ for (group in levels(sites_nmds$group_type)) {
   
 }
 
-#### * Plot ####
+
+
+#### 2 Plot ###################################################################
+
 
 (graph_a <- ggplot() +
    geom_point(
@@ -193,6 +200,7 @@ for (group in levels(sites_nmds$group_type)) {
 
 
 ### Save ###
+
 ggsave(here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff"),
        dpi = 800, width = 16.5, height = 16, units = "cm")
 graph_a + theme(legend.position = "right")
