@@ -12,6 +12,8 @@ Restoration Ecology, TUM School of Life Sciences, Technical University of Munich
 
 \* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de), ORCiD <https://orcid.org/0000-0001-5372-4174>
 
+<!--# Replace "Dike experiment" in the title -->
+
 ```{r set-up, include = FALSE, message = FALSE}
 library(here)
 library(knitr)
@@ -36,7 +38,7 @@ set_flextable_defaults(
 
 # Appendix A1
 
-Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010; ID, 3271; WGS84, lat/lon, 48.85476, 12.918911) @cdc2022temp, @cdc2022prec] <!--# Check brackets -->and stream gauge Pfelling [ID: 10078000, WGS84, lat/lon, 48.87975, 12.74716, @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
+Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010, ID: 3271, WGS84: lat/lon, 48.85476, 12.918911, @cdc2022temp; @cdc2022prec] and stream gauge Pfelling [ID: 10078000, WGS84: lat/lon, 48.87975, 12.74716, @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
 
 ```{r table-flood-weather, tab.id = "flood-weather", tab.cap = ""}
 read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
@@ -53,6 +55,24 @@ read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
 All sown seed mixtures can be found on GitHub in the folder \`outputs/tables/table_a2_seed_mixtures.csv\`. There it is indicated which species are combined and the ratio in the specific seed mixture.
 
 # Appendix A3
+
+The community-weighted means (CWM) of the seed mixtures used for the field experiment: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target types hay meadows and dry calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2%, 98.8%, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
+
+```{r fig.id = "traits", fig.asp = 0.3030, fig.width = 6.49, fig.cap = ""}
+knitr::include_graphics(
+  here::here("outputs", "figures", "figure_a3_800dpi_16.5x5cm_traits.tiff")
+  )
+```
+
+### Acknowledgment
+
+This figure has been supported by the TRY initiative on plant traits (<http://www.try-db.org>). The TRY initiative and database is hosted, developed and maintained by J. Kattge and G. Boenisch (Max Planck Institute for Biogeochemistry, Jena, Germany). TRY is currently supported by Future Earth/bioDISCOVERY and the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig.
+
+\clearpage
+
+\newpage
+
+# Appendix A4
 
 Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment.
 
@@ -89,7 +109,11 @@ read_csv(
   autofit()
 ```
 
-# Appendix A4
+\clearpage
+
+\newpage
+
+# Appendix A5
 
 All species which occurred 2018--2021 and the amount of plots in which they appeared (maximum 1152 = 4 years times 288 experimental plots). In total, 274 different species were found. The shades of grey indicate the amount of established plots.
 
