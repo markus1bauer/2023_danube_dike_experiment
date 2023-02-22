@@ -172,7 +172,7 @@ The vegetation developed in general in the desired direction but was still disti
 
 # Conclusions
 
-Our results suggest that adapted seed mixtures can increase restoration efficiency by sowing hay meadows on the north exposition and not on the south exposition of dikes. Furthermore, to reduce nutrient load by sand admixture has a clear positive effect, even if the effect is small. The question which remains is, if sand admixture is the most economical restoration measure to promote diversity on dikes. Seed density seems not to be necessary to be increased on dike slopes and soil depths of 30cm are not adverse compared to 15 cm thick substrates. There was no perfect seed--substrate combination, why we conclude that a variation of seed mixture types and different substrates along restoration sections would promote biodiversity better than a single solution [@bauer2023; @Holl.2022]. The strong and lasting negative effect of drought on the south exposition might require a re-sowing. To close the recovery debt, the adaption of the management might be promising since it is a crucial factor aside of the restoration approach and the site characteristics [@Grman.2013; @tölgyesi2021]. For example, starting the already existing sheep grazing on the experimental sites will modify the disturbance regime and improve dispersal. All in all, our results support the finding that dike grasslands can promote biodiversity in agricultural landscapes [@Batori.2020]. Though, the stubborn recovery debt highlights that restored grasslands cannot substitute old-growth grasslands [@nerlekar2020; @Buisson.2022].
+Our results suggest that adapted seed mixtures can increase restoration efficiency by sowing hay meadows in north but not in south exposition of dikes. Furthermore, to reduce nutrient load by sand admixture has a clear positive effect, even if the effect is small. The question which remains is, if sand admixture is the most economical restoration measure to promote diversity on dikes. Seed density seems not to be necessary to be increased on dike slopes and soil depths of 30 cm are not adverse compared to 15 cm thick substrates. There was no perfect seed--substrate combination and thus we conclude that a variation of seed mixture types and different substrates along restoration sections would promote biodiversity better than a single uniform solution [@bauer2023; @Holl.2022]. Strong and lasting negative effects of drought might require a re-sowing. To close the recovery debt, the adaption of the management might be promising since it is a crucial factor aside of the restoration approach and the site characteristics [@Grman.2013; @tölgyesi2021]. For example, starting the already existing sheep grazing on the experimental sites will modify the disturbance regime and improve dispersal. All in all, our results support the finding that restored dike grasslands can promote biodiversity in agricultural landscapes [@Batori.2020]. Though, the recovery debt highlights that restored grasslands cannot substitute old-growth grasslands [@nerlekar2020; @Buisson.2022].
 
 \clearpage
 
@@ -188,13 +188,15 @@ JH and JK designed the experiment. JH did the surveys in the years 2018--2020 an
 
 # Open research {#sec-open-research .unnumbered}
 
-Data and code are stored on Zenodo (Bauer et al. 2023) <!--# Update citation after upload -->
-
-Model evaluation is stored on GitHub: [github.com/markus1bauer/2023_danube_dike_experiment](https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown)
+Data and code are stored on Zenodo (Bauer et al. 2023) <!--# Update citation after upload -->Model evaluation is stored on GitHub: <https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown>
 
 # Funding {.unnumbered}
 
-MB is funded by a doctoral scholarship of the German Federal Environmental Foundation (DBU) (No. 20021/698). The establishment of the experiment and the vegetation surveys were financed by the WIGES GmbH in the years 2018--2020 (No. 80 002 312). \clearpage \newpage
+MB is funded by a doctoral scholarship of the German Federal Environmental Foundation (DBU) (No. 20021/698). The establishment of the experiment and the vegetation surveys were financed by the WIGES GmbH in the years 2018--2020 (No. 80 002 312).
+
+\clearpage
+
+\newpage
 
 # References {.unnumbered}
 
@@ -231,7 +233,7 @@ read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
 
 ## Table 2 {.unnumbered}
 
-Soil samples of the three substrates were analyzed for the fraction \< 2 mm. Soil texture was classified according to the 'Bodenkundliche Kartieranleitung' [@BodenkundlKartieranl.2005]. The pH was measured in CaCl2 solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl2 extract. For calculating CaCO3, a sub-sample was annealed at 550 °C and the measured C amount multiplied with 8.33. To calculate total N and the C/N ratio, a sub-sample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand.
+Characteristics of the substrates used for the sowing experiment on river dikes. Soil samples of the three substrates were analyzed for the fraction \< 2 mm. Soil texture was classified according to the 'Bodenkundliche Kartieranleitung' [@BodenkundlKartieranl.2005]. The pH was measured in CaCl~2~ solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in CaCl~2~ extract. For calculating CaCO~3~, a sub-sample was annealed at 550 °C and the measured C amount multiplied with 8.33. To calculate total N and the C/N ratio, a sub-sample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand.
 
 ```{r tab.id = "substrate", ft.align = "left", tab.cap = "Substrates"}
 read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
@@ -269,13 +271,13 @@ read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
 
 ## Figure 1 {.unnumbered}
 
-```{r fig.id = "map", fig.asp = 1.2854, fig.width = 5, fig.cap = "Map"}
+```{r fig.id = "map", fig.asp = 1.2854, fig.width = 5, fig.cap = ""}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_1_map.png")
   )
 ```
 
-The experiment was located on a dike at river Danube in SE Germany. The 288 plots were allocated in six blocks (white squares on upper photo) and on the north and south exposition (central photo) [both aerial photos: @bayerischevermessungsverwaltung2023]. Four treatments were conducted: sand admixture, substrate depth, seed density, and seed mixture types H and D. The western half of a block was with a shallow substrate depth and within this half the substrates had different sand admixtures. The photo on the bottom shows one block from the side after four years (Photo: Markus Bauer).
+Local setting and design of the multifactorial experiment on grassland sowing at dikes. The experiment was located on a dike at river Danube in SE Germany. The 288 plots were allocated in six blocks (white squares on upper photo) and on the north and south slope (central photo) [Both aerial photos: @bayerischevermessungsverwaltung2023]. Four treatments were conducted: sand admixture, substrate depth, seed density, and seed mixture types H and D. The western half of a block was with a shallow substrate depth and within this half the substrates had different sand admixtures. The photo on the bottom shows the northern slope of one block in 2021, four years after sowing (Photo: Markus Bauer).
 
 \clearpage
 
@@ -283,7 +285,7 @@ The experiment was located on a dike at river Danube in SE Germany. The 288 plot
 
 ## Figure 2
 
-```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The posterior density distributions (grey) of the treatments calculated over all four surveyed years. Furthermore, the median and the 66% and 95% credible intervals are shown: the persistence of sown species (A), the Favorable Conservation Status (FCS; B) and the successional distance to reference (recovery; C). The FCS is the ratio of target species and non-target species. Note that the zero lines indicate that both levels have equal values. This means for instance that hay meadows are closer to their reference than dry grasslands  (C)."}
+```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The posterior density distributions (grey) of the treatments calculated over all four surveyed years of sown grassland communities at a river dike. Furthermore, the median and the 66% and 95% credible intervals are shown: the persistence of sown species (A), the Favorable Conservation Status (FCS; B) and the successional distance to reference (recovery; C). The FCS is the ratio of target species and non-target species. Note that the zero lines indicate that both levels have equal values. This means for instance that hay meadows are closer to their reference than dry grasslands  (C)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff")
   )
@@ -295,7 +297,7 @@ knitr::include_graphics(
 
 ## Figure 3 {.unnumbered}
 
-```{r fig.id = "persistence", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "Persistence of sown species on the dike experiment. The plots had substrates with different sand admixtures and were sown with different seed mixture types. Per plot 20 species were sown. Shown are the medians and 95 % credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
+```{r fig.id = "persistence", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "Persistence of sown species of sown grassland communities at a river dike. The plots had substrates with different sand admixtures and were sown with different seed mixture types. Per plot 20 species were sown. Shown are the medians and 95% credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_3_persistence_epred_800dpi_16.5x8cm.tiff")
   )
@@ -307,7 +309,7 @@ knitr::include_graphics(
 
 ## Figure 4 {.unnumbered}
 
-```{r fig.id = "fcs", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The Favorable Conservation Status (FCS) of a dike experiment. The plots had substrates with different sand admixtures and were sown with different seed mixture types. The zero line indicate that target and non-target species are balanced. Positive values indicate that there are more target species. Shown are the medians and 95 % credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
+```{r fig.id = "fcs", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The Favorable Conservation Status (FCS) of sown grassland communities at a river dike. The plots had substrates with different sand admixtures and were sown with different seed mixtures. The zero line indicate that target and non-target species are balanced. Positive values indicate that there are more target species. Shown are the medians and 95% credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_4_fcs_epred_800dpi_16.5x8cm.tiff")
   )
@@ -319,7 +321,7 @@ knitr::include_graphics(
 
 ## Figure 5 {.unnumbered}
 
-```{r fig.id = "recovery", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The recovery or successional distance (*d~jt,0~*) of experimental plots to its respective reference sites (hay meadows or dry calcareous grasslands). The plots had substrates with different sand admixtures and were sown with different seed mixture types. The zero lines indicate the mean position of the reference sites for each habitat type on the NMDS axis 1 (Figure 7). The grey area marks the standard deviation of the position of the reference sites. Shown are the medians and 95 % credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
+```{r fig.id = "recovery", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The recovery or successional distance (*d~jt,0~*) of sown grassland communities at a river dike in comparison to the respective reference sites (hay meadows or dry calcareous grasslands). The plots had substrates with different sand admixtures and were sown with different seed mixtures. The zero lines indicate the mean position of the reference sites for each habitat type on the NMDS axis 1 (Figure 7). The grey area marks the standard deviation of the position of the reference sites. Shown are the medians and 95% credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x8cm.tiff")
   )
@@ -331,13 +333,13 @@ knitr::include_graphics(
 
 ## Figure 6 {.unnumbered}
 
-```{r fig.id = "nmds", fig.asp = 0.9696, fig.width = 6.49, fig.cap = "NMDS"}
+```{r fig.id = "nmds", fig.asp = 0.9696, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
   here::here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff")
   )
 ```
 
-NMDS ordination based on Sørensen dissimilarity of the species composition of 288 plots on dike grasslands over four years after sowing the seed mixtures (black squares).<!--# How many observed species --> In addition, 98 positive and negative reference plots were included (filled symbols) from older dike grasslands in the surroundings [@bauer2023] and six plots from sPlotOpen [@Sabatini.2021]. The circles show the standard error of the groups. 2D stress: 0.21.
+NMDS ordination based on Sørensen dissimilarity of the species composition of 288 plots on dike grasslands over four years after sowing the seed mixtures (black squares). In addition, 98 positive and negative reference plots were included (filled symbols) from older dike grasslands in the surroundings [@bauer2023] and six plots from sPlotOpen [@Sabatini.2021]. The circles show the standard error of the groups. 2D stress: 0.21.
 
 \clearpage
 
