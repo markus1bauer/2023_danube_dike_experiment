@@ -37,6 +37,7 @@ graph_a + theme(legend.position = "none") +
   theme(plot.tag = element_text(size = 10, face = "bold"))
 
 ### Save ###
+
 ggsave(
   here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff"),
   dpi = 800, width = 16.5, height = 5, units = "cm"

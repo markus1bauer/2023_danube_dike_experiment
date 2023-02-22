@@ -1,6 +1,6 @@
 # Dike grassland field experiment
 # Community-weighted means of seed mixtures ####
-# Show figure 2
+# Show Appendix A3
 
 # Markus Bauer
 # 2023-02-08
@@ -98,7 +98,8 @@ graph_a + theme(legend.position = "none") +
   theme(plot.tag = element_text(size = 10, face = "bold"))
 
 ### Save ###
+
 ggsave(
-  here("outputs", "figures", "figure_2_800dpi_16.5x5cm_traits.tiff"),
+  here("outputs", "figures", "figure_a3_800dpi_16.5x5cm_traits.tiff"),
   dpi = 800, width = 16.5, height = 5, units = "cm"
 )

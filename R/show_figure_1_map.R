@@ -40,7 +40,7 @@ blocks_table <- read_csv2(
 load("bg_google_satellite.rda")
 load("bg_stamen_terrain.rda")
 
-### Load functions ###
+### Functions ###
 theme_mb <- function(){
   theme(
     panel.background = element_rect(fill = NA),
