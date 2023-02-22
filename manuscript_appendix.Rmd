@@ -52,11 +52,9 @@ read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
 
 # Appendix A2
 
-All sown seed mixtures can be found on GitHub in the folder \`outputs/tables/table_a2_seed_mixtures.csv\`. There it is indicated which species are combined and the ratio in the specific seed mixture.
+All sown seed mixtures can be found on GitHub in the folder \`outputs/tables/ table_a2_seed_mixtures.csv\`. There it is indicated which species are combined and the ratio in the specific seed mixture.
 
 # Appendix A3
-
-The community-weighted means (CWM) of the seed mixtures used for the field experiment: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target types hay meadows and dry calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2%, 98.8%, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
 
 ```{r fig.id = "traits", fig.asp = 0.3030, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
@@ -64,13 +62,11 @@ knitr::include_graphics(
   )
 ```
 
-### Acknowledgment
+The community-weighted means (CWM) of the seed mixtures used for the dike experiment: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target habitat types hay meadows and calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2%, 98.8%, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
 
-This figure has been supported by the TRY initiative on plant traits (<http://www.try-db.org>). The TRY initiative and database is hosted, developed and maintained by J. Kattge and G. Boenisch (Max Planck Institute for Biogeochemistry, Jena, Germany). TRY is currently supported by Future Earth/bioDISCOVERY and the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig.
+#### Acknowledgment
 
-\clearpage
-
-\newpage
+This figure was supported by the TRY initiative on plant traits (<http://www.try-db.org>). The TRY initiative and database is hosted, developed and maintained by J. Kattge and G. Boenisch (Max Planck Institute for Biogeochemistry, Jena, Germany). TRY is currently supported by Future Earth/bioDISCOVERY and the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig. \clearpage \newpage
 
 # Appendix A4
 
@@ -119,18 +115,23 @@ All species which occurred 2018--2021 and the amount of plots in which they appe
 
 ```{r tab.id = "specieslist", tab.cap = ""}
 read_csv(
-  here("outputs", "tables", "table_a4_specieslist.csv"),
+  here("outputs", "tables", "table_a5_specieslist.csv"),
   col_names = TRUE,
   na = c("na", "NA"),
   col_types = cols(.default = "?", name = "f")
   ) %>%
   mutate(name = str_replace_all(name, "_", " ")) %>%
-  rename(Name = name, "Presence [# plots]" = sum) %>%
+  rename(
+    Name = name,
+    Seeded = seeded,
+    "Target species" = target,
+    "Presence [# plots]" = sum
+    ) %>%
   flextable() %>%
   align(part = "all", align = "center", j = -1) %>%
   bold(part = "header") %>%
   style(j = 1, pr_t = fp_text_default(italic = TRUE)) %>%
-  bg(j = 2, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 931))) %>%
+  bg(j = 4, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 931))) %>%
   autofit()
 ```
 
