@@ -77,7 +77,7 @@ theme_mb <- function() {
     filter(type == "cwm_abu_seedmass") %>%
     ggplot(aes(x = target_type, y = value, color = target_type)) +
     geom_boxplot() +
-    labs(x = "", y = expression("Seedmass [mg]")) +
+    labs(x = "", y = expression("Seed mass [mg]")) +
     scale_color_manual(breaks = c("Hay\nmeadow", "Dry\ngrassland"),
                        values = c("#00BFC4", "#F8766D")) +
     theme_mb())
