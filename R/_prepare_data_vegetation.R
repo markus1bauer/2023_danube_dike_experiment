@@ -931,8 +931,14 @@ data_species <- data_species %>%
 
 ### * Model ####
 set.seed(12)
-(ordi <- metaMDS(data_species, binary = TRUE,
-                 try = 50, previous.best = TRUE, na.rm = TRUE))
+(ordi <- metaMDS(
+  data_species,
+  distance = "bray",
+  binary = TRUE,
+  na.rm = TRUE,
+  try = 50,
+  previous.best = TRUE
+  ))
 #save(ordi, file = here("outputs", "models", "model_nmds.Rdata"))
 base::load(here("outputs", "models", "model_nmds.Rdata"))
 ordi
