@@ -20,9 +20,7 @@ knitr::opts_chunk$set(
   )
 ```
 
-<br/>
-<br/>
-<b>Markus Bauer</b>
+<br/> <br/> <b>Markus Bauer</b>
 
 Technichal University of Munich, TUM School of Life Sciences, Chair of
 Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
@@ -30,10 +28,9 @@ Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
 [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de)
 
 ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
-<br>
-[Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
-<br>
-GitHub: [markus1bauer](https://github.com/markus1bauer)
+<br> [Google
+Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
+<br> GitHub: [markus1bauer](https://github.com/markus1bauer)
 
 To compare different models, you only have to change the models in
 section `Load models`
@@ -43,18 +40,18 @@ section `Load models`
 Favourable Conservation Status (FCS) sensu Helm et al. (2015) Divers
 Distrib [DOI: 10.1111/ddi.12285](https://doi.org/10.1111/ddi.12285)
 
-Bayesian analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
+Bayesian analysis motivated by Applestein et al. (2021) Restor Ecol
+[DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
 
-Analysis guided by
-<br>
-<b>BARG</b> (Bayesian Analysis Reporting
-Guidelines): Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
-<br>
-Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378)
-<br>
-Priors: Lemoine (2019) Oikos [DOI: 10.1111/oik.05985](https://doi.org/10.1111/oik.05985)
-<br>
-Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](https://doi.org/10.1037/met0000065)
+Analysis guided by <br> <b>BARG</b> (Bayesian Analysis Reporting
+Guidelines): Kruschke (2021) Nat Hum Behav [DOI:
+10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
+<br> Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI:
+10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378) <br> Priors:
+Lemoine (2019) Oikos [DOI:
+10.1111/oik.05985](https://doi.org/10.1111/oik.05985) <br> Model check:
+Deapoli & Schoot (2017) Psychol Methods [DOI:
+10.1037/met0000065](https://doi.org/10.1037/met0000065)
 
 #### Packages (BARG 2.A)
 
@@ -339,31 +336,23 @@ ggplot(data, aes(x = x)) +
 brms::prior_summary(m_1, all = FALSE)
 ```
 
-#### Prior predictive check (BARG 1.E)
+#### Prior predictive check - Kernel density (BARG 1.E)
 
 ```{r prior-predictive-check}
-bayesplot::ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
+bayesplot::ppc_dens_overlay(yrep_prior[1:500, ])
+ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$site) +
   coord_cartesian(xlim = c(-2, 2))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$site,
-                 binwidth = 0.2) +
+ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$exposition) +
   coord_cartesian(xlim = c(-2, 2))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$exposition,
-                 binwidth = 0.2) +
+ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$survey_year_fct) +
   coord_cartesian(xlim = c(-2, 2))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$survey_year_fct,
-                 binwidth = 0.2) +
+ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$target_type) +
   coord_cartesian(xlim = c(-2, 2))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$target_type,
-                 binwidth = 0.2) +
+ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$seed_density) +
   coord_cartesian(xlim = c(-2, 2))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$seed_density,
-                 binwidth = 0.1) +
+ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$sand_ratio) +
   coord_cartesian(xlim = c(-2, 2))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$sand_ratio,
-                 binwidth = 0.2) +
-  coord_cartesian(xlim = c(-2, 2))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$substrate_depth,
-                 binwidth = 0.2) +
+ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$substrate_depth) +
   coord_cartesian(xlim = c(-2, 2))
 ```
 
