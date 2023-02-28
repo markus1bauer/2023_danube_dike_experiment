@@ -55,8 +55,6 @@ data <- species %>%
     gt(
       groupname_col = "plot"
     ) %>%
-    
-    
     opt_table_lines("none") %>% ### Set general options ###
     tab_options(
       table.font.style = "Arial",
@@ -79,7 +77,7 @@ data <- species %>%
       locations = cells_column_labels(),
       style = cell_borders(
         sides = "top", color = "black", style = "solid", weight = px(1)
-        ) 
+        )
     ) %>%
     tab_style(
       locations = cells_column_labels(),
@@ -93,8 +91,6 @@ data <- species %>%
       locations = cells_body(columns = "name"),
       style = cell_text(align = "left", style = "italic")
     ) %>%
-    
-    
     cols_label( ### Rename column names ###
       name = md("Species name"),
       seeded = md("Seed ratio of seed mixture [wt%]")
