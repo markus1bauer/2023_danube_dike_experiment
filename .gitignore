@@ -44,3 +44,8 @@ data/raw/vegetweb/projectHeader.csv
 data/raw/vegetweb/PRESENTS.csv
 data/raw/vegetweb/plotHeader.csv
 data/raw/vegetweb/COVERAGE_MEAN.csv
+data/raw/database_splotopen/sPlotOpen_DT.txt
+data/raw/database_splotopen/sPlotOpen_header.txt
+data/raw/database_vegetweb/COVERAGE_MEAN.csv
+data/raw/database_vegetweb/plotHeader.csv
+data/raw/database_vegetweb/PRESENTS.csv
