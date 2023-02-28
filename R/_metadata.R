@@ -70,7 +70,7 @@ address <- list(
 
 creator <- eml$creator(
   individualName = eml$individualName(
-    givenName = "Markus", 
+    givenName = "Markus",
     surName = "Bauer"
   ),
   positionName = "PhD student",
@@ -84,7 +84,7 @@ creator <- eml$creator(
 associatedParty <- list(
   eml$associatedParty(
     individualName = eml$individualName(
-      givenName = "Jakob", 
+      givenName = "Jakob",
       surName = "Huber"
     ),
     role = "Researcher",
@@ -93,7 +93,7 @@ associatedParty <- list(
   ),
   eml$associatedParty(
     individualName = eml$individualName(
-      givenName = "Johannes", 
+      givenName = "Johannes",
       surName = "Kollmann"
     ),
     role = "Professor",
@@ -105,14 +105,13 @@ associatedParty <- list(
   )
 )
 
-contact <- 
-  list(
-    individualName = creator$individualName,
-    electronicMailAddress = creator$electronicMailAddress,
-    address = address,
-    organizationName = "Technical University of Munich",
-    onlineUrl = "DOI address to the database"
-  )
+contact <- list(
+  individualName = creator$individualName,
+  electronicMailAddress = creator$electronicMailAddress,
+  address = address,
+  organizationName = "Technical University of Munich",
+  onlineUrl = "DOI address to the database"
+)
 
 
 
@@ -138,9 +137,9 @@ coverage <- set_coverage(
 ### 7 Description #############################################################
 
 
-pubDate = "2023"
+pubDate <- "2023"
 
-title = "Danube old dikes"
+title <- "Danube old dikes"
 
 abstract <- "Not written yet"
 
