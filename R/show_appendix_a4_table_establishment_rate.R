@@ -52,9 +52,7 @@ mean(data$rate_2021); sd(data$rate_2021)
 
 (table <- data %>%
     gt() %>%
-    
-    
-    opt_table_lines("none") %>% ### Set general options ###
+    opt_table_lines("none") %>% ### Set general style options ###
     tab_options(
       table.font.style = "Arial",
       table.font.size = px(11),
@@ -74,8 +72,9 @@ mean(data$rate_2021); sd(data$rate_2021)
     ) %>%
     tab_style(
       locations = cells_column_labels(),
-      style = cell_borders(sides = "top", color = "black",
-                           style = "solid", weight = px(1)) 
+      style = cell_borders(
+        sides = "top", color = "black", style = "solid", weight = px(1)
+        )
     ) %>%
     tab_style(
       locations = cells_column_labels(),
@@ -89,14 +88,10 @@ mean(data$rate_2021); sd(data$rate_2021)
       locations = cells_body(columns = "name"),
       style = cell_text(align = "left", style = "italic")
     ) %>%
-    
-    
     tab_spanner( ### Create spanner column ###
       label = "Establishment rate [%]",
       columns = starts_with("rate_")
     ) %>%
-    
-    
     cols_label( ### Rename column names ###
       name = md("Species name"),
       family = md("Family"),
@@ -106,8 +101,6 @@ mean(data$rate_2021); sd(data$rate_2021)
       rate_2020 = md("2020"),
       rate_2021 = md("2021")
     ) %>%
-    
-    
     tab_style( ### Highlight columns ###
       locations = cells_body(
         columns = rate_2018,
