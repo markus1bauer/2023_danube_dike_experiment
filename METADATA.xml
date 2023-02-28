@@ -1,16 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="972a234e-68a3-478c-bd5a-5569da0c48d4" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="92e3aca6-96a0-4280-a4e0-50e2308b82b7" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
   <dataset>
-    <title>Danube dike experiment</title>
-    <creator>
+    <title>Danube old dikes</title>
+    <creator id="https://orcid.org/0000-0001-5372-4174">
       <individualName>
         <givenName>Markus</givenName>
         <surName>Bauer</surName>
       </individualName>
+      <organizationName>Technical University of Munich</organizationName>
+      <positionName>PhD student</positionName>
+      <address>
+        <deliveryPoint>Emil-Ramann-Strasse 6</deliveryPoint>
+        <city>Freising</city>
+        <administrativeArea>Bayern</administrativeArea>
+        <postalCode>85354</postalCode>
+        <country>Germany</country>
+      </address>
+      <phone>0049-152-56391781</phone>
       <electronicMailAddress>markusbauer@mailbox.org</electronicMailAddress>
     </creator>
-    <pubDate>2022</pubDate>
-    <language>English</language>
+    <associatedParty>
+      <individualName>
+        <givenName>Jakob</givenName>
+        <surName>Huber</surName>
+      </individualName>
+      <organizationName>Technical University of Munich</organizationName>
+      <electronicMailAddress>jakob.huber@posteo.de</electronicMailAddress>
+      <role>Researcher</role>
+    </associatedParty>
+    <associatedParty id="https://orcid.org/0000-0002-4990-3636">
+      <individualName>
+        <givenName>Johannes</givenName>
+        <surName>Kollmann</surName>
+      </individualName>
+      <organizationName>Technical University of Munich</organizationName>
+      <address>
+        <deliveryPoint>Emil-Ramann-Strasse 6</deliveryPoint>
+        <city>Freising</city>
+        <administrativeArea>Bayern</administrativeArea>
+        <postalCode>85354</postalCode>
+        <country>Germany</country>
+      </address>
+      <phone>0049-8161-714144</phone>
+      <electronicMailAddress>johannes.kollmann@.tum.de</electronicMailAddress>
+      <role>Professor</role>
+    </associatedParty>
+    <pubDate>2023</pubDate>
     <abstract>Not written yet</abstract>
     <keywordSet>
       <keyword>rivers</keyword>
@@ -18,17 +53,23 @@
       <keyword>restoration</keyword>
       <keywordThesaurus>LTER controlled vocabulary</keywordThesaurus>
     </keywordSet>
-    <intellectualRights>CC BY 4.0</intellectualRights>
+    <keywordSet>
+      <keyword>beta diversity</keyword>
+      <keyword>temperate grassland</keyword>
+      <keyword>dike</keyword>
+      <keywordThesaurus>own vocabulary</keywordThesaurus>
+    </keywordSet>
+    <intellectualRights>CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/deed.en</intellectualRights>
     <coverage>
       <geographicCoverage>
-        <geographicDescription>Danube dikes near Deggendorf</geographicDescription>
+        <geographicDescription>Danube dike near Deggendorf</geographicDescription>
         <boundingCoordinates>
-          <westBoundingCoordinate>12.59</westBoundingCoordinate>
-          <eastBoundingCoordinate>13.1162</eastBoundingCoordinate>
-          <northBoundingCoordinate>48.9039</northBoundingCoordinate>
-          <southBoundingCoordinate>48.675</southBoundingCoordinate>
+          <westBoundingCoordinate>12.877</westBoundingCoordinate>
+          <eastBoundingCoordinate>12.8925</eastBoundingCoordinate>
+          <northBoundingCoordinate>48.8405</northBoundingCoordinate>
+          <southBoundingCoordinate>48.8384</southBoundingCoordinate>
           <boundingAltitudes>
-            <altitudeMinimum>309</altitudeMinimum>
+            <altitudeMinimum>313</altitudeMinimum>
             <altitudeMaximum>315</altitudeMaximum>
             <altitudeUnits>meter</altitudeUnits>
           </boundingAltitudes>
@@ -46,16 +87,8 @@
       </temporalCoverage>
       <taxonomicCoverage>
         <taxonomicClassification>
-          <taxonRankName>Kingdom</taxonRankName>
-          <taxonRankValue>Plantae</taxonRankValue>
-          <taxonomicClassification>
-            <taxonRankName>Division</taxonRankName>
-            <taxonRankValue>Tracheophyta</taxonRankValue>
-            <taxonomicClassification>
-              <taxonRankName>Subdivision</taxonRankName>
-              <taxonRankValue>Spermatophytina</taxonRankValue>
-            </taxonomicClassification>
-          </taxonomicClassification>
+          <taxonRankName>Subdivision</taxonRankName>
+          <taxonRankValue>Spermatophytina</taxonRankValue>
         </taxonomicClassification>
       </taxonomicCoverage>
     </coverage>
@@ -72,8 +105,29 @@
         <postalCode>85354</postalCode>
         <country>Germany</country>
       </address>
-      <phone>0049-152-56391781</phone>
       <electronicMailAddress>markusbauer@mailbox.org</electronicMailAddress>
+      <onlineUrl>DOI address to the database</onlineUrl>
     </contact>
+    <methods>
+      <methodStep>
+        <description>
+          <section>
+            <title>Methods for vegetation surveys</title>
+            <para>
+    </para>
+            <para>
+      Plots were distributed pairwise on each side of the dike
+      (water/land). Size of plots 25 m². Vegetation surveys with
+      Braun-Blanquet method and Pfadenhauer scale. Vegetation cover and
+      moss cover were estimated, and vegetation height measured (10cm
+      steps).
+    </para>
+            <para>
+      WEITER BEARBEITEN
+    </para>
+          </section>
+        </description>
+      </methodStep>
+    </methods>
   </dataset>
 </eml:eml>
