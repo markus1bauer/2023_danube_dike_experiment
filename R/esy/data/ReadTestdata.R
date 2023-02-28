@@ -8,7 +8,7 @@
 library(vegdata)
 library(data.table)
 ###################################################### #
-## Load infos from EUNIS classification 
+## Load infos from EUNIS classification
 # EUNIS classification expects several header data, e.g. Coast_EEA, Ecoreg, Dunes_Bohn
 # if not present they have to be added
 # # "For JUICE output the releve number starts with country code, which is in your case 32.
@@ -173,5 +173,3 @@ DB <- '100716 Hoppe (2005)'
 write.csv(obs, file = file.path('data', 'obs_100716Hoppe2005.csv'), row.names = FALSE)
 write.csv(header, file = file.path('data', 'header_100716Hoppe2005.csv'), row.names = FALSE)
 # save(obs, header, file = file.path('data', paste("data", word(DB, sep='/', start=length(strsplit(DB, '/')[[1]])), "RData", sep='.')))
-
-
