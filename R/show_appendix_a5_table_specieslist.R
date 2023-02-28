@@ -45,7 +45,7 @@ traits <- read_csv(
 
 
 data <- species %>%
-  mutate(across(where(is.numeric), ~1 * (. != 0))) %>% 
+  mutate(across(where(is.numeric), ~1 * (. != 0))) %>%
   mutate(sum = rowSums(across(where(is.numeric)), na.rm = TRUE),
          .keep = "unused") %>%
   group_by(name) %>%
@@ -61,12 +61,9 @@ data <- species %>%
       "Target species" = target,
       "Presence [# plots]" = sum
     ) %>%
-    
     gt() %>%
-    
-    sub_missing(columns = 2:3, missing_text = "") %>%
-    
-    opt_table_lines("none") %>% ### Set general options ###
+    sub_missing(columns = 2:3, missing_text = "") %>% # replace NA
+    opt_table_lines("none") %>% ### Set general style options ###
     tab_options(
       table.font.style = "Arial",
       table.font.size = px(11),
@@ -88,7 +85,7 @@ data <- species %>%
       locations = cells_column_labels(),
       style = cell_borders(
         sides = "top", color = "black", style = "solid", weight = px(1)
-      ) 
+      )
     ) %>%
     tab_style(
       locations = cells_column_labels(),
@@ -102,8 +99,7 @@ data <- species %>%
       locations = cells_body(columns = "Name"),
       style = cell_text(align = "left", style = "italic")
     ) %>%
-    
-    tab_source_note(source_note = md(
+    tab_source_note(source_note = md( ### Footnote ###
       "In total 274 species occured 2018–2021"
     )))
 
