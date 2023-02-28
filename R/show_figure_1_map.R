@@ -27,7 +27,7 @@ library(grid)
 
 ### Start ###
 rm(list = ls())
-setwd(here("data","processed", "spatial"))
+setwd(here("data", "processed", "spatial"))
 
 ### Load data ###
 germany <- st_read("germany.shp")
@@ -42,14 +42,14 @@ blocks_table <- read_csv(
 load("bg_stamen_terrain.rda")
 
 ### Functions ###
-theme_mb <- function(){
+theme_mb <- function() {
   theme(
     panel.background = element_rect(fill = NA),
     panel.grid = element_line(colour = NA),
     text  = element_text(size = 10, color = "black"),
     axis.title = element_blank(),
     axis.text = element_blank(),
-    axis.ticks = element_blank(), 
+    axis.ticks = element_blank(),
     axis.line.x = element_blank(),
     axis.line.y = element_blank(),
     legend.position = "none",
@@ -70,36 +70,36 @@ theme_mb <- function(){
 
 ### a Map of project site -----------------------------------------------------
 
-(sites_graph <- ggmap(bg_stamen_terrain) + 
+(sites_graph <- ggmap(bg_stamen_terrain) +
    geom_point(
      aes(x = x, y = y), data = blocks_table, size = 2, color = "black"
      ) +
    geom_text_repel(
      aes(label = block, x = x, y = y),
-     data = blocks_table, 
-     min.segment.length = 1, 
-     color = "black", 
-     direction = "y", 
+     data = blocks_table,
+     min.segment.length = 1,
+     color = "black",
+     direction = "y",
      nudge_y = .001
    ) +
    coord_sf(crs = st_crs(4326)) +
    ggspatial::annotation_scale(
-     location = "br", 
-     pad_y = unit(0.6, "cm"), 
+     location = "br",
+     pad_y = unit(0.6, "cm"),
      pad_x = unit(0.7, "cm"),
-     width_hint = 0.4, 
+     width_hint = 0.4,
      height = unit(0.15, "cm"),
      text_col = "black"
    ) +
    ggspatial::annotation_north_arrow(
-     location = "br", 
-     pad_y = unit(1.1, "cm"), 
-     pad_x = unit(0.6, "cm"), 
-     which_north = "true", 
+     location = "br",
+     pad_y = unit(1.1, "cm"),
+     pad_x = unit(0.6, "cm"),
+     which_north = "true",
      style = ggspatial::north_arrow_fancy_orienteering(
        text_col = "black"
-     ), 
-     height = unit(.8, "cm"), 
+     ),
+     height = unit(.8, "cm"),
      width = unit(.8, "cm")
    ) +
    theme_mb())
@@ -119,11 +119,11 @@ germany_graph <- ggplot() +
 ### c Inset --------------------------------------------------------------------
 
 sites_graph + inset_element(
-  germany_graph, 
-  left = .01, 
-  bottom = .1, 
-  right = .3, 
-  top = .4, 
+  germany_graph,
+  left = .01,
+  bottom = .1,
+  right = .3,
+  top = .4,
   on_top = TRUE
 )
 
