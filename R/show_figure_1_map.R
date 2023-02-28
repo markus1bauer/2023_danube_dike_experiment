@@ -6,9 +6,11 @@
 # 2023-02-09
 
 
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # A Preparation ###############################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 
 ### Packages ###
@@ -32,12 +34,11 @@ germany <- st_read("germany.shp")
 danube <- st_read("danube.shp")
 dikes <- st_read("dikes.shp")
 blocks <- st_read("blocks.shp")
-blocks_table <- read_csv2(
+blocks_table <- read_csv(
   "blocks_table.csv",
   col_names = TRUE,
   col_types = cols(block = col_factor())
 )
-load("bg_google_satellite.rda")
 load("bg_stamen_terrain.rda")
 
 ### Functions ###
@@ -69,12 +70,15 @@ theme_mb <- function(){
 
 ### a Map of project site -----------------------------------------------------
 
-(sitesGraph <- ggmap(bg_google_satellite) + 
-   geom_point(data = blocks_table, aes(x = x, y = y), size = 2, color = "white") +
+(sites_graph <- ggmap(bg_stamen_terrain) + 
+   geom_point(
+     aes(x = x, y = y), data = blocks_table, size = 2, color = "black"
+     ) +
    geom_text_repel(
-     data = blocks_table, aes(label = block, x = x, y = y),
+     aes(label = block, x = x, y = y),
+     data = blocks_table, 
      min.segment.length = 1, 
-     color = "white", 
+     color = "black", 
      direction = "y", 
      nudge_y = .001
    ) +
@@ -85,7 +89,7 @@ theme_mb <- function(){
      pad_x = unit(0.7, "cm"),
      width_hint = 0.4, 
      height = unit(0.15, "cm"),
-     text_col = "white"
+     text_col = "black"
    ) +
    ggspatial::annotation_north_arrow(
      location = "br", 
@@ -93,7 +97,7 @@ theme_mb <- function(){
      pad_x = unit(0.6, "cm"), 
      which_north = "true", 
      style = ggspatial::north_arrow_fancy_orienteering(
-       text_col = "white"
+       text_col = "black"
      ), 
      height = unit(.8, "cm"), 
      width = unit(.8, "cm")
@@ -103,9 +107,9 @@ theme_mb <- function(){
 
 ### b Germany -----------------------------------------------------------------
 
-gerGraph <- ggplot() +
-  geom_sf(data = germany, fill = "transparent", colour = "white") +
-  geom_point(aes(x = 12.886, y = 48.839), size = 1, colour = "white") +
+germany_graph <- ggplot() +
+  geom_sf(data = germany, fill = "transparent", colour = "black") +
+  geom_point(aes(x = 12.886, y = 48.839), size = 1, colour = "black") +
   theme_mb() +
   theme(
     plot.background = element_blank()
@@ -114,22 +118,13 @@ gerGraph <- ggplot() +
 
 ### c Inset --------------------------------------------------------------------
 
-sitesGraph + inset_element(
-  gerGraph, 
+sites_graph + inset_element(
+  germany_graph, 
   left = .01, 
   bottom = .1, 
   right = .3, 
   top = .4, 
   on_top = TRUE
-)
-
-
-### d Save ---------------------------------------------------------------------
-
-ggsave(
-  "figure_1_map_300dpi_8x11cm.tiff",
-  dpi = 300, width = 8, height = 11, units = "cm",
-  path = here("outputs", "figures")
 )
 
 
@@ -152,14 +147,16 @@ bbox <- st_bbox(c(ymin = 48.835, ymax = 48.845, xmin = 12.87, xmax = 12.895))
     tm_fill("red", ) +
     tm_text("block", size = 1, col = "black", ymod = 0.7) +
     tm_compass(position = c("right", "bottom"), size = 2) +
-    tm_scale_bar(position = c("right", "bottom", with = 0.4), breaks = c(.25, .5)) +
+    tm_scale_bar(
+      position = c("right", "bottom", with = 0.4), breaks = c(.25, .5)
+      ) +
     tm_layout(frame = FALSE))
-(tmap_ger <- tm_shape(germany) +
+(tmap_germany <- tm_shape(germany) +
     tm_borders(col = "black") +
     tm_shape(location_experiment) +
     tm_dots(size = .075) +
     tm_layout(frame = FALSE, bg.color = "transparent"))
-(tmap_ger_white <- tm_shape(germany) +
+(tmap_germany_white <- tm_shape(germany) +
     tm_borders(col = "white") +
     tm_shape(location_experiment) +
     tm_dots(size = .075, col = "white") +
@@ -170,7 +167,7 @@ bbox <- st_bbox(c(ymin = 48.835, ymax = 48.845, xmin = 12.87, xmax = 12.895))
 
 tmap_save(
   tmap,
-  insets_tm = tmap_ger,
+  insets_tm = tmap_germany,
   insets_vp = viewport(
     x = unit(1.1, "cm"), y = unit(1.1, "cm"),
     width = unit(1, "cm"), height = unit(1.5, "cm")
@@ -182,9 +179,10 @@ tmap_save(
 )
 
 tmap_save(
-  tmap_ger_white,
+  tmap_germany_white,
   dpi = 300, width = 2, height = 3.5, units = "cm", bg = "transparent",
-  device = tiff, type = "cairo",
+  device = tiff,
+  type = "cairo",
   filename = paste0(
     here("outputs", "figures"), "/", "figure_1_germany_300dpi_2x3.5cm.tiff"
   )
