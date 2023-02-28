@@ -43,8 +43,8 @@ theme_mb <- function() {
 
 vegan_cov_ellipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
   theta <- (0:npoints) * 2 * pi / npoints
-  Circle <- cbind(cos(theta), sin(theta))
-  t(center + scale * t(Circle %*% chol(cov)))
+  circle <- cbind(cos(theta), sin(theta))
+  t(center + scale * t(circle %*% chol(cov)))
 }
 
 #### Load sites data and model ###
@@ -102,7 +102,9 @@ sites_nmds <- sites_nmds %>%
 
 sites_nmds <- sites_nmds %>%
   ### Select variables to plot ###
-  select(id, NMDS1, NMDS2, reference, exposition, target_type) %>% # modify group
+  select(
+    id, NMDS1, NMDS2, reference, exposition, target_type # modify group
+    ) %>%
   mutate(
     reference = if_else(
       reference == "positive_reference", "+Reference", if_else(
@@ -133,9 +135,8 @@ for (group in levels(sites_nmds$group_type)) {
       )
     )
   
-  ellipses <-
-    vegan_cov_ellipse(
-      cov = ellipses_calc$cov, center = ellipses_calc$center
+  ellipses <- vegan_cov_ellipse(
+    cov = ellipses_calc$cov, center = ellipses_calc$center
     ) %>%
     as_tibble() %>%
     bind_cols(group_type = group) %>%
@@ -147,7 +148,6 @@ for (group in levels(sites_nmds$group_type)) {
       sep = "\\.",
       c("reference", "exposition", "target_type")
     )
-  
 }
 
 
