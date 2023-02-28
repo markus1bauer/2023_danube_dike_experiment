@@ -36,15 +36,15 @@ rm(list = ls())
 
 
 germany <- raster::getData(
-  'GADM', country = 'DEU', level = 0, download =  TRUE
-) %>% 
+  'GADM', country = "DEU", level = 0, download =  TRUE
+) %>%
   st_as_sf() %>%
   st_set_crs(4326)
 
 bg_stamen_terrain <- get_map(
   source = "stamen",
   maptype = "terrain",
-  location= c(left = 12.87, bottom = 48.835, right = 12.895, top = 48.845),
+  location = c(left = 12.87, bottom = 48.835, right = 12.895, top = 48.845),
   zoom = 14,
   scale = 1
 )
@@ -92,7 +92,7 @@ blocks_table <- bind_cols(
 #plot(st_geometry(danube))
 
 
-  
+
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # C Save ######################################################################
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
