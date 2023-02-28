@@ -44,7 +44,12 @@ Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred 
 read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
   flextable() %>%
   bold(part = "header") %>%
-  compose(part = "body", i = ~ Unit == "m3 s−1", j = "Unit", value = as_paragraph("m", as_sup("3"), " s", as_sup("−1"))) %>%
+  compose(
+    part = "body",
+    i = ~ Unit == "m3 s−1",
+    j = "Unit",
+    value = as_paragraph("m", as_sup("3"), " s", as_sup("−1"))
+    ) %>%
   autofit()
 ```
 
@@ -97,11 +102,17 @@ read_csv(
   flextable() %>%
   align(part = "all", align = "center", j = -1) %>%
   merge_at(part = "header", j = 4:7) %>%
-  add_header_row(top = FALSE, values = c("", "", "", "2018", "2019", "2020", "2021")) %>%
+  add_header_row(
+    top = FALSE,
+    values = c("", "", "", "2018", "2019", "2020", "2021")
+    ) %>%
   border_inner_h(part = "header", border = fp_border(width = 1)) %>%
   bold(part = "header") %>%
   style(j = 1, pr_t = fp_text_default(italic = TRUE)) %>%
-  bg(j = 4:7, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 100))) %>%
+  bg(
+    j = 4:7,
+    bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 100))
+    ) %>%
   autofit()
 ```
 
@@ -131,7 +142,10 @@ read_csv(
   align(part = "all", align = "center", j = -1) %>%
   bold(part = "header") %>%
   style(j = 1, pr_t = fp_text_default(italic = TRUE)) %>%
-  bg(j = 4, bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 931))) %>%
+  bg(
+    j = 4,
+    bg = scales::col_numeric(palette = c("white", "grey60"), domain = c(0, 931))
+    ) %>%
   autofit()
 ```
 
