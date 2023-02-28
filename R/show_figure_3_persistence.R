@@ -133,7 +133,7 @@ theme_mb <- function() {
                      values = c("#00BFC4", "#F8766D")) +
    labs(
      x = "Sand ratio [%]", fill = "", color = "",
-     y = expression("Persistence [# / 20]")
+     y = expression(Persistence ~ "[" * 1 - italic("B")[sor] * "]")
    ) +
    theme_mb())
 
