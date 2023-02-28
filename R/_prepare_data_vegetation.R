@@ -27,21 +27,7 @@
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-#remove.packages("rlang")
-#remove.packages("tidyselect")
-#remove.packages("tidyverse")
-#remove.packages("Brobdingnag")
-#remove.packages("dbplyr")
-#remove.packages("Matrix")
 
-#devtools::install_github("RobinHankin/Brobdingnag") 
-#install.packages("Matrix", dependencies = TRUE)
-#install.packages("rlang", dependencies = TRUE)
-#install.packages("Brobdingnag", dependencies = TRUE)
-#install.packages("tidyselect", dependencies = TRUE)
-#install.packages("dbplyr", dependencies = TRUE)
-#install.packages("tidyverse", dependencies = TRUE)
-#library(tidyverse)
 
 ### Packages ###
 library(here)
@@ -52,13 +38,12 @@ library(vegan)
 suppressPackageStartupMessages(library(adespatial))
 suppressPackageStartupMessages(library(FD))
 #remotes::install_github(file.path("inbo", "checklist"))
+#checklist::setup_project(path = here())
 
 ### Start ###
 rm(list = ls())
 #installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE, start_new_R = TRUE, quit_R = TRUE, print_R_versions = TRUE, GUI = FALSE)
-remotes::install_github("inbo/checklist")
-checklist::setup_source()
-#checklist::check_source()
+checklist::check_source()
 #renv::status()
 
 
@@ -104,7 +89,7 @@ sites_experiment <- read_csv(
     names_to = c("x", "survey_year"),
     names_sep = "\\.",
     values_to = "n",
-    values_transform = list (n = as.character)
+    values_transform = list(n = as.character)
   ) %>%
   pivot_wider(names_from = "x", values_from = "n") %>%
   mutate(
@@ -337,7 +322,7 @@ rm(list = setdiff(ls(), c(
 traits <- traits %>%
   mutate(
     target = if_else(
-      ffh6510 == "1" | ffh6210 == "1" | biotope_target == "1" | 
+      ffh6510 == "1" | ffh6210 == "1" | biotope_target == "1" |
         table_31 == "1" | table_34 == "1" | table_35 == "1" | table_36 == "1" |
         mapped_2011 == "1" | special_target == "1",
     "1", "0"
@@ -364,7 +349,7 @@ data <- species_experiment %>%
   mutate(n = if_else(n > 0 & survey_year == "seeded", 1, n)) %>%
   select(plot, name, survey_year, n) %>%
   pivot_wider(names_from = "survey_year", values_from = "n") %>%
-  pivot_longer(-c(plot, name, seeded), 
+  pivot_longer(-c(plot, name, seeded),
                names_to = "survey_year", values_to = "n") %>%
   mutate(n = if_else(seeded == 1 & n > 0, 1, 0)) %>%
   group_by(name, survey_year) %>%
@@ -400,7 +385,7 @@ cover <- species_experiment %>%
   pivot_longer(
     names_to = "id",
     values_to = "n",
-    cols = starts_with("L") |starts_with("W") | starts_with("C")
+    cols = starts_with("L") | starts_with("W") | starts_with("C")
     ) %>%
   group_by(id)
 
@@ -573,13 +558,13 @@ sites_experiment <- sites_experiment %>%
       (target_richness + 1) / (species_richness - target_richness + 1)
       ),
     fcs_seeded = log(
-      (seeded_richness + 1 ) / (species_richness - seeded_richness + 1)
+      (seeded_richness + 1) / (species_richness - seeded_richness + 1)
       ),
     fcs_target = round(fcs_target, 3),
     fcs_seeded = round(fcs_seeded, 3)
     )
 
-### b Species evenness and shannon ----------------------------------------------
+### b Species evenness and shannon ---------------------------------------------
 
 data <- species_experiment  %>%
   pivot_longer(-name, names_to = "id", values_to = "value") %>%
@@ -1016,10 +1001,13 @@ data_species <- species_experiment %>%
 for (i in unique(data_species$year)) {
   nam <- paste("species", i, sep = "_")
   
-  assign(nam, data_species %>%
-           filter(year == i) %>%
-           select(-year) %>%
-           column_to_rownames(var = "plot"))
+  assign(
+    nam,
+    data_species %>%
+      filter(year == i) %>%
+      select(-year) %>%
+      column_to_rownames(var = "plot")
+  )
 }
 
 ### a Calculate TBI Presence --------------------------------------------------
@@ -1293,7 +1281,7 @@ data <- data %>%
            Tripleurospermum_maritimum = "Matricaria_maritima",
            Vicia_sativa_ssp_nigra = "Vicia_sativa_s._nigra"
            )
-         ) %>% 
+         ) %>%
   group_by(name) %>%
   summarise(across(where(is.double), ~median(.x, na.rm = TRUE)))
 
@@ -1454,7 +1442,7 @@ data_lhs <- data %>%
   drop_na()
 data_sla <- data %>%
   select(name, sla) %>%
-  drop_na() 
+  drop_na()
 data_seedmass <- data %>%
   select(name, seedmass) %>%
   drop_na()
