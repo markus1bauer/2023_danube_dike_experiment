@@ -68,7 +68,7 @@ theme_mb <- function() {
     filter(type == "cwm_abu_sla") %>%
     ggplot(aes(x = target_type, y = value, color = target_type)) +
     geom_boxplot() +
-    labs(x = "", y = expression("SLA [mm² mg"^-1*"]")) +
+    labs(x = "", y = expression("SLA [mm² mg"^-1 * "]")) +
     scale_color_manual(breaks = c("Hay\nmeadow", "Dry\ngrassland"),
                        values = c("#00BFC4", "#F8766D")) +
     theme_mb())
