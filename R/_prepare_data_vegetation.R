@@ -37,14 +37,16 @@ library(naniar)
 library(vegan)
 suppressPackageStartupMessages(library(adespatial))
 suppressPackageStartupMessages(library(FD))
+library(installr)
 #remotes::install_github(file.path("inbo", "checklist"))
+library(checklist)
 #checklist::setup_project(path = here())
 
 ### Start ###
 rm(list = ls())
 #installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE, start_new_R = TRUE, quit_R = TRUE, print_R_versions = TRUE, GUI = FALSE)
 checklist::check_source()
-#renv::status()
+renv::status()
 
 
 
@@ -115,7 +117,7 @@ sites_experiment <- read_csv(
 ### Sabatini et al. (2021) Global Ecol Biogeogr:
 ### https://doi.org/10.1111/geb.13346
 sites_splot <- read_delim(
-  here("data", "raw", "sabatini_etal_2021", "sPlotOpen_header.txt"),
+  here("data", "raw", "database_splotopen", "sPlotOpen_header.txt"),
   col_names = TRUE, na = c("", "NA", "na"),
   col_types = cols(
     .default = "?",
@@ -171,7 +173,7 @@ species_experiment <- data.table::fread(
 ### Sabatini et al. (2021) Global Ecol Biogeogr:
 ### https://doi.org/10.1111/geb.13346
 species_splot <- read_delim(
-  here("data", "raw", "sabatini_etal_2021", "sPlotOpen_DT.txt"),
+  here("data", "raw", "database_splotopen", "sPlotOpen_DT.txt"),
   col_names = TRUE, na = c("", "NA", "na"), col_types =
     cols(
       .default = "?"
