@@ -153,19 +153,19 @@ plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
   theme(axis.text.x = element_text(angle = 90))
 (plot1 + plot2) / (plot3 + plot4)
 ggplot(data = sites,
-       aes(x = sand_ratio, y = n, color = target_type)) + 
+       aes(x = sand_ratio, y = n, color = target_type)) +
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
   geom_boxplot(fill = "transparent") +
   facet_grid(exposition ~ survey_year_fct) +
   labs(title = "Target type vs. sand ratio [vol%]")
 ggplot(data = sites,
-       aes(x = sand_ratio, y = n, color = substrate_depth)) + 
+       aes(x = sand_ratio, y = n, color = substrate_depth)) +
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
   geom_boxplot(fill = "transparent") +
   facet_grid(exposition ~ survey_year_fct) +
   labs(title = "Substrate depth [cm] vs. sand ratio [vol%]")
 ggplot(data = sites,
-       aes(x = seed_density, y = n, color = target_type)) + 
+       aes(x = seed_density, y = n, color = target_type)) +
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
   geom_boxplot(fill = "transparent") +
   facet_grid(exposition ~ survey_year_fct) +
@@ -309,7 +309,7 @@ draws2 <- m_2 %>%
 ```{r possible-priors}
 brms::get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
             seed_density + substrate_depth +
-            (1 | site/plot) + (1 | botanist_year),
+            (1 | site / plot) + (1 | botanist_year),
           data = sites)
 data <- data.frame(x = c(-5, 5))
 ggplot(data, aes(x = x)) +
@@ -327,7 +327,7 @@ ggplot(data, aes(x = x)) +
 ggplot(data, aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) +
-  ggtitle(expression(Student~italic(t)*"-distribution"))
+  ggtitle(expression(Student ~ italic(t) * "-distribution"))
 ```
 
 #### Prior summary (BARG 1.D)
@@ -363,8 +363,12 @@ ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$substrate_depth) 
 #### Trace plots
 
 ```{r mcmc-trace, fig.height = 14}
-bayesplot::mcmc_trace(posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2))
-bayesplot::mcmc_trace(posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2))
+bayesplot::mcmc_trace(
+  posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2)
+  )
+bayesplot::mcmc_trace(
+  posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2)
+  )
 ```
 
 #### Sampling efficency: Rhat (BARG 2.B)
@@ -501,9 +505,9 @@ DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 
 ```{r conditional-r2, collapse = TRUE}
 brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot)) 
+         re_formula =  ~ (1 | site / plot))
 brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site/plot))
+         re_formula =  ~ (1 | site / plot))
 ```
 
 ### Marginal <i>R</i><sup>2</sup> values
@@ -531,13 +535,21 @@ bayes_factor
 
 ```{r posteriors, fig.height = 7}
 combined_models <- bind_rows(
-  bayesplot::mcmc_intervals_data(posterior1, prob = 0.66, prob_outer = 0.95) %>%
+  bayesplot::mcmc_intervals_data(
+    posterior1, prob = 0.66, prob_outer = 0.95
+    ) %>%
     mutate(model = "m_1"),
-  bayesplot::mcmc_intervals_data(posterior2, prob = 0.66, prob_outer = 0.95) %>%
+  bayesplot::mcmc_intervals_data(
+    posterior2, prob = 0.66, prob_outer = 0.95
+    ) %>%
     mutate(model = "m_2"),
-  bayesplot::mcmc_intervals_data(posterior_flat, prob = 0.66, prob_outer = 0.95) %>%
+  bayesplot::mcmc_intervals_data(
+    posterior_flat, prob = 0.66, prob_outer = 0.95
+    ) %>%
     mutate(model = "m_flat"),
-  bayesplot::mcmc_intervals_data(posterior_prior, prob = 0.66, prob_outer = 0.95) %>%
+  bayesplot::mcmc_intervals_data(
+    posterior_prior, prob = 0.66, prob_outer = 0.95
+    ) %>%
     mutate(model = "m_prior")
   )
 
@@ -554,7 +566,7 @@ pos <- position_nudge(
 ggplot(
   data = combined_models,
   aes(x = m, y = forcats::fct_rev(factor(parameter)), color = model)
-  ) + 
+  ) +
   geom_vline(xintercept = 0, color = "grey") +
   geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
   geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
