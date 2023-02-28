@@ -1,5 +1,5 @@
 ---
-title: "Fit by design: Developing substrate-specific seed mixtures for functional dike restoration"
+title: "Fit by design: Developing substrate-specific seed mixtures for functional dike grasslands"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
   officedown::rdocx_document:
@@ -28,7 +28,7 @@ set_flextable_defaults(
   )
 ft <- officer::fp_text(shading.color = "yellow")
 
-word_spec <- function(x, prop = ft) ftext(text = toString(x) ,prop =  ft)
+word_spec <- function(x, prop = ft) ftext(text = toString(x), prop =  ft)
 ```
 
 Restoration Ecology, TUM School of Life Sciences, Technical University of Munich, Germany
@@ -216,7 +216,10 @@ read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
   flextable() %>%
   merge_at(part = "header", j = 2:3) %>%
   align(align = "center", part = "all", j = -1) %>%
-  add_header_row(top = FALSE, values = c("", "Hay meadow", "Dry grassland", "", "", "")) %>%
+  add_header_row(
+    top = FALSE,
+    values = c("", "Hay meadow", "Dry grassland", "", "", "")
+    ) %>%
   add_header_row(top = FALSE, values = c("", "#", "#", "#", "wt%", "wt%")) %>%
   bold(part = "header", i = 1) %>%
   border_inner_h(part = "header", border = fp_border(width = 1)) %>%
@@ -248,13 +251,34 @@ read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
     ) %>%
   border_inner_h(part = "header", border = fp_border(width = 1)) %>%
   align(align = "center", part = "all", j = -1) %>%
-  compose(i = 1, j = 10, part = "header", value = as_paragraph("P", as_sub("2"), "O", as_sub("5"))) %>%
-  compose(i = 1, j = 11, part = "header", value = as_paragraph("K", as_sub("2"), "O")) %>%
-  compose(i = 1, j = 12, part = "header", value = as_paragraph("Mg", as_sup("2+"))) %>%
-  compose(i = 1, j = 14, part = "header", value = as_paragraph("CaCO", as_sub("3"))) %>%
-  compose(i = 2, j = 10, part = "header", value = as_paragraph("mg 100 g", as_sup("−1"))) %>%
-  compose(i = 2, j = 11, part = "header", value = as_paragraph("mg 100 g", as_sup("−1"))) %>%
-  compose(i = 2, j = 12, part = "header", value = as_paragraph("mg 100 g", as_sup("−1"))) %>%
+  compose(
+    i = 1, j = 10, part = "header",
+    value = as_paragraph("P", as_sub("2"), "O", as_sub("5"))
+    ) %>%
+  compose(
+    i = 1, j = 11, part = "header",
+    value = as_paragraph("K", as_sub("2"), "O")
+    ) %>%
+  compose(
+    i = 1, j = 12, part = "header",
+    value = as_paragraph("Mg", as_sup("2+"))
+    ) %>%
+  compose(
+    i = 1, j = 14, part = "header",
+    value = as_paragraph("CaCO", as_sub("3"))
+    ) %>%
+  compose(
+    i = 2, j = 10, part = "header",
+    value = as_paragraph("mg 100 g", as_sup("−1"))
+    ) %>%
+  compose(
+    i = 2, j = 11, part = "header",
+    value = as_paragraph("mg 100 g", as_sup("−1"))
+    ) %>%
+  compose(
+    i = 2, j = 12, part = "header",
+    value = as_paragraph("mg 100 g", as_sup("−1"))
+    ) %>%
   align(align = "left", part = "footer") %>%
   set_table_properties(layout = "autofit", width = 1)
 ```
@@ -295,7 +319,9 @@ knitr::include_graphics(
 
 ```{r fig.id = "persistence", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "Persistence of sown species of sown grassland communities at a river dike. The plots had substrates with different sand admixtures and were sown with two different seed mixture types. Per plot twenty species were sown. Shown are the medians and 95% credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
-  here::here("outputs", "figures", "figure_3_persistence_epred_800dpi_16.5x8cm.tiff")
+  here::here(
+    "outputs", "figures", "figure_3_persistence_epred_800dpi_16.5x8cm.tiff"
+    )
   )
 ```
 
@@ -319,7 +345,9 @@ knitr::include_graphics(
 
 ```{r fig.id = "recovery", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The recovery or successional distance (*d~jt,0~*) of sown grassland communities at a river dike in comparison to the respective reference sites (hay meadows or dry calcareous grasslands). The plots had substrates with different sand admixtures and were sown with two different seed mixtures. The zero lines indicate the mean position of the reference sites for each habitat type on the NMDS axis 1 (Figure 7). The grey area marks the standard deviation of the position of the reference sites. Shown are the medians and 95% credible intervals of the posterior distributions which were derived from a Bayesian linear mixed-effects model (BLMM)."}
 knitr::include_graphics(
-  here::here("outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x8cm.tiff")
+  here::here(
+    "outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x8cm.tiff"
+    )
   )
 ```
 
