@@ -130,7 +130,7 @@ theme_mb <- function() {
      color = ""
    ) +
    theme_mb())
-  
+
 ### Save ###
 
 ggsave(
