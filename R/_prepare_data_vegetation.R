@@ -45,7 +45,7 @@ library(checklist)
 ### Start ###
 rm(list = ls())
 #installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE, start_new_R = TRUE, quit_R = TRUE, print_R_versions = TRUE, GUI = FALSE)
-checklist::check_source()
+#checklist::check_source()
 renv::status()
 
 
@@ -917,7 +917,7 @@ data_sites <- data_sites %>%
 data_species <- data_species %>%
   column_to_rownames("id")
 
-### * Model ####
+### * Model (try several times) ####
 set.seed(12)
 (ordi <- metaMDS(
   data_species,
@@ -1072,7 +1072,7 @@ data_presence <- bind_rows(tbi18, tbi19, tbi20, tbi21) %>%
 
 rm(list = setdiff(ls(), c(
   "sites_experiment", "species_experiment", "traits",
-  "sites_bauer", "sites_splot", "species_bauer", "species_splot",
+  "sites_bauer", "sites_splot", "sites_nmds", "species_bauer", "species_splot",
   "species_seeded", "species_2018", "species_2019", "species_2020",
   "species_2021", "data_presence", "data_sites", "data_species"
   )))
@@ -1154,7 +1154,7 @@ data <- data_presence %>%
 
 sites_temporal <- sites_experiment %>%
   filter(survey_year != "seeded") %>%
-  left_join(data, by = "id") %>%
+  left_join(data, by = "id", multiple = "all") %>%
   select(
     id, plot, site, longitude, latitude, elevation, plot_size, exposition,
     orientation, sand_ratio, substrate_depth, target_type, seed_density,
@@ -1164,7 +1164,7 @@ sites_temporal <- sites_experiment %>%
 
 rm(list = setdiff(ls(), c(
   "sites_experiment", "species_experiment", "traits", "sites_temporal",
-  "sites_bauer", "sites_splot", "species_bauer", "species_splot"
+  "sites_bauer", "sites_splot", "sites_nmds", "species_bauer", "species_splot"
   )))
 
 
@@ -1179,7 +1179,7 @@ rm(list = setdiff(ls(), c(
 ### https://doi.org/10.1111/j.1365-2745.2008.01430.x
 
 data_sla <- data.table::fread(
-  here("data", "raw", "leda_database",
+  here("data", "raw", "database_leda",
        "data_raw_traitbase_leda_20210223_sla.txt"),
   sep = ";",
   dec = ".",
@@ -1193,7 +1193,7 @@ data_sla <- data.table::fread(
   mutate(name = str_replace_all(name, " ", "_"))
 
 data_seedmass <- data.table::fread(
-  here("data", "raw", "leda_database",
+  here("data", "raw", "database_leda",
        "data_raw_traitbase_leda_20210223_seedmass.txt"),
   sep = ";",
   dec = ".",
@@ -1208,7 +1208,7 @@ data_seedmass <- data.table::fread(
          seedmass = round(seedmass, 3))
 
 data_height <- data.table::fread(
-  here("data", "raw", "leda_database",
+  here("data", "raw", "database_leda",
        "data_raw_traitbase_leda_20210223_canopy_height.txt"),
   sep = ";",
   dec = ".",
@@ -1223,8 +1223,8 @@ data_height <- data.table::fread(
 
 #### Join SLA, canopy height and seedmass of LEDA ###
 data <- data_sla %>%
-  full_join(data_seedmass, by = "name") %>%
-  full_join(data_height, by = "name")
+  full_join(data_seedmass, by = "name", multiple = "all") %>%
+  full_join(data_height, by = "name", multiple = "all")
 
 #### * Find synonyms ####
 
@@ -1320,7 +1320,7 @@ traits %>%
 ### https://doi.org/10.1111/gcb.14904
 
 data <- data.table::fread(
-  here("data", "raw", "try_database",
+  here("data", "raw", "database_try",
        "data_raw_traitbase_try_20210306_13996.txt"),
   header = TRUE,
   sep = "\t",
@@ -1330,7 +1330,7 @@ data <- data.table::fread(
   as_tibble() %>%
   bind_rows(
     data.table::fread(
-      here("data", "raw", "try_database",
+      here("data", "raw", "database_try",
            "data_raw_traitbase_try_20210318_14157.txt"),
       header = TRUE,
       sep = "\t",
@@ -1405,9 +1405,9 @@ data <- data %>%
 traits <- traits %>%
   left_join(data, by = "name") %>%
   mutate(
-    sla = coalesce(sla.x, sla.y),
-    seedmass = coalesce(seedmass.x, seedmass.y),
-    height = coalesce(height.x, height.y),
+    sla = dplyr::coalesce(sla.x, sla.y),
+    seedmass = dplyr::coalesce(seedmass.x, seedmass.y),
+    height = dplyr::coalesce(height.x, height.y),
     .keep = "unused",
     name = as.character(name)
   ) %>%
@@ -1485,7 +1485,7 @@ sites_experiment <- sites_experiment %>%
 data_species <- semi_join(species_experiment, data_sla, by = "name")
 data_traits <- semi_join(data_sla, data_species, by = "name")
 data_species <- data_species %>%
-  pivot_longer(-name, "site", "value") %>%
+  pivot_longer(-name, names_to = "site", values_to = "value") %>%
   pivot_wider(names_from = "name", values_from = "value") %>%
   column_to_rownames("site")
 data_traits <- column_to_rownames(data_traits, "name")
@@ -1500,8 +1500,10 @@ data <- data_diversity$FDis %>%
   as.data.frame() %>%
   add_column(data_diversity$CWM$sla) %>%
   rownames_to_column("id") %>%
-  rename("fdis_abu_sla" = ".",
-         "cwm_abu_sla" = "data_diversity$CWM$sla") %>%
+  rename(
+    "fdis_abu_sla" = ".",
+    "cwm_abu_sla" = "data_diversity$CWM$sla"
+    ) %>%
   mutate(cwm_abu_sla = exp(cwm_abu_sla)) %>%
   mutate(across(where(is.numeric), ~ round(.x, digits = 3))) %>%
   select(id, cwm_abu_sla)
@@ -1530,8 +1532,10 @@ data <- data_diversity$FDis %>%
   as.data.frame() %>%
   add_column(data_diversity$CWM$seedmass) %>%
   rownames_to_column("id") %>%
-  rename("fdis_abu_seedmass" = ".",
-         "cwm_abu_seedmass" = "data_diversity$CWM$seedmass") %>%
+  rename(
+    "fdis_abu_seedmass" = ".",
+    "cwm_abu_seedmass" = "data_diversity$CWM$seedmass"
+    ) %>%
   mutate(cwm_abu_seedmass = exp(cwm_abu_seedmass)) %>%
   mutate(across(where(is.numeric), ~ round(.x, digits = 3))) %>%
   select(id, cwm_abu_seedmass)
@@ -1560,8 +1564,10 @@ data <- data_diversity$FDis %>%
   as.data.frame() %>%
   add_column(data_diversity$CWM$height) %>%
   rownames_to_column("id") %>%
-  rename("fdis_abu_height" = ".",
-         "cwm_abu_height" = "data_diversity$CWM$height") %>%
+  rename(
+    "fdis_abu_height" = ".",
+    "cwm_abu_height" = "data_diversity$CWM$height"
+    ) %>%
   mutate(cwm_abu_height = exp(cwm_abu_height)) %>%
   mutate(across(where(is.numeric), ~ round(.x, digits = 3))) %>%
   select(id, cwm_abu_height)
