@@ -37,17 +37,17 @@ base::load(file = here("outputs", "models", "model_nmds.Rdata"))
 
 
 
-### Check size of species pool for seeding ###
-traits %>%
-  select(seeded_hay_meadow, seeded_dry_grassland) %>%
-  mutate(across(where(is.character), ~as.numeric(.x))) %>%
-  summarise(across(where(is.numeric), ~sum(.x)))
-
 ### Check species number used for NMDS ###
 ordi$species %>%
   as.data.frame() %>%
   rownames_to_column(var = "name") %>%
   as_tibble()
+
+### Check size of species pool for seeding ###
+traits %>%
+  select(seeded_hay_meadow, seeded_dry_grassland) %>%
+  mutate(across(where(is.character), ~as.numeric(.x))) %>%
+  summarise(across(where(is.numeric), ~sum(.x)))
 
 ### How many species of the species pool established? ###
 traits %>%
