@@ -33,7 +33,7 @@ traits <- read_csv(
   col_names = TRUE,
   na = c("", "NA", "na"),
   col_types = cols(.default = "?")
-) %>%
+  ) %>%
   select(name, target, seeded)
 
 
