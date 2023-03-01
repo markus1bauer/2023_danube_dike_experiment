@@ -190,7 +190,7 @@ m_1$family
 m_2$family
 ```
 
-Markov Chain Monte Carlo (MCMC) method used with No-U-Turn Sampler (NUTS) sampler which is an extension of Hamiltonian Monte Carlo (HMC).
+Markov Chain Monte Carlo (MCMC) method used with No-U-Turn Sampler (NUTS) which is an extension of Hamiltonian Monte Carlo (HMC).
 
 Amount of chains for MCMC
 
@@ -276,10 +276,12 @@ draws2 <- m_2 %>%
 #### Possible prior distributions
 
 ```{r possible-priors}
-brms::get_prior(n ~ target_type + exposition + sand_ratio + survey_year_fct +
-            seed_density + substrate_depth +
-            (1 | site / plot) + (1 | botanist_year),
-          data = sites)
+brms::get_prior(
+  n ~ target_type + sand_ratio + seed_density + substrate_depth +
+    exposition + survey_year_fct + botanist_year + (1 | site / plot),
+  data = sites
+  ) %>%
+  select(prior, class, coef, group, source)
 ggplot(data = data.frame(x = c(-2, 0)), aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = -1, sd = 1)) +
   expand_limits(y = 0) +
@@ -302,7 +304,9 @@ ggplot(data, aes(x = x)) +
 #### Prior summary (BARG 1.D)
 
 ```{r prior-summary}
-brms::prior_summary(m_1, all = FALSE)
+m_1 %>%
+  brms::prior_summary(all = FALSE) %>%
+  select(prior, class, coef, group, source)
 ```
 
 #### Prior predictive check (BARG 1.E)
@@ -372,34 +376,38 @@ m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff()
 #### Pairs plot
 
 ```{r mcmc-pairs, collapse = TRUE, fig.height = 6.5}
-bayesplot::mcmc_pairs(m_1, off_diag_args = list(size = 1.2),
-           pars = c(
-             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
-             "b_target_typedry_grassland", "b_seed_density8",
-             "b_expositionsouth", "sigma"
-           ))
-bayesplot::mcmc_pairs(m_2, off_diag_args = list(size = 1.2),
-           pars = c(
-             "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
-             "b_target_typedry_grassland", "b_seed_density8",
-             "b_expositionsouth", "sigma"
-           ))
+m_1 %>% bayesplot::mcmc_pairs(
+  off_diag_args = list(size = 1.2),
+  pars = c(
+    "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+    "b_target_typedry_grassland", "b_seed_density8",
+    "b_expositionsouth", "sigma"
+           )
+)
+m_2 %>% bayesplot::mcmc_pairs(
+  off_diag_args = list(size = 1.2),
+  pars = c(
+    "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+    "b_target_typedry_grassland", "b_seed_density8",
+    "b_expositionsouth", "sigma"
+           )
+)
 ```
 
 #### Parallel coordinate plot
 
 ```{r mcmc-parcoord, collapse = TRUE}
-bayesplot::mcmc_parcoord(posterior1, np = hmc_diagnostics1) +
+posterior1 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics1) +
   theme(axis.text.x = element_text(angle = 45))
-bayesplot::mcmc_parcoord(posterior2, np = hmc_diagnostics2) +
+posterior2 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics2) +
   theme(axis.text.x = element_text(angle = 45))
 ```
 
 ### Autocorrelation check
 
 ```{r autocorrelation}
-bayesplot::mcmc_acf(posterior1, lags = 10)
-bayesplot::mcmc_acf(posterior2, lags = 10)
+posterior1 %>% bayesplot::mcmc_acf(lags = 10)
+posterior2 %>% bayesplot::mcmc_acf(lags = 10)
 ```
 
 ### Posterior predictive check (BARG 3.A)
@@ -437,13 +445,15 @@ p1 / p2
 p1 <- bayesplot::ppc_stat(y, yrep1, binwidth = 0.001)
 p2 <- bayesplot::ppc_stat(y, yrep2, binwidth = 0.001)
 p1 / p2
-ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
-ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
+p1 / p2
 p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
 p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
 p1 / p2
-ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
-ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
+p1 / p2
 p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
 p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
 p1 / p2
@@ -462,8 +472,8 @@ p1 / p2
 
 ```{r loo}
 # Leave-one-out cross validation based on posterior likelihood
-loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = FALSE)
-loo2 <- m_2 %>% brms::loo(save_psis = TRUE, moment_match = FALSE)
+loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
+loo2 <- m_2 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
 loo1
 loo2
 plot(loo1)
@@ -476,14 +486,13 @@ Leave one out probability integral transform
 p1 <- bayesplot::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
 p2 <- bayesplot::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
 p1 / p2
-
 ```
 
 ### DHARMa
 
 ```{r dharma, collapse = TRUE}
-DHARMa.helpers::dh_check_brms(m_1, integer = TRUE)
-DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
+m_1 %>% DHARMa.helpers::dh_check_brms(integer = TRUE)
+m_2 %>% DHARMa.helpers::dh_check_brms(integer = TRUE)
 ```
 
 ## Model comparison
@@ -491,19 +500,23 @@ DHARMa.helpers::dh_check_brms(m_2, integer = TRUE)
 ### Conditional <i>R</i><sup>2</sup> values
 
 ```{r conditional-r2, collapse = TRUE}
-brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site / plot))
-brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
-         re_formula =  ~ (1 | site / plot))
+m_1 %>% brms::bayes_R2(
+  probs = c(0.05, 0.5, 0.95), re_formula =  ~ (1 | site / plot)
+  )
+m_2 %>% brms::bayes_R2(
+  probs = c(0.05, 0.5, 0.95), re_formula =  ~ (1 | site / plot)
+  )
 ```
 
 ### Marginal <i>R</i><sup>2</sup> values
 
 ```{r marginal-r2, collapse = TRUE}
-brms::bayes_R2(m_1, probs = c(0.05, 0.5, 0.95),
-         re_formula = 1 ~ 1)
-brms::bayes_R2(m_2, probs = c(0.05, 0.5, 0.95),
-         re_formula = 1 ~ 1)
+m_1 %>% brms::bayes_R2(
+  probs = c(0.05, 0.5, 0.95), re_formula = 1 ~ 1
+  )
+m_2 %>% brms::bayes_R2(
+  probs = c(0.05, 0.5, 0.95), re_formula = 1 ~ 1
+  )
 ```
 
 ### Bayes factor (BARG 3.C)
@@ -570,9 +583,12 @@ Effect sizes of chosen model just to get exact values of means etc. if necessary
 ```{r effect-sizes, message = FALSE}
 posterior1 %>%
   posterior::summarize_draws() %>%
-  knitr::kable()
-emm <- emmeans(m_1, revpairwise ~ target_type + sand_ratio | exposition |
-          survey_year_fct, type = "response")
+  knitr::kable() %>%
+  kableExtra::kable_styling(font_size = 10)
+emm <- m_1 %>% emmeans(
+  revpairwise ~ target_type + sand_ratio | exposition | survey_year_fct,
+  type = "response"
+  )
 emm$emmeans
 ```
 
