@@ -176,10 +176,11 @@ ggplot(data = sites,
 
 ```{r outliers, echo = FALSE}
 sites %>% group_by(exposition) %>% count(site)
-boxplot(sites$n)
-ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
-ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03)
-ggplot(sites, aes(x = n)) + geom_density()
+plot1 <- ggplot(sites, aes(y = n)) + geom_boxplot()
+plot2 <- ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
+plot3 <- ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03)
+plot4 <- ggplot(sites, aes(x = n)) + geom_density()
+(plot1 + plot2) / (plot3 + plot4)
 ```
 
 ## Models
@@ -306,22 +307,23 @@ brms::get_prior(
   ) %>%
   select(prior, class, coef, group, source)
 data <- data.frame(x = c(-5, 5))
-ggplot(data, aes(x = x)) +
+plot1 <- ggplot(data, aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 2)) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for Intercept")
-ggplot(data, aes(x = x)) +
+plot2 <- ggplot(data, aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0.3, sd = 2)) +
   expand_limits(y = 0) +
   ggtitle("Normal distribution for treatments")
-ggplot(data, aes(x = x)) +
+plot3 <- ggplot(data, aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0) +
   ggtitle("Cauchy distribution")
-ggplot(data, aes(x = x)) +
+plot4 <- ggplot(data, aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) +
   ggtitle(expression(Student ~ italic(t) * "-distribution"))
+(plot1 + plot2) / (plot3 + plot4)
 ```
 
 #### Prior summary (BARG 1.D)
@@ -334,37 +336,37 @@ m_1 %>%
 
 #### Prior predictive check (BARG 1.E)
 
-```{r prior-predictive-check, fig.height = 4}
+```{r prior-predictive-check, fig.height = 3}
 bayesplot::ppc_stat(y, yrep_prior[1:500, ], binwidth = 0.5) +
-  coord_cartesian(xlim = c(-4, 4))
+  coord_cartesian(xlim = c(-4, 4)) + bayesplot::theme_default()
 ppc_stat_grouped(
   y, yrep_prior[1:500, ], group = sites$site, binwidth = 0.5
   ) +
-  coord_cartesian(xlim = c(-4, 4))
+  coord_cartesian(xlim = c(-4, 4)) + bayesplot::theme_default()
 ppc_stat_grouped(
   y, yrep_prior[1:500, ], group = sites$exposition, binwidth = 0.5
   ) +
-  coord_cartesian(xlim = c(-4, 4))
+  coord_cartesian(xlim = c(-4, 4)) + bayesplot::theme_default()
 ppc_stat_grouped(
   y, yrep_prior[1:500, ], group = sites$survey_year_fct, binwidth = 0.5
   ) +
-  coord_cartesian(xlim = c(-4, 4))
+  coord_cartesian(xlim = c(-4, 4)) + bayesplot::theme_default()
 ppc_stat_grouped(
   y, yrep_prior[1:500, ], group = sites$target_type, binwidth = 0.5
   ) +
-  coord_cartesian(xlim = c(-4, 4))
+  coord_cartesian(xlim = c(-4, 4)) + bayesplot::theme_default()
 ppc_stat_grouped(
   y, yrep_prior[1:500, ], group = sites$seed_density, binwidth = 0.5
   ) +
-  coord_cartesian(xlim = c(-4, 4))
+  coord_cartesian(xlim = c(-4, 4)) + bayesplot::theme_default()
 ppc_stat_grouped(
   y, yrep_prior[1:500, ], group = sites$sand_ratio, binwidth = 0.5
   ) +
-  coord_cartesian(xlim = c(-4, 4))
+  coord_cartesian(xlim = c(-4, 4)) + bayesplot::theme_default()
 ppc_stat_grouped(
   y, yrep_prior[1:500, ], group = sites$substrate_depth, binwidth = 0.5
   ) +
-  coord_cartesian(xlim = c(-4, 4))
+  coord_cartesian(xlim = c(-4, 4)) + bayesplot::theme_default()
 ```
 
 ## Model check
@@ -376,22 +378,22 @@ ppc_stat_grouped(
 ```{r mcmc-trace, fig.height = 14}
 bayesplot::mcmc_trace(
   posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2)
-  )
+  ) + bayesplot::theme_default()
 bayesplot::mcmc_trace(
   posterior2, np = hmc_diagnostics2, facet_args = list(ncol = 2)
-  )
+  ) + bayesplot::theme_default()
 ```
 
 #### Sampling efficency: R-hat (BARG 2.B)
 
-```{r rhat, collapse = TRUE}
+```{r rhat, collapse = TRUE, fig.height = 3}
 m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat()
 m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat()
 ```
 
 #### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
 
-```{r ess, collapse = TRUE}
+```{r ess, collapse = TRUE, fig.height = 3}
 m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff()
 m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff()
 ```
@@ -500,8 +502,9 @@ loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
 loo2 <- m_2 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
 loo1
 loo2
-plot(loo1)
-plot(loo2)
+plot1 <- plot(loo1)
+plot2 <- plot(loo2)
+plot1 / plot2
 ```
 
 Leave one out probability integral transform
@@ -514,7 +517,7 @@ p1 / p2
 
 ### DHARMa
 
-```{r dharma, collapse = TRUE}
+```{r dharma, collapse = TRUE, fig.height = 5}
 m_1 %>% DHARMa.helpers::dh_check_brms(integer = TRUE)
 m_2 %>% DHARMa.helpers::dh_check_brms(integer = TRUE)
 ```
@@ -608,8 +611,7 @@ necessary.
 ```{r effect-sizes, message = FALSE}
 posterior1 %>%
   posterior::summarize_draws() %>%
-  knitr::kable() #%>%
-  #kableExtra::kable_styling(font_size = 10)
+  knitr::kable()
 emm <- m_1 %>% emmeans(
   revpairwise ~ target_type + sand_ratio | exposition | survey_year_fct,
   type = "response"
