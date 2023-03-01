@@ -1,5 +1,5 @@
 ---
-title: "Analysis of Bauer et al. (unpublished) Field experiment: <br> Persistence"
+title: "Analysis of Bauer et al. (2023) bioRxiv: <br> Persistence"
 author: "<b>Markus Bauer</b> <br>"
 date: "<b>`r format(Sys.time(), '%Y-%m-%d')`</b>"
 output:
@@ -309,28 +309,35 @@ brms::prior_summary(m_1, all = FALSE)
 #### Prior predictive check (BARG 1.E)
 
 ```{r prior-predictive-check}
-bayesplot::ppd_stat(yrep_prior[1:500, ], binwidth = 0.2) +
+bayesplot::ppc_stat(y, yrep_prior[1:500, ], binwidth = 0.2) +
   coord_cartesian(xlim = c(-1, 1))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$site,
-                 binwidth = 0.2) +
+ppc_stat_grouped(
+  y, yrep_prior[1:500, ], group = sites$site, binwidth = 0.2
+  ) +
   coord_cartesian(xlim = c(-1, 1))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$exposition,
-                 binwidth = 0.2) +
+ppc_stat_grouped(
+  y, yrep_prior[1:500, ], group = sites$exposition, binwidth = 0.2
+  ) +
   coord_cartesian(xlim = c(-1, 1))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$survey_year_fct,
-                 binwidth = 0.2) +
+ppc_stat_grouped(
+  y, yrep_prior[1:500, ], group = sites$survey_year_fct, binwidth = 0.2
+  ) +
   coord_cartesian(xlim = c(-1, 1))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$target_type,
-                 binwidth = 0.2) +
+ppc_stat_grouped(
+  y, yrep_prior[1:500, ], group = sites$target_type, binwidth = 0.2
+  ) +
   coord_cartesian(xlim = c(-1, 1))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$seed_density,
-                 binwidth = 0.1) +
+ppc_stat_grouped(
+  y, yrep_prior[1:500, ], group = sites$seed_density, binwidth = 0.2
+  ) +
   coord_cartesian(xlim = c(-1, 1))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$sand_ratio,
-                 binwidth = 0.2) +
+ppc_stat_grouped(
+  y, yrep_prior[1:500, ], group = sites$sand_ratio, binwidth = 0.2
+  ) +
   coord_cartesian(xlim = c(-1, 1))
-ppd_stat_grouped(yrep_prior[1:500, ], group = sites$substrate_depth,
-                 binwidth = 0.2) +
+ppc_stat_grouped(
+  y, yrep_prior[1:500, ], group = sites$substrate_depth, binwidth = 0.2
+  ) +
   coord_cartesian(xlim = c(-1, 1))
 ```
 
@@ -560,7 +567,7 @@ ggplot(
 
 Effect sizes of chosen model just to get exact values of means etc. if necessary.
 
-```{r effect-sizes}
+```{r effect-sizes, message = FALSE}
 posterior1 %>%
   posterior::summarize_draws() %>%
   knitr::kable()
@@ -570,7 +577,7 @@ emm$emmeans
 ```
 
 ```{r write-csv, echo = FALSE}
-write.csv(draws1, here("outputs", "statistics", "table_persistence.csv"))
+draws1 %>% write_csv(here("outputs", "statistics", "table_persistence.csv"))
 ```
 
 # Session info (BARG 2.A/6.A/6.B)
