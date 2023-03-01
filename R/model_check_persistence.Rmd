@@ -156,10 +156,11 @@ ggplot(data = sites,
 
 ```{r outliers, echo = FALSE}
 sites %>% group_by(exposition) %>% count(site)
-boxplot(sites$n)
-ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
-ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03)
-ggplot(sites, aes(x = n)) + geom_density()
+plot1 <- ggplot(sites, aes(y = n)) + geom_boxplot()
+plot2 <- ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
+plot3 <- ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03)
+plot4 <- ggplot(sites, aes(x = n)) + geom_density()
+(plot1 + plot2) / (plot3 + plot4)
 ```
 
 ## Models
@@ -419,13 +420,15 @@ posterior2 %>% bayesplot::mcmc_acf(lags = 10)
 p1 <- bayesplot::ppc_dens_overlay(y, yrep1[1:50, ])
 p2 <- bayesplot::ppc_dens_overlay(y, yrep2[1:50, ])
 p1 / p2
-ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site)
-ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site)
+p1 / p2
 p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$exposition)
 p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$exposition)
 p1 / p2
-ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$survey_year_fct)
-ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$survey_year_fct)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$survey_year_fct)
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$survey_year_fct)
+p1 / p2
 p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$target_type)
 p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$target_type)
 p1 / p2
@@ -476,8 +479,9 @@ loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
 loo2 <- m_2 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
 loo1
 loo2
-plot(loo1)
-plot(loo2)
+plot1 <- plot(loo1)
+plot2 <- plot(loo2)
+plot1 / plot2
 ```
 
 Leave one out probability integral transform
@@ -490,7 +494,7 @@ p1 / p2
 
 ### DHARMa
 
-```{r dharma, collapse = TRUE}
+```{r dharma, collapse = TRUE, fig.height = 4}
 m_1 %>% DHARMa.helpers::dh_check_brms(integer = TRUE)
 m_2 %>% DHARMa.helpers::dh_check_brms(integer = TRUE)
 ```
