@@ -212,7 +212,8 @@ m_1$family
 m_2$family
 ```
 
-NUTS sampler is used.
+Markov Chain Monte Carlo (MCMC) method used with No-U-Turn Sampler
+(NUTS) sampler which is an extension of Hamiltonian Monte Carlo (HMC).
 
 Amount of chains for MCMC
 
@@ -274,23 +275,14 @@ posterior_prior <- m_prior %>%
 posterior_flat <- m_flat %>%
   posterior::as_draws() %>%
   posterior::subset_draws(variable = variables)
-# R hat
-rhat1 <- brms::rhat(m_1)
-rhat2 <- brms::rhat(m_2)
-# NEFF ratio
-neff1 <- brms::neff_ratio(m_1)
-neff2 <- brms::neff_ratio(m_2)
 # Long format of draws
-hmc_diagnostics1 <- brms::nuts_params(m_1)
-hmc_diagnostics2 <- brms::nuts_params(m_2)
+hmc_diagnostics1 <- m_1 %>% brms::nuts_params()
+hmc_diagnostics2 <- m_2 %>% brms::nuts_params()
 y <- sites$n
 # Posterior predictive distribution
-yrep1 <- brms::posterior_predict(m_1, draws = 500)
-yrep2 <- brms::posterior_predict(m_2, draws = 500)
-yrep_prior <- brms::posterior_predict(m_prior, draws = 500)
-# Leave-one-out cross validation based on posterior likelihood
-loo1 <- brms::loo(m_1, save_psis = TRUE, moment_match = FALSE)
-loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
+yrep1 <- m_1 %>% brms::posterior_predict(draws = 500)
+yrep2 <- m_2 %>% brms::posterior_predict(draws = 500)
+yrep_prior <- m_prior %>% brms::posterior_predict(draws = 500)
 # Summary statistics
 draws1 <- m_1 %>%
   posterior::as_draws() %>%
@@ -339,7 +331,7 @@ brms::prior_summary(m_1, all = FALSE)
 #### Prior predictive check - Kernel density (BARG 1.E)
 
 ```{r prior-predictive-check}
-bayesplot::ppc_dens_overlay(yrep_prior[1:500, ])
+bayesplot::ppc_dens_overlay(y, yrep_prior[1:500, ])
 ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$site) +
   coord_cartesian(xlim = c(-2, 2))
 ppc_dens_overlay_grouped(y, yrep_prior[1:500, ], group = sites$exposition) +
@@ -371,18 +363,18 @@ bayesplot::mcmc_trace(
   )
 ```
 
-#### Sampling efficency: Rhat (BARG 2.B)
+#### Sampling efficency: R-hat (BARG 2.B)
 
 ```{r rhat, collapse = TRUE}
-bayesplot::mcmc_rhat(rhat1)
-bayesplot::mcmc_rhat(rhat1)
+m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat()
+m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat()
 ```
 
 #### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
 
 ```{r ess, collapse = TRUE}
-bayesplot::mcmc_neff(neff1)
-bayesplot::mcmc_neff(neff2)
+m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff()
+m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff()
 ```
 
 #### Pairs plot
@@ -477,6 +469,8 @@ p1 / p2
 #### LOO cross-validation (Leave one out)
 
 ```{r loo}
+loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = FALSE)
+loo2 <- m_2 %>% brms::loo(save_psis = TRUE, moment_match = FALSE)
 loo1
 loo2
 plot(loo1)
