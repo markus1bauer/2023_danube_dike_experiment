@@ -180,14 +180,14 @@ for (group in levels(sites_nmds$group_type)) {
    coord_fixed() +
    scale_shape_manual(
      values = c(
-       "triangle", "square",
+       "square", "triangle",
        "circle open", "circle open", "circle open", "circle open",
        "square open"
      )
    ) +
    scale_color_manual(
      values = c(
-       "grey", "royalblue",
+       "royalblue", "grey",
        "orange1", "firebrick2", "deeppink3", "mediumpurple4",
        "black"
      )
