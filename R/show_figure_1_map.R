@@ -184,6 +184,6 @@ tmap_save(
   device = tiff,
   type = "cairo",
   filename = paste0(
-    here("outputs", "figures"), "/", "figure_1_germany_300dpi_2x3.5cm.tiff"
+    here("outputs", "figures"), "/", "figure_1_germany_white_300dpi_2x3.5cm.tiff"
   )
 )
