@@ -41,8 +41,8 @@ Restoration Ecology, TUM School of Life Sciences, Technical University of Munich
 
 # Abstract {.unnumbered}
 
-1.  Sowing is a well-established restoration technique to overcome dispersal limitation and site-specific seed mixtures are most effective to achieve functional communities. This is especially important if the restored vegetation has to protect critical infrastructure like roadsides and dikes. Here, an improved seed--substrate combination would secure slope stability, reduce mowing efforts, and generate biodiverse grasslands.
-2.  A factorial field experiment addressed this topic on a dike at the Danube River in SE Germany in the 2018--2021 time period. On 288 plots, we tested three sand admixtures, two substrate depths, two seed densities and two seed mixtures (mesic hay meadow, calcareous grassland) in north or south exposition, and measured the persistence of sown species, the Favourable Conservation Status (FCS), and the successional distance to reference sites as calculated from an ordination.
+1.  Sowing is a well-established restoration technique to overcome dispersal limitation and site-specific seed mixtures are most effective to achieve functional communities. This is especially important if the restored vegetation has to protect critical infrastructure like roadsides and dikes. Here, an improved seed--substrate combination will secure slope stability, reduce mowing efforts, and generate biodiverse grasslands.
+2.  A factorial field experiment addressed this topic on a dike at the Danube River in SE Germany in the 2018--2021 time period. On 288 plots, we tested three sand admixtures, two substrate depths, two seed densities and two seed mixture types (mesic hay meadow, semi-dry calcareous grassland) in north or south exposition, and measured the persistence of sown species, the Favourable Conservation Status (FCS), and the successional distance to reference sites as calculated from an ordination.
 3.  Sand admixture had a slightly positive effect on target variables, while substrate depth, seed density and mixture type had no effects on species persistence or FCS.
 4.  Overall, the sown vegetation developed in the desired direction, but a recovery debt remained after four years, and some plots still showed similarities to negative references from ruderal sites. In north exposition, hay meadow-seed mixtures developed closer to the respective reference communities than dry grasslands.
 5.  In south exposition, the sown communities developed poorly which might be due to a severe drought during establishment and the addition and removal of a geotextile. This initial negative effect remained over the entire observation period.
@@ -98,11 +98,9 @@ To measure the success of restoration, we chose three indices. First, we observe
 
 1.  Mesic vs dry grassland mixtures are favoured by site conditions on northern and southern dike slopes, respectively, compared to their reference sites.
 
-2.  Higher seed density increases persistence of sown species and suppresses non-target species.
+2.  Nutrient reduction (by sand addition) and lower soil depth increase persistence of sown species and fosters target species in comparison to non-target species especially for dry grassland mixtures. Hay meadow mixtures can cope with no sand admixture and larger soil depths.
 
-3.  Nutrient reduction (by sand addition) and lower soil depth has similar effects on community dynamics.
-
-4.  Increased soil depth has positive effects on these community changes. à Fig. 2
+3.  Higher seed density increases generally persistence of sown species and suppresses non-target species.
 
 \clearpage
 
