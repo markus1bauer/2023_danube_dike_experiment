@@ -16,19 +16,14 @@ knitr::opts_chunk$set(
   echo = TRUE
   )
 ```
-<br/>
-<br/>
-<b>Markus Bauer</b>
+
+<br/> <br/> <b>Markus Bauer</b>
 
 Technichal University of Munich, TUM School of Life Sciences, Chair of Restoration Ecology, Emil-Ramann-Straße 6, 85354 Freising, Germany
 
-[markus1.bauer@tum.de](mailto:markus1.bauer@tum.de)
+[markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de)
 
-ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174)
-<br>
-[Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao)
-<br>
-GitHub: [markus1bauer](https://github.com/markus1bauer)
+ORCiD ID: [0000-0001-5372-4174](https://orcid.org/0000-0001-5372-4174) <br> [Google Scholar](https://scholar.google.de/citations?user=oHhmOkkAAAAJ&hl=de&oi=ao) <br> GitHub: [markus1bauer](https://github.com/markus1bauer)
 
 To compare different models, you only have to change the models in section `Load models`
 
@@ -38,15 +33,7 @@ Recovery completeness sensu Rydgren et al. (2019) J Appl Ecol [DOI: 10.1111/1365
 
 Bayesian analysis motivated by Applestein et al. (2021) Restor Ecol [DOI: 10.1111/rec.13596](https://doi.org/10.1111/rec.13596)
 
-Analysis guided by
-<br>
-<b>BARG</b> (Bayesian Analysis Reporting Guidelines): Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7)
-<br>
-Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378)
-<br>
-Priors: Lemoine (2019) Oikos [DOI: 10.1111/oik.05985](https://doi.org/10.1111/oik.05985)
-<br>
-Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](https://doi.org/10.1037/met0000065)
+Analysis guided by <br> <b>BARG</b> (Bayesian Analysis Reporting Guidelines): Kruschke (2021) Nat Hum Behav [DOI: 10.1038/s41562-021-01177-7](https://doi.org/10.1038/s41562-021-01177-7) <br> Model check: Gabry et al. (2019) J R Stat Soc A Stat [DOI: 10.1111/rssa.12378](https://doi.org/10.1111/rssa.12378) <br> Priors: Lemoine (2019) Oikos [DOI: 10.1111/oik.05985](https://doi.org/10.1111/oik.05985) <br> Model check: Deapoli & Schoot (2017) Psychol Methods [DOI: 10.1037/met0000065](https://doi.org/10.1037/met0000065)
 
 #### Packages
 
@@ -203,7 +190,7 @@ m_1$family
 m_2$family
 ```
 
-NUTS sampler is used.
+Markov Chain Monte Carlo (MCMC) method used with No-U-Turn Sampler (NUTS) sampler which is an extension of Hamiltonian Monte Carlo (HMC).
 
 Amount of chains for MCMC
 
@@ -265,23 +252,14 @@ posterior_prior <- m_prior %>%
 posterior_flat <- m_flat %>%
   posterior::as_draws() %>%
   posterior::subset_draws(variable = variables)
-# R hat
-rhat1 <- brms::rhat(m_1)
-rhat2 <- brms::rhat(m_2)
-# NEFF ratio
-neff1 <- brms::neff_ratio(m_1)
-neff2 <- brms::neff_ratio(m_2)
 # Long format of draws
-hmc_diagnostics1 <- brms::nuts_params(m_1)
-hmc_diagnostics2 <- brms::nuts_params(m_2)
+hmc_diagnostics1 <- m_1 %>% brms::nuts_params()
+hmc_diagnostics2 <- m_2 %>% brms::nuts_params()
 y <- sites$n
 # Posterior predictive distribution
-yrep1 <- brms::posterior_predict(m_1, draws = 500)
-yrep2 <- brms::posterior_predict(m_2, draws = 500)
-yrep_prior <- brms::posterior_predict(m_prior, draws = 500)
-# Leave-one-out cross validation based on posterior likelihood
-loo1 <- brms::loo(m_1, save_psis = TRUE, moment_match = FALSE)
-loo2 <- brms::loo(m_2, save_psis = TRUE, moment_match = FALSE)
+yrep1 <- m_1 %>% brms::posterior_predict(draws = 500)
+yrep2 <- m_2 %>% brms::posterior_predict(draws = 500)
+yrep_prior <- m_prior %>% brms::posterior_predict(draws = 500)
 # Summary statistics
 draws1 <- m_1 %>%
   posterior::as_draws() %>%
@@ -370,18 +348,18 @@ bayesplot::mcmc_trace(
   )
 ```
 
-#### Sampling efficency: Rhat (BARG 2.B)
+#### Sampling efficency: R-hat (BARG 2.B)
 
 ```{r rhat, collapse = TRUE}
-bayesplot::mcmc_rhat(rhat1)
-bayesplot::mcmc_rhat(rhat1)
+m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat()
+m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat()
 ```
 
 #### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
 
 ```{r ess, collapse = TRUE}
-bayesplot::mcmc_neff(neff1)
-bayesplot::mcmc_neff(neff2)
+m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff()
+m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff()
 ```
 
 #### Pairs plot
@@ -476,6 +454,9 @@ p1 / p2
 #### LOO cross-validation (Leave one out)
 
 ```{r loo}
+# Leave-one-out cross validation based on posterior likelihood
+loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = FALSE)
+loo2 <- m_2 %>% brms::loo(save_psis = TRUE, moment_match = FALSE)
 loo1
 loo2
 plot(loo1)
