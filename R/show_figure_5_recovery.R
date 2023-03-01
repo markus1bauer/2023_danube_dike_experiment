@@ -177,8 +177,8 @@ get_variables(m2)
   scale_x_continuous(breaks = seq(-100, 400, .2)) +
   labs(
     x = expression(
-      Delta ~ Successional ~ distance ~ "(" * italic(d)[italic(jt) * ",0"] *
-        ")"),
+      Delta ~ Successional ~ distance ~ "[" * italic(d)[italic(jt) * ",0"] *
+        "]"),
     y = ""
     ) +
   theme_mb())
