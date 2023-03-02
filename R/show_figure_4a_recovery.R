@@ -129,8 +129,9 @@ sd <- sum(as.numeric(as.character(
      ) +
    labs(
      x = "Sand ratio [%]", fill = "", color = "",
-     y = expression(Recovery ~
-                      "[" * italic(d)[italic(jt) * ",0"] * "]")
+     y = expression(
+       Recovery ~ completeness ~ "[" * italic(d)[italic(jt) * ",0"] * "]"
+       )
    ) +
    theme_mb())
 
