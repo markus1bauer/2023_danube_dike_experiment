@@ -382,15 +382,15 @@ bayesplot::mcmc_trace(
 #### Sampling efficency: R-hat (BARG 2.B)
 
 ```{r rhat, collapse = TRUE}
-m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank())
-m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank())
+m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank(), axis.ticks.y = element_blank())
+m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank(), axis.ticks.y = element_blank())
 ```
 
 #### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
 
 ```{r ess, collapse = TRUE}
-m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank())
-m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank())
+m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank(), axis.ticks.y = element_blank())
+m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank(), axis.ticks.y = element_blank())
 ```
 
 #### Pairs plot
