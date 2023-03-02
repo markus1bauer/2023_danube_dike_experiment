@@ -382,15 +382,15 @@ bayesplot::mcmc_trace(
 #### Sampling efficency: R-hat (BARG 2.B)
 
 ```{r rhat, collapse = TRUE}
-m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank(), axis.ticks.y = element_blank())
-m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank(), axis.ticks.y = element_blank())
+m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank() + axis.ticks.y = element_blank())
+m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank() + axis.ticks.y = element_blank())
 ```
 
 #### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
 
 ```{r ess, collapse = TRUE}
-m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank(), axis.ticks.y = element_blank())
-m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank(), axis.ticks.y = element_blank())
+m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank() + axis.ticks.y = element_blank())
+m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank() + axis.ticks.y = element_blank())
 ```
 
 #### Pairs plot
@@ -418,9 +418,9 @@ m_2 %>% bayesplot::mcmc_pairs(
 
 ```{r mcmc-parcoord, collapse = TRUE}
 posterior1 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics1) +
-  theme(axis.text.x = element_text(angle = 45)) + bayesplot::theme_default()
-posterior2 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics2) +
-  theme(axis.text.x = element_text(angle = 45)) + bayesplot::theme_default()
+  bayesplot::theme_default() + theme(axis.text.x = element_text(angle = 45))
+posterior2 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics2) + 
+  bayesplot::theme_default() + theme(axis.text.x = element_text(angle = 45))
 ```
 
 ### Autocorrelation check
@@ -593,7 +593,7 @@ ggplot(
   geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
   geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
   geom_point(position = pos, color = "black") +
-  coord_cartesian(xlim = c(-1, .6)) +
+  coord_cartesian(xlim = c(-.9, .9)) +
   bayesplot::theme_default() +
   ggtitle("Posterior distbributions (mean, CI66, CI95)")
 ```
