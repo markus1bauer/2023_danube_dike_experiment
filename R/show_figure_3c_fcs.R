@@ -87,110 +87,51 @@ theme_mb <- function() {
 
 
 
-## 1 Marginal effects #########################################################
-
-
-(p1 <- ggplot(data = sites) +
-   geom_quasirandom(
-     aes(y = n, x = sand_ratio, color = target_type),
-     alpha = 0.2,
-     dodge.width = 0.9,
-     cex = .5
-   ) +
-   geom_hline(
-     yintercept = 0,
-     linetype = "dashed",
-     linewidth = .3,
-     color = "black"
-   ) +
-   tidybayes::stat_pointinterval(
-     aes(y = .epred, x = sand_ratio, color = target_type),
-     data = model,
-     point_interval = median_qi,
-     .width = c(0.66, 0.95),
-     point_size = 2,
-     position = "dodge"
-   ) +
-   facet_grid(
-     exposition ~ survey_year_fct,
-     labeller = as_labeller(
-       c(south = "South", north = "North",
-         "2018" = "2018", "2019" = "2019", "2020" = "2020", "2021" = "2021")
-     )
-   ) +
-   scale_y_continuous(limits = c(-2.8, 2.0), breaks = seq(-100, 400, 1)) +
-   scale_color_manual(
-     breaks = c("hay_meadow", "dry_grassland"),
-     labels = c("Hay meadow", "Dry grassland"),
-     values = c("#00BFC4", "#F8766D")
-     ) +
-   labs(
-     x = "Sand ratio [%]",
-     y = expression(Favourable ~ Conservation ~ Status ~ "(FCS)"),
-     color = ""
-   ) +
-   theme_mb())
-
-### Save ###
-
-ggsave(
-  here("outputs", "figures", "figure_4_fcs_epred_800dpi_24x8cm.tiff"),
-  dpi = 800, width = 24, height = 8, units = "cm"
-  )
-
-p1 + theme(legend.position = "bottom")
-ggsave(
-  here("outputs", "figures", "figure_4_fcs_epred_800dpi_16.5x8cm.tiff"),
-  dpi = 800, width = 16.5, height = 8, units = "cm"
-  )
-
-
-
-## 2 Coefficients #############################################################
+## 1 Coefficients #############################################################
 
 
 get_variables(m2)
 
-(p2 <- m2 %>%
-  gather_draws(
-    b_sand_ratio25, b_sand_ratio50, b_substrate_depth15,
-    b_target_typedry_grassland, b_seed_density8
-  ) %>%
-  mutate(
-    .variable = as.factor(.variable),
-    .variable = fct_relevel(
-      .variable, "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
-      "b_target_typedry_grassland", "b_seed_density8"
-    ),
-    .variable = fct_relevel(.variable, rev),
-    .variable = fct_recode(
-      .variable,
-      "Hay meadow vs. Dry grassland" = "b_target_typedry_grassland",
-      "Sand ratio: 0 vs. 25 %" = "b_sand_ratio25",
-      "Sand ratio: 0 vs. 50 %" = "b_sand_ratio50",
-      "Substrate depth: 30 vs. 15 cm" = "b_substrate_depth15",
-      "Seed density: 4 vs. 8 g/m²" = "b_seed_density8"
+(p1 <- m2 %>%
+    gather_draws(
+      b_sand_ratio25, b_sand_ratio50, b_substrate_depth15,
+      b_target_typedry_grassland, b_seed_density8
+    ) %>%
+    mutate(
+      .variable = as.factor(.variable),
+      .variable = fct_relevel(
+        .variable, "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+        "b_target_typedry_grassland", "b_seed_density8"
+      ),
+      .variable = fct_relevel(.variable, rev),
+      .variable = fct_recode(
+        .variable,
+        "Hay meadow vs. Dry grassland" = "b_target_typedry_grassland",
+        "Sand ratio: 0 vs. 25 %" = "b_sand_ratio25",
+        "Sand ratio: 0 vs. 50 %" = "b_sand_ratio50",
+        "Substrate depth: 30 vs. 15 cm" = "b_substrate_depth15",
+        "Seed density: 4 vs. 8 g/m²" = "b_seed_density8"
       )
-  ) %>%
-  ggplot(aes(x = .value, y = .variable)) +
-  geom_vline(xintercept = 0, linetype = "dashed") +
-  ggdist::stat_halfeye(point_interval = "median_qi", .width = c(0.66, 0.95)) +
-  scale_x_continuous(breaks = seq(-100, 400, .5), limits = c(-.5, .7)) +
-  labs(x = expression(Delta ~ Favourabale ~ Conservation ~ Status ~ "(FCS)"),
-       y = "") +
-  theme_mb())
+    ) %>%
+    ggplot(aes(x = .value, y = .variable)) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    ggdist::stat_halfeye(point_interval = "median_qi", .width = c(0.66, 0.95)) +
+    scale_x_continuous(breaks = seq(-100, 400, .5), limits = c(-.5, .7)) +
+    labs(x = expression(Delta ~ Favourabale ~ Conservation ~ Status ~ "(FCS)"),
+         y = "") +
+    theme_mb())
 
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_4_fcs_coef_800dpi_24x8cm2.tiff"),
+  here("outputs", "figures", "figure_3c_fcs_800dpi_24x8cm2.tiff"),
   dpi = 800, width = 24, height = 8, units = "cm"
-  )
+)
 
-(graph_b <- p2 +
+(graph_c <- p1 +
     labs(x = expression(Delta ~ "FCS")) +
     theme(
       axis.text.y = element_blank(),
       axis.line.y = element_blank(),
       axis.ticks.y = element_blank()
-      ))
+    ))

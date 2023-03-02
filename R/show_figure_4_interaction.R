@@ -27,18 +27,29 @@ rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 # B Plot #######################################################################
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+graph_a / graph_b / graph_c +
+  plot_layout(guides = "collect") +
+  plot_annotation(tag_levels = "A", tag_prefix = "", tag_suffix = "") &
+  theme(
+    plot.tag = element_text(size = 10, face = "bold"),
+    legend.position = "bottom"
+    )
 
+sd <- 0.25475
 
-graph_a + theme(legend.position = "none") +
-   graph_b + theme(legend.position = "none") +
-  (graph_c + theme(legend.position = c(.19, .88))) +
+(graph_a + theme(legend.position = c(.19, .88))) /
+  (graph_b + theme(legend.position = "none")) /
+  (graph_c + theme(legend.position = "none")) +
   plot_layout(guides = "keep") +
   plot_annotation(tag_levels = "A", tag_prefix = "", tag_suffix = "") &
-  theme(plot.tag = element_text(size = 10, face = "bold"))
+  theme(
+    plot.tag = element_text(size = 10, face = "bold")
+  )
+
 
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff"),
-  dpi = 800, width = 16.5, height = 5, units = "cm"
+  here("outputs", "figures", "figure_4_800dpi_16.5x20cm.tiff"),
+  dpi = 800, width = 16.5, height = 20, units = "cm"
 )

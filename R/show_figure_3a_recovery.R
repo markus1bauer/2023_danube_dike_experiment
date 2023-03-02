@@ -1,0 +1,131 @@
+# Dike grassland field experiment
+# Recovery completeness ####
+# Show figure 5
+
+# Markus Bauer
+# 2022-12-12
+
+
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# A Preparation ###############################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+### Packages ###
+library(here)
+library(tidyverse)
+library(ggbeeswarm)
+library(ggrepel)
+library(tidybayes)
+
+### Start ###
+rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
+
+### Load data ###
+sites <- read_csv(
+  here("data", "processed", "data_processed_sites_nmds.csv"),
+  col_names = TRUE, na = c("na", "NA", ""),
+  col_types = cols(
+    .default = "?",
+    id = "f",
+    plot = "f",
+    site = "f",
+    exposition = col_factor(levels = c("north", "south")),
+    sand_ratio = "f",
+    substrate_depth = col_factor(levels = c("30", "15")),
+    target_type = col_factor(levels = c("hay_meadow", "dry_grassland")),
+    seed_density = "f"
+  )
+) %>%
+  filter(reference == "2018" | reference == "2019" | reference == "2020" |
+           reference == "2021") %>%
+  mutate(
+    survey_year_fct = factor(survey_year),
+    survey_year = as.numeric(survey_year),
+    botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
+    botanist_year = factor(botanist_year),
+    n = recovery_completeness
+  )
+
+### * Model ####
+base::load(file = here("outputs", "models", "model_recovery_2.Rdata"))
+
+model <- sites %>%
+  tidybayes::add_epred_draws(m2, allow_new_levels = TRUE)
+
+### * Functions ####
+theme_mb <- function() {
+  theme(
+    panel.background = element_rect(fill = "white"),
+    text = element_text(size = 9, color = "black"),
+    strip.text = element_text(size = 10),
+    axis.text = element_text(angle = 0, hjust = 0.5, size = 9,
+                             color = "black"),
+    axis.title = element_text(angle = 0, hjust = 0.5, size = 9,
+                              color = "black"),
+    axis.line = element_line(),
+    legend.key = element_rect(fill = "white"),
+    legend.text = element_text(size = 9),
+    legend.position = "right",
+    legend.margin = margin(0, 0, 0, 0, "cm"),
+    plot.margin = margin(0, 0, 0, 0, "cm")
+  )
+}
+
+
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# B Plot ######################################################################
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+## 1 Coefficients #############################################################
+
+
+get_variables(m2)
+
+(p1 <- m2 %>%
+    tidybayes::gather_draws(
+      `b_sand_ratio25`, b_sand_ratio50, b_substrate_depth15,
+      b_target_typedry_grassland, b_seed_density8
+    ) %>%
+    mutate(
+      .variable = as.factor(.variable),
+      .variable = fct_relevel(
+        .variable, "b_sand_ratio25", "b_sand_ratio50", "b_substrate_depth15",
+        "b_target_typedry_grassland", "b_seed_density8"
+      ),
+      .variable = fct_relevel(.variable, rev),
+      .variable = fct_recode(
+        .variable,
+        "Hay meadow vs. Dry grassland" = "b_target_typedry_grassland",
+        "Sand ratio: 0 vs. 25 %" = "b_sand_ratio25",
+        "Sand ratio: 0 vs. 50 %" = "b_sand_ratio50",
+        "Substrate depth: 30 vs. 15 cm" = "b_substrate_depth15",
+        "Seed density: 4 vs. 8 g/m²" = "b_seed_density8"
+      )
+    ) %>%
+    ggplot(aes(x = .value, y = .variable)) +
+    geom_vline(xintercept = 0, linetype = "dashed") +
+    ggdist::stat_halfeye(point_interval = "median_qi", .width = c(0.66, 0.95)) +
+    scale_x_continuous(breaks = seq(-100, 400, .2)) +
+    labs(
+      x = expression(
+        Delta ~ Successional ~ distance ~ "[" * italic(d)[italic(jt) * ",0"] *
+          "]"),
+      y = ""
+    ) +
+    theme_mb())
+
+### Save ###
+
+ggsave(
+  here("outputs", "figures", "figure_3a_recovery_800dpi_24x8cm.tiff"),
+  dpi = 800, width = 24, height = 8, units = "cm"
+)
+
+(graph_a <- p1 +
+    labs(x = expression(Delta ~ Recovery)))
