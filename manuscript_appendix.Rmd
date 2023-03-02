@@ -12,8 +12,6 @@ Restoration Ecology, TUM School of Life Sciences, Technical University of Munich
 
 \* Corresponding author: [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de), ORCiD <https://orcid.org/0000-0001-5372-4174>
 
-<!--# Replace "Dike experiment" in the title -->
-
 ```{r set-up, include = FALSE, message = FALSE}
 library(here)
 library(knitr)
