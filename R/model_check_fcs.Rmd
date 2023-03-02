@@ -69,6 +69,23 @@ library(emmeans)
 
 ```{r echo = FALSE}
 rm(list = ls())
+theme_mb <- function() {
+  theme(
+    panel.background = element_rect(fill = "white"),
+    text = element_text(size = 9, color = "black"),
+    strip.text = element_text(size = 10),
+    axis.text = element_text(angle = 0, hjust = 0.5, size = 9,
+                             color = "black"),
+    axis.title = element_text(angle = 0, hjust = 0.5, size = 9,
+                              color = "black"),
+    axis.line = element_line(),
+    legend.key = element_rect(fill = "white"),
+    legend.text = element_text(size = 9),
+    legend.position = "right",
+    legend.margin = margin(0, 0, 0, 0, "cm"),
+    plot.margin = margin(0, 0, 0, 0, "cm")
+  )
+}
 ```
 
 #### Load data
@@ -118,68 +135,68 @@ plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = sand_ratio)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   facet_grid(~ survey_year_fct) +
-  labs(title = "Sand ratio [vol%]")
+  labs(title = "Sand ratio [vol%]") + theme_mb()
 plot2 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = substrate_depth)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   facet_grid(~ survey_year_fct) +
-  labs(title = "Substrate depth [cm]")
+  labs(title = "Substrate depth [cm]") + theme_mb()
 plot3 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = target_type)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   facet_grid(~ survey_year_fct) +
-  labs(title = "Target type")
+  labs(title = "Target type") + theme_mb()
 plot4 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = seed_density)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   facet_grid(~ survey_year_fct) +
-  labs(title = "Seed density [g/m²]")
+  labs(title = "Seed density [g/m²]") + theme_mb()
 (plot1 + plot2) / (plot3 + plot4)
 plot1 <- ggplot(sites %>% filter(survey_year == 2021),
                 aes(y = n, x = exposition)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   facet_grid(~ survey_year_fct) +
-  labs(title = "Exposition")
+  labs(title = "Exposition") + theme_mb()
 plot2 <- ggplot(sites, aes(y = n, x = survey_year_fct)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
-  labs(title = "Survey year")
+  labs(title = "Survey year") + theme_mb()
 plot3 <- ggplot(sites %>% filter(survey_year == 2021), aes(y = n, x = site)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   facet_grid(~ survey_year_fct) +
-  labs(title = "Blocks")
+  labs(title = "Blocks") + theme_mb()
 plot4 <- ggplot(sites, aes(y = n, x = botanist_year)) +
   geom_quasirandom(color = "grey") + geom_boxplot(fill = "transparent") +
   labs(title = "Botanists and survey year") +
-  theme(axis.text.x = element_text(angle = 90))
+  theme_mb() + theme(axis.text.x = element_text(angle = 90))
 (plot1 + plot2) / (plot3 + plot4)
 ggplot(data = sites,
        aes(x = sand_ratio, y = n, color = target_type)) +
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
   geom_boxplot(fill = "transparent") +
   facet_grid(exposition ~ survey_year_fct) +
-  labs(title = "Target type vs. sand ratio [vol%]")
+  labs(title = "Target type vs. sand ratio [vol%]") + theme_mb()
 ggplot(data = sites,
        aes(x = sand_ratio, y = n, color = substrate_depth)) +
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
   geom_boxplot(fill = "transparent") +
   facet_grid(exposition ~ survey_year_fct) +
-  labs(title = "Substrate depth [cm] vs. sand ratio [vol%]")
+  labs(title = "Substrate depth [cm] vs. sand ratio [vol%]") + theme_mb()
 ggplot(data = sites,
        aes(x = seed_density, y = n, color = target_type)) +
   geom_quasirandom(alpha = 0.5, dodge.width = 0.8) +
   geom_boxplot(fill = "transparent") +
   facet_grid(exposition ~ survey_year_fct) +
-  labs(title = "Target type vs. Seed density [g/m²]")
+  labs(title = "Target type vs. Seed density [g/m²]") + theme_mb()
 ```
 
 ### Outliers, zero-inflation, transformations?
 
 ```{r outliers, echo = FALSE}
 sites %>% group_by(exposition) %>% count(site)
-plot1 <- ggplot(sites, aes(y = n)) + geom_boxplot()
-plot2 <- ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom()
-plot3 <- ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03)
-plot4 <- ggplot(sites, aes(x = n)) + geom_density()
+plot1 <- ggplot(sites, aes(y = n)) + geom_boxplot() + theme_mb()
+plot2 <- ggplot(sites, aes(x = exposition, y = n)) + geom_quasirandom() + theme_mb()
+plot3 <- ggplot(sites, aes(x = n)) + geom_histogram(binwidth = 0.03) + theme_mb()
+plot4 <- ggplot(sites, aes(x = n)) + geom_density() + theme_mb()
 (plot1 + plot2) / (plot3 + plot4)
 ```
 
@@ -310,19 +327,21 @@ data <- data.frame(x = c(-5, 5))
 plot1 <- ggplot(data, aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 2)) +
   expand_limits(y = 0) +
-  ggtitle("Normal distribution for Intercept")
+  ggtitle("Normal distribution for Intercept") + theme_mb()
 plot2 <- ggplot(data, aes(x = x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0.3, sd = 2)) +
   expand_limits(y = 0) +
-  ggtitle("Normal distribution for treatments")
+  ggtitle("Normal distribution for treatments") + theme_mb()
+# See Lemoine 2019 https://doi.org/10.1111/oik.05985
 plot3 <- ggplot(data, aes(x = x)) +
   stat_function(fun = dcauchy, n = 101, args = list(location = 0, scale = 1)) +
   expand_limits(y = 0) +
-  ggtitle("Cauchy distribution")
+  ggtitle("Cauchy distribution") + theme_mb()
+# Software standard
 plot4 <- ggplot(data, aes(x = x)) +
   stat_function(fun = dstudent_t, args = list(df = 3, mu = 0, sigma = 2.5)) +
   expand_limits(y = 0) +
-  ggtitle(expression(Student ~ italic(t) * "-distribution"))
+  ggtitle(expression(Student ~ italic(t) * "-distribution")) + theme_mb()
 (plot1 + plot2) / (plot3 + plot4)
 ```
 
@@ -386,16 +405,16 @@ bayesplot::mcmc_trace(
 
 #### Sampling efficency: R-hat (BARG 2.B)
 
-```{r rhat, collapse = TRUE, fig.height = 3}
-m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat()
-m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat()
+```{r rhat, collapse = TRUE}
+m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank())
+m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.x = element_blank())
 ```
 
 #### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
 
-```{r ess, collapse = TRUE, fig.height = 3}
-m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff()
-m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff()
+```{r ess, collapse = TRUE}
+m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank())
+m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.x = element_blank())
 ```
 
 #### Pairs plot
@@ -408,7 +427,7 @@ m_1 %>% bayesplot::mcmc_pairs(
     "b_target_typedry_grassland", "b_seed_density8",
     "b_expositionsouth", "sigma"
            )
-)
+) + bayesplot::theme_default()
 m_2 %>% bayesplot::mcmc_pairs(
   off_diag_args = list(size = 1.2),
   pars = c(
@@ -416,23 +435,23 @@ m_2 %>% bayesplot::mcmc_pairs(
     "b_target_typedry_grassland", "b_seed_density8",
     "b_expositionsouth", "sigma"
            )
-)
+) + bayesplot::theme_default()
 ```
 
 #### Parallel coordinate plot
 
 ```{r mcmc-parcoord, collapse = TRUE}
 posterior1 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics1) +
-  theme(axis.text.x = element_text(angle = 45))
+  theme(axis.text.x = element_text(angle = 45)) + bayesplot::theme_default()
 posterior2 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics2) +
-  theme(axis.text.x = element_text(angle = 45))
+  theme(axis.text.x = element_text(angle = 45)) + bayesplot::theme_default()
 ```
 
 #### Autocorrelation check
 
 ```{r autocorrelation}
-posterior1 %>% bayesplot::mcmc_acf(lags = 10)
-posterior2 %>% bayesplot::mcmc_acf(lags = 10)
+posterior1 %>% bayesplot::mcmc_acf(lags = 10) + bayesplot::theme_default()
+posterior2 %>% bayesplot::mcmc_acf(lags = 10) + bayesplot::theme_default()
 ```
 
 ### Posterior predictive check (BARG 3.A)
@@ -440,78 +459,83 @@ posterior2 %>% bayesplot::mcmc_acf(lags = 10)
 #### Kernel density
 
 ```{r kernel-density}
-p1 <- bayesplot::ppc_dens_overlay(y, yrep1[1:50, ])
-p2 <- bayesplot::ppc_dens_overlay(y, yrep2[1:50, ])
+p1 <- bayesplot::ppc_dens_overlay(y, yrep1[1:50, ]) + bayesplot::theme_default()
+p2 <- bayesplot::ppc_dens_overlay(y, yrep2[1:50, ]) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site)
-p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$site) + bayesplot::theme_default()
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$site) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$exposition)
-p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$exposition)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$exposition) + bayesplot::theme_default()
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$exposition) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$survey_year_fct)
-p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$survey_year_fct)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$survey_year_fct) + bayesplot::theme_default()
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$survey_year_fct) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$target_type)
-p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$target_type)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$target_type) + bayesplot::theme_default()
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$target_type) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$seed_density)
-p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$seed_density)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$seed_density) + bayesplot::theme_default()
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$seed_density) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$sand_ratio)
-p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$sand_ratio)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$sand_ratio) + bayesplot::theme_default()
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$sand_ratio) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$substrate_depth)
-p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$substrate_depth)
+p1 <- ppc_dens_overlay_grouped(y, yrep1[1:50, ], group = sites$substrate_depth) + bayesplot::theme_default()
+p2 <- ppc_dens_overlay_grouped(y, yrep2[1:50, ], group = sites$substrate_depth) + bayesplot::theme_default()
 p1 / p2
 ```
 
 #### Histograms of statistics skew
 
 ```{r histogram}
-p1 <- bayesplot::ppc_stat(y, yrep1, binwidth = 0.001)
-p2 <- bayesplot::ppc_stat(y, yrep2, binwidth = 0.001)
+p1 <- bayesplot::ppc_stat(y, yrep1, binwidth = 0.001) + bayesplot::theme_default()
+p2 <- bayesplot::ppc_stat(y, yrep2, binwidth = 0.001) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$site, binwidth = 0.001) + bayesplot::theme_default()
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$site, binwidth = 0.001) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$exposition, binwidth = 0.001) + bayesplot::theme_default()
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$exposition, binwidth = 0.001) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$survey_year_fct, binwidth = 0.001) + bayesplot::theme_default()
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$survey_year_fct, binwidth = 0.001) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$target_type, binwidth = 0.001) + bayesplot::theme_default()
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$target_type, binwidth = 0.001) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$seed_density, binwidth = 0.001) + bayesplot::theme_default()
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$seed_density, binwidth = 0.001) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$sand_ratio, binwidth = 0.001) + bayesplot::theme_default()
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$sand_ratio, binwidth = 0.001) + bayesplot::theme_default()
 p1 / p2
-p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001)
-p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001)
+p1 <- ppc_stat_grouped(y, yrep1, group = sites$substrate_depth, binwidth = 0.001) + bayesplot::theme_default()
+p2 <- ppc_stat_grouped(y, yrep2, group = sites$substrate_depth, binwidth = 0.001) + bayesplot::theme_default()
 p1 / p2
 ```
 
 #### LOO cross-validation (Leave one out)
+
+plot1 \<- plot(loo1)
+
+plot2 \<- plot(loo2)
+
+plot1 / plot2
 
 ```{r loo}
 loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
 loo2 <- m_2 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
 loo1
 loo2
-plot1 <- plot(loo1)
-plot2 <- plot(loo2)
-plot1 / plot2
+plot(loo1)
+plot(loo2)
 ```
 
 Leave one out probability integral transform
 
 ```{r loo-pit}
-p1 <- bayesplot::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object))
-p2 <- bayesplot::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object))
+p1 <- bayesplot::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object)) + bayesplot::theme_default()
+p2 <- bayesplot::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object)) + bayesplot::theme_default()
 p1 / p2
 ```
 
