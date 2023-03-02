@@ -419,10 +419,8 @@ m_2 %>% bayesplot::mcmc_pairs(
 #### Parallel coordinate plot
 
 ```{r mcmc-parcoord, collapse = TRUE}
-posterior1 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics1) +
-  theme(axis.text.x = element_text(angle = 45)) + bayesplot::theme_default()
-posterior2 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics2) +
-  theme(axis.text.x = element_text(angle = 45)) + bayesplot::theme_default()
+posterior1 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics1) + bayesplot::theme_default() + theme(axis.text.x = element_text(angle = 45))
+posterior2 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics2) + bayesplot::theme_default() + theme(axis.text.x = element_text(angle = 45))
 ```
 
 #### Autocorrelation check
