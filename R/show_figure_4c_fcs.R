@@ -144,4 +144,8 @@ ggsave(
   dpi = 800, width = 16.5, height = 8, units = "cm"
   )
 
-(graph_c <- p1)
+(graph_c <- p1 +
+    theme(
+      strip.background.x = element_blank(),
+      strip.text.x = element_blank()
+    ))
