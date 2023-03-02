@@ -153,6 +153,8 @@ ggsave(
 
 (graph_b <- p1 +
     theme(
+      strip.background.x = element_blank(),
+      strip.text.x = element_blank(),
       axis.title.x = element_blank(),
       axis.text.x = element_blank(),
       axis.line.x = element_blank(),
