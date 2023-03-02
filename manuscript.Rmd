@@ -46,11 +46,7 @@ Restoration Ecology, TUM School of Life Sciences, Technical University of Munich
 3.  Sand admixture had a slightly positive effect on target variables, while substrate depth, seed density and mixture type had no effects on species persistence or FCS.
 4.  Overall, the sown vegetation developed in the desired direction, but a recovery debt remained after four years, and some plots still showed similarities to negative references from ruderal sites. In north exposition, hay meadow-seed mixtures developed closer to the respective reference communities than dry grasslands.
 5.  In south exposition, the sown communities developed poorly which might be due to a severe drought during establishment and the addition and removal of a geotextile. This initial negative effect remained over the entire observation period.
-6.  Synthesis and applications: Site-adapted seed mixtures make restoration more efficient. However, applying several seed--substrate combinations might foster beta diversity. Furthermore, additional management efforts are recommended, as they might be necessary to reduce the recovery debt and re-sowing after unfavourable conditions.
-
-\clearpage
-
-\newpage
+6.  Synthesis and applications: Site-adapted seed mixtures make restoration more efficient. However, applying several seed--substrate combinations might foster beta diversity. Furthermore, additional management efforts are recommended, as they might be necessary to reduce the recovery debt and re-sowing after unfavourable conditions. \clearpage \newpage
 
 # Keywords {.unnumbered}
 
@@ -134,19 +130,25 @@ Data, code and the entire model specifications and evaluations are stored on Git
 
 # Results
 
-## Weak effects of restoration treatments
-
-We could identify a statistically clear positive effect of the sand admixture on the persistence of sown species and on the recovery rate (Figure \@ref(fig:effects)). The posterior distributions are also shown in the interaction plots that separate exposition and survey year (Figures \@ref(fig:persistence), \@ref(fig:fcs), \@ref(fig:recovery)). For all three response variables, the vegetation developed strongly positive after one year, but the recovery rate slowed down in the following years. Both expositions had similar trends but for all responses, the values were clearly lower in south exposition, e.g., persistence values were on average more than 46% higher in north exposition (Figure \@ref(fig:persistence)). The interactions of restoration treatments were neither clear nor strong (Figures \@ref(fig:persistence), \@ref(fig:fcs), \@ref(fig:recovery)). Persistence of both seed mixture types was slightly positively affected by sand admixture on the north exposition (+ 6--7 ± 4%, Figure \@ref(fig:persistence)).
-
 ## Hay meadows on north exposition closer to reference
 
 The ordination visualizes the species composition of seed mixtures and the development of the plots over time (Figure \@ref(fig:nmds)). The NMDS confirmed that the seed mixtures were variable, but distinctive for hay meadows and dry grasslands and ascertained the intended direction of the vegetation development. As one exception, hay meadows in south exposition did not develop towards their seed-mixture compositions.
 
-The reference sites had a larger variation than the seed mixtures and were close to the seed mixtures but hardly overlapped (Figure \@ref(fig:nmds)). The positions of the reference sites were shifted to the left in comparison to the seed mixtures, which means in the direction of early successional states. Nonetheless, they still differed from the negative references of ruderal vegetation. Negative references were only available on the south exposition and they were located in the NMDS between the positive reference sites and the state of restored plots in 2021. Hay meadow-seed mixtures led to a closer development to hay meadow references than dry grasslands to their references (Figure \@ref(fig:effects), \@ref(fig:recovery)). This was especially the case in north exposition (Figure \@ref(fig:nmds)). \clearpage \newpage
+The reference sites had a larger variation than the seed mixtures and were close to the seed mixtures but hardly overlapped (Figure \@ref(fig:nmds)). The positions of the reference sites were shifted to the left in comparison to the seed mixtures, which means in the direction of early successional states. Nonetheless, they still differed from the negative references of ruderal vegetation. Negative references were only available on the south exposition and they were located in the NMDS between the positive reference sites and the state of restored plots in 2021. Hay meadow-seed mixtures led to a closer development to hay meadow references than dry grasslands to their references (Figure \@ref(fig:effects)A, \@ref(fig:interactions)A). This was especially the case in north exposition (Figure \@ref(fig:nmds)).
+
+## Weak effects of restoration treatments
+
+We could identify a statistically clear positive effect of the sand admixture on the persistence of sown species and on the recovery rate (Figure \@ref(fig:effects)). The posterior distributions are also shown in the interaction plots that separate exposition and survey year (Figures \@ref(fig:interactions)). For all three response variables, the vegetation developed strongly positive after one year, but the recovery rate slowed down in the following years. Both expositions had similar trends but for all responses, the values were clearly lower in south exposition, e.g., persistence values were on average more than 46% higher in north exposition (Figure \@ref(fig:interactions)B). The interactions of restoration treatments were neither clear nor strong (Figures \@ref(fig:interactions)). Persistence of both seed mixture types was slightly positively affected by sand admixture on the north exposition (+ 6--7 ± 4%, Figure \@ref(fig:interactions)B). \clearpage \newpage
 
 # Discussion
 
 The vegetation of the dike experiment developed in the desired direction, but with a decelerating recovery rate. A significantly worse effect during establishment phase remained over the complete observation period in south compared to north exposition. All in all, it was hardly possible to identify any best seed--substrate combinations, although the hay meadows developed closer to their reference on the north exposition than the dry grasslands.
+
+## The success of the restoration approaches
+
+The seed mixtures and their positive reference sites were similar but hardly overlapped (Figure \@ref(fig:nmds)). The position on the NMDS suggests that the seed mixture represents a later successional stage than the references. The NMDS shows a slightly better adaptation of hay meadows to the north exposition than of dry grasslands (Figure \@ref(fig:interactions)A). This can be expected from the requirements of hay meadows for mesic conditions which can be provided on north-exposed dike slopes [@Batori.2020; @Oberdorfer.1993]. On the southern exposition, the plots of hay meadows developed rather to dry grassland references which indicates an inefficient restoration by using a non-adapted seed mixture.
+
+The vegetation developed generally in the desired direction but was still distinct from positive references and seed mixtures after four years. In the south exposition, the plots were rather similar to the negative reference of dry, ruderal vegetation. The gap between goal and restoration outcome was also shown for other sowing experiments or restorations [@mitchley2012; @Engst.2016; @Kaulfuss.2022] or for dike vegetation compared with semi-natural references [@Batori.2016]. This result is not surprising since the 'recovery debt' is a general phenomenon of grassland restoration [@MorenoMateos.2017; @jones2018].
 
 ## General effects of treatments and exposition
 
@@ -157,12 +159,6 @@ The vegetation in south exposition had a different species composition, which co
 ## No interaction effect of seed--substrate combinations
 
 Our aim was to identify perfect seed--substrate combinations regarding restoration effectiveness and biodiversity. For evaluating effectiveness, we measured the persistence of the sown species and for fostering plant biodiversity in general, we measured the FCS. However, we could not identify an interaction effect for neither one of the indices. We would have expected a better performance of hay-meadow seed mixtures with lower sand admixture and for dry grasslands with higher sand admixture. Our results suggest that, at least after four years, the substrate conditions are within the range of both seed mixture types (hay meadows, dry grasslands). Although, both types are clearly phytosociologically and functionally distinct, they are still relatively closely related because they contain shared species and could develop under similar site conditions with modified sub-associations [Appendix A3, @husicka2003; @Oberdorfer.1993]. Other grassland studies could identify more or less clear interactions of opposing habitat preferences or functional traits along the gradients of productivity, moisture, and nutrients [@Zirbel.2020; @Freitag.2021; @Kaulfuss.2022]. However, these studies did not work with an experimental set up of different seed--substrate combinations, but analysed the result of habitat and biotic filtering after one, five and about 15 years, respectively. Furthermore, the non-existence of ideal combinations could be explained by priority effects which means that the species of the imperfect-adapted seed mixture type could establish earlier and pre-empted the available niches for the species of related habitat types [@Fukami.2015].
-
-## The success of the restoration approaches
-
-The seed mixtures and their positive reference sites were similar but hardly overlapped (Figure \@ref(fig:nmds)). The position on the NMDS suggests that the seed mixture represents a later successional stage than the references. The NMDS shows a slightly better adaptation of hay meadows to the north exposition than of dry grasslands (Figure \@ref(fig:recovery)). This can be expected from the requirements of hay meadows for mesic conditions which can be provided on north-exposed dike slopes [@Batori.2020; @Oberdorfer.1993]. On the southern exposition, the plots of hay meadows developed rather to dry grassland references which indicates an inefficient restoration by using a non-adapted seed mixture.
-
-The vegetation developed generally in the desired direction but was still distinct from positive references and seed mixtures after four years. In the south exposition, the plots were rather similar to the negative reference of dry, ruderal vegetation. The gap between goal and restoration outcome was also shown for other sowing experiments or restorations [@mitchley2012; @Engst.2016; @Kaulfuss.2022] or for dike vegetation compared with semi-natural references [@Batori.2016]. This result is not surprising since the 'recovery debt' is a general phenomenon of grassland restoration [@MorenoMateos.2017; @jones2018].
 
 \clearpage
 
@@ -236,7 +232,7 @@ read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
 
 Characteristics of the substrates used for the sowing experiment on river dikes. Soil samples of the three substrates were analyzed for the fraction \< 2 mm. The soil texture was classified according to the 'Bodenkundliche Kartieranleitung' [@BodenkundlKartieranl.2005]. The pH was measured in CaCl~2~ solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in a CaCl~2~ extract. For calculating CaCO~3~, a sub-sample was annealed at 550 °C and the measured C amount multiplied with 8.33. To calculate total N and the C/N ratio, a sub-sample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand.
 
-```{r tab.id = "substrate", ft.align = "left", tab.cap = "Substrates"}
+```{r tab.id = "substrate", ft.align = "left", tab.cap = ""}
 read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
          show_col_types = FALSE) %>%
   select(-starts_with("lfl")) %>%
@@ -307,11 +303,13 @@ Local setting and design of the multifactorial experiment on grassland sowing at
 
 ## Figure 2
 
-```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = "The posterior density distributions (grey) of the treatments calculated over all four surveyed years of sown grassland communities at a river dike. Furthermore, the median and the 66% and 95% credible intervals are shown: the persistence of sown species (A), the Favourable Conservation Status (FCS; B) and the successional distance to reference (recovery; C). The FCS is the ratio of target species to non-target species. Note that the zero lines indicate that both levels have equal values. This means, e.g., that hay meadows are closer to their reference than dry grasslands  (C)."}
+```{r fig.id = "nmds", fig.asp = 0.9696, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
-  here::here("outputs", "figures", "figure_2_800dpi_16.5x5cm.tiff")
+  here::here("outputs", "figures", "figure_2_nmds_800dpi_16.5x16cm.tiff")
   )
 ```
+
+The species composition of sown experimental plots on a river dike over time and in comparison with reference sites and the seed mixtures. Both expositions and both seed mixture types are shown in separated panels. The NMDS was based on the Sørensen dissimilarity and data of 288 plots observed over four years after sowing in 2018 (circles). These experimental plots were compared with the seed mixtures (black squares) and 98 positive and negative reference plots (filled symbols) from older dike grasslands in the surroundings [@bauer2023] and six plots from sPlotOpen [@Sabatini.2021]. The ellipses show the standard error of the groups. 2D-stress: 0.21.
 
 \clearpage
 
@@ -319,13 +317,13 @@ knitr::include_graphics(
 
 ## Figure 3 {.unnumbered}
 
-```{r fig.id = "persistence", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "Persistence (1-*B*~sor~) of sown species of sown grassland communities at a river dike. The plots had substrates with different sand admixtures and were sown with two different seed mixture types. Twenty species were sown per plot. Shown are the medians and 95% credible intervals of the posterior distributions, which were derived from a Bayesian linear mixed-effects model (BLMM)."}
+```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
-  here::here(
-    "outputs", "figures", "figure_3_persistence_epred_800dpi_16.5x8cm.tiff"
-    )
+  here::here("outputs", "figures", "figure_3_800dpi_16.5x5cm.tiff")
   )
 ```
+
+Effects of treatments on the development of sown grassland communities at a river dike. The posterior density distributions (grey) is calculated over all four surveyed years and both expositions. Shown are the medians, 66% and 95% credible intervals, which were derived from a Bayesian linear mixed-effects model (BLMM). (A) The persistence of sown species, (B) the Favourable Conservation Status (FCS) and (C) the recovery completeness compared to reference sites. The FCS is the ratio of target species to non-target species. Note that the zero lines indicate that both levels have equal values. This means, e.g., that hay meadows are closer to their reference than dry grasslands (C).
 
 \clearpage
 
@@ -333,39 +331,13 @@ knitr::include_graphics(
 
 ## Figure 4 {.unnumbered}
 
-```{r fig.id = "fcs", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The Favourable Conservation Status (FCS) of sown grassland communities at a river dike. The plots had substrates with different sand admixtures and were sown with two different seed mixtures. The zero line indicates that target and non-target species are balanced. Positive values indicate that there are more target species. Shown are the medians and 95% credible intervals of the posterior distributions, which were derived from a Bayesian linear mixed-effects model (BLMM)."}
+```{r fig.id = "interactions", fig.asp = 1.2121, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
-  here::here("outputs", "figures", "figure_4_fcs_epred_800dpi_16.5x8cm.tiff")
+  here::here("outputs", "figures", "figure_4_800dpi_16.5x20cm.tiff")
   )
 ```
 
-\clearpage
-
-\newpage
-
-## Figure 5 {.unnumbered}
-
-```{r fig.id = "recovery", fig.asp = 0.4848, fig.width = 6.49, fig.cap = "The recovery or successional distance (*d~jt,0~*) of sown grassland communities at a river dike in comparison to the respective reference sites (mesic hay meadows or semi-dry calcareous grasslands). The plots had substrates with different sand admixtures and were sown with two different seed mixtures. The zero lines indicate the mean position of the reference sites for each habitat type on the NMDS axis 1 (Figure 7). The grey area marks the standard deviation of the position of the reference sites. Shown are the medians and 95% credible intervals of the posterior distributions, which were derived from a Bayesian linear mixed-effects model (BLMM)."}
-knitr::include_graphics(
-  here::here(
-    "outputs", "figures", "figure_5_recovery_epred_800dpi_16.5x8cm.tiff"
-    )
-  )
-```
-
-\clearpage
-
-\newpage
-
-## Figure 6 {.unnumbered}
-
-```{r fig.id = "nmds", fig.asp = 0.9696, fig.width = 6.49, fig.cap = ""}
-knitr::include_graphics(
-  here::here("outputs", "figures", "figure_6_nmds_800dpi_16.5x16cm.tiff")
-  )
-```
-
-The species composition of sown experimental plots on a river dike over time and in comparison with reference sites and the seed mixtures. Both expositions and both seed mixture types are shown in separated panels. The NMDS was based on the Sørensen dissimilarity and data of 288 plots observed over four years after sowing in 2018 (circles). These experimental plots were compared with the seed mixtures (black squares) and 98 positive and negative reference plots (filled symbols) from older dike grasslands in the surroundings [@bauer2023] and six plots from sPlotOpen [@Sabatini.2021]. The ellipses show the standard error of the groups. 2D-stress: 0.21.
+The development sown grassland communities at a river dike. The plots had substrates with different sand admixtures and were sown with two different seed mixture types. Three indices are evaluated. (A) Recovery completeness (*d~jt~*~,0~): the zero lines indicate the mean position of the reference sites for each habitat type on the NMDS axis 1 (Figure \@ref(fig:nmds)). The grey area marks the standard deviation of the position of the reference sites. (B) Persistence of sown species: losses component of the temporal beta-diversity index (1 − *B*~sor~) (C) Favourable Conservation Status (FCS): the zero line indicates that target and non-target species are balanced. Positive values indicate that there are more target species. Shown are the medians and 95% credible intervals of the posterior distributions, which were derived from a Bayesian linear mixed-effects model (BLMM).
 
 \clearpage
 
