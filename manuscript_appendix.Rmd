@@ -1,5 +1,5 @@
 ---
-title: "Appendix of Bauer et al. (2023) Dike experiment"
+title: "Appendix of Bauer et al. (2023) bioRxiv"
 author: Markus Bauer*, Jakob Huber, Johannes Kollmann
 output:
   officedown::rdocx_document:
@@ -30,7 +30,8 @@ knitr::opts_chunk$set(
 set_flextable_defaults(
   font.family = "Times New Roman",
   font.size = 11,
-  text.align = "center"
+  text.align = "center",
+  padding = 2
   )
 ```
 
@@ -57,7 +58,7 @@ read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
 
 # Appendix A2
 
-All sown seed mixtures can be found on GitHub in the folder \`outputs/tables/ table_a2_seed_mixtures.csv\`. There it is indicated which species are combined and the ratio in the specific seed mixture.
+All sown seed mixtures can be found on GitHub in the folder 'outputs/tables/ table_a2_seed_mixtures.csv'. There, we indicate which species were combined and their respective ratio in the specific seed mixture.
 
 # Appendix A3
 
@@ -75,7 +76,7 @@ This figure was supported by the TRY initiative on plant traits (<http://www.try
 
 # Appendix A4
 
-Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species. This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment.
+Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species (presence-absence data). This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment.
 
 ```{r tab.id = "establishment", tab.cap = ""}
 read_csv(
@@ -93,7 +94,7 @@ read_csv(
   rename(
     Species = name,
     Family = family,
-    "Seeded plots [#]" = total_seeded_2018,
+    "Sown plots [#]" = total_seeded_2018,
     "Establishment rate [%]" = rate_2018,
     "2019" = rate_2019,
     "2020" = rate_2020,
