@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="92e3aca6-96a0-4280-a4e0-50e2308b82b7" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="ae327b08-39c4-411c-9984-f52b351610cc" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
   <dataset>
+    <alternateIdentifier>https://doi.org/10.XXX</alternateIdentifier>
+    <shortName>Experiment on Danube dike</shortName>
     <title>Danube old dikes</title>
     <creator id="https://orcid.org/0000-0001-5372-4174">
       <individualName>
@@ -46,17 +48,35 @@
       <role>Professor</role>
     </associatedParty>
     <pubDate>2023</pubDate>
-    <abstract>Not written yet</abstract>
+    <language>English</language>
+    <abstract>A multifactorial experiment was set up on a dike of the Danube 
+River in SE Germany. The aim of the experiment was to find suitable seed-
+substrate combinations. Four treatments were tested on both dike slopes: nutrient 
+reduction of agricultural soil by sand admixture (0, 25, 50%), substrate depths 
+(15, 30 cm), seed density (4, 8 g / m²), and seed mixture type (mesic hay 
+meadow, semi-dry calcareous grasslands. The 48 treatment combinations were 
+replicated six times resulting in 288 plots of a size of 2 x 3 m². The 
+experiment was established in April 2018 and observed until 2021. The 
+vegetation surveys according to Braun-Blanquet were conducted using the Londo 
+scale.</abstract>
     <keywordSet>
-      <keyword>rivers</keyword>
-      <keyword>vegetation dynamics</keyword>
+      <keyword>droughts</keyword>
+      <keyword>grasslands</keyword>
+      <keyword>meadows</keyword>
+      <keyword>monitoring</keyword>
+      <keyword>permanent plots</keyword>
+      <keyword>plant communities</keyword>
       <keyword>restoration</keyword>
+      <keyword>rivers</keyword>
+      <keyword>soil samples</keyword>
+      <keyword>species composition</keyword>
+      <keyword>vegetation</keyword>
       <keywordThesaurus>LTER controlled vocabulary</keywordThesaurus>
     </keywordSet>
     <keywordSet>
-      <keyword>beta diversity</keyword>
-      <keyword>temperate grassland</keyword>
+      <keyword>experiment</keyword>
       <keyword>dike</keyword>
+      <keyword>temperate grassland</keyword>
       <keywordThesaurus>own vocabulary</keywordThesaurus>
     </keywordSet>
     <intellectualRights>CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/deed.en</intellectualRights>
@@ -106,28 +126,8 @@
         <country>Germany</country>
       </address>
       <electronicMailAddress>markusbauer@mailbox.org</electronicMailAddress>
-      <onlineUrl>DOI address to the database</onlineUrl>
+      <onlineUrl>https://www3.ls.tum.de/roek/mitarbeiter-in/prof-dr-johannes-kollmann/</onlineUrl>
     </contact>
-    <methods>
-      <methodStep>
-        <description>
-          <section>
-            <title>Methods for vegetation surveys</title>
-            <para>
-    </para>
-            <para>
-      Plots were distributed pairwise on each side of the dike
-      (water/land). Size of plots 25 m². Vegetation surveys with
-      Braun-Blanquet method and Pfadenhauer scale. Vegetation cover and
-      moss cover were estimated, and vegetation height measured (10cm
-      steps).
-    </para>
-            <para>
-      WEITER BEARBEITEN
-    </para>
-          </section>
-        </description>
-      </methodStep>
-    </methods>
+    <referencePublication>Bauer et al. (bioRxiv) DOI XXX</referencePublication>
   </dataset>
 </eml:eml>
