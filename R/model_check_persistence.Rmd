@@ -405,7 +405,7 @@ m_1 %>% bayesplot::mcmc_pairs(
     "b_target_typedry_grassland", "b_seed_density8",
     "b_expositionsouth", "sigma"
            )
-) + bayesplot::theme_default()
+)
 m_2 %>% bayesplot::mcmc_pairs(
   off_diag_args = list(size = 1.2),
   pars = c(
@@ -413,7 +413,7 @@ m_2 %>% bayesplot::mcmc_pairs(
     "b_target_typedry_grassland", "b_seed_density8",
     "b_expositionsouth", "sigma"
            )
-) + bayesplot::theme_default()
+)
 ```
 
 #### Parallel coordinate plot
