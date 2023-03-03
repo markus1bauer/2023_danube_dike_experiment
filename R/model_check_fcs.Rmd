@@ -427,7 +427,7 @@ m_1 %>% bayesplot::mcmc_pairs(
     "b_target_typedry_grassland", "b_seed_density8",
     "b_expositionsouth", "sigma"
            )
-) + bayesplot::theme_default()
+)
 m_2 %>% bayesplot::mcmc_pairs(
   off_diag_args = list(size = 1.2),
   pars = c(
@@ -435,7 +435,7 @@ m_2 %>% bayesplot::mcmc_pairs(
     "b_target_typedry_grassland", "b_seed_density8",
     "b_expositionsouth", "sigma"
            )
-) + bayesplot::theme_default()
+)
 ```
 
 #### Parallel coordinate plot
@@ -513,12 +513,6 @@ p1 / p2
 ```
 
 #### LOO cross-validation (Leave one out)
-
-plot1 \<- plot(loo1)
-
-plot2 \<- plot(loo2)
-
-plot1 / plot2
 
 ```{r loo}
 loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
@@ -620,7 +614,7 @@ ggplot(
   geom_linerange(aes(xmin = l, xmax = h), position = pos, linewidth = 2) +
   geom_linerange(aes(xmin = ll, xmax = hh), position = pos) +
   geom_point(position = pos, color = "black") +
-  coord_cartesian(xlim = c(-1, 1)) +
+  coord_cartesian(xlim = c(-.65, 1)) +
   bayesplot::theme_default() +
   ggtitle("Posterior distbributions (mean, CI66, CI95)")
 ```
