@@ -26,38 +26,26 @@ rm(list = ls())
 
 
 
-### 1 Methods and units #######################################################
+## 1 Methods and units #######################################################
 
 
-methods_file <- here("data", "text", "methods.odt")
-methods <- set_methods(methods_file)
+#methods_file <- here("data", "text", "methods.odt")
+#methods <- set_methods(methods_file)
 
-EMLassemblyline::view_unit_dictionary()
+#EMLassemblyline::view_unit_dictionary()
 # List of standard units, which should be used in metadata file
 
 
 
-### 2 Raw data ################################################################
+## 2 Raw data ################################################################
 
-### a data_raw_species  -------------------------------------------------------
+## 3 Processed data ##########################################################
 
-### b data_raw_traits  --------------------------------------------------------
-
-### c data_raw_sites  ---------------------------------------------------------
-
-### 3 Processed data ##########################################################
-
-### a data_processed_species  -------------------------------------------------
-
-### b data_processed_traits  --------------------------------------------------
-
-### c data_processed_sites  ---------------------------------------------------
-
-### 4 Put data table together #################################################
+## 4 Put data table together #################################################
 
 
 
-### 5 Contact #################################################################
+## 5 Contact #################################################################
 
 
 address <- list(
@@ -110,12 +98,12 @@ contact <- list(
   electronicMailAddress = creator$electronicMailAddress,
   address = address,
   organizationName = "Technical University of Munich",
-  onlineUrl = "DOI address to the database"
+  onlineUrl = "https://www3.ls.tum.de/roek/mitarbeiter-in/prof-dr-johannes-kollmann/"
 )
 
 
 
-### 6 Temporal and spatial coverage ###########################################
+## 6 Temporal and spatial coverage ###########################################
 
 
 geographicDescription <- "Danube dike near Deggendorf"
@@ -134,36 +122,61 @@ coverage <- set_coverage(
 
 
 
-### 7 Description #############################################################
+## 7 Description #############################################################
 
 
 pubDate <- "2023"
 
 title <- "Danube old dikes"
 
-abstract <- "Not written yet"
+abstract <- "A multifactorial experiment was set up on a dike of the Danube 
+River in SE Germany. The aim of the experiment was to find suitable seed-
+substrate combinations. Four treatments were tested on both dike slopes: nutrient 
+reduction of agricultural soil by sand admixture (0, 25, 50%), substrate depths 
+(15, 30 cm), seed density (4, 8 g / m²), and seed mixture type (mesic hay 
+meadow, semi-dry calcareous grasslands. The 48 treatment combinations were 
+replicated six times resulting in 288 plots of a size of 2 x 3 m². The 
+experiment was established in April 2018 and observed until 2021. The 
+vegetation surveys according to Braun-Blanquet were conducted using the Londo 
+scale."
 
 keywordSet <- list(
   list(
     keywordThesaurus = "LTER controlled vocabulary",
     keyword = list(
+      "droughts",
+      "grasslands",
+      "meadows",
+      "monitoring",
+      "permanent plots",
+      "plant communities",
+      "restoration",
       "rivers",
-      "vegetation dynamics",
-      "restoration"
+      "soil samples",
+      "species composition",
+      "vegetation"
       )
   ),
   list(
     keywordThesaurus = "own vocabulary",
     keyword = list(
-      "beta diversity",
-      "temperate grassland",
-      "dike"
+      "experiment",
+      "dike",
+      "temperate grassland"
       )
   )
 )
 
 intellectualRights <-
   "CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/deed.en"
+
+alternate_identifier <- "https://doi.org/10.XXX"
+
+short_name <- "Experiment on Danube dike"
+
+language <- "English"
+
+reference_publication <- "Bauer et al. (bioRxiv) DOI XXX"
 
 
 
@@ -175,15 +188,19 @@ intellectualRights <-
 
 dataset <- list(
   title = title,
+  shortName = short_name,
   pubDate = pubDate,
   creator = creator,
   associatedParty = associatedParty,
   intellectualRights = intellectualRights,
+  alternateIdentifier = alternate_identifier,
   abstract = abstract,
   keywordSet = keywordSet,
   coverage = coverage,
-  contact = contact,
-  methods = methods#,
+  referencePublication = reference_publication,
+  language = language,
+  contact = contact#,
+  #methods = methods,
   #dataTable = dataTable,
   #additonalMetadata = list(metadata = list(unitList = unitList))
   )
