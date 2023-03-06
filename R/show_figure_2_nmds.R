@@ -19,7 +19,7 @@ library(tidyverse)
 library(vegan)
 
 ### Start ###
-rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d", "ordi")))
+#rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d", "ordi")))
 setwd(here("data", "processed"))
 
 ### Functions ###
@@ -49,20 +49,24 @@ vegan_cov_ellipse <- function(cov, center = c(0, 0), scale = 1, npoints = 100) {
 
 #### Load sites data and model ###
 
-sites_nmds <- read_csv(
-  "data_processed_sites_nmds.csv",
+sites <- read_csv(
+  here("data", "processed", "data_processed_sites_nmds.csv"),
   col_names = TRUE,
   na = c("na", "NA", ""),
-  col_types = cols(.default = "?")
+  col_types = cols(
+    .default = "?",
+    exposition = col_factor(levels = c("north", "south", "other")),
+    target_type = col_factor(levels = c("hay_meadow", "dry_grassland", "other"))
+  )
 )
 
-sites_nmds %>%
+sites %>%
   group_by(source, esy) %>%
   filter(esy == "R1A" | esy == "R22" | esy == "V38") %>%
   count()
 
-base::load(file = here("outputs", "models", "model_nmds.Rdata"))
-ordi
+#base::load(file = here("outputs", "models", "model_nmds.Rdata"))
+#ordi
 
 
 
@@ -78,29 +82,29 @@ ordi
 ellipses <- tibble()
 
 ### Copy references to both expositions ###
-data <- sites_nmds %>%
+data <- sites %>%
   filter(exposition == "other") %>%
   mutate(exposition = "north")
 data <- data %>%
   mutate(exposition = "south") %>%
   bind_rows(data)
-sites_nmds <- sites_nmds %>%
+sites <- sites %>%
   filter(!(exposition == "other")) %>%
   bind_rows(data)
 
 ### Copy negative references to both target_types ###
-data <- sites_nmds %>%
+data <- sites %>%
   filter(target_type == "other") %>%
   mutate(target_type = "hay_meadow")
 data <- data %>%
   mutate(target_type = "dry_grassland") %>%
   bind_rows(data)
-sites_nmds <- sites_nmds %>%
+sites <- sites %>%
   filter(!(target_type == "other")) %>%
   bind_rows(data) %>%
   filter(!(reference == "negative_reference" & exposition == "north"))
 
-sites_nmds <- sites_nmds %>%
+sites <- sites %>%
   ### Select variables to plot ###
   select(
     id, NMDS1, NMDS2, reference, exposition, target_type # modify group
@@ -124,9 +128,9 @@ sites_nmds <- sites_nmds %>%
   )
 
 ### Calculate ellipses for plot ###
-for (group in levels(sites_nmds$group_type)) {
+for (group in levels(sites$group_type)) {
   
-  ellipses_calc <- sites_nmds %>%
+  ellipses_calc <- sites %>%
     filter(group_type == group) %>%
     with(
       cov.wt(
@@ -159,7 +163,7 @@ for (group in levels(sites_nmds$group_type)) {
    geom_point(
      aes(y = NMDS2, x = NMDS1,
          color = reference, shape = reference, alpha = reference),
-     data = sites_nmds,
+     data = sites,
      cex = 2
    ) +
    facet_grid(
@@ -174,7 +178,7 @@ for (group in levels(sites_nmds$group_type)) {
    geom_path(
      aes(x = NMDS1, y = NMDS2, color = reference),
      data = data_ellipses,
-     size = 1,
+     linewidth = 1,
      show.legend = FALSE
    ) +
    coord_fixed() +
