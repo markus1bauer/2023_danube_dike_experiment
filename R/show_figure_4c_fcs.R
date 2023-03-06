@@ -55,7 +55,7 @@ sites <- read_csv(
   )
 
 ### * Model ####
-load(file = here("outputs", "models", "model_fcs_2.Rdata"))
+base::load(file = here("outputs", "models", "model_fcs_2.Rdata"))
 
 model <- sites %>%
   add_epred_draws(m2, allow_new_levels = TRUE)
