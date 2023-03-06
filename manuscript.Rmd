@@ -42,23 +42,19 @@ Restoration Ecology, TUM School of Life Sciences, Technical University of Munich
 # Abstract {.unnumbered}
 
 1.  Sowing is a well-established restoration technique to overcome dispersal limitation and site-specific seed mixtures are most effective to achieve functional communities. This is especially important if the restored vegetation has to protect critical infrastructure like roadsides and dikes. Here, an improved seed--substrate combination will secure slope stability, reduce mowing efforts, and generate biodiverse grasslands.
-2.  A factorial field experiment addressed this topic on a dike at the Danube River in SE Germany in the 2018--2021 time period. On 288 plots, we tested three sand admixtures, two substrate depths, two seed densities and two seed mixture types (mesic hay meadow, semi-dry calcareous grassland) in north or south exposition, and measured the persistence of sown species, the Favourable Conservation Status (FCS), and the successional distance to reference sites as calculated from an ordination.
-3.  Sand admixture had a slightly positive effect on target variables, while substrate depth, seed density and mixture type had no effects on species persistence or FCS.
-4.  Overall, the sown vegetation developed in the desired direction, but a recovery debt remained after four years, and some plots still showed similarities to negative references from ruderal sites. In north exposition, hay meadow-seed mixtures developed closer to the respective reference communities than dry grasslands.
-5.  In south exposition, the sown communities developed poorly which might be due to a severe drought during establishment and the addition and removal of a geotextile. This initial negative effect remained over the entire observation period.
-6.  Synthesis and applications: Site-adapted seed mixtures make restoration more efficient. However, applying several seed--substrate combinations might foster beta diversity. Furthermore, additional management efforts are recommended, as they might be necessary to reduce the recovery debt and re-sowing after unfavourable conditions. \clearpage \newpage
+2.  A factorial field experiment addressed this topic on a dike at the Danube River in SE Germany in the 2018--2021 time period. On 288 plots, we tested three sand admixtures, two substrate depths, two seed densities and two seed mixture types (mesic hay meadow, semi-dry calcareous grassland) in north or south exposition, and measured the recovery completeness by calculating the successional distance to reference sites, the persistence of sown species, and the Favourable Conservation Status (FCS) of target species in general.
+3.  Overall, the sown vegetation developed in the desired direction, but a recovery debt remained after four years, and some plots still showed similarities to negative references from ruderal sites. In north exposition, hay meadow-seed mixtures developed closer to the respective reference communities than dry grasslands.
+4.  In south exposition, the sown communities developed poorly which might be due to a severe drought during establishment. This initial negative effect remained over the entire observation period.
+5.  Sand admixture had a slightly positive effect on target variables, while substrate depth, seed density and mixture type had no effects on species persistence or FCS.
+6.  Synthesis and applications: Site-adapted seed mixtures can make restoration more efficient. However, applying several seed--substrate combinations might foster beta diversity. Furthermore, additional management efforts are recommended, as they might be necessary to reduce the recovery debt, as well as re-sowing after unfavourable conditions. \clearpage \newpage
 
 # Keywords {.unnumbered}
 
 Artificial soil mixture
 
-Community assembly
-
 Dry grasslands
 
 Ecological restoration
-
-Favourable Conservation Status
 
 Hay meadow
 
@@ -67,8 +63,6 @@ Levee
 Persistence
 
 River embankment
-
-Soil restoration
 
 Sowing
 
@@ -90,15 +84,15 @@ Dikes are promising sites for the restoration of species-rich grasslands because
 
 The aim of this study is to identify the best combinations of seed mixtures and substrates for vital and species-rich grasslands on north- and south-exposed dike slopes. An experiment was set up to test agricultural soil with different amounts of sand admixture, substrate depths, seed densities, and seed mixture types. We expected a better development of dry grassland in the south exposition with shallow and sandy substrates, and of mesic meadows in north exposition on less sandy and deep substrates. Furthermore for slopes, higher seed densities are recommended for a succesfull establishment [@KleberLerchbaumer.2017], albeit without experimental evidence.
 
-To measure the success of restoration, we chose three indices. First, we observed the persistence of the sown species, which is a key objective of the restoration measure sowing [@Wilsey.2021]. For this purpose, the presence of the sown species was monitored for three consecutive years. Second, we calculated the Favourable Conservation Status (FCS) which distinguishes habitat-characteristic and non-typical derived diversity [@Helm.2015]. Third, the recovery completeness was determined by measuring the successional distance to the reference grasslands [@Rydgren.2019]. To complement these indices, the success of restoration or the difference from desired conditions was evaluated [cf. @Brudvig.2017b]. This was reached by comparing the species composition of the experimental plots with reference sites. We tested following hypotheses after four years of observation:
+The success of restoration or the difference from desired conditions was evaluated [cf. @Brudvig.2017b] by comparing the species composition of the experimental plots with reference sites. The successional distance to the reference grasslands determined the recovery completeness [@Rydgren.2019]. Furthermore, we observed the persistence of the sown species, which is a key objective of the restoration measure sowing [@Wilsey.2021]. For this purpose, the presence of the sown species was monitored for three consecutive years. Finally, the Favourable Conservation Status (FCS) was calculated which distinguishes habitat-characteristic and non-typical derived diversity [@Helm.2015]. We tested following hypotheses after four years of observation:
 
 1.  Establishment of mesic vs dry grassland mixtures is facilitated by site conditions on northern and southern dike slopes, respectively.
 
-2.  Nutrient reduction (by sand addition) and shallow soil increase establishment of dry grassland compared to mesic mixtures.
+2.  Nutrient reduction by sand addition and shallow substrates increase the establishment of dry-grassland compared to mesic seed mixtures.
 
-3.  Reduced soil resources benefit especially target species in comparison to non-target species(, thus increasing conservation value).
+3.  Reduced soil resources benefit especially target species in comparison to non-target species.
 
-4.  Higher seed density increases generally establishment of sown plants and suppresses non-target species.
+4.  Higher seed density increases the establishment of sown plants and suppresses non-target species.
 
 \clearpage
 
@@ -120,7 +114,9 @@ Reference vegetation surveys were extracted from sPlotOpen [@Sabatini.2021] and 
 
 ## Statistical analyses {.unnumbered}
 
-To measure the effects of the treatments on our three response variables, we calculated Bayesian linear mixed-effects models (BLMM) with the random effect plot nested in block with the Cauchy prior [see @lemoine2019]. Furthermore, we included as a fixed effect the botanists recording a certain plot. For the simple effects of the treatments, we chose plausible weakly informative priors. To evaluate the influence of the priors, prior predictive checks and models with non-informative priors were calculated. For the computation, we used four chains, a thinning rate of two, 5,000 iterations for warm-up, and 10,000 in total. We used the Markov Chain Monte Carlo method (MCMC) with the no-U-turn Sampler (NUTS), which is based on the Hamiltonian Monte Carlo approach (HMC). For evaluating the computation, the convergence of the four chains was checked using trace plots and evaluating R-hat values, and MCMC chain resolution by the effective sampling size (ESS). Posterior predictive checks were done with Kernel density estimates histograms of statistics skew and leave-one-out (LOO) cross-validation [see @gabry2019]. Finally, the models were compared with the Bayes factor (BF) and Bayesian *R*² values [@gelman2019]. A non-metric multidimensional scaling ordination (NMDS) with Sørensen dissimilarity was used to visualize variation in species composition in space and time (2D-stress 0.21). Seven species were excluded because they had an accumulated cover over all plots of less than 0.5%. Finally, 343 species were included in the ordination.
+A non-metric multidimensional scaling ordination (NMDS) with Sørensen dissimilarity was used to visualize variation in species composition in space and time (2D-stress 0.21). Seven species were excluded because they had an accumulated cover over all plots of less than 0.5%. Finally, 343 species were included in the ordination.
+
+To measure the effects of the treatments on our three response variables, we calculated Bayesian linear mixed-effects models (BLMM) with the random effect plot nested in block with the Cauchy prior [see @lemoine2019]. Furthermore, we included as a fixed effect the botanists recording a certain plot. For the simple effects of the treatments, we chose plausible weakly informative priors. To evaluate the influence of the priors, prior predictive checks and models with non-informative priors were calculated. For the computation, we used four chains, a thinning rate of two, 5,000 iterations for warm-up, and 10,000 in total. We used the Markov Chain Monte Carlo method (MCMC) with the no-U-turn Sampler (NUTS), which is based on the Hamiltonian Monte Carlo approach (HMC). For evaluating the computation, the convergence of the four chains was checked using trace plots and evaluating R-hat values, and MCMC chain resolution by the effective sampling size (ESS). Posterior predictive checks were done with Kernel density estimates histograms of statistics skew and leave-one-out (LOO) cross-validation [see @gabry2019]. Finally, the models were compared with the Bayes factor (BF) and Bayesian *R*² values [@gelman2019].
 
 Data, code and the entire model specifications and evaluations are stored on GitHub and presented in an easily accessible document for scrolling through `r word_spec("(include Zenodo reference)")`.<!--# Cite Zenodo--> There, the sections are referenced to the Bayesian analysis reporting guidelines [BARG, @kruschke2021]. All analyses were performed in R [Version 4.2.2, @base] with the functions 'brm' from the package 'brms' [@brms] for model calculation, several functions from 'brms' and 'bayesplot' [@bayesplot] for model evaluation, and 'metaMDS' from 'vegan' for the ordination [@vegan].
 
@@ -152,7 +148,7 @@ The vegetation developed generally in the desired direction but was still distin
 
 ## General effects of treatments and exposition
 
-Restoration on agricultural soils can have limited success due to high nutrient loads [@walker2004] but mixing with a mineral component need not necessarily improve the outcome [@chenot-lescure2022]. Similarly to that study in France, sand admixture reduced nutrient loads and led to higher persistence of sown species while a 50% admixture did not further increase the effect. In addition, the effect only appeared in north exposition and the effect size of about 6% in the fourth year after restoration was rather small. The Favourable Conservation Status (FCS) was hardly affected by the sand admixture, which corresponds to the experiment in a quarry [@chenot-lescure2022]. Substrate depth did not significantly affect persistence or FCS, similarly to earlier studies [@baer2004]. Larger differences in soil depths might be necessary to observe negative effects by thicker substrate layers as was shown for prairies [@dornbush2010]. Seed density had also no clear effect on persistence and FCS which fits the results of @Kaulfuss.2022, who found that a certain amount of seeds is necessary for a successful establishment of target species, but higher densities do not further improve the outcome, but rather have a slightly negative effect.
+Restoration on agricultural soils can have limited success due to high nutrient loads [@walker2004] but mixing with a mineral component need not necessarily improve the outcome [@chenot-lescure2022]. Similarly to that study in France, sand admixture reduced nutrient loads and led to higher persistence of sown species while a 50% admixture did not further increase the effect. In addition, the effect only appeared in north exposition and the effect size of about 6% in the fourth year after restoration was rather small. The Favourable Conservation Status (FCS) was hardly affected by the sand admixture, which corresponds to the experiment in a quarry [@chenot-lescure2022]. Substrate depth did not significantly affect persistence or FCS, similarly to earlier studies [@husicka2003; @baer2004]. Larger differences in soil depths might be necessary to observe negative effects by thicker substrate layers as was shown for prairies [@dornbush2010] or a substrate depth of lower 15 cm since most of the roots are in this soil layer [@vannoppen2016]. Seed density had also no clear effect on persistence and FCS which fits the results of @Kaulfuss.2022, who found that a certain amount of seeds is necessary for a successful establishment of target species, but higher densities do not further improve the outcome, but rather have a slightly negative effect.
 
 The vegetation in south exposition had a different species composition, which confirms the findings of @Batori.2016 in Hungary. Here, the differences might be due to some unintended methodical reasons: the geotextile, which had been implemented on the southern slope, was removed after two weeks. This led to the drying of many seedlings which was amplified by the intense drought of 2018 and 2019 [@hari2020]. This drought could have decreased germination and the establishment of sown species, also generally speaking, because a moist spring with a mesic temperature enhances establishment [@Larson.2021; @orrock2023]. The interesting point here is the lasting negative effect on persistence and FCS on the southern slope which suggests a legacy effect by adverse weather conditions after sowing as it was observed by other studies [@Stuble.2017; @Groves.2020]. The problems during the establishment phase might have led to an alternative trajectory [@suding2004] and could probably only be met by re-sowing. The drying of seedlings might also have levelled the distinction of the seed mixture types on the south exposition.
 
