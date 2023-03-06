@@ -55,7 +55,7 @@ sites <- read_csv(
   )
 
 ### * Model ####
-load(file = here("outputs", "models", "model_persistence_2.Rdata"))
+base::load(file = here("outputs", "models", "model_persistence_2.Rdata"))
 
 model <- sites %>%
   tidybayes::add_epred_draws(m2, allow_new_levels = TRUE)
