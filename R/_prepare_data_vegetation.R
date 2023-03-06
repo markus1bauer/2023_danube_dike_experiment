@@ -41,12 +41,13 @@ library(installr)
 #remotes::install_github(file.path("inbo", "checklist"))
 library(checklist)
 #checklist::setup_project(path = here())
+library(renv)
 
 ### Start ###
 rm(list = ls())
 #installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE, start_new_R = TRUE, quit_R = TRUE, print_R_versions = TRUE, GUI = FALSE)
 #checklist::check_source()
-renv::status()
+#renv::status()
 
 
 
@@ -918,15 +919,15 @@ data_species <- data_species %>%
   column_to_rownames("id")
 
 ### * Model (try several times) ####
-set.seed(12)
-(ordi <- metaMDS(
-  data_species,
-  distance = "bray",
-  binary = TRUE,
-  na.rm = TRUE,
-  try = 50,
-  previous.best = TRUE
-  ))
+set.seed(19)
+#ordi <- metaMDS(
+#  data_species,
+#  distance = "bray",
+#  binary = TRUE,
+#  na.rm = TRUE,
+#  try = 20,
+#  previous.best = TRUE
+#  )
 #save(ordi, file = here("outputs", "models", "model_nmds.Rdata"))
 base::load(here("outputs", "models", "model_nmds.Rdata"))
 ordi
