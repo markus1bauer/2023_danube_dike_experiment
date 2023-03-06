@@ -1,7 +1,7 @@
 Analysis of Bauer et al. (2023) bioRxiv: <br> Persistence
 ================
 <b>Markus Bauer</b> <br>
-<b>2023-03-02</b>
+<b>2023-03-03</b>
 
 - <a href="#preparation" id="toc-preparation">Preparation</a>
 - <a href="#statistics" id="toc-statistics">Statistics</a>
@@ -557,8 +557,12 @@ m_1 %>% bayesplot::mcmc_pairs(
     "b_target_typedry_grassland", "b_seed_density8",
     "b_expositionsouth", "sigma"
            )
-) + bayesplot::theme_default()
-## NULL
+)
+```
+
+![](model_check_persistence_files/figure-gfm/mcmc-pairs-1.png)<!-- -->
+
+``` r
 m_2 %>% bayesplot::mcmc_pairs(
   off_diag_args = list(size = 1.2),
   pars = c(
@@ -566,9 +570,10 @@ m_2 %>% bayesplot::mcmc_pairs(
     "b_target_typedry_grassland", "b_seed_density8",
     "b_expositionsouth", "sigma"
            )
-) + bayesplot::theme_default()
-## NULL
+)
 ```
+
+![](model_check_persistence_files/figure-gfm/mcmc-pairs-2.png)<!-- -->
 
 #### Parallel coordinate plot
 
@@ -882,7 +887,7 @@ bayes_factor <- brms::bayes_factor(m_1, m_2)
 bayes_factor
 ```
 
-    ## Estimated Bayes factor in favor of m_1 over m_2: 9239467214.54522
+    ## Estimated Bayes factor in favor of m_1 over m_2: 127846715424.84245
 
 ## Posterior distributions (BARG 3.B)
 
