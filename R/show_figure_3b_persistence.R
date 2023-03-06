@@ -55,7 +55,7 @@ sites <- read_csv(
   )
 
 ### * Model ####
-load(file = here("outputs", "models", "model_persistence_2.Rdata"))
+base::load(file = here("outputs", "models", "model_persistence_2.Rdata"))
 
 model <- sites %>%
   tidybayes::add_epred_draws(m2, allow_new_levels = TRUE)
@@ -127,6 +127,7 @@ ggsave(
   here("outputs", "figures", "figure_3b_persistence_800dpi_24x8cm.tiff"),
   dpi = 800, width = 24, height = 8, units = "cm"
 )
+
 (graph_b <- p1 +
     labs(x = expression(Delta ~ Persistence)) +
     theme(
