@@ -134,13 +134,13 @@ theme_mb <- function() {
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_4c_fcs_epred_800dpi_24x8cm.tiff"),
+  here("outputs", "figures", "figure_4c_fcs_800dpi_24x8cm.tiff"),
   dpi = 800, width = 24, height = 8, units = "cm"
   )
 
 p1 + theme(legend.position = "bottom")
 ggsave(
-  here("outputs", "figures", "figure_4c_fcs_epred_800dpi_16.5x8cm.tiff"),
+  here("outputs", "figures", "figure_4c_fcs_800dpi_16.5x8cm.tiff"),
   dpi = 800, width = 16.5, height = 8, units = "cm"
   )
 
