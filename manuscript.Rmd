@@ -41,7 +41,7 @@ Restoration Ecology, TUM School of Life Sciences, Technical University of Munich
 
 # Abstract {.unnumbered}
 
-1.  Sowing is a well-established restoration technique to overcome dispersal limitation and site-specific seed mixtures are most effective to achieve functional communities. This is especially important if the restored vegetation has to protect critical infrastructure like roadsides and dikes. Here, an improved seed--substrate combination will secure slope stability, reduce mowing efforts, and generate biodiverse grasslands.
+1.  Sowing is a well-established restoration technique to overcome dispersal limitation. Site-specific seed mixtures are most effective to achieve functional communities. This is especially important if the restored vegetation has to protect critical infrastructure like roadsides and dikes. Here, an improved seed--substrate combination will secure slope stability, reduce mowing efforts, and generate species-rich grasslands.
 2.  A factorial field experiment addressed this topic on a dike at the Danube River in SE Germany in the 2018--2021 time period. On 288 plots, we tested three sand admixtures, two substrate depths, two seed densities and two seed mixture types (mesic hay meadow, semi-dry calcareous grassland) in north or south exposition, and measured the recovery completeness by calculating the successional distance to reference sites, the persistence of sown species, and the Favourable Conservation Status (FCS) of target species in general.
 3.  Overall, the sown vegetation developed in the desired direction, but a recovery debt remained after four years, and some plots still showed similarities to negative references from ruderal sites. In north exposition, hay meadow-seed mixtures developed closer to the respective reference communities than dry grasslands.
 4.  In south exposition, the sown communities developed poorly which might be due to a severe drought during establishment. This initial negative effect remained over the entire observation period.
@@ -56,8 +56,6 @@ Dry grasslands
 
 Ecological restoration
 
-Hay meadow
-
 Levee
 
 Persistence
@@ -68,8 +66,6 @@ Sowing
 
 Species composition
 
-Species-rich grassland
-
 \clearpage
 
 \newpage
@@ -78,19 +74,19 @@ Species-rich grassland
 
 Grasslands can support an exceedingly high biodiversity and they provide several ecosystem services [@Dengler.2014; @Bardgett.2021]. However, they are globally endangered [@Bardgett.2021], and in Europe, calcareous grasslands and hay meadows are red-listed habitats [Category 3, 'vulnerable', @Janssen.2016]. Restoration is seen as a key factor to sustain biodiversity and ecosystem services [@COP.2014; @UnitedNations.2019b], and sowing is a well-established approach to establish species-rich grasslands [@Kiehl.2010]. Sowing high-diversity mixtures of local provenance produced by specialized companies is a promising way to scale up restoration efforts [@Freitag.2021], and to overcome the dispersal filters [@myers2009; @orrock2023]. However, there are still open questions about adjusting seed mixtures to specific site conditions and future climate conditions [@Torok.2021].
 
-Restoration ecology can increase the predictability of restoration approaches [@Suding.2011; @Mouquet.2015] by using rigorous, repeatable, and transparent experiments based on advanced theory, which will finally strengthen evidence-based restoration [@Cooke.2018; @Wainwright.2018]. Local site conditions and the restoration method are key predictors for vegetation development after sowing [@Brudvig.2017b], and habitat and biotic filtering are the main assembly factors which can be manipulated by the choice of seed--substrate combinations [@Torok.2017]. This means a close adaptation of the substrate to the niche of the target species or of the seed mixtures to the characteristics of the chosen substrate. Suitable substrates should reduce habitat filtering, while the seed mixture should minimize the competitive exclusion of unsuitable species. Modifying seed mixtures to match specific site conditions could be based on functional plant traits [@Funk.2008; @Laughlin.2014; @Balazs.2020], although this is not easy to implement [@merchant2022; @Bauer.2022]. This challenge is particularly interesting on artificial substrates that are used in urban areas [@Bauer.2022], quarries [@chenot-lescure2022], or on dikes [@Liebrand.1996].
+Restoration ecology can increase the predictability of restoration approaches [@Suding.2011; @Mouquet.2015] by using rigorous, repeatable, and transparent experiments based on advanced theory, which will finally strengthen evidence-based restoration [@Cooke.2018; @Wainwright.2018]. Local site conditions and the restoration method are key predictors for vegetation development after sowing [@Brudvig.2017b]. Hhabitat and biotic filtering are the main assembly factors which can be manipulated by the choice of seed--substrate combinations [@Torok.2017]. This means a close adaptation of the substrate to the niche of the target species or of the seed mixtures to the characteristics of the chosen substrate. Suitable substrates should reduce habitat filtering, while the seed mixture should minimize the competitive exclusion of unsuitable species. Modifying seed mixtures to match specific site conditions could be based on functional plant traits [@Funk.2008; @Laughlin.2014; @Balazs.2020], although this is not easy to implement [@merchant2022; @Bauer.2022]. This challenge is particularly interesting on artificial substrates that are used in urban areas [@Bauer.2022], quarries [@chenot-lescure2022], or on dikes [@Liebrand.1996].
 
 Dikes are promising sites for the restoration of species-rich grasslands because they can increase habitat area and connectivity of semi-natural grasslands and therefore significantly contribute to biodiversity conservation in agricultural landscapes [@Batori.2020]. Steep slopes with different exposition, contrasting substrate layers and dense swards for erosion protection characterize dikes [@Batori.2016; @berendse2015; @husicka2003]. Dikes can reconcile several ecosystem functions like dike security with biodiversity [@teixeira2022], which can be fostered by an adapted seed--substrate combination.
 
-The aim of this study is to identify the best combinations of seed mixtures and substrates for vital and species-rich grasslands on north- and south-exposed dike slopes. An experiment was set up to test agricultural soil with different amounts of sand admixture, substrate depths, seed densities, and seed mixture types. We expected a better development of dry grassland in the south exposition with shallow and sandy substrates, and of mesic meadows in north exposition on less sandy and deep substrates. Furthermore for slopes, higher seed densities are recommended for a successful establishment [@KleberLerchbaumer.2017], albeit without experimental evidence.
+The aim of this study is to identify the best combinations of seed mixtures and substrates for vital and species-rich grasslands on north- and south-exposed dike slopes. An experiment was set up to test different substrate depths, sand admixtures, seed densities, and mixture types. We expected a better development of dry grassland in the south exposition with shallow and sandy substrates, and of mesic meadows in north exposition on less sandy and deep substrates. For slopes, higher seed densities are recommended for a successful establishment [@KleberLerchbaumer.2017], albeit without experimental evidence.
 
-The success of restoration or the difference from desired conditions was evaluated [cf. @Brudvig.2017b] by comparing the species composition of the experimental plots with reference sites. The successional distance to the reference grasslands determined the recovery completeness [@Rydgren.2019]. Furthermore, we observed the persistence of the sown species, which is a key objective of the restoration measure sowing [@Wilsey.2021]. For this purpose, the presence of the sown species was monitored for three consecutive years. Finally, the Favourable Conservation Status (FCS) was calculated which distinguishes habitat-characteristic and non-typical derived diversity [@Helm.2015]. We tested following hypotheses after four years of observation:
+The success of restoration or the difference from desired conditions was evaluated [cf. @Brudvig.2017b] by comparing the species composition of the experimental plots with reference sites. The successional distance to the reference grasslands determined the recovery completeness [@Rydgren.2019]. Furthermore, we observed the persistence which is the presence of the sown species monitored over three consecutive years [@Wilsey.2021]. Finally, the Favourable Conservation Status (FCS) was calculated which distinguishes habitat-characteristic diversity and non-typical derived diversity [@Helm.2015]. We tested following hypotheses after four years of observation:
 
 1.  Establishment of mesic vs dry grassland mixtures is facilitated by site conditions on northern and southern dike slopes, respectively.
 
 2.  Nutrient reduction by sand addition and shallow substrates increase the establishment of dry-grassland compared to mesic seed mixtures.
 
-3.  Reduced soil resources benefit especially target species in comparison to non-target species.
+3.  Reduced soil resources benefit especially target species of species-rich grasslands.
 
 4.  Higher seed density increases the establishment of sown plants and suppresses non-target species.
 
