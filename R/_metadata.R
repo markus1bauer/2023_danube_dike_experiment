@@ -72,7 +72,7 @@ creator <- eml$creator(
 associatedParty <- list(
   eml$associatedParty(
     individualName = eml$individualName(
-      givenName = "Jakob",
+      givenName = "Jakob Kaspar",
       surName = "Huber"
     ),
     role = "Researcher",
