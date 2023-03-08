@@ -1,6 +1,6 @@
 ---
 title: "Appendix of Bauer et al. (2023) bioRxiv"
-author: Markus Bauer*, Jakob Huber, Johannes Kollmann
+author: Markus Bauer*, Jakob K. Huber, Johannes Kollmann
 output:
   officedown::rdocx_document:
     reference_docx: template_word.docx
@@ -37,7 +37,8 @@ set_flextable_defaults(
 
 # Appendix A1
 
-Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010, ID: 3271, WGS84: lat/lon, 48.85476, 12.918911, @cdc2022temp; @cdc2022prec] and stream gauge Pfelling [ID: 10078000, WGS84: lat/lon, 48.87975, 12.74716, @lfu2021discharge]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
+Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010, ID: 3271, WGS84: lat/lon, 48.85476, 12.918911, @cdc2022temp; @cdc2022prec], stream gauge Pfelling [ID: 10078000, WGS84: lat/lon, 48.87975, 12.74716, @lfu2021discharge], and water level Deggendorf [ID: 10081004, UTM32: northing/easting,
+5415586, 790796<!--# Make WGS-->, @lfu2021waterlevel]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
 
 ```{r table-flood-weather, tab.id = "flood-weather", tab.cap = ""}
 read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
@@ -56,7 +57,39 @@ read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
 
 # Appendix A2
 
-All sown seed mixtures can be found on GitHub in the folder 'outputs/tables/ table_a2_seed_mixtures.csv'. There, we indicate which species were combined and their respective ratio in the specific seed mixture.
+All sown seed mixtures can be found on GitHub in the folder 'outputs/tables/ table_a2_seed_mixtures.csv'. <!--# Cite Zenodo--> There, we indicate which species were combined and their respective ratio in the specific seed mixture.
+
+For both target vegetation types, a respective initial plant species collection was assembled. The two lists contained the following groups:
+
+-   Character species of the corresponding phytosociological units (Arrhenatherion and Mesobromion, as listed in standard literature) and of FFH-habitat types 6510 and 6210 as described for Bavaria
+
+-   Typical species of corresponding habitat types according to official directives for biotope mapping in Bavaria
+
+-   Species consistently occurring in our own vegetation records on existing river dikes of the region, conducted in 2017, and in species-rich grasslands, recorded within a wide-range habitat documentation project in the Danube valley near Straubing and Deggendorf from 2011. This project had been commissioned as planning grounds for state flood protection programs.
+
+The two species pools were derived from this collection by removing the following groups:
+
+-   Very rare and/or regionally absent species
+
+-   Woody shrubs, which were excluded from dike vegetation guidelines in Germany because of vortex erosion phenomena around their rooting system
+
+-   Nitrogen indicators
+
+-   Neophytic and/or invasive species or species with rapid clonal propagation with a high potential of forming mono-dominant stands
+
+-   Species of strong ruderal character	
+
+-   Ephemeral/annual species
+
+-   Species, for which no seeds were available in the market or which are difficult to establish by propagule application, e.g., *Carex* spec. or cryptogams
+
+-   Taxonomically and functionally closely related and similar species
+
+For constructing concrete seed mixtures of 20 pant species, a pre-defined number of species within certain functional groups was selected randomly. This way, seed mixtures consisted of three tall grasses, four small grasses, three legumes, one hemiparasite (*Rhinanthus* spec.) and nine herbal perennials, three of which listed as character species in the literature. The actual choice was conducted in a manner, so that each individual species was assigned to each block and each treatment level combination with a near-constant frequency. Furthermore, all species of each functional group were chosen almost the same number of times. In total, plots received 24 or 48 g of seeds (4 vs. 8 g m^-2^).
+
+\clearpage
+
+\newpage
 
 # Appendix A3
 
@@ -66,11 +99,15 @@ knitr::include_graphics(
   )
 ```
 
-The community-weighted means (CWM) of the seed mixtures used for the dike experiment: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target habitat types hay meadows and calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2%, 98.8%, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
+The community-weighted means (CWM) of the seed mixtures used for the dike experiment are based on abundance data: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target habitat types hay meadows and calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2%, 98.8%, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
 
 #### Acknowledgment
 
-This figure was supported by the TRY initiative on plant traits (<http://www.try-db.org>). The TRY initiative and database is hosted, developed and maintained by J. Kattge and G. Boenisch (Max Planck Institute for Biogeochemistry, Jena, Germany). TRY is currently supported by Future Earth/bioDISCOVERY and the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig. \clearpage \newpage
+This figure was supported by the TRY initiative on plant traits (<http://www.try-db.org>). The TRY initiative and database is hosted, developed and maintained by J. Kattge and G. Boenisch (Max Planck Institute for Biogeochemistry, Jena, Germany). TRY is currently supported by Future Earth/bioDISCOVERY and the German Centre for Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig.
+
+\clearpage
+
+\newpage
 
 # Appendix A4
 
