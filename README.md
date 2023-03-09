@@ -6,7 +6,7 @@ Data and code for:
 
 Bauer M, Huber JK, Kollmann J (2023) __Fit by design: Developing substrate-specific seed mixtures for functional dike grasslands.__ &ndash; *bioRxiv*
 
-[![DOI:10.XXX](http://img.shields.io/badge/DOI-10.XXX-informational.svg)](https://doi.org/10.XXX)
+[![DOI:10.5281/zenodo.7713397](http://img.shields.io/badge/DOI-10.5281/zenodo.7713397-informational.svg)](https://doi.org/10.5281/zenodo.7713397)
 
 **Study region**: [Experiment at River Danube](https://www.openstreetmap.org/#map=17/48.83977/12.88445) <br> <br> \## Content of the repository
 
@@ -49,6 +49,6 @@ When using the **data available** in this repository, please cite the original p
 
 **Dataset**
 
-> Bauer M, Huber JK & Kollmann J (2022) Data and code for Bauer et al. (2023) bioRxiv (v1.0.0) [Data set]. &ndash; *Zenodo*. <https://doi.org/10.xxx>
+> Bauer M, Huber JK & Kollmann J (2022) Data and code for Bauer et al. (2023) bioRxiv (v1.0.0) [Data set]. &ndash; *Zenodo*. <https://doi.org/10.5281/zenodo.7713396>
 
 Contact [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de){.email} for any further information.
