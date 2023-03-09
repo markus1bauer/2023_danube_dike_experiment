@@ -106,14 +106,14 @@ contact <- list(
 ## 6 Temporal and spatial coverage ###########################################
 
 
-geographicDescription <- "Danube dike near Deggendorf"
+geographic_description <- "Danube dike near Deggendorf"
 
 coverage <- set_coverage(
   begin = "2018-06-01", end = "2021-07-31",
   sci_names = list(list(
     Subdivision = "Spermatophytina"
   )),
-  geographicDescription = geographicDescription,
+  geographicDescription = geographic_description,
   west = 12.87704, east = 12.89251,
   north = 48.84048, south = 48.83844,
   altitudeMin = 313, altitudeMaximum = 315,
@@ -127,7 +127,7 @@ coverage <- set_coverage(
 
 pubDate <- "2023"
 
-title <- "Danube old dikes"
+title <- "Fit by design: Developing substrate-specific seed mixtures for functional dike grasslands"
 
 abstract <- "A multifactorial experiment was set up on a dike of the Danube 
 River in SE Germany. The aim of the experiment was to find suitable seed-
@@ -140,7 +140,7 @@ experiment was established in April 2018 and observed until 2021. The
 vegetation surveys according to Braun-Blanquet were conducted using the Londo 
 scale."
 
-keywordSet <- list(
+keyword_set <- list(
   list(
     keywordThesaurus = "LTER controlled vocabulary",
     keyword = list(
@@ -167,16 +167,16 @@ keywordSet <- list(
   )
 )
 
-intellectualRights <-
-  "CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/deed.en"
+license <- list(
+  licenseName = "CC-BY-4.0",
+  url = "https://creativecommons.org/licenses/by/4.0/deed.en"
+)
 
 alternate_identifier <- "https://doi.org/10.XXX"
 
 short_name <- "Experiment on Danube dike"
 
 language <- "English"
-
-reference_publication <- "Bauer et al. (bioRxiv) DOI XXX"
 
 
 
@@ -192,12 +192,11 @@ dataset <- list(
   pubDate = pubDate,
   creator = creator,
   associatedParty = associatedParty,
-  intellectualRights = intellectualRights,
+  licensed = license,
   alternateIdentifier = alternate_identifier,
   abstract = abstract,
-  keywordSet = keywordSet,
+  keywordSet = keyword_set,
   coverage = coverage,
-  referencePublication = reference_publication,
   language = language,
   contact = contact#,
   #methods = methods,
@@ -214,5 +213,7 @@ eml <- list(
 write_eml(eml, here("METADATA.xml"))
 eml_validate(here("METADATA.xml"))
 
-#render_eml(file = here("METADATA.xml"), outfile = "METADATA.html",
-#           open = TRUE, publish_mode = TRUE)
+#render_eml(
+#  file = here("METADATA.xml"), outfile = "METADATA.html",
+#  open = TRUE, publish_mode = TRUE
+#  )
