@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="58723ca8-96eb-4b97-8fad-7adfbb8d3b27" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="2685f60c-622b-4ba8-8335-7c3821014781" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
   <dataset>
     <alternateIdentifier>https://doi.org/10.XXX</alternateIdentifier>
     <shortName>Experiment on Danube dike</shortName>
-    <title>Danube old dikes</title>
+    <title>Fit by design: Developing substrate-specific seed mixtures for functional dike grasslands</title>
     <creator id="https://orcid.org/0000-0001-5372-4174">
       <individualName>
         <givenName>Markus</givenName>
@@ -79,7 +79,10 @@ scale.</abstract>
       <keyword>temperate grassland</keyword>
       <keywordThesaurus>own vocabulary</keywordThesaurus>
     </keywordSet>
-    <intellectualRights>CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/deed.en</intellectualRights>
+    <licensed>
+      <licenseName>CC-BY-4.0</licenseName>
+      <url>https://creativecommons.org/licenses/by/4.0/deed.en</url>
+    </licensed>
     <coverage>
       <geographicCoverage>
         <geographicDescription>Danube dike near Deggendorf</geographicDescription>
@@ -128,6 +131,5 @@ scale.</abstract>
       <electronicMailAddress>markusbauer@mailbox.org</electronicMailAddress>
       <onlineUrl>https://www3.ls.tum.de/roek/mitarbeiter-in/prof-dr-johannes-kollmann/</onlineUrl>
     </contact>
-    <referencePublication>Bauer et al. (bioRxiv) DOI XXX</referencePublication>
   </dataset>
 </eml:eml>
