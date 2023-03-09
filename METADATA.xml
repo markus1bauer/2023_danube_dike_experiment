@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="2685f60c-622b-4ba8-8335-7c3821014781" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
+<eml:eml xmlns:eml="https://eml.ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.2" packageId="320f9eb0-c001-44bb-9608-aff7c2cbc016" system="uuid" xsi:schemaLocation="https://eml.ecoinformatics.org/eml-2.2.0 https://eml.ecoinformatics.org/eml-2.2.0/eml.xsd">
   <dataset>
-    <alternateIdentifier>https://doi.org/10.XXX</alternateIdentifier>
+    <alternateIdentifier>https://doi.org/10.5281/zenodo.7713396</alternateIdentifier>
     <shortName>Experiment on Danube dike</shortName>
     <title>Fit by design: Developing substrate-specific seed mixtures for functional dike grasslands</title>
     <creator id="https://orcid.org/0000-0001-5372-4174">
