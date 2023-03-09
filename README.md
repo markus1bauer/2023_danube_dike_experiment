@@ -1,10 +1,10 @@
 # Data and code for Bauer et al. (2023) bioRxiv
 
-*Markus Bauer* <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16"/></a>, Jakob Huber, and Johannes Kollmann <a href="https://orcid.org/0000-0002-4990-3636"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16"/></a>
+*Markus Bauer* <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16"/></a>, Jakob K. Huber, and Johannes Kollmann <a href="https://orcid.org/0000-0002-4990-3636"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16"/></a>
 
 Data and code for:
 
-Bauer M, Huber J, Kollmann J (2023) bioRxiv
+Bauer M, Huber JK, Kollmann J (2023) bioRxiv
 
 [![DOI:10.XXX](http://img.shields.io/badge/DOI-10.XXX-informational.svg)](https://doi.org/10.XXX)
 
@@ -45,10 +45,10 @@ When using the **data available** in this repository, please cite the original p
 
 **Publication**
 
-> Bauer M, Huber J, & Kollmann J (2023) XXX -- *bioRxiv. DOI*
+> Bauer M, Huber JK, & Kollmann J (2023) XXX -- *bioRxiv. DOI*
 
 **Dataset**
 
-> Bauer M, Huber J & Kollmann J (2022) Data and code for Bauer et al. (2023) bioRxiv (v1.0.0) [Data set]. -- *Zenodo*. <https://doi.org/10.xxx>
+> Bauer M, Huber JK & Kollmann J (2022) Data and code for Bauer et al. (2023) bioRxiv (v1.0.0) [Data set]. -- *Zenodo*. <https://doi.org/10.xxx>
 
 Contact [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de){.email} for any further information.
