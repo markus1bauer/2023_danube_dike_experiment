@@ -4,7 +4,7 @@
 
 Data and code for:
 
-Bauer M, Huber J, Kollmann J (2023) EcoEvoRxiv
+Bauer M, Huber J, Kollmann J (2023) bioRxiv
 
 [![DOI:10.XXX](http://img.shields.io/badge/DOI-10.XXX-informational.svg)](https://doi.org/10.XXX)
 
