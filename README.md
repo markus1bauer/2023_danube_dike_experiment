@@ -4,7 +4,7 @@
 
 Data and code for:
 
-Bauer M, Huber JK, Kollmann J (2023) Fit by design: Developing substrate-specific seed mixtures for functional dike grasslands. bioRxiv
+Bauer M, Huber JK, Kollmann J (2023) __Fit by design: Developing substrate-specific seed mixtures for functional dike grasslands.__ &ndash; _bioRxiv_
 
 [![DOI:10.XXX](http://img.shields.io/badge/DOI-10.XXX-informational.svg)](https://doi.org/10.XXX)
 
