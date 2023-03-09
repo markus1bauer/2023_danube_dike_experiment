@@ -125,9 +125,11 @@ coverage <- set_coverage(
 ## 7 Description #############################################################
 
 
+title <- "Fit by design: Developing substrate-specific seed mixtures for functional dike grasslands"
+
 pubDate <- "2023"
 
-title <- "Fit by design: Developing substrate-specific seed mixtures for functional dike grasslands"
+alternate_identifier <- "https://doi.org/10.5281/zenodo.7713396"
 
 abstract <- "A multifactorial experiment was set up on a dike of the Danube 
 River in SE Germany. The aim of the experiment was to find suitable seed-
@@ -171,8 +173,6 @@ license <- list(
   licenseName = "CC-BY-4.0",
   url = "https://creativecommons.org/licenses/by/4.0/deed.en"
 )
-
-alternate_identifier <- "https://doi.org/10.XXX"
 
 short_name <- "Experiment on Danube dike"
 
