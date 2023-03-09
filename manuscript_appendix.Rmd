@@ -37,8 +37,7 @@ set_flextable_defaults(
 
 # Appendix A1
 
-Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010, ID: 3271, WGS84: lat/lon, 48.85476, 12.918911, @cdc2022temp; @cdc2022prec], stream gauge Pfelling [ID: 10078000, WGS84: lat/lon, 48.87975, 12.74716, @lfu2021discharge], and water level Deggendorf [ID: 10081004, UTM32: northing/easting,
-5415586, 790796<!--# Make WGS-->, @lfu2021waterlevel]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
+Three dry years (2018--2020) and three minor floods (2018, 2019, 2021) occurred during the study period. Annual temperature, precipitation and discharge of River Danube near the study sites (2017--2021), based on weather station Metten [mean, 1981--2010, ID: 3271, WGS84: lat/lon, 48.85476/12.918911, @cdc2022temp; @cdc2022prec], stream gauge Pfelling [ID: 10078000, WGS84: lat/lon, 48.87975/12.74716, @lfu2021discharge], and water level Deggendorf [ID: 10081004, WGS84: lat/lon, 48.82508/12.96229, @lfu2021waterlevel]. HQ2 = Highest discharge with a probability of occurrence every second year. HSW = Highest water level for shipping.
 
 ```{r table-flood-weather, tab.id = "flood-weather", tab.cap = ""}
 read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
@@ -57,7 +56,7 @@ read_csv(here::here("data", "raw", "data_raw_table_a1.csv")) %>%
 
 # Appendix A2
 
-All sown seed mixtures can be found on GitHub in the folder 'outputs/tables/ table_a2_seed_mixtures.csv'. <!--# Cite Zenodo--> There, we indicate which species were combined and their respective ratio in the specific seed mixture.
+## Generating species pools
 
 For both target vegetation types, a respective initial plant species collection was assembled. The two lists contained the following groups:
 
@@ -77,7 +76,7 @@ The two species pools were derived from this collection by removing the followin
 
 -   Neophytic and/or invasive species or species with rapid clonal propagation with a high potential of forming mono-dominant stands
 
--   Species of strong ruderal character	
+-   Species of strong ruderal character
 
 -   Ephemeral/annual species
 
@@ -85,7 +84,11 @@ The two species pools were derived from this collection by removing the followin
 
 -   Taxonomically and functionally closely related and similar species
 
+## Constructing seed mixtures
+
 For constructing concrete seed mixtures of 20 pant species, a pre-defined number of species within certain functional groups was selected randomly. This way, seed mixtures consisted of three tall grasses, four small grasses, three legumes, one hemiparasite (*Rhinanthus* spec.) and nine herbal perennials, three of which listed as character species in the literature. The actual choice was conducted in a manner, so that each individual species was assigned to each block and each treatment level combination with a near-constant frequency. Furthermore, all species of each functional group were chosen almost the same number of times. In total, plots received 24 or 48 g of seeds (4 vs. 8 g m^-2^).
+
+All sown seed mixtures can be found on GitHub in the folder **'outputs/tables/ table_a2_seed_mixtures.csv'**. <!--# Cite Zenodo--> There, we indicate which species were combined and their respective ratio in the specific seed mixture.
 
 \clearpage
 
@@ -99,7 +102,7 @@ knitr::include_graphics(
   )
 ```
 
-The community-weighted means (CWM) of the seed mixtures used for the dike experiment are based on abundance data: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target habitat types hay meadows and calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2%, 98.8%, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
+The community-weighted means (CWM) of the seed mixtures used for the dike experiment are based on abundance data: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target habitat types hay meadows and calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2, 98.8, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
 
 #### Acknowledgment
 
@@ -111,7 +114,7 @@ This figure was supported by the TRY initiative on plant traits (<http://www.try
 
 # Appendix A4
 
-Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots which were occupied by the respective species (presence-absence data). This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment.
+Establishment rate of sown species [Nomenclature: @WorldFloraOnline.2021]. Indicated is the number of sown plots and the percentage of these plots that were occupied by the respective species (presence-absence data). This means that for each species only the sown plots were included. The shades of grey indicate the success of establishment.
 
 ```{r tab.id = "establishment", tab.cap = ""}
 read_csv(
