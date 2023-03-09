@@ -232,7 +232,7 @@ read_csv(here::here("data", "raw", "data_raw_table_1_seedmix.csv"),
 
 ## Table 2 {.unnumbered}
 
-Characteristics of the substrates used for the sowing experiment on river dikes. Soil samples of the three substrates were analysed for the fraction \<2 mm. The soil texture was classified according to the 'Bodenkundliche Kartieranleitung' [@BodenkundlKartieranl.2005]. The pH was measured in CaCl~2~ solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in a CaCl~2~ extract. For calculating CaCO~3~, a sub-sample was annealed at 550 °C and the measured C amount multiplied with 8.33. To calculate total N and the C/N ratio, a sub-sample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand.<!--# Humusanteil-->
+Characteristics of the substrates used for the sowing experiment on river dikes. Soil samples of the three substrates were analysed for the fraction \<2 mm. The soil texture was classified according to the 'Bodenkundliche Kartieranleitung' [@BodenkundlKartieranl.2005]. The pH was measured in CaCl~2~ solution. Plant available phosphorus and potassium were measured in a calcium acetate-lactate extract and magnesium in a CaCl~2~ extract. For calculating CaCO~3~, a sub-sample was annealed at 550 °C and the measured C amount multiplied with 8.33. To calculate total N and the C/N ratio, a sub-sample was incinerated at 1000 °C. Lt3 = medium clayey loam; Ls4 = strong sandy loam; Sl3 = medium loamy sand; Sl4 = strong loamy sand.
 
 ```{r tab.id = "substrate", ft.align = "left", tab.cap = ""}
 read_csv(here::here("data", "raw", "data_raw_table_3_substrate.csv"),
