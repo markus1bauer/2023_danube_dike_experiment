@@ -3512,6 +3512,19 @@
         "sp"
       ]
     },
+    "rgnparser": {
+      "Package": "rgnparser",
+      "Version": "0.2.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6381a681e46300bfa14584f139a084d9",
+      "Requirements": [
+        "jsonlite",
+        "readr",
+        "sys",
+        "tibble"
+      ]
+    },
     "ritis": {
       "Package": "ritis",
       "Version": "1.0.0",
