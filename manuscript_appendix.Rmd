@@ -84,6 +84,8 @@ The two species pools were derived from this collection by removing the followin
 
 -   Taxonomically and functionally closely related and similar species
 
+The hay meadows pool had 55 species and the dry grasslands poll 58. In total, 93 different species were seeded.
+
 ## Constructing seed mixtures
 
 For constructing concrete seed mixtures of 20 pant species, a pre-defined number of species within certain functional groups was selected randomly. This way, seed mixtures consisted of three tall grasses, four small grasses, three legumes, one hemiparasite (*Rhinanthus* spec.) and nine herbal perennials, three of which listed as character species in the literature. The actual choice was conducted in a manner, so that each individual species was assigned to each block and each treatment level combination with a near-constant frequency. Furthermore, all species of each functional group were chosen almost the same number of times. In total, plots received 24 or 48 g of seeds (4 vs. 8 g m^-2^).
@@ -102,7 +104,7 @@ knitr::include_graphics(
   )
 ```
 
-The community-weighted means (CWM) of the seed mixtures used for the dike experiment are based on abundance data: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target habitat types hay meadows and calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2, 98.8, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
+The community-weighted means (CWM) of plant traits of the seed mixtures used for the dike experiment are based on abundance data: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target habitat types hay meadows and calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2, 98.8, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
 
 #### Acknowledgment
 
@@ -161,7 +163,7 @@ read_csv(
 
 # Appendix A5
 
-All species which occurred 2018--2021 and the amount of plots in which they appeared (maximum 1152 = 4 years times 288 experimental plots). In total, 274 different species were found. The shades of grey indicate the amount of established plots.
+All species which occurred 2018--2021 and the amount of plots in which they appeared (maximum 1152 = 4 years times 288 experimental plots). In total, 274 different species were found of which 93 were seeded. The shades of grey indicate the amount of established plots.
 
 ```{r tab.id = "specieslist", tab.cap = ""}
 read_csv(
