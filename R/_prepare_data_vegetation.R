@@ -47,7 +47,7 @@ library(renv)
 rm(list = ls())
 #installr::updateR(browse_news = FALSE, install_R = TRUE, copy_packages = TRUE, copy_Rprofile.site = TRUE, keep_old_packages = TRUE, update_packages = TRUE, start_new_R = TRUE, quit_R = TRUE, print_R_versions = TRUE, GUI = FALSE)
 #checklist::check_source()
-#renv::status()
+renv::status()
 
 
 
@@ -214,7 +214,13 @@ traits <- read_csv(
       r = "d",
       n = "d",
     )
-) %>%
+)
+
+data <- traits$name %>%
+  rgnparser::gn_parse_tidy() %>%
+  select(verbatim, canonicalfull, cardinality, quality)
+
+traits %>%
   separate(name, c("genus", "species", "ssp", "subspecies"), "_",
            remove = FALSE, extra = "drop", fill = "right") %>%
   mutate(genus = str_sub(genus, 1, 4),
