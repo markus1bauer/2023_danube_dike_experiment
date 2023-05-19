@@ -43,11 +43,25 @@ traits <- read_csv(
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+### Number of established plots of Bromus hordeaceus ###
+species %>%
+  filter(name == "Bromus_hordeaceus") %>%
+  mutate(across(where(is.numeric), ~1 * (. != 0))) %>%
+  pivot_longer(cols = -name, names_to = "survey_year", values_to = "n") %>%
+  mutate(
+    survey_year = str_extract(
+      survey_year, "[:digit:][:digit:][:digit:][:digit:]"
+      )
+    ) %>%
+  group_by(name, survey_year) %>%
+  summarise(total_established = sum(n, na.rm = TRUE))
 
+### Plot the table ###
 data <- species %>%
   mutate(across(where(is.numeric), ~1 * (. != 0))) %>%
-  mutate(sum = rowSums(across(where(is.numeric)), na.rm = TRUE),
-         .keep = "unused") %>%
+  mutate(
+    sum = rowSums(across(where(is.numeric)), na.rm = TRUE), .keep = "unused"
+    ) %>%
   group_by(name) %>%
   summarise(sum = sum(sum)) %>%
   left_join(traits, by = "name") %>%
