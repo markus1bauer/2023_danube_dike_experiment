@@ -358,8 +358,9 @@ data <- species_experiment %>%
   mutate(n = if_else(n > 0 & survey_year == "seeded", 1, n)) %>%
   select(plot, name, survey_year, n) %>%
   pivot_wider(names_from = "survey_year", values_from = "n") %>%
-  pivot_longer(-c(plot, name, seeded),
-               names_to = "survey_year", values_to = "n") %>%
+  pivot_longer(
+    -c(plot, name, seeded), names_to = "survey_year", values_to = "n"
+    ) %>%
   mutate(n = if_else(seeded == 1 & n > 0, 1, 0)) %>%
   group_by(name, survey_year) %>%
   summarise(

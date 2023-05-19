@@ -26,7 +26,8 @@ data <- read_csv(
   here("data", "processed", "data_processed_traits.csv"),
   col_names = TRUE,
   na = c("na", "NA"),
-  col_types = cols(.default = "?", name = "f")) %>%
+  col_types = cols(.default = "?", name = "f")
+  ) %>%
   select(name, family, total_seeded_2018, starts_with("rate_")) %>%
   drop_na(total_seeded_2018) %>%
   arrange(match(family, c("Poaceae", "Fabaceae"))) %>%
