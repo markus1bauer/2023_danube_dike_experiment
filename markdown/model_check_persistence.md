@@ -1,52 +1,35 @@
 Analysis of Bauer et al. (2023) bioRxiv: <br> Persistence
 ================
 <b>Markus Bauer</b> <br>
-<b>2023-03-03</b>
+<b>2023-07-04</b>
 
-- <a href="#preparation" id="toc-preparation">Preparation</a>
-- <a href="#statistics" id="toc-statistics">Statistics</a>
-  - <a href="#data-exploration" id="toc-data-exploration">Data
-    exploration</a>
-    - <a href="#graphs-of-raw-data" id="toc-graphs-of-raw-data">Graphs of raw
-      data</a>
-    - <a href="#outliers-zero-inflation-transformations"
-      id="toc-outliers-zero-inflation-transformations">Outliers,
-      zero-inflation, transformations?</a>
-  - <a href="#models" id="toc-models">Models</a>
-    - <a href="#load-models-barg-6g" id="toc-load-models-barg-6g">Load models
-      (BARG 6.G)</a>
-    - <a href="#model-specifications-barg-1d"
-      id="toc-model-specifications-barg-1d">Model specifications (BARG
-      1.D)</a>
-    - <a href="#preparation-for-analysis"
-      id="toc-preparation-for-analysis">Preparation for analysis</a>
-    - <a href="#priors-barg-1de" id="toc-priors-barg-1de">Priors (BARG
-      1.D/E)</a>
-  - <a href="#model-check" id="toc-model-check">Model check</a>
-    - <a href="#check-computation-mcmc-diagnostics-barg-2bc"
-      id="toc-check-computation-mcmc-diagnostics-barg-2bc">Check computation
-      (MCMC diagnostics, BARG 2.B/C)</a>
-    - <a href="#posterior-predictive-check-barg-3a"
-      id="toc-posterior-predictive-check-barg-3a">Posterior predictive check
-      (BARG 3.A)</a>
-    - <a href="#dharma" id="toc-dharma">DHARMa</a>
-  - <a href="#model-comparison" id="toc-model-comparison">Model
-    comparison</a>
-    - <a href="#conditional-r2-values"
-      id="toc-conditional-r2-values">Conditional <i>R</i><sup>2</sup>
-      values</a>
-    - <a href="#marginal-r2-values" id="toc-marginal-r2-values">Marginal
-      <i>R</i><sup>2</sup> values</a>
-    - <a href="#bayes-factor-barg-3c" id="toc-bayes-factor-barg-3c">Bayes
-      factor (BARG 3.C)</a>
-  - <a href="#posterior-distributions-barg-3b"
-    id="toc-posterior-distributions-barg-3b">Posterior distributions (BARG
-    3.B)</a>
-    - <a href="#forest-plot-barg-2b5b" id="toc-forest-plot-barg-2b5b">Forest
-      plot (BARG 2.B/5.B)</a>
-    - <a href="#effect-sizes" id="toc-effect-sizes">Effect sizes</a>
-- <a href="#session-info-barg-2a6a6b"
-  id="toc-session-info-barg-2a6a6b">Session info (BARG 2.A/6.A/6.B)</a>
+- [Preparation](#preparation)
+- [Statistics](#statistics)
+  - [Data exploration](#data-exploration)
+    - [Graphs of raw data](#graphs-of-raw-data)
+    - [Outliers, zero-inflation,
+      transformations?](#outliers-zero-inflation-transformations)
+  - [Models](#models)
+    - [Load models (BARG 6.G)](#load-models-barg-6g)
+    - [Model specifications (BARG 1.D)](#model-specifications-barg-1d)
+    - [Preparation for analysis](#preparation-for-analysis)
+    - [Priors (BARG 1.D/E)](#priors-barg-1de)
+  - [Model check](#model-check)
+    - [Check computation (MCMC diagnostics, BARG
+      2.B/C)](#check-computation-mcmc-diagnostics-barg-2bc)
+    - [Posterior predictive check (BARG
+      3.A)](#posterior-predictive-check-barg-3a)
+    - [DHARMa](#dharma)
+  - [Model comparison](#model-comparison)
+    - [Conditional <i>R</i><sup>2</sup> values](#conditional-r2-values)
+    - [Marginal <i>R</i><sup>2</sup> values](#marginal-r2-values)
+    - [Bayes factor (BARG 3.C)](#bayes-factor-barg-3c)
+  - [Posterior distributions (BARG
+    3.B)](#posterior-distributions-barg-3b)
+    - [Forest plot of effect sizes (BARG
+      2.B/5.B)](#forest-plot-of-effect-sizes-barg-2b5b)
+    - [Effect sizes](#effect-sizes)
+- [Session info (BARG 2.A/6.A/6.B)](#session-info-barg-2a6a6b)
 
 <br/> <br/> <b>Markus Bauer</b>
 
@@ -423,6 +406,9 @@ m_1 %>%
 
 #### Prior predictive check (BARG 1.E)
 
+The blue line (observed value) should be in the center of the
+distribution of 500 simulated data sets.
+
 ``` r
 bayesplot::ppc_stat(y, yrep_prior[1:500, ], binwidth = 0.2) +
   coord_cartesian(xlim = c(-1, 1)) + bayesplot::theme_default()
@@ -499,6 +485,8 @@ ppc_stat_grouped(
 
 #### Trace plots
 
+The traces of the four chains should overlap each other.
+
 ``` r
 bayesplot::mcmc_trace(
   posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2)
@@ -521,6 +509,8 @@ bayesplot::mcmc_trace(
 
 #### Sampling efficency: R-hat (BARG 2.B)
 
+R-hat values should be lower than 1.1.
+
 ``` r
 m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
 ```
@@ -535,6 +525,8 @@ m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + t
 
 #### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
 
+ESS should be greater than 0.1.
+
 ``` r
 m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
 ```
@@ -548,6 +540,9 @@ m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default
 ![](model_check_persistence_files/figure-gfm/ess-2.png)<!-- -->
 
 #### Pairs plot
+
+If the technical problem of divergent transitions occurs, points would
+be highlighted in green.
 
 ``` r
 m_1 %>% bayesplot::mcmc_pairs(
@@ -577,6 +572,9 @@ m_2 %>% bayesplot::mcmc_pairs(
 
 #### Parallel coordinate plot
 
+If the technical problem of divergent transitions occurs, points would
+be highlighted in green.
+
 ``` r
 posterior1 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics1) + bayesplot::theme_default() + theme(axis.text.x = element_text(angle = 45))
 ```
@@ -590,6 +588,8 @@ posterior2 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics2) + bayesplot::them
 ![](model_check_persistence_files/figure-gfm/mcmc-parcoord-2.png)<!-- -->
 
 #### Autocorrelation check
+
+Autocorrelation should go down to zero very fast.
 
 ``` r
 posterior1 %>% bayesplot::mcmc_acf(lags = 10) + bayesplot::theme_default()
@@ -606,6 +606,11 @@ posterior2 %>% bayesplot::mcmc_acf(lags = 10) + bayesplot::theme_default()
 ### Posterior predictive check (BARG 3.A)
 
 #### Kernel density
+
+The kernel density estimate of the observed data (dark line) compared
+with estimates for 50 simulated data sets drawn from the posterior
+predictive distribution (thinner and lighter lines). The dark line
+should be near the simulated curves.
 
 ``` r
 p1 <- bayesplot::ppc_dens_overlay(y, yrep1[1:50, ]) + bayesplot::theme_default()
@@ -673,6 +678,9 @@ p1 / p2
 
 #### Histograms of statistics skew
 
+The dark line (computed from the observed data) should be in the center
+of the posterior predictive distribution.
+
 ``` r
 p1 <- bayesplot::ppc_stat(y, yrep1, binwidth = 0.001) + bayesplot::theme_default()
 p2 <- bayesplot::ppc_stat(y, yrep2, binwidth = 0.001) + bayesplot::theme_default()
@@ -738,6 +746,8 @@ p1 / p2
 ![](model_check_persistence_files/figure-gfm/histograms-8.png)<!-- -->
 
 #### LOO cross-validation (Leave one out)
+
+All Pareto-k estimates should be \< 0.7.
 
 ``` r
 loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
@@ -811,21 +821,13 @@ plot(loo2)
 
 ![](model_check_persistence_files/figure-gfm/loo-2.png)<!-- -->
 
-Leave one out probability integral transform
+Computed leave one out probability integral transform (LOO PIT; dark
+curve) versus the posterior predictive distribution (light curves). The
+LOO PIT curve should be within the range of light curves.
 
 ``` r
 p1 <- bayesplot::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object)) + bayesplot::theme_default()
-```
-
-    ## NOTE: The kernel density estimate assumes continuous observations and is not optimal for discrete observations.
-
-``` r
 p2 <- bayesplot::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object)) + bayesplot::theme_default()
-```
-
-    ## NOTE: The kernel density estimate assumes continuous observations and is not optimal for discrete observations.
-
-``` r
 p1 / p2
 ```
 
@@ -887,11 +889,11 @@ bayes_factor <- brms::bayes_factor(m_1, m_2)
 bayes_factor
 ```
 
-    ## Estimated Bayes factor in favor of m_1 over m_2: 127846715424.84245
+    ## Estimated Bayes factor in favor of m_1 over m_2: 526633636.27329
 
 ## Posterior distributions (BARG 3.B)
 
-### Forest plot (BARG 2.B/5.B)
+### Forest plot of effect sizes (BARG 2.B/5.B)
 
 ``` r
 combined_models <- bind_rows(
@@ -1051,7 +1053,7 @@ emm$emmeans
 
 # Session info (BARG 2.A/6.A/6.B)
 
-    ## R version 4.2.2 (2022-10-31 ucrt)
+    ## R version 4.2.3 (2023-03-15 ucrt)
     ## Platform: x86_64-w64-mingw32/x64 (64-bit)
     ## Running under: Windows 10 x64 (build 22621)
     ## 
@@ -1079,7 +1081,7 @@ emm$emmeans
     ## 
     ## loaded via a namespace (and not attached):
     ##   [1] uuid_1.1-0           backports_1.4.1      plyr_1.8.8          
-    ##   [4] igraph_1.4.1         sp_1.6-0             splines_4.2.2       
+    ##   [4] igraph_1.4.1         sp_1.6-0             splines_4.2.3       
     ##   [7] crosstalk_1.2.0      gap.datasets_0.0.5   rncl_0.8.7          
     ##  [10] rstantools_2.2.0     inline_0.3.19        digest_0.6.31       
     ##  [13] foreach_1.5.2        htmltools_0.5.4      fansi_1.0.4         
@@ -1095,19 +1097,19 @@ emm$emmeans
     ##  [43] distributional_0.3.1 pkgbuild_1.4.0       rstan_2.26.13       
     ##  [46] adegraphics_1.0-17   abind_1.4-5          scales_1.2.1        
     ##  [49] mvtnorm_1.1-3        miniUI_0.1.1.1       progress_1.2.2      
-    ##  [52] xtable_1.8-4         bit_4.0.5            stats4_4.2.2        
+    ##  [52] xtable_1.8-4         bit_4.0.5            stats4_4.2.3        
     ##  [55] StanHeaders_2.26.13  DT_0.27              httr_1.4.5          
     ##  [58] htmlwidgets_1.6.1    threejs_0.3.3        RColorBrewer_1.1-3  
     ##  [61] posterior_1.4.0      ellipsis_0.3.2       XML_3.99-0.13       
     ##  [64] pkgconfig_2.0.3      farver_2.1.1         qgam_1.3.4          
     ##  [67] deldir_1.0-6         utf8_1.2.3           tidyselect_1.2.0    
     ##  [70] labeling_0.4.2       rlang_1.0.6          reshape2_1.4.4      
-    ##  [73] later_1.3.0          munsell_0.5.0        tools_4.2.2         
+    ##  [73] later_1.3.0          munsell_0.5.0        tools_4.2.3         
     ##  [76] cli_3.6.0            generics_0.1.3       ade4_1.7-22         
     ##  [79] evaluate_0.20        fastmap_1.1.1        yaml_2.3.7          
     ##  [82] processx_3.8.0       knitr_1.42           bit64_4.0.5         
     ##  [85] nlme_3.1-162         mime_0.12            adegenet_2.1.10     
-    ##  [88] xml2_1.3.3           gap_1.5-1            compiler_4.2.2      
+    ##  [88] xml2_1.3.3           gap_1.5-1            compiler_4.2.3      
     ##  [91] shinythemes_1.2.0    rstudioapi_0.14      beeswarm_0.4.0      
     ##  [94] curl_5.0.0           png_0.1-8            RNeXML_2.4.11       
     ##  [97] stringi_1.7.12       highr_0.10           ps_1.7.2            
@@ -1118,10 +1120,10 @@ emm$emmeans
     ## [112] bridgesampling_1.1-2 estimability_1.4.1   httpuv_1.6.9        
     ## [115] R6_2.5.1             latticeExtra_0.6-30  promises_1.2.0.1    
     ## [118] KernSmooth_2.23-20   gridExtra_2.3        vipor_0.4.5         
-    ## [121] codetools_0.2-18     boot_1.3-28          colourpicker_1.2.0  
+    ## [121] codetools_0.2-19     boot_1.3-28.1        colourpicker_1.2.0  
     ## [124] MASS_7.3-58.2        gtools_3.9.4         rprojroot_2.0.3     
     ## [127] withr_2.5.0          shinystan_2.6.0      mgcv_1.8-41         
-    ## [130] parallel_4.2.2       hms_1.1.2            grid_4.2.2          
+    ## [130] parallel_4.2.3       hms_1.1.2            grid_4.2.3          
     ## [133] coda_0.19-4          minqa_1.2.5          rmarkdown_2.20      
     ## [136] shiny_1.7.4          base64enc_0.1-3      dygraphs_1.1.1.6    
     ## [139] interp_1.1-3

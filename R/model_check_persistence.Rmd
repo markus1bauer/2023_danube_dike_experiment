@@ -333,6 +333,8 @@ m_1 %>%
 
 #### Prior predictive check (BARG 1.E)
 
+The blue line (observed value) should be in the center of the distribution of 500 simulated data sets.
+
 ```{r prior-predictive-check, fig.height = 3}
 bayesplot::ppc_stat(y, yrep_prior[1:500, ], binwidth = 0.2) +
   coord_cartesian(xlim = c(-1, 1)) + bayesplot::theme_default()
@@ -372,6 +374,8 @@ ppc_stat_grouped(
 
 #### Trace plots
 
+The traces of the four chains should overlap each other.
+
 ```{r mcmc-trace, fig.height = 14}
 bayesplot::mcmc_trace(
   posterior1, np = hmc_diagnostics1, facet_args = list(ncol = 2)
@@ -383,6 +387,8 @@ bayesplot::mcmc_trace(
 
 #### Sampling efficency: R-hat (BARG 2.B)
 
+R-hat values should be lower than 1.1.
+
 ```{r rhat, collapse = TRUE}
 m_1 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
 m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
@@ -390,12 +396,16 @@ m_2 %>% brms::rhat() %>% bayesplot::mcmc_rhat() + bayesplot::theme_default() + t
 
 #### Sampling effectiveness: Effective sampling size (ESS) (BARG 2.C)
 
+ESS should be greater than 0.1.
+
 ```{r ess, collapse = TRUE}
 m_1 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
 m_2 %>% brms::neff_ratio() %>% bayesplot::mcmc_neff() + bayesplot::theme_default() + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
 ```
 
 #### Pairs plot
+
+If the technical problem of divergent transitions occurs, points would be highlighted in green.
 
 ```{r mcmc-pairs, collapse = TRUE, fig.height = 6.5}
 m_1 %>% bayesplot::mcmc_pairs(
@@ -418,12 +428,16 @@ m_2 %>% bayesplot::mcmc_pairs(
 
 #### Parallel coordinate plot
 
+If the technical problem of divergent transitions occurs, points would be highlighted in green.
+
 ```{r mcmc-parcoord, collapse = TRUE}
 posterior1 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics1) + bayesplot::theme_default() + theme(axis.text.x = element_text(angle = 45))
 posterior2 %>% bayesplot::mcmc_parcoord(np = hmc_diagnostics2) + bayesplot::theme_default() + theme(axis.text.x = element_text(angle = 45))
 ```
 
 #### Autocorrelation check
+
+Autocorrelation should go down to zero very fast.
 
 ```{r autocorrelation}
 posterior1 %>% bayesplot::mcmc_acf(lags = 10) + bayesplot::theme_default()
@@ -433,6 +447,8 @@ posterior2 %>% bayesplot::mcmc_acf(lags = 10) + bayesplot::theme_default()
 ### Posterior predictive check (BARG 3.A)
 
 #### Kernel density
+
+The kernel density estimate of the observed data (dark line) compared with estimates for 50 simulated data sets drawn from the posterior predictive distribution (thinner and lighter lines). The dark line should be near the simulated curves.
 
 ```{r kernel-density}
 p1 <- bayesplot::ppc_dens_overlay(y, yrep1[1:50, ]) + bayesplot::theme_default()
@@ -463,6 +479,8 @@ p1 / p2
 
 #### Histograms of statistics skew
 
+The dark line (computed from the observed data) should be in the center of the posterior predictive distribution.
+
 ```{r histograms}
 p1 <- bayesplot::ppc_stat(y, yrep1, binwidth = 0.001) + bayesplot::theme_default()
 p2 <- bayesplot::ppc_stat(y, yrep2, binwidth = 0.001) + bayesplot::theme_default()
@@ -492,6 +510,8 @@ p1 / p2
 
 #### LOO cross-validation (Leave one out)
 
+All Pareto-k estimates should be \< 0.7.
+
 ```{r loo}
 loo1 <- m_1 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
 loo2 <- m_2 %>% brms::loo(save_psis = TRUE, moment_match = TRUE)
@@ -501,9 +521,9 @@ plot(loo1)
 plot(loo2)
 ```
 
-Leave one out probability integral transform
+Computed leave one out probability integral transform (LOO PIT; dark curve) versus the posterior predictive distribution (light curves). The LOO PIT curve should be within the range of light curves.
 
-```{r loo-pit}
+```{r loo-pit, message = FALSE}
 p1 <- bayesplot::ppc_loo_pit_overlay(y, yrep1, lw = weights(loo1$psis_object)) + bayesplot::theme_default()
 p2 <- bayesplot::ppc_loo_pit_overlay(y, yrep2, lw = weights(loo2$psis_object)) + bayesplot::theme_default()
 p1 / p2
@@ -552,7 +572,7 @@ bayes_factor
 
 ## Posterior distributions (BARG 3.B)
 
-### Forest plot (BARG 2.B/5.B)
+### Forest plot of effect sizes (BARG 2.B/5.B)
 
 ```{r posteriors, fig.height = 7}
 combined_models <- bind_rows(
