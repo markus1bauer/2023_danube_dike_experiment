@@ -1,5 +1,5 @@
 ---
-title: "Appendix of Bauer et al. (2023) bioRxiv"
+title: "Appendix of Bauer et al. (2023) Journal of Applied Ecology"
 author: Markus Bauer*, Jakob K. Huber, Johannes Kollmann
 output:
   officedown::rdocx_document:
@@ -90,7 +90,7 @@ The hay meadows pool had 55 species and the dry grasslands poll 58. In total, 93
 
 For constructing concrete seed mixtures of 20 pant species, a pre-defined number of species within certain functional groups was selected randomly. This way, seed mixtures consisted of three tall grasses, four small grasses, three legumes, one hemiparasite (*Rhinanthus* spec.) and nine herbal perennials, three of which listed as character species in the literature. The actual choice was conducted in a manner, so that each individual species was assigned to each block and each treatment level combination with a near-constant frequency. Furthermore, all species of each functional group were chosen almost the same number of times. In total, plots received 24 or 48 g of seeds (4 vs. 8 g m^-2^).
 
-All sown seed mixtures can be found on GitHub in the folder **'outputs/tables/ table_a2_seed_mixtures.csv'**. <!--# Cite Zenodo--> There, we indicate which species were combined and their respective ratio in the specific seed mixture.
+All sown seed mixtures can be found on GitHub in the folder **'outputs/tables/ table_a2_seed_mixtures.csv'** [@bauer2023experiment]. There, we indicate which species were combined and their respective ratio in the specific seed mixture.
 
 \clearpage
 
@@ -163,7 +163,7 @@ read_csv(
 
 # Appendix A5
 
-All species which occurred 2018--2021 and the amount of plots in which they appeared (maximum 1152 = 4 years times 288 experimental plots). In total, 274 different species were found of which 93 were seeded. The shades of grey indicate the amount of established plots.
+All species which occurred 2018--2021 and the amount of plots in which they appeared (maximum 1152 plots = 4 years times 288 experimental plots). In total, 274 different species were found of which 93 were seeded. The shades of grey indicate the amount of established plots.
 
 ```{r tab.id = "specieslist", tab.cap = ""}
 read_csv(
