@@ -1,5 +1,4 @@
-# Data and code for Bauer et al. (2023) bioRxiv
-
+# Data and code for Bauer et al. (2023) J Appl Ecol
 *Markus Bauer* <a href="https://orcid.org/0000-0001-5372-4174"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16"/></a>, Jakob K. Huber, and Johannes Kollmann <a href="https://orcid.org/0000-0002-4990-3636"><img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" width="16" height="16"/></a>
 
 Data and code for:
