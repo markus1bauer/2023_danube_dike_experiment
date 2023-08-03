@@ -50,4 +50,4 @@ When using the **data available** in this repository, please cite the original p
 
 > Bauer M, Huber JK & Kollmann J (2022) Data and code for Bauer et al. (2023) bioRxiv (v1.0.0) [Data set]. &ndash; *Zenodo*. <https://doi.org/10.5281/zenodo.7713396>
 
-Contact [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de){.email} for any further information.
+Contact [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de) for any further information.
