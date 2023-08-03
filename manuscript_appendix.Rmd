@@ -80,7 +80,7 @@ The two species pools were derived from this collection by removing the followin
 
 -   Ephemeral/annual species
 
--   Species, for which no seeds were available in the market or which are difficult to establish by propagule application, e.g., *Carex* spec. or cryptogams
+-   Species, for which no seeds were available in the market or which are difficult to establish by propagule application, e.g. *Carex* sp. or cryptogams
 
 -   Taxonomically and functionally closely related and similar species
 
@@ -104,7 +104,7 @@ knitr::include_graphics(
   )
 ```
 
-The community-weighted means (CWM) of plant traits of the seed mixtures used for the dike experiment are based on abundance data: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target habitat types hay meadows and calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2, 98.8, 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
+The community-weighted means (CWM) of plant traits of the seed mixtures used for the dike experiment are based on abundance data: specific leaf area (SLA), seed mass and canopy height. The CWMs were weighted by seed weight in the seed mixture and indicate differences between the target habitat types hay meadows and calcareous grasslands. The functional traits of specific leaf area (SLA), seed mass and canopy height (available traits of all species: 99.2, 98.8, and 99.6%) were retrieved from the databases LEDA [@Kleyer.2008] and TRY [@Kattge.2020].
 
 #### Acknowledgment
 
@@ -172,7 +172,11 @@ read_csv(
   na = c("na", "NA"),
   col_types = cols(.default = "?", name = "f")
   ) %>%
-  mutate(name = str_replace_all(name, "_", " ")) %>%
+  mutate(
+    name = str_replace(name, "_ssp", "_ssp."),
+    name = str_replace(name, "_spec", "_sp."),
+    name = str_replace_all(name, "_", " ")
+    ) %>%
   rename(
     Name = name,
     Seeded = seeded,
