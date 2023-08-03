@@ -61,11 +61,16 @@ sites <- read_csv(
 )
 
 sites %>%
-  #group_by(source, survey_year, esy) %>%
   group_by(source, esy) %>%
   filter(esy == "R1A" | esy == "R22" | esy == "V38") %>%
   count() %>%
-  print(n = 26)
+  print()
+
+sites %>%
+  group_by(source, exposition, esy) %>%
+  filter(esy == "R1A" | esy == "R22" | esy == "V38") %>%
+  count() %>%
+  print(n = 55)
 
 base::load(file = here("outputs", "models", "model_nmds.Rdata"))
 ordi
