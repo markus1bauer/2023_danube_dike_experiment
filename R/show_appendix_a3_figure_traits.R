@@ -100,6 +100,6 @@ graph_a + theme(legend.position = "none") +
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_a3_800dpi_16.5x5cm_traits.tiff"),
-  dpi = 800, width = 16.5, height = 5, units = "cm"
+  here("outputs", "figures", "figure_a3_300dpi_16.5x5cm_traits.tiff"),
+  dpi = 300, width = 16.5, height = 5, units = "cm"
 )

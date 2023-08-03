@@ -212,8 +212,8 @@ for (group in levels(sites$group_type)) {
 
 ### Save ###
 
-ggsave(here("outputs", "figures", "figure_2_nmds_600dpi_16.5x16cm.tiff"),
-       dpi = 800, width = 16.5, height = 16, units = "cm")
+ggsave(here("outputs", "figures", "figure_2_nmds_500dpi_16.5x16cm.tiff"),
+       dpi = 500, width = 16.5, height = 16, units = "cm")
 graph_a + theme(legend.position = "right")
-ggsave(here("outputs", "figures", "figure_2_nmds_600dpi_18x13cm.tiff"),
-       dpi = 600, width = 18, height = 13, units = "cm")
+ggsave(here("outputs", "figures", "figure_2_nmds_500dpi_18x13cm.tiff"),
+       dpi = 500, width = 18, height = 13, units = "cm")

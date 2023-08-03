@@ -42,6 +42,6 @@ sd <- 0.25475
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_4_600dpi_16.5x20cm.tiff"),
-  dpi = 600, width = 16.5, height = 20, units = "cm"
+  here("outputs", "figures", "figure_4_300dpi_16.5x20cm.tiff"),
+  dpi = 300, width = 16.5, height = 20, units = "cm"
 )

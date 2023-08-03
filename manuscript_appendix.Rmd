@@ -100,7 +100,7 @@ All sown seed mixtures can be found on GitHub in the folder **'outputs/tables/ t
 
 ```{r fig.id = "traits", fig.asp = 0.3030, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
-  here::here("outputs", "figures", "figure_a3_800dpi_16.5x5cm_traits.tiff")
+  here::here("outputs", "figures", "figure_a3_300dpi_16.5x5cm_traits.tiff")
   )
 ```
 

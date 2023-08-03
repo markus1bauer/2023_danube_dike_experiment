@@ -313,7 +313,7 @@ Local setting and design of the multifactorial experiment on grassland sowing on
 
 ```{r fig.id = "nmds", fig.asp = 0.9696, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
-  here::here("outputs", "figures", "figure_2_nmds_600dpi_16.5x16cm.tiff")
+  here::here("outputs", "figures", "figure_2_nmds_500dpi_16.5x16cm.tiff")
   )
 ```
 
@@ -341,7 +341,7 @@ Effects of treatments on the development of sown grassland communities at a rive
 
 ```{r fig.id = "interactions", fig.asp = 1.2121, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
-  here::here("outputs", "figures", "figure_4_600dpi_16.5x20cm.tiff")
+  here::here("outputs", "figures", "figure_4_500dpi_16.5x20cm.tiff")
   )
 ```
 

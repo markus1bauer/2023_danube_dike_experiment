@@ -140,15 +140,15 @@ theme_mb <- function() {
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_4b_persistence_800dpi_24x8cm.tiff"),
-  dpi = 800, width = 24, height = 8, units = "cm"
+  here("outputs", "figures", "figure_4b_persistence_600dpi_24x8cm.tiff"),
+  dpi = 600, width = 24, height = 8, units = "cm"
   )
 
 p1 + theme(legend.position = "bottom") +
   scale_y_continuous(limits = c(0, 1.02), breaks = seq(-100, 400, .25))
 ggsave(
-  here("outputs", "figures", "figure_4b_persistence_800dpi_16.5x8cm.tiff"),
-  dpi = 800, width = 16.5, height = 8, units = "cm"
+  here("outputs", "figures", "figure_4b_persistence_600dpi_16.5x8cm.tiff"),
+  dpi = 600, width = 16.5, height = 8, units = "cm"
   )
 
 (graph_b <- p1 +
