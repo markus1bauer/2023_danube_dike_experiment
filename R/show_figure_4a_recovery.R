@@ -139,14 +139,14 @@ sd <- sum(as.numeric(as.character(
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_4a_recovery_600dpi_24x8cm.tiff"),
-  dpi = 600, width = 24, height = 8, units = "cm"
+  here("outputs", "figures", "figure_4a_recovery_300dpi_24x8cm.tiff"),
+  dpi = 300, width = 24, height = 8, units = "cm"
   )
 
 p1 + theme(legend.position = "bottom")
 ggsave(
-  here("outputs", "figures", "figure_4a_recovery_600dpi_16.5x8cm.tiff"),
-  dpi = 600, width = 16.5, height = 8, units = "cm"
+  here("outputs", "figures", "figure_4a_recovery_300dpi_16.5x8cm.tiff"),
+  dpi = 300, width = 16.5, height = 8, units = "cm"
   )
 
 (graph_a <- p1 +
