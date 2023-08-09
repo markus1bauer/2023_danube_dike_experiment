@@ -210,9 +210,7 @@ Jakob Huber and Johannes Kollmann conceived the ideas and designed the experimen
 
 # Data availability statement {#sec-open-research .unnumbered}
 
-'Data available via the Dryad Digital Repository
-
-Data and code available via Zenodo repository https://doi.org/10.5281/zenodo.7713396 [@bauer2023experiment]. Model evaluation can also be directly accessed via GitHub: <https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown>
+Data and code available via Zenodo repository <https://doi.org/10.5281/zenodo.7713396> [@bauer2023experiment]. Model evaluation can also be directly accessed via GitHub: <https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown>
 
 # Funding {.unnumbered}
 
