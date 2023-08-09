@@ -43,10 +43,28 @@ Restoration Ecology, TUM School of Life Sciences, Technical University of Munich
 
 1.  Sowing is a well-established restoration technique to overcome dispersal limitation. Seed mixtures adapted to certain environmental conditions, like substrate or microclimate, are most effective to achieve functional communities. This is especially important if the restored vegetation has to protect critical infrastructure like roadsides and dikes. Here, an improved seed--substrate combination will secure slope stability, make restorations more effective, and generate species-rich grasslands.
 2.  A factorial field experiment addressed this topic on a dike at River Danube in SE Germany in 2018--2021. Within 288 plots, we tested three sand admixtures, two substrate depths, two seed densities and two seed mixture types (mesic hay meadow, semi-dry calcareous grassland) in north and south exposition, and measured the recovery completeness by calculating the successional distance to reference sites, the persistence of sown species, and the Favourable Conservation Status (FCS) of target species.
-3.  Overall, the sown vegetation developed in the desired direction, but a recovery debt remained after four years, and some plots still showed similarities to negative references from ruderal sites. In north exposition, hay meadow-seed mixtures developed closer to the respective reference communities than dry-grassland mixtures.
+3.  Overall, the sown vegetation developed in the desired direction, but a recovery debt remained after four years, and some plots still showed similarities to negative references from ruderal sites. In north exposition, hay meadow-seed mixtures developed closer to their reference communities than dry-grassland mixtures to their reference.
 4.  In south exposition, the sown communities established poorly which might be due to a severe drought during establishment. This initial negative effect remained over the entire observation period.
-5.  Sand admixture had a slightly positive effect on target variables, while the tested substrate depths, seed densities and mixture types had no effects on species persistence or FCS.
-6.  Synthesis and applications: Site-adapted seed mixtures make restoration more effective, while applying several seed--substrate combinations might foster beta diversity. Furthermore, additional management efforts are recommended, as they might be necessary to reduce the recovery debt, as well as re-sowing after unfavourable conditions.
+5.  Sand admixture had a slightly positive effect on target variables, while the tested substrate depths, seed densities and seed mixture types had no effects on species persistence or FCS.
+6.  *Synthesis and applications:* Site-adapted seed mixtures make restoration more effective, while applying several seed--substrate combinations might foster beta diversity. Furthermore, additional management efforts are recommended, as they might be necessary to reduce the recovery debt, as well as re-sowing after unfavourable conditions.
+
+\clearpage
+
+\newpage
+
+# Zusammenfassung
+
+1.  Die Aussaat ist eine bewährte Renaturierungstechnik da die Samenausbreitung in der Landschaft häufig eingeschränkt ist. Saatgutmischungen, die an ihr Substrat oder Mikroklima angepasst sind, sind am effektivsten, um Pflanzengesellschaften erfolgreich zu etablieren. Dies ist besonders wichtig, wenn die etablierte Vegetation Infrastrukturobjekte wie Straßenränder und Deiche schützen soll. In diesem Fall wird eine verbesserte Saatgut-Substrat-Kombination die Hangstabilität sichern, die Wiederherstellung effektiver machen und artenreiches Grünland hervorbringen.
+
+2.  Ein faktorieller Feldversuch widmete sich diesem Thema auf einem Deich an der Donau in Süddeutschland in den Jahren 2018--2021. Auf 288 Parzellen untersucthen wir drei Sandbeimischungen, zwei Substrattiefen, zwei Saatgutdichten und zwei Saatmischungstypen (Glatthaferwiese, Halbtrockenrasen) in Nord- und Südexposition und ermittelten den Erfolg der Renaturierung, indem wir den Sukzessionsabstand zu Referenzflächen, die Persistenz der angesäten Arten und den günstigen Erhaltungszustand (*Favourable Conservation Status*, FCS) der Zielarten berechneten.
+
+3.  Insgesamt entwickelte sich die eingesäte Vegetation in die gewünschte Richtung, doch blieb nach vier Jahren eine 'Renaturierungsschuld' bestehen, und einige Parzellen wiesen immer noch Ähnlichkeiten mit negativen Referenzen von Ruderalstandorten auf. In der Nordexposition entwickelten sich die Glatthaferwiesen-Saatmischungen näher an den ihre Referenz als die Trockenrasenmischungen.
+
+4.  In der Südexposition etablierten sich die ausgesäten Gemeinschaften schlecht, was auf eine starke Trockenheit während der Etablierung zurückzuführen sein könnte. Dieser anfängliche negative Effekt blieb über den gesamten Beobachtungszeitraum bestehen.
+
+5.  Die Sandbeimischung wirkte sich leicht positiv auf die Zielvariablen aus, während die untersuchten Substrattiefen, Saatdichten und Saatmischungsarten keine Auswirkungen auf die Persistenz der Arten oder den FCS hatten.
+
+6.  *Synthese und Anwendungen:* Standortangepasste Saatmischungen machen die Renaturierung effektiver, während die Anwendung verschiedener Saat-Substrat-Kombinationen die Beta-Diversität fördern könnte. Darüber hinaus werden zusätzliche Bewirtschaftungsmaßnahmen empfohlen, da sie notwendig sein könnten, um die 'Renaturierungsschuld' zu verringern, sowie die Wiederaussaat nach ungünstigen Bedingungen.
 
 \clearpage
 
@@ -110,7 +128,7 @@ Below the substrate, a 5-cm thick drainage layer of gravel (0--16 mm grain size)
 
 ## Vegetation surveys
 
-The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and the Londo scale was used [@londo1976]. The establishment rates of species were recorded in Appendix A4. Establishment success was high with 48 species of the species pool of hay meadows (87%) and 46 (79%) of dry grasslands recorded by 2021, which are rather good ratios [cf. @hedberg2010]; the species established in 31 ± 22% (mean ± SD) of their sown plots. In total, 274 vascular plant species were found (Appendix A5).
+The vegetation was surveyed in June or July 2018--2021 [@BraunBlanquet.1964] and the Londo scale was used [@londo1976]. No special permits were necessary. The establishment rates of species were recorded in Appendix A4. Establishment success was high with 48 species of the species pool of hay meadows (87%) and 46 (79%) of dry grasslands recorded by 2021, which are rather good ratios [cf. @hedberg2010]; the species established in 31 ± 22% (mean ± SD) of their sown plots. In total, 274 vascular plant species were found (Appendix A5).
 
 To compare the restoration outcomes with real references and not solely with seed mixtures, vegetation surveys were extracted from sPlotOpen [@Sabatini.2021] and our own surveys on the Danube dikes in the surroundings [@bauer2023]. We selected six dry grassland plots [EUNIS code R1A, @Chytry.2020] within SE Germany from sPlotOpen and 82 plots of our own survey, which included dry grasslands (*n* = 15), hay meadows (R22, *n* = 59), and as a negative reference ruderal, dry and anthropogenic vegetation (V38, *n* = 9 ✕ 2, plots used for both seed mixture types).
 
@@ -182,13 +200,19 @@ There were no perfect seed--substrate combinations and thus we conclude that a v
 
 We would like to thank our project partners Dr. Markus Fischer, Frank Schuster, and Christoph Schwahn (WIGES GmbH) as well as Stefan Radlmair and the late Klaus Rachl (Government of Lower Bavaria) for numerous discussions on restoration and management of dike grasslands. Fieldwork was supported by Clemens Berger and Uwe Kleber-Lerchbaumer (Wasserwirtschaftsamt Deggendorf). We thank Holger Paetsch, Simon Reith, Anna Ritter, Jakob Strak, Dr. Leonardo H. Teixeira, and Linda Weggler for assisting with the field surveys or soil analyses in 2018--2020. The German Federal Environmental Foundation (DBU) supported MB with a doctoral scholarship. Thank you also to three anonymous referees for their valuable suggestions improving the manuscript.
 
-# Author contribution {.unnumbered}
+# Conflict of interest statement
 
-JH and JK designed the experiment. JH did the surveys in the years 2018--2020, and MB in 2019 and 2021. MB did the analyses and wrote the manuscript. JK and JH critically revised the manuscript.
+The authors declare no conflict of interest.
 
-# Open research {#sec-open-research .unnumbered}
+# Authors' contribution {.unnumbered}
 
-Data and code are stored on Zenodo [@bauer2023experiment]. Model evaluation is stored on GitHub: <https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown>
+Jakob Huber and Johannes Kollmann conceived the ideas and designed the experiment. Jakob Huber did the surveys in the years 2018--2020, and Markus Bauer in 2019 and 2021. Markus Bauer did the analyses and wrote the manuscript. Johannes Kollmann and Jakob Huber critically revised the manuscript and gave final approval for publication.
+
+# Data availability statement {#sec-open-research .unnumbered}
+
+'Data available via the Dryad Digital Repository
+
+Data and code available via Zenodo repository https://doi.org/10.5281/zenodo.7713396 [@bauer2023experiment]. Model evaluation can also be directly accessed via GitHub: <https://github.com/markus1bauer/2023_danube_dike_experiment/tree/main/markdown>
 
 # Funding {.unnumbered}
 
@@ -327,7 +351,7 @@ The species composition of sown experimental plots on a river dike over time and
 
 ```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
-  here::here("outputs", "figures", "figure_3_600dpi_16.5x5cm_modified.tiff")
+  here::here("outputs", "figures", "figure_3_600dpi_16.5x5cm.tiff")
   )
 ```
 
