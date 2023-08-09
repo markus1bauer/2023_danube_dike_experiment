@@ -351,7 +351,7 @@ The species composition of sown experimental plots on a river dike over time and
 
 ```{r fig.id = "effects", fig.asp = 0.3030, fig.width = 6.49, fig.cap = ""}
 knitr::include_graphics(
-  here::here("outputs", "figures", "figure_3_600dpi_16.5x5cm.tiff")
+  here::here("outputs", "figures", "figure_3_300dpi_16.5x5cm.tiff")
   )
 ```
 
