@@ -124,8 +124,8 @@ get_variables(m2)
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_3c_fcs_600dpi_24x8cm2.tiff"),
-  dpi = 600, width = 24, height = 8, units = "cm"
+  here("outputs", "figures", "figure_3c_fcs_300dpi_24x8cm2.tiff"),
+  dpi = 300, width = 24, height = 8, units = "cm"
 )
 
 (graph_c <- p1 +

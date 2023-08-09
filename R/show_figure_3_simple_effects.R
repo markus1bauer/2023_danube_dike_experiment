@@ -29,16 +29,20 @@ rm(list = setdiff(ls(), c("graph_a", "graph_b", "graph_c", "graph_d")))
 
 
 
-graph_a + theme(legend.position = "none") +
-   graph_b + theme(legend.position = "none") +
-  (graph_c + theme(legend.position = c(.19, .88))) +
-  plot_layout(guides = "keep") +
-  plot_annotation(tag_levels = "A", tag_prefix = "", tag_suffix = "") &
-  theme(plot.tag = element_text(size = 10, face = "bold"))
+graph_a +
+  annotate("text", x = -.29, y = 5.71, label = "A", fontface = 2) +
+  theme(legend.position = "none") +
+  graph_b +
+  annotate("text", x = -.07, y = 5.71, label = "B", fontface = 2) +
+  theme(legend.position = "none") +
+  (graph_c +
+     annotate("text", x = -.5, y = 5.71, label = "C", fontface = 2) +
+     theme(legend.position = c(.19, .88))) +
+  plot_layout(guides = "keep")
 
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_3_600dpi_16.5x5cm.tiff"),
-  dpi = 600, width = 16.5, height = 5, units = "cm"
+  here("outputs", "figures", "figure_3_300dpi_16.5x5cm.tiff"),
+  dpi = 300, width = 16.5, height = 5, units = "cm"
 )

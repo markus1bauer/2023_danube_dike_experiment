@@ -124,8 +124,8 @@ get_variables(m2)
 ### Save ###
 
 ggsave(
-  here("outputs", "figures", "figure_3b_persistence_600dpi_24x8cm.tiff"),
-  dpi = 600, width = 24, height = 8, units = "cm"
+  here("outputs", "figures", "figure_3b_persistence_300dpi_24x8cm.tiff"),
+  dpi = 300, width = 24, height = 8, units = "cm"
 )
 
 (graph_b <- p1 +
