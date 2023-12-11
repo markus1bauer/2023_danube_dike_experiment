@@ -3,9 +3,9 @@
 
 Data and code for:
 
-Bauer M, Huber JK, Kollmann J (2023) __Fit by design: Developing seed–substrate combinations to adapt dike grasslands to microclimatic variation.__ &ndash; *Journal of Applied Ecology*
+Bauer M, Huber JK, Kollmann J (2023) __Fit by design: Developing seed–substrate combinations to adapt dike grasslands to microclimatic variation.__ &ndash; *Journal of Applied Ecology* 60, 2413&ndash;2424.
 
-[![DOI:10.1101/2023.03.09.530576](http://img.shields.io/badge/DOI-10.1101/2023.03.09.530576-informational.svg)](https://doi.org/10.1101/2023.03.09.530576)
+[![DOI:10.1111/1365-2664.14497](http://img.shields.io/badge/DOI-10.1111/1365-2664.14497-informational.svg)](https://doi.org/10.1111/1365-2664.14497)
 
 **Study region**: [Experiment at River Danube](https://www.openstreetmap.org/#map=17/48.83977/12.88445) <br> <br> \## Content of the repository
 
@@ -44,10 +44,10 @@ When using the **data available** in this repository, please cite the original p
 
 **Publication**
 
-> Bauer M, Huber JK, & Kollmann J (2023) Fit by design: Developing seed–substrate combinations to adapt dike grasslands to microclimatic variation. &ndash; *Journal of Applied Ecology*. <https://doi.org/10.1101/2023.03.09.530576>
+> Bauer M, Huber JK & Kollmann J (2023) Fit by design: Developing seed–substrate combinations to adapt dike grasslands to microclimatic variation. &ndash; *Journal of Applied Ecology* 60, 2413&ndash;2424.. <https://doi.org/10.1111/1365-2664.14497>
 
 **Dataset**
 
-> Bauer M, Huber JK & Kollmann J (2022) Data and code for Bauer et al. (2023) bioRxiv (v1.0.0) [Data set]. &ndash; *Zenodo*. <https://doi.org/10.5281/zenodo.7713396>
+> Bauer M, Huber JK & Kollmann J (2023) Data and code for Bauer et al. (2023) J Appl Ecol (v1.1.0) [Data set]. &ndash; *Zenodo*. <https://doi.org/10.5281/zenodo.8212966>
 
 Contact [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de) for any further information.
