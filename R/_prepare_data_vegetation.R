@@ -1424,7 +1424,7 @@ traits <- traits %>%
     ) %>%
   arrange(name)
 
-### * Check completeness of LEDA + TRY ####
+#### * Check completeness of LEDA + TRY ####
 
 traits %>%
   filter(!str_detect(name, "_spec") & !str_detect(name, "aceae")) %>%
