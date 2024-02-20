@@ -42,10 +42,10 @@ sites <- read_csv(
   mutate(
     survey_year_fct = factor(survey_year),
     botanist_year = str_c(survey_year, botanist, exposition, sep = " "),
-    botanist_year = factor(botanist_year)
+    botanist_year = factor(botanist_year),
     id = factor(id)
   ) %>%
-  select(id, plot, site, exposition, survey_year_fct, esy)
+  select(id, plot, site, exposition, survey_year, esy)
 
 
 
@@ -58,29 +58,13 @@ sites <- read_csv(
 ## 1 Data exploration ##########################################################
 
 
-### a Graphs of raw data -------------------------------------------------------
-
-library(broom)
-data <- sites %>%
-  group_by() %>%
-  count(esy, survey_year_fct, exposition) %>%
-  mutate(ratio = round(nesy/288, digits = 2)) %>%
-  pivot_wider(names_from = "survey_year", values_from = "n") %>%
-  arrange(esy, exposition)
-
-data %>%
-  ggplot(aes(y = ratio, x = survey_year_fct)) +
-  facet_grid(~ n) +
-  geom_bar(stat = "identity") +
-  scale_y_continuous(limits = c(0, 0.4))
-
 ### a Table of raw data -------------------------------------------------------
 
 data <- sites %>%
   mutate(esy = replace_na(esy, "no class")) %>%
   filter(!str_detect(esy, "ref")) %>%
   count(esy, survey_year, exposition) %>%
-  mutate(ratio = round(n/41, digits = 2))
+  mutate(ratio = round(n/288, digits = 2))
 data_table <- data %>%
   select(-n) %>%
   pivot_wider(names_from = "survey_year", values_from = "ratio") %>%
@@ -97,7 +81,9 @@ data %>%
   scale_y_continuous(limits = c(0, 0.4))
 
 
-### 2 Save ####################################################################
+
+## 2 Save #####################################################################
+
 
 data_table %>%
   write_csv(here("outputs", "statistics", "vegetation_classification.csv"))
