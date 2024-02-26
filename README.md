@@ -50,4 +50,7 @@ When using the **data available** in this repository, please cite the original p
 
 > Bauer M, Huber JK & Kollmann J (2023) Data and code for Bauer et al. (2023) J Appl Ecol (v1.1.0) [Data set]. &ndash; *Zenodo*. <https://doi.org/10.5281/zenodo.8212966>
 
+This dataset is also linke to PANGAEA
+> Bauer M, Huber JK & Kollmann J (2023) Vegetation ecological dike experiment at River Danube. &ndash; *PANGAEA*. https://doi.org/10.1594/PANGAEA.962775
+
 Contact [markus1.bauer\@tum.de](mailto:markus1.bauer@tum.de) for any further information.
