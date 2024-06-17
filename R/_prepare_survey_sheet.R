@@ -51,12 +51,12 @@ data <- species %>%
   select(block, plot, seeded, "2019", "2020", "2021", name) %>%
   arrange(block, plot, name) %>%
   mutate(
-    sum = rowSums(across(where(is.numeric))),
     seeded = as.character(seeded),
+    sum = rowSums(across(where(is.numeric))),
     current = ".5|2|4|10|20|30|40|50|60|70|80|90|97.5"
   ) %>%
-  select(-sum) %>%
   filter(sum > 0) %>%
+  select(-sum) %>%
   group_by(plot)
 
 write_excel_csv(data, here("outputs", "tables", "survey_sheet.csv"))
