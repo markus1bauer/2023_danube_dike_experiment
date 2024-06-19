@@ -19,7 +19,7 @@
 # insert persons in header
 # insert page number in footnote
 # print each plot on one page: Daten -> Teilergebnis -> sort by plot -> tick "plot" + tick "break page for each group"
-# replicate row names on each page: Seitenlayout -> Drucktitel -> Weiederholungszeilen oben -> "$1:$1"
+# replicate row names on each page: Seitenlayout -> Drucktitel -> Weiederholungszeilen oben -> insert "$1:$1"
 
 ### Packages ###
 library(here)
